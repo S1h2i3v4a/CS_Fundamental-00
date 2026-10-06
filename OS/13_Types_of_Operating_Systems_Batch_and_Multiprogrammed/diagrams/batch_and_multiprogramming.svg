@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg13" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <filter id="sh13" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="680" fill="url(#bg13)" rx="16" />
+  <text x="500" y="42" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">
+    Module 13: Batch Operating Systems &amp; Multiprogramming Architecture
+  </text>
+  <text x="500" y="68" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">
+    Sequential Job Batches | Spooling Disk Buffering | CPU-I/O Overlap &amp; Multiprogramming
+  </text>
+
+  <!-- Part 1: Batch OS -->
+  <g transform="translate(40, 95)" filter="url(#sh13)">
+    <rect width="920" height="245" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="25" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#f8fafc">
+      1. Batch Operating System Flow (Operator &amp; Batching)
+    </text>
+
+    <!-- Users submitting cards -->
+    <rect x="25" y="55" width="130" height="150" rx="8" fill="#0f172a" stroke="#6366f1" />
+    <text x="90" y="80" font-size="12" font-weight="bold" fill="#a5b4fc" text-anchor="middle">Users (Punch Cards)</text>
+    <rect x="40" y="95" width="100" height="22" rx="4" fill="#312e81" />
+    <text x="90" y="110" font-size="10" fill="#e0e7ff" text-anchor="middle">Job 1 (Fortran)</text>
+    <rect x="40" y="125" width="100" height="22" rx="4" fill="#312e81" />
+    <text x="90" y="140" font-size="10" fill="#e0e7ff" text-anchor="middle">Job 2 (Cobol)</text>
+    <rect x="40" y="155" width="100" height="22" rx="4" fill="#312e81" />
+    <text x="90" y="170" font-size="10" fill="#e0e7ff" text-anchor="middle">Job 3 (Fortran)</text>
+
+    <!-- Arrow to Operator -->
+    <path d="M 160 130 L 205 130" stroke="#6366f1" stroke-width="2.5" />
+    <polygon points="210,130 200,125 200,135" fill="#6366f1" />
+
+    <!-- Human Operator -->
+    <rect x="215" y="55" width="140" height="150" rx="8" fill="#0f172a" stroke="#ec4899" />
+    <text x="285" y="80" font-size="12" font-weight="bold" fill="#f472b6" text-anchor="middle">Human Operator</text>
+    <text x="285" y="105" font-size="10" fill="#cbd5e1" text-anchor="middle">• Reads card decks</text>
+    <text x="285" y="125" font-size="10" fill="#cbd5e1" text-anchor="middle">• Groups similar jobs</text>
+    <text x="285" y="145" font-size="10" fill="#cbd5e1" text-anchor="middle">• Prepares Batches</text>
+    <text x="285" y="175" font-size="11" font-weight="bold" fill="#fbbf24" text-anchor="middle">No Interactivity!</text>
+
+    <!-- Arrow to Batches -->
+    <path d="M 360 130 L 405 130" stroke="#ec4899" stroke-width="2.5" />
+    <polygon points="410,130 400,125 400,135" fill="#ec4899" />
+
+    <!-- Batches Deck -->
+    <rect x="415" y="55" width="150" height="150" rx="8" fill="#0f172a" stroke="#10b981" />
+    <text x="490" y="80" font-size="12" font-weight="bold" fill="#34d399" text-anchor="middle">Batches Formed</text>
+    <rect x="430" y="95" width="120" height="40" rx="4" fill="#064e3b" stroke="#059669" />
+    <text x="490" y="112" font-size="10" font-weight="bold" fill="#a7f3d0" text-anchor="middle">Batch 1 (Fortran)</text>
+    <text x="490" y="126" font-size="9" fill="#cbd5e1" text-anchor="middle">Job 1 + Job 3</text>
+    <rect x="430" y="145" width="120" height="40" rx="4" fill="#064e3b" stroke="#059669" />
+    <text x="490" y="162" font-size="10" font-weight="bold" fill="#a7f3d0" text-anchor="middle">Batch 2 (Cobol)</text>
+    <text x="490" y="176" font-size="9" fill="#cbd5e1" text-anchor="middle">Job 2 + Job 4</text>
+
+    <!-- Arrow to Mainframe -->
+    <path d="M 570 130 L 615 130" stroke="#10b981" stroke-width="2.5" />
+    <polygon points="620,130 610,125 610,135" fill="#10b981" />
+
+    <!-- Mainframe Execution -->
+    <rect x="625" y="55" width="270" height="150" rx="8" fill="#0f172a" stroke="#38bdf8" />
+    <text x="760" y="80" font-size="13" font-weight="bold" fill="#38bdf8" text-anchor="middle">Mainframe CPU &amp; Tape</text>
+    <text x="645" y="105" font-size="10" fill="#cbd5e1">• Executes Batch 1 sequentially</text>
+    <text x="645" y="123" font-size="10" fill="#cbd5e1">• Compiler loaded once into RAM</text>
+    <text x="645" y="141" font-size="10" fill="#ef4444">• CPU IDLE during I/O wait (Tape RW)</text>
+    <text x="645" y="175" font-size="10" font-weight="bold" fill="#fde047">Drawback: Turnaround Time = Days</text>
+  </g>
+
+  <!-- Part 2: Multiprogramming -->
+  <g transform="translate(40, 360)" filter="url(#sh13)">
+    <rect width="920" height="285" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="25" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#f8fafc">
+      2. Multiprogramming Architecture &amp; CPU-I/O Concurrency
+    </text>
+
+    <!-- RAM Layout -->
+    <rect x="25" y="50" width="200" height="215" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="125" y="75" font-size="12" font-weight="bold" fill="#38bdf8" text-anchor="middle">Main Memory (RAM)</text>
+
+    <rect x="40" y="90" width="170" height="30" fill="#1e293b" stroke="#475569" />
+    <text x="125" y="110" font-size="11" font-weight="bold" fill="#e2e8f0" text-anchor="middle">Operating System</text>
+
+    <rect x="40" y="125" width="170" height="30" fill="#1e1b4b" stroke="#6366f1" />
+    <text x="125" y="145" font-size="11" fill="#c7d2fe" text-anchor="middle">Process P1 (Active)</text>
+
+    <rect x="40" y="160" width="170" height="30" fill="#064e3b" stroke="#10b981" />
+    <text x="125" y="180" font-size="11" fill="#a7f3d0" text-anchor="middle">Process P2 (Ready)</text>
+
+    <rect x="40" y="195" width="170" height="30" fill="#78350f" stroke="#f59e0b" />
+    <text x="125" y="215" font-size="11" fill="#fde68a" text-anchor="middle">Process P3 (Ready)</text>
+
+    <rect x="40" y="230" width="170" height="25" fill="#0f172a" stroke="#334155" stroke-dasharray="3,3" />
+    <text x="125" y="247" font-size="10" fill="#64748b" text-anchor="middle">Unallocated RAM</text>
+
+    <!-- Execution Timeline / Gantt Comparison -->
+    <!-- Uniprogrammed -->
+    <g transform="translate(250, 50)">
+      <text x="0" y="20" font-size="12" font-weight="bold" fill="#ef4444">Without Multiprogramming (CPU Idle on I/O):</text>
+      <!-- Bars -->
+      <rect x="0" y="30" width="90" height="25" fill="#3b82f6" rx="3" />
+      <text x="45" y="47" font-size="10" fill="#fff" text-anchor="middle">P1 CPU</text>
+      <rect x="90" y="30" width="130" height="25" fill="#ef4444" opacity="0.3" stroke="#ef4444" stroke-dasharray="2,2" rx="3" />
+      <text x="155" y="47" font-size="10" fill="#fca5a5" text-anchor="middle">CPU IDLE (P1 I/O)</text>
+      <rect x="220" y="30" width="90" height="25" fill="#3b82f6" rx="3" />
+      <text x="265" y="47" font-size="10" fill="#fff" text-anchor="middle">P1 CPU</text>
+      <rect x="310" y="30" width="80" height="25" fill="#10b981" rx="3" />
+      <text x="350" y="47" font-size="10" fill="#fff" text-anchor="middle">P2 CPU</text>
+      <text x="405" y="47" font-size="11" font-weight="bold" fill="#ef4444">Util ≈ 30%</text>
+    </g>
+
+    <!-- Multiprogrammed -->
+    <g transform="translate(250, 125)">
+      <text x="0" y="20" font-size="12" font-weight="bold" fill="#34d399">With Multiprogramming (Non-preemptive Switch on I/O):</text>
+      <!-- Bars -->
+      <rect x="0" y="30" width="90" height="25" fill="#3b82f6" rx="3" />
+      <text x="45" y="47" font-size="10" fill="#fff" text-anchor="middle">P1 CPU</text>
+      <rect x="90" y="30" width="110" height="25" fill="#10b981" rx="3" />
+      <text x="145" y="47" font-size="10" fill="#fff" text-anchor="middle">P2 CPU (P1 I/O)</text>
+      <rect x="200" y="30" width="100" height="25" fill="#f59e0b" rx="3" />
+      <text x="250" y="47" font-size="10" fill="#fff" text-anchor="middle">P3 CPU (P2 I/O)</text>
+      <rect x="300" y="30" width="90" height="25" fill="#3b82f6" rx="3" />
+      <text x="345" y="47" font-size="10" fill="#fff" text-anchor="middle">P1 CPU</text>
+      <text x="405" y="47" font-size="11" font-weight="bold" fill="#34d399">Util &gt; 90%</text>
+    </g>
+
+    <!-- Spooling Box -->
+    <g transform="translate(250, 205)">
+      <rect width="640" height="60" rx="6" fill="#0f172a" stroke="#6366f1" />
+      <text x="15" y="24" font-size="12" font-weight="bold" fill="#a5b4fc">SPOOLING (Simultaneous Peripheral Operation On-Line):</text>
+      <text x="15" y="45" font-size="10" fill="#cbd5e1">Disk buffers print/read jobs in FIFO queue. CPU directly pushes print data to High-Speed Disk; slow physical printer reads from spooler independently!</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg17" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <filter id="sh17" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="720" fill="url(#bg17)" rx="16" />
+  <text x="500" y="40" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">
+    Module 17: Advanced Kernel Concepts, Reentrancy &amp; System Calls
+  </text>
+  <text x="500" y="65" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">
+    Reentrant Kernel Concurrency | 6-Stage System Call Execution Lifecycle | Spooling FIFO Architecture
+  </text>
+
+  <!-- Part 1: Reentrant Kernel -->
+  <g transform="translate(40, 90)" filter="url(#sh17)">
+    <rect width="920" height="240" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="25" y="28" font-size="15" font-weight="bold" fill="#f8fafc">
+      1. Reentrant Kernel Architecture (Concurrent Kernel Mode Execution)
+    </text>
+
+    <!-- Processes -->
+    <g transform="translate(25, 45)">
+      <!-- Non-reentrant danger -->
+      <rect width="425" height="175" rx="6" fill="#0f172a" stroke="#ef4444" />
+      <text x="20" y="25" font-size="12" font-weight="bold" fill="#f87171">Non-Reentrant Kernel (Race Condition Danger)</text>
+      <text x="20" y="45" font-size="10" fill="#cbd5e1">• P1 kernel mode mein PCB table modify kar raha hai.</text>
+      <text x="20" y="62" font-size="10" fill="#cbd5e1">• Hardware interrupt par P2 kernel mode mein enter ho gaya.</text>
+      <text x="20" y="80" font-size="10" fill="#ef4444">• Result: Shared kernel data structure CORRUPT ho jati hai!</text>
+      <text x="20" y="105" font-size="10" fill="#94a3b8">Workaround (Ancient): Disable ALL interrupts upon entering kernel.</text>
+      <text x="20" y="125" font-size="10" fill="#fca5a5">Drawback: Terrible latency; real-time events missed.</text>
+    </g>
+
+    <!-- Reentrant Kernel -->
+    <g transform="translate(470, 45)">
+      <rect width="425" height="175" rx="6" fill="#0f172a" stroke="#10b981" />
+      <text x="20" y="25" font-size="12" font-weight="bold" fill="#34d399">Reentrant Kernel (Modern OS Standard: Linux/Windows)</text>
+      <text x="20" y="45" font-size="10" fill="#cbd5e1">• Multiple processes simultaneously execute inside kernel mode.</text>
+      <text x="20" y="62" font-size="10" fill="#cbd5e1">• Har process ka independent Kernel Stack hota hai.</text>
+      <text x="20" y="80" font-size="10" fill="#38bdf8">• Shared data structures are protected via Spinlocks &amp; Mutexes.</text>
+      <text x="20" y="105" font-size="10" fill="#a7f3d0">P1 modifying PCB #4 | P2 simultaneously modifying Inode table #12</text>
+      <text x="20" y="125" font-size="10" font-weight="bold" fill="#34d399">✓ Zero collision; maximum multi-core CPU parallelism!</text>
+    </g>
+  </g>
+
+  <!-- Part 2: System Call Execution Lifecycle -->
+  <g transform="translate(40, 350)" filter="url(#sh17)">
+    <rect width="920" height="340" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="25" y="28" font-size="15" font-weight="bold" fill="#38bdf8">
+      2. Step-by-Step Lifecycle of a System Call (Hardware &amp; Software Trace)
+    </text>
+
+    <!-- 6 Sequential Steps Flow -->
+    <g transform="translate(25, 48)">
+      <!-- Step 1 -->
+      <rect x="0" y="0" width="135" height="85" rx="6" fill="#0f172a" stroke="#6366f1" />
+      <text x="67" y="20" font-size="10" font-weight="bold" fill="#a5b4fc" text-anchor="middle">1. User Invocation</text>
+      <text x="67" y="38" font-size="9" fill="#cbd5e1" text-anchor="middle">App calls glibc</text>
+      <text x="67" y="52" font-size="9" font-family="monospace" fill="#38bdf8" text-anchor="middle">read(fd, buf, n)</text>
+      <text x="67" y="70" font-size="8" fill="#94a3b8" text-anchor="middle">User Mode (Bit 1)</text>
+
+      <path d="M 135 42 L 152 42" stroke="#6366f1" stroke-width="2" />
+
+      <!-- Step 2 -->
+      <rect x="155" y="0" width="135" height="85" rx="6" fill="#0f172a" stroke="#6366f1" />
+      <text x="222" y="20" font-size="10" font-weight="bold" fill="#a5b4fc" text-anchor="middle">2. CPU Registers</text>
+      <text x="222" y="38" font-size="9" fill="#cbd5e1" text-anchor="middle">Load Syscall No</text>
+      <text x="222" y="52" font-size="9" font-family="monospace" fill="#38bdf8" text-anchor="middle">RAX = 0 (sys_read)</text>
+      <text x="222" y="70" font-size="8" fill="#94a3b8" text-anchor="middle">Pass Args in RDI, RSI</text>
+
+      <path d="M 290 42 L 307 42" stroke="#ef4444" stroke-width="2" />
+
+      <!-- Step 3 -->
+      <rect x="310" y="0" width="135" height="85" rx="6" fill="#450a0a" stroke="#ef4444" />
+      <text x="377" y="20" font-size="10" font-weight="bold" fill="#fca5a5" text-anchor="middle">3. Trap / Syscall</text>
+      <text x="377" y="38" font-size="9" fill="#fecaca" text-anchor="middle">Hardware Trap</text>
+      <text x="377" y="52" font-size="9" font-weight="bold" fill="#fbbf24" text-anchor="middle">Mode Bit 1 → 0</text>
+      <text x="377" y="70" font-size="8" fill="#fecaca" text-anchor="middle">Kernel Mode Entry</text>
+
+      <path d="M 445 42 L 462 42" stroke="#10b981" stroke-width="2" />
+
+      <!-- Step 4 -->
+      <rect x="465" y="0" width="135" height="85" rx="6" fill="#064e3b" stroke="#10b981" />
+      <text x="532" y="20" font-size="10" font-weight="bold" fill="#a7f3d0" text-anchor="middle">4. Table Lookup</text>
+      <text x="532" y="38" font-size="9" fill="#cbd5e1" text-anchor="middle">sys_call_table[RAX]</text>
+      <text x="532" y="52" font-size="9" fill="#cbd5e1" text-anchor="middle">Validates pointers</text>
+      <text x="532" y="70" font-size="8" fill="#34d399" text-anchor="middle">Security Validation</text>
+
+      <path d="M 600 42 L 617 42" stroke="#10b981" stroke-width="2" />
+
+      <!-- Step 5 -->
+      <rect x="620" y="0" width="135" height="85" rx="6" fill="#064e3b" stroke="#10b981" />
+      <text x="687" y="20" font-size="10" font-weight="bold" fill="#a7f3d0" text-anchor="middle">5. Service Exec</text>
+      <text x="687" y="38" font-size="9" fill="#cbd5e1" text-anchor="middle">Kernel reads Disk</text>
+      <text x="687" y="52" font-size="9" fill="#cbd5e1" text-anchor="middle">Populates Buffer</text>
+      <text x="687" y="70" font-size="8" fill="#34d399" text-anchor="middle">Driver Routine</text>
+
+      <path d="M 755 42 L 772 42" stroke="#6366f1" stroke-width="2" />
+
+      <!-- Step 6 -->
+      <rect x="775" y="0" width="95" height="85" rx="6" fill="#0f172a" stroke="#6366f1" />
+      <text x="822" y="20" font-size="10" font-weight="bold" fill="#a5b4fc" text-anchor="middle">6. Sysret</text>
+      <text x="822" y="38" font-size="9" fill="#cbd5e1" text-anchor="middle">Mode Bit</text>
+      <text x="822" y="52" font-size="9" font-weight="bold" fill="#fbbf24" text-anchor="middle">0 → 1</text>
+      <text x="822" y="70" font-size="8" fill="#38bdf8" text-anchor="middle">Return to App</text>
+    </g>
+
+    <!-- Deep Details Box -->
+    <g transform="translate(25, 150)">
+      <rect width="870" height="120" rx="6" fill="#0f172a" stroke="#475569" />
+      <text x="20" y="25" font-size="12" font-weight="bold" fill="#fbbf24">3 Parameter Passing Mechanisms in System Calls:</text>
+      
+      <text x="20" y="50" font-size="11" fill="#cbd5e1">• <tspan font-weight="bold" fill="#38bdf8">1. CPU Registers:</tspan> Fast &amp; direct. Parameters CPU registers (RDI, RSI, RDX) mein load hote hain (Linux syscall ABI). Limitation: Registers limited hote hain (&lt;6 parameters).</text>
+
+      <text x="20" y="75" font-size="11" fill="#cbd5e1">• <tspan font-weight="bold" fill="#10b981">2. Memory Block / Table:</tspan> Parameters memory table / structure mein pack kiye jate hain, aur table ka starting memory address CPU register (EBX) mein pass kiya jata hai (Used in Linux &amp; Solaris).</text>
+
+      <text x="20" y="100" font-size="11" fill="#cbd5e1">• <tspan font-weight="bold" fill="#a855f7">3. Program Stack:</tspan> Parameters user application stack par push kiye jate hain, aur kernel stack se pop karke retrieve karta hai.</text>
+    </g>
+  </g>
+</svg>

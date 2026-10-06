@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <filter id="sh14" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="700" fill="url(#bg14)" rx="16" />
+  <text x="500" y="42" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">
+    Module 14: Time-Sharing &amp; Real-Time Operating Systems
+  </text>
+  <text x="500" y="68" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">
+    Round-Robin Preemption | Time Quantum (q) | Hard vs Soft RTOS Determinism
+  </text>
+
+  <!-- Part 1: Time Sharing Multitasking -->
+  <g transform="translate(40, 95)" filter="url(#sh14)">
+    <rect width="920" height="260" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="25" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#f8fafc">
+      1. Time-Sharing / Multitasking (Round Robin Preemption)
+    </text>
+
+    <!-- Circular Queue Model -->
+    <g transform="translate(35, 55)">
+      <rect width="260" height="180" rx="8" fill="#0f172a" stroke="#6366f1" />
+      <text x="130" y="28" font-size="12" font-weight="bold" fill="#a5b4fc" text-anchor="middle">Circular Ready Queue</text>
+      <!-- Circular node representation -->
+      <circle cx="80" cy="80" r="26" fill="#312e81" stroke="#818cf8" stroke-width="2" />
+      <text x="80" y="85" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">P1</text>
+      
+      <circle cx="180" cy="80" r="26" fill="#064e3b" stroke="#34d399" stroke-width="2" />
+      <text x="180" y="85" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">P2</text>
+
+      <circle cx="130" cy="145" r="26" fill="#78350f" stroke="#fbbf24" stroke-width="2" />
+      <text x="130" y="150" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">P3</text>
+
+      <!-- Arrows -->
+      <path d="M 108 72 L 152 72" stroke="#cbd5e1" stroke-width="2" />
+      <path d="M 170 102 L 145 125" stroke="#cbd5e1" stroke-width="2" />
+      <path d="M 115 125 L 90 102" stroke="#cbd5e1" stroke-width="2" />
+    </g>
+
+    <!-- Gantt Chart Timeline -->
+    <g transform="translate(320, 55)">
+      <rect width="575" height="180" rx="8" fill="#0f172a" stroke="#38bdf8" />
+      <text x="25" y="30" font-size="13" font-weight="bold" fill="#38bdf8">Gantt Chart Execution (Time Slice q = 2 ms)</text>
+      
+      <!-- Timeline blocks -->
+      <g transform="translate(25, 50)">
+        <rect x="0" y="0" width="85" height="35" rx="4" fill="#6366f1" />
+        <text x="42" y="22" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">P1 (2ms)</text>
+
+        <rect x="90" y="0" width="85" height="35" rx="4" fill="#10b981" />
+        <text x="132" y="22" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">P2 (2ms)</text>
+
+        <rect x="180" y="0" width="85" height="35" rx="4" fill="#f59e0b" />
+        <text x="222" y="22" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">P3 (2ms)</text>
+
+        <rect x="270" y="0" width="85" height="35" rx="4" fill="#6366f1" />
+        <text x="312" y="22" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">P1 (2ms)</text>
+
+        <rect x="360" y="0" width="85" height="35" rx="4" fill="#10b981" />
+        <text x="402" y="22" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">P2 (2ms)</text>
+
+        <rect x="450" y="0" width="70" height="35" rx="4" fill="#f59e0b" />
+        <text x="485" y="22" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">P3 (End)</text>
+
+        <!-- Time markers -->
+        <text x="0" y="52" font-size="10" fill="#94a3b8">0ms</text>
+        <text x="85" y="52" font-size="10" fill="#94a3b8">2ms</text>
+        <text x="175" y="52" font-size="10" fill="#94a3b8">4ms</text>
+        <text x="265" y="52" font-size="10" fill="#94a3b8">6ms</text>
+        <text x="355" y="52" font-size="10" fill="#94a3b8">8ms</text>
+        <text x="445" y="52" font-size="10" fill="#94a3b8">10ms</text>
+        <text x="520" y="52" font-size="10" fill="#94a3b8">12ms</text>
+      </g>
+
+      <text x="25" y="130" font-size="11" fill="#cbd5e1">• Timer interrupt hardware forces CPU context switch har 2ms baad.</text>
+      <text x="25" y="148" font-size="11" fill="#cbd5e1">• Har user ko illusion milta hai ki computer completely usi ka hai (*Fair Share*).</text>
+      <text x="25" y="166" font-size="11" fill="#34d399">✓ Key Metric: Minimizes Response Time (Interactive systems ke liye best).</text>
+    </g>
+  </g>
+
+  <!-- Part 2: Real-Time Systems -->
+  <g transform="translate(40, 375)" filter="url(#sh14)">
+    <rect width="920" height="295" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="25" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#f8fafc">
+      2. Real-Time Operating Systems (Hard RTOS vs Soft RTOS)
+    </text>
+
+    <!-- Hard RTOS Box -->
+    <g transform="translate(25, 50)">
+      <rect width="425" height="225" rx="8" fill="#0f172a" stroke="#ef4444" stroke-width="1.5" />
+      <text x="20" y="28" font-size="14" font-weight="bold" fill="#ef4444">🚨 Hard Real-Time System (Zero Tolerance)</text>
+      <text x="20" y="52" font-size="11" fill="#cbd5e1">• Strict Deadlines: Miss deadline = TOTAL CATASTROPHE</text>
+      <text x="20" y="72" font-size="11" fill="#cbd5e1">• Jitter Tolerance: Exactly 0 microseconds</text>
+      <text x="20" y="92" font-size="11" fill="#cbd5e1">• No Virtual Memory / Paging (bina page-fault latency ke)</text>
+      
+      <!-- Utility Curve -->
+      <g transform="translate(20, 110)">
+        <line x1="10" y1="60" x2="360" y2="60" stroke="#475569" stroke-width="1.5" />
+        <line x1="10" y1="10" x2="10" y2="60" stroke="#475569" stroke-width="1.5" />
+        <text x="8" y="8" font-size="9" fill="#94a3b8">Utility</text>
+        <text x="365" y="63" font-size="9" fill="#94a3b8">Time</text>
+        <line x1="180" y1="10" x2="180" y2="60" stroke="#fbbf24" stroke-dasharray="2,2" stroke-width="1.5" />
+        <text x="180" y="75" font-size="9" fill="#fbbf24" text-anchor="middle">Deadline</text>
+
+        <!-- Hard curve: Flat 100% then instant crash to -infinity -->
+        <path d="M 10 20 L 180 20 L 180 85" stroke="#ef4444" stroke-width="3" fill="none" />
+        <text x="230" y="40" font-size="11" font-weight="bold" fill="#ef4444">Negative Value (Failure)</text>
+      </g>
+      <text x="20" y="210" font-size="11" fill="#fca5a5">Examples: Pacemakers, Airbag Sensor, Missile Avionics</text>
+    </g>
+
+    <!-- Soft RTOS Box -->
+    <g transform="translate(470, 50)">
+      <rect width="425" height="225" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="20" y="28" font-size="14" font-weight="bold" fill="#38bdf8">🎮 Soft Real-Time System (Degraded QoS)</text>
+      <text x="20" y="52" font-size="11" fill="#cbd5e1">• Tolerant Deadlines: Miss deadline = Quality Drop (Lag)</text>
+      <text x="20" y="72" font-size="11" fill="#cbd5e1">• High priority given to real-time tasks over best-effort</text>
+      <text x="20" y="92" font-size="11" fill="#cbd5e1">• Virtual memory &amp; dynamic caching supported</text>
+      
+      <!-- Utility Curve -->
+      <g transform="translate(20, 110)">
+        <line x1="10" y1="60" x2="360" y2="60" stroke="#475569" stroke-width="1.5" />
+        <line x1="10" y1="10" x2="10" y2="60" stroke="#475569" stroke-width="1.5" />
+        <text x="8" y="8" font-size="9" fill="#94a3b8">Utility</text>
+        <text x="365" y="63" font-size="9" fill="#94a3b8">Time</text>
+        <line x1="180" y1="10" x2="180" y2="60" stroke="#fbbf24" stroke-dasharray="2,2" stroke-width="1.5" />
+        <text x="180" y="75" font-size="9" fill="#fbbf24" text-anchor="middle">Deadline</text>
+
+        <!-- Soft curve: Flat then exponential decay -->
+        <path d="M 10 20 L 180 20 Q 240 25 340 55" stroke="#38bdf8" stroke-width="3" fill="none" />
+        <text x="210" y="40" font-size="11" font-weight="bold" fill="#38bdf8">Gradual QoS Decay</text>
+      </g>
+      <text x="20" y="210" font-size="11" fill="#7dd3fc">Examples: Video Streaming (YouTube), VoIP Call, VR Games</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg19" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <filter id="sh19" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bg19)" rx="16" />
+  <text x="500" y="38" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">
+    Module 19: Unit 1 Complete Knowledge Graph &amp; Exam Cheatsheet
+  </text>
+  <text x="500" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">
+    10 Years AKTU PYQ Coverage (2014–2023) | High-Yield Formulas | Interview Core Pillars
+  </text>
+
+  <!-- Central Hub Mind Map -->
+  <g transform="translate(40, 85)" filter="url(#sh19)">
+    <rect width="920" height="630" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+
+    <!-- Central Node -->
+    <rect x="360" y="270" width="200" height="70" rx="35" fill="#0284c7" stroke="#38bdf8" stroke-width="2.5" />
+    <text x="460" y="302" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">OPERATING</text>
+    <text x="460" y="322" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">SYSTEM (UNIT 1)</text>
+
+    <!-- Branch 1: Core Fundamentals (Top Left) -->
+    <path d="M 370 280 L 190 120" stroke="#6366f1" stroke-width="2.5" />
+    <rect x="70" y="60" width="230" height="105" rx="8" fill="#0f172a" stroke="#6366f1" stroke-width="1.5" />
+    <text x="185" y="85" font-size="13" font-weight="bold" fill="#a5b4fc" text-anchor="middle">1. Fundamentals &amp; Kernel</text>
+    <text x="85" y="105" font-size="10" fill="#cbd5e1">• Bridge: Hardware ↔ User</text>
+    <text x="85" y="122" font-size="10" fill="#cbd5e1">• Dual Mode (Mode Bit 1 ↔ 0)</text>
+    <text x="85" y="139" font-size="10" fill="#cbd5e1">• Bootstrap Loader / POST</text>
+    <text x="85" y="156" font-size="10" fill="#38bdf8">• PYQs: 2015-16, 2017-18</text>
+
+    <!-- Branch 2: OS Classifications (Top Right) -->
+    <path d="M 550 280 L 730 120" stroke="#10b981" stroke-width="2.5" />
+    <rect x="620" y="60" width="245" height="105" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+    <text x="742" y="85" font-size="13" font-weight="bold" fill="#34d399" text-anchor="middle">2. OS Classifications</text>
+    <text x="635" y="105" font-size="10" fill="#cbd5e1">• Batch OS &amp; Spooling (FIFO)</text>
+    <text x="635" y="122" font-size="10" fill="#cbd5e1">• Multiprogramming (1 - p^n)</text>
+    <text x="635" y="139" font-size="10" fill="#cbd5e1">• Time Sharing (Round Robin q)</text>
+    <text x="635" y="156" font-size="10" fill="#38bdf8">• Hard vs Soft RTOS (Deadlines)</text>
+
+    <!-- Branch 3: Architectures (Bottom Left) -->
+    <path d="M 370 330 L 190 490" stroke="#f59e0b" stroke-width="2.5" />
+    <rect x="70" y="450" width="230" height="110" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" />
+    <text x="185" y="475" font-size="13" font-weight="bold" fill="#fbbf24" text-anchor="middle">3. OS Structures</text>
+    <text x="85" y="495" font-size="10" fill="#cbd5e1">• Monolithic (Fast direct calls)</text>
+    <text x="85" y="512" font-size="10" fill="#cbd5e1">• Layered (Strict N → N-1)</text>
+    <text x="85" y="529" font-size="10" fill="#cbd5e1">• Microkernel (IPC Message passing)</text>
+    <text x="85" y="546" font-size="10" fill="#cbd5e1">• Modular (Modern Linux LKMs)</text>
+
+    <!-- Branch 4: System Calls & Services (Bottom Right) -->
+    <path d="M 550 330 L 730 490" stroke="#ec4899" stroke-width="2.5" />
+    <rect x="620" y="450" width="245" height="110" rx="8" fill="#0f172a" stroke="#ec4899" stroke-width="1.5" />
+    <text x="742" y="475" font-size="13" font-weight="bold" fill="#f472b6" text-anchor="middle">4. Services &amp; System Calls</text>
+    <text x="635" y="495" font-size="10" fill="#cbd5e1">• Trap &amp; sys_call_table indexing</text>
+    <text x="635" y="512" font-size="10" fill="#cbd5e1">• Reentrant Kernel concurrency</text>
+    <text x="635" y="529" font-size="10" fill="#cbd5e1">• 8 Major Core OS Components</text>
+    <text x="635" y="546" font-size="10" fill="#38bdf8">• Parameter passing (Reg/Block/Stack)</text>
+
+    <!-- Bottom Formulas Ribbon -->
+    <g transform="translate(50, 575)">
+      <rect width="820" height="42" rx="6" fill="#0f172a" stroke="#38bdf8" />
+      <text x="410" y="26" font-size="11" font-weight="bold" fill="#e0f2fe" text-anchor="middle">
+        Formula Cheat Sheet: CPU Util = 1 - p^n | Amdahl Speedup = 1 / [(1-P) + P/N] | AMAT = Hit Time + (Miss Rate × Miss Penalty)
+      </text>
+    </g>
+  </g>
+</svg>

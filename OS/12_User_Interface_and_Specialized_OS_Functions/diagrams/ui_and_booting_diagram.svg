@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#312e81" />
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="cardGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c2d12" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="700" fill="url(#bgGrad)" rx="16" />
+
+  <!-- Header -->
+  <text x="500" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">
+    Module 12: User Interfaces, Booting Modes &amp; Specialized OS Functions
+  </text>
+  <text x="500" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">
+    CLI vs GUI vs Touch | Cold vs Warm Booting | System Protection &amp; Resource Accounting
+  </text>
+
+  <!-- Section 1: User Interfaces -->
+  <g transform="translate(40, 95)" filter="url(#shadow)">
+    <rect width="920" height="150" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="30" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#f8fafc">
+      1. User Interface (UI) Paradigms
+    </text>
+
+    <!-- CLI Box -->
+    <rect x="30" y="45" width="270" height="90" rx="8" fill="#0f172a" stroke="#6366f1" stroke-width="1.5" />
+    <text x="45" y="70" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#a5b4fc">Command Line (CLI)</text>
+    <text x="45" y="90" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Text-only prompt (Bash, CMD, Zsh)</text>
+    <text x="45" y="108" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Extremely lightweight &amp; scriptable</text>
+    <text x="45" y="124" font-family="system-ui, sans-serif" font-size="11" fill="#38bdf8">• Direct system call invocation</text>
+
+    <!-- GUI Box -->
+    <rect x="325" y="45" width="270" height="90" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+    <text x="340" y="70" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#6ee7b7">Graphical UI (GUI)</text>
+    <text x="340" y="90" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• WIMP (Windows, Icons, Menus, Pointer)</text>
+    <text x="340" y="108" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• High visual intuitiveness</text>
+    <text x="340" y="124" font-family="system-ui, sans-serif" font-size="11" fill="#38bdf8">• Window Manager + Display Server</text>
+
+    <!-- Touch Box -->
+    <rect x="620" y="45" width="270" height="90" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" />
+    <text x="635" y="70" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#fde68a">Touch / Gestural UI</text>
+    <text x="635" y="90" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Direct fingertip interaction (Android, iOS)</text>
+    <text x="635" y="108" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Virtual keyboards &amp; haptic feedback</text>
+    <text x="635" y="124" font-family="system-ui, sans-serif" font-size="11" fill="#38bdf8">• Event-driven touch gestures</text>
+  </g>
+
+  <!-- Section 2: Booting Comparison -->
+  <g transform="translate(40, 265)" filter="url(#shadow)">
+    <rect width="920" height="210" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="30" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#f8fafc">
+      2. Booting Modes: Cold Booting vs Warm Booting
+    </text>
+
+    <!-- Cold Boot Track -->
+    <g transform="translate(30, 48)">
+      <rect width="425" height="145" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="20" y="25" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">
+        ❄️ Cold Booting (Hard Boot)
+      </text>
+      <text x="20" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Trigger: Power Button ON from completely OFF state</text>
+
+      <rect x="15" y="60" width="80" height="35" rx="4" fill="#1e293b" stroke="#475569" />
+      <text x="55" y="82" font-size="10" fill="#f8fafc" text-anchor="middle">Power Supply</text>
+
+      <path d="M 95 77 L 115 77" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)" />
+
+      <rect x="115" y="60" width="90" height="35" rx="4" fill="#0284c7" />
+      <text x="160" y="76" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">POST Test</text>
+      <text x="160" y="88" font-size="8" fill="#e0f2fe" text-anchor="middle">(H/W Checked)</text>
+
+      <path d="M 205 77 L 225 77" stroke="#38bdf8" stroke-width="2" />
+
+      <rect x="225" y="60" width="85" height="35" rx="4" fill="#1e293b" stroke="#475569" />
+      <text x="267" y="76" font-size="10" fill="#f8fafc" text-anchor="middle">BIOS / UEFI</text>
+      <text x="267" y="88" font-size="8" fill="#94a3b8" text-anchor="middle">ROM Executed</text>
+
+      <path d="M 310 77 L 330 77" stroke="#38bdf8" stroke-width="2" />
+
+      <rect x="330" y="60" width="80" height="35" rx="4" fill="#059669" />
+      <text x="370" y="76" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">Kernel Load</text>
+      <text x="370" y="88" font-size="8" fill="#d1fae5" text-anchor="middle">RAM Populated</text>
+
+      <text x="20" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">✓ Full diagnostic hardware check</text>
+      <text x="20" y="132" font-family="system-ui, sans-serif" font-size="11" fill="#f87171">✗ Slower boot time due to complete POST</text>
+    </g>
+
+    <!-- Warm Boot Track -->
+    <g transform="translate(465, 48)">
+      <rect width="425" height="145" rx="8" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5" />
+      <text x="20" y="25" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">
+        🔥 Warm Booting (Soft Boot / Reboot)
+      </text>
+      <text x="20" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Trigger: OS Restart option, Ctrl+Alt+Del, Reset cmd</text>
+
+      <rect x="15" y="60" width="95" height="35" rx="4" fill="#1e293b" stroke="#475569" />
+      <text x="62" y="76" font-size="10" fill="#f8fafc" text-anchor="middle">OS Reset Signal</text>
+      <text x="62" y="88" font-size="8" fill="#94a3b8" text-anchor="middle">Power Stays ON</text>
+
+      <path d="M 110 77 L 135 77" stroke="#fbbf24" stroke-width="2" />
+
+      <rect x="135" y="60" width="115" height="35" rx="4" fill="#b45309" />
+      <text x="192" y="76" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">Bypass POST</text>
+      <text x="192" y="88" font-size="8" fill="#fef3c7" text-anchor="middle">Hardware Unchecked</text>
+
+      <path d="M 250 77 L 275 77" stroke="#fbbf24" stroke-width="2" />
+
+      <rect x="275" y="60" width="135" height="35" rx="4" fill="#059669" />
+      <text x="342" y="76" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">Reload OS Kernel</text>
+      <text x="342" y="88" font-size="8" fill="#d1fae5" text-anchor="middle">Clear &amp; Fresh State</text>
+
+      <text x="20" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">✓ Fast restart cycle; retains hardware power</text>
+      <text x="20" y="132" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">✓ Clears memory leaks &amp; hung user-space processes</text>
+    </g>
+  </g>
+
+  <!-- Section 3: Specialized OS Functions -->
+  <g transform="translate(40, 495)" filter="url(#shadow)">
+    <rect width="920" height="185" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="30" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#f8fafc">
+      3. Specialized Auxiliary OS Functions
+    </text>
+
+    <!-- 6 Grid Cards -->
+    <!-- Card 1: Protection & Security -->
+    <rect x="30" y="45" width="270" height="58" rx="6" fill="#0f172a" stroke="#38bdf8" />
+    <text x="42" y="68" font-size="12" font-weight="bold" fill="#38bdf8">🛡️ Protection &amp; Security</text>
+    <text x="42" y="86" font-size="10" fill="#94a3b8">ACLs, Passwords, Memory boundaries, Encryption</text>
+
+    <!-- Card 2: Performance Control -->
+    <rect x="325" y="45" width="270" height="58" rx="6" fill="#0f172a" stroke="#10b981" />
+    <text x="337" y="68" font-size="12" font-weight="bold" fill="#10b981">⚡ System Performance</text>
+    <text x="337" y="86" font-size="10" fill="#94a3b8">Response time monitoring, bottleneck detection</text>
+
+    <!-- Card 3: Job Accounting -->
+    <rect x="620" y="45" width="270" height="58" rx="6" fill="#0f172a" stroke="#f59e0b" />
+    <text x="632" y="68" font-size="12" font-weight="bold" fill="#f59e0b">📊 Job Accounting</text>
+    <text x="632" y="86" font-size="10" fill="#94a3b8">Tracks CPU time, disk I/O, user billing quotas</text>
+
+    <!-- Card 4: Error Detection -->
+    <rect x="30" y="113" width="270" height="58" rx="6" fill="#0f172a" stroke="#ef4444" />
+    <text x="42" y="136" font-size="12" font-weight="bold" fill="#ef4444">🔍 Error Detection &amp; Debug</text>
+    <text x="42" y="154" font-size="10" fill="#94a3b8">Hardware traps, parity checks, core dumps, logs</text>
+
+    <!-- Card 5: Software Coordination -->
+    <rect x="325" y="113" width="270" height="58" rx="6" fill="#0f172a" stroke="#a855f7" />
+    <text x="337" y="136" font-size="12" font-weight="bold" fill="#a855f7">🔄 Software Coordination</text>
+    <text x="337" y="154" font-size="10" fill="#94a3b8">Linkers, assemblers, shared dynamic libraries</text>
+
+    <!-- Card 6: Network Management -->
+    <rect x="620" y="113" width="270" height="58" rx="6" fill="#0f172a" stroke="#ec4899" />
+    <text x="632" y="136" font-size="12" font-weight="bold" fill="#ec4899">🌐 Network Security</text>
+    <text x="632" y="154" font-size="10" fill="#94a3b8">TCP/IP stacks, socket routing, packet firewalls</text>
+  </g>
+</svg>

@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg15" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <filter id="sh15" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="700" fill="url(#bg15)" rx="16" />
+  <text x="500" y="42" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">
+    Module 15: Multiprocessor, Multiuser &amp; Multithreaded Systems
+  </text>
+  <text x="500" y="68" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">
+    SMP vs ASMP | Flynn's Taxonomy | Multiuser Quotas | Heavyweight Process vs Threads
+  </text>
+
+  <!-- Part 1: Multiprocessor Architectures -->
+  <g transform="translate(40, 95)" filter="url(#sh15)">
+    <rect width="920" height="260" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="25" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#f8fafc">
+      1. Multiprocessor Architecture: Symmetric (SMP) vs Asymmetric (ASMP)
+    </text>
+
+    <!-- SMP Box -->
+    <g transform="translate(25, 48)">
+      <rect width="425" height="195" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+      <text x="20" y="25" font-size="13" font-weight="bold" fill="#34d399">Symmetric Multiprocessing (SMP) - Peer Model</text>
+      <text x="20" y="44" font-size="10" fill="#cbd5e1">• Saare CPUs equal peer status enjoy karte hain.</text>
+      <text x="20" y="60" font-size="10" fill="#cbd5e1">• Single shared OS copy; any CPU can run kernel or user tasks.</text>
+
+      <!-- 3 CPUs on Shared Bus & RAM -->
+      <g transform="translate(20, 75)">
+        <rect x="0" y="0" width="75" height="40" rx="4" fill="#064e3b" stroke="#059669" />
+        <text x="37" y="24" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">CPU 0</text>
+        
+        <rect x="100" y="0" width="75" height="40" rx="4" fill="#064e3b" stroke="#059669" />
+        <text x="137" y="24" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">CPU 1</text>
+
+        <rect x="200" y="0" width="75" height="40" rx="4" fill="#064e3b" stroke="#059669" />
+        <text x="237" y="24" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">CPU 2</text>
+
+        <line x1="37" y1="40" x2="37" y2="60" stroke="#34d399" stroke-width="2" />
+        <line x1="137" y1="40" x2="137" y2="60" stroke="#34d399" stroke-width="2" />
+        <line x1="237" y1="40" x2="237" y2="60" stroke="#34d399" stroke-width="2" />
+        <line x1="20" y1="60" x2="260" y2="60" stroke="#34d399" stroke-width="3" />
+        <text x="290" y="64" font-size="10" font-weight="bold" fill="#34d399">Shared System Bus</text>
+
+        <!-- Shared Memory -->
+        <line x1="137" y1="60" x2="137" y2="75" stroke="#34d399" stroke-width="2" />
+        <rect x="60" y="75" width="160" height="30" rx="4" fill="#1e293b" stroke="#38bdf8" />
+        <text x="140" y="95" font-size="10" font-weight="bold" fill="#38bdf8" text-anchor="middle">Shared Main Memory (RAM)</text>
+      </g>
+    </g>
+
+    <!-- ASMP Box -->
+    <g transform="translate(470, 48)">
+      <rect width="425" height="195" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" />
+      <text x="20" y="25" font-size="13" font-weight="bold" fill="#fbbf24">Asymmetric Multiprocessing (ASMP) - Master-Slave</text>
+      <text x="20" y="44" font-size="10" fill="#cbd5e1">• Master CPU manages OS scheduling &amp; I/O operations.</text>
+      <text x="20" y="60" font-size="10" fill="#cbd5e1">• Slave CPUs only execute assigned user code.</text>
+
+      <g transform="translate(20, 75)">
+        <rect x="0" y="0" width="105" height="40" rx="4" fill="#78350f" stroke="#d97706" />
+        <text x="52" y="18" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">Master CPU</text>
+        <text x="52" y="32" font-size="8" fill="#fef3c7" text-anchor="middle">(Runs OS Kernel)</text>
+
+        <path d="M 105 20 L 150 20" stroke="#fbbf24" stroke-width="2" />
+        <polygon points="155,20 145,16 145,24" fill="#fbbf24" />
+
+        <rect x="160" y="0" width="100" height="40" rx="4" fill="#1e293b" stroke="#64748b" />
+        <text x="210" y="18" font-size="10" font-weight="bold" fill="#cbd5e1" text-anchor="middle">Slave CPU 1</text>
+        <text x="210" y="32" font-size="8" fill="#94a3b8" text-anchor="middle">(User Task)</text>
+
+        <rect x="280" y="0" width="100" height="40" rx="4" fill="#1e293b" stroke="#64748b" />
+        <text x="330" y="18" font-size="10" font-weight="bold" fill="#cbd5e1" text-anchor="middle">Slave CPU 2</text>
+        <text x="330" y="32" font-size="8" fill="#94a3b8" text-anchor="middle">(User Task)</text>
+
+        <text x="20" y="80" font-size="10" fill="#fca5a5">• Limitation: Master CPU becomes a bottleneck.</text>
+        <text x="20" y="98" font-size="10" fill="#fca5a5">• Master crash leads to entire system halt.</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Part 2: Multithreading & Multiuser Models -->
+  <g transform="translate(40, 375)" filter="url(#sh15)">
+    <rect width="920" height="295" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="25" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#f8fafc">
+      2. Thread Model vs Heavyweight Process &amp; Multiuser Quotas
+    </text>
+
+    <!-- Heavyweight Process -->
+    <g transform="translate(25, 48)">
+      <rect width="425" height="225" rx="8" fill="#0f172a" stroke="#6366f1" stroke-width="1.5" />
+      <text x="20" y="26" font-size="13" font-weight="bold" fill="#a5b4fc">Heavyweight Process Model (Isolated)</text>
+      <text x="20" y="46" font-size="10" fill="#cbd5e1">• Har process ka separate memory address space hota hai.</text>
+      <text x="20" y="62" font-size="10" fill="#cbd5e1">• High context switch overhead (Flush TLB + Page tables).</text>
+
+      <g transform="translate(20, 75)">
+        <rect x="0" y="0" width="180" height="130" rx="6" fill="#1e1b4b" stroke="#818cf8" />
+        <text x="90" y="20" font-size="11" font-weight="bold" fill="#e0e7ff" text-anchor="middle">Process P1</text>
+        <rect x="15" y="30" width="150" height="20" fill="#312e81" /><text x="90" y="44" font-size="9" fill="#c7d2fe" text-anchor="middle">Code &amp; Data Segment</text>
+        <rect x="15" y="55" width="150" height="20" fill="#312e81" /><text x="90" y="69" font-size="9" fill="#c7d2fe" text-anchor="middle">Heap Segment</text>
+        <rect x="15" y="80" width="150" height="20" fill="#4338ca" /><text x="90" y="94" font-size="9" fill="#e0e7ff" text-anchor="middle">Stack &amp; Registers</text>
+        <rect x="15" y="105" width="150" height="18" fill="#1e1b4b" stroke="#6366f1" /><text x="90" y="118" font-size="8" fill="#a5b4fc" text-anchor="middle">Single Thread of Control</text>
+
+        <rect x="205" y="0" width="180" height="130" rx="6" fill="#1e1b4b" stroke="#818cf8" />
+        <text x="295" y="20" font-size="11" font-weight="bold" fill="#e0e7ff" text-anchor="middle">Process P2</text>
+        <rect x="220" y="30" width="150" height="20" fill="#312e81" /><text x="295" y="44" font-size="9" fill="#c7d2fe" text-anchor="middle">Code &amp; Data Segment</text>
+        <rect x="220" y="55" width="150" height="20" fill="#312e81" /><text x="295" y="69" font-size="9" fill="#c7d2fe" text-anchor="middle">Heap Segment</text>
+        <rect x="220" y="80" width="150" height="20" fill="#4338ca" /><text x="295" y="94" font-size="9" fill="#e0e7ff" text-anchor="middle">Stack &amp; Registers</text>
+        <rect x="220" y="105" width="150" height="18" fill="#1e1b4b" stroke="#6366f1" /><text x="295" y="118" font-size="8" fill="#a5b4fc" text-anchor="middle">Single Thread of Control</text>
+      </g>
+    </g>
+
+    <!-- Multithreaded Process -->
+    <g transform="translate(470, 48)">
+      <rect width="425" height="225" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="20" y="26" font-size="13" font-weight="bold" fill="#38bdf8">Multithreaded Model (Lightweight Concurrency)</text>
+      <text x="20" y="46" font-size="10" fill="#cbd5e1">• Threads within same process share Code, Data, Open Files.</text>
+      <text x="20" y="62" font-size="10" fill="#cbd5e1">• Private state: Har thread ka apna Stack, PC aur Registers hain.</text>
+
+      <g transform="translate(20, 75)">
+        <rect x="0" y="0" width="385" height="130" rx="6" fill="#0c4a6e" stroke="#0284c7" />
+        <text x="192" y="18" font-size="11" font-weight="bold" fill="#e0f2fe" text-anchor="middle">Shared Process Address Space</text>
+        
+        <rect x="15" y="25" width="355" height="20" fill="#0369a1" />
+        <text x="192" y="39" font-size="9" fill="#bae6fd" text-anchor="middle">Shared Code, Data &amp; Open File Descriptors</text>
+
+        <!-- 3 Threads -->
+        <rect x="15" y="55" width="110" height="65" rx="4" fill="#082f49" stroke="#38bdf8" />
+        <text x="70" y="70" font-size="9" font-weight="bold" fill="#38bdf8" text-anchor="middle">Thread T1</text>
+        <text x="70" y="86" font-size="8" fill="#94a3b8" text-anchor="middle">Stack 1</text>
+        <text x="70" y="102" font-size="8" fill="#94a3b8" text-anchor="middle">Registers 1</text>
+
+        <rect x="137" y="55" width="110" height="65" rx="4" fill="#082f49" stroke="#38bdf8" />
+        <text x="192" y="70" font-size="9" font-weight="bold" fill="#38bdf8" text-anchor="middle">Thread T2</text>
+        <text x="192" y="86" font-size="8" fill="#94a3b8" text-anchor="middle">Stack 2</text>
+        <text x="192" y="102" font-size="8" fill="#94a3b8" text-anchor="middle">Registers 2</text>
+
+        <rect x="260" y="55" width="110" height="65" rx="4" fill="#082f49" stroke="#38bdf8" />
+        <text x="315" y="70" font-size="9" font-weight="bold" fill="#38bdf8" text-anchor="middle">Thread T3</text>
+        <text x="315" y="86" font-size="8" fill="#94a3b8" text-anchor="middle">Stack 3</text>
+        <text x="315" y="102" font-size="8" fill="#94a3b8" text-anchor="middle">Registers 3</text>
+      </g>
+    </g>
+  </g>
+</svg>

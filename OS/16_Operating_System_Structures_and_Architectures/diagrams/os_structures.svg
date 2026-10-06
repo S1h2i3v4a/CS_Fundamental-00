@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg16" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <filter id="sh16" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="720" fill="url(#bg16)" rx="16" />
+  <text x="500" y="40" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">
+    Module 16: Operating System Structures &amp; Architectural Approaches
+  </text>
+  <text x="500" y="65" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">
+    Simple (MS-DOS) | Monolithic Kernel | Layered System | Microkernel | Modular LKMs
+  </text>
+
+  <!-- 4 Architecture Cards Grid -->
+  <!-- Card 1: Monolithic Kernel -->
+  <g transform="translate(40, 90)" filter="url(#sh16)">
+    <rect width="440" height="280" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="1.5" />
+    <text x="20" y="28" font-size="14" font-weight="bold" fill="#f87171">1. Monolithic Kernel Architecture</text>
+    <text x="20" y="48" font-size="10" fill="#cbd5e1">All services run in privileged Kernel Space (Ring 0)</text>
+
+    <g transform="translate(20, 60)">
+      <!-- User Mode -->
+      <rect x="0" y="0" width="400" height="35" rx="4" fill="#0f172a" stroke="#6366f1" />
+      <text x="200" y="22" font-size="11" font-weight="bold" fill="#a5b4fc" text-anchor="middle">User Applications (User Mode Ring 3)</text>
+
+      <line x1="0" y1="45" x2="400" y2="45" stroke="#ef4444" stroke-dasharray="4,4" />
+      <text x="200" y="43" font-size="9" fill="#ef4444" text-anchor="middle">--- System Call Interface (Trap) ---</text>
+
+      <!-- Monolithic Kernel Block -->
+      <rect x="0" y="52" width="400" height="110" rx="4" fill="#450a0a" stroke="#ef4444" />
+      <text x="200" y="70" font-size="11" font-weight="bold" fill="#fca5a5" text-anchor="middle">Monolithic Kernel (Single Address Space)</text>
+      
+      <rect x="15" y="80" width="85" height="30" fill="#7f1d1d" rx="3" /><text x="57" y="98" font-size="9" fill="#fecaca" text-anchor="middle">Scheduler</text>
+      <rect x="110" y="80" width="85" height="30" fill="#7f1d1d" rx="3" /><text x="152" y="98" font-size="9" fill="#fecaca" text-anchor="middle">VMM</text>
+      <rect x="205" y="80" width="85" height="30" fill="#7f1d1d" rx="3" /><text x="247" y="98" font-size="9" fill="#fecaca" text-anchor="middle">File System</text>
+      <rect x="300" y="80" width="85" height="30" fill="#7f1d1d" rx="3" /><text x="342" y="98" font-size="9" fill="#fecaca" text-anchor="middle">Drivers</text>
+
+      <rect x="0" y="172" width="400" height="28" rx="4" fill="#0f172a" stroke="#475569" />
+      <text x="200" y="190" font-size="10" fill="#94a3b8" text-anchor="middle">Underlying Computer Hardware</text>
+    </g>
+    <text x="20" y="270" font-size="10" fill="#34d399">✓ Maximum raw execution speed | ✗ Bug in driver crashes entire OS</text>
+  </g>
+
+  <!-- Card 2: Layered Approach -->
+  <g transform="translate(520, 90)" filter="url(#sh16)">
+    <rect width="440" height="280" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
+    <text x="20" y="28" font-size="14" font-weight="bold" fill="#fbbf24">2. Layered Approach (Dijkstra's Model)</text>
+    <text x="20" y="48" font-size="10" fill="#cbd5e1">Strict hierarchy: Layer N can only call Layer N-1</text>
+
+    <g transform="translate(20, 60)">
+      <rect x="0" y="0" width="400" height="26" rx="3" fill="#065f46" stroke="#10b981" />
+      <text x="200" y="17" font-size="10" font-weight="bold" fill="#a7f3d0" text-anchor="middle">Layer N: User Interface / Shell</text>
+
+      <rect x="0" y="32" width="400" height="26" rx="3" fill="#1e1b4b" stroke="#6366f1" />
+      <text x="200" y="49" font-size="10" font-weight="bold" fill="#c7d2fe" text-anchor="middle">Layer N-1: Application System Calls</text>
+
+      <rect x="0" y="64" width="400" height="26" rx="3" fill="#701a75" stroke="#a855f7" />
+      <text x="200" y="81" font-size="10" font-weight="bold" fill="#e9d5ff" text-anchor="middle">Layer 2: File System &amp; Device Drivers</text>
+
+      <rect x="0" y="96" width="400" height="26" rx="3" fill="#0c4a6e" stroke="#0284c7" />
+      <text x="200" y="113" font-size="10" font-weight="bold" fill="#bae6fd" text-anchor="middle">Layer 1: Memory Management &amp; CPU Scheduler</text>
+
+      <rect x="0" y="128" width="400" height="26" rx="3" fill="#0f172a" stroke="#475569" />
+      <text x="200" y="145" font-size="10" font-weight="bold" fill="#f8fafc" text-anchor="middle">Layer 0: Computer Hardware</text>
+    </g>
+    <text x="20" y="250" font-size="10" fill="#cbd5e1">• Modular verification &amp; easy debugging layer by layer.</text>
+    <text x="20" y="270" font-size="10" fill="#fca5a5">✗ Major drawback: High invocation latency across multiple layers.</text>
+  </g>
+
+  <!-- Card 3: Microkernel Architecture -->
+  <g transform="translate(40, 390)" filter="url(#sh16)">
+    <rect width="440" height="300" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="20" y="28" font-size="14" font-weight="bold" fill="#38bdf8">3. Microkernel Architecture (Mach / QNX)</text>
+    <text x="20" y="48" font-size="10" fill="#cbd5e1">Minimal privileged core; Services run as User Daemons</text>
+
+    <g transform="translate(20, 60)">
+      <!-- User Space Servers -->
+      <rect x="0" y="0" width="400" height="75" rx="4" fill="#0f172a" stroke="#0284c7" />
+      <text x="200" y="16" font-size="10" font-weight="bold" fill="#38bdf8" text-anchor="middle">User Space (Unprivileged Servers)</text>
+      
+      <rect x="10" y="25" width="85" height="38" fill="#1e293b" stroke="#38bdf8" rx="3" />
+      <text x="52" y="42" font-size="9" fill="#f8fafc" text-anchor="middle">Client App</text>
+      <text x="52" y="55" font-size="7" fill="#94a3b8" text-anchor="middle">(User Mode)</text>
+
+      <rect x="105" y="25" width="85" height="38" fill="#064e3b" stroke="#10b981" rx="3" />
+      <text x="147" y="42" font-size="9" fill="#f8fafc" text-anchor="middle">File Server</text>
+      <text x="147" y="55" font-size="7" fill="#a7f3d0" text-anchor="middle">(User Mode)</text>
+
+      <rect x="205" y="25" width="90" height="38" fill="#78350f" stroke="#f59e0b" rx="3" />
+      <text x="250" y="42" font-size="9" fill="#f8fafc" text-anchor="middle">Device Driver</text>
+      <text x="250" y="55" font-size="7" fill="#fde68a" text-anchor="middle">(User Mode)</text>
+
+      <rect x="305" y="25" width="85" height="38" fill="#701a75" stroke="#a855f7" rx="3" />
+      <text x="347" y="42" font-size="9" fill="#f8fafc" text-anchor="middle">Net Server</text>
+      <text x="347" y="55" font-size="7" fill="#e9d5ff" text-anchor="middle">(User Mode)</text>
+
+      <!-- Boundary -->
+      <line x1="0" y1="85" x2="400" y2="85" stroke="#38bdf8" stroke-dasharray="3,3" />
+      <text x="200" y="83" font-size="8" fill="#38bdf8" text-anchor="middle">--- Inter-Process Communication (IPC Messages) ---</text>
+
+      <!-- Microkernel Core -->
+      <rect x="0" y="92" width="400" height="55" rx="4" fill="#082f49" stroke="#38bdf8" />
+      <text x="200" y="110" font-size="10" font-weight="bold" fill="#7dd3fc" text-anchor="middle">Microkernel (Kernel Mode Ring 0)</text>
+      <text x="200" y="126" font-size="9" fill="#e0f2fe" text-anchor="middle">IPC Message Passing | Basic Memory | Low-Level Scheduling</text>
+
+      <!-- Hardware -->
+      <rect x="0" y="156" width="400" height="24" rx="4" fill="#0f172a" stroke="#475569" />
+      <text x="200" y="172" font-size="9" fill="#94a3b8" text-anchor="middle">Hardware</text>
+    </g>
+    <text x="20" y="275" font-size="10" fill="#34d399">✓ Extreme reliability: Driver crash does not crash kernel.</text>
+    <text x="20" y="290" font-size="10" fill="#fca5a5">✗ IPC context switch overhead between user &amp; kernel space.</text>
+  </g>
+
+  <!-- Card 4: Modular / LKM Architecture -->
+  <g transform="translate(520, 390)" filter="url(#sh16)">
+    <rect width="440" height="300" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5" />
+    <text x="20" y="28" font-size="14" font-weight="bold" fill="#34d399">4. Modular / Loadable Kernel Modules (LKM)</text>
+    <text x="20" y="48" font-size="10" fill="#cbd5e1">Core kernel loads dynamic modules on-the-fly (Linux/Solaris)</text>
+
+    <g transform="translate(20, 60)">
+      <!-- Core Kernel Hub -->
+      <circle cx="200" cy="80" r="48" fill="#064e3b" stroke="#10b981" stroke-width="2" />
+      <text x="200" y="75" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">Core</text>
+      <text x="200" y="90" font-size="11" font-weight="bold" fill="#a7f3d0" text-anchor="middle">Kernel</text>
+
+      <!-- Orbiting Modules -->
+      <!-- Module 1 -->
+      <rect x="25" y="10" width="100" height="32" rx="4" fill="#0f172a" stroke="#10b981" />
+      <text x="75" y="30" font-size="9" fill="#34d399" text-anchor="middle">ext4 File System</text>
+      <path d="M 125 26 L 160 55" stroke="#10b981" stroke-dasharray="2,2" />
+
+      <!-- Module 2 -->
+      <rect x="275" y="10" width="100" height="32" rx="4" fill="#0f172a" stroke="#10b981" />
+      <text x="325" y="30" font-size="9" fill="#34d399" text-anchor="middle">USB Driver</text>
+      <path d="M 275 26 L 240 55" stroke="#10b981" stroke-dasharray="2,2" />
+
+      <!-- Module 3 -->
+      <rect x="15" y="105" width="105" height="32" rx="4" fill="#0f172a" stroke="#10b981" />
+      <text x="67" y="125" font-size="9" fill="#34d399" text-anchor="middle">NVIDIA GPU Driver</text>
+      <path d="M 120 115 L 155 95" stroke="#10b981" stroke-dasharray="2,2" />
+
+      <!-- Module 4 -->
+      <rect x="275" y="105" width="105" height="32" rx="4" fill="#0f172a" stroke="#10b981" />
+      <text x="327" y="125" font-size="9" fill="#34d399" text-anchor="middle">Network Protocol</text>
+      <path d="M 275 115 L 245 95" stroke="#10b981" stroke-dasharray="2,2" />
+    </g>
+
+    <text x="20" y="245" font-size="10" fill="#cbd5e1">• Object-oriented interfaces ke through modules dynamically load hote hain (`insmod`, `rmmod`).</text>
+    <text x="20" y="265" font-size="10" fill="#cbd5e1">• Kernel reboot kiye bina naye hardware drivers install ho jate hain.</text>
+    <text x="20" y="285" font-size="10" fill="#34d399">✓ Monolithic speed (direct calls) + Microkernel flexibility!</text>
+  </g>
+</svg>
