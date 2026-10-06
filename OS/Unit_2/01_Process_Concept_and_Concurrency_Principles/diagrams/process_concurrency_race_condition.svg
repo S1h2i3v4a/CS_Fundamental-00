@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 480" width="100%" height="auto">
+  <rect width="100%" height="100%" fill="#0f172a" rx="14"/>
+  <text x="425" y="36" fill="#38bdf8" font-size="20" font-family="'Segoe UI', sans-serif" font-weight="bold" text-anchor="middle">Process Concurrency &amp; Race Condition Architecture</text>
+  <text x="425" y="58" fill="#94a3b8" font-size="12" font-family="'Segoe UI', sans-serif" text-anchor="middle">Independent vs Cooperating Processes &amp; Data Inconsistency</text>
+
+  <!-- Left: Independent Process Box -->
+  <rect x="40" y="85" width="360" height="175" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="40" y="85" width="360" height="32" rx="10" fill="#0284c7"/>
+  <text x="220" y="107" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">1. Independent Processes (Deterministic)</text>
+  <text x="55" y="138" fill="#e2e8f0" font-size="12">• Does NOT share memory, variables or I/O state.</text>
+  <text x="55" y="160" fill="#e2e8f0" font-size="12">• Execution sequence does not affect other processes.</text>
+  <text x="55" y="182" fill="#e2e8f0" font-size="12">• Deterministic output: Same input = Always same output.</text>
+  <text x="55" y="204" fill="#38bdf8" font-size="12" font-weight="bold">Example:</text>
+  <text x="110" y="204" fill="#cbd5e1" font-size="12">Calculator and Music Player running simultaneously.</text>
+  <text x="55" y="226" fill="#10b981" font-size="11" font-weight="bold">✓ No Synchronization Required</text>
+
+  <!-- Right: Cooperating Process Box -->
+  <rect x="440" y="85" width="370" height="175" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="440" y="85" width="370" height="32" rx="10" fill="#d97706"/>
+  <text x="625" y="107" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">2. Cooperating Processes (Non-Deterministic)</text>
+  <text x="455" y="138" fill="#e2e8f0" font-size="12">• Shares state, shared memory, files, or variables.</text>
+  <text x="455" y="160" fill="#e2e8f0" font-size="12">• Can affect or be affected by other concurrent processes.</text>
+  <text x="455" y="182" fill="#e2e8f0" font-size="12">• Non-deterministic: Order of execution dictates final output.</text>
+  <text x="455" y="204" fill="#f59e0b" font-size="12" font-weight="bold">Example:</text>
+  <text x="510" y="204" fill="#cbd5e1" font-size="12">Producer-Consumer, ATM balance concurrent withdraw.</text>
+  <text x="455" y="226" fill="#ef4444" font-size="11" font-weight="bold">⚠️ Prone to Race Condition &amp; Data Inconsistency!</text>
+
+  <!-- Bottom: The Race Condition Trace -->
+  <rect x="40" y="280" width="770" height="175" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+  <rect x="40" y="280" width="770" height="30" rx="10" fill="#b91c1c"/>
+  <text x="425" y="301" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">⚠️ The Race Condition: Bank Account Balance = 1000</text>
+
+  <!-- Process P1 flow -->
+  <rect x="60" y="325" width="220" height="110" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+  <text x="170" y="345" fill="#38bdf8" font-weight="bold" font-size="12" text-anchor="middle">Process P1 (Deposit 500)</text>
+  <text x="75" y="368" fill="#cbd5e1" font-size="11">R1 = Balance (1000)</text>
+  <text x="75" y="388" fill="#cbd5e1" font-size="11">R1 = R1 + 500 (1500)</text>
+  <text x="75" y="408" fill="#fca5a5" font-size="11">[Preempted before store!]</text>
+  <text x="75" y="425" fill="#38bdf8" font-size="10">Later: Balance = 1500</text>
+
+  <!-- Shared Memory in Middle -->
+  <rect x="315" y="335" width="220" height="90" rx="8" fill="#334155" stroke="#f59e0b" stroke-width="2"/>
+  <text x="425" y="358" fill="#fcd34d" font-weight="bold" font-size="12" text-anchor="middle">Shared Memory: Balance</text>
+  <text x="425" y="382" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">Initial Value: 1000</text>
+  <text x="425" y="408" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">Final Corrupt Value: 800 or 1500!</text>
+
+  <!-- Process P2 flow -->
+  <rect x="565" y="325" width="225" height="110" rx="6" fill="#0f172a" stroke="#f43f5e"/>
+  <text x="677" y="345" fill="#f43f5e" font-weight="bold" font-size="12" text-anchor="middle">Process P2 (Withdraw 200)</text>
+  <text x="580" y="368" fill="#cbd5e1" font-size="11">R2 = Balance (1000)</text>
+  <text x="580" y="388" fill="#cbd5e1" font-size="11">R2 = R2 - 200 (800)</text>
+  <text x="580" y="408" fill="#4ade80" font-size="11">Balance = 800 (Stored!)</text>
+  <text x="580" y="425" fill="#f43f5e" font-size="10">P1 overwrites later!</text>
+</svg>

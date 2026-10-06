@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 490" width="100%" height="auto">
+  <rect width="100%" height="100%" fill="#0f172a" rx="14"/>
+  <text x="425" y="34" fill="#38bdf8" font-size="20" font-family="'Segoe UI', sans-serif" font-weight="bold" text-anchor="middle">Hardware Synchronization: Test-and-Set (TSL) &amp; Swap</text>
+  <text x="425" y="56" fill="#94a3b8" font-size="12" font-family="'Segoe UI', sans-serif" text-anchor="middle">Atomic Instruction Execution &amp; Spinlock Mechanics</text>
+
+  <!-- Left: Why Software Lock Fails -->
+  <rect x="40" y="80" width="370" height="205" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+  <rect x="40" y="80" width="370" height="30" rx="10" fill="#b91c1c"/>
+  <text x="225" y="101" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">Why Simple Software Lock Fails (Flaw)</text>
+
+  <text x="55" y="130" fill="#e2e8f0" font-family="monospace" font-size="11">while (lock == 1); // 1. Check lock</text>
+  <text x="55" y="150" fill="#fca5a5" font-family="monospace" font-size="11">// &lt;--- PREEMPTION OCCURS HERE! ---&gt;</text>
+  <text x="55" y="170" fill="#e2e8f0" font-family="monospace" font-size="11">lock = 1;          // 2. Set lock</text>
+  <text x="55" y="190" fill="#4ade80" font-family="monospace" font-weight="bold" font-size="11">/* CRITICAL SECTION */</text>
+
+  <rect x="55" y="205" width="340" height="65" rx="6" fill="#0f172a" stroke="#ef4444"/>
+  <text x="65" y="223" fill="#ef4444" font-size="11" font-weight="bold">The Flaw:</text>
+  <text x="65" y="240" fill="#cbd5e1" font-size="10.5">Agar lock 0 tha aur P1 ne test karke preemption le li,</text>
+  <text x="65" y="254" fill="#cbd5e1" font-size="10.5">toh P2 bhi lock 0 dekh kar CS me chala jayega! Mutual Exclusion FAILS!</text>
+
+  <!-- Right: Hardware Atomic Test_and_Set -->
+  <rect x="440" y="80" width="370" height="205" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <rect x="440" y="80" width="370" height="30" rx="10" fill="#047857"/>
+  <text x="625" y="101" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">Hardware Atomic Test_and_Set (TSL)</text>
+
+  <text x="455" y="130" fill="#e2e8f0" font-family="monospace" font-size="11">boolean Test_and_Set(boolean *target) {</text>
+  <text x="475" y="150" fill="#fcd34d" font-family="monospace" font-size="11">boolean r = *target; // Read original</text>
+  <text x="475" y="170" fill="#fcd34d" font-family="monospace" font-size="11">*target = true;      // Set to 1</text>
+  <text x="475" y="190" fill="#fcd34d" font-family="monospace" font-size="11">return r;            // Return original</text>
+  <text x="455" y="210" fill="#e2e8f0" font-family="monospace" font-size="11">} // &lt;--- EXECUTED IN 1 ATOMIC CLOCK CYCLE!</text>
+
+  <rect x="455" y="220" width="340" height="50" rx="6" fill="#0f172a" stroke="#10b981"/>
+  <text x="465" y="238" fill="#4ade80" font-size="11" font-weight="bold">Usage in Code:</text>
+  <text x="465" y="256" fill="#38bdf8" font-family="monospace" font-size="11">while (Test_and_Set(&amp;lock)); /* CS */ lock = false;</text>
+
+  <!-- Bottom: Spinlock & Criteria Evaluation -->
+  <rect x="40" y="300" width="770" height="175" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="425" y="325" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Spinlock Architecture &amp; Criteria Verification</text>
+
+  <rect x="60" y="340" width="230" height="120" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+  <text x="70" y="360" fill="#38bdf8" font-size="12" font-weight="bold">What is a Spinlock?</text>
+  <text x="70" y="380" fill="#cbd5e1" font-size="10.5">• A lock where waiting thread</text>
+  <text x="70" y="396" fill="#cbd5e1" font-size="10.5">spins continuously in while loop.</text>
+  <text x="70" y="416" fill="#4ade80" font-size="10.5" font-weight="bold">Good for:</text>
+  <text x="125" y="416" fill="#cbd5e1" font-size="10.5">Short waiting time.</text>
+  <text x="70" y="434" fill="#f43f5e" font-size="10.5" font-weight="bold">Bad for:</text>
+  <text x="120" y="434" fill="#cbd5e1" font-size="10.5">Long wait (wastes CPU).</text>
+
+  <rect x="310" y="340" width="230" height="120" rx="6" fill="#0f172a" stroke="#f59e0b"/>
+  <text x="320" y="360" fill="#f59e0b" font-size="12" font-weight="bold">The Swap Instruction</text>
+  <text x="320" y="380" fill="#cbd5e1" font-size="10.5">void Swap(boolean *a, *b) {</text>
+  <text x="335" y="396" fill="#cbd5e1" font-size="10.5">temp=*a; *a=*b; *b=temp;</text>
+  <text x="320" y="412" fill="#cbd5e1" font-size="10.5">}</text>
+  <text x="320" y="430" fill="#cbd5e1" font-size="10.5">key = true;</text>
+  <text x="320" y="446" fill="#38bdf8" font-size="10.5">while(key) Swap(&amp;lock, &amp;key);</text>
+
+  <rect x="560" y="340" width="230" height="120" rx="6" fill="#0f172a" stroke="#10b981"/>
+  <text x="570" y="360" fill="#10b981" font-size="12" font-weight="bold">Criteria Evaluation</text>
+  <text x="570" y="380" fill="#cbd5e1" font-size="10.5">• Mutual Exclusion: ✓ YES</text>
+  <text x="570" y="398" fill="#cbd5e1" font-size="10.5">• Progress: ✓ YES</text>
+  <text x="570" y="416" fill="#ef4444" font-size="10.5" font-weight="bold">• Bounded Waiting: ✗ NO!</text>
+  <text x="570" y="434" fill="#cbd5e1" font-size="10">Random scheduling may cause</text>
+  <text x="570" y="448" fill="#cbd5e1" font-size="10">a process to starve!</text>
+</svg>

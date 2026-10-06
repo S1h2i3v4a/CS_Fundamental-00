@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Module 04: Dekker's Algorithm</title>
+<style>
+@page {
+  size: A4;
+  margin: 14mm 15mm 14mm 15mm;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #1e293b;
+  line-height: 1.55;
+  font-size: 12.8px;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  color: #0284c7;
+  font-size: 21px;
+  border-bottom: 2px solid #0284c7;
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+h2 {
+  color: #0f172a;
+  font-size: 15.5px;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 3px;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+h3 {
+  color: #334155;
+  font-size: 13.5px;
+  margin-top: 12px;
+  margin-bottom: 5px;
+}
+p, li {
+  color: #334155;
+  margin-bottom: 5px;
+}
+ul, ol {
+  margin-top: 3px;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+blockquote {
+  background: #f0fdf4;
+  border-left: 4px solid #10b981;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 4px;
+  color: #166534;
+  font-size: 12px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 11.8px;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 6px 8px;
+  text-align: left;
+}
+th {
+  background: #f1f5f9;
+  color: #0f172a;
+  font-weight: 600;
+}
+tr:nth-child(even) {
+  background: #f8fafc;
+}
+pre, code {
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+pre {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 11.2px;
+  overflow-x: auto;
+  line-height: 1.45;
+  margin: 8px 0;
+}
+code {
+  background: #f1f5f9;
+  color: #0284c7;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 11.2px;
+}
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+.svg-container {
+  text-align: center;
+  margin: 14px 0;
+  page-break-inside: avoid;
+}
+.svg-container img {
+  max-width: 98%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+.badge {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+</style>
+</head>
+<body>
+
+<span class="badge">Unit 2 • Module 04</span>
+<h1>4. Software Solutions: Dekker's Algorithm</h1>
+<blockquote><strong>Syllabus Coverage:</strong> Gateway Classes Slides 108–120 | 1st Correct Software Mutual Exclusion Algorithm, Collision Resolution, Comparison with Peterson.</blockquote>
+
+<h2>4.1 Core Code &amp; Logic</h2>
+<pre><code>flag[i] = true;
+while (flag[j]) {
+    if (turn == j) {
+        flag[i] = false;       // Polite back-off to prevent Livelock
+        while (turn == j);     // Wait until Pj exits CS
+        flag[i] = true;        // Re-assert intention
+    }
+}
+/* CRITICAL SECTION */
+turn = j;
+flag[i] = false;</code></pre>
+
+<div class="svg-container">
+  <img src="diagrams/dekkers_algorithm_flowchart.svg" alt="Dekker Algorithm Flowchart">
+</div>
+
+<h2>4.2 Comparison Table: Dekker vs Peterson</h2>
+<table>
+  <tr><th>Feature</th><th>Dekker's Algorithm (1965)</th><th>Peterson's Algorithm (1981)</th></tr>
+  <tr><td><strong>Structure</strong></td><td>Nested loops with explicit back-off.</td><td>Single concise while condition.</td></tr>
+  <tr><td><strong>Intention Reset</strong></td><td>Temporarily drops flag to false during conflict.</td><td>Keeps flag true; modifies <code>turn</code> only.</td></tr>
+  <tr><td><strong>Criteria Satisfied</strong></td><td>Mutual Exclusion, Progress, Bounded Waiting.</td><td>Mutual Exclusion, Progress, Bounded Waiting.</td></tr>
+  <tr><td><strong>Instruction Count</strong></td><td>Higher (more branches and checks).</td><td>Lower (minimal overhead).</td></tr>
+</table>
+
+</body>
+</html>

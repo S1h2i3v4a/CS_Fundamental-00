@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Module 10: Process Generation & Lifecycle</title>
+<style>
+@page {
+  size: A4;
+  margin: 14mm 15mm 14mm 15mm;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #1e293b;
+  line-height: 1.55;
+  font-size: 12.8px;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  color: #0284c7;
+  font-size: 21px;
+  border-bottom: 2px solid #0284c7;
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+h2 {
+  color: #0f172a;
+  font-size: 15.5px;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 3px;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+h3 {
+  color: #334155;
+  font-size: 13.5px;
+  margin-top: 12px;
+  margin-bottom: 5px;
+}
+p, li {
+  color: #334155;
+  margin-bottom: 5px;
+}
+ul, ol {
+  margin-top: 3px;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+blockquote {
+  background: #f0fdf4;
+  border-left: 4px solid #10b981;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 4px;
+  color: #166534;
+  font-size: 12px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 11.8px;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 6px 8px;
+  text-align: left;
+}
+th {
+  background: #f1f5f9;
+  color: #0f172a;
+  font-weight: 600;
+}
+tr:nth-child(even) {
+  background: #f8fafc;
+}
+pre, code {
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+pre {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 11.2px;
+  overflow-x: auto;
+  line-height: 1.45;
+  margin: 8px 0;
+}
+code {
+  background: #f1f5f9;
+  color: #0284c7;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 11.2px;
+}
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+.svg-container {
+  text-align: center;
+  margin: 14px 0;
+  page-break-inside: avoid;
+}
+.svg-container img {
+  max-width: 98%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+.badge {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+</style>
+</head>
+<body>
+
+<span class="badge">Unit 2 • Module 10</span>
+<h1>10. Process Generation, Forking &amp; Lifecycle</h1>
+<blockquote><strong>Syllabus Coverage:</strong> Gateway Classes Slides 121–128 | Forking vs Spawning, Return Values, 2^n Tree Mathematics, Zombie vs Orphan Processes.</blockquote>
+
+<h2>10.1 The fork() System Call</h2>
+<p>Clones the calling parent process into an identical child address space.</p>
+<ul>
+  <li><code>pid == 0</code> in Child process.</li>
+  <li><code>pid &gt; 0</code> in Parent process (value is child PID).</li>
+  <li><code>pid == -1</code> on process creation failure.</li>
+</ul>
+
+<div class="svg-container">
+  <img src="diagrams/fork_process_tree_lifecycle.svg" alt="Fork Lifecycle Diagram">
+</div>
+
+<h2>10.2 Mathematical Process Tree Growth</h2>
+<p>Formula for $n$ consecutive <code>fork()</code> statements:</p>
+<pre><code>Total Processes = 2^n
+Total Child Processes Created = 2^n - 1</code></pre>
+
+<h2>10.3 Zombie vs Orphan Process Comparison</h2>
+<table>
+  <tr><th>Feature</th><th>Zombie Process (&lt;defunct&gt;)</th><th>Orphan Process</th></tr>
+  <tr><td><strong>Terminated First</strong></td><td>Child terminated first; Parent still alive.</td><td>Parent terminated first; Child still running.</td></tr>
+  <tr><td><strong>Process Table Entry</strong></td><td>Entry remains in Process Table (wastes PID).</td><td>Active normal process entry.</td></tr>
+  <tr><td><strong>Resolution / Adoption</strong></td><td>Parent must call <code>wait()</code> to reap status.</td><td>Immediately adopted by <code>init / systemd</code> (PID 1).</td></tr>
+</table>
+
+</body>
+</html>

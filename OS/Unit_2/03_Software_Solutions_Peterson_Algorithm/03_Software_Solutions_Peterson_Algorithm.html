@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Module 03: Peterson's Algorithm</title>
+<style>
+@page {
+  size: A4;
+  margin: 14mm 15mm 14mm 15mm;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #1e293b;
+  line-height: 1.55;
+  font-size: 12.8px;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  color: #0284c7;
+  font-size: 21px;
+  border-bottom: 2px solid #0284c7;
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+h2 {
+  color: #0f172a;
+  font-size: 15.5px;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 3px;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+h3 {
+  color: #334155;
+  font-size: 13.5px;
+  margin-top: 12px;
+  margin-bottom: 5px;
+}
+p, li {
+  color: #334155;
+  margin-bottom: 5px;
+}
+ul, ol {
+  margin-top: 3px;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+blockquote {
+  background: #f0fdf4;
+  border-left: 4px solid #10b981;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 4px;
+  color: #166534;
+  font-size: 12px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 11.8px;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 6px 8px;
+  text-align: left;
+}
+th {
+  background: #f1f5f9;
+  color: #0f172a;
+  font-weight: 600;
+}
+tr:nth-child(even) {
+  background: #f8fafc;
+}
+pre, code {
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+pre {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 11.2px;
+  overflow-x: auto;
+  line-height: 1.45;
+  margin: 8px 0;
+}
+code {
+  background: #f1f5f9;
+  color: #0284c7;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 11.2px;
+}
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+.svg-container {
+  text-align: center;
+  margin: 14px 0;
+  page-break-inside: avoid;
+}
+.svg-container img {
+  max-width: 98%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+.badge {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+</style>
+</head>
+<body>
+
+<span class="badge">Unit 2 • Module 03</span>
+<h1>3. Peterson's Algorithm (2-Process Synchronization)</h1>
+<blockquote><strong>Syllabus Coverage:</strong> Gateway Classes Slides 25–39 | 2-Process Software Solution, Step-by-Step Code Trace, Mathematical Proofs.</blockquote>
+
+<h2>3.1 Core Architecture &amp; Shared Variables</h2>
+<ul>
+  <li><code>boolean flag[2] = {false, false};</code> — Process intention array (<code>flag[i] = true</code> means Pi is interested).</li>
+  <li><code>int turn;</code> — Decides tie-breaking priority when both processes contend simultaneously.</li>
+</ul>
+
+<div class="svg-container">
+  <img src="diagrams/peterson_algorithm_trace.svg" alt="Peterson Algorithm Trace">
+</div>
+
+<h2>3.2 Step-by-Step Execution Trace</h2>
+<pre><code>// Process P0 Code
+flag[0] = true;
+turn = 1;
+while (flag[1] &amp;&amp; turn == 1); // Busy waiting
+/* CRITICAL SECTION */
+flag[0] = false;
+/* Remainder Section */
+
+// Process P1 Code
+flag[1] = true;
+turn = 0;
+while (flag[0] &amp;&amp; turn == 0); // Busy waiting
+/* CRITICAL SECTION */
+flag[1] = false;
+/* Remainder Section */</code></pre>
+
+<h2>3.3 Criteria Proof Summary</h2>
+<table>
+  <tr><th>Criterion</th><th>Status</th><th>Mathematical / Logical Proof</th></tr>
+  <tr><td><strong>Mutual Exclusion</strong></td><td>✓ Satisfied</td><td>Variable <code>turn</code> cannot be both 0 and 1 at the same nanosecond. Only one process can evaluate while loop to false.</td></tr>
+  <tr><td><strong>Progress</strong></td><td>✓ Satisfied</td><td>If P1 is in Remainder, <code>flag[1] == false</code>, allowing P0 to enter immediately without delay.</td></tr>
+  <tr><td><strong>Bounded Waiting</strong></td><td>✓ Satisfied</td><td>Bound $k=1$. P0 exiting sets <code>flag[0]=false</code>; if re-requesting, sets <code>turn=1</code>, granting P1 immediate entry.</td></tr>
+</table>
+
+</body>
+</html>

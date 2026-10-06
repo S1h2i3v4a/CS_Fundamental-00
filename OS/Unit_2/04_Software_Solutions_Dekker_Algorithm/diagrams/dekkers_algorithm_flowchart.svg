@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 490" width="100%" height="auto">
+  <rect width="100%" height="100%" fill="#0f172a" rx="14"/>
+  <text x="425" y="34" fill="#38bdf8" font-size="20" font-family="'Segoe UI', sans-serif" font-weight="bold" text-anchor="middle">Dekker's Algorithm: First Software Mutual Exclusion</text>
+  <text x="425" y="56" fill="#94a3b8" font-size="12" font-family="'Segoe UI', sans-serif" text-anchor="middle">Contention Back-off Loop &amp; Tie-Breaker Turn Mechanism</text>
+
+  <!-- Left: Process Pi Code Flow -->
+  <rect x="40" y="80" width="370" height="280" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="40" y="80" width="370" height="30" rx="10" fill="#0284c7"/>
+  <text x="225" y="101" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">Process Pi (Pi &amp; Pj Contention Flow)</text>
+
+  <text x="55" y="130" fill="#e2e8f0" font-family="monospace" font-size="11">flag[i] = true;          // 1. Declare intent</text>
+  <text x="55" y="150" fill="#e2e8f0" font-family="monospace" font-size="11">while (flag[j]) {        // 2. Is Pj interested?</text>
+  <text x="75" y="170" fill="#fcd34d" font-family="monospace" font-size="11">if (turn == j) {      // 3. If turn belongs to Pj:</text>
+  <text x="95" y="190" fill="#cbd5e1" font-family="monospace" font-size="10.5">flag[i] = false;   // Pi backs off (yields)</text>
+  <text x="95" y="210" fill="#cbd5e1" font-family="monospace" font-size="10.5">while (turn == j); // Wait until Pj finishes</text>
+  <text x="95" y="230" fill="#cbd5e1" font-family="monospace" font-size="10.5">flag[i] = true;    // Pi re-asserts intent</text>
+  <text x="75" y="250" fill="#fcd34d" font-family="monospace" font-size="11">}</text>
+  <text x="55" y="270" fill="#e2e8f0" font-family="monospace" font-size="11">}</text>
+  <text x="55" y="292" fill="#4ade80" font-family="monospace" font-weight="bold" font-size="12">/* CRITICAL SECTION */</text>
+  <text x="55" y="314" fill="#e2e8f0" font-family="monospace" font-size="11">turn = j;                // Give next turn to Pj</text>
+  <text x="55" y="334" fill="#e2e8f0" font-family="monospace" font-size="11">flag[i] = false;         // Release intention</text>
+  <text x="55" y="352" fill="#94a3b8" font-family="monospace" font-size="10.5">/* Remainder Section */</text>
+
+  <!-- Right: Comparison Box (Dekker vs Peterson) -->
+  <rect x="440" y="80" width="370" height="280" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="440" y="80" width="370" height="30" rx="10" fill="#d97706"/>
+  <text x="625" y="101" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">Dekker's vs Peterson's Comparison</text>
+
+  <rect x="455" y="125" width="340" height="65" rx="6" fill="#0f172a" stroke="#cbd5e1"/>
+  <text x="465" y="145" fill="#38bdf8" font-size="12" font-weight="bold">1. Complexity &amp; Structure</text>
+  <text x="465" y="165" fill="#cbd5e1" font-size="11">Dekker requires nested while loops &amp; explicit back-off.</text>
+  <text x="465" y="180" fill="#cbd5e1" font-size="11">Peterson is a single elegant while loop condition.</text>
+
+  <rect x="455" y="200" width="340" height="65" rx="6" fill="#0f172a" stroke="#cbd5e1"/>
+  <text x="465" y="220" fill="#f59e0b" font-size="12" font-weight="bold">2. Intent Withdrawal (Yielding)</text>
+  <text x="465" y="240" fill="#cbd5e1" font-size="11">Dekker temporarily sets flag[i]=false to prevent livelock.</text>
+  <text x="465" y="255" fill="#cbd5e1" font-size="11">Peterson never resets flag until exiting CS completely.</text>
+
+  <rect x="455" y="275" width="340" height="70" rx="6" fill="#0f172a" stroke="#cbd5e1"/>
+  <text x="465" y="295" fill="#10b981" font-size="12" font-weight="bold">3. Historical Context</text>
+  <text x="465" y="315" fill="#cbd5e1" font-size="11">Dekker (1965) was the 1st correct software algorithm.</text>
+  <text x="465" y="330" fill="#cbd5e1" font-size="11">Peterson (1981) simplified it 16 years later.</text>
+
+  <!-- Bottom: 3 Criteria Verification -->
+  <rect x="40" y="375" width="770" height="95" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <text x="70" y="402" fill="#38bdf8" font-size="12" font-weight="bold">Mutual Exclusion: ✓ YES</text>
+  <text x="70" y="420" fill="#cbd5e1" font-size="10.5">Dono ek saath CS mein kabhi nahi ghus sakte kyunki turn collision break karta hai.</text>
+  <text x="70" y="440" fill="#f59e0b" font-size="12" font-weight="bold">Progress: ✓ YES</text>
+  <text x="70" y="458" fill="#cbd5e1" font-size="10.5">Inactive process dusre ko nahi rokta. Livelock back-off logic se resolve hota hai.</text>
+
+  <text x="450" y="402" fill="#10b981" font-size="12" font-weight="bold">Bounded Waiting: ✓ YES</text>
+  <text x="450" y="420" fill="#cbd5e1" font-size="10.5">Exiting process explicitly turn = j pass karta hai, preventing indefinite starvation.</text>
+  <text x="450" y="440" fill="#f43f5e" font-size="12" font-weight="bold">Limitation: Busy Waiting</text>
+  <text x="450" y="458" fill="#cbd5e1" font-size="10.5">Both while loops consume continuous CPU cycles (Spinlocks).</text>
+</svg>

@@ -6,7 +6,7 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 
 ## ⚡ Quick Revision Short Notes (Instant Recall)
 - 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 1 condensed into **EXACT 3 PAGES** for last-minute exam & interview rapid recall!
-- 📘 **[Unit 1 Short Notes README](./Unit_1/00_Quick_Revision_Short_Notes/README.md)**
+- 📄 **[Unit_2_Quick_Revision_3_Page_Notes.pdf](./Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 2 (Concurrency & Synchronization) condensed into **EXACT 3 PAGES**!
 
 ---
 
@@ -37,9 +37,29 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 
 ---
 
+### 📗 [Unit 2: Concurrent Processes & Synchronization](./Unit_2/README.md)
+*Complete 138-page syllabus coverage organized in sequential priority subfolders (`00_` to `12_`):*
+- **[00_Quick_Revision_Short_Notes](./Unit_2/00_Quick_Revision_Short_Notes/README.md)** *(3-Page High-Yield Cheat Sheet)*
+- **[01_Process_Concept_and_Concurrency_Principles](./Unit_2/01_Process_Concept_and_Concurrency_Principles/README.md)**
+- **[02_Critical_Section_Problem_and_Criteria](./Unit_2/02_Critical_Section_Problem_and_Criteria/README.md)**
+- **[03_Software_Solutions_Peterson_Algorithm](./Unit_2/03_Software_Solutions_Peterson_Algorithm/README.md)**
+- **[04_Software_Solutions_Dekker_Algorithm](./Unit_2/04_Software_Solutions_Dekker_Algorithm/README.md)**
+- **[05_Hardware_Synchronization_Test_and_Set](./Unit_2/05_Hardware_Synchronization_Test_and_Set/README.md)**
+- **[06_Semaphores_and_Mutexes](./Unit_2/06_Semaphores_and_Mutexes/README.md)**
+- **[07_Producer_Consumer_Problem](./Unit_2/07_Producer_Consumer_Problem/README.md)**
+- **[08_Readers_Writers_Problem](./Unit_2/08_Readers_Writers_Problem/README.md)**
+- **[09_Dining_Philosophers_and_Sleeping_Barber](./Unit_2/09_Dining_Philosophers_and_Sleeping_Barber/README.md)**
+- **[10_Process_Generation_and_Lifecycle](./Unit_2/10_Process_Generation_and_Lifecycle/README.md)**
+- **[11_Inter_Process_Communication_IPC](./Unit_2/11_Inter_Process_Communication_IPC/README.md)**
+- **[12_Unit_2_AKTU_PYQs_and_Interview_Cheatsheet](./Unit_2/12_Unit_2_AKTU_PYQs_and_Interview_Cheatsheet/README.md)**
+
+---
+
 ## 📚 Master Consolidated PDF Documents
-- 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)** (Exact 3-Page Recall Sheet)
-- 📄 **[Complete_OS_Master_Notes.pdf](./Complete_OS_Master_Notes.pdf)** (58-Page Full Notes)
+- 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)** (Unit 1 Exact 3-Page Recall Sheet)
+- 📄 **[Unit_1_Master_Notes.pdf](./Unit_1/Unit_1_Master_Notes.pdf)** (Unit 1 Complete 58-Page Master PDF)
+- 📄 **[Unit_2_Quick_Revision_3_Page_Notes.pdf](./Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)** (Unit 2 Exact 3-Page Recall Sheet)
+- 📄 **[Unit_2_Master_Notes.pdf](./Unit_2/Unit_2_Master_Notes.pdf)** (Unit 2 Complete 17-Page Master PDF)
 
 ---
 *Created for CS Fundamentals Repository by Shivam Keshari*

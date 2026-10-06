@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unit 2 Operating Systems - Ultra High-Yield 3-Page Short Notes</title>
+<style>
+@page {
+  size: A4;
+  margin: 7mm 9mm 7mm 9mm;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #1e293b;
+  line-height: 1.28;
+  font-size: 9.8px;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+.page {
+  height: 281mm;
+  max-height: 281mm;
+  overflow: hidden;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.page:last-child {
+  page-break-after: avoid;
+}
+.header {
+  border-bottom: 2px solid #0284c7;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.title {
+  color: #0284c7;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+.subtitle {
+  color: #64748b;
+  font-size: 9px;
+  margin: 0;
+}
+.section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #0284c7;
+  border-radius: 4px;
+  padding: 4px 7px;
+  margin-bottom: 4px;
+}
+.section h2 {
+  color: #0f172a;
+  font-size: 10.8px;
+  margin: 0 0 3px 0;
+  font-weight: 700;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 2px;
+}
+.section h3 {
+  color: #0369a1;
+  font-size: 10px;
+  margin: 2px 0 1px 0;
+  font-weight: 600;
+}
+p, li {
+  color: #334155;
+  margin: 0 0 2px 0;
+}
+ul {
+  margin: 1px 0 2px 0;
+  padding-left: 14px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2px 0;
+  font-size: 9.2px;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 2px 4px;
+  text-align: left;
+}
+th {
+  background: #f1f5f9;
+  font-weight: 600;
+  color: #0f172a;
+}
+code {
+  font-family: 'Consolas', monospace;
+  background: #f1f5f9;
+  color: #0284c7;
+  padding: 1px 2px;
+  border-radius: 2px;
+  font-size: 9.2px;
+}
+pre {
+  font-family: 'Consolas', monospace;
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+  margin: 2px 0;
+  line-height: 1.25;
+}
+.footer {
+  text-align: center;
+  font-size: 8.5px;
+  color: #94a3b8;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 2px;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.highlight {
+  color: #b91c1c;
+  font-weight: 600;
+}
+.badge-tag {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 8.5px;
+}
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div>
+    <div class="header">
+      <div>
+        <h1 class="title">⚡ Unit 2: Concurrent Processes &amp; Synchronization (Page 1 of 3)</h1>
+        <p class="subtitle">Process Concurrency • Critical Section Problem • Peterson's &amp; Dekker's Solutions</p>
+      </div>
+      <span class="badge-tag">AKTU BCS401 Core</span>
+    </div>
+
+    <div class="section">
+      <h2>1.1 Process Concurrency &amp; Race Conditions</h2>
+      <ul>
+        <li><strong>Independent Process:</strong> State not shared. Deterministic execution. Never causes data corruption.</li>
+        <li><strong>Cooperating Process:</strong> Shares variables, memory, buffer, or files. Non-deterministic relative sequence.</li>
+        <li><strong>Race Condition:</strong> Concurrent access to shared data without synchronization where final result depends on relative execution interleaving.</li>
+        <li><strong>Lost Update Assembly Trace:</strong> Balance = 1000. P1 deposits 500 (R1=1500). Preempted before store. P2 withdraws 200 (R2=800, stores 800). P1 wakes and stores 1500. Outcome: Corrupt balance (1500 or 800 instead of 1300)!</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>1.2 Critical Section Problem &amp; The 4 Criteria</h2>
+      <ul>
+        <li><strong>4 Code Sections:</strong> <code>Entry Section</code> (Acquires lock) $ightarrow$ <code>Critical Section</code> (Shared resource access; only 1 process) $ightarrow$ <code>Exit Section</code> (Releases lock/signals) $ightarrow$ <code>Remainder Section</code> (Local code).</li>
+      </ul>
+      <table>
+        <tr><th>Criterion</th><th>Type</th><th>Definition &amp; Invariant</th><th>Hazard Prevented</th></tr>
+        <tr><td><strong>Mutual Exclusion</strong></td><td>Primary (Mandatory)</td><td>If Pi is in CS, no other process can be in CS. Zero concurrent overlap.</td><td>Data Inconsistency</td></tr>
+        <tr><td><strong>Progress</strong></td><td>Primary (Mandatory)</td><td>If CS is empty, only processes not in remainder decide next entrant. Decision not delayed indefinitely.</td><td>Deadlock / Livelock</td></tr>
+        <tr><td><strong>Bounded Waiting</strong></td><td>Secondary (Desirable)</td><td>Bound $k$ on entries granted to others after a request is registered.</td><td>Starvation</td></tr>
+        <tr><td><strong>Speed Neutrality</strong></td><td>Secondary (Desirable)</td><td>No assumptions regarding relative CPU clock speeds or processor counts.</td><td>Architecture Bugs</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>1.3 Software Solutions: Peterson's Algorithm (Gary Peterson, 1981)</h2>
+      <p>Classical 2-Process software synchronization satisfying Mutual Exclusion, Progress, and Bounded Waiting ($k=1$).</p>
+      <div class="grid-2">
+        <div>
+          <h3>Process P0 Code (i=0, j=1)</h3>
+          <pre><code>flag[0] = true; // Declare intent
+turn = 1;       // Polite tie-breaker
+while (flag[1] && turn == 1); // Spin
+/* CRITICAL SECTION */
+flag[0] = false;// Release intent</code></pre>
+        </div>
+        <div>
+          <h3>Process P1 Code (i=1, j=0)</h3>
+          <pre><code>flag[1] = true; // Declare intent
+turn = 0;       // Polite tie-breaker
+while (flag[0] && turn == 0); // Spin
+/* CRITICAL SECTION */
+flag[1] = false;// Release intent</code></pre>
+        </div>
+      </div>
+      <ul>
+        <li><strong>Proof of Mutual Exclusion:</strong> For both to be in CS, <code>turn == 0</code> and <code>turn == 1</code> must hold simultaneously in RAM, which is impossible for a single integer variable!</li>
+        <li><strong>Proof of Progress &amp; Bounded Waiting:</strong> If P1 is in Remainder, <code>flag[1] == false</code>, allowing P0 immediate entry. When exiting, P0 sets <code>turn = 1</code>, giving P1 entry within $k=1$ turn.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>1.4 Software Solutions: Dekker's Algorithm (Theodorus Dekker, 1965)</h2>
+      <p>First correct software mutual exclusion solution. Uses <code>flag[2]</code> and <code>turn</code> with a contention back-off loop.</p>
+      <pre><code>flag[i] = true;
+while (flag[j]) {
+    if (turn == j) {
+        flag[i] = false;   // Polite withdrawal of intent to prevent Livelock
+        while (turn == j); // Wait until Pj completes CS
+        flag[i] = true;    // Re-assert intent
+    }
+}
+/* CRITICAL SECTION */
+turn = j; flag[i] = false;</code></pre>
+      <p><strong>Dekker vs Peterson:</strong> Dekker requires nested checks and active intention withdrawal; Peterson simplified this to a single while condition without withdraw.</p>
+    </div>
+  </div>
+
+  <div class="footer">CS Fundamentals • Unit 2: Concurrent Processes • Page 1 of 3</div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div>
+    <div class="header">
+      <div>
+        <h1 class="title">⚡ Unit 2: Concurrent Processes &amp; Synchronization (Page 2 of 3)</h1>
+        <p class="subtitle">Hardware Synchronization • Semaphores &amp; Mutexes • Producer-Consumer Problem</p>
+      </div>
+      <span class="badge-tag">AKTU BCS401 Core</span>
+    </div>
+
+    <div class="section">
+      <h2>2.1 Hardware Synchronization Primitives (Test-and-Set &amp; Swap)</h2>
+      <ul>
+        <li><strong>Software Lock Flaw:</strong> <code>while(lock==1); lock=1;</code> fails because preemption between test and set allows two processes into CS simultaneously!</li>
+        <li><strong>Test_and_Set Instruction (TSL):</strong> Hardware atomic CPU instruction executed in 1 clock cycle:</li>
+      </ul>
+      <pre><code>boolean Test_and_Set(boolean *target) { boolean r = *target; *target = true; return r; }
+// Synchronization Code:
+while (Test_and_Set(&lock)); /* CRITICAL SECTION */ lock = false;</code></pre>
+      <ul>
+        <li><strong>Swap Instruction:</strong> Atomically swaps memory contents: <code>while(key) Swap(&lock, &key);</code></li>
+        <li><strong>Spinlocks:</strong> Busy-waiting locks. Excellent for short waits (avoids context switch overhead); terrible for long waits (100% CPU burn). Guarantees Mutual Exclusion and Progress, but NOT Bounded Waiting (Starvation prone).</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>2.2 Semaphores (Edsger Dijkstra, 1965)</h2>
+      <p>Protected integer variable modified strictly via atomic primitives <code>wait()</code> (P / Down) and <code>signal()</code> (V / Up).</p>
+      <table>
+        <tr><th>Type</th><th>Value Range</th><th>Primary Purpose</th><th>Initialization</th></tr>
+        <tr><td><strong>Binary Semaphore</strong></td><td>0 or 1</td><td>Mutual Exclusion (Critical Section Lock).</td><td>1 (Unlocked)</td></tr>
+        <tr><td><strong>Counting Semaphore</strong></td><td>0 to N</td><td>Resource Pool Management (e.g. N printers, DB connections).</td><td>N (Available count)</td></tr>
+      </table>
+      <h3>Block &amp; Wakeup Implementation (Eliminating Busy Waiting)</h3>
+      <pre><code>typedef struct { int value; struct process *list; } semaphore;
+void wait(semaphore *S) {
+    S->value--;
+    if (S->value < 0) { add_to_queue(S->list, current_process); block(); } // Puts to sleep!
+}
+void signal(semaphore *S) {
+    S->value++;
+    if (S->value <= 0) { process *P = remove_from_queue(S->list); wakeup(P); } // Wakes to Ready!
+}</code></pre>
+      <p><strong>Magic Rule:</strong> If <code>S.value &lt; 0</code>, magnitude <code>|S.value|</code> equals exact number of processes blocked in the queue!</p>
+    </div>
+
+    <div class="section">
+      <h2>2.3 Mutex vs Binary Semaphore Comparison</h2>
+      <table>
+        <tr><th>Feature</th><th>Mutex (Mutual Exclusion Lock)</th><th>Binary Semaphore</th></tr>
+        <tr><td><strong>Mechanism</strong></td><td>Strict Locking mechanism.</td><td>Signaling / Notification mechanism.</td></tr>
+        <tr><td><strong>Ownership</strong></td><td>Has ownership: Only locking thread may unlock.</td><td>No ownership: Any process can signal.</td></tr>
+        <tr><td><strong>Priority Inversion</strong></td><td>Supports Priority Inheritance Protocol (PIP).</td><td>No priority inheritance support.</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>2.4 Producer-Consumer (Bounded Buffer) Problem</h2>
+      <p>Shared circular buffer of size $N$. 3 Semaphores: <code>mutex = 1</code>, <code>empty = N</code>, <code>full = 0</code>.</p>
+      <div class="grid-2">
+        <div>
+          <h3>Producer Process</h3>
+          <pre><code>wait(empty); // Decrement empty
+wait(mutex); // Lock buffer
+buffer[in] = item;
+in = (in + 1) % N;
+signal(mutex);
+signal(full); // Increment full</code></pre>
+        </div>
+        <div>
+          <h3>Consumer Process</h3>
+          <pre><code>wait(full);  // Decrement full
+wait(mutex); // Lock buffer
+item = buffer[out];
+out = (out + 1) % N;
+signal(mutex);
+signal(empty); // Increment empty</code></pre>
+        </div>
+      </div>
+      <p class="highlight">⚠️ Deadlock Trap: If Producer executes <code>wait(mutex)</code> before <code>wait(empty)</code>, when the buffer is full, it locks mutex and sleeps on empty. Consumer cannot enter to consume $ightarrow$ DEADLOCK!</p>
+    </div>
+  </div>
+
+  <div class="footer">CS Fundamentals • Unit 2: Concurrent Processes • Page 2 of 3</div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div>
+    <div class="header">
+      <div>
+        <h1 class="title">⚡ Unit 2: Concurrent Processes &amp; Synchronization (Page 3 of 3)</h1>
+        <p class="subtitle">Readers-Writers • Classical Problems • Process Lifecycle (fork) • IPC Models</p>
+      </div>
+      <span class="badge-tag">AKTU BCS401 Core</span>
+    </div>
+
+    <div class="section">
+      <h2>3.1 Readers-Writers Problem (First Problem: Reader Priority)</h2>
+      <ul>
+        <li><strong>Conflict Matrix:</strong> Readers concurrent ($\checkmark$); Reader &amp; Writer ($	imes$); Multiple Writers ($	imes$).</li>
+        <li><strong>Variables:</strong> <code>int rc = 0; semaphore mutex = 1; semaphore db = 1;</code></li>
+        <li><strong>Reader Protocol:</strong> <code>wait(mutex); rc++; if (rc == 1) wait(db); signal(mutex);</code> $ightarrow$ <em>Read DB</em> $ightarrow$ <code>wait(mutex); rc--; if (rc == 0) signal(db); signal(mutex);</code></li>
+        <li><strong>Writer Protocol:</strong> <code>wait(db);</code> $ightarrow$ <em>Write DB</em> $ightarrow$ <code>signal(db);</code></li>
+        <li><strong>Writer Starvation:</strong> If readers stream continuously, <code>rc</code> never drops to 0 $\implies$ Writer starves indefinitely!</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>3.2 Dining Philosophers &amp; Sleeping Barber Problems</h2>
+      <ul>
+        <li><strong>Dining Philosophers:</strong> 5 philosophers, 5 chopsticks. All pick left chopstick simultaneously $\implies$ Circular Wait $\implies$ Deadlock!
+          <br><em>Deadlock Solutions:</em> (1) Allow at most 4 diners. (2) Asymmetric pick: Odd pick left first, Even pick right first.</li>
+        <li><strong>Sleeping Barber:</strong> 1 barber, 1 barber chair, $N$ waiting chairs.
+          <br><em>Semaphores:</em> <code>customers = 0</code>, <code>barbers = 0</code>, <code>mutex = 1</code>, <code>waiting = 0</code>.
+          <br>If waiting chairs &lt; $N$, customer increments waiting and signals customer; otherwise leaves (Dropout).</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>3.3 Process Generation, Lifecycle &amp; Forking Mathematics</h2>
+      <ul>
+        <li><strong>The fork() Return Values:</strong> In Child: <code>0</code> | In Parent: <code>Child PID (>0)</code> | Error: <code>-1</code>.</li>
+        <li><strong>Process Tree Growth Formulas:</strong> For $n$ consecutive <code>fork()</code> calls:
+          <br>$$	ext{Total Processes} = 2^n \qquad \Big| \qquad 	ext{New Child Processes Created} = 2^n - 1$$
+          <em>Example:</em> 3 forks $\implies 2^3 = 8$ total processes, 7 child processes.</li>
+        <li><strong>Process State Duality:</strong>
+          <br>• <strong>Zombie (`&lt;defunct&gt;`):</strong> Child dead, Parent has NOT called <code>wait()</code>. Entry wastes PID in Process Table.
+          <br>• <strong>Orphan:</strong> Parent died before child. Child adopted by <code>init / systemd</code> (PID 1).</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>3.4 Inter-Process Communication (IPC) Models</h2>
+      <table>
+        <tr><th>Feature</th><th>Shared Memory Model</th><th>Message Passing Model</th></tr>
+        <tr><td><strong>Speed</strong></td><td>Fastest (Direct memory read/write at RAM bus speed).</td><td>Slower (Syscalls + kernel data copying).</td></tr>
+        <tr><td><strong>Synchronization</strong></td><td>Programmer responsibility (via Semaphores).</td><td>Kernel handles synchronization automatically.</td></tr>
+        <tr><td><strong>Primitives</strong></td><td><code>shmget()</code>, <code>shmat()</code></td><td><code>send(message)</code>, <code>receive(message)</code></td></tr>
+        <tr><td><strong>Distributed Support</strong></td><td>Single machine only.</td><td>Works seamlessly across networked systems.</td></tr>
+      </table>
+      <ul>
+        <li><strong>IPC Schemes:</strong> Direct (<code>send(P, msg)</code>) vs Indirect (<code>send(Mailbox_A, msg)</code>).</li>
+        <li><strong>Buffering:</strong> Zero Capacity (Rendezvous / Synchronous), Bounded Capacity ($N$), Unbounded Capacity.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">CS Fundamentals • Unit 2: Concurrent Processes • Page 3 of 3</div>
+</div>
+
+</body>
+</html>
