@@ -4,10 +4,17 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 
 ---
 
+## ⚡ Quick Revision Short Notes (Instant Recall)
+- 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 1 condensed into **EXACT 3 PAGES** for last-minute exam & interview rapid recall!
+- 📘 **[Unit 1 Short Notes README](./Unit_1/00_Quick_Revision_Short_Notes/README.md)**
+
+---
+
 ## 📂 Units Index
 
 ### 📘 [Unit 1: Introduction, Architecture & Operating System Structures](./Unit_1/README.md)
-*Complete 150-page syllabus coverage organized in sequential priority subfolders (`01_` to `19_`):*
+*Complete 150-page syllabus coverage organized in sequential priority subfolders (`00_` to `19_`):*
+- **[00_Quick_Revision_Short_Notes](./Unit_1/00_Quick_Revision_Short_Notes/README.md)** *(3-Page High-Yield Cheat Sheet)*
 - **[01_Introduction_to_OS](./Unit_1/01_Introduction_to_OS/README.md)**
 - **[02_Components_and_Abstract_View](./Unit_1/02_Components_and_Abstract_View/README.md)**
 - **[03_User_vs_System_View](./Unit_1/03_User_vs_System_View/README.md)**
@@ -28,7 +35,11 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 - **[18_OS_Services_and_System_Components](./Unit_1/18_OS_Services_and_System_Components/README.md)**
 - **[19_AKTU_PYQs_and_Interview_Cheatsheet](./Unit_1/19_AKTU_PYQs_and_Interview_Cheatsheet/README.md)**
 
-📄 **Unit 1 Master Consolidated PDF:** [Unit_1_Master_Notes.pdf](./Unit_1/Unit_1_Master_Notes.pdf) (58 Pages)
+---
+
+## 📚 Master Consolidated PDF Documents
+- 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)** (Exact 3-Page Recall Sheet)
+- 📄 **[Complete_OS_Master_Notes.pdf](./Complete_OS_Master_Notes.pdf)** (58-Page Full Notes)
 
 ---
 *Created for CS Fundamentals Repository by Shivam Keshari*

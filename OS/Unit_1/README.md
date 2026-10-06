@@ -4,10 +4,19 @@ Yeh folder **Operating System (Unit 1 Complete Syllabus)** ke sabhi topics ko pr
 
 ---
 
+## ⚡ Quick Revision Short Notes (Last-Minute Recall)
+
+> 🚀 **[00_Quick_Revision_Short_Notes](./00_Quick_Revision_Short_Notes/README.md)**  
+> Poore Unit 1 ke sabhi 19 subtopics ko **sirf 3 pages** mein condense kiya gaya hai taaki exam ya interview se 10 minute pehle pure concepts rapidly recall ho sakein!  
+> 📄 **[Download 3-Page Short Notes PDF (Instant Recall)](./Unit_1_Quick_Revision_3_Page_Notes.pdf)**
+
+---
+
 ## 🗺️ Complete Unit 1 Roadmap (Priority 01 to 19)
 
 | Priority | Module Subfolder | Key Concepts Covered | Visual Architectural Diagram | Chapter PDF |
 | :---: | :--- | :--- | :---: | :---: |
+| **00** | [00_Quick_Revision_Short_Notes](./00_Quick_Revision_Short_Notes/README.md) | **Unit 1 Ultra High-Yield 3-Page Cheat Sheet (All 19 Topics)** | Rapid Mind Map | [3-Page PDF](./Unit_1_Quick_Revision_3_Page_Notes.pdf) |
 | **01** | [01_Introduction_to_OS](./01_Introduction_to_OS/README.md) | OS Definition, 3 Entities (H/W, App S/W, System S/W), 4 Components | [Concentric OS Architecture](./01_Introduction_to_OS/diagrams/os_position_diagram.svg) | [Download PDF](./01_Introduction_to_OS/01_Introduction_to_OS.pdf) |
 | **02** | [02_Components_and_Abstract_View](./02_Components_and_Abstract_View/README.md) | Abstract Layered View, Translators, Hardware Resources | [Layered System Stack](./02_Components_and_Abstract_View/diagrams/computer_abstract_view.svg) | [Download PDF](./02_Components_and_Abstract_View/02_Components_and_Abstract_View.pdf) |
 | **03** | [03_User_vs_System_View](./03_User_vs_System_View/README.md) | User View (Convenience) vs System View (Resource Manager), `a = b + c` trace | [Dual Perspective Layout](./03_User_vs_System_View/diagrams/user_vs_system_diagram.svg) | [Download PDF](./03_User_vs_System_View/03_User_vs_System_View.pdf) |
@@ -30,8 +39,9 @@ Yeh folder **Operating System (Unit 1 Complete Syllabus)** ke sabhi topics ko pr
 
 ---
 
-## 📚 Master Consolidated PDF Document
-- 📄 **[Unit_1_Master_Notes.pdf](./Unit_1_Master_Notes.pdf)** (All 19 Modules Consolidated, 58 Pages, Complete Unit 1 Coverage)
+## 📚 Master Consolidated PDF Documents
+- 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1_Quick_Revision_3_Page_Notes.pdf)** (Exact 3-Page Ultra Condensed Sheet for Rapid Recall)
+- 📄 **[Unit_1_Master_Notes.pdf](./Unit_1_Master_Notes.pdf)** (Complete 58-Page Master Document, All 19 Modules Consolidated)
 
 ---
 *Created for CS Fundamentals Repository by Shivam Keshari*

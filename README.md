@@ -4,6 +4,12 @@ Welcome to the **CS Fundamentals** repository! Yeh repository Computer Science k
 
 ---
 
+## ⚡ Quick Revision Short Notes
+- 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./OS/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 1 condensed into **EXACT 3 PAGES** for last-minute exam & interview rapid recall!
+- 📘 **[Unit 1 Short Notes Guide](./OS/Unit_1/00_Quick_Revision_Short_Notes/README.md)**
+
+---
+
 ## 📂 Repository Structure & Units
 
 ```
@@ -12,9 +18,11 @@ CS_Fundamental-00/
 └── OS/                                          <-- Operating System Core Module
     ├── README.md                                <-- OS Subjects Index
     ├── Complete_OS_Master_Notes.pdf             <-- 58-Page Master PDF (Consolidated Modules 01-19)
-    └── Unit_1/                                  <-- Unit 1 Folder (Priorities 01 to 19)
+    └── Unit_1/                                  <-- Unit 1 Folder (Priorities 00 to 19)
         ├── README.md                            <-- Unit 1 Complete Roadmap
-        ├── Unit_1_Master_Notes.pdf              <-- 58-Page Unit 1 PDF
+        ├── Unit_1_Quick_Revision_3_Page_Notes.pdf <-- 3-Page Rapid Recall PDF
+        ├── Unit_1_Master_Notes.pdf              <-- 58-Page Unit 1 Master PDF
+        ├── 00_Quick_Revision_Short_Notes/       <-- Priority 00: 3-Page Ultra Condensed Cheat Sheet
         ├── 01_Introduction_to_OS/               <-- Priority 01: Definition, 3 Entities, 4 Components
         ├── 02_Components_and_Abstract_View/     <-- Priority 02: Abstract Layered View, Translators
         ├── 03_User_vs_System_View/              <-- Priority 03: User View vs System View (a = b + c)
@@ -39,11 +47,11 @@ CS_Fundamental-00/
 ---
 
 ## 🚀 Key Highlights of this Repository
-1. **Perfect GitHub Sorting:** Sabhi subfolders ko two-digit prefix (`01_` se `19_`) diya gaya hai taaki GitHub ke UI par upar se lekar niche tak exact 1 to 19 sequence mein sort hon.
-2. **Hinglish Intuition:** Technical terms aur complex concepts ko relatable Hinglish mein explain kiya gaya hai.
-3. **Mathematical & Algorithmic Traces:** CPU utilization formula ($1 - p^n$), Amdahl's Law, AMAT cache equation, aur system call assembly traps detail mein covered hain.
-4. **Architectural SVG Diagrams:** Har concept ke andar high-resolution custom SVG diagrams embedded hain.
-5. **Print-Ready PDFs:** Har module ka individual chapter PDF aur complete 58-page master PDF ([`Unit_1_Master_Notes.pdf`](./OS/Unit_1/Unit_1_Master_Notes.pdf)) available hai.
+1. **Ultra High-Yield 3-Page Short Notes:** Poora Unit 1 exact 3 pages mein available hai quick recall ke liye ([`Unit_1_Quick_Revision_3_Page_Notes.pdf`](./OS/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)).
+2. **Perfect GitHub Sorting:** Sabhi subfolders ko zero-padded prefixes (`00_` se `19_`) diye gaye hain taaki GitHub file browser mein 100% sequential priority order dikhe.
+3. **Hinglish Intuition:** Relatable, clear Hinglish bhasha mein notes likhe gaye hain.
+4. **Step-by-Step Code & Execution Traces:** `printf("Hello");` system call lifecycle, Amdahl's Law, CPU utilization ($1 - p^n$), aur AMAT memory calculation.
+5. **Architectural SVG Diagrams:** High-resolution vector diagrams jo print aur digital reading dono ke liye optimized hain.
 
 ---
 *Maintained by Shivam Keshari*
