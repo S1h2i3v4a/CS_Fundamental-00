@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 480" width="100%" height="auto">
+  <rect width="100%" height="100%" fill="#0a0f1d" rx="16" />
+  <text x="425" y="35" fill="#38bdf8" font-size="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="bold" text-anchor="middle">
+    Fig 6.1: Bootstrap Process &amp; System Booting Sequence
+  </text>
+  <text x="425" y="55" fill="#94a3b8" font-size="12" font-family="'Segoe UI', Roboto, sans-serif" text-anchor="middle">
+    Reference: Image 6 &amp; 7 [Firmware, POST, Boot Block, Kernel Handoff]
+  </text>
+
+  <!-- Step 1: Power On -->
+  <rect x="50" y="85" width="150" height="85" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+  <text x="125" y="110" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">STEP 1: POWER-ON</text>
+  <text x="125" y="130" fill="#f8fafc" font-size="10" text-anchor="middle">Computer Turn On / Reset</text>
+  <text x="125" y="148" fill="#94a3b8" font-size="9" text-anchor="middle">CPU starts at fixed address</text>
+
+  <line x1="200" y1="127" x2="250" y2="127" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: ROM / Firmware Execution -->
+  <rect x="250" y="85" width="170" height="85" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <text x="335" y="110" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">STEP 2: FIRMWARE</text>
+  <text x="335" y="130" fill="#f8fafc" font-size="10" text-anchor="middle">Bootstrap Loader in ROM</text>
+  <text x="335" y="148" fill="#94a3b8" font-size="9" text-anchor="middle">(PROM / EPROM / EEPROM)</text>
+
+  <line x1="420" y1="127" x2="470" y2="127" stroke="#10b981" stroke-width="3"/>
+
+  <!-- Step 3: Hardware Diagnostics (POST) -->
+  <rect x="470" y="85" width="160" height="85" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <text x="550" y="110" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">STEP 3: POST / HW INIT</text>
+  <text x="550" y="130" fill="#f8fafc" font-size="10" text-anchor="middle">Power-On Self Test</text>
+  <text x="550" y="148" fill="#94a3b8" font-size="9" text-anchor="middle">Checks CPU, RAM, Devices</text>
+
+  <line x1="630" y1="127" x2="680" y2="127" stroke="#f59e0b" stroke-width="3"/>
+
+  <!-- Step 4: Boot Sector Read -->
+  <rect x="680" y="85" width="130" height="85" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="2"/>
+  <text x="745" y="110" fill="#f472b6" font-size="12" font-weight="bold" text-anchor="middle">STEP 4: BOOT SECTOR</text>
+  <text x="745" y="130" fill="#f8fafc" font-size="10" text-anchor="middle">Reads MBR / Boot Block</text>
+  <text x="745" y="148" fill="#94a3b8" font-size="9" text-anchor="middle">from SSD / Hard Disk</text>
+
+  <!-- Arrow down to lower row -->
+  <line x1="745" y1="170" x2="745" y2="225" stroke="#ec4899" stroke-width="3"/>
+  <line x1="745" y1="225" x2="680" y2="225" stroke="#ec4899" stroke-width="3"/>
+
+  <!-- Step 5: Loading Kernel into RAM -->
+  <rect x="470" y="195" width="210" height="85" rx="8" fill="#312e81" stroke="#6366f1" stroke-width="2"/>
+  <text x="575" y="220" fill="#a5b4fc" font-size="12" font-weight="bold" text-anchor="middle">STEP 5: LOAD KERNEL TO RAM</text>
+  <text x="575" y="240" fill="#f8fafc" font-size="10" text-anchor="middle">OS Kernel transferred from Disk</text>
+  <text x="575" y="258" fill="#93c5fd" font-size="9" text-anchor="middle">Main Memory (RAM) populated</text>
+
+  <line x1="470" y1="237" x2="420" y2="237" stroke="#6366f1" stroke-width="3"/>
+
+  <!-- Step 6: Handoff Control to Kernel -->
+  <rect x="230" y="195" width="190" height="85" rx="8" fill="#065f46" stroke="#10b981" stroke-width="2"/>
+  <text x="325" y="220" fill="#6ee7b7" font-size="12" font-weight="bold" text-anchor="middle">STEP 6: HANDOFF TO OS</text>
+  <text x="325" y="240" fill="#f8fafc" font-size="10" text-anchor="middle">Control transferred to Kernel</text>
+  <text x="325" y="258" fill="#a7f3d0" font-size="9" text-anchor="middle">Bootstrap execution completes</text>
+
+  <line x1="230" y1="237" x2="180" y2="237" stroke="#10b981" stroke-width="3"/>
+
+  <!-- Step 7: Transition to User Mode -->
+  <rect x="40" y="195" width="140" height="85" rx="8" fill="#1e3a8a" stroke="#38bdf8" stroke-width="2"/>
+  <text x="110" y="220" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">STEP 7: USER MODE</text>
+  <text x="110" y="240" fill="#f8fafc" font-size="10" text-anchor="middle">OS establishes configs</text>
+  <text x="110" y="258" fill="#bfdbfe" font-size="9" text-anchor="middle">Starts executing user apps</text>
+
+  <!-- Bottom Detailed Explanatory Cards -->
+  <rect x="40" y="310" width="770" height="145" rx="10" fill="#111827" stroke="#374151" stroke-width="1.5"/>
+  <text x="60" y="335" fill="#facc15" font-size="13" font-weight="bold">Summary of Firmware Terminology (Image 6 Note):</text>
+  <text x="60" y="360" fill="#f1f5f9" font-size="11"><b>ROM (Read Only Memory):</b> Permanent non-volatile storage jisme initial bootstrap code rehta hai.</text>
+  <text x="60" y="380" fill="#cbd5e1" font-size="11"><b>PROM / EPROM / EEPROM:</b> Programmable / Erasable ROM chips jisme firmware updates flash kiye jate hain (BIOS / UEFI).</text>
+  <text x="60" y="400" fill="#cbd5e1" font-size="11"><b>Boot Sector / Boot Block:</b> Storage device ka first physical sector (MBR/GPT) jo OS bootloader code rakhta hai.</text>
+  <text x="60" y="420" fill="#38bdf8" font-size="11"><b>Kernel Handoff:</b> Ek baar Kernel RAM mein load hua, firmware CPU ka control Kernel ko de deta hai aur kaam khatam kar deta hai.</text>
+</svg>
