@@ -77,4 +77,4 @@ Hardware basic computing resources provide karta hai jisme mukhyatah shamil hain
 ![Abstract View of Computer System](diagrams/computer_abstract_view.svg)
 
 ---
-*Next Module: [3. User View vs System View of OS](../3_User_vs_System_View/README.md)*
+*Next Module: [3. User View vs System View of OS](../03_User_vs_System_View/README.md)*

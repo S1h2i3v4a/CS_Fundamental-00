@@ -1,37 +1,34 @@
-# Operating System (OS) - Comprehensive Study Modules
+# Operating System (OS) - Comprehensive Curriculum
 
-Yeh folder **Operating System (Unit 1 Complete Syllabus & Beyond)** ke sabhi core concepts ko structured, priority-wise format mein organize karta hai. Saare concepts Hinglish mein hain, visual architectural SVG diagrams ke saath aur high-yield interview / exam answers ke saath structured hain.
-
----
-
-## 🗺️ Complete Modules Roadmap (Priority 1 to 19)
-
-| Priority | Module Folder | Key Topics Covered | Reference Diagram | Chapter PDF |
-| :---: | :--- | :--- | :---: | :---: |
-| **1** | [1_Introduction_to_OS](./1_Introduction_to_OS/README.md) | OS Definition, 3 Entities (H/W, App S/W, System S/W), 4 Components | [Concentric OS Position](./1_Introduction_to_OS/diagrams/os_position_diagram.svg) | [Download PDF](./1_Introduction_to_OS/1_Introduction_to_OS.pdf) |
-| **2** | [2_Components_and_Abstract_View](./2_Components_and_Abstract_View/README.md) | Abstract Layered View, Translators (Assembler, Compiler, Interpreter), Hardware Resources | [Abstract System Architecture](./2_Components_and_Abstract_View/diagrams/computer_abstract_view.svg) | [Download PDF](./2_Components_and_Abstract_View/2_Components_and_Abstract_View.pdf) |
-| **3** | [3_User_vs_System_View](./3_User_vs_System_View/README.md) | User View (Convenience) vs System View (Resource Manager), Thought Process: `a = b + c` | [Dual Perspectives View](./3_User_vs_System_View/diagrams/user_vs_system_diagram.svg) | [Download PDF](./3_User_vs_System_View/3_User_vs_System_View.pdf) |
-| **4** | [4_Kernel_and_Operations](./4_Kernel_and_Operations/README.md) | Kernel Definition, 5 Core Functions, Monolithic vs Microkernel vs Hybrid | [Kernel Architecture & Types](./4_Kernel_and_Operations/diagrams/kernel_architecture_diagram.svg) | [Download PDF](./4_Kernel_and_Operations/4_Kernel_and_Operations.pdf) |
-| **5** | [5_Computer_System_Organization](./5_Computer_System_Organization/README.md) | Common Bus, Device Controllers, Memory Controller, Internal CPU (ALU, CU, Regs, I/O) | [System Organization & CPU Architecture](./5_Computer_System_Organization/diagrams/system_organization.svg) | [Download PDF](./5_Computer_System_Organization/5_Computer_System_Organization.pdf) |
-| **6** | [6_Bootstrap_Program_and_Booting](./6_Bootstrap_Program_and_Booting/README.md) | Bootstrap Loader, Firmware (ROM/EPROM/EEPROM), POST, Boot Block, Kernel Handoff | [Bootstrapping Sequence Flowchart](./6_Bootstrap_Program_and_Booting/diagrams/bootstrapping_flow.svg) | [Download PDF](./6_Bootstrap_Program_and_Booting/6_Bootstrap_Program_and_Booting.pdf) |
-| **7** | [7_Dual_Mode_Operation](./7_Dual_Mode_Operation/README.md) | User Mode vs Kernel Mode, Mode Bit, System Call Transition, Thought Process: `printf("Hello")` | [Dual Mode Transition Architecture](./7_Dual_Mode_Operation/diagrams/dual_mode_operation.svg) | [Download PDF](./7_Dual_Mode_Operation/7_Dual_Mode_Operation.pdf) |
-| **8** | [8_Memory_Management_Functions](./8_Memory_Management_Functions/README.md) | Array of Bytes/Words, 4 Core OS Activities, Thought Process: Memory Addressing & Allocation | [Memory Byte Array & Allocation Layout](./8_Memory_Management_Functions/diagrams/memory_management_layout.svg) | [Download PDF](./8_Memory_Management_Functions/8_Memory_Management_Functions.pdf) |
-| **9** | [9_Memory_Hierarchy_and_Caching](./9_Memory_Hierarchy_and_Caching/README.md) | Memory Hierarchy Pyramid, Caching, L1/L2/L3, Write-Through vs Write-Back, Coherency | [Memory Hierarchy & Cache Layout](./9_Memory_Hierarchy_and_Caching/diagrams/memory_hierarchy_cache.svg) | [Download PDF](./9_Memory_Hierarchy_and_Caching/9_Memory_Hierarchy_and_Caching.pdf) |
-| **10** | [10_Processor_Management_and_Scheduling](./10_Processor_Management_and_Scheduling/README.md) | Process Lifecycle, Multiprogramming, 3 Activities, Thought Process: Context Switch Latency | [Processor Management & Dispatching](./10_Processor_Management_and_Scheduling/diagrams/processor_management.svg) | [Download PDF](./10_Processor_Management_and_Scheduling/10_Processor_Management_and_Scheduling.pdf) |
-| **11** | [11_Device_and_File_Management](./11_Device_and_File_Management/README.md) | Device Drivers & Uniform Interface, File System CRUD, Inodes, File Read Journey | [Device Drivers & Hierarchical File Tree](./11_Device_and_File_Management/diagrams/device_and_file_management.svg) | [Download PDF](./11_Device_and_File_Management/11_Device_and_File_Management.pdf) |
-| **12** | [12_User_Interface_and_Specialized_OS_Functions](./12_User_Interface_and_Specialized_OS_Functions/README.md) | CLI vs GUI vs Touch, Cold vs Warm Booting, Protection, Accounting, Performance Monitoring | [UI & Booting Modes Diagram](./12_User_Interface_and_Specialized_OS_Functions/diagrams/ui_and_booting_diagram.svg) | [Download PDF](./12_User_Interface_and_Specialized_OS_Functions/12_User_Interface_and_Specialized_OS_Functions.pdf) |
-| **13** | [13_Types_of_Operating_Systems_Batch_and_Multiprogrammed](./13_Types_of_Operating_Systems_Batch_and_Multiprogrammed/README.md) | Batch OS, Human Operator, Spooling FIFO, Multiprogramming, CPU Utilization $1-p^n$ | [Batch & Multiprogramming Diagram](./13_Types_of_Operating_Systems_Batch_and_Multiprogrammed/diagrams/batch_and_multiprogramming.svg) | [Download PDF](./13_Types_of_Operating_Systems_Batch_and_Multiprogrammed/13_Types_of_Operating_Systems_Batch_and_Multiprogrammed.pdf) |
-| **14** | [14_Time_Sharing_and_Real_Time_Systems](./14_Time_Sharing_and_Real_Time_Systems/README.md) | Time Sharing / Multitasking, Quantum $q$, Preemption, Hard vs Soft RTOS Deadlines | [Time-Sharing & RTOS Diagram](./14_Time_Sharing_and_Real_Time_Systems/diagrams/timesharing_and_rtos.svg) | [Download PDF](./14_Time_Sharing_and_Real_Time_Systems/14_Time_Sharing_and_Real_Time_Systems.pdf) |
-| **15** | [15_Multiprocessor_and_Distributed_Systems](./15_Multiprocessor_and_Distributed_Systems/README.md) | Flynn's Taxonomy, SMP vs ASMP, Multiuser Quotas, Heavyweight Process vs Multithreading | [Multiprocessor & Threads Diagram](./15_Multiprocessor_and_Distributed_Systems/diagrams/multiprocessor_multithreaded.svg) | [Download PDF](./15_Multiprocessor_and_Distributed_Systems/15_Multiprocessor_and_Distributed_Systems.pdf) |
-| **16** | [16_Operating_System_Structures_and_Architectures](./16_Operating_System_Structures_and_Architectures/README.md) | Simple (MS-DOS), Monolithic, Layered Approach, Microkernel, Modular LKMs (Linux) | [OS Structures Architectural Diagram](./16_Operating_System_Structures_and_Architectures/diagrams/os_structures.svg) | [Download PDF](./16_Operating_System_Structures_and_Architectures/16_Operating_System_Structures_and_Architectures.pdf) |
-| **17** | [17_Advanced_Kernel_and_System_Calls](./17_Advanced_Kernel_and_System_Calls/README.md) | Monolithic vs Microkernel Duel, Reentrant Kernel, 6-Stage System Call Lifecycle | [Reentrancy & Syscall Trace](./17_Advanced_Kernel_and_System_Calls/diagrams/reentrant_and_syscall.svg) | [Download PDF](./17_Advanced_Kernel_and_System_Calls/17_Advanced_Kernel_and_System_Calls.pdf) |
-| **18** | [18_OS_Services_and_System_Components](./18_OS_Services_and_System_Components/README.md) | Layered View of OS Services (Slide 130), 8 Core Architectural Components (Slide 135) | [Services & Components Diagram](./18_OS_Services_and_System_Components/diagrams/os_services_components.svg) | [Download PDF](./18_OS_Services_and_System_Components/18_OS_Services_and_System_Components.pdf) |
-| **19** | [19_AKTU_PYQs_and_Interview_Cheatsheet](./19_AKTU_PYQs_and_Interview_Cheatsheet/README.md) | 10 Years AKTU PYQs (2014-2023) Solved, Top Tech Interview Q&A, Formula Cheatsheet | [Unit 1 Knowledge Graph](./19_AKTU_PYQs_and_Interview_Cheatsheet/diagrams/unit1_mindmap.svg) | [Download PDF](./19_AKTU_PYQs_and_Interview_Cheatsheet/19_AKTU_PYQs_and_Interview_Cheatsheet.pdf) |
+Yeh repository Operating System ke sabhi units ko structured, modular aur priority-wise format mein host karta hai.
 
 ---
 
-## 📚 Master Consolidated PDF Document
-- 📄 **[Complete_OS_Master_Notes.pdf](./Complete_OS_Master_Notes.pdf)** (All 19 Modules Consolidated, 58 Pages, Complete Unit 1 Coverage)
+## 📂 Units Index
+
+### 📘 [Unit 1: Introduction, Architecture & Operating System Structures](./Unit_1/README.md)
+*Complete 150-page syllabus coverage organized in sequential priority subfolders (`01_` to `19_`):*
+- **[01_Introduction_to_OS](./Unit_1/01_Introduction_to_OS/README.md)**
+- **[02_Components_and_Abstract_View](./Unit_1/02_Components_and_Abstract_View/README.md)**
+- **[03_User_vs_System_View](./Unit_1/03_User_vs_System_View/README.md)**
+- **[04_Kernel_and_Operations](./Unit_1/04_Kernel_and_Operations/README.md)**
+- **[05_Computer_System_Organization](./Unit_1/05_Computer_System_Organization/README.md)**
+- **[06_Bootstrap_Program_and_Booting](./Unit_1/06_Bootstrap_Program_and_Booting/README.md)**
+- **[07_Dual_Mode_Operation](./Unit_1/07_Dual_Mode_Operation/README.md)**
+- **[08_Memory_Management_Functions](./Unit_1/08_Memory_Management_Functions/README.md)**
+- **[09_Memory_Hierarchy_and_Caching](./Unit_1/09_Memory_Hierarchy_and_Caching/README.md)**
+- **[10_Processor_Management_and_Scheduling](./Unit_1/10_Processor_Management_and_Scheduling/README.md)**
+- **[11_Device_and_File_Management](./Unit_1/11_Device_and_File_Management/README.md)**
+- **[12_User_Interface_and_Specialized_OS_Functions](./Unit_1/12_User_Interface_and_Specialized_OS_Functions/README.md)**
+- **[13_Types_of_Operating_Systems_Batch_and_Multiprogrammed](./Unit_1/13_Types_of_Operating_Systems_Batch_and_Multiprogrammed/README.md)**
+- **[14_Time_Sharing_and_Real_Time_Systems](./Unit_1/14_Time_Sharing_and_Real_Time_Systems/README.md)**
+- **[15_Multiprocessor_and_Distributed_Systems](./Unit_1/15_Multiprocessor_and_Distributed_Systems/README.md)**
+- **[16_Operating_System_Structures_and_Architectures](./Unit_1/16_Operating_System_Structures_and_Architectures/README.md)**
+- **[17_Advanced_Kernel_and_System_Calls](./Unit_1/17_Advanced_Kernel_and_System_Calls/README.md)**
+- **[18_OS_Services_and_System_Components](./Unit_1/18_OS_Services_and_System_Components/README.md)**
+- **[19_AKTU_PYQs_and_Interview_Cheatsheet](./Unit_1/19_AKTU_PYQs_and_Interview_Cheatsheet/README.md)**
+
+📄 **Unit 1 Master Consolidated PDF:** [Unit_1_Master_Notes.pdf](./Unit_1/Unit_1_Master_Notes.pdf) (58 Pages)
 
 ---
 *Created for CS Fundamentals Repository by Shivam Keshari*

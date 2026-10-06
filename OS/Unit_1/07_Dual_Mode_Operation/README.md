@@ -83,4 +83,4 @@ Lekin computer ki Monitor Display Screen ek hardware peripheral hai. User Mode p
 ![Dual Mode Operation](diagrams/dual_mode_operation.svg)
 
 ---
-*Next Module: [8. Functions of Operating System - Memory Management](../8_Memory_Management_Functions/README.md)*
+*Next Module: [8. Functions of Operating System - Memory Management](../08_Memory_Management_Functions/README.md)*

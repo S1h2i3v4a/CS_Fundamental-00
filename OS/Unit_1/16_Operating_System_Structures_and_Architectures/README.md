@@ -1,6 +1,6 @@
 # Module 16: Operating System Structures & Architectures
 
-> **Reference Note:** Yeh module [Module 4: Kernel and Operations](../4_Kernel_and_Operations/README.md) ke Monolithic vs Microkernel introduction ko complete architectural depth provide karta hai.
+> **Reference Note:** Yeh module [Module 4: Kernel and Operations](../04_Kernel_and_Operations/README.md) ke Monolithic vs Microkernel introduction ko complete architectural depth provide karta hai.
 
 ---
 

@@ -1,12 +1,12 @@
 # Module 12: User Interfaces, Booting Modes & Specialized OS Functions
 
-> **Reference Note:** Yeh module humare [Module 6: Bootstrap Program & Booting](../6_Bootstrap_Program_and_Booting/README.md) aur [Module 7: Dual-Mode Operation](../7_Dual_Mode_Operation/README.md) ke concepts ko aage extend karta hai.
+> **Reference Note:** Yeh module humare [Module 6: Bootstrap Program & Booting](../06_Bootstrap_Program_and_Booting/README.md) aur [Module 7: Dual-Mode Operation](../07_Dual_Mode_Operation/README.md) ke concepts ko aage extend karta hai.
 
 ---
 
 ## 1. User Interface (UI) ya Command Interpreter
 
-User direct bare hardware se communicate nahi kar sakta (jaisa humne [Module 1](../1_Introduction_to_OS/README.md) mein dekha tha). OS user aur machine ke beech bridge banta hai through **User Interfaces**:
+User direct bare hardware se communicate nahi kar sakta (jaisa humne [Module 1](../01_Introduction_to_OS/README.md) mein dekha tha). OS user aur machine ke beech bridge banta hai through **User Interfaces**:
 
 ### 1.1 Command-Line Interface (CLI)
 - **Concept:** Text-based interface jahan user keyboard se text commands enter karta hai (e.g., Linux Shell/Bash, MS-DOS `cmd`, PowerShell).
@@ -29,7 +29,7 @@ User direct bare hardware se communicate nahi kar sakta (jaisa humne [Module 1](
 
 ## 2. Booting Modes: Cold Booting vs Warm Booting
 
-> **Concept Reference:** [Module 6](../6_Bootstrap_Program_and_Booting/README.md) mein humne dekha tha ki bootstrap loader ROM se POST run karke OS ko load karta hai.
+> **Concept Reference:** [Module 6](../06_Bootstrap_Program_and_Booting/README.md) mein humne dekha tha ki bootstrap loader ROM se POST run karke OS ko load karta hai.
 
 ### 2.1 Cold Booting (Hard Boot)
 - **Definition:** Jab computer **completely OFF state** (Power zero) se start hota hai via physical Power Button.

@@ -1,6 +1,6 @@
 # Module 17: Advanced Kernel Concepts, Reentrancy & System Calls
 
-> **Reference Note:** Yeh module [Module 7: Dual-Mode Operation](../7_Dual_Mode_Operation/README.md) aur [Module 16: OS Structures](../16_Operating_System_Structures_and_Architectures/README.md) ke foundation par deep-dive execute karta hai.
+> **Reference Note:** Yeh module [Module 7: Dual-Mode Operation](../07_Dual_Mode_Operation/README.md) aur [Module 16: OS Structures](../16_Operating_System_Structures_and_Architectures/README.md) ke foundation par deep-dive execute karta hai.
 
 ---
 

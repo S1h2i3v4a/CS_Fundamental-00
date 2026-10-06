@@ -75,4 +75,4 @@ Part B: CPU Internal Architecture
 ```
 
 ---
-*Next Module: [6. Bootstrap Program and How it Works](../6_Bootstrap_Program_and_Booting/README.md)*
+*Next Module: [6. Bootstrap Program and How it Works](../06_Bootstrap_Program_and_Booting/README.md)*

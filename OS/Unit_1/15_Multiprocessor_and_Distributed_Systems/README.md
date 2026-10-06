@@ -1,6 +1,6 @@
 # Module 15: Multiprocessor, Multiuser & Multithreaded Systems
 
-> **Reference Note:** Yeh module [Module 5: Computer System Organization](../5_Computer_System_Organization/README.md) aur [Module 10: Processor Management](../10_Processor_Management_and_Scheduling/README.md) ke multi-core CPU architecture par build karta hai.
+> **Reference Note:** Yeh module [Module 5: Computer System Organization](../05_Computer_System_Organization/README.md) aur [Module 10: Processor Management](../10_Processor_Management_and_Scheduling/README.md) ke multi-core CPU architecture par build karta hai.
 
 ---
 

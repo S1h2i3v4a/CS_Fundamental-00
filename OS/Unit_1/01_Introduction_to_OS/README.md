@@ -69,4 +69,4 @@ Ek computer system ko 4 mukhya bhaagon mein divide kiya jata hai:
   - End-users jo computer ko use karte hain (Humans, remote machines, ya automated background bots).
 
 ---
-*Next Module: [2. Components and Abstract View of Computer System](../2_Components_and_Abstract_View/README.md)*
+*Next Module: [2. Components and Abstract View of Computer System](../02_Components_and_Abstract_View/README.md)*

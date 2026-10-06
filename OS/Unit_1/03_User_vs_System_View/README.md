@@ -101,4 +101,4 @@ int a = b + c;
 ![User View vs System View](diagrams/user_vs_system_diagram.svg)
 
 ---
-*Next Module: [4. Kernel and its Operations](../4_Kernel_and_Operations/README.md)*
+*Next Module: [4. Kernel and its Operations](../04_Kernel_and_Operations/README.md)*

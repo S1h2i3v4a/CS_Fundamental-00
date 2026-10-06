@@ -1,6 +1,6 @@
 # Module 18: Operating System Services & Core System Components
 
-> **Reference Note:** Yeh module [Module 2: Components & Abstract View](../2_Components_and_Abstract_View/README.md) aur [Module 11: Device & File Management](../11_Device_and_File_Management/README.md) ke individual modules ko ek integrated overall view provide karta hai.
+> **Reference Note:** Yeh module [Module 2: Components & Abstract View](../02_Components_and_Abstract_View/README.md) aur [Module 11: Device & File Management](../11_Device_and_File_Management/README.md) ke individual modules ko ek integrated overall view provide karta hai.
 
 ---
 

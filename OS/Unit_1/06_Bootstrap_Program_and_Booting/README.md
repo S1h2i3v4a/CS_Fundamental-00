@@ -69,4 +69,4 @@ Image 6 ke middle section mein handwritten notes hain: `Init Prog`, `firmware`, 
 ```
 
 ---
-*Next Module: [7. Dual-Mode Operation (User Mode vs Kernel Mode)](../7_Dual_Mode_Operation/README.md)*
+*Next Module: [7. Dual-Mode Operation (User Mode vs Kernel Mode)](../07_Dual_Mode_Operation/README.md)*
