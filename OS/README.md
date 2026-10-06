@@ -4,7 +4,7 @@ Yeh folder **Operating System** ke core concepts ko structured, priority-wise fo
 
 ---
 
-## Complete Modules Roadmap (Priority 1 to 8)
+## Complete Modules Roadmap (Priority 1 to 11)
 
 | Priority | Module Folder | Key Topics Covered | Reference Diagram | PDF Notes |
 | :---: | :--- | :--- | :---: | :---: |
@@ -16,12 +16,14 @@ Yeh folder **Operating System** ke core concepts ko structured, priority-wise fo
 | **6** | [6_Bootstrap_Program_and_Booting](./6_Bootstrap_Program_and_Booting/README.md) | Bootstrap Loader, Firmware (ROM/EPROM/EEPROM), POST, Boot Block, Kernel Handoff | [Bootstrapping Sequence Flowchart](./6_Bootstrap_Program_and_Booting/diagrams/bootstrapping_flow.svg) | [Download PDF](./6_Bootstrap_Program_and_Booting/6_Bootstrap_Program_and_Booting.pdf) |
 | **7** | [7_Dual_Mode_Operation](./7_Dual_Mode_Operation/README.md) | User Mode vs Kernel Mode, Mode Bit, System Call Transition, Thought Process: `printf("Hello")` | [Dual Mode Transition Architecture](./7_Dual_Mode_Operation/diagrams/dual_mode_operation.svg) | [Download PDF](./7_Dual_Mode_Operation/7_Dual_Mode_Operation.pdf) |
 | **8** | [8_Memory_Management_Functions](./8_Memory_Management_Functions/README.md) | Array of Bytes/Words, 4 Core OS Activities, Thought Process: Memory Addressing & Allocation | [Memory Byte Array & Allocation Layout](./8_Memory_Management_Functions/diagrams/memory_management_layout.svg) | [Download PDF](./8_Memory_Management_Functions/8_Memory_Management_Functions.pdf) |
+| **9** | [9_Memory_Hierarchy_and_Caching](./9_Memory_Hierarchy_and_Caching/README.md) | Memory Hierarchy Pyramid, Caching, L1/L2/L3, Write-Through vs Write-Back, Coherency | [Memory Hierarchy & Cache Layout](./9_Memory_Hierarchy_and_Caching/diagrams/memory_hierarchy_cache.svg) | [Download PDF](./9_Memory_Hierarchy_and_Caching/9_Memory_Hierarchy_and_Caching.pdf) |
+| **10** | [10_Processor_Management_and_Scheduling](./10_Processor_Management_and_Scheduling/README.md) | Process Lifecycle, Multiprogramming, 3 Activities, Thought Process: Context Switch Latency | [Processor Management & Dispatching](./10_Processor_Management_and_Scheduling/diagrams/processor_management.svg) | [Download PDF](./10_Processor_Management_and_Scheduling/10_Processor_Management_and_Scheduling.pdf) |
+| **11** | [11_Device_and_File_Management](./11_Device_and_File_Management/README.md) | Device Drivers & Uniform Interface, File System CRUD, Inodes, File Read Journey | [Device Drivers & Hierarchical File Tree](./11_Device_and_File_Management/diagrams/device_and_file_management.svg) | [Download PDF](./11_Device_and_File_Management/11_Device_and_File_Management.pdf) |
 
 ---
 
 ## Master Consolidated PDF Documents
-- 📄 **[Complete_OS_Master_Notes.pdf](./Complete_OS_Master_Notes.pdf)** (All 8 Modules Consolidated, 18+ Pages)
-- 📄 **[Complete_OS_Module_1_Notes.pdf](./Complete_OS_Module_1_Notes.pdf)** (Modules 1 to 4)
+- 📄 **[Complete_OS_Master_Notes.pdf](./Complete_OS_Master_Notes.pdf)** (All 11 Modules Consolidated, 24+ Pages)
 
 ---
 *Created for CS Fundamentals Repository by Shivam Keshari*
