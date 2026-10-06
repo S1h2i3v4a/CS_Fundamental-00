@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="auto">
+  <defs>
+    <linearGradient id="layerGrad1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#090d16" rx="16" />
+
+  <text x="400" y="35" fill="#38bdf8" font-size="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="bold" text-anchor="middle">
+    Fig 2.1: Abstract View of Computer System Components
+  </text>
+  <text x="400" y="58" fill="#94a3b8" font-size="12" font-family="'Segoe UI', Roboto, sans-serif" text-anchor="middle">
+    Reference: Image 2 [Layered Components &amp; Translators Architecture]
+  </text>
+
+  <!-- Outer Layer: Users -->
+  <rect x="50" y="80" width="460" height="60" rx="8" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2" />
+  <text x="280" y="105" fill="#bfdbfe" font-size="14" font-weight="bold" text-anchor="middle">TOP LAYER: MULTIPLE USERS</text>
+  
+  <rect x="70" y="115" width="80" height="20" rx="4" fill="#2563eb" />
+  <text x="110" y="129" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">User 1</text>
+  <rect x="170" y="115" width="80" height="20" rx="4" fill="#2563eb" />
+  <text x="210" y="129" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">User 2</text>
+  <text x="280" y="129" fill="#94a3b8" font-size="14" font-weight="bold" text-anchor="middle">. . . .</text>
+  <rect x="330" y="115" width="80" height="20" rx="4" fill="#2563eb" />
+  <text x="370" y="129" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">User N</text>
+
+  <!-- Translators & App Programs Layer -->
+  <rect x="50" y="160" width="460" height="90" rx="8" fill="#312e81" stroke="#6366f1" stroke-width="2" />
+  <text x="280" y="185" fill="#c7d2fe" font-size="14" font-weight="bold" text-anchor="middle">SYSTEM &amp; APPLICATION PROGRAMS</text>
+  
+  <rect x="65" y="200" width="85" height="35" rx="6" fill="#4338ca" />
+  <text x="107" y="218" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">COMPILER</text>
+  <text x="107" y="230" fill="#a5b4fc" font-size="9" text-anchor="middle">(HLL → Assembly)</text>
+
+  <rect x="160" y="200" width="90" height="35" rx="6" fill="#4338ca" />
+  <text x="205" y="218" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">ASSEMBLER</text>
+  <text x="205" y="230" fill="#a5b4fc" font-size="9" text-anchor="middle">(Assembly → 0,1)</text>
+
+  <rect x="260" y="200" width="85" height="35" rx="6" fill="#4338ca" />
+  <text x="302" y="218" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">TEXT EDITOR</text>
+  <text x="302" y="230" fill="#a5b4fc" font-size="9" text-anchor="middle">(User Code/Text)</text>
+
+  <rect x="355" y="200" width="140" height="35" rx="6" fill="#4338ca" />
+  <text x="425" y="218" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">DB / BROWSER / APPS</text>
+  <text x="425" y="230" fill="#a5b4fc" font-size="9" text-anchor="middle">(Spreadsheets/Games)</text>
+
+  <!-- Operating System Layer -->
+  <rect x="50" y="270" width="460" height="70" rx="8" fill="#065f46" stroke="#10b981" stroke-width="2" />
+  <text x="280" y="300" fill="#a7f3d0" font-size="16" font-weight="bold" text-anchor="middle">OPERATING SYSTEM (O.S.)</text>
+  <text x="280" y="325" fill="#6ee7b7" font-size="12" text-anchor="middle">Controls Hardware, Coordinates Resources Among Apps &amp; Users</text>
+
+  <!-- Computer Hardware Layer -->
+  <rect x="50" y="360" width="460" height="85" rx="8" fill="#831843" stroke="#f43f5e" stroke-width="2" />
+  <text x="280" y="385" fill="#fecdd3" font-size="15" font-weight="bold" text-anchor="middle">COMPUTER HARDWARE (H/W)</text>
+  
+  <rect x="70" y="398" width="110" height="32" rx="4" fill="#9f1239" />
+  <text x="125" y="418" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">CPU (Core Compute)</text>
+
+  <rect x="195" y="398" width="110" height="32" rx="4" fill="#9f1239" />
+  <text x="250" y="418" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">MEMORY (RAM)</text>
+
+  <rect x="320" y="398" width="170" height="32" rx="4" fill="#9f1239" />
+  <text x="405" y="418" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">I/O DEVICES (Disk, Screen)</text>
+
+  <!-- Right Panel: Translators Detailed Note -->
+  <rect x="530" y="80" width="235" height="365" rx="10" fill="#1e293b" stroke="#334155" stroke-width="2" />
+  <text x="647" y="115" fill="#facc15" font-size="15" font-weight="bold" text-anchor="middle">TRANSLATORS NOTE</text>
+  
+  <line x1="550" y1="130" x2="745" y2="130" stroke="#475569" stroke-width="1"/>
+
+  <text x="550" y="155" fill="#38bdf8" font-size="13" font-weight="bold">1) Assembler:</text>
+  <text x="560" y="175" fill="#cbd5e1" font-size="11">• Assembly code ko direct</text>
+  <text x="560" y="190" fill="#cbd5e1" font-size="11">  Machine language (0,1) mein</text>
+  <text x="560" y="205" fill="#cbd5e1" font-size="11">  convert karta hai.</text>
+
+  <text x="550" y="235" fill="#38bdf8" font-size="13" font-weight="bold">2) Compiler &amp; Interpreter:</text>
+  <text x="560" y="255" fill="#cbd5e1" font-size="11">• High-Level Language (HLL)</text>
+  <text x="560" y="270" fill="#cbd5e1" font-size="11">  jaise C, C++, Python ko</text>
+  <text x="560" y="285" fill="#cbd5e1" font-size="11">  Machine Code (0,1) banate hain.</text>
+
+  <rect x="545" y="315" width="205" height="110" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-dasharray="4,2"/>
+  <text x="647" y="338" fill="#a7f3d0" font-size="12" font-weight="bold" text-anchor="middle">CONVERSION FLOW</text>
+  <text x="647" y="362" fill="#f1f5f9" font-size="12" text-anchor="middle">High Level Language (HLL)</text>
+  <text x="647" y="380" fill="#38bdf8" font-size="12" text-anchor="middle">⬇ [Compiler / Interpreter]</text>
+  <text x="647" y="405" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">Binary Code (0, 1)</text>
+</svg>

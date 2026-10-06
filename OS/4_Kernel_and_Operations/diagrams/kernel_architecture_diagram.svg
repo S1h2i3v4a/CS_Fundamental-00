@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 480" width="100%" height="auto">
+  <rect width="100%" height="100%" fill="#0b0f19" rx="16" />
+  <text x="425" y="35" fill="#38bdf8" font-size="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="bold" text-anchor="middle">
+    Fig 4.1: Kernel Architecture &amp; Core Operations
+  </text>
+  <text x="425" y="58" fill="#94a3b8" font-size="12" font-family="'Segoe UI', Roboto, sans-serif" text-anchor="middle">
+    Reference: Image 4 [Kernel Functions &amp; 3 Types Comparison]
+  </text>
+
+  <!-- Top User Space -->
+  <rect x="40" y="80" width="770" height="45" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="425" y="108" fill="#e0f2fe" font-size="14" font-weight="bold" text-anchor="middle">
+    USER SPACE: Applications, Shell, Libraries, User GUI / CLI
+  </text>
+
+  <!-- Bridge: System Call Interface -->
+  <rect x="40" y="135" width="770" height="25" rx="4" fill="#0284c7" />
+  <text x="425" y="152" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">
+    SYSTEM CALL INTERFACE (BRIDGE BETWEEN USER &amp; HARDWARE)
+  </text>
+
+  <!-- Kernel Core Operations Box -->
+  <rect x="40" y="170" width="770" height="110" rx="8" fill="#1e1e38" stroke="#818cf8" stroke-width="2" />
+  <text x="425" y="193" fill="#a5b4fc" font-size="14" font-weight="bold" text-anchor="middle">
+    KERNEL CORE: 5 FUNDAMENTAL OPERATIONS
+  </text>
+
+  <!-- 5 Operation Pills -->
+  <rect x="55" y="208" width="138" height="58" rx="6" fill="#312e81" stroke="#6366f1" />
+  <text x="124" y="230" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">1. Process Mgmt</text>
+  <text x="124" y="248" fill="#cbd5e1" font-size="9" text-anchor="middle">CPU Scheduling, Threads</text>
+
+  <rect x="203" y="208" width="138" height="58" rx="6" fill="#312e81" stroke="#6366f1" />
+  <text x="272" y="230" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">2. Memory Mgmt</text>
+  <text x="272" y="248" fill="#cbd5e1" font-size="9" text-anchor="middle">RAM, Virtual Memory</text>
+
+  <rect x="351" y="208" width="148" height="58" rx="6" fill="#312e81" stroke="#6366f1" />
+  <text x="425" y="230" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">3. Device Mgmt</text>
+  <text x="425" y="248" fill="#cbd5e1" font-size="9" text-anchor="middle">Device Drivers, I/O</text>
+
+  <rect x="509" y="208" width="138" height="58" rx="6" fill="#312e81" stroke="#6366f1" />
+  <text x="578" y="230" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">4. File System</text>
+  <text x="578" y="248" fill="#cbd5e1" font-size="9" text-anchor="middle">Disk Storage, RW Ops</text>
+
+  <rect x="657" y="208" width="140" height="58" rx="6" fill="#312e81" stroke="#6366f1" />
+  <text x="727" y="230" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">5. Security</text>
+  <text x="727" y="248" fill="#cbd5e1" font-size="9" text-anchor="middle">Access Control, Auth</text>
+
+  <!-- Hardware Layer -->
+  <rect x="40" y="290" width="770" height="35" rx="6" fill="#881337" stroke="#f43f5e" />
+  <text x="425" y="313" fill="#ffe4e6" font-size="13" font-weight="bold" text-anchor="middle">
+    PHYSICAL HARDWARE: CPU | RAM | STORAGE (SSD/HDD) | PERIPHERALS
+  </text>
+
+  <!-- Bottom: 3 Types of Kernel -->
+  <text x="425" y="355" fill="#facc15" font-size="14" font-weight="bold" text-anchor="middle">
+    THREE MAIN TYPES OF KERNEL
+  </text>
+
+  <rect x="40" y="370" width="245" height="90" rx="8" fill="#1e293b" stroke="#0284c7" />
+  <text x="162" y="392" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">1. Monolithic Kernel</text>
+  <text x="55" y="414" fill="#cbd5e1" font-size="10">• Saare services same space mein</text>
+  <text x="55" y="430" fill="#cbd5e1" font-size="10">• Super fast execution</text>
+  <text x="55" y="446" fill="#cbd5e1" font-size="10">• E.g.: Linux, Unix</text>
+
+  <rect x="302" y="370" width="245" height="90" rx="8" fill="#1e293b" stroke="#10b981" />
+  <text x="424" y="392" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">2. Microkernel</text>
+  <text x="317" y="414" fill="#cbd5e1" font-size="10">• Minimal core in kernel space</text>
+  <text x="317" y="430" fill="#cbd5e1" font-size="10">• Baaki services user space mein</text>
+  <text x="317" y="446" fill="#cbd5e1" font-size="10">• E.g.: Minix, QNX</text>
+
+  <rect x="565" y="370" width="245" height="90" rx="8" fill="#1e293b" stroke="#f59e0b" />
+  <text x="687" y="392" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">3. Hybrid Kernel</text>
+  <text x="580" y="414" fill="#cbd5e1" font-size="10">• Monolithic + Microkernel combo</text>
+  <text x="580" y="430" fill="#cbd5e1" font-size="10">• Speed aur modularity dono</text>
+  <text x="580" y="446" fill="#cbd5e1" font-size="10">• E.g.: Windows NT, macOS</text>
+</svg>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 450" width="100%" height="auto">
+  <defs>
+    <radialGradient id="hwGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fee2e2" />
+      <stop offset="100%" stop-color="#fca5a5" />
+    </radialGradient>
+    <radialGradient id="osGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e0f2fe" />
+      <stop offset="100%" stop-color="#bae6fd" />
+    </radialGradient>
+    <radialGradient id="appGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef3c7" />
+      <stop offset="100%" stop-color="#fde68a" />
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#0f172a" rx="16" />
+  
+  <text x="350" y="38" fill="#38bdf8" font-size="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="bold" text-anchor="middle">
+    Fig 1.1: Position of Operating System (Concentric View)
+  </text>
+  <text x="350" y="60" fill="#94a3b8" font-size="12" font-family="'Segoe UI', Roboto, sans-serif" text-anchor="middle">
+    Reference: Image 1 [Position of OS &amp; 3 Entities Architecture]
+  </text>
+
+  <!-- Outer Circle: Users & Apps -->
+  <circle cx="270" cy="240" r="160" fill="url(#appGrad)" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6,4" />
+  <text x="270" y="105" fill="#b45309" font-size="14" font-weight="bold" font-family="sans-serif" text-anchor="middle">
+    USERS / APPLICATION SOFTWARE &amp; PROGRAMS
+  </text>
+
+  <!-- Middle Circle: Operating System -->
+  <circle cx="270" cy="240" r="110" fill="url(#osGrad)" stroke="#0284c7" stroke-width="3" />
+  <text x="270" y="160" fill="#0369a1" font-size="16" font-weight="bold" font-family="sans-serif" text-anchor="middle">
+    OPERATING SYSTEM (O.S.)
+  </text>
+  <text x="270" y="180" fill="#0284c7" font-size="12" font-weight="600" font-family="sans-serif" text-anchor="middle">
+    [System Software / Intermediary Layer]
+  </text>
+
+  <!-- Inner Circle: Hardware -->
+  <circle cx="270" cy="240" r="55" fill="url(#hwGrad)" stroke="#ef4444" stroke-width="3" />
+  <text x="270" y="235" fill="#b91c1c" font-size="15" font-weight="bold" font-family="sans-serif" text-anchor="middle">
+    HARDWARE
+  </text>
+  <text x="270" y="255" fill="#dc2626" font-size="11" font-weight="bold" font-family="sans-serif" text-anchor="middle">
+    (H/W Machine)
+  </text>
+
+  <!-- Right Side Notes Box -->
+  <rect x="470" y="100" width="205" height="260" rx="10" fill="#1e293b" stroke="#334155" stroke-width="2" />
+  <text x="485" y="130" fill="#fbbf24" font-size="14" font-weight="bold" font-family="sans-serif">3 ENTITIES / ITEMS:</text>
+  
+  <circle cx="495" cy="165" r="12" fill="#ef4444" />
+  <text x="495" y="170" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">1</text>
+  <text x="515" y="163" fill="#f8fafc" font-size="13" font-weight="bold">H/W (Machine)</text>
+  <text x="515" y="178" fill="#94a3b8" font-size="11">CPU, RAM, Disks</text>
+
+  <circle cx="495" cy="225" r="12" fill="#eab308" />
+  <text x="495" y="230" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">2</text>
+  <text x="515" y="223" fill="#f8fafc" font-size="13" font-weight="bold">Application S/W</text>
+  <text x="515" y="238" fill="#94a3b8" font-size="11">Browser, Office, Games</text>
+
+  <circle cx="495" cy="285" r="12" fill="#0ea5e9" />
+  <text x="495" y="290" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">3</text>
+  <text x="515" y="283" fill="#f8fafc" font-size="13" font-weight="bold">System S/W (OS)</text>
+  <text x="515" y="298" fill="#94a3b8" font-size="11">Resource Controller</text>
+
+  <rect x="485" y="325" width="175" height="25" rx="6" fill="#334155" />
+  <text x="572" y="342" fill="#38bdf8" font-size="11" font-weight="600" text-anchor="middle">OS = Bridge Between 1 &amp; 2</text>
+</svg>

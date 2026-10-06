@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="auto">
+  <rect width="100%" height="100%" fill="#0a0f1d" rx="16" />
+  <text x="400" y="35" fill="#38bdf8" font-size="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="bold" text-anchor="middle">
+    Fig 3.1: Dual Perspectives of Operating System
+  </text>
+  <text x="400" y="58" fill="#94a3b8" font-size="12" font-family="'Segoe UI', Roboto, sans-serif" text-anchor="middle">
+    Reference: Image 3 [User View vs System View / Resource Manager]
+  </text>
+
+  <!-- Left: User View Box -->
+  <rect x="40" y="80" width="340" height="340" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
+  <rect x="40" y="80" width="340" height="45" rx="12" fill="#0284c7" />
+  <text x="210" y="110" fill="#ffffff" font-size="16" font-weight="bold" text-anchor="middle">1. USER VIEW (End-User)</text>
+  
+  <text x="60" y="150" fill="#facc15" font-size="13" font-weight="bold">Primary Goal: Convenience &amp; Usability</text>
+  <text x="60" y="175" fill="#cbd5e1" font-size="12">• Platform for executing applications</text>
+  <text x="60" y="195" fill="#cbd5e1" font-size="12">• Interfaces: GUI, CLI, APIs</text>
+  <text x="60" y="215" fill="#cbd5e1" font-size="12">• Focus: Running apps, files, settings</text>
+  <text x="60" y="235" fill="#cbd5e1" font-size="12">• User concerns: Responsiveness, ease of use</text>
+
+  <rect x="55" y="260" width="310" height="140" rx="8" fill="#0f172a" stroke="#475569"/>
+  <text x="210" y="285" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">Example: User Perspective</text>
+  <text x="75" y="310" fill="#94a3b8" font-size="11">User writes code:</text>
+  <text x="75" y="332" fill="#4ade80" font-size="14" font-family="monospace" font-weight="bold">a = b + c;</text>
+  <text x="75" y="358" fill="#cbd5e1" font-size="11">User only cares about output correctness</text>
+  <text x="75" y="378" fill="#cbd5e1" font-size="11">and fast execution!</text>
+
+  <!-- Right: System View Box -->
+  <rect x="420" y="80" width="340" height="340" rx="12" fill="#1e293b" stroke="#ec4899" stroke-width="2" />
+  <rect x="420" y="80" width="340" height="45" rx="12" fill="#be185d" />
+  <text x="590" y="110" fill="#ffffff" font-size="16" font-weight="bold" text-anchor="middle">2. SYSTEM VIEW (Resource Manager)</text>
+
+  <text x="440" y="150" fill="#facc15" font-size="13" font-weight="bold">Primary Goal: Efficiency &amp; Control</text>
+  <text x="440" y="175" fill="#cbd5e1" font-size="12">• OS as a master Resource Allocator</text>
+  <text x="440" y="195" fill="#cbd5e1" font-size="12">• Controls CPU, Memory, I/O devices</text>
+  <text x="440" y="215" fill="#cbd5e1" font-size="12">• Enforces Security, Stability &amp; Isolation</text>
+  <text x="440" y="235" fill="#cbd5e1" font-size="12">• Target audience: SysAdmins, Engineers</text>
+
+  <rect x="435" y="260" width="310" height="140" rx="8" fill="#0f172a" stroke="#475569"/>
+  <text x="590" y="285" fill="#f43f5e" font-size="12" font-weight="bold" text-anchor="middle">Example: System Perspective</text>
+  <text x="450" y="308" fill="#94a3b8" font-size="11">Inside OS &amp; Hardware:</text>
+  <text x="450" y="328" fill="#f472b6" font-size="11">1. Memory allocated for a, b, c</text>
+  <text x="450" y="348" fill="#f472b6" font-size="11">2. Values loaded in registers (R1, R2)</text>
+  <text x="450" y="368" fill="#f472b6" font-size="11">3. CPU executes ADD, result written to RAM</text>
+  <text x="450" y="388" fill="#4ade80" font-size="11">4. Protection prevents illegal memory access</text>
+</svg>
