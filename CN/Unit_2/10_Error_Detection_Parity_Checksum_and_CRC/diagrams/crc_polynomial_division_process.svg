@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="crcGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="440" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Error Detection: Cyclic Redundancy Check (CRC) Polynomial Division &amp; Checksum</text>
+
+  <!-- Left: Modulo-2 Division Step-by-Step -->
+  <rect x="35" y="55" width="410" height="235" rx="6" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="410" height="28" rx="6" fill="url(#crcGrad)"/>
+  <text x="240" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">1. CRC Modulo-2 Binary Division (XOR Arithmetic)</text>
+
+  <text x="50" y="102" fill="#0f172a" font-size="9" font-weight="bold">Data: 100100 (6 bits) | Divisor G(x): 1101 (degree r = 3 zeros appended)</text>
+
+  <!-- Modulo-2 Division Box -->
+  <rect x="50" y="110" width="380" height="170" rx="4" fill="#0f172a"/>
+  <text x="65" y="128" fill="#38bdf8" font-size="9" font-family="monospace">Divisor: 1101 ) 100100 000 ( Appended r=3 zeros )</text>
+  <text x="145" y="144" fill="#f8fafc" font-size="9" font-family="monospace">1101</text>
+  <line x1="145" y1="148" x2="210" y2="148" stroke="#64748b" stroke-width="1"/>
+  <text x="155" y="162" fill="#34d399" font-size="9" font-family="monospace">01000   (XOR: 1^1=0, 0^1=1, 0^0=0, 1^1=0)</text>
+  <text x="165" y="176" fill="#f8fafc" font-size="9" font-family="monospace">1101</text>
+  <line x1="165" y1="180" x2="225" y2="180" stroke="#64748b" stroke-width="1"/>
+  <text x="175" y="194" fill="#34d399" font-size="9" font-family="monospace">01010</text>
+  <text x="185" y="208" fill="#f8fafc" font-size="9" font-family="monospace">1101</text>
+  <line x1="185" y1="212" x2="245" y2="212" stroke="#64748b" stroke-width="1"/>
+  <text x="195" y="226" fill="#34d399" font-size="9" font-family="monospace">01110</text>
+  <text x="205" y="240" fill="#f8fafc" font-size="9" font-family="monospace">1101</text>
+  <line x1="205" y1="244" x2="265" y2="244" stroke="#64748b" stroke-width="1"/>
+  <text x="215" y="258" fill="#fbbf24" font-size="10" font-weight="bold" font-family="monospace">0011  → Remainder CRC = 001</text>
+  <text x="65" y="274" fill="#4ade80" font-size="8.5" font-weight="bold">Transmitted Codeword = Data + CRC = 100100 001</text>
+
+  <!-- Right: Checksum & 2D Parity Overview -->
+  <rect x="460" y="55" width="355" height="235" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="460" y="55" width="355" height="28" rx="6" fill="#0f172a"/>
+  <text x="637" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">2. Parity &amp; Internet Checksum Methods</text>
+
+  <rect x="475" y="92" width="325" height="60" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="485" y="108" fill="#1e40af" font-size="9" font-weight="bold">Two-Dimensional (2D) Parity:</text>
+  <text x="485" y="122" fill="#334155" font-size="8">Data organized into a matrix of rows and columns.</text>
+  <text x="485" y="135" fill="#334155" font-size="8">Adds row parity bits AND a column parity byte.</text>
+  <text x="485" y="147" fill="#166534" font-size="8" font-weight="bold">Detects all 1, 2, 3-bit errors! Corrects any single-bit error!</text>
+
+  <rect x="475" y="160" width="325" height="65" rx="4" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="485" y="176" fill="#c2410c" font-size="9" font-weight="bold">Internet Checksum (16-bit 1's Complement):</text>
+  <text x="485" y="190" fill="#334155" font-size="8">1. Split message into 16-bit words.</text>
+  <text x="485" y="203" fill="#334155" font-size="8">2. Add all words using 1's complement (wrap-around carry!).</text>
+  <text x="485" y="217" fill="#334155" font-size="8">3. Checksum = 1's complement of sum. Receiver sum must be all 1s.</text>
+
+  <rect x="475" y="232" width="325" height="52" rx="4" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="485" y="248" fill="#166534" font-size="8.5" font-weight="bold">Receiver Verification in CRC:</text>
+  <text x="485" y="262" fill="#334155" font-size="8">Receiver divides incoming codeword (100100001) by G(x) (1101).</text>
+  <text x="485" y="275" fill="#15803d" font-size="8.5" font-weight="bold">If Remainder == 0 → ACCEPT! If Remainder != 0 → ERROR DETECTED!</text>
+
+  <!-- Bottom: Error Types & Standard CRC Polynomials -->
+  <rect x="35" y="300" width="780" height="125" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="300" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Standard CRC Polynomials &amp; Burst Error Detection Capabilities</text>
+
+  <text x="50" y="340" fill="#0f172a" font-size="9.5" font-weight="bold">CRC-16:</text>
+  <text x="120" y="340" fill="#1e3a8a" font-size="9" font-family="monospace">G(x) = x^16 + x^15 + x^2 + 1</text>
+  <text x="360" y="340" fill="#334155" font-size="8.5">Used in HDLC and USB. Appends 16 check bits.</text>
+
+  <text x="50" y="362" fill="#0f172a" font-size="9.5" font-weight="bold">CRC-32:</text>
+  <text x="120" y="362" fill="#1e3a8a" font-size="9" font-family="monospace">G(x) = x^32 + x^26 + x^23 + ... + 1</text>
+  <text x="380" y="362" fill="#065f46" font-size="8.5" font-weight="bold">Standard in IEEE 802.3 Ethernet FCS! Detects 100% burst errors ≤ 32 bits!</text>
+
+  <text x="50" y="386" fill="#0f172a" font-size="9.5" font-weight="bold">Burst Error Definition:</text>
+  <text x="190" y="386" fill="#334155" font-size="8.5">Length of burst is measured from first corrupted bit to last corrupted bit (even if intermediate bits are intact).</text>
+
+  <text x="50" y="410" fill="#0f172a" font-size="9.5" font-weight="bold">CRC Detection Proof:</text>
+  <text x="190" y="410" fill="#b91c1c" font-size="8.5">If polynomial has at least two terms: detects all single bits. If (x+1) is a factor: detects all odd numbers of bit errors.</text>
+</svg>

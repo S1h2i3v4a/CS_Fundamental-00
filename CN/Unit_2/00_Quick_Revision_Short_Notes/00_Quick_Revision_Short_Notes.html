@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 2: Ultra Quick Revision Short Notes (Exact 3 Pages)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 6.9pt;
+    line-height: 1.2;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 5mm 6.5mm 4mm 6.5mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-bar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 3.5px 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5px;
+  }
+  .header-title {
+    font-size: 9.2pt;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 6.5pt;
+    color: #93c5fd;
+    font-weight: 500;
+  }
+  .page-tag {
+    background: #3b82f6;
+    color: #ffffff;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 6.2pt;
+    font-weight: 700;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+  }
+  .card {
+    border: 1px solid #cbd5e1;
+    border-radius: 3.5px;
+    background: #ffffff;
+    padding: 3.5px 4.5px;
+    margin-bottom: 3.5px;
+  }
+  .card-title {
+    font-size: 7.2pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1.5px;
+    margin-bottom: 2.5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-title span {
+    font-size: 5.8pt;
+    color: #64748b;
+    font-weight: 500;
+  }
+  p, ul {
+    margin: 1.5px 0;
+    padding-left: 10px;
+  }
+  li {
+    margin-bottom: 1px;
+  }
+  strong {
+    color: #0f172a;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 0.5px 2.5px;
+    border-radius: 2px;
+    font-family: monospace;
+    font-size: 6.2pt;
+  }
+  .formula {
+    background: #eff6ff;
+    border-left: 2px solid #2563eb;
+    padding: 1.5px 4px;
+    margin: 1.5px 0;
+    font-family: monospace;
+    font-size: 6.3pt;
+    color: #1e40af;
+    font-weight: 600;
+  }
+  .formula-alert {
+    background: #fef2f2;
+    border-left: 2px solid #ef4444;
+    padding: 1.5px 4px;
+    margin: 1.5px 0;
+    font-family: monospace;
+    font-size: 6.3pt;
+    color: #991b1b;
+    font-weight: 600;
+  }
+  .formula-green {
+    background: #ecfdf5;
+    border-left: 2px solid #10b981;
+    padding: 1.5px 4px;
+    margin: 1.5px 0;
+    font-family: monospace;
+    font-size: 6.3pt;
+    color: #065f46;
+    font-weight: 600;
+  }
+  table.compact {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 5.9pt;
+    margin: 1.5px 0;
+  }
+  table.compact th, table.compact td {
+    border: 0.5px solid #cbd5e1;
+    padding: 1.2px 2.5px;
+    text-align: left;
+  }
+  table.compact th {
+    background: #f8fafc;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .footer-bar {
+    border-top: 1px solid #cbd5e1;
+    padding-top: 2px;
+    font-size: 5.6pt;
+    color: #64748b;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1: DLL, FRAMING & RANDOM ACCESS MAC ==================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">CN UNIT 2: DATA LINK LAYER &amp; MEDIUM ACCESS SUBLAYER</div>
+        <div class="header-sub">AKTU BCS603 / GATE CS — Quick Revision Cheat Sheet (Module 01 - 05)</div>
+      </div>
+      <div class="page-tag">PAGE 1 OF 3</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- DLL Foundations & Framing -->
+      <div class="card">
+        <div class="card-title">1. Data Link Layer (DLL) Foundations &amp; Framing <span>Module 01</span></div>
+        <ul>
+          <li><strong>DLL Core Responsibilities:</strong> Framing, Flow Control, Error Control, Physical Addressing (MAC), and Channel Access Control (MAC Sublayer).</li>
+          <li><strong>LLC (802.2) vs MAC:</strong> LLC handles upper protocol multiplexing &amp; flow control (medium independent). MAC handles channel access, framing &amp; contention.</li>
+          <li><strong>Framing Methods:</strong>
+            <ul>
+              <li><em>Character Count:</em> Frame header carries total byte count. Vulnerable: 1 corrupted count bit desynchronizes all subsequent frames!</li>
+              <li><em>Byte / Character Stuffing:</em> Flag byte (`0x7E`) delimits frame. If Flag occurs in payload, prefix with `ESC` (`0x1B`). If ESC in payload, prefix with `ESC`.</li>
+              <li><em>Bit Stuffing (5-Ones Rule):</em> Flag = `01111110`. Sender automatically stuffs a `0` after five consecutive `1`s (`111110`). Receiver unstuffs it.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="formula">Bit Stuffing: 011111101111110 -> 011111(0)1011111(0)10</div>
+      </div>
+
+      <!-- ALOHA Protocols -->
+      <div class="card">
+        <div class="card-title">2. Pure ALOHA vs Slotted ALOHA <span>Module 02</span></div>
+        <ul>
+          <li><strong>Pure ALOHA (Continuous):</strong> Station transmits immediately whenever data is ready.
+            <ul>
+              <li>Vulnerable Time: <code>T_vuln = 2 · T_fr</code></li>
+              <li>Poisson Throughput: <code>S = G · e^(-2G)</code></li>
+              <li>Max Throughput: <code>S_max = 1 / (2e) ≈ 18.4%</code> at <code>G = 0.5</code>.</li>
+            </ul>
+          </li>
+          <li><strong>Slotted ALOHA (Discrete Clock Slots):</strong> Station can only transmit at beginning of slot (Slot duration = <code>T_fr</code>).
+            <ul>
+              <li>Vulnerable Time: <code>T_vuln = 1 · T_fr</code> (Halved!)</li>
+              <li>Poisson Throughput: <code>S = G · e^(-G)</code></li>
+              <li>Max Throughput: <code>S_max = 1 / e ≈ 36.8%</code> at <code>G = 1.0</code> (Doubled!).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="formula-alert">AKTU Poisson: P(k) = (G^k · e^(-G)) / k! | P(0) = e^(-G) (1 slot)</div>
+      </div>
+    </div>
+
+    <!-- CSMA & Persistence Strategies -->
+    <div class="card">
+      <div class="card-title">3. Carrier Sense Multiple Access (CSMA) &amp; Persistence Strategies <span>Module 03</span></div>
+      <div class="grid-3">
+        <div>
+          <strong>1-Persistent CSMA:</strong>
+          <ul>
+            <li>Continuously senses channel.</li>
+            <li>If Idle: Transmits immediately (p=1).</li>
+            <li>If Busy: Keeps continuous listening.</li>
+            <li>High collision if 2 stations wait for busy channel to free!</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Non-Persistent CSMA:</strong>
+          <ul>
+            <li>Senses channel once.</li>
+            <li>If Idle: Transmits immediately.</li>
+            <li>If Busy: Waits random backoff time before sensing again.</li>
+            <li>Reduces collisions; wastes channel idle time. Peak ~0.8.</li>
+          </ul>
+        </div>
+        <div>
+          <strong>p-Persistent CSMA:</strong>
+          <ul>
+            <li>Used in slotted channels.</li>
+            <li>If Idle: Transmits with prob <code>p</code>; defers to next slot with prob <code>1 - p</code>.</li>
+            <li>Optimal: <code>N · p &lt; 1</code> to prevent collisions.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="formula">Collision Window: t in [0, Tp] due to propagation delay. Carrier sensing cannot see ahead of wavefront!</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- CSMA/CD -->
+      <div class="card">
+        <div class="card-title">4. CSMA with Collision Detection (CSMA/CD) <span>Module 04</span></div>
+        <ul>
+          <li><strong>Mechanism:</strong> "Listen While Talk". Transceiver checks voltage: <code>V_chan > 2 · V_tx</code> indicates collision.</li>
+          <li><strong>Collision Action:</strong> Immediately abort frame + Broadcast 32/48-bit <strong>Jam Signal</strong> + Increment <code>k</code> (collision count).</li>
+          <li><strong>Binary Exponential Backoff (BEB):</strong> Wait <code>R · Slot_Time</code> where <code>0 ≤ R ≤ 2^k - 1</code> (Max k=10; Abort at k=16).</li>
+          <li><strong>Core Derivation (64-Byte Frame):</strong>
+            <div class="formula-alert">T_t ≥ 2 · T_p  ==>  L_min = 2 · T_p · Bandwidth = 512 bits = 64 Bytes</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- CSMA/CA -->
+      <div class="card">
+        <div class="card-title">5. CSMA with Collision Avoidance (CSMA/CA) <span>Module 05</span></div>
+        <ul>
+          <li><strong>Why CSMA/CD Fails in Wireless:</strong>
+            <ul>
+              <li>Dynamic Range: Transmit power drowns received power (Tx blinds Rx).</li>
+              <li>Hidden Station Problem: A &amp; C cannot hear each other; collide at B.</li>
+              <li>Exposed Station: C refrains from sending to D due to hearing A-B.</li>
+            </ul>
+          </li>
+          <li><strong>Interframe Spaces (IFS):</strong> <code>SIFS &lt; PIFS &lt; DIFS &lt; EIFS</code> (Shortest IFS = Highest Priority; SIFS for ACK/CTS).</li>
+          <li><strong>4-Way RTS/CTS Handshake:</strong> RTS carries duration; CTS echoes it. Stations overhearing CTS set <strong>NAV</strong> countdown timer (Virtual Sensing).</li>
+        </ul>
+        <div class="formula-green">NAV = SIFS + T_CTS + SIFS + T_DATA + SIFS + T_ACK</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Computer Networks (BCS603) — Dr. Nidhi Parashar Ma'am Notes</span>
+    <span>Page 1: DLL, Framing, ALOHA &amp; CSMA Protocols</span>
+    <span>CS_Fundamental-00</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 2: CONTROLLED ACCESS, CDMA & ARQ FLOW CONTROL ==================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">CN UNIT 2: DATA LINK LAYER &amp; MEDIUM ACCESS SUBLAYER</div>
+        <div class="header-sub">AKTU BCS603 / GATE CS — Quick Revision Cheat Sheet (Module 06 - 09)</div>
+      </div>
+      <div class="page-tag">PAGE 2 OF 3</div>
+    </div>
+
+    <!-- Controlled Access & CDMA -->
+    <div class="card">
+      <div class="card-title">6. Controlled Access &amp; CDMA Channelization <span>Module 06</span></div>
+      <div class="grid-2">
+        <div>
+          <strong>Controlled Access Methods:</strong>
+          <ul>
+            <li><strong>Reservation:</strong> N bit reservation interval precedes N data frames.</li>
+            <li><strong>Polling:</strong> Primary-Secondary architecture. Poll (asks data), Select (sends data). Single point of failure at Primary.</li>
+            <li><strong>Token Passing:</strong> Special Token frame circulating in logical ring. Station holding token transmits for Token Holding Time (THT). Zero collisions!</li>
+          </ul>
+        </div>
+        <div>
+          <strong>CDMA &amp; Orthogonal Walsh Codes:</strong>
+          <ul>
+            <li>Walsh Recursive Construction: <code>W_2N = [W_N, W_N; W_N, -W_N]</code></li>
+            <li>Properties: <code>Wi · Wi = N</code> and <code>Wi · Wj = 0 (i ≠ j)</code></li>
+            <li>Data Encoding: Bit 0 = -1, Bit 1 = +1, Silent = 0. Transmitted: <code>Si = di · Wi</code>.</li>
+            <li>Channel Signal: <code>C = Σ Si</code> | Receiver Decoding: <code>di = (C · Wi) / N</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="formula">Example: C = [1, 1, -1, 3], W2 = [1, -1, 1, -1] -> C · W2 = 1 - 1 - 1 - 3 = -4 -> d2 = -4/4 = -1 (Bit 0 Decoded!)</div>
+    </div>
+
+    <!-- Flow Control & Stop-and-Wait ARQ -->
+    <div class="card">
+      <div class="card-title">7. Flow Control Foundations &amp; Stop-and-Wait ARQ Protocol <span>Module 07</span></div>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li><strong>Flow Control:</strong> Prevents fast sender from overflowing slow receiver buffer.</li>
+            <li><strong>Error Control (ARQ):</strong> Adds Timer + Retransmission + Sequence Numbers.</li>
+            <li><strong>1-Bit Sequence Numbering (0 &amp; 1):</strong> Prevents duplicate frame acceptance when ACK is lost! Receiver ACK n expects frame n.</li>
+            <li><strong>Piggybacking:</strong> Outgoing ACK combined inside outgoing data frame header.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="formula-alert">Total Time T_total = T_t + 2 · T_p  (Neglecting Tack, Tproc)</div>
+          <div class="formula">Parameter a = T_p / T_t = (d / v) / (L / Bandwidth)</div>
+          <div class="formula-green">Efficiency η = T_t / (T_t + 2 · T_p) = 1 / (1 + 2a) | Throughput = η · B</div>
+          <p><strong>Physical Impact of 'a':</strong> If a &gt;&gt; 1 (Satellite link, a=250): η drops to <code>1 / (1 + 500) ≈ 0.2%</code>! Motivates Sliding Window Pipelining.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sliding Window Protocols: GBN vs Selective Repeat -->
+    <div class="card">
+      <div class="card-title">8. Sliding Window Protocols: Go-Back-N vs Selective Repeat ARQ <span>Module 08 &amp; 09</span></div>
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>Parameter / Feature</th>
+            <th>Stop-and-Wait ARQ</th>
+            <th>Go-Back-N (GBN) ARQ</th>
+            <th>Selective Repeat (SR) ARQ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sender Window (Ws)</strong></td>
+            <td><code>1</code></td>
+            <td><code>2^m - 1</code></td>
+            <td><code>2^(m - 1)</code></td>
+          </tr>
+          <tr>
+            <td><strong>Receiver Window (Wr)</strong></td>
+            <td><code>1</code></td>
+            <td><code>1</code> (Strictly sequential)</td>
+            <td><code>2^(m - 1)</code> (Out-of-order buffer!)</td>
+          </tr>
+          <tr>
+            <td><strong>Window Sizing Proof</strong></td>
+            <td>Ws + Wr ≤ 2^m → 1 + 1 ≤ 2</td>
+            <td><code>Ws + 1 ≤ 2^m  ==>  Ws ≤ 2^m - 1</code></td>
+            <td><code>Ws + Wr ≤ 2^m  ==>  2·Ws ≤ 2^m  ==>  Ws ≤ 2^(m-1)</code></td>
+          </tr>
+          <tr>
+            <td><strong>Out-of-Order Buffering</strong></td>
+            <td>No</td>
+            <td><strong>No</strong> (Subsequent frames discarded!)</td>
+            <td><strong>Yes</strong> (Stored in reassembly buffer)</td>
+          </tr>
+          <tr>
+            <td><strong>Acknowledgment Type</strong></td>
+            <td>Individual ACK</td>
+            <td><strong>Cumulative ACK</strong> (ACK n confirms up to n-1)</td>
+            <td><strong>Individual ACK</strong> + <strong>NAK</strong> (Selective Reject)</td>
+          </tr>
+          <tr>
+            <td><strong>Retransmission Scope</strong></td>
+            <td>1 frame</td>
+            <td><strong>All N frames</strong> in window (Go-Back penalty)</td>
+            <td><strong>Only the damaged / lost frame</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Number of Timers</strong></td>
+            <td>1 timer</td>
+            <td>1 timer (For oldest unacknowledged frame Sf)</td>
+            <td>Multiple independent timers (1 per frame)</td>
+          </tr>
+          <tr>
+            <td><strong>Efficiency (η)</strong></td>
+            <td><code>1 / (1 + 2a)</code></td>
+            <td><code>Ws / (1 + 2a)</code> (for Ws &lt; 1+2a; 100% if Ws ≥ 1+2a)</td>
+            <td><code>Ws / (1 + 2a)</code> (High utilization even on lossy link)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="grid-2">
+        <div class="formula">GBN 100% Efficiency Condition: Ws ≥ 1 + 2a ==> m ≥ ⌈log2(2 + 2a)⌉</div>
+        <div class="formula-alert">Why Ws ≤ 2^m - 1? If Ws = 2^m and all ACKs lost, sender retransmits old window; receiver cannot distinguish old duplicate from new frame!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Computer Networks (BCS603) — Dr. Nidhi Parashar Ma'am Notes</span>
+    <span>Page 2: Controlled Access, CDMA, Flow Control &amp; Sliding Window ARQ</span>
+    <span>CS_Fundamental-00</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 3: ERROR CONTROL, LAN STANDARDS & L2 DEVICES ==================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">CN UNIT 2: DATA LINK LAYER &amp; MEDIUM ACCESS SUBLAYER</div>
+        <div class="header-sub">AKTU BCS603 / GATE CS — Quick Revision Cheat Sheet (Module 10 - 14)</div>
+      </div>
+      <div class="page-tag">PAGE 3 OF 3</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Error Detection & CRC -->
+      <div class="card">
+        <div class="card-title">9. Error Detection: Parity, Checksum &amp; CRC <span>Module 10</span></div>
+        <ul>
+          <li><strong>Error Types:</strong> Single-Bit vs Burst Error (Length = first to last flipped bit index).</li>
+          <li><strong>Parity:</strong> 1D parity fails on even-bit flips. 2D Parity detects all 1, 2, 3-bit errors; corrects 1-bit error via row-column intersection.</li>
+          <li><strong>Internet Checksum:</strong> 16-bit 1's complement sum. Wrap-around carry added to LSB. Final result complemented. Receiver sum must be all 1s.</li>
+          <li><strong>Cyclic Redundancy Check (CRC):</strong> Modulo-2 XOR division.
+            <ul>
+              <li>Degree of G(x) is <code>r</code>. Append <code>r</code> zeros to data.</li>
+              <li>Divide by G(x) using Modulo-2 arithmetic.</li>
+              <li>Remainder <code>R</code> is CRC (FCS). Codeword = Data + R.</li>
+              <li>Receiver checks if <code>Codeword mod G(x) == 0</code>.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="formula-green">CRC-32: Used in 802.3 Ethernet FCS. Detects 100% burst errors ≤ 32 bits!</div>
+      </div>
+
+      <!-- Error Correction & Hamming Code -->
+      <div class="card">
+        <div class="card-title">10. Error Correction &amp; Hamming Code <span>Module 11</span></div>
+        <ul>
+          <li><strong>Hamming Distance (d_min):</strong>
+            <ul>
+              <li>To detect <code>d</code> errors: <code>d_min ≥ d + 1</code></li>
+              <li>To correct <code>t</code> errors: <code>d_min ≥ 2t + 1</code></li>
+            </ul>
+          </li>
+          <li><strong>Redundancy Formula:</strong> <code>2^r ≥ m + r + 1</code> (For m=4 bits data → r=3 bits → Hamming (7, 4) Code).</li>
+          <li><strong>Bit Positions:</strong> Parity at powers of 2 (1, 2, 4). Data at 3, 5, 6, 7.
+            <div class="formula">p1 = d1 ⊕ d2 ⊕ d4 | p2 = d1 ⊕ d3 ⊕ d4 | p4 = d2 ⊕ d3 ⊕ d4</div>
+          </li>
+          <li><strong>Syndrome Word (S4 S2 S1):</strong>
+            <div class="formula-alert">S1 = b1⊕b3⊕b5⊕b7 | S2 = b2⊕b3⊕b6⊕b7 | S4 = b4⊕b5⊕b6⊕b7</div>
+            Value of (S4 S2 S1) directly gives the erroneous bit index! Invert to correct.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- IEEE 802.3 Ethernet Standards -->
+    <div class="card">
+      <div class="card-title">11. IEEE 802.3 Ethernet Frame &amp; Standards Evolution <span>Module 12</span></div>
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>Preamble</th>
+            <th>SFD</th>
+            <th>Dest MAC</th>
+            <th>Src MAC</th>
+            <th>Length/Type</th>
+            <th>Data Payload (LLC PDU)</th>
+            <th>FCS (CRC-32)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>7 Bytes (1010..)</td>
+            <td>1 Byte (10101011)</td>
+            <td>6 Bytes (48b)</td>
+            <td>6 Bytes (48b)</td>
+            <td>2 Bytes (Type/Len)</td>
+            <td><strong>46 to 1500 Bytes</strong> (Padding if &lt;46B)</td>
+            <td>4 Bytes</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li><strong>Frame Limits:</strong> Minimum = 64 Bytes (512 bits); Maximum = 1518 Bytes.</li>
+            <li><strong>MAC Address (48 bits):</strong> First 24 bits = OUI (Vendor ID); Last 24 bits = NIC serial. Broadcast = <code>FF:FF:FF:FF:FF:FF</code>.</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><strong>Ethernet Family:</strong> 10Base5 (Thick), 10Base2 (Thin), 10Base-T (Twisted pair). Fast Ethernet (100 Mbps, 802.3u). Gigabit Ethernet (1 Gbps, 802.3z). 10G Ethernet (802.3ae, Full-Duplex only, No CSMA/CD).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Token Ring & FDDI -->
+      <div class="card">
+        <div class="card-title">12. Token Ring (802.5) &amp; FDDI <span>Module 13</span></div>
+        <ul>
+          <li><strong>IEEE 802.5 Token Ring:</strong> Physical star, logical ring via MSAU. Token = SD (1B) + AC (1B) + ED (1B). Active Monitor clears orphan frames &amp; lost tokens. Early Token Release in 16 Mbps.</li>
+          <li><strong>FDDI (100 Mbps Optical Fiber):</strong>
+            <ul>
+              <li>Dual Counter-Rotating Ring (Primary CW + Secondary CCW).</li>
+              <li>Self-Healing: Cable cut triggers wrap-around into 1 single ring!</li>
+              <li>Timed Token Protocol: <code>THT = max(0, TTRT - TRT)</code>.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bridges, Switches & STP -->
+      <div class="card">
+        <div class="card-title">13. Bridges, Switches &amp; STP (802.1D) <span>Module 14</span></div>
+        <ul>
+          <li><strong>Collision vs Broadcast Domains:</strong> Switch splits collision domains (1 per port); preserves 1 broadcast domain.</li>
+          <li><strong>Transparent Bridge Learning:</strong> Learn (Source MAC), Forward/Filter (Dest MAC), Flood (Unknown/Broadcast).</li>
+          <li><strong>Spanning Tree Protocol (STP 802.1D):</strong> Prevents broadcast storms &amp; loops.
+            <ul>
+              <li>1. Elect Root Bridge (Lowest Bridge ID: Priority + MAC).</li>
+              <li>2. Select Root Port (RP) per non-root bridge (Lowest path cost).</li>
+              <li>3. Select Designated Port (DP) per segment.</li>
+              <li>4. Place redundant ports in <strong>BLOCKING</strong> state!</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Computer Networks (BCS603) — Dr. Nidhi Parashar Ma'am Notes</span>
+    <span>Page 3: Error Detection, Hamming FEC, Ethernet Standards &amp; STP</span>
+    <span>CS_Fundamental-00</span>
+  </div>
+</div>
+
+</body>
+</html>

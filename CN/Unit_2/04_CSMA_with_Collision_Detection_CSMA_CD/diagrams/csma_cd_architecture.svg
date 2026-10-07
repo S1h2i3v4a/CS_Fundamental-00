@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 430" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cdGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+    <linearGradient id="jamGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#991b1b"/><stop offset="100%" stop-color="#ef4444"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="430" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">CSMA/CD: "Listen While Talk", Condition Tt ≥ 2Tp &amp; Minimum Frame Size Derivation</text>
+
+  <!-- Left: Listen While Talk Flow & Jam Signal -->
+  <rect x="35" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="375" height="28" rx="6" fill="url(#cdGrad)"/>
+  <text x="222" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">1. Collision Detection Operation</text>
+
+  <text x="50" y="100" fill="#1e3a8a" font-size="10" font-weight="bold">• Core Principle: "Listen While Transmit"</text>
+  <text x="50" y="116" fill="#334155" font-size="8.5">Station continuously compares transmitted signal with received voltage.</text>
+
+  <rect x="50" y="126" width="345" height="40" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="222" y="142" fill="#1e40af" font-size="9" font-weight="bold" text-anchor="middle">Normal Signal: V_channel ≈ V_trans</text>
+  <text x="222" y="156" fill="#991b1b" font-size="9" font-weight="bold" text-anchor="middle">Collision Detected: V_channel &gt; 2 · V_trans (Peak spike!)</text>
+
+  <text x="50" y="182" fill="#0f172a" font-size="9" font-weight="bold">• Action on Collision Detection:</text>
+  <text x="65" y="198" fill="#ef4444" font-size="8.5" font-weight="bold">1. Immediately ABORT transmission (Saves bandwidth!).</text>
+  <text x="65" y="212" fill="#ef4444" font-size="8.5" font-weight="bold">2. Broadcast a 32/48-bit JAM SIGNAL to warn all stations.</text>
+  <text x="65" y="226" fill="#334155" font-size="8.5">3. Increment collision counter k (k = k + 1).</text>
+  <text x="65" y="240" fill="#334155" font-size="8.5">4. Execute Binary Exponential Backoff algorithm.</text>
+  <text x="65" y="254" fill="#334155" font-size="8.5">5. If k &gt; 15: Give up (Report transmission error to upper layer).</text>
+
+  <text x="50" y="278" fill="#166534" font-size="8.5" font-weight="bold">Saves immense channel time compared to sending full broken frame!</text>
+
+  <!-- Right: Condition Tt ≥ 2Tp Derivation -->
+  <rect x="440" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#ef4444" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="55" width="375" height="28" rx="6" fill="url(#jamGrad)"/>
+  <text x="627" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">2. Mathematical Condition: Tt ≥ 2 · Tp</text>
+
+  <rect x="455" y="92" width="345" height="42" rx="4" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="627" y="110" fill="#991b1b" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Tt ≥ 2 · Tp</text>
+  <text x="627" y="125" fill="#7f1d1d" font-size="8.5" text-anchor="middle">Transmission Delay MUST be at least Twice Propagation Delay!</text>
+
+  <text x="455" y="150" fill="#0f172a" font-size="9" font-weight="bold">• The Worst-Case Collision Detection Scenario:</text>
+  <text x="455" y="166" fill="#334155" font-size="8.5">1. Host A transmits at $t = 0$.</text>
+  <text x="455" y="180" fill="#334155" font-size="8.5">2. At t = Tp - ε, signal reaches far-end Host B.</text>
+  <text x="455" y="194" fill="#334155" font-size="8.5">3. B transmits; collision occurs at B at t ≈ Tp.</text>
+  <text x="455" y="208" fill="#334155" font-size="8.5">4. Collision noise takes another Tp to travel back to Host A.</text>
+  <text x="455" y="222" fill="#991b1b" font-size="8.5" font-weight="bold">5. Host A detects collision at t = 2 · Tp (Round Trip Time)!</text>
+
+  <rect x="455" y="235" width="345" height="45" rx="4" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="627" y="252" fill="#9a3412" font-size="9.5" font-weight="bold" font-family="monospace" text-anchor="middle">L_min = 2 · Tp · Bandwidth (Bits)</text>
+  <text x="627" y="268" fill="#7c2d12" font-size="8" text-anchor="middle">If frame finishes transmitting before 2Tp, sender CANNOT detect collision!</text>
+
+  <!-- Bottom: Binary Exponential Backoff Algorithm -->
+  <rect x="35" y="300" width="780" height="115" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="300" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Binary Exponential Backoff Algorithm (BEB) in Ethernet (IEEE 802.3)</text>
+
+  <text x="50" y="340" fill="#0f172a" font-size="9.5" font-weight="bold">Backoff Formula:</text>
+  <text x="160" y="340" fill="#1e3a8a" font-size="9" font-family="monospace">Waiting Time = R · Slot_Time</text>
+  <text x="360" y="340" fill="#334155" font-size="8.5">where R is chosen uniformly at random from range: 0 ≤ R ≤ 2^k - 1</text>
+
+  <text x="50" y="362" fill="#0f172a" font-size="9.5" font-weight="bold">Range Scaling:</text>
+  <text x="160" y="362" fill="#334155" font-size="8.5">1st Collision (k=1): R ∈ {0, 1}. 2nd Collision (k=2): R ∈ {0, 1, 2, 3}. 10th Collision (k=10): R ∈ {0 ... 1023}.</text>
+
+  <text x="50" y="385" fill="#0f172a" font-size="9.5" font-weight="bold">Ethernet Slot Time:</text>
+  <text x="180" y="385" fill="#065f46" font-size="9">In 10 Mbps Ethernet: Slot Time = 51.2 μs = 512 bit times = <tspan font-weight="bold">64 Bytes (Minimum Frame Size!)</tspan></text>
+</svg>

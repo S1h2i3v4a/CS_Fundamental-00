@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#818cf8"/></linearGradient>
+    <linearGradient id="fddiGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0d9488"/><stop offset="100%" stop-color="#2dd4bf"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="440" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Token Ring (IEEE 802.5) &amp; FDDI Dual Counter-Rotating Self-Healing Architecture</text>
+
+  <!-- Left: Token Ring Architecture -->
+  <rect x="35" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#4f46e5" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="375" height="28" rx="6" fill="url(#ringGrad)"/>
+  <text x="222" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">1. IEEE 802.5 Token Ring &amp; MSAU</text>
+
+  <!-- Ring illustration -->
+  <ellipse cx="160" cy="155" rx="75" ry="55" fill="none" stroke="#4f46e5" stroke-width="2.5" stroke-dasharray="4"/>
+  <!-- Stations -->
+  <circle cx="160" cy="100" r="14" fill="#4f46e5"/><text x="160" y="104" fill="#fff" font-size="8" font-weight="bold" text-anchor="middle">S1 (Mon)</text>
+  <circle cx="235" cy="155" r="14" fill="#e0e7ff" stroke="#4f46e5"/><text x="235" y="159" fill="#312e81" font-size="8.5" text-anchor="middle">S2</text>
+  <circle cx="160" cy="210" r="14" fill="#e0e7ff" stroke="#4f46e5"/><text x="160" y="214" fill="#312e81" font-size="8.5" text-anchor="middle">S3</text>
+  <circle cx="85" cy="155" r="14" fill="#e0e7ff" stroke="#4f46e5"/><text x="85" y="159" fill="#312e81" font-size="8.5" text-anchor="middle">S4</text>
+
+  <!-- Circulating Token -->
+  <rect x="185" y="115" width="40" height="16" rx="3" fill="#f59e0b"/><text x="205" y="126" fill="#fff" font-size="7.5" font-weight="bold" text-anchor="middle">TOKEN</text>
+
+  <!-- Ring notes -->
+  <rect x="255" y="95" width="145" height="120" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="262" y="110" fill="#0f172a" font-size="8" font-weight="bold">Token Format (3B):</text>
+  <text x="262" y="124" fill="#334155" font-size="7.5">SD (1B) + AC (1B) + ED (1B)</text>
+  <text x="262" y="142" fill="#4f46e5" font-size="8" font-weight="bold">Active Monitor (S1):</text>
+  <text x="262" y="156" fill="#334155" font-size="7.5">• Prevents orphaned frames.</text>
+  <text x="262" y="168" fill="#334155" font-size="7.5">• Regenerates lost token.</text>
+  <text x="262" y="180" fill="#334155" font-size="7.5">• Sets Monitor bit in AC.</text>
+  <text x="262" y="196" fill="#166534" font-size="7.5" font-weight="bold">Speed: 4 / 16 Mbps</text>
+
+  <rect x="45" y="225" width="355" height="55" rx="4" fill="#eef2ff" stroke="#c7d2fe"/>
+  <text x="55" y="240" fill="#312e81" font-size="8.5" font-weight="bold">Early Token Release (ETR):</text>
+  <text x="55" y="254" fill="#334155" font-size="8">In 16 Mbps mode, station releases token immediately after transmitting frame</text>
+  <text x="55" y="266" fill="#334155" font-size="8">without waiting for frame header to travel around the entire ring.</text>
+
+  <!-- Right: FDDI Dual Counter-Rotating Ring -->
+  <rect x="440" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#0d9488" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="55" width="375" height="28" rx="6" fill="url(#fddiGrad)"/>
+  <text x="627" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">2. FDDI Dual Counter-Rotating Self-Healing Ring</text>
+
+  <!-- Primary Outer Ring (Clockwise) -->
+  <ellipse cx="570" cy="155" rx="80" ry="55" fill="none" stroke="#0d9488" stroke-width="2"/>
+  <text x="570" y="90" fill="#0d9488" font-size="7.5" font-weight="bold" text-anchor="middle">Primary Ring (100 Mbps CW Data)</text>
+
+  <!-- Secondary Inner Ring (Counter-Clockwise) -->
+  <ellipse cx="570" cy="155" rx="55" ry="38" fill="none" stroke="#f97316" stroke-width="2" stroke-dasharray="3"/>
+  <text x="570" y="130" fill="#c2410c" font-size="7.5" font-weight="bold" text-anchor="middle">Secondary Ring (Backup CCW)</text>
+
+  <!-- Stations DAS -->
+  <circle cx="570" cy="100" r="10" fill="#0f172a"/><text x="570" y="103" fill="#fff" font-size="7" text-anchor="middle">A</text>
+  <circle cx="650" cy="155" r="10" fill="#0f172a"/><text x="650" y="158" fill="#fff" font-size="7" text-anchor="middle">B</text>
+  <circle cx="570" cy="210" r="10" fill="#0f172a"/><text x="570" y="213" fill="#fff" font-size="7" text-anchor="middle">C</text>
+  <circle cx="490" cy="155" r="10" fill="#0f172a"/><text x="490" y="158" fill="#fff" font-size="7" text-anchor="middle">D</text>
+
+  <!-- Fault break between B and C -->
+  <line x1="615" y1="180" x2="625" y2="190" stroke="#ef4444" stroke-width="3"/>
+  <line x1="625" y1="180" x2="615" y2="190" stroke="#ef4444" stroke-width="3"/>
+  <text x="645" y="188" fill="#ef4444" font-size="7.5" font-weight="bold">Cable Cut!</text>
+
+  <!-- Wrap around loops -->
+  <path d="M 648 165 C 655 175 640 180 635 160" fill="none" stroke="#ef4444" stroke-width="2"/>
+  <path d="M 578 210 C 585 220 595 210 580 200" fill="none" stroke="#ef4444" stroke-width="2"/>
+
+  <rect x="670" y="95" width="135" height="120" rx="4" fill="#f0fdfa" stroke="#99f6e4"/>
+  <text x="678" y="110" fill="#0f766e" font-size="8" font-weight="bold">Self-Healing Wrap:</text>
+  <text x="678" y="124" fill="#334155" font-size="7.5">When cable snaps, stations</text>
+  <text x="678" y="136" fill="#334155" font-size="7.5">B and C wrap primary ring</text>
+  <text x="678" y="148" fill="#334155" font-size="7.5">into secondary ring!</text>
+  <text x="678" y="164" fill="#0f766e" font-size="8" font-weight="bold">Forms 1 Big Single Ring</text>
+  <text x="678" y="176" fill="#334155" font-size="7.5">Network stays 100% alive!</text>
+  <text x="678" y="196" fill="#0d9488" font-size="7.5" font-weight="bold">Span: 200 km, 1000 Stns</text>
+
+  <rect x="450" y="225" width="355" height="55" rx="4" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="460" y="240" fill="#9a3412" font-size="8.5" font-weight="bold">Timed Token Protocol in FDDI:</text>
+  <text x="460" y="254" fill="#334155" font-size="8">TTRT (Target Token Rotation Time) negotiated by stations.</text>
+  <text x="460" y="266" fill="#334155" font-size="8">Token Holding Time: THT = TTRT - TRT (Guarantees Real-time voice bandwidth!).</text>
+
+  <!-- Bottom: Master Comparison Table -->
+  <rect x="35" y="300" width="780" height="125" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="300" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Comparative Architecture: Token Bus (802.4) vs Token Ring (802.5) vs FDDI</text>
+
+  <text x="50" y="340" fill="#0f172a" font-size="9" font-weight="bold">Token Bus (802.4):</text>
+  <text x="160" y="340" fill="#334155" font-size="8.5">Physical Bus, Logical Ring. Stations ordered by descending numerical address. Complex ring maintenance.</text>
+
+  <text x="50" y="362" fill="#0f172a" font-size="9" font-weight="bold">Token Ring (802.5):</text>
+  <text x="160" y="362" fill="#334155" font-size="8.5">Physical Star / Logical Ring via MSAU. Token captured by setting T bit in Access Control byte. Monitored by Active Monitor.</text>
+
+  <text x="50" y="385" fill="#0f172a" font-size="9" font-weight="bold">FDDI (ANSI X3T9.5):</text>
+  <text x="160" y="385" fill="#0d9488" font-size="8.5" font-weight="bold">Dual Counter-Rotating Fiber Rings. 100 Mbps. 4B/5B block coding. Self-healing wrap-around on fiber rupture.</text>
+
+  <text x="50" y="410" fill="#0f172a" font-size="9" font-weight="bold">Efficiency Law:</text>
+  <text x="160" y="410" fill="#1e3a8a" font-size="8.5" font-family="monospace">FDDI Token Holding Time: THT = max(0, TTRT - TRT)  |  Efficiency η = THT / TTRT</text>
+</svg>

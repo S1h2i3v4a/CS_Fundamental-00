@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="srGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="440" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Selective Repeat ARQ: Independent Buffering, NAK Retransmission &amp; Window Sizing Proof</text>
+
+  <!-- Left: Sender and Receiver Windows with Out-of-Order Buffering -->
+  <rect x="35" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#059669" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="375" height="28" rx="6" fill="url(#srGrad)"/>
+  <text x="222" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">1. Window Architecture (m = 3 bits → Ws = Wr = 4)</text>
+
+  <!-- Sender Window -->
+  <text x="50" y="102" fill="#0f172a" font-size="9.5" font-weight="bold">Sender Window (Ws = 2^(3-1) = 4):</text>
+  <g transform="translate(50, 110)">
+    <rect x="0" y="0" width="32" height="25" fill="#e2e8f0" stroke="#94a3b8"/><text x="16" y="16" font-size="9" text-anchor="middle">0</text>
+    <rect x="32" y="0" width="32" height="25" fill="#e2e8f0" stroke="#94a3b8"/><text x="48" y="16" font-size="9" text-anchor="middle">1</text>
+    <!-- Window of 4 frames -->
+    <rect x="64" y="0" width="128" height="25" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+    <text x="80" y="16" font-size="9" font-weight="bold" fill="#047857" text-anchor="middle">2 (Retx)</text>
+    <text x="112" y="16" font-size="9" fill="#065f46" text-anchor="middle">3 (Ack)</text>
+    <text x="144" y="16" font-size="9" fill="#065f46" text-anchor="middle">4 (Ack)</text>
+    <text x="176" y="16" font-size="9" fill="#065f46" text-anchor="middle">5 (Sent)</text>
+    <rect x="192" y="0" width="32" height="25" fill="#ffffff" stroke="#94a3b8"/><text x="208" y="16" font-size="9" text-anchor="middle">6</text>
+    <rect x="224" y="0" width="32" height="25" fill="#ffffff" stroke="#94a3b8"/><text x="240" y="16" font-size="9" text-anchor="middle">7</text>
+  </g>
+
+  <!-- Receiver Window (Size = 4) -->
+  <text x="50" y="168" fill="#0f172a" font-size="9.5" font-weight="bold">Receiver Window (Wr = 4, Has Out-of-Order Buffer):</text>
+  <g transform="translate(50, 178)">
+    <rect x="0" y="0" width="32" height="25" fill="#e2e8f0" stroke="#94a3b8"/><text x="16" y="16" font-size="9" text-anchor="middle">0</text>
+    <rect x="32" y="0" width="32" height="25" fill="#e2e8f0" stroke="#94a3b8"/><text x="48" y="16" font-size="9" text-anchor="middle">1</text>
+    <!-- Window of 4 frames -->
+    <rect x="64" y="0" width="128" height="25" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="80" y="16" font-size="8.5" font-weight="bold" fill="#b45309" text-anchor="middle">2 (MISS)</text>
+    <text x="112" y="16" font-size="8.5" fill="#15803d" text-anchor="middle">3 (Buf)</text>
+    <text x="144" y="16" font-size="8.5" fill="#15803d" text-anchor="middle">4 (Buf)</text>
+    <text x="176" y="16" font-size="8.5" fill="#b45309" text-anchor="middle">5 (Wait)</text>
+  </g>
+
+  <rect x="50" y="232" width="345" height="50" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="60" y="248" fill="#065f46" font-size="8.5" font-weight="bold">• Key Architectural Advantage:</text>
+  <text x="60" y="262" fill="#334155" font-size="8">Frames 3 &amp; 4 are STORED in Receiver Buffer, NOT discarded!</text>
+  <text x="60" y="274" fill="#047857" font-size="8">Sender ONLY retransmits the missing Frame 2 (Zero waste!).</text>
+
+  <!-- Right: Retransmission Timeline & NAK -->
+  <rect x="440" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#d97706" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="55" width="375" height="28" rx="6" fill="#d97706"/>
+  <text x="627" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">2. Timeline: NAK 2 &amp; Selective Retransmission</text>
+
+  <!-- Timeline -->
+  <line x1="475" y1="95" x2="475" y2="280" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="575" y1="95" x2="575" y2="280" stroke="#94a3b8" stroke-width="2"/>
+  <text x="475" y="92" fill="#0f172a" font-size="8.5" font-weight="bold" text-anchor="middle">Tx</text>
+  <text x="575" y="92" fill="#0f172a" font-size="8.5" font-weight="bold" text-anchor="middle">Rx</text>
+
+  <line x1="475" y1="102" x2="575" y2="118" stroke="#10b981" stroke-width="1.5"/><text x="525" y="108" fill="#10b981" font-size="7">Frame 0 (OK)</text>
+  <line x1="475" y1="120" x2="575" y2="136" stroke="#10b981" stroke-width="1.5"/><text x="525" y="126" fill="#10b981" font-size="7">Frame 1 (OK)</text>
+  <!-- Frame 2 lost -->
+  <line x1="475" y1="138" x2="530" y2="148" stroke="#ef4444" stroke-width="1.5"/><text x="535" y="152" fill="#ef4444" font-size="9" font-weight="bold">×</text>
+  <text x="505" y="142" fill="#ef4444" font-size="7">Frame 2 LOST</text>
+  <!-- Frame 3 arrives -->
+  <line x1="475" y1="156" x2="575" y2="172" stroke="#0284c7" stroke-width="1.5"/><text x="525" y="162" fill="#0284c7" font-size="7">Frame 3 (Buffered)</text>
+  <!-- Receiver sends NAK 2 immediately -->
+  <line x1="575" y1="175" x2="475" y2="195" stroke="#dc2626" stroke-width="1.8"/><text x="525" y="183" fill="#dc2626" font-size="7.5" font-weight="bold">NAK 2 (Selective Reject!)</text>
+
+  <!-- Sender retransmits ONLY Frame 2 -->
+  <line x1="475" y1="205" x2="575" y2="225" stroke="#16a34a" stroke-width="2"/><text x="525" y="213" fill="#16a34a" font-size="7.5" font-weight="bold">Re-send ONLY Frame 2</text>
+  <line x1="575" y1="230" x2="475" y2="250" stroke="#059669" stroke-width="1.5"/><text x="525" y="238" fill="#059669" font-size="7">ACK 5 (Delivers 2, 3, 4)</text>
+
+  <rect x="590" y="95" width="215" height="185" rx="4" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="600" y="112" fill="#92400e" font-size="8.5" font-weight="bold">• Selective Repeat Merits:</text>
+  <text x="600" y="128" fill="#334155" font-size="8">1. Receiver buffers out-of-order</text>
+  <text x="600" y="141" fill="#334155" font-size="8">frames; no unnecessary discards.</text>
+  <text x="600" y="156" fill="#334155" font-size="8">2. Immediate NAK triggers quick</text>
+  <text x="600" y="169" fill="#334155" font-size="8">retransmission before timer expiry.</text>
+  <text x="600" y="186" fill="#991b1b" font-size="8.5" font-weight="bold">• Trade-off / Complexity:</text>
+  <text x="600" y="200" fill="#334155" font-size="8">Requires independent timer per frame</text>
+  <text x="600" y="213" fill="#334155" font-size="8">and sorting reassembly buffers at</text>
+  <text x="600" y="226" fill="#334155" font-size="8">the receiver side.</text>
+
+  <!-- Bottom: Window Sizing Proof & Protocol Comparison Table -->
+  <rect x="35" y="300" width="780" height="125" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="300" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Mathematical Proof: Why Ws = Wr = 2^(m-1)? (AKTU Core Exam Derivation)</text>
+
+  <text x="50" y="340" fill="#0f172a" font-size="9.5" font-weight="bold">Proof (Ws + Wr ≤ 2^m):</text>
+  <text x="195" y="340" fill="#334155" font-size="8.5">For no overlap between old and new sequence numbers: Window_Sender + Window_Receiver ≤ Total Sequences = 2^m.</text>
+  <text x="195" y="354" fill="#334155" font-size="8.5">Since receiver must buffer up to Ws frames to avoid buffer overflow, we choose Ws = Wr. Therefore: 2 · Ws ≤ 2^m → Ws ≤ 2^(m-1).</text>
+
+  <text x="50" y="380" fill="#0f172a" font-size="9.5" font-weight="bold">Counter-Example (Ws &gt; 2^(m-1)):</text>
+  <text x="215" y="380" fill="#dc2626" font-size="8.5">If m=2 (sequences 0,1,2,3) and Ws=Wr=3: Sender transmits 0,1,2. Receiver accepts all and advances window to {3, 0, 1}.</text>
+  <text x="215" y="394" fill="#dc2626" font-size="8.5">If all ACKs are lost, sender retransmits old Frame 0. Receiver window contains 0 (as NEW frame)! Overlap disaster occurs!</text>
+
+  <text x="50" y="416" fill="#0f172a" font-size="9.5" font-weight="bold">Master Rule:</text>
+  <text x="140" y="416" fill="#065f46" font-size="9" font-weight="bold">Stop-and-Wait: Ws=1, Wr=1 | Go-Back-N: Ws=2^m - 1, Wr=1 | Selective Repeat: Ws = Wr = 2^(m-1)</text>
+</svg>

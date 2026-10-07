@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 2: Controlled Access & Channelization Protocols (Reservation, Polling, Token & CDMA)</title>
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-top: 30px; }
+h2 { color: #1e3a8a; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin-top: 24px; }
+h3 { color: #1e40af; margin-top: 18px; }
+h4 { color: #334155; margin-top: 14px; }
+p, li { font-size: 14.5px; }
+code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13.5px; }
+pre { background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px; }
+th, td { border: 1px solid #cbd5e1; padding: 9px 12px; text-align: left; }
+th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f1f5f9; }
+blockquote { border-left: 4px solid #2563eb; margin: 16px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; }
+.diagram-container { text-align: center; margin: 25px 0; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-red { background: #fee2e2; color: #991b1b; }
+.formula-box { background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 6px; padding: 14px; margin: 16px 0; }
+
+</style>
+</head>
+<body>
+
+<h1>Module 06: Controlled Access & Channelization Protocols</h1>
+<p class="badge badge-blue">Unit 2: Data Link Layer & MAC Sublayer</p>
+<p class="badge badge-green">Collision-Free Protocols & CDMA</p>
+<p>Comprehensive coverage of collision-free access (Reservation, Polling, Token Passing) and channelization methods (FDMA, TDMA, CDMA) with Walsh matrix mathematical proofs and solved numericals.</p>
+
+<div class="diagram-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ctrlGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4338ca"/><stop offset="100%" stop-color="#6366f1"/></linearGradient>
+    <linearGradient id="cdmaGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="440" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Controlled Access &amp; Channelization: Reservation, Polling, Token Passing &amp; CDMA Walsh Codes</text>
+
+  <!-- Left: Controlled Access (Reservation, Polling, Token) -->
+  <rect x="35" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#4338ca" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="375" height="28" rx="6" fill="url(#ctrlGrad)"/>
+  <text x="222" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">1. Controlled Access: Collision-Free Methods</text>
+
+  <!-- Method 1: Polling -->
+  <text x="50" y="102" fill="#4338ca" font-size="9.5" font-weight="bold">A. Polling (Primary-Secondary Master/Slave):</text>
+  <rect x="50" y="112" width="60" height="22" rx="3" fill="#1e293b"/><text x="80" y="127" fill="#fff" font-size="8.5" font-weight="bold" text-anchor="middle">Primary</text>
+  <line x1="110" y1="123" x2="170" y2="123" stroke="#4338ca" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="140" y="118" fill="#4338ca" font-size="7.5" text-anchor="middle">POLL / SELECT</text>
+  <rect x="175" y="112" width="60" height="22" rx="3" fill="#e0e7ff" stroke="#4338ca"/><text x="205" y="127" fill="#312e81" font-size="8.5" text-anchor="middle">Secondary 1</text>
+  <rect x="245" y="112" width="60" height="22" rx="3" fill="#e0e7ff" stroke="#4338ca"/><text x="275" y="127" fill="#312e81" font-size="8.5" text-anchor="middle">Secondary 2</text>
+
+  <!-- Method 2: Token Passing -->
+  <text x="50" y="155" fill="#4338ca" font-size="9.5" font-weight="bold">B. Token Passing (Logical Ring Architecture):</text>
+  <circle cx="100" cy="190" r="14" fill="#e0e7ff" stroke="#4338ca"/><text x="100" y="194" fill="#312e81" font-size="8.5" text-anchor="middle">S1</text>
+  <circle cx="170" cy="190" r="14" fill="#e0e7ff" stroke="#4338ca"/><text x="170" y="194" fill="#312e81" font-size="8.5" text-anchor="middle">S2</text>
+  <circle cx="240" cy="190" r="14" fill="#e0e7ff" stroke="#4338ca"/><text x="240" y="194" fill="#312e81" font-size="8.5" text-anchor="middle">S3</text>
+  <circle cx="310" cy="190" r="14" fill="#e0e7ff" stroke="#4338ca"/><text x="310" y="194" fill="#312e81" font-size="8.5" text-anchor="middle">S4</text>
+  <path d="M 115 190 Q 205 160 295 190" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3"/>
+  <rect x="185" y="165" width="40" height="15" rx="3" fill="#f59e0b"/><text x="205" y="176" fill="#fff" font-size="7.5" font-weight="bold" text-anchor="middle">TOKEN</text>
+  <text x="205" y="222" fill="#334155" font-size="8" text-anchor="middle">Station holding TOKEN transmits for Token Hold Time (THT).</text>
+
+  <rect x="50" y="235" width="345" height="45" rx="4" fill="#eef2ff" stroke="#c7d2fe"/>
+  <text x="60" y="250" fill="#312e81" font-size="8.5" font-weight="bold">Guaranteed Zero Collisions &amp; Deterministic Delay!</text>
+  <text x="60" y="265" fill="#475569" font-size="8">Trade-off: High overhead of polling/token management at low load.</text>
+
+  <!-- Right: CDMA & Orthogonal Walsh Codes -->
+  <rect x="440" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#059669" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="55" width="375" height="28" rx="6" fill="url(#cdmaGrad)"/>
+  <text x="627" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">2. CDMA &amp; Orthogonal Walsh Codes</text>
+
+  <text x="455" y="102" fill="#065f46" font-size="9.5" font-weight="bold">Walsh Matrix Generation (N = 4):</text>
+  <rect x="455" y="112" width="345" height="52" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="465" y="126" fill="#065f46" font-size="8.5" font-family="monospace">W1 = [+1, +1, +1, +1]   W2 = [+1, -1, +1, -1]</text>
+  <text x="465" y="142" fill="#065f46" font-size="8.5" font-family="monospace">W3 = [+1, +1, -1, -1]   W4 = [+1, -1, -1, +1]</text>
+  <text x="465" y="156" fill="#047857" font-size="8" font-weight="bold">Property: Wi · Wi = N = 4  AND  Wi · Wj = 0 (Orthogonal!)</text>
+
+  <text x="455" y="180" fill="#0f172a" font-size="9" font-weight="bold">• Encoding &amp; Transmission:</text>
+  <text x="455" y="196" fill="#334155" font-size="8.5">Data Bit 0 → -1 | Data Bit 1 → +1 | Silent → 0</text>
+  <text x="455" y="210" fill="#334155" font-size="8.5">Transmitted Vector: Si = di · Wi</text>
+  <text x="455" y="225" fill="#1e3a8a" font-size="9" font-weight="bold" font-family="monospace">Composite Channel Signal: C = S1 + S2 + S3 + S4</text>
+
+  <rect x="455" y="235" width="345" height="45" rx="4" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="465" y="250" fill="#166534" font-size="8.5" font-weight="bold">• Receiver Decoding (Dot Product):</text>
+  <text x="465" y="266" fill="#15803d" font-size="9" font-weight="bold" font-family="monospace">Decoded Data di = (C · Wi) / N</text>
+
+  <!-- Bottom: Summary & Solved Numerical Table -->
+  <rect x="35" y="300" width="780" height="125" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="300" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Channelization Architecture: FDMA vs TDMA vs CDMA Comparison &amp; Solved Example</text>
+
+  <text x="50" y="340" fill="#0f172a" font-size="9.5" font-weight="bold">FDMA:</text>
+  <text x="110" y="340" fill="#334155" font-size="8.5">Bandwidth divided into dedicated frequency bands. Requires Guard Bands. Continuous transmission.</text>
+
+  <text x="50" y="360" fill="#0f172a" font-size="9.5" font-weight="bold">TDMA:</text>
+  <text x="110" y="360" fill="#334155" font-size="8.5">Entire bandwidth shared in discrete time slots. Requires synchronization &amp; Guard Times. Burst transmission.</text>
+
+  <text x="50" y="380" fill="#0f172a" font-size="9.5" font-weight="bold">CDMA:</text>
+  <text x="110" y="380" fill="#065f46" font-size="8.5">Stations transmit simultaneously across the entire bandwidth using unique orthogonal codes. No time slots!</text>
+
+  <text x="50" y="405" fill="#0f172a" font-size="9.5" font-weight="bold">AKTU Example:</text>
+  <text x="145" y="405" fill="#1e3a8a" font-size="8.5">If S1 sends d1=+1, S2 sends d2=-1, S3 silent (d3=0), S4 sends d4=+1:</text>
+  <text x="145" y="418" fill="#1e3a8a" font-size="8.5" font-family="monospace">C = (+1)W1 + (-1)W2 + (0)W3 + (+1)W4 = [1, 1, 1, 1] + [-1, 1, -1, 1] + [1, -1, -1, 1] = [1, 1, -1, 3]</text>
+</svg>
+</div>
+
+<h2>1. Controlled Access vs Contention Protocols</h2>
+<p>Unlike contention methods where stations collide, controlled access guarantees deterministic, collision-free access. Stations either reserve time slots beforehand (Reservation), respond to master inquiries (Polling), or pass a logical permission token (Token Ring/Bus).</p>
+
+<h2>2. CDMA & Orthogonal Walsh Codes</h2>
+<p>Code Division Multiple Access allows all stations to transmit simultaneously across the entire bandwidth. Each station is assigned a unique, mutually orthogonal chip sequence generated via Walsh matrices.</p>
+
+<div class="formula-box">
+  <h4>CDMA Encoding &amp; Decoding Formulas</h4>
+  <code>Transmitted Signal: Si = di · Wi</code><br>
+  <code>Composite Signal: C = Σ Si</code><br>
+  <code>Receiver Decoding: di = (C · Wi) / N</code>
+</div>
+
+</body>
+</html>

@@ -53,3 +53,4 @@ CS_Fundamental-00/
 
 ### 🌐 Computer Networks (CN) — AKTU BCS603
 - [**Unit 1: Introduction & Physical Layer**](CN/Unit_1) — 15 Modules, 15 Valid XML SVGs, [3-Page Revision Sheet](CN/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf), [Master Notes PDF](CN/Unit_1/Unit_1_Master_Notes.pdf) ✅
+- [**Unit 2: Data Link Layer & Medium Access Sublayer**](CN/Unit_2) — 15 Modules, 14 Valid XML SVGs, [3-Page Revision Sheet](CN/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf), [Master Notes PDF](CN/Unit_2/Unit_2_Master_Notes.pdf) ✅

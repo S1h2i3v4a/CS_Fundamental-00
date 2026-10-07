@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 2: Data Link Layer Foundations & Framing Techniques</title>
+<style>
+
+@page {
+  size: A4 portrait;
+  margin: 12mm 15mm 15mm 15mm;
+}
+* {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1e293b;
+  background-color: #ffffff;
+  line-height: 1.5;
+  font-size: 9.5pt;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  color: #0f172a;
+  font-size: 18pt;
+  font-weight: 800;
+  border-bottom: 2.5px solid #2563eb;
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+h2 {
+  color: #1e3a8a;
+  font-size: 13pt;
+  font-weight: 700;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 3px;
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+h3 {
+  color: #0f172a;
+  font-size: 10.5pt;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+p, li {
+  color: #334155;
+  margin-top: 3px;
+  margin-bottom: 6px;
+}
+ul, ol {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 3px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 8.5pt;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 5px 8px;
+  text-align: left;
+}
+th {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-weight: 700;
+}
+tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+.box-tip {
+  background-color: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.box-warn {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.box-highlight {
+  background-color: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.diagram-container {
+  text-align: center;
+  margin: 14px 0;
+  page-break-inside: avoid;
+}
+.diagram-container svg {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+</style>
+</head>
+<body>
+
+<h1>Module 01: Data Link Layer Foundations &amp; Framing Techniques</h1>
+<p><strong>AKTU BCS603 Core Topic:</strong> LLC vs MAC sublayers, Character Count vulnerability, Byte Stuffing escape sequences, and Bit Stuffing 5-ones rule.</p>
+
+<div class="diagram-container">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+    <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#065f46"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+    <linearGradient id="ambGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9a3412"/><stop offset="100%" stop-color="#f97316"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="420" fill="#f8fafc" rx="8"/>
+
+  <!-- Title Banner -->
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Data Link Layer Framing: Character-Oriented (Byte Stuffing) vs Bit-Oriented (Bit Stuffing)</text>
+
+  <!-- Top: Sublayer Decomposition (LLC vs MAC) -->
+  <rect x="35" y="55" width="780" height="70" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="780" height="24" rx="6" fill="#1e3a8a"/>
+  <text x="425" y="71" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Data Link Layer Sublayer Architecture (IEEE 802 Committee)</text>
+
+  <rect x="50" y="85" width="360" height="32" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="230" y="101" fill="#1e40af" font-size="10" font-weight="bold" text-anchor="middle">LLC (Logical Link Control - IEEE 802.2)</text>
+  <text x="230" y="113" fill="#475569" font-size="7.5" text-anchor="middle">Hardware-independent; Multiplexing, Flow control, Error notifications</text>
+
+  <rect x="440" y="85" width="360" height="32" rx="4" fill="#d1fae5" stroke="#10b981"/>
+  <text x="620" y="101" fill="#065f46" font-size="10" font-weight="bold" text-anchor="middle">MAC (Medium Access Control - IEEE 802.3/802.11)</text>
+  <text x="620" y="113" fill="#475569" font-size="7.5" text-anchor="middle">Hardware-dependent; Physical MAC addressing, CSMA/CD, framing delimitation</text>
+
+  <!-- Middle: Byte Stuffing (Character-Oriented) -->
+  <rect x="35" y="135" width="780" height="130" rx="6" fill="#ffffff" stroke="#f97316" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="135" width="780" height="24" rx="6" fill="url(#ambGrad)"/>
+  <text x="425" y="151" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">1. Byte Stuffing (Character-Oriented Framing): ESC Character Insertion</text>
+
+  <!-- Original Payload with accidental FLAG and ESC -->
+  <text x="50" y="176" fill="#0f172a" font-size="9" font-weight="bold">Original Data Payload:</text>
+  <rect x="190" y="165" width="60" height="22" rx="3" fill="#f1f5f9" stroke="#94a3b8"/><text x="220" y="180" fill="#0f172a" font-size="8.5" font-family="monospace" text-anchor="middle">DATA A</text>
+  <rect x="255" y="165" width="60" height="22" rx="3" fill="#fee2e2" stroke="#ef4444"/><text x="285" y="180" fill="#991b1b" font-size="8.5" font-weight="bold" font-family="monospace" text-anchor="middle">FLAG</text>
+  <rect x="320" y="165" width="60" height="22" rx="3" fill="#f1f5f9" stroke="#94a3b8"/><text x="350" y="180" fill="#0f172a" font-size="8.5" font-family="monospace" text-anchor="middle">DATA B</text>
+  <rect x="385" y="165" width="60" height="22" rx="3" fill="#fef3c7" stroke="#f59e0b"/><text x="415" y="180" fill="#92400e" font-size="8.5" font-weight="bold" font-family="monospace" text-anchor="middle">ESC</text>
+  <rect x="450" y="165" width="60" height="22" rx="3" fill="#f1f5f9" stroke="#94a3b8"/><text x="480" y="180" fill="#0f172a" font-size="8.5" font-family="monospace" text-anchor="middle">DATA C</text>
+
+  <text x="50" y="212" fill="#065f46" font-size="9" font-weight="bold">Transmitted Frame (Stuffed):</text>
+  <!-- Flag Header -->
+  <rect x="190" y="200" width="50" height="24" rx="3" fill="#1e3a8a"/><text x="215" y="216" fill="#fff" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">FLAG</text>
+  <rect x="245" y="200" width="55" height="24" rx="3" fill="#f1f5f9" stroke="#94a3b8"/><text x="272" y="216" fill="#0f172a" font-size="8" font-family="monospace" text-anchor="middle">DATA A</text>
+  <!-- Stuffed ESC before FLAG -->
+  <rect x="305" y="200" width="40" height="24" rx="3" fill="#fef3c7" stroke="#f59e0b"/><text x="325" y="216" fill="#92400e" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">ESC</text>
+  <rect x="350" y="200" width="50" height="24" rx="3" fill="#fee2e2" stroke="#ef4444"/><text x="375" y="216" fill="#991b1b" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">FLAG</text>
+  <rect x="405" y="200" width="55" height="24" rx="3" fill="#f1f5f9" stroke="#94a3b8"/><text x="432" y="216" fill="#0f172a" font-size="8" font-family="monospace" text-anchor="middle">DATA B</text>
+  <!-- Stuffed ESC before ESC -->
+  <rect x="465" y="200" width="40" height="24" rx="3" fill="#fef3c7" stroke="#f59e0b"/><text x="485" y="216" fill="#92400e" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">ESC</text>
+  <rect x="510" y="200" width="40" height="24" rx="3" fill="#fef3c7" stroke="#f59e0b"/><text x="530" y="216" fill="#92400e" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">ESC</text>
+  <rect x="555" y="200" width="55" height="24" rx="3" fill="#f1f5f9" stroke="#94a3b8"/><text x="582" y="216" fill="#0f172a" font-size="8" font-family="monospace" text-anchor="middle">DATA C</text>
+  <!-- Flag Trailer -->
+  <rect x="615" y="200" width="50" height="24" rx="3" fill="#1e3a8a"/><text x="640" y="216" fill="#fff" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">FLAG</text>
+
+  <text x="50" y="248" fill="#475569" font-size="8">Rule: Sender inserts extra ESC byte before accidental FLAG or ESC. Receiver strips escape bytes automatically.</text>
+
+  <!-- Bottom: Bit Stuffing (Bit-Oriented) -->
+  <rect x="35" y="275" width="780" height="135" rx="6" fill="#ffffff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="275" width="780" height="24" rx="6" fill="url(#gGrad)"/>
+  <text x="425" y="291" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">2. Bit Stuffing (Bit-Oriented Framing): The 5 Consecutive 1s Rule (HDLC / PPP Flag: 01111110)</text>
+
+  <!-- Original bitstream -->
+  <text x="50" y="316" fill="#0f172a" font-size="9" font-weight="bold">Original Bit Stream:</text>
+  <rect x="190" y="305" width="580" height="22" rx="3" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="200" y="320" fill="#0f172a" font-size="9" font-family="monospace">0 0 0 1 1 1 1 1 1 1 0 1 1 1 1 1 0 1 1 1 1 1 1 0</text>
+  <text x="280" y="338" fill="#ef4444" font-size="8" font-weight="bold">↑ (Seven 1s here!)</text>
+  <text x="445" y="338" fill="#ef4444" font-size="8" font-weight="bold">↑ (Five 1s)</text>
+  <text x="545" y="338" fill="#ef4444" font-size="8" font-weight="bold">↑ (Six 1s = False Flag!)</text>
+
+  <!-- Stuffed bitstream -->
+  <text x="50" y="362" fill="#065f46" font-size="9" font-weight="bold">Stuffed Bit Stream:</text>
+  <!-- Flag 01111110 -->
+  <rect x="190" y="350" width="75" height="22" rx="3" fill="#1e3a8a"/><text x="227" y="365" fill="#fff" font-size="8.5" font-weight="bold" font-family="monospace" text-anchor="middle">01111110</text>
+  <rect x="270" y="350" width="420" height="22" rx="3" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="278" y="365" fill="#065f46" font-size="8.5" font-family="monospace">00011111<tspan fill="#ef4444" font-weight="bold">0</tspan>11011111<tspan fill="#ef4444" font-weight="bold">0</tspan>011111<tspan fill="#ef4444" font-weight="bold">0</tspan>10</text>
+  <rect x="695" y="350" width="75" height="22" rx="3" fill="#1e3a8a"/><text x="732" y="365" fill="#fff" font-size="8.5" font-weight="bold" font-family="monospace" text-anchor="middle">01111110</text>
+
+  <text x="50" y="396" fill="#065f46" font-size="8.5" font-weight="bold">Golden Rule: Whenever sender encounters five consecutive '1's (11111), it UNCONDITIONALLY injects a '0' bit!</text>
+</svg>
+</div>
+
+<h2>1. Comparative Framing Strategies</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Framing Technique</th>
+      <th>Demarcation Mechanism</th>
+      <th>Vulnerability / Overhead</th>
+      <th>Standard Protocol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Character Count</strong></td>
+      <td>Header integer stores frame length</td>
+      <td>Single bit count error desynchronizes all subsequent frames</td>
+      <td>Early framing experiments (Obsolete)</td>
+    </tr>
+    <tr>
+      <td><strong>Byte Stuffing</strong></td>
+      <td>Flag bytes with ESC byte prefix</td>
+      <td>Tied to 8-bit character boundaries; high byte overhead</td>
+      <td>BISYNC, PPP (Byte mode)</td>
+    </tr>
+    <tr>
+      <td><strong>Bit Stuffing</strong></td>
+      <td>Flag pattern <code>01111110</code> with 0-bit injection after 5 ones</td>
+      <td>Negligible bit overhead (~1 bit per 32 bits on average); arbitrary data</td>
+      <td>HDLC, SDLC, PPP, Frame Relay</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>2. Golden Rule of Bit Stuffing</h2>
+<div class="box-highlight">
+  <strong>Sender Rule:</strong> Scan bit stream. Whenever five consecutive <code>1</code>s (<code>11111</code>) are transmitted, <strong>UNCONDITIONALLY stuff a <code>0</code></strong>.<br>
+  <strong>Receiver Rule:</strong> If five consecutive <code>1</code>s are received:
+  <ul>
+    <li>If next bit is <code>0</code>: Destuff (strip) it!</li>
+    <li>If next bit is <code>1</code> followed by <code>0</code>: Valid <strong>FLAG</strong> detected!</li>
+    <li>If next bit is <code>1</code> followed by <code>1</code>: Error / Link Abort signal!</li>
+  </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 2: IEEE 802 LAN Standards & Ethernet (IEEE 802.3)</title>
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-top: 30px; }
+h2 { color: #1e3a8a; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin-top: 24px; }
+h3 { color: #1e40af; margin-top: 18px; }
+h4 { color: #334155; margin-top: 14px; }
+p, li { font-size: 14.5px; }
+code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13.5px; }
+pre { background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px; }
+th, td { border: 1px solid #cbd5e1; padding: 9px 12px; text-align: left; }
+th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f1f5f9; }
+blockquote { border-left: 4px solid #2563eb; margin: 16px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; }
+.diagram-container { text-align: center; margin: 25px 0; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-red { background: #fee2e2; color: #991b1b; }
+.formula-box { background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 6px; padding: 14px; margin: 16px 0; }
+
+</style>
+</head>
+<body>
+
+<h1>Module 12: IEEE 802 LAN Standards & Ethernet (IEEE 802.3)</h1>
+<p class="badge badge-blue">Unit 2: Data Link Layer & MAC Sublayer</p>
+<p class="badge badge-green">IEEE 802 Architecture & Ethernet Evolution</p>
+<p>LLC 802.2 vs MAC decomposition, complete IEEE 802.3 frame structure, formal mathematical derivation of the 64-byte minimum frame size, and 48-bit MAC addressing.</p>
+
+<div class="diagram-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ethGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#334155"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="440" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">IEEE 802.3 Ethernet: Standard Frame Anatomy, Minimum 64-Byte Derivation &amp; MAC Architecture</text>
+
+  <!-- Top: Field-by-Field Ethernet Frame Format -->
+  <rect x="35" y="55" width="780" height="150" rx="6" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="780" height="26" rx="6" fill="url(#ethGrad)"/>
+  <text x="425" y="72" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">Standard IEEE 802.3 Ethernet Frame Format (Total Min: 64B, Max: 1518B)</text>
+
+  <!-- Frame Fields Row -->
+  <g transform="translate(45, 90)">
+    <!-- Preamble -->
+    <rect x="0" y="0" width="70" height="40" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="35" y="18" font-size="8.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Preamble</text>
+    <text x="35" y="32" font-size="7.5" fill="#64748b" text-anchor="middle">7 Bytes (1010..)</text>
+
+    <!-- SFD -->
+    <rect x="70" y="0" width="45" height="40" fill="#fee2e2" stroke="#ef4444"/>
+    <text x="92" y="18" font-size="8.5" font-weight="bold" fill="#991b1b" text-anchor="middle">SFD</text>
+    <text x="92" y="32" font-size="7.5" fill="#991b1b" text-anchor="middle">1B (10101011)</text>
+
+    <!-- Dest MAC -->
+    <rect x="115" y="0" width="85" height="40" fill="#e0f2fe" stroke="#0284c7"/>
+    <text x="157" y="18" font-size="8.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Dest MAC</text>
+    <text x="157" y="32" font-size="7.5" fill="#0284c7" text-anchor="middle">6 Bytes (48 bits)</text>
+
+    <!-- Src MAC -->
+    <rect x="200" y="0" width="85" height="40" fill="#e0f2fe" stroke="#0284c7"/>
+    <text x="242" y="18" font-size="8.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Src MAC</text>
+    <text x="242" y="32" font-size="7.5" fill="#0284c7" text-anchor="middle">6 Bytes (48 bits)</text>
+
+    <!-- Length / Type -->
+    <rect x="285" y="0" width="65" height="40" fill="#fef3c7" stroke="#d97706"/>
+    <text x="317" y="18" font-size="8.5" font-weight="bold" fill="#92400e" text-anchor="middle">Type/Len</text>
+    <text x="317" y="32" font-size="7.5" fill="#b45309" text-anchor="middle">2 Bytes</text>
+
+    <!-- Data / Payload -->
+    <rect x="350" y="0" width="280" height="40" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="490" y="18" font-size="9" font-weight="bold" fill="#166534" text-anchor="middle">Payload Data (LLC PDU + Padding)</text>
+    <text x="490" y="32" font-size="8" fill="#15803d" text-anchor="middle">46 to 1500 Bytes (Requires Padding if &lt; 46B)</text>
+
+    <!-- CRC / FCS -->
+    <rect x="630" y="0" width="70" height="40" fill="#ffedd5" stroke="#ea580c"/>
+    <text x="665" y="18" font-size="8.5" font-weight="bold" fill="#c2410c" text-anchor="middle">FCS (CRC)</text>
+    <text x="665" y="32" font-size="7.5" fill="#ea580c" text-anchor="middle">4 Bytes (CRC-32)</text>
+  </g>
+
+  <!-- Dimension line for 64B min frame -->
+  <line x1="160" y1="145" x2="745" y2="145" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="450" y="160" fill="#dc2626" font-size="9" font-weight="bold" text-anchor="middle">Minimum Ethernet Frame = 6 + 6 + 2 + 46 + 4 = 64 Bytes (Excluding Preamble/SFD)</text>
+  <text x="450" y="174" fill="#64748b" font-size="8" text-anchor="middle">Maximum Frame Size = 6 + 6 + 2 + 1500 + 4 = 1518 Bytes (MTU = 1500 Bytes)</text>
+  <text x="450" y="190" fill="#1e3a8a" font-size="8.5">Interframe Gap (IFG) = 96 bit times (9.6 μs in 10 Mbps) mandatory between frames.</text>
+
+  <!-- Left Bottom: Why 64-Byte Minimum Frame Size Derivation -->
+  <rect x="35" y="215" width="375" height="215" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="215" width="375" height="26" rx="6" fill="#0284c7"/>
+  <text x="222" y="233" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">1. Why 64 Bytes Minimum Frame Size? (AKTU)</text>
+
+  <rect x="45" y="248" width="355" height="42" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="222" y="265" fill="#1e40af" font-size="10.5" font-weight="bold" font-family="monospace" text-anchor="middle">Tt ≥ 2 · Tp  (CSMA/CD Detection Law)</text>
+  <text x="222" y="280" fill="#1e3a8a" font-size="8" text-anchor="middle">Sender must still be transmitting when collision noise returns!</text>
+
+  <text x="50" y="306" fill="#0f172a" font-size="8.5" font-weight="bold">In Standard 10 Mbps Ethernet (10Base5):</text>
+  <text x="50" y="320" fill="#334155" font-size="8">• Max network span = 2500 m + 4 repeaters.</text>
+  <text x="50" y="334" fill="#334155" font-size="8">• Max Round Trip Time (2 · Tp) ≈ 51.2 μs (Slot Time).</text>
+  <text x="50" y="348" fill="#334155" font-size="8">• Bandwidth = 10 Mbps = 10^7 bits/s.</text>
+
+  <rect x="45" y="360" width="355" height="45" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="222" y="377" fill="#065f46" font-size="9.5" font-weight="bold" font-family="monospace" text-anchor="middle">L_min = 2 · Tp · B = 51.2 μs × 10 Mbps</text>
+  <text x="222" y="394" fill="#047857" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">L_min = 512 bits = Exactly 64 Bytes!</text>
+
+  <text x="50" y="420" fill="#991b1b" font-size="8" font-weight="bold">If payload &lt; 46B, Padding (0s) is appended to reach 64B.</text>
+
+  <!-- Right Bottom: MAC Address Anatomy & Ethernet Evolution -->
+  <rect x="440" y="215" width="375" height="215" rx="6" fill="#ffffff" stroke="#d97706" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="215" width="375" height="26" rx="6" fill="#d97706"/>
+  <text x="627" y="233" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">2. MAC Address Anatomy &amp; Media Evolution</text>
+
+  <!-- MAC Box -->
+  <rect x="450" y="248" width="355" height="50" rx="4" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="460" y="265" fill="#92400e" font-size="9" font-weight="bold">48-Bit MAC: 00:1A:2B : 3C:4D:5E</text>
+  <text x="460" y="280" fill="#334155" font-size="8">First 24 Bits (OUI): Assigned by IEEE to vendor (Cisco, Intel).</text>
+  <text x="460" y="292" fill="#334155" font-size="8">Last 24 Bits: Unique NIC Serial Number assigned by vendor.</text>
+
+  <text x="450" y="316" fill="#0f172a" font-size="8.5" font-weight="bold">Ethernet Standards Generations:</text>
+  <text x="450" y="332" fill="#334155" font-size="8">1. Standard Ethernet (10 Mbps): 10Base5 (Thick), 10BaseT (Twisted pair).</text>
+  <text x="450" y="348" fill="#334155" font-size="8">2. Fast Ethernet (100 Mbps, 802.3u): 100BaseTX (Cat5), Slot time = 5.12 μs.</text>
+  <text x="450" y="364" fill="#334155" font-size="8">3. Gigabit Ethernet (1000 Mbps, 802.3z): Carrier Extension (512B slot).</text>
+  <text x="450" y="380" fill="#334155" font-size="8">4. 10G Ethernet (10 Gbps, 802.3ae): Full Duplex switch only (NO CSMA/CD!).</text>
+
+  <rect x="450" y="392" width="355" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="460" y="405" fill="#0f172a" font-size="7.5" font-weight="bold">Addressing Modes: Unicast (bit 0=0), Multicast (bit 0=1),</text>
+  <text x="460" y="417" fill="#0f172a" font-size="7.5" font-weight="bold">Broadcast: FF:FF:FF:FF:FF:FF (All 48 bits are 1s).</text>
+</svg>
+</div>
+
+<h2>1. IEEE 802 Architecture &amp; Frame Anatomy</h2>
+<p>The IEEE 802 architecture decouples transmission media specifics into the MAC sublayer while abstracting logical flow and network-layer multiplexing into the LLC 802.2 sublayer. The standard Ethernet frame spans between 64 and 1518 bytes.</p>
+
+<h2>2. 64-Byte Minimum Frame Size Derivation</h2>
+<div class="formula-box">
+  <h4>Collision Detection Slot Time</h4>
+  <code>Worst-case Round Trip Time (2 · Tp) = 51.2 μs</code><br>
+  <code>L_min = (2 · Tp) · Bandwidth = 51.2 μs · 10 Mbps = 512 bits = 64 Bytes</code><br>
+  <code>Minimum Payload = 64B - 18B (Header+Trailer) = 46 Bytes</code>
+</div>
+
+</body>
+</html>

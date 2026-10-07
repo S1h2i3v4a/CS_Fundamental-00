@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gbnGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#a855f7"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="440" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Sliding Window Protocols: Go-Back-N (GBN) ARQ Architecture &amp; Window Mechanics</text>
+
+  <!-- Left: Sender and Receiver Sliding Window Mechanics -->
+  <rect x="35" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="375" height="28" rx="6" fill="url(#gbnGrad)"/>
+  <text x="222" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">1. Window Pointers &amp; Buffer Mechanics</text>
+
+  <!-- Sender Window -->
+  <text x="50" y="102" fill="#0f172a" font-size="9.5" font-weight="bold">Sender Window (m = 3 bits → Ws = 2^3 - 1 = 7):</text>
+  <!-- Frame slots 0 to 7 -->
+  <g transform="translate(50, 110)">
+    <rect x="0" y="0" width="35" height="25" fill="#e2e8f0" stroke="#94a3b8"/><text x="17" y="16" font-size="9" text-anchor="middle">0 (Ack)</text>
+    <rect x="35" y="0" width="35" height="25" fill="#e2e8f0" stroke="#94a3b8"/><text x="52" y="16" font-size="9" text-anchor="middle">1 (Ack)</text>
+    <!-- Outstanding window of 4 frames -->
+    <rect x="70" y="0" width="140" height="25" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="87" y="16" font-size="9" font-weight="bold" fill="#6d28d9" text-anchor="middle">2</text>
+    <text x="122" y="16" font-size="9" font-weight="bold" fill="#6d28d9" text-anchor="middle">3</text>
+    <text x="157" y="16" font-size="9" font-weight="bold" fill="#6d28d9" text-anchor="middle">4</text>
+    <text x="192" y="16" font-size="9" font-weight="bold" fill="#6d28d9" text-anchor="middle">5</text>
+    <rect x="210" y="0" width="35" height="25" fill="#ffffff" stroke="#94a3b8"/><text x="227" y="16" font-size="9" text-anchor="middle">6</text>
+    <rect x="245" y="0" width="35" height="25" fill="#ffffff" stroke="#94a3b8"/><text x="262" y="16" font-size="9" text-anchor="middle">7</text>
+  </g>
+  <text x="120" y="150" fill="#7c3aed" font-size="8" font-weight="bold" text-anchor="middle">Sf (Oldest Unack)</text>
+  <text x="260" y="150" fill="#7c3aed" font-size="8" font-weight="bold" text-anchor="middle">Sn (Next to Send)</text>
+
+  <!-- Receiver Window (Size = 1) -->
+  <text x="50" y="175" fill="#0f172a" font-size="9.5" font-weight="bold">Receiver Window (Strictly Wr = 1):</text>
+  <g transform="translate(50, 185)">
+    <rect x="0" y="0" width="35" height="25" fill="#e2e8f0" stroke="#94a3b8"/><text x="17" y="16" font-size="9" text-anchor="middle">0</text>
+    <rect x="35" y="0" width="35" height="25" fill="#e2e8f0" stroke="#94a3b8"/><text x="52" y="16" font-size="9" text-anchor="middle">1</text>
+    <!-- Receiver window of 1 slot -->
+    <rect x="70" y="0" width="35" height="25" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="87" y="16" font-size="9" font-weight="bold" fill="#15803d" text-anchor="middle">2 (Exp)</text>
+    <rect x="105" y="0" width="35" height="25" fill="#ffffff" stroke="#94a3b8"/><text x="122" y="16" font-size="9" text-anchor="middle">3</text>
+    <rect x="140" y="0" width="35" height="25" fill="#ffffff" stroke="#94a3b8"/><text x="157" y="16" font-size="9" text-anchor="middle">4</text>
+  </g>
+  <text x="120" y="225" fill="#15803d" font-size="8" font-weight="bold" text-anchor="middle">Rn = 2 (Expecting strictly Frame 2)</text>
+
+  <rect x="50" y="240" width="345" height="42" rx="4" fill="#faf5ff" stroke="#e9d5ff"/>
+  <text x="60" y="254" fill="#6d28d9" font-size="8.5" font-weight="bold">Receiver has NO BUFFER for out-of-order frames!</text>
+  <text x="60" y="268" fill="#475569" font-size="8">If Frame 2 is lost, arriving Frames 3, 4, 5 are DISCARDED unconditionally!</text>
+
+  <!-- Right: Transmission Timeline & The Go-Back Disaster -->
+  <rect x="440" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#ef4444" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="55" width="375" height="28" rx="6" fill="#ef4444"/>
+  <text x="627" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">2. Error Recovery: Frame Loss &amp; Retransmit-N</text>
+
+  <!-- Timeline -->
+  <line x1="475" y1="95" x2="475" y2="280" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="575" y1="95" x2="575" y2="280" stroke="#94a3b8" stroke-width="2"/>
+  <text x="475" y="92" fill="#0f172a" font-size="8.5" font-weight="bold" text-anchor="middle">Tx</text>
+  <text x="575" y="92" fill="#0f172a" font-size="8.5" font-weight="bold" text-anchor="middle">Rx</text>
+
+  <line x1="475" y1="102" x2="575" y2="118" stroke="#10b981" stroke-width="1.5"/><text x="525" y="108" fill="#10b981" font-size="7">Frame 0 (OK)</text>
+  <line x1="475" y1="120" x2="575" y2="136" stroke="#10b981" stroke-width="1.5"/><text x="525" y="126" fill="#10b981" font-size="7">Frame 1 (OK)</text>
+  <!-- Frame 2 lost -->
+  <line x1="475" y1="138" x2="535" y2="148" stroke="#ef4444" stroke-width="1.5"/><text x="540" y="151" fill="#ef4444" font-size="9" font-weight="bold">×</text>
+  <text x="505" y="142" fill="#ef4444" font-size="7">Frame 2 LOST</text>
+  <!-- Subsequent frames discarded -->
+  <line x1="475" y1="156" x2="575" y2="172" stroke="#f59e0b" stroke-width="1.5"/><text x="525" y="162" fill="#f59e0b" font-size="7">Frame 3 (Discarded!)</text>
+  <line x1="475" y1="174" x2="575" y2="190" stroke="#f59e0b" stroke-width="1.5"/><text x="525" y="180" fill="#f59e0b" font-size="7">Frame 4 (Discarded!)</text>
+
+  <!-- Timeout for frame 2 -->
+  <line x1="465" y1="138" x2="465" y2="208" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2"/>
+  <text x="450" y="175" fill="#dc2626" font-size="7" font-weight="bold" text-anchor="middle">Timer 2</text>
+
+  <!-- Retransmit ALL from 2 -->
+  <line x1="475" y1="210" x2="575" y2="226" stroke="#7c3aed" stroke-width="1.8"/><text x="525" y="216" fill="#7c3aed" font-size="7" font-weight="bold">Re-send Frame 2</text>
+  <line x1="475" y1="228" x2="575" y2="244" stroke="#7c3aed" stroke-width="1.8"/><text x="525" y="234" fill="#7c3aed" font-size="7" font-weight="bold">Re-send Frame 3</text>
+  <line x1="475" y1="246" x2="575" y2="262" stroke="#7c3aed" stroke-width="1.8"/><text x="525" y="252" fill="#7c3aed" font-size="7" font-weight="bold">Re-send Frame 4</text>
+
+  <rect x="590" y="95" width="215" height="185" rx="4" fill="#fff1f2" stroke="#fecdd3"/>
+  <text x="600" y="112" fill="#991b1b" font-size="8.5" font-weight="bold">The Go-Back-N Penalty:</text>
+  <text x="600" y="128" fill="#334155" font-size="8">Even though Frames 3 &amp; 4 arrived</text>
+  <text x="600" y="141" fill="#334155" font-size="8">without noise, receiver rejected them</text>
+  <text x="600" y="154" fill="#334155" font-size="8">because Frame 2 was missing!</text>
+  <text x="600" y="172" fill="#991b1b" font-size="8.5" font-weight="bold">Sender must GO BACK and re-send</text>
+  <text x="600" y="185" fill="#991b1b" font-size="8.5" font-weight="bold">ALL N outstanding frames!</text>
+  <text x="600" y="205" fill="#475569" font-size="8">Wastes enormous bandwidth on noisy</text>
+  <text x="600" y="218" fill="#475569" font-size="8">high-speed links.</text>
+
+  <!-- Bottom: Window Sizing Proof & Efficiency Equation -->
+  <rect x="35" y="300" width="780" height="125" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="300" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Mathematical Foundation: Window Size Proof (Ws &lt; 2^m) &amp; Pipelined Efficiency</text>
+
+  <text x="50" y="340" fill="#0f172a" font-size="9.5" font-weight="bold">Why Ws = 2^m - 1?</text>
+  <text x="165" y="340" fill="#334155" font-size="8.5">If Ws = 2^m (e.g., m=2, Ws=4, sequence {0,1,2,3}). If sender sends frames 0,1,2,3 and all ACKs are lost,</text>
+  <text x="165" y="352" fill="#334155" font-size="8.5">receiver expects Frame 0 of NEW round. When sender retransmits old Frame 0, receiver CANNOT tell if it's new or old!</text>
+
+  <text x="50" y="375" fill="#0f172a" font-size="9.5" font-weight="bold">Efficiency Formula:</text>
+  <text x="165" y="375" fill="#7c3aed" font-size="10" font-weight="bold" font-family="monospace">η = Ws / (1 + 2a)  for Ws &lt; (1 + 2a)   |   η = 100%  for Ws ≥ (1 + 2a)</text>
+
+  <text x="50" y="400" fill="#0f172a" font-size="9.5" font-weight="bold">Optimal Window:</text>
+  <text x="165" y="400" fill="#065f46" font-size="9">To achieve 100% utilization: Window Size Ws ≥ 1 + 2a = 1 + 2(Tp/Tt). Pipelining fills the transmission pipe!</text>
+</svg>
