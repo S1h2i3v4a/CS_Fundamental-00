@@ -8,7 +8,8 @@ Welcome to the **CS Fundamentals** repository! Yeh repository Computer Science k
 - 📄 **[Unit 1: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 1 condensed into **EXACT 3 PAGES**!
 - 📄 **[Unit 2: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 2 (Concurrency & Synchronization) condensed into **EXACT 3 PAGES**!
 - 📄 **[Unit 3: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 3 (CPU Scheduling & Deadlock) condensed into **EXACT 3 PAGES**!
-- 📘 **[Unit 1 Guide](./OS/Unit_1/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 2 Guide](./OS/Unit_2/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 3 Guide](./OS/Unit_3/00_Quick_Revision_Short_Notes/README.md)**
+- 📄 **[Unit 4: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 4 (Memory Management & Virtual Memory) condensed into **EXACT 3 PAGES**!
+- 📘 **[Unit 1 Guide](./OS/Unit_1/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 2 Guide](./OS/Unit_2/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 3 Guide](./OS/Unit_3/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 4 Guide](./OS/Unit_4/00_Quick_Revision_Short_Notes/README.md)**
 
 ---
 
@@ -81,12 +82,32 @@ CS_Fundamental-00/
         ├── 14_Deadlock_Avoidance_and_Bankers_Algorithm/ <-- Priority 14: Safe State, Banker's Safety & Resource Request
         ├── 15_Deadlock_Detection_and_Recovery/  <-- Priority 15: Wait-For Graph (WFG), Detection Matrix, Process Abort
         └── 16_Unit_3_AKTU_PYQs_and_Interview_Cheatsheet/ <-- Priority 16: AKTU PYQs, Formula Sheet, Unit 3 Mindmap
+    └── Unit_4/                                  <-- Unit 4 Folder (Priorities 00 to 15)
+        ├── README.md                            <-- Unit 4 Complete Roadmap
+        ├── Unit_4_Quick_Revision_3_Page_Notes.pdf <-- 3-Page Rapid Recall PDF
+        ├── Unit_4_Master_Notes.pdf              <-- 19-Page Consolidated Master PDF
+        ├── 00_Quick_Revision_Short_Notes/       <-- Priority 00: 3-Page Ultra High-Yield Notes
+        ├── 01_Memory_Hierarchy_and_Address_Binding/ <-- Priority 01: Hierarchy, Resident Monitor, Binding Phases
+        ├── 02_Contiguous_Allocation_and_Fragmentation/ <-- Priority 02: MFT, MVT, Internal/External Frag, Base/Limit
+        ├── 03_Dynamic_Storage_Allocation_Strategies/ <-- Priority 03: First/Best/Worst/Next Fit, Compaction
+        ├── 04_Paging_Architecture_and_Address_Translation/ <-- Priority 04: Frames, Pages, (p,d) to (f,d) Translation
+        ├── 05_Translation_Lookaside_Buffer_TLB_and_EMAT/ <-- Priority 05: TLB Hardware, Hit/Miss, EMAT Formulas
+        ├── 06_Multilevel_and_Inverted_Page_Tables/ <-- Priority 06: Two-Level Paging, Inverted Table, ASID
+        ├── 07_Segmentation_and_Paged_Segmentation/ <-- Priority 07: User View, Base/Limit Trap, Hybrid Paging
+        ├── 08_Virtual_Memory_and_Demand_Paging/ <-- Priority 08: Lazy Swapper, Valid-Invalid Bit, Page Fault
+        ├── 09_Page_Fault_Handling_and_EAT_Performance/ <-- Priority 09: 6-Step Interrupt Trace, EAT Performance
+        ├── 10_FIFO_Page_Replacement_and_Beladys_Anomaly/ <-- Priority 10: FIFO Queue, Belady Anomaly Proof
+        ├── 11_Optimal_and_LRU_Page_Replacement/  <-- Priority 11: OPT Future Benchmark, LRU Stack Property
+        ├── 12_Counting_Algorithms_and_Clock_Replacement/ <-- Priority 12: Clock Second Chance, LFU/MFU
+        ├── 13_Thrashing_and_Working_Set_Model/   <-- Priority 13: CPU Thrashing, Working Set (Delta), PFF
+        ├── 14_Locality_of_Reference_and_Cache_Organization/ <-- Priority 14: Temporal/Spatial Locality, Cache Mappings
+        └── 15_Unit_4_AKTU_PYQs_and_Interview_Cheatsheet/ <-- Priority 15: AKTU PYQs, Formula Sheet, Interview Q&As
 ```
 
 ---
 
 ## 🛠️ Key Highlights
-- **Priority-Driven Sequential Sorting:** Har unit ke folders sequential zero-padded prefixes (`00_` to `19_`, `00_` to `12_`, `00_` to `16_`) se organized hain jisse GitHub par automatically exact teaching order me top-to-bottom display hote hain.
+- **Priority-Driven Sequential Sorting:** Har unit ke folders sequential zero-padded prefixes (`00_` to `19_`, `00_` to `12_`, `00_` to `16_`, `00_` to `15_`) se organized hain jisse GitHub par automatically exact teaching order me top-to-bottom display hote hain.
 - **Bilingual Hinglish Explanations:** Deep machine-level assembly traces, real-world intuitive analogies, edge cases aur semester exam answers.
 - **Architectural Dark-Mode Diagrams:** Har module me custom vector SVG flowcharts aur diagrams shamil hain.
 - **Single-Click Printable PDFs:** Har chapter ka standalone PDF aur poor unit ka all-in-one consolidated **Master PDF** available hai.

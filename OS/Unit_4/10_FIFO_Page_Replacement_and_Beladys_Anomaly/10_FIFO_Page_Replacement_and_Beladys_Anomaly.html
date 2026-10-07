@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 10: FIFO Page Replacement and Belady's Anomaly</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 10: FIFO Page Replacement and Belady's Anomaly</h1>
+<p><span class="badge">AKTU BCS401</span> <span class="badge">Unit 4</span> <span class="badge">Page Replacement Paradox</span></p>
+
+<h2>1. FIFO Algorithm &amp; Dirty Bit</h2>
+<p>FIFO memory me sabse pehle enter karne wale page ko replace karta hai. Dirty Bit (0/1) indicate karta hai ki page modify hua hai ya nahi; clean page evict karte samay disk write save ho jata hai.</p>
+
+<h2>2. Belady's Anomaly Proof</h2>
+<p>Normally frames badhane se faults kam hote hain, lekin FIFO me frames 3 se 4 karne par faults 9 se badhkar 10 ho jate hain!</p>
+
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Belady's Anomaly: FIFO 3 Frames vs 4 Frames Proof</text>
+  
+  <text x="500" y="65" fill="#fde68a" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Reference String: 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5</text>
+
+  <!-- Left: 3 Frames Trace -->
+  <g transform="translate(60, 90)">
+    <rect width="400" height="390" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="200" y="28" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">FIFO with 3 Frames (9 Page Faults)</text>
+    
+    <text x="30" y="65" fill="#cbd5e1" font-family="sans-serif" font-size="11">Initial: [Empty]</text>
+    <text x="30" y="90" fill="#cbd5e1" font-family="sans-serif" font-size="11">Refs 1, 2, 3: Frames = [1, 2, 3] &rarr; 3 Faults</text>
+    <text x="30" y="115" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 4: Replace 1 &rarr; [4, 2, 3] &rarr; Fault 4</text>
+    <text x="30" y="140" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 1: Replace 2 &rarr; [4, 1, 3] &rarr; Fault 5</text>
+    <text x="30" y="165" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 2: Replace 3 &rarr; [4, 1, 2] &rarr; Fault 6</text>
+    <text x="30" y="190" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 5: Replace 4 &rarr; [5, 1, 2] &rarr; Fault 7</text>
+    <text x="30" y="215" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Ref 1: HIT! Frames = [5, 1, 2]</text>
+    <text x="30" y="240" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Ref 2: HIT! Frames = [5, 1, 2]</text>
+    <text x="30" y="265" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 3: Replace 1 &rarr; [5, 3, 2] &rarr; Fault 8</text>
+    <text x="30" y="290" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 4: Replace 2 &rarr; [5, 3, 4] &rarr; Fault 9</text>
+    <text x="30" y="315" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Ref 5: HIT! Frames = [5, 3, 4]</text>
+    
+    <rect x="30" y="340" width="340" height="32" rx="6" fill="#065f46"/>
+    <text x="200" y="361" fill="#a7f3d0" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Total Page Faults = 9</text>
+  </g>
+
+  <!-- Right: 4 Frames Trace (Anomaly!) -->
+  <g transform="translate(540, 90)">
+    <rect width="400" height="390" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <text x="200" y="28" fill="#f87171" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">FIFO with 4 Frames (10 Page Faults!)</text>
+    
+    <text x="30" y="65" fill="#cbd5e1" font-family="sans-serif" font-size="11">Refs 1, 2, 3, 4: Frames = [1, 2, 3, 4] &rarr; 4 Faults</text>
+    <text x="30" y="90" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Ref 1: HIT! Frames = [1, 2, 3, 4]</text>
+    <text x="30" y="115" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Ref 2: HIT! Frames = [1, 2, 3, 4]</text>
+    <text x="30" y="140" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 5: Replace 1 &rarr; [5, 2, 3, 4] &rarr; Fault 5</text>
+    <text x="30" y="165" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 1: Replace 2 &rarr; [5, 1, 3, 4] &rarr; Fault 6</text>
+    <text x="30" y="190" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 2: Replace 3 &rarr; [5, 1, 2, 4] &rarr; Fault 7</text>
+    <text x="30" y="215" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 3: Replace 4 &rarr; [5, 1, 2, 3] &rarr; Fault 8</text>
+    <text x="30" y="240" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 4: Replace 5 &rarr; [4, 1, 2, 3] &rarr; Fault 9</text>
+    <text x="30" y="265" fill="#cbd5e1" font-family="sans-serif" font-size="11">Ref 5: Replace 1 &rarr; [4, 5, 2, 3] &rarr; Fault 10</text>
+    
+    <rect x="30" y="300" width="340" height="30" rx="4" fill="#991b1b"/>
+    <text x="200" y="320" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Total Page Faults = 10 (Faults BADH GAYE!)</text>
+    
+    <text x="200" y="355" fill="#fca5a5" font-family="sans-serif" font-size="10.5" text-anchor="middle">Frames 3 &rarr; 4 badhane par Faults 9 &rarr; 10 ho gaye!</text>
+    <text x="200" y="372" fill="#cbd5e1" font-family="sans-serif" font-size="10.5" text-anchor="middle">&bull; FIFO is NOT a Stack Algorithm.</text>
+  </g>
+</svg>
+</div>
+
+<h2>3. Summary Comparison</h2>
+<div class="callout-warn">
+<strong>Why it happens:</strong> FIFO is NOT a Stack Algorithm ($S_n 
+ot\subseteq S_{n+1}$).<br>
+<strong>Stack Algorithms:</strong> LRU and Optimal algorithms strictly follow subset property and NEVER suffer from Belady's Anomaly!
+</div>
+</body>
+</html>

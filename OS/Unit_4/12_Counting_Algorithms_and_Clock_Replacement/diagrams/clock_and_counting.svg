@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Second Chance (Clock) &amp; Counting Page Replacement</text>
+  
+  <!-- Left Side: Clock Algorithm Circle -->
+  <g transform="translate(60, 70)">
+    <rect width="420" height="410" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="210" y="28" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Second Chance (Clock) Replacement</text>
+    
+    <!-- Clock Circle -->
+    <circle cx="210" cy="180" r="110" fill="#0f172a" stroke="#475569" stroke-width="3"/>
+    
+    <!-- Clock Nodes (Frames) -->
+    <!-- Top -->
+    <rect x="175" y="80" width="70" height="30" rx="4" fill="#1e293b" stroke="#38bdf8"/>
+    <text x="210" y="100" fill="#cbd5e1" font-family="sans-serif" font-size="11" text-anchor="middle">P1 [R=0]</text>
+    
+    <!-- Right -->
+    <rect x="270" y="165" width="70" height="30" rx="4" fill="#1e293b" stroke="#4ade80"/>
+    <text x="305" y="185" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">P2 [R=1]</text>
+    
+    <!-- Bottom -->
+    <rect x="175" y="250" width="70" height="30" rx="4" fill="#1e293b" stroke="#f59e0b"/>
+    <text x="210" y="270" fill="#cbd5e1" font-family="sans-serif" font-size="11" text-anchor="middle">P3 [R=0]</text>
+    
+    <!-- Left -->
+    <rect x="80" y="165" width="70" height="30" rx="4" fill="#1e293b" stroke="#4ade80"/>
+    <text x="115" y="185" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">P4 [R=1]</text>
+    
+    <!-- Clock Hand (Pointer) pointing to Top -->
+    <line x1="210" y1="180" x2="210" y2="120" stroke="#f43f5e" stroke-width="3" marker-end="url(#arrow)"/>
+    <circle cx="210" cy="180" r="6" fill="#f43f5e"/>
+    
+    <text x="210" y="325" fill="#f87171" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Clock Pointer inspects Frame</text>
+    <text x="210" y="345" fill="#cbd5e1" font-family="sans-serif" font-size="10.5" text-anchor="middle">&bull; If R == 0 &rarr; Replace this page (Victim found!)</text>
+    <text x="210" y="365" fill="#cbd5e1" font-family="sans-serif" font-size="10.5" text-anchor="middle">&bull; If R == 1 &rarr; Set R = 0, advance pointer (Second Chance!)</text>
+  </g>
+
+  <!-- Right Side: Enhanced Second Chance & Counting -->
+  <g transform="translate(520, 70)">
+    <rect width="420" height="410" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="210" y="28" fill="#c084fc" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Enhanced Second Chance &amp; Counting Algos</text>
+    
+    <text x="20" y="60" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="bold">Enhanced 4-Class Classification &lt;Reference, Modify&gt;:</text>
+    
+    <rect x="20" y="75" width="380" height="28" rx="4" fill="#0f172a"/>
+    <text x="30" y="94" fill="#4ade80" font-family="sans-serif" font-size="10.5" font-weight="bold">Class 1 (0, 0):</text>
+    <text x="130" y="94" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Not used, Not dirty &rarr; BEST VICTIM!</text>
+    
+    <rect x="20" y="110" width="380" height="28" rx="4" fill="#0f172a"/>
+    <text x="30" y="129" fill="#38bdf8" font-family="sans-serif" font-size="10.5" font-weight="bold">Class 2 (0, 1):</text>
+    <text x="130" y="129" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Not used, Dirty &rarr; Needs disk write</text>
+    
+    <rect x="20" y="145" width="380" height="28" rx="4" fill="#0f172a"/>
+    <text x="30" y="164" fill="#f59e0b" font-family="sans-serif" font-size="10.5" font-weight="bold">Class 3 (1, 0):</text>
+    <text x="130" y="164" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Recently used, Clean &rarr; Will be used soon</text>
+    
+    <rect x="20" y="180" width="380" height="28" rx="4" fill="#0f172a"/>
+    <text x="30" y="199" fill="#ef4444" font-family="sans-serif" font-size="10.5" font-weight="bold">Class 4 (1, 1):</text>
+    <text x="130" y="199" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Recently used, Dirty &rarr; WORST CANDIDATE</text>
+    
+    <text x="20" y="235" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="bold">Counting-Based Algorithms:</text>
+    
+    <rect x="20" y="250" width="380" height="60" rx="4" fill="#0f172a"/>
+    <text x="30" y="272" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="bold">LFU (Least Frequently Used):</text>
+    <text x="30" y="292" fill="#94a3b8" font-family="sans-serif" font-size="10">Page with smallest reference count is replaced.</text>
+    
+    <rect x="20" y="320" width="380" height="60" rx="4" fill="#0f172a"/>
+    <text x="30" y="342" fill="#a855f7" font-family="sans-serif" font-size="11" font-weight="bold">MFU (Most Frequently Used):</text>
+    <text x="30" y="362" fill="#94a3b8" font-family="sans-serif" font-size="10">Page with highest count is replaced (newly brought page has count 0).</text>
+  </g>
+</svg>

@@ -8,6 +8,7 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 - 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 1 condensed into **EXACT 3 PAGES** for last-minute exam & interview rapid recall!
 - 📄 **[Unit_2_Quick_Revision_3_Page_Notes.pdf](./Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 2 (Concurrency & Synchronization) condensed into **EXACT 3 PAGES**!
 - 📄 **[Unit_3_Quick_Revision_3_Page_Notes.pdf](./Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 3 (CPU Scheduling & Deadlock) condensed into **EXACT 3 PAGES**!
+- 📄 **[Unit_4_Quick_Revision_3_Page_Notes.pdf](./Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 4 (Memory Management & Virtual Memory) condensed into **EXACT 3 PAGES**!
 
 ---
 
@@ -78,6 +79,27 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 
 ---
 
+### 📕 [Unit 4: Memory Management](./Unit_4/README.md)
+*Complete 175-page syllabus coverage organized in sequential priority subfolders (`00_` to `15_`):*
+- **[00_Quick_Revision_Short_Notes](./Unit_4/00_Quick_Revision_Short_Notes/README.md)** *(3-Page High-Yield Cheat Sheet)*
+- **[01_Memory_Hierarchy_and_Address_Binding](./Unit_4/01_Memory_Hierarchy_and_Address_Binding/README.md)**
+- **[02_Contiguous_Allocation_and_Fragmentation](./Unit_4/02_Contiguous_Allocation_and_Fragmentation/README.md)**
+- **[03_Dynamic_Storage_Allocation_Strategies](./Unit_4/03_Dynamic_Storage_Allocation_Strategies/README.md)**
+- **[04_Paging_Architecture_and_Address_Translation](./Unit_4/04_Paging_Architecture_and_Address_Translation/README.md)**
+- **[05_Translation_Lookaside_Buffer_TLB_and_EMAT](./Unit_4/05_Translation_Lookaside_Buffer_TLB_and_EMAT/README.md)**
+- **[06_Multilevel_and_Inverted_Page_Tables](./Unit_4/06_Multilevel_and_Inverted_Page_Tables/README.md)**
+- **[07_Segmentation_and_Paged_Segmentation](./Unit_4/07_Segmentation_and_Paged_Segmentation/README.md)**
+- **[08_Virtual_Memory_and_Demand_Paging](./Unit_4/08_Virtual_Memory_and_Demand_Paging/README.md)**
+- **[09_Page_Fault_Handling_and_EAT_Performance](./Unit_4/09_Page_Fault_Handling_and_EAT_Performance/README.md)**
+- **[10_FIFO_Page_Replacement_and_Beladys_Anomaly](./Unit_4/10_FIFO_Page_Replacement_and_Beladys_Anomaly/README.md)**
+- **[11_Optimal_and_LRU_Page_Replacement](./Unit_4/11_Optimal_and_LRU_Page_Replacement/README.md)**
+- **[12_Counting_Algorithms_and_Clock_Replacement](./Unit_4/12_Counting_Algorithms_and_Clock_Replacement/README.md)**
+- **[13_Thrashing_and_Working_Set_Model](./Unit_4/13_Thrashing_and_Working_Set_Model/README.md)**
+- **[14_Locality_of_Reference_and_Cache_Organization](./Unit_4/14_Locality_of_Reference_and_Cache_Organization/README.md)**
+- **[15_Unit_4_AKTU_PYQs_and_Interview_Cheatsheet](./Unit_4/15_Unit_4_AKTU_PYQs_and_Interview_Cheatsheet/README.md)**
+
+---
+
 ## 📚 Master Consolidated PDF Documents
 - 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)** (Unit 1 Exact 3-Page Recall Sheet)
 - 📄 **[Unit_1_Master_Notes.pdf](./Unit_1/Unit_1_Master_Notes.pdf)** (Unit 1 Complete 58-Page Master PDF)
@@ -85,6 +107,8 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 - 📄 **[Unit_2_Master_Notes.pdf](./Unit_2/Unit_2_Master_Notes.pdf)** (Unit 2 Complete 17-Page Master PDF)
 - 📄 **[Unit_3_Quick_Revision_3_Page_Notes.pdf](./Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf)** (Unit 3 Exact 3-Page Recall Sheet)
 - 📄 **[Unit_3_Master_Notes.pdf](./Unit_3/Unit_3_Master_Notes.pdf)** (Unit 3 Complete 17-Page Master PDF)
+- 📄 **[Unit_4_Quick_Revision_3_Page_Notes.pdf](./Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf)** (Unit 4 Exact 3-Page Recall Sheet)
+- 📄 **[Unit_4_Master_Notes.pdf](./Unit_4/Unit_4_Master_Notes.pdf)** (Unit 4 Complete 19-Page Master PDF)
 
 ---
 *Created for CS Fundamentals Repository by Shivam Keshari*

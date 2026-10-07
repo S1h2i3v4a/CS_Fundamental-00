@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 03: Dynamic Storage Allocation Strategies</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 03: Dynamic Storage Allocation Strategies</h1>
+<p><span class="badge">AKTU BCS401</span> <span class="badge">Unit 4</span> <span class="badge">Dynamic Storage Allocation</span></p>
+
+<h2>1. Allocation Strategies Overview</h2>
+<table>
+<tr><th>Strategy</th><th>Algorithm Rule</th><th>Search Overhead</th><th>Key Advantage / Disadvantage</th></tr>
+<tr><td><strong>First Fit</strong></td><td>Pehla hole jo size satisfy kare</td><td>Fast ($O(1)$ to $O(n)$)</td><td>Fastest; early memory fragmentation</td></tr>
+<tr><td><strong>Best Fit</strong></td><td>Smallest hole jo size satisfy kare</td><td>Strictly $O(n)$</td><td>Preserves large holes; creates tiny useless slivers</td></tr>
+<tr><td><strong>Worst Fit</strong></td><td>Largest available hole</td><td>Strictly $O(n)$</td><td>Large leftover; destroys largest blocks quickly</td></tr>
+<tr><td><strong>Next Fit</strong></td><td>Last allocated pointer se circular First Fit</td><td>Fast</td><td>Spreads allocation evenly</td></tr>
+</table>
+
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Dynamic Storage Allocation Strategies: Comparison</text>
+  
+  <!-- Strategy 1: First Fit -->
+  <g transform="translate(40, 70)">
+    <rect width="210" height="410" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="210" height="40" rx="10" fill="#0284c7"/>
+    <text x="105" y="26" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">1. First Fit</text>
+    <text x="15" y="65" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">Working Principle:</text>
+    <text x="15" y="85" fill="#94a3b8" font-family="sans-serif" font-size="10">Pehle hole se search shuru karo; jo PEHLA hole process size se bada mila, allocate kar do.</text>
+    <text x="15" y="140" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Advantages:</text>
+    <text x="15" y="160" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; Fastest execution speed<br>&bull; Poori list search nahi karni padti</text>
+    <text x="15" y="215" fill="#f87171" font-family="sans-serif" font-size="11" font-weight="bold">Disadvantages:</text>
+    <text x="15" y="235" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; Shuruati memory blocks me tiny unusable holes jama ho jate hain.</text>
+    <text x="15" y="300" fill="#f59e0b" font-family="sans-serif" font-size="11" font-weight="bold">Time Complexity:</text>
+    <text x="15" y="320" fill="#fde68a" font-family="sans-serif" font-size="12" font-weight="bold">O(n) worst / O(1) best</text>
+  </g>
+
+  <!-- Strategy 2: Best Fit -->
+  <g transform="translate(280, 70)">
+    <rect width="210" height="410" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <rect x="0" y="0" width="210" height="40" rx="10" fill="#059669"/>
+    <text x="105" y="26" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">2. Best Fit</text>
+    <text x="15" y="65" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">Working Principle:</text>
+    <text x="15" y="85" fill="#94a3b8" font-family="sans-serif" font-size="10">Poori list search karo aur wo hole chuno jo process se bada ho aur SMALLEST ho.</text>
+    <text x="15" y="140" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Advantages:</text>
+    <text x="15" y="160" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; Badi holes preserve rehti hain future ke bade processes ke liye.</text>
+    <text x="15" y="215" fill="#f87171" font-family="sans-serif" font-size="11" font-weight="bold">Disadvantages:</text>
+    <text x="15" y="235" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; Generates smallest leftover holes jo kisi kaam ke nahi hote (Worst fragmentation).</text>
+    <text x="15" y="300" fill="#f59e0b" font-family="sans-serif" font-size="11" font-weight="bold">Time Complexity:</text>
+    <text x="15" y="320" fill="#fde68a" font-family="sans-serif" font-size="12" font-weight="bold">Strictly O(n)</text>
+  </g>
+
+  <!-- Strategy 3: Worst Fit -->
+  <g transform="translate(520, 70)">
+    <rect width="210" height="410" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <rect x="0" y="0" width="210" height="40" rx="10" fill="#dc2626"/>
+    <text x="105" y="26" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">3. Worst Fit</text>
+    <text x="15" y="65" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">Working Principle:</text>
+    <text x="15" y="85" fill="#94a3b8" font-family="sans-serif" font-size="10">Poori list me se LARGEST available hole ko choose karo aur allocate karo.</text>
+    <text x="15" y="140" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Advantages:</text>
+    <text x="15" y="160" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; Leftover hole ka size bada hota hai, jisme naya process fit ho sakta hai.</text>
+    <text x="15" y="215" fill="#f87171" font-family="sans-serif" font-size="11" font-weight="bold">Disadvantages:</text>
+    <text x="15" y="235" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; System ke largest holes jaldi khatam ho jate hain; bade jobs starve karte hain.</text>
+    <text x="15" y="300" fill="#f59e0b" font-family="sans-serif" font-size="11" font-weight="bold">Time Complexity:</text>
+    <text x="15" y="320" fill="#fde68a" font-family="sans-serif" font-size="12" font-weight="bold">Strictly O(n)</text>
+  </g>
+
+  <!-- Strategy 4: Next Fit & Compaction -->
+  <g transform="translate(760, 70)">
+    <rect width="200" height="410" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="1.5"/>
+    <rect x="0" y="0" width="200" height="40" rx="10" fill="#7e22ce"/>
+    <text x="100" y="26" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">4. Next Fit &amp; Compact</text>
+    <text x="12" y="65" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">Next Fit Strategy:</text>
+    <text x="12" y="85" fill="#94a3b8" font-family="sans-serif" font-size="10">First Fit ki tarah, lekin search start se nahi balki LAST ALLOCATION pointer se hoti hai.</text>
+    <text x="12" y="150" fill="#c084fc" font-family="sans-serif" font-size="11" font-weight="bold">Compaction (Defra):</text>
+    <text x="12" y="170" fill="#cbd5e1" font-family="sans-serif" font-size="10">External fragmentation khatam karne ke liye saare processes ko memory ke ek side shift karna taaki ek bada contiguous free block ban jaye.</text>
+    <text x="12" y="265" fill="#ef4444" font-family="sans-serif" font-size="10.5" font-weight="bold">Compaction Condition:</text>
+    <text x="12" y="285" fill="#fca5a5" font-family="sans-serif" font-size="10">Possible ONLY if Dynamic Relocation is supported at runtime!</text>
+  </g>
+</svg>
+</div>
+
+<h2>2. Solved Numerical Summary</h2>
+<p><strong>Holes:</strong> 100K, 500K, 200K, 300K, 600K | <strong>Processes:</strong> P1(212K), P2(417K), P3(112K), P4(426K)</p>
+<div class="callout">
+&bull; <strong>First Fit:</strong> P1 in 500K, P2 in 600K, P3 in 500K remaining, <strong>P4 Waits (Cannot Allocate)</strong>.<br>
+&bull; <strong>Best Fit:</strong> P1 in 300K, P2 in 500K, P3 in 200K, P4 in 600K &rarr; <strong>All 4 Processes Successfully Allocated!</strong><br>
+&bull; <strong>Worst Fit:</strong> P1 in 600K, P2 in 500K, P3 in 600K remaining, <strong>P4 Waits (Cannot Allocate)</strong>.
+</div>
+
+<h2>3. Compaction (Defragmentation)</h2>
+<p>External fragmentation ko khatam karne ke liye saare processes ko relocate karke contiguous hole banaya jata hai. Iske liye <strong>Execution Time Dynamic Relocation</strong> mandatory hota hai.</p>
+</body>
+</html>

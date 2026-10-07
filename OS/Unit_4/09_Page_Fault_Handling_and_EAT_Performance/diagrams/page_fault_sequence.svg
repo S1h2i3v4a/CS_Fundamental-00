@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">6-Step Page Fault Handling Sequence</text>
+  
+  <!-- Step 1: Memory Reference -->
+  <g transform="translate(40, 80)">
+    <rect width="180" height="85" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle cx="25" cy="25" r="14" fill="#0284c7"/>
+    <text x="25" y="30" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">1</text>
+    <text x="100" y="28" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold">Memory Reference</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">CPU instruction references virtual page p</text>
+    <text x="20" y="72" fill="#94a3b8" font-family="sans-serif" font-size="10">Page Table Bit = 'i' (Invalid)</text>
+  </g>
+
+  <!-- Step 2: Trap to OS -->
+  <g transform="translate(260, 80)">
+    <rect width="180" height="85" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <circle cx="25" cy="25" r="14" fill="#dc2626"/>
+    <text x="25" y="30" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">2</text>
+    <text x="100" y="28" fill="#f87171" font-family="sans-serif" font-size="12" font-weight="bold">Trap to OS</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">MMU sends interrupt trap</text>
+    <text x="20" y="72" fill="#fca5a5" font-family="sans-serif" font-size="10">OS saves process state (registers)</text>
+  </g>
+
+  <!-- Step 3: Validate Reference -->
+  <g transform="translate(480, 80)">
+    <rect width="220" height="85" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <circle cx="25" cy="25" r="14" fill="#d97706"/>
+    <text x="25" y="30" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">3</text>
+    <text x="120" y="28" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="bold">Validate &amp; Find Frame</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Check PCB: Illegal &rarr; Abort</text>
+    <text x="20" y="72" fill="#94a3b8" font-family="sans-serif" font-size="10">Find free frame in RAM</text>
+  </g>
+
+  <!-- Step 4: Disk Read Swap-in -->
+  <g transform="translate(740, 80)">
+    <rect width="220" height="85" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
+    <circle cx="25" cy="25" r="14" fill="#7c3aed"/>
+    <text x="25" y="30" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">4</text>
+    <text x="120" y="28" fill="#c084fc" font-family="sans-serif" font-size="12" font-weight="bold">Disk Read (Page-In)</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Issue disk I/O to swap space</text>
+    <text x="20" y="72" fill="#e9d5ff" font-family="sans-serif" font-size="10">Process sleeps in Wait Queue</text>
+  </g>
+
+  <!-- Step 5: Reset Page Table -->
+  <g transform="translate(740, 260)">
+    <rect width="220" height="85" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <circle cx="25" cy="25" r="14" fill="#059669"/>
+    <text x="25" y="30" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">5</text>
+    <text x="120" y="28" fill="#4ade80" font-family="sans-serif" font-size="12" font-weight="bold">Update Page Table</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Write frame f in Page Table</text>
+    <text x="20" y="72" fill="#86efac" font-family="sans-serif" font-size="10">Change Bit from 'i' to 'v' (Valid)</text>
+  </g>
+
+  <!-- Step 6: Restart Instruction -->
+  <g transform="translate(480, 260)">
+    <rect width="220" height="85" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle cx="25" cy="25" r="14" fill="#0284c7"/>
+    <text x="25" y="30" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">6</text>
+    <text x="120" y="28" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold">Restart Instruction</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Move process to Ready Queue</text>
+    <text x="20" y="72" fill="#94a3b8" font-family="sans-serif" font-size="10">Instruction executes successfully!</text>
+  </g>
+
+  <!-- Connecting Arrows -->
+  <line x1="220" y1="122" x2="260" y2="122" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="440" y1="122" x2="480" y2="122" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="700" y1="122" x2="740" y2="122" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="850" y1="165" x2="850" y2="260" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="740" y1="302" x2="700" y2="302" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- EAT Mathematical Model Box -->
+  <g transform="translate(40, 230)">
+    <rect width="400" height="150" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="200" y="25" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">EAT (Effective Access Time) Mathematical Model</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="11">p = Page Fault Rate (0 &le; p &le; 1)</text>
+    <text x="20" y="75" fill="#4ade80" font-family="sans-serif" font-size="11">t_RAM = 100 ns (Memory access)</text>
+    <text x="20" y="95" fill="#f87171" font-family="sans-serif" font-size="11">t_Fault = 8,000,000 ns (8 ms disk seek + latency)</text>
+    <text x="20" y="125" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="bold">EAT = (1 - p) &times; t_RAM + p &times; t_Fault</text>
+  </g>
+</svg>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 07: Segmentation and Paged Segmentation</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 07: Segmentation and Paged Segmentation</h1>
+<p><span class="badge">AKTU BCS401</span> <span class="badge">Unit 4</span> <span class="badge">Logical Memory Segmentation</span></p>
+
+<h2>1. Programmer View vs OS View</h2>
+<p>Segmentation memory ko logical units (Code, Stack, Heap, Data) me organize karta hai. Address &lt;s, d&gt; hota hai jaha s = Segment number aur d = Offset.</p>
+
+<h2>2. Hardware Bounds Protection</h2>
+<p>Segment Table me do fields hote hain: <strong>Base</strong> (Physical start) aur <strong>Limit</strong> (Length). Agar d &ge; Limit, hardware MMU ek <strong>Trap (Segmentation Fault)</strong> generate karta hai. Agar d &lt; Limit, tab Physical Address = Base + d.</p>
+
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Segmentation Hardware Architecture &amp; Bounds Protection</text>
+  
+  <!-- CPU and Logical Address <s, d> -->
+  <g transform="translate(40, 100)">
+    <rect width="80" height="60" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="40" y="36" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CPU</text>
+    
+    <rect x="120" y="10" width="110" height="40" rx="4" fill="#0284c7"/>
+    <text x="175" y="35" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">s (Segment #)</text>
+    
+    <rect x="230" y="10" width="90" height="40" rx="4" fill="#0369a1"/>
+    <text x="275" y="35" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">d (Offset)</text>
+    
+    <line x1="80" y1="30" x2="120" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Segment Table -->
+  <g transform="translate(410, 80)">
+    <rect width="200" height="200" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
+    <rect x="0" y="0" width="200" height="30" rx="8" fill="#581c87"/>
+    <text x="100" y="20" fill="#e9d5ff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Segment Table</text>
+    
+    <text x="50" y="48" fill="#94a3b8" font-family="sans-serif" font-size="10.5">Limit (Size)</text>
+    <text x="150" y="48" fill="#94a3b8" font-family="sans-serif" font-size="10.5">Base (Addr)</text>
+    <line x1="10" y1="55" x2="190" y2="55" stroke="#334155"/>
+    
+    <rect x="15" y="65" width="170" height="25" fill="#0f172a"/>
+    <text x="50" y="82" fill="#cbd5e1" font-family="sans-serif" font-size="11">1000</text>
+    <text x="150" y="82" fill="#4ade80" font-family="sans-serif" font-size="11">1400</text>
+    
+    <rect x="15" y="95" width="170" height="25" fill="#3b82f6" opacity="0.3"/>
+    <text x="50" y="112" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="bold">Limit(s)</text>
+    <text x="150" y="112" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Base(s)</text>
+    
+    <rect x="15" y="125" width="170" height="25" fill="#0f172a"/>
+    <text x="50" y="142" fill="#cbd5e1" font-family="sans-serif" font-size="11">400</text>
+    <text x="150" y="142" fill="#4ade80" font-family="sans-serif" font-size="11">6300</text>
+    
+    <!-- Arrow from s to table -->
+    <path d="M -180 50 C -100 50, -100 110, 15 110" fill="none" stroke="#38bdf8" stroke-width="1.8" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Comparator Block (Bounds Check: d < Limit) -->
+  <g transform="translate(420, 320)">
+    <polygon points="50,0 100,35 50,70 0,35" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <text x="50" y="40" fill="#fde68a" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">d &lt; Limit?</text>
+    
+    <!-- Path from Limit to Comparator -->
+    <path d="M 40 -130 L 40 -10 L 50 0" stroke="#cbd5e1" stroke-width="1.5"/>
+    <!-- Path from d to Comparator -->
+    <path d="M -100 -180 C -100 0, -20 35, 0 35" stroke="#38bdf8" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+    
+    <!-- False Trap Branch -->
+    <line x1="50" y1="70" x2="50" y2="120" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="60" y="100" fill="#f87171" font-family="sans-serif" font-size="11" font-weight="bold">NO: TRAP (Segfault)</text>
+  </g>
+
+  <!-- Adder Block: Physical Address = Base + d -->
+  <g transform="translate(680, 200)">
+    <circle cx="35" cy="35" r="30" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+    <text x="35" y="42" fill="#4ade80" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle">+</text>
+    
+    <!-- Path from Base(s) to Adder -->
+    <path d="M -80 -90 L -10 -90 L -10 20 L 5 25" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+    <!-- Path from Comparator YES to Adder -->
+    <path d="M -160 155 L -100 155 L -100 45 L 5 45" stroke="#fde68a" stroke-width="1.8" fill="none"/>
+    <text x="-150" y="145" fill="#4ade80" font-family="sans-serif" font-size="10.5" font-weight="bold">YES (Valid)</text>
+    
+    <!-- Adder Output to Physical RAM -->
+    <line x1="65" y1="35" x2="130" y2="35" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="100" y="25" fill="#4ade80" font-family="sans-serif" font-size="10" font-weight="bold">Physical Address</text>
+  </g>
+
+  <!-- Physical Memory Box -->
+  <g transform="translate(820, 80)">
+    <rect width="150" height="380" rx="8" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <text x="75" y="25" fill="#4ade80" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">Physical RAM</text>
+    
+    <rect x="15" y="45" width="120" height="50" fill="#0f172a" stroke="#334155"/>
+    <text x="75" y="73" fill="#64748b" font-family="sans-serif" font-size="10" text-anchor="middle">Segment 0 (Code)</text>
+    
+    <rect x="15" y="140" width="120" height="75" fill="#166534" stroke="#4ade80"/>
+    <text x="75" y="170" fill="#ffffff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Segment s</text>
+    <text x="75" y="195" fill="#86efac" font-family="sans-serif" font-size="9" text-anchor="middle">Base(s) + d</text>
+    
+    <rect x="15" y="250" width="120" height="50" fill="#0f172a" stroke="#334155"/>
+    <text x="75" y="278" fill="#64748b" font-family="sans-serif" font-size="10" text-anchor="middle">Segment 2 (Stack)</text>
+  </g>
+</svg>
+</div>
+
+<h2>3. Paging vs Segmentation Comparison</h2>
+<table>
+<tr><th>Parameter</th><th>Paging</th><th>Segmentation</th></tr>
+<tr><td>Block Size</td><td>Fixed (4 KB)</td><td>Variable</td></tr>
+<tr><td>Decided by</td><td>Hardware / OS</td><td>Programmer / Compiler</td></tr>
+<tr><td>Internal Fragmentation</td><td>Yes (in last page)</td><td><strong>No (Zero)</strong></td></tr>
+<tr><td>External Fragmentation</td><td><strong>No (Zero)</strong></td><td>Yes</td></tr>
+<tr><td>Address Calculation</td><td>Bit Concatenation</td><td>Base + Offset Addition</td></tr>
+</table>
+
+<h2>4. Solved Examples</h2>
+<div class="callout">
+&bull; &lt;0, 430&gt;: 430 &lt; 600 (Valid) &rarr; Base 219 + 430 = <strong>649</strong>.<br>
+&bull; &lt;2, 500&gt;: 500 &ge; 100 (Limit Exceeded) &rarr; <strong>Trap: Segfault</strong>.<br>
+&bull; &lt;3, 400&gt;: 400 &lt; 580 (Valid) &rarr; Base 1327 + 400 = <strong>1727</strong>.
+</div>
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Unit 4: Memory Management - 3-Page Ultra Revision Notes</title>
+<style>
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #0f172a;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  font-size: 8.2pt;
+  line-height: 1.28;
+}
+.page {
+  width: 210mm;
+  height: 296mm;
+  max-height: 296mm;
+  padding: 8mm 11mm 6mm 11mm;
+  margin: 0 auto;
+  overflow: hidden;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+.page:last-child {
+  page-break-after: avoid;
+}
+.header {
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.header h1 {
+  margin: 0;
+  font-size: 13pt;
+  color: #1e3a8a;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.header .badge {
+  font-size: 7.2pt;
+  font-weight: bold;
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.sec-title {
+  font-size: 9pt;
+  font-weight: 800;
+  color: #1e40af;
+  background: #f1f5f9;
+  border-left: 3px solid #2563eb;
+  padding: 2px 6px;
+  margin: 4px 0 2px 0;
+  text-transform: uppercase;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.box {
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 4px 6px;
+  background: #f8fafc;
+}
+.box-title {
+  font-weight: bold;
+  font-size: 8.3pt;
+  color: #0f172a;
+  margin-bottom: 2px;
+  border-bottom: 1px dashed #cbd5e1;
+  padding-bottom: 2px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7.6pt;
+  margin: 3px 0;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 2px 4px;
+  text-align: left;
+}
+th {
+  background: #e2e8f0;
+  font-weight: 700;
+  color: #0f172a;
+}
+ul {
+  margin: 2px 0;
+  padding-left: 14px;
+}
+li {
+  margin-bottom: 1.5px;
+}
+.formula {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 7.8pt;
+  margin: 2px 0;
+}
+.highlight {
+  color: #b91c1c;
+  font-weight: bold;
+}
+.green {
+  color: #15803d;
+  font-weight: bold;
+}
+.footer {
+  margin-top: auto;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 3px;
+  font-size: 7pt;
+  color: #64748b;
+  display: flex;
+  justify-content: space-between;
+}
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>UNIT 4: MEMORY MANAGEMENT &bull; ULTRA RECALL NOTES</h1>
+      <span style="font-size: 7.5pt; color: #475569;">B.Tech CS/IT (AKTU BCS401) &bull; Page 1 of 3: Address Binding, Contiguous, Paging &amp; TLB</span>
+    </div>
+    <span class="badge">PAGE 1 / 3</span>
+  </div>
+
+  <div class="sec-title">1. Memory Hierarchy &amp; Address Spaces</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Memory Hierarchy &amp; Latency</div>
+      <ul>
+        <li><strong>Speed Order:</strong> Registers (&lt;1ns) &gt; L1/L2/L3 Cache (1-10ns) &gt; RAM (50-100ns) &gt; SSD/NVMe (&mu;s) &gt; HDD (ms).</li>
+        <li><strong>Resident Monitor:</strong> Early OS batch prototype; uses <em>Fence Register</em> to isolate OS code from user programs.</li>
+        <li><strong>Logical (Virtual) Address:</strong> CPU generates at execution.</li>
+        <li><strong>Physical (Real) Address:</strong> RAM hardware pin address.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Address Binding: 3 Crucial Phases</div>
+      <ul>
+        <li><strong>Compile Time:</strong> Generates <em>Absolute Code</em>. Starting address fix hota hai; move karne par scratch recompile!</li>
+        <li><strong>Load Time:</strong> Generates <em>Relocatable Code</em>. Offset relative to 0; loader final RAM base address bind karta hai.</li>
+        <li><strong>Execution Time:</strong> Dynamic relocation via hardware MMU. Process runtime par RAM me swap/relocate ho sakta hai.</li>
+      </ul>
+      <div class="formula">Physical Addr = Logical Addr + Base Register</div>
+    </div>
+  </div>
+
+  <div class="sec-title">2. Dynamic Loading &amp; Linking</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Dynamic Loading</div>
+      <ul>
+        <li>Routines memory me tabhi aate hain jab unhe actually call kiya jaye (on-demand). Unused error routines memory waste nahi karte.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Dynamic Linking (Shared Libs .so / .dll)</div>
+      <ul>
+        <li>Binary me actual code ke bajaye chhota <strong>Stub</strong> embed hota hai. Shared library RAM me ek baar load hoti hai aur sabhi share karte hain.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">3. Contiguous Allocation, Fragmentation &amp; Strategies</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Fixed vs Variable Partitions</div>
+      <table>
+        <tr><th>Feature</th><th>Fixed (MFT)</th><th>Variable (MVT)</th></tr>
+        <tr><td>Partitioning</td><td>Boot time fixed slots</td><td>Dynamic on process request</td></tr>
+        <tr><td>Multiprogramming</td><td>Strictly partition count</td><td>Dynamic (RAM capacity)</td></tr>
+        <tr><td><strong>Fragmentation</strong></td><td><span class="highlight">Internal Fragmentation</span></td><td><span class="highlight">External Fragmentation</span></td></tr>
+      </table>
+      <ul>
+        <li><strong>Internal Frag:</strong> Partition space unused by smaller process.</li>
+        <li><strong>External Frag:</strong> Total free memory sufficient hai par non-contiguous hone se allocation fail ho jati hai (<em>50% Rule</em>).</li>
+        <li><strong>Compaction:</strong> Processes ko relocate karke ek bada hole banana; <span class="highlight">requires Execution-Time Relocation!</span></li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Dynamic Storage Allocation Strategies</div>
+      <ul>
+        <li><strong>First Fit:</strong> Pehla hole jo process size satisfy kare. <em>Sabse Tez (Fastest)</em>, shuru me chhote fragments chhodta hai.</li>
+        <li><strong>Best Fit:</strong> Smallest hole jo satisfy kare. Badi holes preserve rehti hain par <em>smallest useless slivers</em> create hote hain (Worst external frag). O(n).</li>
+        <li><strong>Worst Fit:</strong> Sabse bada available hole allocate karo. Leftover hole bada rehta hai, par largest blocks jaldi exhaust hote hain. O(n).</li>
+        <li><strong>Next Fit:</strong> Circular First Fit from last allocation pointer.</li>
+      </ul>
+      <div class="formula">Hardware Bounds: If L &lt; Limit &rArr; Base + L; Else Trap!</div>
+    </div>
+  </div>
+
+  <div class="sec-title">4. Non-Contiguous Paging &amp; Address Translation</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Paging Principles &amp; Address Math</div>
+      <ul>
+        <li>RAM is split into <strong>Frames</strong>; Process is split into <strong>Pages</strong>.</li>
+        <li><span class="green">Invariant: Frame Size = Page Size = 2^n bytes</span>.</li>
+        <li><span class="green">External Fragmentation = ZERO (Completely eliminated!)</span></li>
+        <li>Internal Fragmentation: Last page only (Avg = PageSize / 2).</li>
+        <li>Logical Address = [p : m - n bits] | [d : n bits].</li>
+        <li>Page Table index p yields Frame f &rArr; Physical = [f || d].</li>
+      </ul>
+      <div class="formula">Physical Addr = (f &times; FrameSize) + d</div>
+    </div>
+    <div class="box">
+      <div class="box-title">Pure Paging Latency Bottleneck</div>
+      <ul>
+        <li>Pure paging me har access ke liye RAM ko <span class="highlight">DO BAAR</span> access karna padta hai:</li>
+        <li>1. Page Table entry read karne ke liye (RAM access 1).</li>
+        <li>2. Actual data / instruction read karne ke liye (RAM access 2).</li>
+        <li>Latency penalty = <span class="highlight">100% Slowdown (2 &times; t_RAM)</span>.</li>
+      </ul>
+      <div class="formula">Pure Paging Access Time = 2 &times; t_RAM</div>
+    </div>
+  </div>
+
+  <div class="sec-title">5. TLB (Translation Lookaside Buffer) &amp; EMAT</div>
+  <div class="box">
+    <div class="box-title">Hardware Associative Cache &amp; Effective Memory Access Time (EMAT)</div>
+    <div class="grid-2">
+      <div>
+        <ul>
+          <li><strong>TLB:</strong> High-speed associative cache on CPU chip (1-10ns). Fast parallel search for &lt;p, f&gt;.</li>
+          <li><strong>TLB Hit (h):</strong> Time = t_TLB + t_RAM. Direct physical frame read.</li>
+          <li><strong>TLB Miss (1 - h):</strong> Time = t_TLB + 2 &times; t_RAM. Read table from RAM, update TLB, then read data.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="formula">EMAT = h(t_TLB + t_RAM) + (1-h)(t_TLB + 2&times;t_RAM)</div>
+        <div class="formula">EMAT = t_TLB + (2 - h) &times; t_RAM</div>
+        <ul>
+          <li><em>Solved Quick:</em> If t_RAM=100ns, t_TLB=20ns, h=0.8 &rArr; EMAT = 0.8(120) + 0.2(220) = <strong>140 ns</strong>. (At h=0.98 &rArr; <strong>122 ns</strong>).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Operating Systems (BCS401) &bull; Unit 4 Master Notes</span>
+    <span>Self-Contained Revision Sheet &bull; Page 1 of 3</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>UNIT 4: MEMORY MANAGEMENT &bull; ULTRA RECALL NOTES</h1>
+      <span style="font-size: 7.5pt; color: #475569;">B.Tech CS/IT (AKTU BCS401) &bull; Page 2 of 3: Multilevel, Segmentation, Demand Paging &amp; Belady</span>
+    </div>
+    <span class="badge">PAGE 2 / 3</span>
+  </div>
+
+  <div class="sec-title">6. Multilevel &amp; Inverted Page Tables</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Two-Level Hierarchical Paging</div>
+      <ul>
+        <li>32-bit CPU with 4KB pages needs 1M entries &times; 4B = <strong>4MB contiguous table per process</strong>!</li>
+        <li><strong>Two-Level Split:</strong> [p1 : 10 bits] | [p2 : 10 bits] | [d : 12 bits].</li>
+        <li>Outer page table fits in 1 page (4KB). Unused inner tables RAM me load nahi hote (huge RAM savings!).</li>
+        <li><span class="highlight">Miss Penalty:</span> k-level paging me miss par <strong>(k + 1) RAM accesses</strong> lagte hain (Two-level = 3 RAM accesses).</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Inverted Page Table</div>
+      <ul>
+        <li>Poore system me <span class="green">strictly EK TABLE</span> hoti hai, indexed by physical Frame Number i.</li>
+        <li>Entry = &lt;Process ID (PID), Page Number (p)&gt;.</li>
+        <li><strong>Pro:</strong> Memory overhead physical RAM ke size par depend karta hai, virtual space par nahi (Extremely small).</li>
+        <li><strong>Con:</strong> Slow search (requires Hash Table); shared memory difficult.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">7. Segmentation &amp; Paged Segmentation</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Segmentation Architecture &lt;s, d&gt;</div>
+      <ul>
+        <li>User/Programmer view: Variable size modules (Code, Stack, Heap).</li>
+        <li><strong>Segment Table:</strong> Stores <em>Base</em> (physical start) and <em>Limit</em> (length).</li>
+        <li><strong>Hardware Bounds Check:</strong>
+          <ul>
+            <li>If (d &ge; Limit) &rArr; <span class="highlight">TRAP: Segmentation Fault!</span></li>
+            <li>If (d &lt; Limit) &rArr; <span class="green">Physical Addr = Base + d</span>.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Paging vs Segmentation vs Hybrid</div>
+      <table>
+        <tr><th>Property</th><th>Paging</th><th>Segmentation</th></tr>
+        <tr><td>Block Size</td><td>Fixed (4KB)</td><td>Variable</td></tr>
+        <tr><td>Defined By</td><td>Hardware/OS</td><td>Programmer/Compiler</td></tr>
+        <tr><td>Internal Frag</td><td>Yes (last page)</td><td><span class="green">Zero</span></td></tr>
+        <tr><td>External Frag</td><td><span class="green">Zero</span></td><td>Yes</td></tr>
+      </table>
+      <ul>
+        <li><strong>Paged Segmentation:</strong> Hybrid; segments are internally paged (Combines logical protection with zero external frag).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">8. Virtual Memory &amp; Demand Paging</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Demand Paging &amp; Valid-Invalid Bit</div>
+      <ul>
+        <li>Virtual memory allows process size &gt; physical RAM.</li>
+        <li><strong>Demand Paging:</strong> Pages loaded into RAM only when demanded by CPU (<em>Lazy Swapper / Pager</em>).</li>
+        <li><strong>Page Table (V/I) Bit:</strong>
+          <ul>
+            <li>'v' (Valid = 1): Page is physically in RAM.</li>
+            <li>'i' (Invalid = 0): Page is not in RAM (On disk swap space).</li>
+          </ul>
+        </li>
+        <li>Accessing invalid page triggers <span class="highlight">PAGE FAULT TRAP</span>!</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">6-Step Page Fault Handling Sequence</div>
+      <ol style="margin: 2px 0; padding-left: 14px;">
+        <li>MMU detects 'i' bit &rArr; Hardware Trap to OS.</li>
+        <li>OS kernel saves user registers &amp; state into PCB.</li>
+        <li>OS checks legality; if legal, finds free frame in RAM.</li>
+        <li>Issue disk I/O to swap-in page from backing store.</li>
+        <li>Write frame # in Page Table; flip bit to 'v' (Valid).</li>
+        <li>OS restarts trapped instruction from exact PC point.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="sec-title">9. Effective Access Time (EAT) under Demand Paging</div>
+  <div class="box">
+    <div class="grid-2">
+      <div>
+        <div class="formula">EAT = (1 - p) &times; t_RAM + p &times; (Fault Service Time)</div>
+        <ul>
+          <li>t_RAM = 100 - 200 ns | Fault Service Time = 8 - 10 ms (8,000,000 ns).</li>
+          <li>Disk access is <span class="highlight">100,000&times; slower than RAM!</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="box-title">Numerical Rule of Thumb:</div>
+        <ul>
+          <li>For &lt; 10% performance degradation:
+            $$p \le rac{\Delta 	ext{Allowed Time}}{	ext{Fault Time}} pprox rac{20	ext{ns}}{8	imes 10^6	ext{ns}} = rac{1}{400,000} = \mathbf{0.00025\%}$$
+          </li>
+          <li>System must have fewer than 1 fault per 400,000 references!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title">10. FIFO Page Replacement &amp; Belady's Anomaly</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">FIFO Algorithm &amp; Dirty Bit</div>
+      <ul>
+        <li><strong>FIFO:</strong> Replaces oldest page in RAM. Implemented via circular queue.</li>
+        <li><strong>Dirty (Modify) Bit:</strong> If 0 (Clean) &rArr; discard without disk write; If 1 (Dirty) &rArr; must write back to swap space before evicting.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Belady's Anomaly Proof (AKTU Classic)</div>
+      <ul>
+        <li><strong>Phenomenon:</strong> Frames badhane par page faults badh jate hain!</li>
+        <li><strong>String:</strong> 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5</li>
+        <li>3 Frames &rArr; <strong>9 Page Faults</strong>.</li>
+        <li>4 Frames &rArr; <span class="highlight">10 Page Faults! (Faults Badh Gaye)</span></li>
+        <li><strong>Why:</strong> FIFO is NOT a Stack Algorithm ($S_n 
+ot\subseteq S_{n+1}$).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Operating Systems (BCS401) &bull; Unit 4 Master Notes</span>
+    <span>Self-Contained Revision Sheet &bull; Page 2 of 3</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>UNIT 4: MEMORY MANAGEMENT &bull; ULTRA RECALL NOTES</h1>
+      <span style="font-size: 7.5pt; color: #475569;">B.Tech CS/IT (AKTU BCS401) &bull; Page 3 of 3: Page Replacement, Thrashing, Cache &amp; Formulas</span>
+    </div>
+    <span class="badge">PAGE 3 / 3</span>
+  </div>
+
+  <div class="sec-title">11. Optimal &amp; LRU Page Replacement (Stack Algorithms)</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Optimal (OPT / MIN) Algorithm</div>
+      <ul>
+        <li><strong>Rule:</strong> Replace page that will not be used for longest time in future.</li>
+        <li>Guarantees <span class="green">lowest possible page fault rate</span>.</li>
+        <li>Theoretical benchmark; impossible in real OS (needs future oracle).</li>
+        <li><span class="green">No Belady's Anomaly (Stack Algorithm)</span>.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Least Recently Used (LRU) Algorithm</div>
+      <ul>
+        <li><strong>Rule:</strong> Replace page that has not been used for longest time in past.</li>
+        <li>Approximates OPT via temporal locality. <span class="green">No Belady's Anomaly!</span></li>
+        <li><strong>Implementation:</strong>
+          <ul>
+            <li>1. Logical Clock Counter: Min counter value victim ($O(n)$ search).</li>
+            <li>2. Doubly Linked Stack: Most recent to Top; Bottom = victim ($O(1)$).</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">12. Clock (Second Chance) &amp; Counting Algorithms</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Second Chance (Clock) Replacement</div>
+      <ul>
+        <li>Circular queue + Clock Pointer + <strong>Reference Bit (R)</strong>.</li>
+        <li>If R == 0 &rArr; Replace page (Victim found!).</li>
+        <li>If R == 1 &rArr; Reset R = 0, advance pointer (Second chance!).</li>
+        <li>Degenerates to FIFO if all bits are 1.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Enhanced Clock &amp; Counting (LFU/MFU)</div>
+      <ul>
+        <li><strong>Enhanced Pair &lt;R, M&gt;:</strong> (0,0) Best victim &gt; (0,1) Dirty &gt; (1,0) Clean recent &gt; (1,1) Worst candidate.</li>
+        <li><strong>LFU:</strong> Smallest reference count replaced.</li>
+        <li><strong>MFU:</strong> Highest count replaced (protects new arrivals).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">13. Thrashing &amp; Working-Set Model</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Thrashing Cause &amp; Working-Set Model</div>
+      <ul>
+        <li><strong>Thrashing:</strong> CPU utilization crashes near 0% because system spends 99% time swapping pages between disk and RAM.</li>
+        <li><strong>Root Cause:</strong> High Degree of Multiprogramming &rArr; Frames per process fall below locality &rArr; continuous faults.</li>
+        <li><strong>Working-Set Model:</strong> Parameter $\Delta$ (Window).
+          <ul>
+            <li>$WSS_i$ = pages accessed in last $\Delta$ refs.</li>
+            <li>Demand $D = \sum WSS_i$.</li>
+            <li><span class="highlight">If D &gt; Total Frames M &rArr; Thrashing occurs!</span></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Page-Fault Frequency (PFF) Strategy</div>
+      <ul>
+        <li>Dynamic self-regulating frame allocation.</li>
+        <li>If Fault Rate &gt; Upper Threshold &rArr; Allocate extra frames to process.</li>
+        <li>If Fault Rate &lt; Lower Threshold &rArr; Remove surplus frames from process.</li>
+        <li>If Upper exceeded and no frames free &rArr; Swap-out process.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">14. Locality of Reference &amp; Cache Organization</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Locality of Reference</div>
+      <ul>
+        <li><strong>Temporal Locality:</strong> Same location accessed again soon (Loops, loop index counters, subroutines).</li>
+        <li><strong>Spatial Locality:</strong> Adjacent memory locations accessed soon (Array sequential access, code stream).</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">Cache Mappings &amp; AMAT</div>
+      <ul>
+        <li><strong>Direct:</strong> Line = Block mod N. Fast, high conflict misses.</li>
+        <li><strong>Fully Associative:</strong> Any block in any line. Zero conflict.</li>
+        <li><strong>k-Way Set:</strong> Set = Block mod NumSets. Best balance.</li>
+      </ul>
+      <div class="formula">AMAT = Hit Time + (Miss Rate &times; Miss Penalty)</div>
+    </div>
+  </div>
+
+  <div class="sec-title">15. Master Formula Table &amp; Technical Interview Quick Recall</div>
+  <div class="box">
+    <table style="font-size: 7.5pt;">
+      <tr><th>Concept / Metric</th><th>Formula / Condition</th><th>Key Insight</th></tr>
+      <tr><td><strong>Paging Address</strong></td><td>Physical = (f &times; FrameSize) + d</td><td>External Frag = 0; Internal = last page</td></tr>
+      <tr><td><strong>TLB EMAT</strong></td><td>EMAT = h(t_TLB + t_RAM) + (1-h)(t_TLB + 2&times;t_RAM)</td><td>Two-level Miss = t_TLB + 3&times;t_RAM</td></tr>
+      <tr><td><strong>Demand Paging EAT</strong></td><td>EAT = (1-p)&times;t_RAM + p&times;(t_Fault)</td><td>p must be &lt; 0.00025% for 10% slowdown</td></tr>
+      <tr><td><strong>Segmentation</strong></td><td>If d &lt; Limit &rArr; Base + d; Else TRAP!</td><td>Programmer view; Internal Frag = 0</td></tr>
+      <tr><td><strong>Thrashing</strong></td><td>Thrashing if Demand D = &sum; WSS_i &gt; M</td><td>Prevent via PFF or swapping out process</td></tr>
+      <tr><td><strong>Belady's Anomaly</strong></td><td>FIFO fails subset property $S_n \subseteq S_{n+1}$</td><td>LRU and OPT never suffer anomaly</td></tr>
+      <tr><td><strong>COW &amp; ASID</strong></td><td>Copy-On-Write on fork(); ASID tags in TLB</td><td>Avoids TLB flush on context switch</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>Operating Systems (BCS401) &bull; Unit 4 Master Notes</span>
+    <span>Self-Contained Revision Sheet &bull; Page 3 of 3</span>
+  </div>
+</div>
+
+</body>
+</html>

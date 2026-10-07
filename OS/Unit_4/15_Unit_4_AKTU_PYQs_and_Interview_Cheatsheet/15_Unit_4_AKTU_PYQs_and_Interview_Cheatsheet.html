@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 15: AKTU PYQs and Technical Interview Cheatsheet</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 15: AKTU PYQs and Technical Interview Cheatsheet</h1>
+<p><span class="badge">AKTU BCS401</span> <span class="badge">Unit 4</span> <span class="badge">Exam Mastery &amp; Interviews</span></p>
+
+<h2>1. Master Formula Sheet</h2>
+<table>
+<tr><th>Concept</th><th>Mathematical Formula</th></tr>
+<tr><td>TLB EMAT</td><td>h &times; (t_TLB + t_RAM) + (1 - h) &times; (t_TLB + 2 &times; t_RAM)</td></tr>
+<tr><td>Demand Paging EAT</td><td>(1 - p) &times; t_RAM + p &times; t_Fault</td></tr>
+<tr><td>Segmentation</td><td>Physical = Base + Offset (If Offset &lt; Limit)</td></tr>
+<tr><td>Working Set Thrashing</td><td>Demand D = &sum; WSS_i &gt; Physical Memory M</td></tr>
+</table>
+
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Unit 4 High-Yield Formulas &amp; Interview Cheatsheet</text>
+  
+  <!-- Row 1 Left: Paging Formulas -->
+  <g transform="translate(40, 70)">
+    <rect width="440" height="190" rx="8" fill="#1e293b" stroke="#38bdf8"/>
+    <text x="220" y="26" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">1. Paging &amp; Address Translation</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Page Size = Frame Size = 2^n bytes &rArr; Offset d = n bits</text>
+    <text x="20" y="80" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Page Number p = Logical Bits (m) - n bits</text>
+    <text x="20" y="105" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">&bull; Physical Address = (Frame Number f &times; FrameSize) + d</text>
+    <text x="20" y="130" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Pure Paging Latency = 2 &times; t_RAM (Double access penalty)</text>
+    <text x="20" y="155" fill="#fde68a" font-family="sans-serif" font-size="10.5">&bull; Internal Frag = Worst (PageSize - 1), Average (PageSize / 2)</text>
+  </g>
+
+  <!-- Row 1 Right: TLB & EMAT -->
+  <g transform="translate(520, 70)">
+    <rect width="440" height="190" rx="8" fill="#1e293b" stroke="#10b981"/>
+    <text x="220" y="26" fill="#34d399" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">2. TLB &amp; Effective Access Time</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Hit Time = t_TLB + t_RAM</text>
+    <text x="20" y="80" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Miss Time = t_TLB + 2 &times; t_RAM</text>
+    <text x="20" y="110" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">&bull; EMAT = h &times; (t_TLB + t_RAM) + (1-h)&times;(t_TLB + 2&times;t_RAM)</text>
+    <text x="20" y="135" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Two-Level Miss = t_TLB + 3 &times; t_RAM</text>
+    <text x="20" y="160" fill="#fca5a5" font-family="sans-serif" font-size="10.5">&bull; Demand Paging EAT = (1-p)&times;t_RAM + p&times;(t_Fault)</text>
+  </g>
+
+  <!-- Row 2 Left: Page Replacement Comparison -->
+  <g transform="translate(40, 280)">
+    <rect width="440" height="200" rx="8" fill="#1e293b" stroke="#f59e0b"/>
+    <text x="220" y="26" fill="#fbbf24" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">3. Page Replacement Rules</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; FIFO: Replaces oldest; suffers Belady's Anomaly</text>
+    <text x="20" y="80" fill="#4ade80" font-family="sans-serif" font-size="10.5" font-weight="bold">&bull; OPT: Longest future use; minimum faults (theoretical)</text>
+    <text x="20" y="105" fill="#38bdf8" font-family="sans-serif" font-size="10.5" font-weight="bold">&bull; LRU: Least recent past use; Stack algorithm (NO anomaly)</text>
+    <text x="20" y="130" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Clock (Second Chance): R=0 replace; R=1 reset to 0</text>
+    <text x="20" y="155" fill="#e2e8f0" font-family="sans-serif" font-size="10.5">&bull; Enhanced Clock: (0,0) best &gt; (0,1) &gt; (1,0) &gt; (1,1) worst</text>
+    <text x="20" y="180" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; LFU/MFU: Smallest count / Largest count replaced</text>
+  </g>
+
+  <!-- Row 2 Right: Segmentation & Thrashing -->
+  <g transform="translate(520, 280)">
+    <rect width="440" height="200" rx="8" fill="#1e293b" stroke="#a855f7"/>
+    <text x="220" y="26" fill="#c084fc" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">4. Segmentation &amp; Thrashing</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Segment Address = &lt;s, d&gt; | If d &ge; Limit &rArr; Trap (Segfault)</text>
+    <text x="20" y="80" fill="#4ade80" font-family="sans-serif" font-size="10.5" font-weight="bold">&bull; If d &lt; Limit &rArr; Physical Address = Base(s) + d</text>
+    <text x="20" y="105" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Thrashing: CPU thrashing when Demand D = &sum; WSS_i &gt; M</text>
+    <text x="20" y="130" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; PFF Strategy: Dynamic threshold frame allocation</text>
+    <text x="20" y="155" fill="#fde68a" font-family="sans-serif" font-size="10.5">&bull; Compaction: Requires Execution Time Dynamic Relocation</text>
+    <text x="20" y="180" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Cache AMAT = Hit_Time + Miss_Rate &times; Miss_Penalty</text>
+  </g>
+</svg>
+</div>
+
+<h2>2. High-Yield Interview Topics</h2>
+<div class="callout">
+&bull; <strong>ASID Tagging vs TLB Flush:</strong> Context switch par ASID tag use karke TLB flush avoid kiya jata hai.<br>
+&bull; <strong>Copy-On-Write (COW):</strong> fork() par parent aur child shared read-only frames use karte hain; memory write par single page copy hota hai.<br>
+&bull; <strong>Belady's Anomaly:</strong> FIFO suffers because it is not a stack algorithm ($S_n 
+ot\subseteq S_{n+1}$).
+</div>
+</body>
+</html>
