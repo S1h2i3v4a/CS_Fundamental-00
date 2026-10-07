@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrBlue04" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg04)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Data Models &amp; Database Languages Ecosystem</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Classification of Data Models and DDL / DML / DCL / TCL Sublanguages</text>
+
+  <!-- LEFT: DATA MODELS CLASSIFICATION -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="405" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <rect width="440" height="34" rx="10" fill="#1e3a8a"/>
+    <text x="220" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">CLASSIFICATION OF DATA MODELS</text>
+
+    <!-- 1. Record-Based -->
+    <rect x="20" y="48" width="400" height="110" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+    <text x="32" y="68" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">1. Record-Based Logical Models</text>
+    <text x="32" y="86" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• <b>Relational Model:</b> Data organized in 2D tables (relations).</text>
+    <text x="32" y="104" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• <b>Network Model (CODASYL):</b> Records connected via pointers/graphs.</text>
+    <text x="32" y="122" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• <b>Hierarchical Model:</b> Tree structure, parent-child segments (IMS).</text>
+    <text x="32" y="142" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Standard across industry: Relational dominates.</text>
+
+    <!-- 2. Object-Based -->
+    <rect x="20" y="168" width="400" height="75" rx="6" fill="#0f172a" stroke="#34d399"/>
+    <text x="32" y="188" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">2. Object-Based Data Models</text>
+    <text x="32" y="206" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• <b>Object-Oriented (OODBMS):</b> Objects, classes, methods, inheritance.</text>
+    <text x="32" y="224" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• <b>Object-Relational (ORDBMS):</b> Relational + complex user-defined types (PostgreSQL).</text>
+
+    <!-- 3. Semi-Structured -->
+    <rect x="20" y="253" width="400" height="65" rx="6" fill="#0f172a" stroke="#fbbf24"/>
+    <text x="32" y="273" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">3. Semi-Structured Models (NoSQL)</text>
+    <text x="32" y="291" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• JSON documents, BSON, XML trees (MongoDB, DynamoDB).</text>
+    <text x="32" y="306" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Schema-on-read flexibility without predefined DDL tables.</text>
+
+    <!-- 4. Physical Model -->
+    <rect x="20" y="328" width="400" height="52" rx="6" fill="#0f172a" stroke="#a855f7"/>
+    <text x="32" y="348" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#c084fc">4. Physical Data Models</text>
+    <text x="32" y="366" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Low-level record formats, byte-offsets, block headers.</text>
+  </g>
+
+  <!-- RIGHT: DATABASE LANGUAGES -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="405" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect width="440" height="34" rx="10" fill="#064e3b"/>
+    <text x="220" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">DATABASE LANGUAGES (SQL SUBSYSTEMS)</text>
+
+    <g transform="translate(20, 48)">
+      <!-- DDL -->
+      <rect width="400" height="68" rx="5" fill="#0f172a" stroke="#38bdf8"/>
+      <text x="15" y="20" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#38bdf8">DDL (Data Definition Language)</text>
+      <text x="15" y="36" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Defines schema structure &amp; writes metadata to Data Dictionary.</text>
+      <text x="15" y="52" font-family="monospace" font-size="9.5" fill="#a5f3fc">Commands: CREATE, ALTER, DROP, TRUNCATE, RENAME</text>
+
+      <!-- DML -->
+      <rect y="78" width="400" height="120" rx="5" fill="#0f172a" stroke="#34d399"/>
+      <text x="15" y="98" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#34d399">DML (Data Manipulation Language)</text>
+      <text x="15" y="114" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Accesses and manipulates user data inside tables.</text>
+      
+      <rect x="15" y="122" width="370" height="68" rx="4" fill="#022c22" stroke="#059669"/>
+      <text x="25" y="138" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#6ee7b7">• Procedural DML: User specifies WHAT and HOW (Relational Alg)</text>
+      <text x="25" y="154" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#6ee7b7">• Non-Procedural (Declarative) DML: User specifies WHAT only (SQL)</text>
+      <text x="25" y="172" font-family="monospace" font-size="9" fill="#a7f3d0">Commands: SELECT, INSERT, UPDATE, DELETE</text>
+
+      <!-- DCL -->
+      <rect y="208" width="400" height="62" rx="5" fill="#0f172a" stroke="#fbbf24"/>
+      <text x="15" y="228" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#fbbf24">DCL (Data Control Language)</text>
+      <text x="15" y="244" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Manages security privileges and access rights.</text>
+      <text x="15" y="258" font-family="monospace" font-size="9.5" fill="#fde68a">Commands: GRANT, REVOKE</text>
+
+      <!-- TCL -->
+      <rect y="280" width="400" height="62" rx="5" fill="#0f172a" stroke="#c084fc"/>
+      <text x="15" y="300" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#c084fc">TCL (Transaction Control Language)</text>
+      <text x="15" y="316" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Controls transaction boundaries and atomicity rollback.</text>
+      <text x="15" y="330" font-family="monospace" font-size="9.5" fill="#e9d5ff">Commands: COMMIT, ROLLBACK, SAVEPOINT</text>
+    </g>
+  </g>
+</svg>

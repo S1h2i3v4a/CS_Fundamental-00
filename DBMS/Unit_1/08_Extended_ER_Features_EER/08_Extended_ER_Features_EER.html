@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 08: Extended ER Features (EER)</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 08: Extended ER Features (EER)</h1>
+<p><span class="badge">Unit 1: Advanced Modeling</span> <span class="badge">AKTU BCS501</span> <span class="badge">Specialization &amp; Aggregation</span></p>
+
+<h2>1. EER Architecture &amp; Taxonomy</h2>
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg08)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Extended Entity-Relationship (EER) Architecture</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Specialization, Generalization, Disjoint (d) vs Overlapping (o) &amp; Aggregation</text>
+
+  <!-- SUPERCLASS -->
+  <rect x="420" y="85" width="160" height="50" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+  <text x="500" y="115" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">EMPLOYEE</text>
+  <text x="500" y="128" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#93c5fd">(Superclass Entity)</text>
+
+  <!-- Connectors from Superclass to Disjoint Circle -->
+  <line x1="500" y1="135" x2="500" y2="175" stroke="#38bdf8" stroke-width="2"/>
+  
+  <!-- Disjoint / Overlapping Circle -->
+  <circle cx="500" cy="195" r="20" fill="#0f172a" stroke="#f59e0b" stroke-width="2.5"/>
+  <text x="500" y="202" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="16" font-weight="bold" fill="#fbbf24">d</text>
+  <text x="535" y="198" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Disjoint Constraint</text>
+
+  <!-- Subclasses branches -->
+  <line x1="485" y1="210" x2="250" y2="280" stroke="#64748b" stroke-width="1.8"/>
+  <line x1="500" y1="215" x2="500" y2="280" stroke="#64748b" stroke-width="1.8"/>
+  <line x1="515" y1="210" x2="750" y2="280" stroke="#64748b" stroke-width="1.8"/>
+
+  <!-- SUBCLASSES -->
+  <!-- 1. Manager -->
+  <g transform="translate(180, 280)">
+    <rect width="140" height="48" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="70" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">MANAGER</text>
+    <text x="70" y="40" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Subclass (Bonus)</text>
+  </g>
+
+  <!-- 2. Engineer -->
+  <g transform="translate(430, 280)">
+    <rect width="140" height="48" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="70" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">ENGINEER</text>
+    <text x="70" y="40" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Subclass (Tech_Type)</text>
+  </g>
+
+  <!-- 3. Secretary -->
+  <g transform="translate(680, 280)">
+    <rect width="140" height="48" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="70" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">SECRETARY</text>
+    <text x="70" y="40" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Subclass (Typing_Speed)</text>
+  </g>
+
+  <!-- BOTTOM: AGGREGATION & CONSTRAINTS -->
+  <g transform="translate(40, 360)">
+    <rect width="920" height="135" rx="10" fill="#1e293b" stroke="#6366f1" stroke-width="2"/>
+    <rect width="920" height="28" rx="10" fill="#312e81"/>
+    <text x="460" y="19" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#c7d2fe">EER CONSTRAINTS &amp; AGGREGATION PRINCIPLES</text>
+
+    <!-- Disjointness -->
+    <g transform="translate(25, 38)">
+      <text x="0" y="16" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#38bdf8">1. Disjointness Constraint:</text>
+      <text x="0" y="34" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• <b>Disjoint (d):</b> Entity can belong to at most ONE subclass (e.g. Can't be Manager AND Secretary simultaneously).</text>
+      <text x="0" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• <b>Overlapping (o):</b> Entity can belong to MULTIPLE subclasses (e.g. Employee can be Teacher AND Student).</text>
+    </g>
+
+    <!-- Completeness -->
+    <g transform="translate(470, 38)">
+      <text x="0" y="16" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#10b981">2. Completeness Constraint:</text>
+      <text x="0" y="34" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• <b>Total (Double line):</b> Every superclass entity MUST belong to at least one subclass.</text>
+      <text x="0" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• <b>Partial (Single line):</b> Some superclass entities may not belong to any subclass.</text>
+    </g>
+
+    <!-- Aggregation note -->
+    <text x="460" y="118" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fde68a"><b>Aggregation:</b> Treating a relationship between entity sets as a higher-level composite entity so it can enter a secondary relationship.</text>
+  </g>
+</svg>
+
+</div>
+
+<h2>2. Specialization vs Generalization</h2>
+<table>
+  <tr><th>Feature</th><th>Specialization</th><th>Generalization</th></tr>
+  <tr><td><b>Approach</b></td><td>Top-Down Process</td><td>Bottom-Up Process</td></tr>
+  <tr><td><b>Objective</b></td><td>Identify distinguishing subclass properties</td><td>Generalize common superclass attributes</td></tr>
+  <tr><td><b>Inheritance</b></td><td>Subclass inherits all superclass attributes</td><td>Common attributes extracted into superclass</td></tr>
+</table>
+
+<h2>3. Core EER Constraints</h2>
+<div class="callout-info">
+• <b>Disjoint (d):</b> Entity can belong to at most 1 subclass.<br>
+• <b>Overlapping (o):</b> Entity can simultaneously belong to multiple subclasses.<br>
+• <b>Total (Double Line):</b> Entity must belong to at least 1 subclass.<br>
+• <b>Partial (Single Line):</b> Entity may not belong to any defined subclass.<br>
+• <b>Aggregation:</b> Abstracts a relationship into a higher-level composite entity.
+</div>
+</body>
+</html>

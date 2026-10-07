@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg03)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Database Users Hierarchy &amp; DBA Roles</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">User Classification, Interfaces &amp; Database Administrator Responsibilities</text>
+
+  <!-- LEFT: 5 USER CATEGORIES -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="405" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <rect width="440" height="34" rx="10" fill="#1e3a8a"/>
+    <text x="220" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">CLASSIFICATION OF DATABASE USERS</text>
+
+    <!-- 1. Naive -->
+    <rect x="20" y="48" width="400" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="68" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">1. Naive / Parametric Users</text>
+    <text x="32" y="86" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Interact via canned form interfaces. No SQL knowledge.</text>
+    <text x="32" y="98" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: Bank tellers, railway booking clerks, web shoppers.</text>
+
+    <!-- 2. Application Programmers -->
+    <rect x="20" y="116" width="400" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="136" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">2. Application Programmers</text>
+    <text x="32" y="154" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Write software using C, Java, Python with embedded SQL/ORMs.</text>
+    <text x="32" y="166" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: Backend engineers, full-stack developers.</text>
+
+    <!-- 3. Sophisticated Users -->
+    <rect x="20" y="184" width="400" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="204" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">3. Sophisticated / Analytical Users</text>
+    <text x="32" y="222" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Formulate complex ad-hoc SQL queries without writing programs.</text>
+    <text x="32" y="234" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: Data analysts, business intelligence scientists.</text>
+
+    <!-- 4. Specialized Users -->
+    <rect x="20" y="252" width="400" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="272" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#c084fc">4. Specialized Users</text>
+    <text x="32" y="290" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Write custom non-OLTP database apps (CAD, GIS, Spatial, AI).</text>
+    <text x="32" y="302" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: GIS mapping experts, multimedia engineers.</text>
+
+    <!-- 5. Casual Users -->
+    <rect x="20" y="320" width="400" height="68" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="340" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">5. Casual / Temporary Users</text>
+    <text x="32" y="358" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Access DB occasionally; need different info each time.</text>
+    <text x="32" y="372" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: Senior managers viewing quarterly executive summaries.</text>
+  </g>
+
+  <!-- RIGHT: DBA ROLES & RESPONSIBILITIES -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="405" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect width="440" height="34" rx="10" fill="#064e3b"/>
+    <text x="220" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">DATABASE ADMINISTRATOR (DBA) DUTIES</text>
+
+    <g transform="translate(20, 48)">
+      <!-- Duty 1 -->
+      <rect width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="20" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">1. Schema Definition</text>
+      <text x="15" y="36" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Writes DDL to create conceptual tables, primary keys, relationships.</text>
+
+      <!-- Duty 2 -->
+      <rect y="56" width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="76" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">2. Storage Structure &amp; Access Method Definition</text>
+      <text x="15" y="92" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Decides B+ Tree vs Hash indexes, disk block clustering, RAID tier.</text>
+
+      <!-- Duty 3 -->
+      <rect y="112" width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="132" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">3. Security &amp; Authorization Enforcement</text>
+      <text x="15" y="148" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Controls GRANT and REVOKE privileges to prevent unauthorized leaks.</text>
+
+      <!-- Duty 4 -->
+      <rect y="168" width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="188" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">4. Routine Backup &amp; Disaster Recovery</text>
+      <text x="15" y="204" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Schedules full/differential backups; tests WAL log crash recovery.</text>
+
+      <!-- Duty 5 -->
+      <rect y="224" width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="244" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">5. Performance Tuning &amp; Monitoring</text>
+      <text x="15" y="260" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Monitors slow query logs, cache hit ratio, index fragmentation.</text>
+
+      <!-- Cloud DBA Note -->
+      <rect y="280" width="400" height="64" rx="5" fill="#022c22" stroke="#10b981"/>
+      <text x="15" y="300" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#a7f3d0">Modern Cloud DBA Role:</text>
+      <text x="15" y="318" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Manages AWS RDS, Aurora, GCP Cloud SQL, automated scaling,</text>
+      <text x="15" y="332" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">multi-region read replicas, and zero-downtime schema migrations.</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg10)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Relational Data Model &amp; Integrity Constraints</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Relation Anatomy: Tuples, Attributes, Domains, Degree, Cardinality &amp; The 4 Constraints</text>
+
+  <!-- TABLE STRUCTURE ANATOMY -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="235" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <rect width="440" height="32" rx="10" fill="#1e3a8a"/>
+    <text x="220" y="21" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="bold" fill="#60a5fa">RELATION ANATOMY: STUDENT(RollNo, Name, Marks)</text>
+
+    <!-- Table Header (Degree = 3 Columns) -->
+    <g transform="translate(20, 45)">
+      <rect width="110" height="28" fill="#0f172a" stroke="#475569"/>
+      <text x="55" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#38bdf8">RollNo (PK)</text>
+
+      <rect x="110" width="160" height="28" fill="#0f172a" stroke="#475569"/>
+      <text x="190" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#38bdf8">Name</text>
+
+      <rect x="270" width="130" height="28" fill="#0f172a" stroke="#475569"/>
+      <text x="335" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#38bdf8">Marks</text>
+
+      <!-- Row 1 -->
+      <rect y="28" width="110" height="25" fill="#1e293b" stroke="#334155"/>
+      <text x="55" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#f8fafc">101</text>
+
+      <rect x="110" y="28" width="160" height="25" fill="#1e293b" stroke="#334155"/>
+      <text x="190" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#f8fafc">Akhil Sharma</text>
+
+      <rect x="270" y="28" width="130" height="25" fill="#1e293b" stroke="#334155"/>
+      <text x="335" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#f8fafc">92</text>
+
+      <!-- Row 2 -->
+      <rect y="53" width="110" height="25" fill="#0f172a" stroke="#334155"/>
+      <text x="55" y="70" text-anchor="middle" font-family="monospace" font-size="10" fill="#f8fafc">102</text>
+
+      <rect x="110" y="53" width="160" height="25" fill="#0f172a" stroke="#334155"/>
+      <text x="190" y="70" text-anchor="middle" font-family="monospace" font-size="10" fill="#f8fafc">Rahul Gupta</text>
+
+      <rect x="270" y="53" width="130" height="25" fill="#0f172a" stroke="#334155"/>
+      <text x="335" y="70" text-anchor="middle" font-family="monospace" font-size="10" fill="#f8fafc">85</text>
+
+      <!-- Row 3 -->
+      <rect y="78" width="110" height="25" fill="#1e293b" stroke="#334155"/>
+      <text x="55" y="95" text-anchor="middle" font-family="monospace" font-size="10" fill="#f8fafc">103</text>
+
+      <rect x="110" y="78" width="160" height="25" fill="#1e293b" stroke="#334155"/>
+      <text x="190" y="95" text-anchor="middle" font-family="monospace" font-size="10" fill="#f8fafc">Pooja Verma</text>
+
+      <rect x="270" y="78" width="130" height="25" fill="#1e293b" stroke="#334155"/>
+      <text x="335" y="95" text-anchor="middle" font-family="monospace" font-size="10" fill="#f8fafc">95</text>
+    </g>
+
+    <!-- Metrics -->
+    <rect x="20" y="160" width="400" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="180" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">• Degree (Arity): Number of attributes / columns = 3</text>
+    <text x="30" y="198" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">• Cardinality: Number of tuples / rows = 3</text>
+    <text x="30" y="214" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">• Domain: Permitted set of atomic values (e.g. Marks ∈ [0, 100])</text>
+  </g>
+
+  <!-- THE 4 INTEGRITY CONSTRAINTS -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="405" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect width="440" height="34" rx="10" fill="#064e3b"/>
+    <text x="220" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">THE 4 RELATIONAL INTEGRITY CONSTRAINTS</text>
+
+    <g transform="translate(20, 48)">
+      <!-- 1. Domain -->
+      <rect width="400" height="70" rx="6" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="22" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#6ee7b7">1. Domain Constraint</text>
+      <text x="15" y="40" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Every attribute value must be atomic and within defined data type.</text>
+      <text x="15" y="56" font-family="monospace" font-size="9" fill="#a7f3d0">Example: Age cannot be "ABC" or a set of values.</text>
+
+      <!-- 2. Key Constraint -->
+      <rect y="80" width="400" height="70" rx="6" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="102" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#6ee7b7">2. Key Constraint</text>
+      <text x="15" y="120" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">No two distinct tuples can have identical candidate key values.</text>
+      <text x="15" y="136" font-family="monospace" font-size="9" fill="#a7f3d0">t1[Candidate_Key] ≠ t2[Candidate_Key]</text>
+
+      <!-- 3. Entity Integrity -->
+      <rect y="160" width="400" height="78" rx="6" fill="#0f172a" stroke="#f59e0b"/>
+      <text x="15" y="182" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">3. Entity Integrity Constraint</text>
+      <text x="15" y="200" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Primary Key attributes can NEVER be NULL!</text>
+      <text x="15" y="216" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">If PK is NULL, individual tuples cannot be identified or indexed.</text>
+      <text x="15" y="230" font-family="monospace" font-size="9" fill="#fde68a">t[Primary_Key] ≠ NULL</text>
+
+      <!-- 4. Referential Integrity -->
+      <rect y="248" width="400" height="95" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+      <text x="15" y="270" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">4. Referential Integrity Constraint</text>
+      <text x="15" y="288" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Foreign key value in referencing relation must either:</text>
+      <text x="25" y="304" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">(a) Match an existing PK in referenced relation, OR (b) Be NULL.</text>
+      <text x="15" y="322" font-family="monospace" font-size="8.5" fill="#a5f3fc">Violation Triggers: ON DELETE CASCADE / SET NULL / RESTRICT</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM CALLOUT -->
+  <rect x="40" y="335" width="440" height="155" rx="10" fill="#0f172a" stroke="#475569"/>
+  <text x="55" y="360" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Update Operations &amp; Constraint Checks:</text>
+  <text x="55" y="380" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• INSERT: Can violate Domain, Key, Entity, or Referential integrity.</text>
+  <text x="55" y="400" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• DELETE: Can only violate Referential Integrity (if child references it).</text>
+  <text x="55" y="420" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• UPDATE: Combination of Delete old + Insert new.</text>
+  <text x="55" y="445" font-family="monospace" font-size="9" fill="#34d399">DBMS automatically rejects transactions violating constraints!</text>
+</svg>

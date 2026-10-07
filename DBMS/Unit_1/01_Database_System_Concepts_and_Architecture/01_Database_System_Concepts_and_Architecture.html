@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 01: Database System Concepts and Architecture</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 01: Database System Concepts &amp; Architecture</h1>
+<p><span class="badge">Unit 1: Introduction</span> <span class="badge">AKTU BCS501</span> <span class="badge">3-Schema Architecture</span></p>
+
+<h2>1. Three-Schema Architecture &amp; Data Abstraction</h2>
+<p>ANSI/SPARC model decouples user applications from physical storage through three distinct abstraction boundaries: <b>External Level</b> (User Views), <b>Conceptual Level</b> (Logical Schema), and <b>Internal Level</b> (Physical Storage Layout).</p>
+
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr01" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg01)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Three-Schema Architecture &amp; Data Independence</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">ANSI / SPARC 3-Level Data Abstraction Model &amp; System Tiers</text>
+
+  <!-- 1. EXTERNAL LEVEL -->
+  <g transform="translate(60, 85)">
+    <rect width="520" height="95" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="260" y="24" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">EXTERNAL LEVEL (View Level - User Views)</text>
+    
+    <rect x="25" y="38" width="135" height="42" rx="6" fill="#0f172a" stroke="#60a5fa"/>
+    <text x="92" y="56" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f8fafc">View 1 (Student)</text>
+    <text x="92" y="71" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">RollNo, Name, Marks</text>
+
+    <rect x="190" y="38" width="140" height="42" rx="6" fill="#0f172a" stroke="#60a5fa"/>
+    <text x="260" y="56" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f8fafc">View 2 (Accounts)</text>
+    <text x="260" y="71" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">RollNo, Fee_Paid, Due</text>
+
+    <rect x="355" y="38" width="140" height="42" rx="6" fill="#0f172a" stroke="#60a5fa"/>
+    <text x="425" y="56" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f8fafc">View 3 (Hostel)</text>
+    <text x="425" y="71" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">RollNo, Room_No</text>
+  </g>
+
+  <!-- MAPPING 1 & LOGICAL INDEPENDENCE -->
+  <line x1="320" y1="180" x2="320" y2="225" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr01)"/>
+  <rect x="620" y="145" width="340" height="60" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <text x="790" y="168" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#34d399">Logical Data Independence</text>
+  <text x="790" y="188" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Conceptual schema change does NOT affect External Views.</text>
+
+  <!-- 2. CONCEPTUAL LEVEL -->
+  <g transform="translate(60, 225)">
+    <rect width="520" height="85" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <text x="260" y="24" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fbbf24">CONCEPTUAL LEVEL (Logical Level - Community View)</text>
+    
+    <rect x="25" y="36" width="470" height="36" rx="6" fill="#0f172a" stroke="#d97706"/>
+    <text x="260" y="53" text-anchor="middle" font-family="monospace" font-size="10.5" fill="#f8fafc">STUDENT(RollNo: INT, Name: VARCHAR, Fee: DEC, Room: INT, Marks: INT)</text>
+    <text x="260" y="66" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Defines ALL entities, attributes, relations, data types and security constraints</text>
+  </g>
+
+  <!-- MAPPING 2 & PHYSICAL INDEPENDENCE -->
+  <line x1="320" y1="310" x2="320" y2="355" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr01)"/>
+  <rect x="620" y="275" width="340" height="60" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="790" y="298" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#38bdf8">Physical Data Independence</text>
+  <text x="790" y="318" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Internal schema / disk layout change does NOT affect Logical schema.</text>
+
+  <!-- 3. INTERNAL LEVEL -->
+  <g transform="translate(60, 355)">
+    <rect width="520" height="135" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="260" y="24" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">INTERNAL LEVEL (Physical Level - Storage Architecture)</text>
+    
+    <g transform="translate(25, 36)">
+      <rect width="470" height="42" rx="6" fill="#0f172a" stroke="#059669"/>
+      <text x="235" y="20" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#a7f3d0">Data Structures &amp; Physical Access Paths</text>
+      <text x="235" y="34" text-anchor="middle" font-family="monospace" font-size="9" fill="#cbd5e1">B+ Tree on RollNo | Record Length: 64B | Hash Cluster on DeptID</text>
+
+      <rect y="48" width="470" height="38" rx="6" fill="#022c22" stroke="#047857"/>
+      <text x="235" y="65" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#6ee7b7">Physical Hardware Storage (HDD / SSD / Cloud Blocks)</text>
+      <text x="235" y="78" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Block Size: 4 KB | Compression: zstd | Extents &amp; Inodes</text>
+    </g>
+  </g>
+
+  <!-- SIDEBAR: SYSTEM TIERS -->
+  <rect x="620" y="355" width="340" height="135" rx="10" fill="#1e293b" stroke="#6366f1" stroke-width="2"/>
+  <text x="790" y="378" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#a5b4fc">DBMS System Architectures</text>
+  <text x="635" y="402" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• 1-Tier: Direct local access (SQLite, MS Access)</text>
+  <text x="635" y="424" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• 2-Tier: Client App (ODBC/JDBC) → DB Server</text>
+  <text x="635" y="446" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• 3-Tier: Browser → App Server (Logic) → DB Server</text>
+  <text x="635" y="468" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">• N-Tier: Load Balancers, Microservices &amp; Replicas</text>
+</svg>
+
+</div>
+
+<h2>2. Physical vs Logical Data Independence</h2>
+<div class="callout-info">
+<b>Physical Data Independence:</b> Ability to change internal schema (e.g., adding B+ tree indexes, changing disk partitioning, migrating to NVMe SSD) without modifying conceptual schema or existing application queries.<br>
+<b>Logical Data Independence:</b> Ability to modify conceptual schema (e.g., adding new entities or attributes) without altering existing external views or breaking existing application programs.
+</div>
+
+<h2>3. System Deployment Tiers</h2>
+<table>
+  <tr><th>Architecture</th><th>Structure</th><th>Key Pros</th><th>Key Cons</th></tr>
+  <tr><td><b>1-Tier</b></td><td>Client + App + DB on 1 PC</td><td>Zero network latency</td><td>Single user only (SQLite)</td></tr>
+  <tr><td><b>2-Tier</b></td><td>Fat Client → DB Server</td><td>Direct ODBC/JDBC</td><td>Security risk; client update overhead</td></tr>
+  <tr><td><b>3-Tier</b></td><td>Browser → App Server → DB Server</td><td>Scalable; secure business logic</td><td>Inter-tier network latency</td></tr>
+</table>
+</body>
+</html>

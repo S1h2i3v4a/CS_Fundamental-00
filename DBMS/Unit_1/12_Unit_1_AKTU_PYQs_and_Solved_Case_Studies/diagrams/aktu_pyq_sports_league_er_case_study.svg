@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg12)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">AKTU 10-Mark Solved Case Study: Sports League ER Diagram</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Complete Design of Teams, Players, Matches, Positions, Scores &amp; Injury Records (AKTU 2022-23)</text>
+
+  <!-- TEAM ENTITY -->
+  <g transform="translate(60, 180)">
+    <rect width="140" height="52" rx="5" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+    <text x="70" y="32" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">TEAM</text>
+    
+    <!-- Attributes -->
+    <line x1="70" y1="0" x2="70" y2="-45" stroke="#64748b" stroke-width="1.5"/>
+    <ellipse cx="70" cy="-60" rx="52" ry="20" fill="#0f172a" stroke="#3b82f6"/>
+    <text x="70" y="-56" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#60a5fa" text-decoration="underline">TName</text>
+
+    <line x1="120" y1="0" x2="160" y2="-35" stroke="#64748b" stroke-width="1.5"/>
+    <ellipse cx="180" cy="-45" rx="42" ry="18" fill="#0f172a" stroke="#3b82f6"/>
+    <text x="180" y="-41" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">City</text>
+
+    <line x1="20" y1="0" x2="-20" y2="-35" stroke="#64748b" stroke-width="1.5"/>
+    <ellipse cx="-40" cy="-45" rx="42" ry="18" fill="#0f172a" stroke="#3b82f6"/>
+    <text x="-40" y="-41" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Coach</text>
+  </g>
+
+  <!-- RELATION: BELONGS_TO -->
+  <line x1="200" y1="206" x2="310" y2="206" stroke="#64748b" stroke-width="2"/>
+  <polygon points="345,185 375,206 345,227 315,206" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
+  <text x="345" y="210" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#34d399">Belongs_To</text>
+  <text x="215" y="198" font-family="monospace" font-size="11" fill="#38bdf8">1</text>
+  <text x="445" y="198" font-family="monospace" font-size="11" fill="#38bdf8">N</text>
+
+  <!-- PLAYER ENTITY -->
+  <g transform="translate(470, 180)">
+    <rect width="140" height="52" rx="5" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+    <text x="70" y="32" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">PLAYER</text>
+
+    <!-- Attributes -->
+    <line x1="70" y1="0" x2="70" y2="-45" stroke="#64748b" stroke-width="1.5"/>
+    <ellipse cx="70" cy="-60" rx="48" ry="20" fill="#0f172a" stroke="#3b82f6"/>
+    <text x="70" y="-56" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#60a5fa" text-decoration="underline">P_ID</text>
+
+    <line x1="120" y1="0" x2="160" y2="-35" stroke="#64748b" stroke-width="1.5"/>
+    <ellipse cx="180" cy="-45" rx="42" ry="18" fill="#0f172a" stroke="#3b82f6"/>
+    <text x="180" y="-41" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Name</text>
+
+    <line x1="20" y1="0" x2="-20" y2="-35" stroke="#64748b" stroke-width="1.5"/>
+    <ellipse cx="-40" cy="-45" rx="45" ry="18" fill="#0f172a" stroke="#3b82f6"/>
+    <text x="-40" y="-41" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Skill_Level</text>
+  </g>
+  <line x1="375" y1="206" x2="470" y2="206" stroke="#64748b" stroke-width="2"/>
+
+  <!-- MATCH / GAME ENTITY & PLAYED RELATION -->
+  <g transform="translate(60, 360)">
+    <rect width="140" height="52" rx="5" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+    <text x="70" y="32" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">MATCH (GAME)</text>
+    <text x="70" y="70" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">Match_ID, Date, Score</text>
+  </g>
+
+  <!-- Connect Teams to Match via Participates (Host Team & Guest Team) -->
+  <line x1="130" y1="232" x2="130" y2="360" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="130,270 150,290 130,310 110,290" fill="#0f172a" stroke="#f59e0b"/>
+  <text x="130" y="294" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#fbbf24">Plays_In</text>
+
+  <!-- WEAK ENTITY: INJURY_RECORD -->
+  <g transform="translate(750, 180)">
+    <!-- Identifying Relationship (Double Diamond) -->
+    <polygon points="40,6 68,26 40,46 12,26" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+    <polygon points="40,11 60,26 40,41 20,26" fill="#1e293b" stroke="#f59e0b"/>
+    <text x="40" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" font-weight="bold" fill="#fde68a">Has</text>
+
+    <!-- Double line connecting Player to Weak Entity -->
+    <line x1="-140" y1="26" x2="12" y2="26" stroke="#f59e0b" stroke-width="2"/>
+
+    <!-- Double Rectangle -->
+    <rect x="90" y="0" width="130" height="52" rx="5" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+    <rect x="95" y="5" width="120" height="42" rx="3" fill="#1e293b" stroke="#f59e0b"/>
+    <text x="155" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fde68a">INJURY_RECORD</text>
+    <text x="155" y="44" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">(Weak Entity)</text>
+
+    <!-- Partial Key -->
+    <line x1="155" y1="52" x2="155" y2="85" stroke="#64748b" stroke-width="1.5"/>
+    <ellipse cx="155" cy="100" rx="55" ry="18" fill="#0f172a" stroke="#f59e0b"/>
+    <text x="155" y="104" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#fde68a">Injury_Date</text>
+  </g>
+
+  <!-- RELATIONAL SCHEMA REDUCTION SUMMARY -->
+  <g transform="translate(320, 320)">
+    <rect width="630" height="160" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.8"/>
+    <text x="315" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#34d399">AKTU Reduced Relational Schema (4 Tables Minimum):</text>
+    <text x="20" y="46" font-family="monospace" font-size="9.5" fill="#cbd5e1">1. TEAM(TName, City, Coach)</text>
+    <text x="20" y="68" font-family="monospace" font-size="9.5" fill="#cbd5e1">2. PLAYER(P_ID, Name, Skill_Level, TName(FK))</text>
+    <text x="20" y="90" font-family="monospace" font-size="9.5" fill="#cbd5e1">3. MATCH(Match_ID, Date, Host_Team(FK), Guest_Team(FK), Score)</text>
+    <text x="20" y="112" font-family="monospace" font-size="9.5" fill="#cbd5e1">4. INJURY_RECORD(P_ID(FK), Injury_Date, Description)</text>
+    <text x="20" y="136" font-family="monospace" font-size="9.5" fill="#a7f3d0">5. PLAYER_MATCH_STATS(P_ID(FK), Match_ID(FK), Position, Minutes)</text>
+  </g>
+</svg>

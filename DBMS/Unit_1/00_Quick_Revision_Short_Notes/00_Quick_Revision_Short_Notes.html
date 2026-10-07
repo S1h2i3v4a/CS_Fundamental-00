@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DBMS Unit 1 - 3-Page Rapid Recall Notes</title>
+<style>
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #0f172a;
+  background-color: #ffffff;
+  -webkit-print-color-adjust: exact;
+}
+.page {
+  width: 210mm;
+  height: 297mm;
+  max-height: 297mm;
+  padding: 8mm 9mm 6mm 9mm;
+  box-sizing: border-box;
+  page-break-after: always;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.header {
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.header-left h1 {
+  font-size: 11.5pt;
+  font-weight: 800;
+  color: #1e3a8a;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+.header-left p {
+  font-size: 7.2pt;
+  color: #475569;
+  margin: 1px 0 0 0;
+  font-weight: 600;
+}
+.header-right {
+  text-align: right;
+  font-size: 7.5pt;
+  font-weight: 700;
+  color: #2563eb;
+}
+.footer {
+  border-top: 1px solid #cbd5e1;
+  padding-top: 2px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 6.8pt;
+  color: #64748b;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+.box {
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 4px 6px;
+  background: #f8fafc;
+  margin-bottom: 4px;
+}
+.box-title {
+  font-size: 8.2pt;
+  font-weight: 700;
+  color: #1e40af;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.box-title span.badge {
+  font-size: 6.2pt;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-amber { background: #fef3c7; color: #b45309; }
+.badge-emerald { background: #d1fae5; color: #065f46; }
+.badge-purple { background: #f3e8ff; color: #6b21a8; }
+.badge-rose { background: #ffe4e6; color: #9f1239; }
+
+p, li {
+  font-size: 7.1pt;
+  line-height: 1.25;
+  margin: 1.5px 0;
+  color: #1e293b;
+}
+ul {
+  padding-left: 12px;
+  margin: 2px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 6.8pt;
+  margin: 2px 0;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 2px 4px;
+  text-align: left;
+}
+th {
+  background: #e2e8f0;
+  font-weight: 700;
+  color: #0f172a;
+}
+code {
+  font-family: Consolas, Monaco, monospace;
+  font-size: 6.8pt;
+  background: #f1f5f9;
+  padding: 0.5px 2px;
+  border-radius: 2px;
+  color: #0369a1;
+}
+.formula {
+  background: #eff6ff;
+  border-left: 2.5px solid #2563eb;
+  padding: 2px 4px;
+  font-family: monospace;
+  font-size: 6.8pt;
+  font-weight: 600;
+  color: #1e40af;
+  margin: 2px 0;
+}
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <h1>DBMS UNIT 1: RAPID RECALL SHORT NOTES</h1>
+      <p>AKTU BCS501 | Concepts, Architecture, File System vs DBMS, Users, DBA & Data Models</p>
+    </div>
+    <div class="header-right">PAGE 1 OF 3</div>
+  </div>
+
+  <div class="content">
+    <div class="grid-2">
+      <!-- 1. Core Architecture -->
+      <div class="box">
+        <div class="box-title">1. 3-Schema ANSI/SPARC Architecture <span class="badge badge-blue">Core Concept</span></div>
+        <p><b>Objective:</b> Physical database se user applications ko decouple karna.</p>
+        <ul>
+          <li><b>1. External Level (View Schema):</b> Multiple tailored views for end users. Unrelated tables hide hote hain (e.g., Student portal hides teacher salary).</li>
+          <li><b>2. Conceptual Level (Logical Schema):</b> Pure database structure ka global blueprint (entities, attributes, relationships, integrity constraints). Hardware independent.</li>
+          <li><b>3. Internal Level (Physical Schema):</b> Data physically hard disk par kaise stored hai (B+ Trees, hashing, clustering, file pointers, block allocation).</li>
+        </ul>
+      </div>
+
+      <!-- 2. Data Independence -->
+      <div class="box">
+        <div class="box-title">2. Data Independence <span class="badge badge-emerald">Exam Favourite</span></div>
+        <p>Ek schema level ko modify karne par uske higher level ko re-write na karna pade.</p>
+        <ul>
+          <li><b>Logical Data Independence:</b> Conceptual schema modify karne par External schema & user queries untouched rehti hain. <i>(Very Difficult to achieve)</i>. Example: Adding column <code>DOB</code> to table does not break existing views.</li>
+          <li><b>Physical Data Independence:</b> Internal schema (disk indexing, hashing, sorting) modify karne par Conceptual/External untouched rehti hain. <i>(Easily achieved)</i>. Example: Changing Heap file to B+ Tree.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. File System vs DBMS -->
+    <div class="box">
+      <div class="box-title">3. Traditional File System vs Modern DBMS <span class="badge badge-rose">10-Marker Must</span></div>
+      <table>
+        <tr>
+          <th>Evaluation Parameter</th>
+          <th>Traditional File System (OS Files)</th>
+          <th>Database Management System (DBMS)</th>
+        </tr>
+        <tr>
+          <td><b>Data Redundancy</b></td>
+          <td>Har department duplicate files maintain karta hai; immense disk waste.</td>
+          <td>Centralized schema; normalization through minimum redundancy.</td>
+        </tr>
+        <tr>
+          <td><b>Data Inconsistency</b></td>
+          <td>Ek file update hui, doosri purani reh gayi &rarr; Phantom data mismatch.</td>
+          <td>Single point updates & cascade rules; 100% mutual consistency.</td>
+        </tr>
+        <tr>
+          <td><b>Atomicity Guarantee</b></td>
+          <td>No rollback. Mid-transfer system crash leaves money deducted & lost.</td>
+          <td>WAL (Write-Ahead Logging) & 2-Phase Commit ensure All-or-Nothing.</td>
+        </tr>
+        <tr>
+          <td><b>Concurrent Access</b></td>
+          <td>File-level OS lock; reader-writer stalls or race conditions (lost update).</td>
+          <td>2PL & multi-version timestamping guarantee Serializability.</td>
+        </tr>
+        <tr>
+          <td><b>Security & Abstraction</b></td>
+          <td>Operating system coarse file permissions (rwx); no column masking.</td>
+          <td>Fine-grained column/row level SQL privileges (<code>GRANT SELECT</code>).</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="grid-2">
+      <!-- 4. Database Users & DBA -->
+      <div class="box">
+        <div class="box-title">4. Database User Categories & DBA Roles <span class="badge badge-purple">Viva & Theory</span></div>
+        <ul>
+          <li><b>Naive / Parametric:</b> Form GUI users (ATM, Railway booking, cashier).</li>
+          <li><b>Application Programmers:</b> DML embedded code likhne wale (Java/C++ devs).</li>
+          <li><b>Sophisticated Users:</b> Complex ad-hoc SQL / Analytical queries (Data Analysts).</li>
+          <li><b>Specialized Users:</b> Non-relational apps (GIS spatial data, AI models).</li>
+          <li><b>DBA (Database Administrator) Duties:</b> Schema definition, Storage structure & access path tuning, Granting authorization (DCL), Periodic backup & crash recovery.</li>
+        </ul>
+      </div>
+
+      <!-- 5. DBMS Languages -->
+      <div class="box">
+        <div class="box-title">5. DBMS Languages Taxonomy <span class="badge badge-amber">Gate / AKTU</span></div>
+        <ul>
+          <li><b>DDL (Data Definition):</b> Schema create/alter. Auto-committed! Commands: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>, <code>TRUNCATE</code>, <code>RENAME</code>.</li>
+          <li><b>DML (Data Manipulation):</b> Tuples modify/retrieve.
+            <br>• <i>Procedural (Low-level):</i> User specifies <b>WHAT</b> data and <b>HOW</b> to get it (Relational Algebra).
+            <br>• <i>Declarative (High-level):</i> User specifies only <b>WHAT</b> data is needed (SQL, Relational Calculus). Commands: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.</li>
+          <li><b>DCL (Control):</b> Permissions. <code>GRANT</code>, <code>REVOKE</code>.</li>
+          <li><b>TCL (Transaction):</b> Integrity. <code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- 6. Client Server Architecture -->
+      <div class="box">
+        <div class="box-title">6. DBMS Tier Architectures <span class="badge badge-blue">Architecture</span></div>
+        <ul>
+          <li><b>1-Tier:</b> User UI, Client logic, aur Database ek hi physical machine par resident (Local SQLite, MS Access). Zero network overhead.</li>
+          <li><b>2-Tier:</b> Client PC par UI + App logic run hoti hai; Database remote server par hota hai via ODBC/JDBC. Fat client bottleneck.</li>
+          <li><b>3-Tier:</b> Client (Web Browser) &rarr; Application Server (Business Logic) &rarr; Database Server (Data Storage). Scalable, secure & enterprise standard.</li>
+        </ul>
+      </div>
+
+      <!-- 7. Data Models -->
+      <div class="box">
+        <div class="box-title">7. Data Models Classification <span class="badge badge-emerald">Foundations</span></div>
+        <ul>
+          <li><b>1. Object-Based Logical Models:</b> High level of abstraction. E-R (Entity-Relationship) Model and Object-Oriented Model.</li>
+          <li><b>2. Record-Based Logical Models:</b> Fixed format records.
+            <br>• <i>Relational Model:</i> 2D Tables (Relations) connected by Foreign Keys (Codd, 1970).
+            <br>• <i>Network Model:</i> Directed Graph (Arbitrary Many-to-Many via pointers).
+            <br>• <i>Hierarchical Model:</i> Strict Tree structure (1:N parent-child, IMS).</li>
+          <li><b>3. Physical Data Models:</b> Frame memory, Unifying models.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental Curricula &bull; DBMS Unit 1</span>
+    <span>Page 1 of 3 (Concepts & Architecture)</span>
+    <span>AKTU BCS501 Ready</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <h1>DBMS UNIT 1: RAPID RECALL SHORT NOTES</h1>
+      <p>AKTU BCS501 | ER Modeling, Attributes, Cardinalities, Weak Entities, Keys & EER</p>
+    </div>
+    <div class="header-right">PAGE 2 OF 3</div>
+  </div>
+
+  <div class="content">
+    <div class="grid-2">
+      <!-- 1. Attributes -->
+      <div class="box">
+        <div class="box-title">1. Attributes Taxonomy & Symbols <span class="badge badge-blue">ER Elements</span></div>
+        <ul>
+          <li><b>Simple / Atomic:</b> Cannot be broken further (<code>Age</code>, <code>RollNo</code>).</li>
+          <li><b>Composite:</b> Hierarchy of sub-parts (<code>Name &rarr; First, Mid, Last</code>).</li>
+          <li><b>Single-Valued:</b> Single item per tuple (<code>Aadhar_No</code>, <code>DOB</code>).</li>
+          <li><b>Multivalued:</b> Multiple items per entity (<code>Phone_No</code>, <code>Skills</code>). Symbol: <b>Double Ellipse</b>.</li>
+          <li><b>Derived:</b> Computed dynamically (<code>Age = Current_Date - DOB</code>). Symbol: <b>Dashed Ellipse</b>.</li>
+          <li><b>Key Attribute:</b> Primary identifier. Symbol: <b>Underlined Text</b>.</li>
+        </ul>
+      </div>
+
+      <!-- 2. Relationships & Cardinalities -->
+      <div class="box">
+        <div class="box-title">2. Cardinality & Participation Constraints <span class="badge badge-emerald">Mapping Logic</span></div>
+        <ul>
+          <li><b>Cardinality Ratios:</b>
+            <br>• <b>1:1 (One-to-One):</b> Citizen &harr; Passport.
+            <br>• <b>1:N (One-to-Many):</b> Department &rarr; Employees.
+            <br>• <b>M:N (Many-to-Many):</b> Students &harr; Courses.</li>
+          <li><b>Participation Constraints:</b>
+            <br>• <b>Total Participation (Double Line):</b> Har entity relationship me mandatory appear hoti hai (e.g., Har Employee ka Dept hona mandatory).
+            <br>• <b>Partial Participation (Single Line):</b> Kuch entities relation ke bina exist kar sakti hain (e.g., Har Professor Dean nahi hota).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Weak Entity Sets -->
+    <div class="box">
+      <div class="box-title">3. Weak Entity Sets & Identifying Relationships <span class="badge badge-rose">Crucial Rule</span></div>
+      <div class="grid-2">
+        <div>
+          <p><b>Definition:</b> Aisa entity set jiske paas apna Primary Key form karne ke liye sufficient attributes na hon. Yeh identifying <b>Owner Entity</b> par depend karta hai.</p>
+          <ul>
+            <li><b>Weak Entity Symbol:</b> <b>Double Rectangle</b>.</li>
+            <li><b>Identifying Relationship:</b> <b>Double Diamond</b> (Always 1:N from Owner to Weak, Total participation on Weak side).</li>
+            <li><b>Partial Key / Discriminator:</b> <b>Dashed Underline</b> attribute.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="formula">Weak Entity PK = Owner PK + Partial Key (Discriminator)</div>
+          <p><b>Real-World Canonical Example:</b></p>
+          <p>• Owner: <code>EMPLOYEE(<u>Emp_ID</u>, Name, Salary)</code></p>
+          <p>• Weak: <code>DEPENDENT(<u>Dep_Name</u>, Relation, Age)</code> [Partial key: <code>Dep_Name</code>]</p>
+          <p>• Resulting PK: <code>{Emp_ID, Dep_Name}</code> (Composite Primary Key).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Relational Keys Hierarchy & Formulas -->
+    <div class="box">
+      <div class="box-title">4. Relational Keys Master Hierarchy & Super Key Math <span class="badge badge-amber">Formula & GATE</span></div>
+      <div class="grid-3">
+        <div>
+          <p><b>Super Key (SK):</b> Any set of attributes jo relation ke har tuple ko uniquely identify kare. (May have redundant attributes).</p>
+          <p><b>Candidate Key (CK):</b> <b>Minimal Super Key</b>. Koi bhi proper subset super key nahi hona chahiye!</p>
+        </div>
+        <div>
+          <p><b>Primary Key (PK):</b> Database designer dwara choose kiya gaya single candidate key. <b>CANNOT BE NULL!</b></p>
+          <p><b>Alternate Key (AK):</b> Candidate keys jo Primary Key choose hone se bache rahe (<code>AK = CK - PK</code>).</p>
+        </div>
+        <div>
+          <p><b>Foreign Key (FK):</b> Current table ka attribute jo kisi parent relation ke Primary Key ko refer karta hai.</p>
+          <p><b>Compound / Composite Key:</b> Key made of 2 or more attributes.</p>
+        </div>
+      </div>
+      <div class="formula">
+        Super Key Calculation Formula: If Relation has n attributes and single Candidate Key of size k: Total SKs = 2^(n - k).
+        <br>For multiple Candidate Keys: Apply Principle of Inclusion-Exclusion: |SK(A &cup; B)| = 2^(n - |A|) + 2^(n - |B|) - 2^(n - |A &cup; B|).
+      </div>
+    </div>
+
+    <!-- 5. Extended ER (EER) -->
+    <div class="box">
+      <div class="box-title">5. Extended ER (EER) Modeling Features <span class="badge badge-purple">Advanced ER</span></div>
+      <div class="grid-2">
+        <div>
+          <p><b>Core Abstractions:</b></p>
+          <ul>
+            <li><b>Generalization:</b> Bottom-up approach. Multiple lower entities ki common properties extract karke superclass banana (e.g., Car & Truck &rarr; Vehicle).</li>
+            <li><b>Specialization:</b> Top-down approach. Superclass ko specific distinguishing attributes ke basis par subclasses me split karna (e.g., Employee &rarr; Developer, QA).</li>
+            <li><b>Aggregation:</b> Relationship-as-Entity abstract karna taaki ternary relationship ko binary me clean model kiya ja sake.</li>
+          </ul>
+        </div>
+        <div>
+          <p><b>EER Constraints:</b></p>
+          <ul>
+            <li><b>Disjointness Constraint:</b>
+              <br>• <i>Disjoint ('d'):</i> Entity maximum 1 subclass ki member ho sakti hai (Mutually exclusive).
+              <br>• <i>Overlapping ('o'):</i> Entity ek saath multiple subclasses me exist kar sakti hai.</li>
+            <li><b>Completeness Constraint:</b>
+              <br>• <i>Total Specialization (Double Line):</i> Har superclass entity kisi na kisi subclass me belong karegi.
+              <br>• <i>Partial Specialization (Single Line):</i> Entity bina kisi subclass me gaye superclass me reh sakti hai.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental Curricula &bull; DBMS Unit 1</span>
+    <span>Page 2 of 3 (ER & Keys)</span>
+    <span>AKTU BCS501 Ready</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <h1>DBMS UNIT 1: RAPID RECALL SHORT NOTES</h1>
+      <p>AKTU BCS501 | ER-to-Relational Mapping, Constraints, Relational Algebra & Calculus</p>
+    </div>
+    <div class="header-right">PAGE 3 OF 3</div>
+  </div>
+
+  <div class="content">
+    <!-- 1. The 7 Mapping Rules & Table Minimization -->
+    <div class="box">
+      <div class="box-title">1. The 7 ER-to-Relational Mapping Rules & Table Minimization Matrix <span class="badge badge-rose">AKTU Top Scoring</span></div>
+      <table>
+        <tr>
+          <th>ER Construct</th>
+          <th>Conversion / Mapping Rule</th>
+          <th>Min Tables</th>
+          <th>Resulting Relational Schema Structure</th>
+        </tr>
+        <tr>
+          <td><b>Strong Entity</b></td>
+          <td>Create dedicated table. Flatten composite attributes into atomic columns.</td>
+          <td><b>1 Table</b></td>
+          <td><code>STUDENT(<u>RollNo</u>, FName, LName, City, Marks)</code></td>
+        </tr>
+        <tr>
+          <td><b>Weak Entity</b></td>
+          <td>Table contains weak attributes + Owner PK as Foreign Key. Composite PK!</td>
+          <td><b>1 Table</b></td>
+          <td><code>DEPENDENT(<u>Emp_ID (FK)</u>, <u>Dep_Name</u>, Relation, Age)</code></td>
+        </tr>
+        <tr>
+          <td><b>1:1 (Both Total)</b></td>
+          <td>Merge both entity sets and relationship into a SINGLE unified table!</td>
+          <td><b>1 Table</b></td>
+          <td><code>CITIZEN_PASSPORT(<u>Aadhar_No</u>, Name, Pass_No, IssueDate)</code></td>
+        </tr>
+        <tr>
+          <td><b>1:1 (One Partial)</b></td>
+          <td>Maintain 2 tables. Place PK of Partial entity as Foreign Key on Total side.</td>
+          <td><b>2 Tables</b></td>
+          <td><code>EMP(<u>Emp_ID</u>, Name)</code> &amp; <code>DEPT(<u>Dept_ID</u>, DName, Mgr_ID(FK))</code></td>
+        </tr>
+        <tr>
+          <td><b>1:N Relationship</b></td>
+          <td>NO new table! Put Primary Key of '1' side as Foreign Key into 'N' side table.</td>
+          <td><b>2 Tables</b></td>
+          <td><code>DEPT(<u>Dept_ID</u>)</code> &amp; <code>EMP(<u>Emp_ID</u>, Name, Dept_ID(FK))</code></td>
+        </tr>
+        <tr>
+          <td><b>M:N Relationship</b></td>
+          <td>Create separate Join Table! PK = Composite union of both participating PKs.</td>
+          <td><b>3 Tables</b></td>
+          <td><code>STU(<u>Roll</u>)</code>, <code>CRS(<u>CID</u>)</code>, <code>ENROLL(<u>Roll(FK)</u>, <u>CID(FK)</u>, Grade)</code></td>
+        </tr>
+        <tr>
+          <td><b>Multivalued Attr</b></td>
+          <td>Create separate table. PK = (Entity PK + Multivalued Attribute).</td>
+          <td><b>+1 Table</b></td>
+          <td><code>STUDENT_PHONE(<u>RollNo(FK)</u>, <u>Phone_Number</u>)</code></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 2. The 4 Relational Integrity Constraints -->
+    <div class="box">
+      <div class="box-title">2. Relational Data Model & The 4 Integrity Constraints <span class="badge badge-blue">Rules</span></div>
+      <div class="grid-2">
+        <ul>
+          <li><b>Domain Constraint:</b> Har attribute value uske defined valid atomic set me hona chahiye (e.g., <code>Age &gt; 0</code>, <code>Marks &isin; [0, 100]</code>).</li>
+          <li><b>Key Constraint:</b> Relation ke koi bhi do distinct tuples identical Primary/Candidate Key share nahi kar sakte.</li>
+        </ul>
+        <ul>
+          <li><b>Entity Integrity:</b> Primary Key attribute value **KABHI BHI NULL NAHI** ho sakti! (Kyunki NULL identify nahi kar sakta).</li>
+          <li><b>Referential Integrity:</b> Foreign Key value ya to parent relation ke existing valid Primary Key se match karegi, ya fir **NULL** hogi. Violated on Delete/Update &rarr; Actions: <code>CASCADE</code>, <code>SET NULL</code>, <code>RESTRICT</code>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Relational Algebra Operations -->
+    <div class="box">
+      <div class="box-title">3. Relational Algebra Operations Master Summary <span class="badge badge-emerald">Formal Operators</span></div>
+      <table>
+        <tr>
+          <th>Operation</th>
+          <th>Symbol</th>
+          <th>Type</th>
+          <th>Behavior &amp; Key Property</th>
+          <th>Example Syntax</th>
+        </tr>
+        <tr>
+          <td><b>Selection</b></td>
+          <td><b>&sigma;<sub>p</sub>(R)</b></td>
+          <td>Horizontal</td>
+          <td>Rows filter karta hai based on predicate condition <code>p</code>. Degree same, Cardinality &le; |R|.</td>
+          <td><code>&sigma;<sub>Salary &gt; 50000</sub>(EMPLOYEE)</code></td>
+        </tr>
+        <tr>
+          <td><b>Projection</b></td>
+          <td><b>&pi;<sub>A</sub>(R)</b></td>
+          <td>Vertical</td>
+          <td>Columns filter karta hai. <b>Automatically removes duplicate rows!</b> Degree = |A|.</td>
+          <td><code>&pi;<sub>Name, Salary</sub>(EMPLOYEE)</code></td>
+        </tr>
+        <tr>
+          <td><b>Cartesian Product</b></td>
+          <td><b>R &times; S</b></td>
+          <td>Cross</td>
+          <td>Combines all tuples. Degree = deg(R)+deg(S); Cardinality = |R| &times; |S|.</td>
+          <td><code>STUDENT &times; COURSE</code></td>
+        </tr>
+        <tr>
+          <td><b>Natural Join</b></td>
+          <td><b>R &bowtie; S</b></td>
+          <td>Join</td>
+          <td>Common attribute names par Cartesian product followed by equality selection and projection.</td>
+          <td><code>EMP &bowtie; DEPT</code></td>
+        </tr>
+        <tr>
+          <td><b>Outer Joins</b></td>
+          <td><b>&LeftFullJoin;, &LeftThreetimes;, &RightThreetimes;</b></td>
+          <td>Preserve</td>
+          <td>Unmatched dangling tuples ko retain karte hain padded with NULLs (Left, Right, Full).</td>
+          <td><code>EMP &LeftThreetimes; DEPT</code></td>
+        </tr>
+        <tr>
+          <td><b>Division Operator</b></td>
+          <td><b>R &divide; S</b></td>
+          <td>Universal</td>
+          <td>Solves "<b>FOR ALL / EVERY</b>" queries. (Find students who took ALL math courses).</td>
+          <td><code>&pi;<sub>Roll, CID</sub>(ENROLL) &divide; &pi;<sub>CID</sub>(MATH_CRS)</code></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 4. Relational Calculus & Codd's Theorem -->
+    <div class="box">
+      <div class="box-title">4. Relational Calculus & Codd's Theorem <span class="badge badge-purple">Theoretical Foundation</span></div>
+      <div class="grid-2">
+        <div>
+          <p><b>Tuple Relational Calculus (TRC):</b> Non-procedural. Focuses on filtering tuples: <code>{ t | P(t) }</code>. Where <code>t</code> is a tuple variable and <code>P(t)</code> is a first-order formula using &exist;, &forall;, &and;, &or;, &not;.</p>
+          <p><b>Domain Relational Calculus (DRC):</b> Focuses on filtering individual attribute domain variables: <code>{ &lang;x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub>&rang; | P(x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub>) }</code>.</p>
+        </div>
+        <div>
+          <div class="formula">
+            CODD'S THEOREM (Relational Completeness):
+            Relational Algebra &equiv; Safe TRC &equiv; Safe DRC
+          </div>
+          <p>A query language is <b>Relationally Complete</b> if it can express any query expressible in basic Relational Algebra. SQL is built upon this foundation!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental Curricula &bull; DBMS Unit 1</span>
+    <span>Page 3 of 3 (Mapping, Constraints & RA)</span>
+    <span>AKTU BCS501 Ready</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 09: ER to Relational Mapping and Table Reduction</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 09: ER-to-Relational Mapping &amp; Table Reduction</h1>
+<p><span class="badge">Unit 1: Schema Mapping</span> <span class="badge">AKTU BCS501</span> <span class="badge">Table Minimization</span></p>
+
+<h2>1. The 7 Conversion Rules</h2>
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrMap09" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg09)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">ER-to-Relational Schema Conversion Rules</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">The 7 Fundamental Mapping Algorithms and Relational Table Minimization</text>
+
+  <!-- GRID OF RULES -->
+  <g transform="translate(40, 80)">
+    <!-- Rule 1: Strong Entity -->
+    <rect width="440" height="85" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="18" y="24" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#60a5fa">Rule 1: Strong Entity Set → 1 Table</text>
+    <text x="18" y="42" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">All simple attributes become columns. Composite attributes flattened.</text>
+    <rect x="18" y="50" width="400" height="24" rx="4" fill="#0f172a" stroke="#475569"/>
+    <text x="218" y="66" text-anchor="middle" font-family="monospace" font-size="10" fill="#a5f3fc">STUDENT(RollNo, Name, Street, City, State, DOB)</text>
+
+    <!-- Rule 2: Weak Entity -->
+    <rect y="95" width="440" height="85" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="18" y="119" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fbbf24">Rule 2: Weak Entity Set → 1 Table (With Owner PK)</text>
+    <text x="18" y="137" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Weak attributes + Owner PK as Foreign Key. PK is Composite.</text>
+    <rect x="18" y="145" width="400" height="24" rx="4" fill="#0f172a" stroke="#475569"/>
+    <text x="218" y="161" text-anchor="middle" font-family="monospace" font-size="10" fill="#fde68a">DEPENDENT(Emp_ID (FK), Dep_Name, Relation, Age)</text>
+
+    <!-- Rule 3: 1:1 Relationship -->
+    <rect y="190" width="440" height="95" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="18" y="214" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#34d399">Rule 3: Binary 1:1 Relationship</text>
+    <text x="18" y="232" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Foreign Key approach: Add PK of either side as FK (prefer Total side).</text>
+    <text x="18" y="248" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Merged Table approach: If BOTH sides Total, combine into 1 table!</text>
+    <rect x="18" y="254" width="400" height="22" rx="4" fill="#0f172a" stroke="#475569"/>
+    <text x="218" y="269" text-anchor="middle" font-family="monospace" font-size="9" fill="#6ee7b7">CITIZEN(Aadhar_No, Name) | PASSPORT(Pass_No, Issue, Aadhar_No(FK))</text>
+
+    <!-- Rule 4: 1:N Relationship -->
+    <rect y="295" width="440" height="95" rx="8" fill="#1e293b" stroke="#6366f1" stroke-width="1.8"/>
+    <text x="18" y="319" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a5b4fc">Rule 4: Binary 1:N Relationship → Foreign Key on 'N' Side</text>
+    <text x="18" y="337" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Do NOT create separate table! Place PK of '1' side into 'N' side table.</text>
+    <rect x="18" y="348" width="400" height="32" rx="4" fill="#0f172a" stroke="#475569"/>
+    <text x="218" y="362" text-anchor="middle" font-family="monospace" font-size="9" fill="#e0e7ff">DEPT(Dept_ID, DName) [1 Side]</text>
+    <text x="218" y="375" text-anchor="middle" font-family="monospace" font-size="9" fill="#e0e7ff">EMPLOYEE(Emp_ID, EName, Dept_ID (FK)) [N Side]</text>
+  </g>
+
+  <!-- RIGHT COLUMN -->
+  <g transform="translate(520, 80)">
+    <!-- Rule 5: M:N Relationship -->
+    <rect width="440" height="115" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="1.8"/>
+    <text x="18" y="24" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#f472b6">Rule 5: Binary M:N Relationship → Dedicated Join Table</text>
+    <text x="18" y="42" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Requires separate relationship table! Primary Key is composite.</text>
+    <rect x="18" y="52" width="400" height="50" rx="4" fill="#0f172a" stroke="#475569"/>
+    <text x="218" y="70" text-anchor="middle" font-family="monospace" font-size="9" fill="#fbcfe8">STUDENT(RollNo, Name) | COURSE(Course_ID, Title)</text>
+    <text x="218" y="90" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="bold" fill="#f472b6">ENROLLED(RollNo(FK), Course_ID(FK), Grade, Enroll_Date)</text>
+
+    <!-- Rule 6: Multivalued Attribute -->
+    <rect y="125" width="440" height="105" rx="8" fill="#1e293b" stroke="#14b8a6" stroke-width="1.8"/>
+    <text x="18" y="149" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#2dd4bf">Rule 6: Multivalued Attribute → Separate Table</text>
+    <text x="18" y="167" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Stores Entity PK + Multivalued Attribute. PK is composite pair.</text>
+    <rect x="18" y="177" width="400" height="42" rx="4" fill="#0f172a" stroke="#475569"/>
+    <text x="218" y="194" text-anchor="middle" font-family="monospace" font-size="9" fill="#ccfbf1">STUDENT(RollNo, Name)</text>
+    <text x="218" y="210" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="bold" fill="#2dd4bf">STUDENT_PHONE(RollNo(FK), Phone_Number)</text>
+
+    <!-- Rule 7: Minimization Table -->
+    <rect y="240" width="440" height="150" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.8"/>
+    <text x="18" y="264" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#c084fc">Table Minimization Principles (Exam Formula):</text>
+    <text x="18" y="284" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• 1:1 with Both Total → 1 Table (Merge both entities + relation)</text>
+    <text x="18" y="302" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• 1:1 with One Partial → 2 Tables (Foreign key on Total side)</text>
+    <text x="18" y="320" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• 1:N Relationship → 2 Tables (Merge relation into 'N' side)</text>
+    <text x="18" y="338" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• M:N Relationship → 3 Tables (Entity A, Entity B, and Join Table)</text>
+    <text x="18" y="356" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">• Weak Entity → 2 Tables (Merged identifying relationship)</text>
+  </g>
+
+  <!-- FOOTER -->
+  <text x="500" y="495" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" fill="#94a3b8">Golden Rule: Never create separate tables for 1:N relationships; always merge with the 'N' side entity table!</text>
+</svg>
+
+</div>
+
+<h2>2. Quick Minimization Formula (AKTU Numerical)</h2>
+<table>
+  <tr><th>Relationship Type</th><th>Participation</th><th>Minimum Relational Tables</th></tr>
+  <tr><td><b>1 : 1</b></td><td>Both Total Participation</td><td><b>1 Table</b> (Fully Merged)</td></tr>
+  <tr><td><b>1 : 1</b></td><td>One Total, One Partial</td><td><b>2 Tables</b> (FK on Total side)</td></tr>
+  <tr><td><b>1 : N</b></td><td>Any Participation</td><td><b>2 Tables</b> (Merge relation into 'N' side)</td></tr>
+  <tr><td><b>M : N</b></td><td>Any Participation</td><td><b>3 Tables</b> (Table A, Table B + Join Table)</td></tr>
+  <tr><td><b>Weak Entity</b></td><td>Total Participation (Standard)</td><td><b>2 Tables</b> (Owner Table + Weak Table)</td></tr>
+  <tr><td><b>Multivalued Attribute</b></td><td>1 Multivalued column</td><td><b>2 Tables</b> (Entity Table + Attribute Table)</td></tr>
+</table>
+</body>
+</html>

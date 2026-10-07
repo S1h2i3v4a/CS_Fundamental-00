@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg11)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Relational Algebra Operations &amp; Query Languages</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Fundamental Operations (σ, π, ×, ∪, -), Joins (⋈), Division (÷) and Calculus</text>
+
+  <!-- 1. SELECTION (Horizontal) -->
+  <g transform="translate(40, 85)">
+    <rect width="280" height="195" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <rect width="280" height="28" rx="8" fill="#1e3a8a"/>
+    <text x="140" y="19" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#60a5fa">SELECTION: σ_{Marks &gt; 80}(R)</text>
+
+    <!-- Visual Table horizontal slice -->
+    <g transform="translate(20, 42)">
+      <rect width="240" height="20" fill="#0f172a" stroke="#475569"/>
+      <text x="120" y="14" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">Roll | Name | Marks</text>
+
+      <rect y="22" width="240" height="20" fill="#065f46" stroke="#10b981"/>
+      <text x="120" y="36" text-anchor="middle" font-family="monospace" font-size="9" font-weight="bold" fill="#a7f3d0">101 | Akhil | 92 ✓ SELECTED</text>
+
+      <rect y="44" width="240" height="20" fill="#0f172a" stroke="#334155"/>
+      <text x="120" y="58" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">102 | Rahul | 75 (Filtered out)</text>
+
+      <rect y="66" width="240" height="20" fill="#065f46" stroke="#10b981"/>
+      <text x="120" y="80" text-anchor="middle" font-family="monospace" font-size="9" font-weight="bold" fill="#a7f3d0">103 | Pooja | 88 ✓ SELECTED</text>
+    </g>
+    <text x="140" y="172" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#38bdf8">Horizontal Filtering of Tuples</text>
+    <text x="140" y="186" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Degree remains same; Cardinality ≤ original</text>
+  </g>
+
+  <!-- 2. PROJECTION (Vertical) -->
+  <g transform="translate(360, 85)">
+    <rect width="280" height="195" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect width="280" height="28" rx="8" fill="#064e3b"/>
+    <text x="140" y="19" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">PROJECTION: π_{Roll, Name}(R)</text>
+
+    <!-- Visual Table vertical slice -->
+    <g transform="translate(20, 42)">
+      <rect width="80" height="86" fill="#065f46" stroke="#10b981"/>
+      <text x="40" y="14" text-anchor="middle" font-family="monospace" font-size="9" fill="#a7f3d0">Roll</text>
+      <text x="40" y="36" text-anchor="middle" font-family="monospace" font-size="9" fill="#a7f3d0">101</text>
+      <text x="40" y="58" text-anchor="middle" font-family="monospace" font-size="9" fill="#a7f3d0">102</text>
+      <text x="40" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#a7f3d0">103</text>
+
+      <rect x="80" width="90" height="86" fill="#065f46" stroke="#10b981"/>
+      <text x="125" y="14" text-anchor="middle" font-family="monospace" font-size="9" fill="#a7f3d0">Name</text>
+      <text x="125" y="36" text-anchor="middle" font-family="monospace" font-size="9" fill="#a7f3d0">Akhil</text>
+      <text x="125" y="58" text-anchor="middle" font-family="monospace" font-size="9" fill="#a7f3d0">Rahul</text>
+      <text x="125" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#a7f3d0">Pooja</text>
+
+      <rect x="170" width="70" height="86" fill="#0f172a" stroke="#334155"/>
+      <text x="205" y="14" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">Marks</text>
+      <text x="205" y="50" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#ef4444">Dropped</text>
+    </g>
+    <text x="140" y="172" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#34d399">Vertical Filtering of Columns</text>
+    <text x="140" y="186" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Auto-eliminates duplicate tuples!</text>
+  </g>
+
+  <!-- 3. NATURAL JOIN & OUTER JOINS -->
+  <g transform="translate(680, 85)">
+    <rect width="280" height="195" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <rect width="280" height="28" rx="8" fill="#78350f"/>
+    <text x="140" y="19" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">JOIN OPERATIONS (R ⋈ S)</text>
+    
+    <g transform="translate(15, 38)">
+      <text x="0" y="16" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#fde68a">• Natural Join (R ⋈ S):</text>
+      <text x="10" y="32" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Equi-join on common attributes; duplicate column dropped.</text>
+
+      <text x="0" y="54" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#38bdf8">• Left Outer Join (R &#x27d5; S):</text>
+      <text x="10" y="70" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">All left tuples kept; unmatched right padded with NULL.</text>
+
+      <text x="0" y="92" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#34d399">• Right Outer Join (R &#x27d6; S):</text>
+      <text x="10" y="108" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">All right tuples kept; unmatched left padded with NULL.</text>
+
+      <text x="0" y="130" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#c084fc">• Full Outer Join (R &#x27d7; S):</text>
+      <text x="10" y="146" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">All tuples from both sides kept with NULL padding.</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM: DIVISION & RELATIONAL CALCULUS -->
+  <g transform="translate(40, 300)">
+    <rect width="920" height="195" rx="10" fill="#1e293b" stroke="#6366f1" stroke-width="2"/>
+    <rect width="920" height="28" rx="10" fill="#312e81"/>
+    <text x="460" y="19" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#c7d2fe">DIVISION OPERATOR (÷) &amp; RELATIONAL CALCULUS (TRC / DRC)</text>
+
+    <!-- Division Operator -->
+    <g transform="translate(25, 40)">
+      <rect width="420" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+      <text x="15" y="22" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Division Operator (R ÷ S) - "FOR ALL" Queries</text>
+      <text x="15" y="42" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Used for queries with condition "Find entities associated with ALL..."</text>
+      <text x="15" y="60" font-family="monospace" font-size="9" fill="#a5f3fc">Example: "Find students enrolled in ALL courses taught by Prof. Rao"</text>
+      <text x="15" y="78" font-family="monospace" font-size="8.5" fill="#cbd5e1">Formula: R ÷ S = π_{R-S}(R) - π_{R-S}( (π_{R-S}(R) × S) - R )</text>
+      <text x="15" y="98" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">If R(A, B) has degree 2 and S(B) has degree 1 → (R ÷ S) has degree 1 (A).</text>
+      <text x="15" y="118" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Highly popular in GATE and AKTU 10-mark examinations!</text>
+    </g>
+
+    <!-- Relational Calculus -->
+    <g transform="translate(475, 40)">
+      <rect width="420" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+      <text x="15" y="22" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Relational Calculus: Declarative Formal Languages</text>
+      <text x="15" y="42" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• TRC (Tuple Relational Calculus): { t | P(t) }</text>
+      <text x="25" y="58" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Quantifiers: ∃ (There exists), ∀ (For all). Safety rule restricts infinite sets.</text>
+
+      <text x="15" y="78" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• DRC (Domain Relational Calculus): { ⟨x1, x2⟩ | P(x1, x2) }</text>
+      <text x="25" y="94" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Variables range over attribute domain values instead of whole tuples.</text>
+
+      <text x="15" y="118" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#a7f3d0">• Codd's Theorem: Relational Algebra ≡ Safe TRC ≡ Safe DRC!</text>
+    </g>
+  </g>
+</svg>

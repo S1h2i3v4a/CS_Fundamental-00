@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 03: Database Users and DBA Roles</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 03: Database Users &amp; DBA Roles</h1>
+<p><span class="badge">Unit 1: User Architecture</span> <span class="badge">AKTU BCS501</span> <span class="badge">DBA Duties</span></p>
+
+<h2>1. User Classification &amp; DBA Duties Overview</h2>
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg03)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Database Users Hierarchy &amp; DBA Roles</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">User Classification, Interfaces &amp; Database Administrator Responsibilities</text>
+
+  <!-- LEFT: 5 USER CATEGORIES -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="405" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <rect width="440" height="34" rx="10" fill="#1e3a8a"/>
+    <text x="220" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">CLASSIFICATION OF DATABASE USERS</text>
+
+    <!-- 1. Naive -->
+    <rect x="20" y="48" width="400" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="68" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">1. Naive / Parametric Users</text>
+    <text x="32" y="86" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Interact via canned form interfaces. No SQL knowledge.</text>
+    <text x="32" y="98" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: Bank tellers, railway booking clerks, web shoppers.</text>
+
+    <!-- 2. Application Programmers -->
+    <rect x="20" y="116" width="400" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="136" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">2. Application Programmers</text>
+    <text x="32" y="154" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Write software using C, Java, Python with embedded SQL/ORMs.</text>
+    <text x="32" y="166" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: Backend engineers, full-stack developers.</text>
+
+    <!-- 3. Sophisticated Users -->
+    <rect x="20" y="184" width="400" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="204" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">3. Sophisticated / Analytical Users</text>
+    <text x="32" y="222" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Formulate complex ad-hoc SQL queries without writing programs.</text>
+    <text x="32" y="234" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: Data analysts, business intelligence scientists.</text>
+
+    <!-- 4. Specialized Users -->
+    <rect x="20" y="252" width="400" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="272" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#c084fc">4. Specialized Users</text>
+    <text x="32" y="290" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Write custom non-OLTP database apps (CAD, GIS, Spatial, AI).</text>
+    <text x="32" y="302" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: GIS mapping experts, multimedia engineers.</text>
+
+    <!-- 5. Casual Users -->
+    <rect x="20" y="320" width="400" height="68" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="32" y="340" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">5. Casual / Temporary Users</text>
+    <text x="32" y="358" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Access DB occasionally; need different info each time.</text>
+    <text x="32" y="372" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Examples: Senior managers viewing quarterly executive summaries.</text>
+  </g>
+
+  <!-- RIGHT: DBA ROLES & RESPONSIBILITIES -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="405" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect width="440" height="34" rx="10" fill="#064e3b"/>
+    <text x="220" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">DATABASE ADMINISTRATOR (DBA) DUTIES</text>
+
+    <g transform="translate(20, 48)">
+      <!-- Duty 1 -->
+      <rect width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="20" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">1. Schema Definition</text>
+      <text x="15" y="36" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Writes DDL to create conceptual tables, primary keys, relationships.</text>
+
+      <!-- Duty 2 -->
+      <rect y="56" width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="76" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">2. Storage Structure &amp; Access Method Definition</text>
+      <text x="15" y="92" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Decides B+ Tree vs Hash indexes, disk block clustering, RAID tier.</text>
+
+      <!-- Duty 3 -->
+      <rect y="112" width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="132" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">3. Security &amp; Authorization Enforcement</text>
+      <text x="15" y="148" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Controls GRANT and REVOKE privileges to prevent unauthorized leaks.</text>
+
+      <!-- Duty 4 -->
+      <rect y="168" width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="188" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">4. Routine Backup &amp; Disaster Recovery</text>
+      <text x="15" y="204" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Schedules full/differential backups; tests WAL log crash recovery.</text>
+
+      <!-- Duty 5 -->
+      <rect y="224" width="400" height="46" rx="5" fill="#0f172a" stroke="#059669"/>
+      <text x="15" y="244" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">5. Performance Tuning &amp; Monitoring</text>
+      <text x="15" y="260" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Monitors slow query logs, cache hit ratio, index fragmentation.</text>
+
+      <!-- Cloud DBA Note -->
+      <rect y="280" width="400" height="64" rx="5" fill="#022c22" stroke="#10b981"/>
+      <text x="15" y="300" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#a7f3d0">Modern Cloud DBA Role:</text>
+      <text x="15" y="318" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Manages AWS RDS, Aurora, GCP Cloud SQL, automated scaling,</text>
+      <text x="15" y="332" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">multi-region read replicas, and zero-downtime schema migrations.</text>
+    </g>
+  </g>
+</svg>
+
+</div>
+
+<h2>2. The 5 Classes of Database Users</h2>
+<table>
+  <tr><th>User Class</th><th>Technical Skill</th><th>Interaction Mechanism</th><th>Example</th></tr>
+  <tr><td><b>Naive / Parametric</b></td><td>Zero SQL Knowledge</td><td>Canned forms / UI buttons</td><td>Bank tellers, IRCTC clerks</td></tr>
+  <tr><td><b>Application Programmers</b></td><td>High (Java/Python/SQL)</td><td>JDBC, ODBC, ORM frameworks</td><td>Backend software engineers</td></tr>
+  <tr><td><b>Sophisticated</b></td><td>High SQL / Analytic</td><td>Direct ad-hoc query consoles</td><td>Data analysts, BI specialists</td></tr>
+  <tr><td><b>Specialized</b></td><td>Expert Domain Knowledge</td><td>Non-traditional DB tools</td><td>CAD/CAM, GIS developers</td></tr>
+  <tr><td><b>Casual</b></td><td>Moderate to High</td><td>Occasional dashboard views</td><td>CEOs, department managers</td></tr>
+</table>
+
+<h2>3. Core DBA Responsibilities</h2>
+<div class="callout-info">
+1. <b>Schema Definition:</b> Formulates DDL schemas, constraints, and data types.<br>
+2. <b>Physical Storage Optimization:</b> Manages B+ Tree indexes, partitioning, and buffer pool sizing.<br>
+3. <b>Security &amp; Authorization:</b> Executes <code>GRANT</code> / <code>REVOKE</code> access matrices.<br>
+4. <b>Disaster Recovery:</b> Automated backup scheduling and point-in-time crash recovery via WAL logs.<br>
+5. <b>Performance Tuning:</b> Diagnoses query bottlenecks and minimizes physical disk I/O.
+</div>
+</body>
+</html>

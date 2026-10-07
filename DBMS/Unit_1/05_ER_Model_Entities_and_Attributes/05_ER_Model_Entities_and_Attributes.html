@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 05: ER Model Entities and Attributes</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 05: ER Model Entities &amp; Attributes</h1>
+<p><span class="badge">Unit 1: ER Modeling</span> <span class="badge">AKTU BCS501</span> <span class="badge">Chen Notation</span></p>
+
+<h2>1. Visual Attribute Taxonomy</h2>
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg05)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Entity-Relationship Model: Entities &amp; Attribute Taxonomy</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Standard Chen Notation: Key, Simple, Composite, Multivalued &amp; Derived Attributes</text>
+
+  <!-- CENTRAL ENTITY -->
+  <rect x="410" y="220" width="180" height="65" rx="4" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2.5"/>
+  <text x="500" y="258" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="18" font-weight="bold" fill="#ffffff">STUDENT</text>
+  <text x="500" y="274" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#93c5fd">(Entity Set)</text>
+
+  <!-- 1. KEY ATTRIBUTE (Underlined) -->
+  <line x1="410" y1="235" x2="230" y2="140" stroke="#64748b" stroke-width="1.8"/>
+  <ellipse cx="180" cy="120" rx="75" ry="32" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+  <text x="180" y="125" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa" text-decoration="underline">Roll_No</text>
+  <text x="180" y="170" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Key Attribute (Underlined)</text>
+
+  <!-- 2. MULTI-VALUED ATTRIBUTE (Double Oval) -->
+  <line x1="410" y1="265" x2="230" y2="340" stroke="#64748b" stroke-width="1.8"/>
+  <ellipse cx="180" cy="360" rx="78" ry="34" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <ellipse cx="180" cy="360" rx="70" ry="27" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+  <text x="180" y="365" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#34d399">Phone_Number</text>
+  <text x="180" y="410" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Multi-Valued (Double Oval)</text>
+
+  <!-- 3. STORED ATTRIBUTE (DOB) & DERIVED ATTRIBUTE (Age - Dashed Oval) -->
+  <line x1="500" y1="220" x2="500" y2="145" stroke="#64748b" stroke-width="1.8"/>
+  <ellipse cx="500" cy="125" rx="65" ry="28" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <text x="500" y="130" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#fbbf24">DOB</text>
+
+  <line x1="500" y1="97" x2="500" y2="55" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <ellipse cx="500" cy="40" rx="60" ry="24" fill="#1e293b" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="500" y="44" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fde68a">Age</text>
+  <text x="590" y="55" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f59e0b">← Derived (Dashed Oval)</text>
+
+  <!-- 4. COMPOSITE ATTRIBUTE (Address -> Street, City, Pincode) -->
+  <line x1="590" y1="235" x2="770" y2="150" stroke="#64748b" stroke-width="1.8"/>
+  <ellipse cx="800" cy="140" rx="65" ry="28" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
+  <text x="800" y="145" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#c084fc">Address</text>
+  <text x="800" y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Composite Attribute</text>
+
+  <!-- Sub-attributes of Address -->
+  <line x1="840" y1="120" x2="910" y2="85" stroke="#64748b" stroke-width="1.2"/>
+  <ellipse cx="930" cy="75" rx="42" ry="18" fill="#0f172a" stroke="#a855f7"/>
+  <text x="930" y="79" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#e9d5ff">Street</text>
+
+  <line x1="865" y1="140" x2="925" y2="135" stroke="#64748b" stroke-width="1.2"/>
+  <ellipse cx="945" cy="135" rx="40" ry="18" fill="#0f172a" stroke="#a855f7"/>
+  <text x="945" y="139" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#e9d5ff">City</text>
+
+  <line x1="845" y1="160" x2="915" y2="190" stroke="#64748b" stroke-width="1.2"/>
+  <ellipse cx="935" cy="195" rx="42" ry="18" fill="#0f172a" stroke="#a855f7"/>
+  <text x="935" y="199" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#e9d5ff">Pincode</text>
+
+  <!-- 5. SIMPLE / ATOMIC ATTRIBUTE (Gender) -->
+  <line x1="590" y1="265" x2="770" y2="340" stroke="#64748b" stroke-width="1.8"/>
+  <ellipse cx="820" cy="355" rx="65" ry="28" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="820" y="360" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#38bdf8">Gender</text>
+  <text x="820" y="398" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Simple / Atomic Attribute</text>
+
+  <!-- BOTTOM LEGEND BOX -->
+  <rect x="60" y="445" width="880" height="55" rx="8" fill="#0f172a" stroke="#334155"/>
+  <text x="500" y="468" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f8fafc">Chen's ER Graphic Notations Summary:</text>
+  <text x="500" y="488" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Rectangle = Entity Set | Oval = Attribute | Underline = Primary Key | Double Oval = Multivalued | Dashed = Derived</text>
+</svg>
+
+</div>
+
+<h2>2. Core Attribute Categories</h2>
+<table>
+  <tr><th>Attribute Type</th><th>Chen Notation</th><th>Key Characteristic</th><th>Example</th></tr>
+  <tr><td><b>Simple / Atomic</b></td><td>Single Oval</td><td>Indivisible atomic value</td><td><code>Gender</code></td></tr>
+  <tr><td><b>Composite</b></td><td>Hierarchical Ovals</td><td>Divisible into sub-attributes</td><td><code>Address → Street, City, Pin</code></td></tr>
+  <tr><td><b>Key Attribute</b></td><td>Underlined Text</td><td>Uniquely identifies entity</td><td><code><u>Roll_No</u></code></td></tr>
+  <tr><td><b>Multi-Valued</b></td><td>Double Oval</td><td>Entity can hold multiple values</td><td><code>Phone_Number</code></td></tr>
+  <tr><td><b>Derived</b></td><td>Dashed Oval</td><td>Calculated on-the-fly from stored data</td><td><code>Age = Today - DOB</code></td></tr>
+</table>
+</body>
+</html>

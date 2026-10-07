@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 06: Relationships, Cardinalities and Weak Entities</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 06: Relationships, Cardinalities &amp; Weak Entities</h1>
+<p><span class="badge">Unit 1: ER Model</span> <span class="badge">AKTU BCS501</span> <span class="badge">Weak Entities</span></p>
+
+<h2>1. Architectural Architecture Overview</h2>
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg06)" rx="16"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Relationships, Cardinalities &amp; Weak Entity Sets</text>
+  <text x="500" y="58" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Mapping Ratios (1:1, 1:N, M:N), Total/Partial Participation &amp; Identifying Relationships</text>
+
+  <!-- SECTION 1: MAPPING CARDINALITIES -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="405" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <rect width="440" height="34" rx="10" fill="#1e3a8a"/>
+    <text x="220" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">MAPPING CARDINALITY RATIOS</text>
+
+    <!-- 1:1 -->
+    <g transform="translate(20, 50)">
+      <rect width="90" height="32" rx="4" fill="#0f172a" stroke="#60a5fa"/>
+      <text x="45" y="20" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#f8fafc">Citizen</text>
+      
+      <line x1="90" y1="16" x2="135" y2="16" stroke="#64748b" stroke-width="1.5"/>
+      <polygon points="155,0 175,16 155,32 135,16" fill="#1e3a8a" stroke="#60a5fa"/>
+      <text x="155" y="19" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#93c5fd">Has</text>
+      <line x1="175" y1="16" x2="220" y2="16" stroke="#64748b" stroke-width="1.5"/>
+
+      <rect x="220" width="90" height="32" rx="4" fill="#0f172a" stroke="#60a5fa"/>
+      <text x="265" y="20" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#f8fafc">Passport</text>
+      
+      <text x="360" y="20" font-family="monospace" font-size="11" font-weight="bold" fill="#38bdf8">1 : 1</text>
+    </g>
+
+    <!-- 1:N -->
+    <g transform="translate(20, 100)">
+      <rect width="90" height="32" rx="4" fill="#0f172a" stroke="#60a5fa"/>
+      <text x="45" y="20" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#f8fafc">Department</text>
+      
+      <line x1="90" y1="16" x2="135" y2="16" stroke="#64748b" stroke-width="1.5"/>
+      <polygon points="155,0 175,16 155,32 135,16" fill="#1e3a8a" stroke="#60a5fa"/>
+      <text x="155" y="19" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#93c5fd">Employs</text>
+      <line x1="175" y1="16" x2="220" y2="16" stroke="#64748b" stroke-width="1.5"/>
+
+      <rect x="220" width="90" height="32" rx="4" fill="#0f172a" stroke="#60a5fa"/>
+      <text x="265" y="20" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#f8fafc">Employee</text>
+      
+      <text x="360" y="20" font-family="monospace" font-size="11" font-weight="bold" fill="#38bdf8">1 : N</text>
+    </g>
+
+    <!-- M:N -->
+    <g transform="translate(20, 150)">
+      <rect width="90" height="32" rx="4" fill="#0f172a" stroke="#60a5fa"/>
+      <text x="45" y="20" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#f8fafc">Student</text>
+      
+      <line x1="90" y1="16" x2="135" y2="16" stroke="#64748b" stroke-width="1.5"/>
+      <polygon points="155,0 175,16 155,32 135,16" fill="#1e3a8a" stroke="#60a5fa"/>
+      <text x="155" y="19" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#93c5fd">Enrolled</text>
+      <line x1="175" y1="16" x2="220" y2="16" stroke="#64748b" stroke-width="1.5"/>
+
+      <rect x="220" width="90" height="32" rx="4" fill="#0f172a" stroke="#60a5fa"/>
+      <text x="265" y="20" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#f8fafc">Course</text>
+      
+      <text x="360" y="20" font-family="monospace" font-size="11" font-weight="bold" fill="#38bdf8">M : N</text>
+    </g>
+
+    <!-- PARTICIPATION CONSTRAINTS CALLOUT -->
+    <rect x="20" y="210" width="400" height="175" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="234" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Participation Constraints:</text>
+    <text x="35" y="258" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#10b981">• Total Participation (Double Line = Existence Dependency):</text>
+    <text x="45" y="276" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Every entity in set MUST participate in relationship.</text>
+    <text x="45" y="292" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Example: Every Employee must belong to a Department.</text>
+    
+    <text x="35" y="322" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#f59e0b">• Partial Participation (Single Line):</text>
+    <text x="45" y="340" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Some entities may not participate in relationship.</text>
+    <text x="45" y="356" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Example: Not every Employee manages a Department.</text>
+  </g>
+
+  <!-- RIGHT: WEAK ENTITY SET IN DEPTH -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="405" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <rect width="440" height="34" rx="10" fill="#78350f"/>
+    <text x="220" y="22" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fbbf24">WEAK ENTITY SET &amp; IDENTIFYING RELATIONSHIP</text>
+
+    <!-- Strong Entity -->
+    <rect x="20" y="60" width="105" height="50" rx="5" fill="#0f172a" stroke="#3b82f6" stroke-width="2"/>
+    <text x="72" y="85" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#60a5fa">EMPLOYEE</text>
+    <text x="72" y="100" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Strong Entity</text>
+
+    <!-- Single Line -->
+    <line x1="125" y1="85" x2="165" y2="85" stroke="#94a3b8" stroke-width="1.8"/>
+
+    <!-- Double Diamond (Identifying Relationship) -->
+    <polygon points="215,55 255,85 215,115 175,85" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+    <polygon points="215,62 245,85 215,108 185,85" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="215" y="89" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#fde68a">Has</text>
+
+    <!-- Double Line (Total Participation) -->
+    <line x1="255" y1="82" x2="310" y2="82" stroke="#f59e0b" stroke-width="1.8"/>
+    <line x1="255" y1="88" x2="310" y2="88" stroke="#f59e0b" stroke-width="1.8"/>
+
+    <!-- Double Rectangle (Weak Entity) -->
+    <rect x="310" y="60" width="115" height="50" rx="5" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+    <rect x="316" y="65" width="103" height="40" rx="3" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="367" y="85" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fde68a">DEPENDENT</text>
+    <text x="367" y="100" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Weak Entity</text>
+
+    <!-- Attributes of Dependent -->
+    <line x1="367" y1="110" x2="367" y2="150" stroke="#64748b" stroke-width="1.5"/>
+    <ellipse cx="367" cy="170" rx="60" ry="22" fill="#0f172a" stroke="#f59e0b"/>
+    <text x="367" y="174" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#fde68a" stroke="#fde68a" stroke-dasharray="3,2">Dep_Name</text>
+    <text x="367" y="205" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Partial Key / Discriminator (Dashed Underline)</text>
+
+    <!-- 4 Mandatory Rules of Weak Entity -->
+    <rect x="20" y="230" width="400" height="155" rx="6" fill="#0f172a" stroke="#d97706"/>
+    <text x="30" y="252" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#fbbf24">Mandatory Rules of Weak Entity:</text>
+    <text x="30" y="272" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Lacks sufficient attributes to form primary key on its own.</text>
+    <text x="30" y="292" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Must have identifying relationship (Double Diamond) with</text>
+    <text x="40" y="308" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">an Owner / Strong Entity Set.</text>
+    <text x="30" y="328" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">3. Always exhibits 100% Total Participation (Double Line).</text>
+    <text x="30" y="348" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">4. Primary Key = (Strong PK + Discriminator).</text>
+    <text x="40" y="366" font-family="monospace" font-size="9.5" fill="#a7f3d0">PK = (Emp_ID, Dep_Name)</text>
+  </g>
+</svg>
+
+</div>
+
+<h2>2. Mapping Cardinalities &amp; Participation Constraints</h2>
+<table>
+  <tr><th>Ratio</th><th>Constraint Meaning</th><th>Total vs Partial Participation</th><th>Example</th></tr>
+  <tr><td><b>1 : 1</b></td><td>Citizen has at most 1 Passport</td><td>Passport has Total Participation</td><td>Citizen ↔ Passport</td></tr>
+  <tr><td><b>1 : N</b></td><td>1 Dept employs N Employees</td><td>Employee has Total (Must have a Dept)</td><td>Department → Employee</td></tr>
+  <tr><td><b>M : N</b></td><td>M Students enroll in N Courses</td><td>Both sides can be Partial/Total</td><td>Student ↔ Course</td></tr>
+</table>
+
+<h2>3. Weak Entity Set Rules (Exam Must-Know)</h2>
+<div class="callout-info">
+1. <b>Double Rectangle:</b> Weak entity container.<br>
+2. <b>Double Diamond:</b> Identifying relationship with Strong owner entity.<br>
+3. <b>Dashed Underline:</b> Partial key / Discriminator.<br>
+4. <b>Double Line:</b> Always total participation.<br>
+5. <b>Composite PK:</b> <code>PK(Weak) = PK(Owner) + Discriminator</code>.
+</div>
+</body>
+</html>
