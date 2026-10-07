@@ -40,7 +40,7 @@
 
     <rect x="25" y="325" width="430" height="65" rx="6" fill="#0f172a" stroke="#ef4444"/>
     <text x="35" y="348" fill="#f87171" font-size="11" font-weight="bold">Resource Nodes Collapsed!</text>
-    <text x="35" y="365" fill="#cbd5e1" font-size="10.5">Pi &rarr; Pj edge indicates Pi is waiting for resource held by Pj.</text>
+    <text x="35" y="365" fill="#cbd5e1" font-size="10.5">Pi → Pj edge indicates Pi is waiting for resource held by Pj.</text>
     <text x="35" y="380" fill="#a7f3d0" font-size="10.5">Cycle detection in WFG runs in O(V^2) via DFS/Tarjan.</text>
   </g>
 

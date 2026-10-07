@@ -43,7 +43,7 @@
     <text x="25" y="185" fill="#cbd5e1" font-size="11">• Provably OPTIMAL for minimizing Avg Waiting Time.</text>
     <text x="25" y="205" fill="#cbd5e1" font-size="11">• Once scheduled, job runs to completion without preemption.</text>
     <text x="25" y="225" fill="#f87171" font-size="11">• Long jobs suffer Starvation if short jobs arrive repeatedly.</text>
-    <text x="25" y="250" fill="#fbbf24" font-size="11">• Next burst prediction: &tau;_{n+1} = &alpha;*t_n + (1-&alpha;)*&tau;_n</text>
+    <text x="25" y="250" fill="#fbbf24" font-size="11">• Next burst prediction: τ_{n+1} = α*t_n + (1-α)*τ_n</text>
     
     <rect x="25" y="280" width="440" height="95" rx="6" fill="#0f172a" stroke="#334155"/>
     <text x="35" y="305" fill="#4ade80" font-size="11" font-family="monospace">Average Turnaround Time = 7.8 ms</text>
@@ -92,7 +92,7 @@
 
     <text x="25" y="160" fill="#f8fafc" font-size="12" font-weight="bold">SRTF Preemptive Mechanism:</text>
     <text x="25" y="185" fill="#cbd5e1" font-size="11">• At every new arrival, remaining time of running job is compared.</text>
-    <text x="25" y="205" fill="#cbd5e1" font-size="11">• If new arrival has strictly shorter remaining burst &rarr; PREEMPT!</text>
+    <text x="25" y="205" fill="#cbd5e1" font-size="11">• If new arrival has strictly shorter remaining burst → PREEMPT!</text>
     <text x="25" y="225" fill="#4ade80" font-size="11">• Even lower Avg WT than non-preemptive SJF.</text>
     <text x="25" y="248" fill="#fbbf24" font-size="11">• Frequent context switches increase CPU overhead.</text>
 

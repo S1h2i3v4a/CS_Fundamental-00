@@ -54,7 +54,7 @@
     <text x="20" y="155" fill="#f8fafc" font-size="12" font-weight="bold">Ready Queue State Transitions:</text>
     <text x="20" y="180" fill="#cbd5e1" font-size="10.5">• Ready Queue operated as Circular FIFO Queue.</text>
     <text x="20" y="200" fill="#cbd5e1" font-size="10.5">• Process gets at most 1 Time Quantum 'q' per turn.</text>
-    <text x="20" y="220" fill="#cbd5e1" font-size="10.5">• Timer interrupt occurs when quantum expires &rarr; Preempt to tail.</text>
+    <text x="20" y="220" fill="#cbd5e1" font-size="10.5">• Timer interrupt occurs when quantum expires → Preempt to tail.</text>
     <text x="20" y="240" fill="#4ade80" font-size="10.5">• Outstanding Response Time (Ideal for Time-Sharing OS).</text>
 
     <rect x="20" y="265" width="480" height="120" rx="6" fill="#0f172a" stroke="#334155"/>
@@ -71,14 +71,14 @@
 
     <!-- Extremely Large q -->
     <rect x="25" y="55" width="430" height="95" rx="6" fill="#0f172a" stroke="#fbbf24"/>
-    <text x="40" y="80" fill="#fbbf24" font-size="13" font-weight="bold">Case 1: Quantum q &rarr; &infin; (Very Large)</text>
+    <text x="40" y="80" fill="#fbbf24" font-size="13" font-weight="bold">Case 1: Quantum q → ∞ (Very Large)</text>
     <text x="40" y="105" fill="#cbd5e1" font-size="10.5">• Har process single slice me finish ho jayega.</text>
     <text x="40" y="123" fill="#cbd5e1" font-size="10.5">• Round Robin degenerates into FCFS (Convoy effect returns!).</text>
     <text x="40" y="141" fill="#f87171" font-size="10.5">• Poor interactive response time.</text>
 
     <!-- Extremely Small q -->
     <rect x="25" y="165" width="430" height="95" rx="6" fill="#0f172a" stroke="#f87171"/>
-    <text x="40" y="190" fill="#f87171" font-size="13" font-weight="bold">Case 2: Quantum q &rarr; 0 (Very Small)</text>
+    <text x="40" y="190" fill="#f87171" font-size="13" font-weight="bold">Case 2: Quantum q → 0 (Very Small)</text>
     <text x="40" y="215" fill="#cbd5e1" font-size="10.5">• Processor Sharing: N processes run on 1/N virtual speed.</text>
     <text x="40" y="233" fill="#cbd5e1" font-size="10.5">• Massive Context Switch Overhead! Most CPU time wasted in switching.</text>
     <text x="40" y="251" fill="#f87171" font-size="10.5">• System throughput drops drastically (Thrashing).</text>

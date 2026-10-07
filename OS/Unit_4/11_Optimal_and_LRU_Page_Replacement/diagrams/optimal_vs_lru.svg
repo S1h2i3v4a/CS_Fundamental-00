@@ -16,12 +16,12 @@
     <text x="210" y="28" fill="#34d399" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Optimal (OPT / MIN) Algorithm</text>
     <text x="210" y="50" fill="#a7f3d0" font-family="sans-serif" font-size="10.5" text-anchor="middle">Looks FORWARD into the future</text>
     
-    <text x="25" y="80" fill="#cbd5e1" font-family="sans-serif" font-size="11">&bull; Rule: Us page ko replace karo jo future me</text>
+    <text x="25" y="80" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Rule: Us page ko replace karo jo future me</text>
     <text x="25" y="98" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">  longest period of time tak use nahi hoga.</text>
-    <text x="25" y="125" fill="#cbd5e1" font-family="sans-serif" font-size="11">&bull; Minimum possible page fault rate guarantee karta hai.</text>
-    <text x="25" y="150" fill="#f87171" font-family="sans-serif" font-size="11">&bull; Practicality: Cannot be implemented in general OS</text>
+    <text x="25" y="125" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Minimum possible page fault rate guarantee karta hai.</text>
+    <text x="25" y="150" fill="#f87171" font-family="sans-serif" font-size="11">• Practicality: Cannot be implemented in general OS</text>
     <text x="25" y="168" fill="#fca5a5" font-family="sans-serif" font-size="10.5">  (Requires future oracle knowledge).</text>
-    <text x="25" y="195" fill="#cbd5e1" font-family="sans-serif" font-size="11">&bull; Benchmark: Dusre algorithms ki efficiency measure</text>
+    <text x="25" y="195" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Benchmark: Dusre algorithms ki efficiency measure</text>
     <text x="25" y="213" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">  karne ke liye theoretical baseline ka kaam karta hai.</text>
     
     <rect x="25" y="320" width="370" height="40" rx="6" fill="#065f46"/>
@@ -34,11 +34,11 @@
     <text x="210" y="28" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Least Recently Used (LRU) Algorithm</text>
     <text x="210" y="50" fill="#93c5fd" font-family="sans-serif" font-size="10.5" text-anchor="middle">Looks BACKWARD into the past</text>
     
-    <text x="25" y="80" fill="#cbd5e1" font-family="sans-serif" font-size="11">&bull; Rule: Us page ko replace karo jo past me</text>
+    <text x="25" y="80" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Rule: Us page ko replace karo jo past me</text>
     <text x="25" y="98" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="bold">  longest period of time se access nahi hua hai.</text>
-    <text x="25" y="125" fill="#cbd5e1" font-family="sans-serif" font-size="11">&bull; OPT ka best practical approximation hai.</text>
-    <text x="25" y="150" fill="#4ade80" font-family="sans-serif" font-size="11">&bull; Stack Algorithm: Belady's Anomaly se 100% immune!</text>
-    <text x="25" y="175" fill="#cbd5e1" font-family="sans-serif" font-size="11">&bull; Implementation Methods:</text>
+    <text x="25" y="125" fill="#cbd5e1" font-family="sans-serif" font-size="11">• OPT ka best practical approximation hai.</text>
+    <text x="25" y="150" fill="#4ade80" font-family="sans-serif" font-size="11">• Stack Algorithm: Belady's Anomaly se 100% immune!</text>
+    <text x="25" y="175" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Implementation Methods:</text>
     <text x="35" y="195" fill="#94a3b8" font-family="sans-serif" font-size="10.5">1. Counter (Logical Clock) - Search min counter on fault</text>
     <text x="35" y="215" fill="#94a3b8" font-family="sans-serif" font-size="10.5">2. Doubly Linked Stack - Most recent to top, bottom = victim</text>
     

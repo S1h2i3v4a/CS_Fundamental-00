@@ -35,14 +35,14 @@
     <!-- 3. No Preemption -->
     <rect x="20" y="225" width="440" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
     <text x="35" y="248" fill="#cbd5e1" font-size="12" font-weight="bold">3. No Preemption Denial</text>
-    <text x="35" y="268" fill="#cbd5e1" font-size="10.5">• If P holding R1 asks for unavailable R2 &rarr; R1 is forcibly preempted!</text>
+    <text x="35" y="268" fill="#cbd5e1" font-size="10.5">• If P holding R1 asks for unavailable R2 → R1 is forcibly preempted!</text>
     <text x="35" y="285" fill="#fca5a5" font-size="10">• Only feasible for saveable states (CPU registers, RAM pages), not disks.</text>
 
     <!-- 4. Circular Wait -->
     <rect x="20" y="310" width="440" height="85" rx="6" fill="#0f172a" stroke="#4ade80"/>
     <text x="35" y="333" fill="#4ade80" font-size="12" font-weight="bold">4. Circular Wait Denial (Havender's Algorithm)</text>
     <text x="35" y="353" fill="#a7f3d0" font-size="10.5">• Imposes global strict linear ordering on all resources.</text>
-    <text x="35" y="372" fill="#4ade80" font-size="10.5">• F: R &rarr; N. Process can ONLY request in strictly increasing order!</text>
+    <text x="35" y="372" fill="#4ade80" font-size="10.5">• F: R → N. Process can ONLY request in strictly increasing order!</text>
   </g>
 
   <!-- Right: Havender's Resource Ordering Graph Trace -->
@@ -85,7 +85,7 @@
     <text x="35" y="270" fill="#4ade80" font-size="11" font-weight="bold">Mathematical Proof of Circular Wait Denial:</text>
     <text x="35" y="290" fill="#cbd5e1" font-size="10">If a cycle existed: F(R0) &lt; F(R1) &lt; F(R2) &lt; ... &lt; F(Rn) &lt; F(R0).</text>
     <text x="35" y="310" fill="#f87171" font-size="10">This implies F(R0) &lt; F(R0), which is a mathematical IMPOSSIBILITY!</text>
-    <text x="35" y="335" fill="#38bdf8" font-size="10.5">&rArr; Circular Wait can NEVER form in any state under Havender's rule.</text>
-    <text x="35" y="355" fill="#a7f3d0" font-size="10">&rArr; 100% Deadlock Free by Design!</text>
+    <text x="35" y="335" fill="#38bdf8" font-size="10.5">⇒ Circular Wait can NEVER form in any state under Havender's rule.</text>
+    <text x="35" y="355" fill="#a7f3d0" font-size="10">⇒ 100% Deadlock Free by Design!</text>
   </g>
 </svg>

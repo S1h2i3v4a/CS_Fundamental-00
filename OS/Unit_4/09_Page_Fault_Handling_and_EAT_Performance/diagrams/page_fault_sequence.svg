@@ -37,7 +37,7 @@
     <circle cx="25" cy="25" r="14" fill="#d97706"/>
     <text x="25" y="30" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">3</text>
     <text x="120" y="28" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="bold">Validate &amp; Find Frame</text>
-    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Check PCB: Illegal &rarr; Abort</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Check PCB: Illegal → Abort</text>
     <text x="20" y="72" fill="#94a3b8" font-family="sans-serif" font-size="10">Find free frame in RAM</text>
   </g>
 
@@ -82,9 +82,9 @@
   <g transform="translate(40, 230)">
     <rect width="400" height="150" rx="8" fill="#0f172a" stroke="#334155"/>
     <text x="200" y="25" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">EAT (Effective Access Time) Mathematical Model</text>
-    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="11">p = Page Fault Rate (0 &le; p &le; 1)</text>
+    <text x="20" y="55" fill="#cbd5e1" font-family="sans-serif" font-size="11">p = Page Fault Rate (0 ≤ p ≤ 1)</text>
     <text x="20" y="75" fill="#4ade80" font-family="sans-serif" font-size="11">t_RAM = 100 ns (Memory access)</text>
     <text x="20" y="95" fill="#f87171" font-family="sans-serif" font-size="11">t_Fault = 8,000,000 ns (8 ms disk seek + latency)</text>
-    <text x="20" y="125" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="bold">EAT = (1 - p) &times; t_RAM + p &times; t_Fault</text>
+    <text x="20" y="125" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="bold">EAT = (1 - p) × t_RAM + p × t_Fault</text>
   </g>
 </svg>

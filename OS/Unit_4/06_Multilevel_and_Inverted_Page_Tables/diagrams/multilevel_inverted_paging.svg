@@ -43,9 +43,9 @@
     <path d="M 150 172 L 220 172" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow)"/>
     <path d="M 200 80 C 200 130, 240 130, 240 180" stroke="#a855f7" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
     
-    <text x="220" y="320" fill="#cbd5e1" font-family="sans-serif" font-size="11" text-anchor="middle">EMAT on Miss: t_TLB + (2 + 1) &times; t_RAM = 3 RAM accesses</text>
-    <text x="220" y="345" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">&bull; Breaks huge 4MB table into single 4KB pages!</text>
-    <text x="220" y="365" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">&bull; Unused inner tables don't need to be in RAM.</text>
+    <text x="220" y="320" fill="#cbd5e1" font-family="sans-serif" font-size="11" text-anchor="middle">EMAT on Miss: t_TLB + (2 + 1) × t_RAM = 3 RAM accesses</text>
+    <text x="220" y="345" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">• Breaks huge 4MB table into single 4KB pages!</text>
+    <text x="220" y="365" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">• Unused inner tables don't need to be in RAM.</text>
   </g>
 
   <!-- Right Side: Inverted Page Table -->
@@ -80,7 +80,7 @@
     <text x="230" y="227" fill="#cbd5e1" font-family="sans-serif" font-size="10">&lt;PID 104, Page 0&gt;</text>
     
     <text x="220" y="320" fill="#fde68a" font-family="sans-serif" font-size="11" text-anchor="middle">Hardware Output = Frame Index i</text>
-    <text x="220" y="345" fill="#cbd5e1" font-family="sans-serif" font-size="10" text-anchor="middle">&bull; Advantage: Memory footprint proportional to RAM size (Tiny!)</text>
-    <text x="220" y="365" fill="#f87171" font-family="sans-serif" font-size="10" text-anchor="middle">&bull; Drawback: Slow search; requires Hash Table acceleration.</text>
+    <text x="220" y="345" fill="#cbd5e1" font-family="sans-serif" font-size="10" text-anchor="middle">• Advantage: Memory footprint proportional to RAM size (Tiny!)</text>
+    <text x="220" y="365" fill="#f87171" font-family="sans-serif" font-size="10" text-anchor="middle">• Drawback: Slow search; requires Hash Table acceleration.</text>
   </g>
 </svg>
