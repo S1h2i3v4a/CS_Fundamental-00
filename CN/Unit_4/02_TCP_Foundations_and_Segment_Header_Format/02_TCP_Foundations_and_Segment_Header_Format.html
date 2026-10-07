@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 4: TCP Foundations and Segment Header Format</title>
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-top: 30px; }
+h2 { color: #1e3a8a; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin-top: 24px; }
+h3 { color: #1e40af; margin-top: 18px; }
+h4 { color: #334155; margin-top: 14px; }
+p, li { font-size: 14.5px; }
+code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13.5px; }
+pre { background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px; }
+th, td { border: 1px solid #cbd5e1; padding: 9px 12px; text-align: left; }
+th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f1f5f9; }
+blockquote { border-left: 4px solid #2563eb; margin: 16px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; }
+.diagram-container { text-align: center; margin: 25px 0; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-amber { background: #fef3c7; color: #92400e; }
+.formula-box { background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 6px; padding: 14px; margin: 16px 0; }
+
+</style>
+</head>
+<body>
+
+<h1>Module 02: TCP Foundations and Segment Header Format</h1>
+<p class="badge badge-blue">Unit 4: Transport Layer</p>
+<p class="badge badge-green">TCP Header Architecture</p>
+<p>Byte-Stream Service, 20-60 Byte Header Field Specifications, 6 Control Flags, Window Advertisement, and Solved AKTU Hex Dump Numericals.</p>
+
+<div class="diagram-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tcpHdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <filter id="sh2" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="950" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="15" y="15" width="920" height="510" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="10"/>
+
+  <rect x="35" y="30" width="880" height="52" fill="url(#tcpHdr)" rx="8" filter="url(#sh2)"/>
+  <text x="475" y="62" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="bold" text-anchor="middle">TCP Segment Header Architecture (20 to 60 Bytes)</text>
+
+  <!-- 32-Bit Grid Diagram -->
+  <g transform="translate(45, 95)">
+    <!-- Ruler -->
+    <text x="0" y="12" fill="#64748b" font-family="monospace" font-size="9">Bit 0</text>
+    <text x="215" y="12" fill="#64748b" font-family="monospace" font-size="9">Bit 8</text>
+    <text x="430" y="12" fill="#64748b" font-family="monospace" font-size="9">Bit 16</text>
+    <text x="645" y="12" fill="#64748b" font-family="monospace" font-size="9">Bit 24</text>
+    <text x="835" y="12" fill="#64748b" font-family="monospace" font-size="9">Bit 31</text>
+
+    <!-- Row 1: Source & Dest Port -->
+    <rect x="0" y="20" width="430" height="38" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" rx="3"/>
+    <text x="215" y="44" fill="#1e3a8a" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Source Port Address (16 Bits)</text>
+
+    <rect x="430" y="20" width="430" height="38" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" rx="3"/>
+    <text x="645" y="44" fill="#1e3a8a" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Destination Port Address (16 Bits)</text>
+
+    <!-- Row 2: Sequence Number -->
+    <rect x="0" y="58" width="860" height="38" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5" rx="3"/>
+    <text x="430" y="82" fill="#3730a3" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Sequence Number (32 Bits) — Byte Number of 1st Data Byte in Segment</text>
+
+    <!-- Row 3: Acknowledgment Number -->
+    <rect x="0" y="96" width="860" height="38" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5" rx="3"/>
+    <text x="430" y="120" fill="#15803d" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Acknowledgment Number (32 Bits) — Next Expected Byte Number (Cumulative)</text>
+
+    <!-- Row 4: HLEN, Reserved, Flags, Window Size -->
+    <rect x="0" y="134" width="110" height="42" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" rx="3"/>
+    <text x="55" y="152" fill="#5b21b6" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">HLEN (4b)</text>
+    <text x="55" y="167" fill="#6d28d9" font-family="sans-serif" font-size="9" text-anchor="middle">4B words (5-15)</text>
+
+    <rect x="110" y="134" width="100" height="42" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" rx="3"/>
+    <text x="160" y="152" fill="#475569" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">Reserved</text>
+    <text x="160" y="167" fill="#64748b" font-family="sans-serif" font-size="9" text-anchor="middle">6 bits (All 0s)</text>
+
+    <!-- 6 Control Flags -->
+    <rect x="210" y="134" width="220" height="42" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5" rx="3"/>
+    <text x="320" y="152" fill="#991b1b" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">6 Control Flags (6 bits)</text>
+    <text x="320" y="167" fill="#b91c1c" font-family="monospace" font-size="9.5" font-weight="bold" text-anchor="middle">URG | ACK | PSH | RST | SYN | FIN</text>
+
+    <rect x="430" y="134" width="430" height="42" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" rx="3"/>
+    <text x="645" y="152" fill="#92400e" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Window Size / rwnd (16 Bits)</text>
+    <text x="645" y="167" fill="#b45309" font-family="sans-serif" font-size="9" text-anchor="middle">Receiver buffer advertisement in bytes</text>
+
+    <!-- Row 5: Checksum & Urgent Pointer -->
+    <rect x="0" y="176" width="430" height="38" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5" rx="3"/>
+    <text x="215" y="200" fill="#9d174d" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Checksum (16 Bits) — Mandatory (Header + Data + Pseudo)</text>
+
+    <rect x="430" y="176" width="430" height="38" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1.5" rx="3"/>
+    <text x="645" y="200" fill="#0f766e" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Urgent Pointer (16 Bits) — Valid only when URG flag = 1</text>
+
+    <!-- Row 6: Options & Padding -->
+    <rect x="0" y="214" width="860" height="34" fill="#f8fafc" stroke="#94a3b8" stroke-dasharray="4,4" rx="3"/>
+    <text x="430" y="236" fill="#475569" font-family="sans-serif" font-size="11" font-style="italic" text-anchor="middle">Options &amp; Padding (0 to 40 Bytes) — MSS, Window Scale, Timestamps, SACK</text>
+  </g>
+
+  <!-- Bottom: Flags Meaning Breakdown -->
+  <g transform="translate(45, 360)">
+    <rect x="0" y="0" width="860" height="145" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">The 6 Core Control Flags of TCP</text>
+
+    <g transform="translate(20, 36)">
+      <!-- URG & ACK -->
+      <rect x="0" y="0" width="135" height="42" fill="#ffffff" stroke="#cbd5e1" rx="3"/>
+      <text x="10" y="18" fill="#b91c1c" font-family="monospace" font-size="11" font-weight="bold">URG</text>
+      <text x="10" y="32" fill="#475569" font-family="sans-serif" font-size="9">Urgent pointer valid</text>
+
+      <rect x="145" y="0" width="135" height="42" fill="#ffffff" stroke="#cbd5e1" rx="3"/>
+      <text x="10" y="18" fill="#15803d" font-family="monospace" font-size="11" font-weight="bold">ACK</text>
+      <text x="10" y="32" fill="#475569" font-family="sans-serif" font-size="9">Ack number field valid</text>
+
+      <rect x="290" y="0" width="135" height="42" fill="#ffffff" stroke="#cbd5e1" rx="3"/>
+      <text x="10" y="18" fill="#d97706" font-family="monospace" font-size="11" font-weight="bold">PSH</text>
+      <text x="10" y="32" fill="#475569" font-family="sans-serif" font-size="9">Push data to app immediately</text>
+
+      <rect x="435" y="0" width="135" height="42" fill="#ffffff" stroke="#cbd5e1" rx="3"/>
+      <text x="10" y="18" fill="#b91c1c" font-family="monospace" font-size="11" font-weight="bold">RST</text>
+      <text x="10" y="32" fill="#475569" font-family="sans-serif" font-size="9">Reset/abort connection</text>
+
+      <rect x="580" y="0" width="135" height="42" fill="#ffffff" stroke="#cbd5e1" rx="3"/>
+      <text x="10" y="18" fill="#2563eb" font-family="monospace" font-size="11" font-weight="bold">SYN</text>
+      <text x="10" y="32" fill="#475569" font-family="sans-serif" font-size="9">Synchronize seq numbers</text>
+
+      <rect x="725" y="0" width="115" height="42" fill="#ffffff" stroke="#cbd5e1" rx="3"/>
+      <text x="10" y="18" fill="#64748b" font-family="monospace" font-size="11" font-weight="bold">FIN</text>
+      <text x="10" y="32" fill="#475569" font-family="sans-serif" font-size="9">Finish/terminate session</text>
+    </g>
+
+    <text x="20" y="105" fill="#1e3a8a" font-family="sans-serif" font-size="11" font-weight="bold">AKTU Numerical Rule:</text>
+    <text x="20" y="122" fill="#334155" font-family="sans-serif" font-size="10.5">HLEN is given in 4-byte words. Example: HLEN = <code>5</code> $\implies 5 	imes 4 = 20	ext{ Bytes}$. Maximum HLEN = <code>15</code> $\implies 15 	imes 4 = 60	ext{ Bytes}$.</text>
+    <text x="20" y="136" fill="#334155" font-family="sans-serif" font-size="10.5">Sequence numbers consume 1 sequence count per SYN and FIN flag even if carrying 0 data bytes!</text>
+  </g>
+</svg>
+</div>
+
+<h2>1. 14 Header Fields Summary</h2>
+<div class="formula-box">
+  <code>HLEN Equation: Header Length in Bytes = HLEN (4 bits) * 4 (Min = 20B, Max = 60B)</code><br>
+  <code>Control Flags (6 bits): URG | ACK | PSH | RST | SYN | FIN</code><br>
+  <code>Window Size (16 bits): rwnd buffer advertisement (Max standard = 65,535 Bytes)</code>
+</div>
+
+<h2>2. Solved AKTU Hex Dump Key Findings</h2>
+<table>
+  <tr><th>Field</th><th>Hex Chunk</th><th>Decimal / Meaning</th></tr>
+  <tr><td>Source Port</td><td><code>05 32</code></td><td>1330 (Ephemeral Client Port)</td></tr>
+  <tr><td>Destination Port</td><td><code>00 17</code></td><td>23 (Telnet Server)</td></tr>
+  <tr><td>Sequence Number</td><td><code>00 00 00 01</code></td><td>1 (Initial Sequence Number)</td></tr>
+  <tr><td>Header Length</td><td><code>5</code> (High nibble of byte 12)</td><td>5 * 4 = 20 Bytes (No options)</td></tr>
+  <tr><td>Active Flags</td><td><code>02</code> (Byte 13)</td><td>SYN = 1 (Connection Request)</td></tr>
+  <tr><td>Window Size</td><td><code>07 FF</code></td><td>2047 Bytes advertised</td></tr>
+</table>
+
+</body>
+</html>

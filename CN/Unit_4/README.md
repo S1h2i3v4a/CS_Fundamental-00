@@ -1,0 +1,41 @@
+# Computer Networks — Unit 4: Transport Layer (End-to-End Protocols & QoS)
+
+> **Course:** Computer Networks (AKTU BCS-603 / GATE CS / IT)  
+> **Source Material:** Gateway Classes AKTU Notes by Dr. Nidhi Parashar Ma'am (107 Slides Comprehensive Coverage)  
+> **Author & Repository:** [Shivam Keshari / CS_Fundamental-00](https://github.com/S1h2i3v4a/CS_Fundamental-00)
+
+---
+
+## 📚 Master Documents & High-Yield Revision
+- **[Unit_4_Master_Notes.pdf](Unit_4_Master_Notes.pdf)** — Consolidated master textbook notes compiling all 15 modules with interactive Table of Contents.
+- **[Unit_4_Quick_Revision_3_Page_Notes.pdf](Unit_4_Quick_Revision_3_Page_Notes.pdf)** — Ultra high-density 3-page verified exam revision cheat sheet.
+
+---
+
+## 📑 Complete 15-Module Architectural Index
+
+| Module | Chapter Title | Key Topics Covered | Artifacts & PDF |
+| :--- | :--- | :--- | :--- |
+| **00** | [Quick Revision Short Notes](00_Quick_Revision_Short_Notes/) | Strict 3-page high-yield cheat sheet covering all 14 modules, formulas, and diagrams | [PDF](00_Quick_Revision_Short_Notes/00_Quick_Revision_Short_Notes.pdf) |
+| **01** | [Transport Layer Services & Port Addressing](01_Transport_Layer_Services_and_Port_Addressing/) | Process-to-process delivery, Sockets (`IP + Port`), Port ranges (0–65535), Well-known/Registered/Dynamic, Multiplexing vs Demultiplexing | [SVG](01_Transport_Layer_Services_and_Port_Addressing/diagrams/transport_layer_ports_and_multiplexing.svg) • [PDF](01_Transport_Layer_Services_and_Port_Addressing/01_Transport_Layer_Services_and_Port_Addressing.pdf) |
+| **02** | [TCP Foundations & Segment Header Format](02_TCP_Foundations_and_Segment_Header_Format/) | Stream delivery, Circular Buffers, Sequence/ACK numbers, 20–60B header anatomy, 14 fields, 6 control flags, HLEN math, Hex dump decoding | [SVG](02_TCP_Foundations_and_Segment_Header_Format/diagrams/tcp_segment_header_architecture.svg) • [PDF](02_TCP_Foundations_and_Segment_Header_Format/02_TCP_Foundations_and_Segment_Header_Format.pdf) |
+| **03** | [TCP Connection Establishment & SYN Flooding](03_TCP_Connection_Establishment_and_SYN_Flooding/) | 3-Way Handshake (SYN, SYN+ACK, ACK), ISN calculation, Sequence number consumption, SYN Flood DoS attack & SYN Cookies defense | [SVG](03_TCP_Connection_Establishment_and_SYN_Flooding/diagrams/tcp_three_way_handshake_and_syn_flood.svg) • [PDF](03_TCP_Connection_Establishment_and_SYN_Flooding/03_TCP_Connection_Establishment_and_SYN_Flooding.pdf) |
+| **04** | [TCP Connection Termination & Half-Close](04_TCP_Connection_Termination_and_Half_Close/) | 4-Way FIN teardown, Piggybacked 3-way close, Half-Close architecture, TIME-WAIT state ($2 \times \text{MSL} \approx 120\text{s}$) rationale, RST resets | [SVG](04_TCP_Connection_Termination_and_Half_Close/diagrams/tcp_connection_termination_and_half_close.svg) • [PDF](04_TCP_Connection_Termination_and_Half_Close/04_TCP_Connection_Termination_and_Half_Close.pdf) |
+| **05** | [TCP Data Transfer, Pushing & Urgent Data](05_TCP_Data_Transfer_Pushing_and_Urgent_Data/) | Full-duplex byte stream, Cumulative ACKs, Piggybacking, PSH flag buffer bypass, URG flag & Urgent Pointer offset math | [SVG](05_TCP_Data_Transfer_Pushing_and_Urgent_Data/diagrams/tcp_pushing_and_urgent_data_mechanics.svg) • [PDF](05_TCP_Data_Transfer_Pushing_and_Urgent_Data/05_TCP_Data_Transfer_Pushing_and_Urgent_Data.pdf) |
+| **06** | [TCP Flow Control & Sliding Window Mechanics](06_TCP_Flow_Control_and_Sliding_Window_Mechanics/) | Credit-based sliding window, `min(rwnd, cwnd)`, Opening/Closing/Shrinking, Zero-Window Deadlock & Persistence Probe, Silly Window Syndrome (Clark & Nagle) | [SVG](06_TCP_Flow_Control_and_Sliding_Window_Mechanics/diagrams/tcp_flow_control_and_sliding_window.svg) • [PDF](06_TCP_Flow_Control_and_Sliding_Window_Mechanics/06_TCP_Flow_Control_and_Sliding_Window_Mechanics.pdf) |
+| **07** | [TCP Error Control & Retransmission Mechanics](07_TCP_Error_Control_and_Retransmission_Mechanics/) | Checksum, Cumulative ACK, Out-of-order buffering, Dynamic RTO formulas (Jacobson SRTT, RTTVAR, RTO), Karn's Rule & Exponential Backoff, Fast Retransmit | [SVG](07_TCP_Error_Control_and_Retransmission_Mechanics/diagrams/tcp_error_control_and_retransmission_rto.svg) • [PDF](07_TCP_Error_Control_and_Retransmission_Mechanics/07_TCP_Error_Control_and_Retransmission_Mechanics.pdf) |
+| **08** | [TCP Congestion Control (Slow Start & CA)](08_TCP_Congestion_Control_Slow_Start_and_Congestion_Avoidance/) | Flow vs Congestion control, AIMD philosophy, Slow Start ($2^n$), Congestion Avoidance ($+1$), Tahoe vs Reno, ssthresh threshold transition | [SVG](08_TCP_Congestion_Control_Slow_Start_and_Congestion_Avoidance/diagrams/tcp_congestion_control_slow_start_aimd.svg) • [PDF](08_TCP_Congestion_Control_Slow_Start_and_Congestion_Avoidance/08_TCP_Congestion_Control_Slow_Start_and_Congestion_Avoidance.pdf) |
+| **09** | [TCP Congestion Detection (Fast Retransmit & Recovery)](09_TCP_Congestion_Detection_Fast_Retransmit_and_Fast_Recovery/) | Timeout vs 3 Duplicate ACKs detection, TCP Tahoe drop to 1 MSS, TCP Reno Fast Recovery to $ssthresh + 3\text{MSS}$, cwnd sawtooth dynamics | [SVG](09_TCP_Congestion_Detection_Fast_Retransmit_and_Fast_Recovery/diagrams/tcp_fast_retransmit_and_fast_recovery.svg) • [PDF](09_TCP_Congestion_Detection_Fast_Retransmit_and_Fast_Recovery/09_TCP_Congestion_Detection_Fast_Retransmit_and_Fast_Recovery.pdf) |
+| **10** | [TCP Timers Architecture & 11-State FSM](10_TCP_Timers_Architecture_and_State_Transition_Diagram/) | Retransmission, Persistence, Keepalive (2hr), TIME-WAIT (2MSL); Complete 11-State Finite State Machine (Client & Server paths) | [SVG](10_TCP_Timers_Architecture_and_State_Transition_Diagram/diagrams/tcp_finite_state_machine_and_timers.svg) • [PDF](10_TCP_Timers_Architecture_and_State_Transition_Diagram/10_TCP_Timers_Architecture_and_State_Transition_Diagram.pdf) |
+| **11** | [User Datagram Protocol (UDP) Architecture](11_User_Datagram_Protocol_UDP_Architecture/) | Connectionless, Unreliable, Message-oriented, 8-Byte fixed header, 12-Byte Pseudo-header checksum verification, UDP socket queues | [SVG](11_User_Datagram_Protocol_UDP_Architecture/diagrams/udp_datagram_header_and_pseudo_header.svg) • [PDF](11_User_Datagram_Protocol_UDP_Architecture/11_User_Datagram_Protocol_UDP_Architecture.pdf) |
+| **12** | [Master Comparison: TCP vs UDP](12_Master_Comparison_TCP_vs_UDP/) | Comprehensive 12-point architectural matrix, Header comparison, Connection state, Reliability, Protocol choice guidelines | [SVG](12_Master_Comparison_TCP_vs_UDP/diagrams/tcp_vs_udp_architectural_comparison.svg) • [PDF](12_Master_Comparison_TCP_vs_UDP/12_Master_Comparison_TCP_vs_UDP.pdf) |
+| **13** | [Quality of Service (QoS) & Traffic Shaping](13_Quality_of_Service_QoS_and_Traffic_Shaping/) | 4 QoS characteristics (Delay, Jitter, Bandwidth, Loss), Scheduling (FIFO, Priority, WFQ), Leaky Bucket vs Token Bucket ($T = C / (M - R)$) | [SVG](13_Quality_of_Service_QoS_and_Traffic_Shaping/diagrams/qos_traffic_shaping_leaky_and_token_bucket.svg) • [PDF](13_Quality_of_Service_QoS_and_Traffic_Shaping/13_Quality_of_Service_QoS_and_Traffic_Shaping.pdf) |
+| **14** | [Unit 4 AKTU Exam PYQs & Numerical Bank](14_Unit_4_AKTU_Semester_Exam_PYQs_and_Numerical_Bank/) | Solved semester exam questions, Hex header dump tracing, Sequence/ACK computations, Sliding window efficiency, Token bucket numericals | [SVG](14_Unit_4_AKTU_Semester_Exam_PYQs_and_Numerical_Bank/diagrams/unit_4_transport_layer_aktu_pyqs.svg) • [PDF](14_Unit_4_AKTU_Semester_Exam_PYQs_and_Numerical_Bank/14_Unit_4_AKTU_Semester_Exam_PYQs_and_Numerical_Bank.pdf) |
+
+---
+
+## 🎯 Pedagogical Standards & Key Features
+1. **100% Handcrafted XML Vector SVGs:** Every single diagram is an error-free, responsive SVG rendered cleanly across web and print.
+2. **Bilingual Hinglish Explanations:** Core intuition explained in lucid Hinglish, supplemented by strict English technical definitions for university examinations.
+3. **Solved Numericals with Derivations:** Step-by-step mathematical procedures for HLEN header byte extraction, Jacobson/Karn RTO calculation, and Token Bucket maximum burst duration.
+4. **Verified 3-Page Cheat Sheet:** Compact summary engineered to fit on exactly 3 A4 pages for ultra-fast last-minute exam recall.

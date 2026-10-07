@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 4: TCP Timers Architecture and State Transition Diagram</title>
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-top: 30px; }
+h2 { color: #1e3a8a; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin-top: 24px; }
+h3 { color: #1e40af; margin-top: 18px; }
+h4 { color: #334155; margin-top: 14px; }
+p, li { font-size: 14.5px; }
+code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13.5px; }
+pre { background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px; }
+th, td { border: 1px solid #cbd5e1; padding: 9px 12px; text-align: left; }
+th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f1f5f9; }
+blockquote { border-left: 4px solid #2563eb; margin: 16px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; }
+.diagram-container { text-align: center; margin: 25px 0; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-purple { background: #f3e8ff; color: #6b21a8; }
+.badge-amber { background: #fef3c7; color: #92400e; }
+.formula-box { background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 6px; padding: 14px; margin: 16px 0; }
+
+</style>
+</head>
+<body>
+
+<h1>Module 10: TCP Timers Architecture and State Transition Diagram</h1>
+<p class="badge badge-blue">Unit 4: Transport Layer</p>
+<p class="badge badge-purple">Timers & Finite State Machine</p>
+<p>The 4 Architectural TCP Timers (RTO, Persistence, Keepalive, TIME-WAIT) and the Complete 11-State Lifecycle Transition State Machine.</p>
+
+<div class="diagram-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="fsmHdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+    <filter id="sh10" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="950" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="15" y="15" width="920" height="510" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="10"/>
+
+  <rect x="35" y="30" width="880" height="52" fill="url(#fsmHdr)" rx="8" filter="url(#sh10)"/>
+  <text x="475" y="62" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="bold" text-anchor="middle">TCP Architecture: The 4 Core Timers &amp; 11-State Finite State Machine (FSM)</text>
+
+  <!-- Top: 4 Timers Grid -->
+  <g transform="translate(45, 95)">
+    <!-- Timer 1 -->
+    <rect x="0" y="0" width="205" height="110" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" rx="5"/>
+    <text x="102" y="22" fill="#1e3a8a" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">1. Retransmission Timer (RTO)</text>
+    <text x="10" y="42" fill="#1e40af" font-family="sans-serif" font-size="9.5">• Tracks sent, unacknowledged data.</text>
+    <text x="10" y="58" fill="#1e40af" font-family="sans-serif" font-size="9.5">• Dynamically calculated via RTT.</text>
+    <text x="10" y="74" fill="#1e40af" font-family="sans-serif" font-size="9.5">• Jacobson Formula: RTT + 4*DevRTT.</text>
+    <text x="10" y="94" fill="#b91c1c" font-family="sans-serif" font-size="9.5" font-weight="bold">On timeout: Resends &amp; drops cwnd.</text>
+
+    <!-- Timer 2 -->
+    <rect x="218" y="0" width="205" height="110" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5" rx="5"/>
+    <text x="320" y="22" fill="#15803d" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">2. Persistence Timer</text>
+    <text x="228" y="42" fill="#166534" font-family="sans-serif" font-size="9.5">• Prevents Zero-Window Deadlock.</text>
+    <text x="228" y="58" fill="#166534" font-family="sans-serif" font-size="9.5">• Starts when receiver advertises rwnd=0.</text>
+    <text x="228" y="74" fill="#166534" font-family="sans-serif" font-size="9.5">• On expiry: Sends 1-byte Probe.</text>
+    <text x="228" y="94" fill="#15803d" font-family="sans-serif" font-size="9.5" font-weight="bold">Forces receiver to re-advertise rwnd.</text>
+
+    <!-- Timer 3 -->
+    <rect x="436" y="0" width="205" height="110" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5" rx="5"/>
+    <text x="538" y="22" fill="#92400e" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">3. Keepalive Timer</text>
+    <text x="446" y="42" fill="#78350f" font-family="sans-serif" font-size="9.5">• Detects dead/crashed client.</text>
+    <text x="446" y="58" fill="#78350f" font-family="sans-serif" font-size="9.5">• Standard duration: 2 Hours.</text>
+    <text x="446" y="74" fill="#78350f" font-family="sans-serif" font-size="9.5">• Sends 10 probes (75s apart).</text>
+    <text x="446" y="94" fill="#b91c1c" font-family="sans-serif" font-size="9.5" font-weight="bold">If no reply: Aborts connection (RST).</text>
+
+    <!-- Timer 4 -->
+    <rect x="654" y="0" width="205" height="110" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5" rx="5"/>
+    <text x="756" y="22" fill="#9d174d" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">4. TIME-WAIT (2MSL) Timer</text>
+    <text x="664" y="42" fill="#be185d" font-family="sans-serif" font-size="9.5">• Active after client sends final ACK.</text>
+    <text x="664" y="58" fill="#be185d" font-family="sans-serif" font-size="9.5">• Duration = 2 * MSL (approx 120s).</text>
+    <text x="664" y="74" fill="#be185d" font-family="sans-serif" font-size="9.5">• Allows ACK retransmit if lost.</text>
+    <text x="664" y="94" fill="#9d174d" font-family="sans-serif" font-size="9.5" font-weight="bold">Flushes old duplicate packets.</text>
+  </g>
+
+  <!-- Bottom: 11-State Finite State Machine (FSM) Diagram -->
+  <g transform="translate(45, 220)">
+    <rect x="0" y="0" width="860" height="285" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="22" fill="#0f172a" font-family="sans-serif" font-size="12.5" font-weight="bold">The 11 States of TCP Lifecycle (Client Active vs Server Passive Path)</text>
+
+    <!-- State Boxes Flow -->
+    <!-- CLOSED -->
+    <rect x="30" y="40" width="110" height="34" fill="#334155" rx="4"/>
+    <text x="85" y="62" fill="#ffffff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">CLOSED</text>
+
+    <!-- LISTEN -->
+    <rect x="200" y="40" width="110" height="34" fill="#e0e7ff" stroke="#4f46e5" rx="4"/>
+    <text x="255" y="62" fill="#3730a3" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">LISTEN</text>
+
+    <!-- SYN-SENT -->
+    <rect x="30" y="110" width="110" height="34" fill="#dbeafe" stroke="#2563eb" rx="4"/>
+    <text x="85" y="132" fill="#1e3a8a" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">SYN-SENT</text>
+
+    <!-- SYN-RCVD -->
+    <rect x="200" y="110" width="110" height="34" fill="#fef3c7" stroke="#d97706" rx="4"/>
+    <text x="255" y="132" fill="#92400e" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">SYN-RCVD</text>
+
+    <!-- ESTABLISHED -->
+    <rect x="360" y="75" width="130" height="42" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="5"/>
+    <text x="425" y="101" fill="#15803d" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">ESTABLISHED</text>
+
+    <!-- Termination States (Client Active Close) -->
+    <!-- FIN-WAIT-1 -->
+    <rect x="530" y="40" width="120" height="34" fill="#fee2e2" stroke="#dc2626" rx="4"/>
+    <text x="590" y="62" fill="#991b1b" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle">FIN-WAIT-1</text>
+
+    <!-- FIN-WAIT-2 -->
+    <rect x="690" y="40" width="120" height="34" fill="#fee2e2" stroke="#dc2626" rx="4"/>
+    <text x="750" y="62" fill="#991b1b" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle">FIN-WAIT-2</text>
+
+    <!-- TIME-WAIT -->
+    <rect x="690" y="110" width="120" height="34" fill="#fdf2f8" stroke="#db2777" stroke-width="2" rx="4"/>
+    <text x="750" y="132" fill="#9d174d" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle">TIME-WAIT (2MSL)</text>
+
+    <!-- Server Termination States -->
+    <!-- CLOSE-WAIT -->
+    <rect x="530" y="180" width="120" height="34" fill="#fff7ed" stroke="#ea580c" rx="4"/>
+    <text x="590" y="202" fill="#c2410c" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle">CLOSE-WAIT</text>
+
+    <!-- LAST-ACK -->
+    <rect x="690" y="180" width="120" height="34" fill="#fff7ed" stroke="#ea580c" rx="4"/>
+    <text x="750" y="202" fill="#c2410c" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle">LAST-ACK</text>
+
+    <!-- CLOSING -->
+    <rect x="610" y="110" width="70" height="34" fill="#f1f5f9" stroke="#94a3b8" rx="4"/>
+    <text x="645" y="132" fill="#475569" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle">CLOSING</text>
+
+    <!-- Explanatory note -->
+    <text x="30" y="255" fill="#475569" font-family="sans-serif" font-size="11">Total 11 States: CLOSED, LISTEN, SYN-SENT, SYN-RCVD, ESTABLISHED, FIN-WAIT-1, FIN-WAIT-2, CLOSE-WAIT, CLOSING, LAST-ACK, TIME-WAIT.</text>
+  </g>
+</svg>
+</div>
+
+<h2>1. The 4 Essential TCP Timers</h2>
+<table>
+  <tr><th>Timer</th><th>Trigger Condition</th><th>Timeout Action</th></tr>
+  <tr><td><b>Retransmission (RTO)</b></td><td>Segment transmitted</td><td>Resends missing segment; cuts cwnd to 1 MSS</td></tr>
+  <tr><td><b>Persistence Timer</b></td><td>rwnd = 0 advertised</td><td>Transmits 1-byte Window Probe to query rwnd</td></tr>
+  <tr><td><b>Keepalive Timer</b></td><td>2 hours connection idle</td><td>Sends 10 probes; aborts dead connection via RST</td></tr>
+  <tr><td><b>TIME-WAIT (2MSL)</b></td><td>Final ACK transmitted</td><td>Holds port for 120s; flushes stray duplicate packets</td></tr>
+</table>
+
+<h2>2. 11 Lifecycle States Summary</h2>
+<div class="formula-box">
+  <code>Connection Setup: CLOSED -> (LISTEN) -> SYN-SENT / SYN-RCVD -> ESTABLISHED</code><br>
+  <code>Connection Teardown: ESTABLISHED -> FIN-WAIT-1 -> FIN-WAIT-2 -> TIME-WAIT -> CLOSED</code><br>
+  <code>Passive Teardown: ESTABLISHED -> CLOSE-WAIT -> LAST-ACK -> CLOSED</code>
+</div>
+
+</body>
+</html>

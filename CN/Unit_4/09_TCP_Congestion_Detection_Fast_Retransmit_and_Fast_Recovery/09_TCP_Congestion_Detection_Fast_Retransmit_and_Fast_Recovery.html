@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 4: TCP Congestion Detection: Fast Retransmit and Fast Recovery</title>
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-top: 30px; }
+h2 { color: #1e3a8a; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin-top: 24px; }
+h3 { color: #1e40af; margin-top: 18px; }
+h4 { color: #334155; margin-top: 14px; }
+p, li { font-size: 14.5px; }
+code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13.5px; }
+pre { background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px; }
+th, td { border: 1px solid #cbd5e1; padding: 9px 12px; text-align: left; }
+th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f1f5f9; }
+blockquote { border-left: 4px solid #2563eb; margin: 16px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; }
+.diagram-container { text-align: center; margin: 25px 0; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-purple { background: #f3e8ff; color: #6b21a8; }
+.badge-amber { background: #fef3c7; color: #92400e; }
+.formula-box { background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 6px; padding: 14px; margin: 16px 0; }
+
+</style>
+</head>
+<body>
+
+<h1>Module 09: TCP Congestion Detection: Fast Retransmit and Fast Recovery</h1>
+<p class="badge badge-blue">Unit 4: Transport Layer</p>
+<p class="badge badge-purple">Loss Recovery & Reno Dynamics</p>
+<p>Congestion Signals Taxonomy, Severe RTO Timeout vs Mild 3 Duplicate ACKs, TCP Tahoe vs Reno Architectural Comparison, and Fast Recovery State Machine.</p>
+
+<div class="diagram-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="frHdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="sh9" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="950" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="15" y="15" width="920" height="510" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="10"/>
+
+  <rect x="35" y="30" width="880" height="52" fill="url(#frHdr)" rx="8" filter="url(#sh9)"/>
+  <text x="475" y="62" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="bold" text-anchor="middle">TCP Congestion Detection: Timeout vs Fast Retransmit &amp; Fast Recovery</text>
+
+  <!-- Left: Severe Congestion (RTO Timeout) -->
+  <g transform="translate(45, 105)">
+    <rect x="0" y="0" width="415" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">1. Severe Congestion: RTO Timer Expiration</text>
+
+    <rect x="15" y="38" width="385" height="85" fill="#fef2f2" stroke="#fca5a5" rx="4"/>
+    <text x="25" y="58" fill="#991b1b" font-family="sans-serif" font-size="11" font-weight="bold">Network Diagnosis: Severe Bottleneck!</text>
+    <text x="25" y="76" fill="#7f1d1d" font-family="sans-serif" font-size="10.5">• Multiple packets dropped; intermediate router queues fully choked.</text>
+    <text x="25" y="94" fill="#7f1d1d" font-family="sans-serif" font-size="10.5">• No duplicate ACKs can return to the sender.</text>
+    <text x="25" y="112" fill="#b91c1c" font-family="sans-serif" font-size="10.5" font-weight="bold">Action: Multiplicative decrease to rock bottom!</text>
+
+    <!-- Reaction Rules -->
+    <rect x="15" y="135" width="385" height="115" fill="#ffffff" stroke="#cbd5e1" rx="4"/>
+    <text x="25" y="155" fill="#1e293b" font-family="sans-serif" font-size="11" font-weight="bold">Mandatory Reaction Steps:</text>
+    <text x="25" y="175" fill="#c2410c" font-family="monospace" font-size="11">ssthresh = cwnd / 2</text>
+    <text x="25" y="195" fill="#b91c1c" font-family="monospace" font-size="11">cwnd = 1 MSS  (Reset to ground zero)</text>
+    <text x="25" y="215" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Resets to Slow Start mode (Exponential increase from 1 MSS).</text>
+    <text x="25" y="235" fill="#475569" font-family="sans-serif" font-size="10">High throughput penalty — Takes multiple RTTs to recover speed!</text>
+
+    <!-- Tahoe Box -->
+    <rect x="15" y="265" width="385" height="120" fill="#eff6ff" stroke="#bfdbfe" rx="4"/>
+    <text x="25" y="285" fill="#1e40af" font-family="sans-serif" font-size="11" font-weight="bold">TCP Tahoe Philosophy (RFC 1122):</text>
+    <text x="25" y="303" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Treats ALL packet losses identically (whether Timeout or Dup ACKs).</text>
+    <text x="25" y="321" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Always cuts ssthresh = cwnd / 2, drops cwnd = 1 MSS, and forces</text>
+    <text x="25" y="339" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Slow Start! Highly conservative and causes throughput collapse.</text>
+  </g>
+
+  <!-- Right: Mild Congestion (3 Dup ACKs & Fast Recovery) -->
+  <g transform="translate(480, 105)">
+    <rect x="0" y="0" width="425" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">2. Mild Congestion: 3 Duplicate ACKs (TCP Reno)</text>
+
+    <rect x="15" y="38" width="395" height="85" fill="#f0fdf4" stroke="#86efac" rx="4"/>
+    <text x="25" y="58" fill="#166534" font-family="sans-serif" font-size="11" font-weight="bold">Network Diagnosis: Isolated Packet Loss!</text>
+    <text x="25" y="76" fill="#14532d" font-family="sans-serif" font-size="10.5">• Subsequent segments ARE reaching receiver (triggering Dup ACKs).</text>
+    <text x="25" y="94" fill="#14532d" font-family="sans-serif" font-size="10.5">• Network pipeline is still flowing, not completely jammed.</text>
+    <text x="25" y="112" fill="#15803d" font-family="sans-serif" font-size="10.5" font-weight="bold">Action: Fast Retransmit + Fast Recovery!</text>
+
+    <!-- Reaction Rules -->
+    <rect x="15" y="135" width="395" height="115" fill="#ffffff" stroke="#cbd5e1" rx="4"/>
+    <text x="25" y="155" fill="#1e293b" font-family="sans-serif" font-size="11" font-weight="bold">TCP Reno Reaction Steps (RFC 2581):</text>
+    <text x="25" y="175" fill="#c2410c" font-family="monospace" font-size="11">ssthresh = cwnd / 2</text>
+    <text x="25" y="195" fill="#15803d" font-family="monospace" font-size="11">cwnd = ssthresh + 3 MSS  (Fast Recovery)</text>
+    <text x="25" y="215" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Resends missing segment immediately (Fast Retransmit).</text>
+    <text x="25" y="235" fill="#15803d" font-family="sans-serif" font-size="10" font-weight="bold">Skips Slow Start completely! Resumes Congestion Avoidance directly.</text>
+
+    <!-- Modern Extensions Box -->
+    <rect x="15" y="265" width="395" height="120" fill="#f5f3ff" stroke="#c4b5fd" rx="4"/>
+    <text x="25" y="285" fill="#6b21a8" font-family="sans-serif" font-size="11" font-weight="bold">Modern TCP Variants (NewReno &amp; SACK):</text>
+    <text x="25" y="303" fill="#581c87" font-family="sans-serif" font-size="10.5">• <tspan font-weight="bold">TCP NewReno (RFC 6582):</tspan> Handles multiple packet drops in 1 window.</text>
+    <text x="25" y="321" fill="#581c87" font-family="sans-serif" font-size="10.5">• <tspan font-weight="bold">TCP SACK (RFC 2018):</tspan> Selective Acknowledgment allows receiver to</text>
+    <text x="25" y="339" fill="#581c87" font-family="sans-serif" font-size="10.5">  report non-contiguous blocks, retransmitting only lost chunks!</text>
+  </g>
+</svg>
+</div>
+
+<h2>1. Severe vs Mild Congestion Response</h2>
+<div class="formula-box">
+  <code>RTO Timeout: ssthresh = cwnd / 2, cwnd = 1 MSS (Full reset to Slow Start)</code><br>
+  <code>3 Duplicate ACKs: Fast Retransmit missing segment immediately without waiting for RTO.</code><br>
+  <code>TCP Reno Fast Recovery: ssthresh = cwnd / 2, cwnd = ssthresh (Resumes Congestion Avoidance directly).</code>
+</div>
+
+<h2>2. Evolution of TCP Loss Recovery</h2>
+<table>
+  <tr><th>TCP Version</th><th>Loss Detection</th><th>Recovery Behavior</th></tr>
+  <tr><td><b>Tahoe</b></td><td>Timeout or 3 Dup ACKs</td><td>Always cuts cwnd to 1 MSS; enters Slow Start</td></tr>
+  <tr><td><b>Reno</b></td><td>3 Duplicate ACKs</td><td>Fast Retransmit + Fast Recovery; skips Slow Start</td></tr>
+  <tr><td><b>NewReno</b></td><td>Partial ACKs</td><td>Recovers multiple packet losses per window without RTO</td></tr>
+  <tr><td><b>SACK</b></td><td>Selective ACK blocks</td><td>Retransmits exclusively missing packet holes</td></tr>
+</table>
+
+</body>
+</html>

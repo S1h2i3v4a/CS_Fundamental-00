@@ -26,7 +26,8 @@ CS_Fundamental-00/
 └── CN/                        # Computer Networks (AKTU BCS603)
     ├── Unit_1/                # Introduction, Reference Models (OSI/TCP-IP), Physical Layer & Transmission Media
     ├── Unit_2/                # Data Link Layer, Error Control, Flow Control (Sliding Window) & MAC Sublayer (CSMA/CD, Ethernet)
-    └── Unit_3/                # Network Layer, IPv4/IPv6, Subnetting/CIDR, NAT, ARP, Routing (DVR, LSR, BGP) & Congestion
+    ├── Unit_3/                # Network Layer, IPv4/IPv6, Subnetting/CIDR, NAT, ARP, Routing (DVR, LSR, BGP) & Congestion
+    └── Unit_4/                # Transport Layer, TCP/UDP, Flow/Error Control, Congestion Control (AIMD) & QoS
 ```
 
 ---
@@ -48,6 +49,7 @@ CS_Fundamental-00/
 | **CN** | **Unit 1** | Introduction & Physical Layer | [3-Page PDF](CN/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](CN/Unit_1/Unit_1_Master_Notes.pdf) |
 | **CN** | **Unit 2** | Data Link Layer & Medium Access Sublayer | [3-Page PDF](CN/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](CN/Unit_2/Unit_2_Master_Notes.pdf) |
 | **CN** | **Unit 3** | Network Layer, Routing & Addressing | [3-Page PDF](CN/Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](CN/Unit_3/Unit_3_Master_Notes.pdf) |
+| **CN** | **Unit 4** | Transport Layer, TCP/UDP & QoS | [3-Page PDF](CN/Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](CN/Unit_4/Unit_4_Master_Notes.pdf) |
 
 ---
 
@@ -61,3 +63,4 @@ CS_Fundamental-00/
 - [**Unit 1: Introduction & Physical Layer**](CN/Unit_1) — 15 Modules, 15 Valid XML SVGs, [3-Page Revision Sheet](CN/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf), [Master Notes PDF](CN/Unit_1/Unit_1_Master_Notes.pdf) ✅
 - [**Unit 2: Data Link Layer & Medium Access Sublayer**](CN/Unit_2) — 15 Modules, 14 Valid XML SVGs, [3-Page Revision Sheet](CN/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf), [Master Notes PDF](CN/Unit_2/Unit_2_Master_Notes.pdf) ✅
 - [**Unit 3: Network Layer (Routing & Addressing)**](CN/Unit_3) — 15 Modules, 14 Valid XML SVGs, [3-Page Revision Sheet](CN/Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf), [Master Notes PDF](CN/Unit_3/Unit_3_Master_Notes.pdf) ✅
+- [**Unit 4: Transport Layer (TCP/UDP & QoS)**](CN/Unit_4) — 15 Modules, 14 Valid XML SVGs, [3-Page Revision Sheet](CN/Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf), [Master Notes PDF](CN/Unit_4/Unit_4_Master_Notes.pdf) ✅

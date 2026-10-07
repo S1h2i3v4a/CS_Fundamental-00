@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 4: Ultra Quick Revision Short Notes (Exact 3 Pages)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 6.7pt;
+    line-height: 1.16;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 4.5mm 5.5mm 3.5mm 5.5mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-bar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 3px 7px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3px;
+  }
+  .header-title {
+    font-size: 8.8pt;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 6.2pt;
+    color: #93c5fd;
+    font-weight: 500;
+  }
+  .page-tag {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 6.1pt;
+    font-weight: 700;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3.5px;
+  }
+  .card {
+    border: 1px solid #cbd5e1;
+    border-radius: 3.5px;
+    background: #ffffff;
+    padding: 2.5px 4px;
+    margin-bottom: 3px;
+  }
+  .card-title {
+    font-size: 7.0pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1px;
+    margin-bottom: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-title span {
+    font-size: 5.7pt;
+    color: #64748b;
+    font-weight: 500;
+  }
+  p, ul {
+    margin: 1.2px 0;
+    padding-left: 9px;
+  }
+  li {
+    margin-bottom: 0.8px;
+  }
+  strong {
+    color: #0f172a;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 0.5px 2px;
+    border-radius: 2px;
+    font-family: monospace;
+    font-size: 6.0pt;
+  }
+  .formula {
+    background: #eff6ff;
+    border-left: 2px solid #2563eb;
+    padding: 1.2px 3.5px;
+    margin: 1.2px 0;
+    font-family: monospace;
+    font-size: 6.0pt;
+    color: #1e3a8a;
+    font-weight: 600;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5px 0;
+    font-size: 5.9pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 1.2px 2.5px;
+    text-align: left;
+  }
+  th {
+    background: #f1f5f9;
+    color: #1e3a8a;
+    font-weight: 700;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.5px 3px;
+    border-radius: 2px;
+    font-size: 5.4pt;
+    font-weight: 700;
+  }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .footer-bar {
+    border-top: 1px solid #cbd5e1;
+    padding-top: 1.5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 5.6pt;
+    color: #64748b;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">COMPUTER NETWORKS: UNIT 4 — TRANSPORT LAYER (QUICK REVISION)</div>
+        <div class="header-sub">BCS603 Gateway Classes Architecture | Process Delivery, TCP Segment, Handshakes &amp; Teardown</div>
+      </div>
+      <div class="page-tag">PAGE 1 OF 3</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Col 1 -->
+      <div>
+        <div class="card">
+          <div class="card-title">1. Transport Layer Core Role &amp; Addressing <span>L4 Protocol Engine</span></div>
+          <ul>
+            <li><strong>Process-to-Process Delivery:</strong> Network layer delivers host-to-host (IP). Transport layer delivers process-to-process using <strong>Port Addresses</strong>.</li>
+            <li><strong>Socket Address:</strong> <code>Socket = IP Address + Port Number</code> (e.g., <code>192.168.1.10:80</code>). Uniquely identifies an active socket endpoint globally.</li>
+            <li><strong>Port Range (16-bit: 0 to 65,535):</strong>
+              <br/>• <em>Well-Known (0–1023):</em> Assigned by IANA (HTTP:80, HTTPS:443, DNS:53, FTP:20/21, SSH:22, SMTP:25).
+              <br/>• <em>Registered (1024–49151):</em> Registered for proprietary apps (MySQL:3306, RDP:3389).
+              <br/>• <em>Dynamic / Ephemeral (49152–65535):</em> Assigned temporarily by OS to client processes.</li>
+            <li><strong>Multiplexing &amp; Demultiplexing:</strong>
+              <br/>• <em>Multiplexing (Sender):</em> Gathers data from multiple sockets, adds L4 headers, and passes down to IP layer.
+              <br/>• <em>Demultiplexing (Receiver):</em> Reads Dst Port, routes segment to matching socket buffer.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">2. TCP Foundations &amp; Byte-Stream Model <span>RFC 793</span></div>
+          <ul>
+            <li><strong>Core Attributes:</strong> Connection-Oriented, Point-to-Point (unicast only), Reliable (ACK + Retransmit), Full-Duplex (simultaneous 2-way), Stream-Oriented.</li>
+            <li><strong>Byte-Stream Service:</strong> TCP treats data as a continuous sequence of individual bytes, NOT discrete packets. Transferred in chunks called <strong>Segments</strong>.</li>
+            <li><strong>Circular Buffers:</strong> Send buffer holds bytes waiting for transmission / ACK. Receive buffer reorders out-of-order bytes and absorbs bursts.</li>
+            <li><strong>Sequence &amp; ACK Numbers:</strong>
+              <br/>• <em>Sequence Number (32-bit):</em> Identifies byte number of 1st data byte in segment: <code>Seq = ISN + 1st_byte_offset</code>.
+              <br/>• <em>ACK Number (32-bit):</em> Cumulative acknowledgment: tells sender <em>"I have safely received all bytes up to N-1; I expect byte N next"</em>.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">3. TCP Segment Header Architecture <span>20 to 60 Bytes</span></div>
+          <table>
+            <tr><th>Field Name</th><th>Width</th><th>Function &amp; Rules</th></tr>
+            <tr><td>Source / Dest Port</td><td>16 b each</td><td>Calling &amp; receiving process port numbers.</td></tr>
+            <tr><td>Sequence Number</td><td>32 bits</td><td>First data byte's byte-stream number.</td></tr>
+            <tr><td>Acknowledgment No</td><td>32 bits</td><td>Next expected byte number (valid if ACK=1).</td></tr>
+            <tr><td>Header Length (HLEN)</td><td>4 bits</td><td>No. of 4-byte words. Formula: <code>Bytes = HLEN × 4</code>. Minimum: 5 (20B), Max: 15 (60B).</td></tr>
+            <tr><td>Reserved</td><td>6 bits</td><td>Must be 0 (used for NS, CWR, ECE flags).</td></tr>
+            <tr><td>Control Flags</td><td>6 bits</td><td>URG, ACK, PSH, RST, SYN, FIN (1 bit each).</td></tr>
+            <tr><td>Window Size (rwnd)</td><td>16 bits</td><td>Receiver buffer credit in bytes (Flow control).</td></tr>
+            <tr><td>Checksum</td><td>16 bits</td><td>Mandatory! Covers Header + Data + Pseudo-Header.</td></tr>
+            <tr><td>Urgent Pointer</td><td>16 bits</td><td>Offset from Seq No to last urgent byte (if URG=1).</td></tr>
+            <tr><td>Options + Padding</td><td>0–40 B</td><td>MSS (Max Segment Size), Window Scale, SACK, Timestamps. Padded to 32-bit boundary.</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <div class="card">
+          <div class="card-title">4. TCP 6 Control Flags Summary <span>1-Bit Triggers</span></div>
+          <ul>
+            <li><code>URG</code>: Urgent pointer field is valid; segment contains high-priority out-of-band data.</li>
+            <li><code>ACK</code>: Acknowledgment field is valid (set in all segments post initial SYN).</li>
+            <li><code>PSH</code>: Receiver must push data immediately to application without buffering.</li>
+            <li><code>RST</code>: Resets connection abruptly due to error, port mismatch, or host crash.</li>
+            <li><code>SYN</code>: Synchronizes sequence numbers during connection establishment. Consumes 1 sequence number.</li>
+            <li><code>FIN</code>: Sender has finished sending data; initiates teardown. Consumes 1 sequence number.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">5. Connection Establishment (3-Way Handshake) <span>SYN-ACK</span></div>
+          <ul>
+            <li><strong>Step 1 (Client → Server):</strong> <code>SYN=1, ACK=0, Seq=ISN_c</code>. Client enters <code>SYN-SENT</code>. Consumes 1 Seq No (no payload).</li>
+            <li><strong>Step 2 (Server → Client):</strong> <code>SYN=1, ACK=1, Seq=ISN_s, Ack=ISN_c+1</code>. Server allocates buffers/TCB and enters <code>SYN-RCVD</code>. Consumes 1 Seq No.</li>
+            <li><strong>Step 3 (Client → Server):</strong> <code>SYN=0, ACK=1, Seq=ISN_c+1, Ack=ISN_s+1</code>. Both enter <code>ESTABLISHED</code>. Can carry data payload.</li>
+            <li><strong>SYN Flooding Attack (DoS):</strong> Attacker spams spoofed SYN packets; server creates half-open connections in backlog queue until memory runs out.</li>
+            <li><strong>Defense — SYN Cookies:</strong> Server encodes state into <code>ISN_s = Hash(src, dst, secret)</code> without allocating RAM until valid 3rd ACK arrives.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">6. Connection Termination &amp; Half-Close <span>FIN Handshake</span></div>
+          <ul>
+            <li><strong>Normal 4-Way Handshake:</strong>
+              <br/>1. Client sends <code>FIN=1, Seq=u</code> → Enters <code>FIN-WAIT-1</code>.
+              <br/>2. Server sends <code>ACK=1, Ack=u+1</code> → Enters <code>CLOSE-WAIT</code>; Client enters <code>FIN-WAIT-2</code>.
+              <br/>3. Server finishes residual data, sends <code>FIN=1, Seq=v, Ack=u+1</code> → Enters <code>LAST-ACK</code>.
+              <br/>4. Client sends <code>ACK=1, Ack=v+1</code> → Enters <code>TIME-WAIT</code> for <strong>2MSL</strong>; Server enters <code>CLOSED</code>.</li>
+            <li><strong>Piggybacked 3-Way Teardown:</strong> If Server has no pending data, it combines Step 2 &amp; 3: sends <code>FIN+ACK</code> directly.</li>
+            <li><strong>Half-Close:</strong> Client stops sending data but can still receive data indefinitely until server finishes its transmission.</li>
+            <li><strong>TIME-WAIT State (2MSL):</strong> Client waits $2 \times \text{MSL}$ (~120s) to:
+              <br/>1. Ensure final ACK reaches server (resend if lost).
+              <br/>2. Allow duplicate / lingering segments to expire in internet routers before reuse.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AKTU BCS603 Computer Networks — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Page 1 of 3 (Fundamentals, Header &amp; Handshakes)</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">COMPUTER NETWORKS: UNIT 4 — TRANSPORT LAYER (QUICK REVISION)</div>
+        <div class="header-sub">Flow Control, Dynamic Sliding Window, Error Recovery &amp; RTO Math</div>
+      </div>
+      <div class="page-tag">PAGE 2 OF 3</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Col 1 -->
+      <div>
+        <div class="card">
+          <div class="card-title">7. TCP Data Transfer, PUSH &amp; URGENT Mechanics <span>Stream Control</span></div>
+          <ul>
+            <li><strong>Normal Data Stream:</strong> Segment carries data bytes. Sequence number is the index of first byte. Acknowledgment number confirms receipt of previous bytes.</li>
+            <li><strong>Pushing Data (PSH Flag):</strong>
+              <br/>• Normal behavior: TCP sender/receiver buffers data for transmission efficiency.
+              <br/>• With <code>PSH=1</code>: Sender flushes output buffer instantly; Receiver flushes input buffer directly to app layer without waiting for a full MSS block.</li>
+            <li><strong>Urgent Data (URG Flag &amp; Pointer):</strong>
+              <br/>• Used for out-of-band signals (e.g., Telnet/SSH Ctrl+C, abort commands).
+              <br/>• <code>Urgent Pointer</code> = 16-bit offset added to Sequence Number pointing to byte immediately after last urgent byte.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">8. Flow Control &amp; Credit Sliding Window <span>Buffer Matching</span></div>
+          <ul>
+            <li><strong>Core Objective:</strong> Prevent fast sender from overflowing slow receiver's buffer.</li>
+            <li><strong>Effective Window Formula:</strong>
+              <div class="formula">Effective Window = min(rwnd, cwnd)</div>
+              <code>rwnd</code> = Receiver Advertised Window; <code>cwnd</code> = Congestion Window.</li>
+            <li><strong>Window States (Sender Perspective):</strong>
+              <br/>• <em>Opening:</em> Right wall expands rightward (receiver advertises larger buffer).
+              <br/>• <em>Closing:</em> Left wall slides rightward (ACK acknowledges sent bytes).
+              <br/>• <em>Shrinking:</em> Right wall moves leftward (strongly discouraged by RFC 793).</li>
+            <li><strong>Zero-Window Deadlock:</strong> Receiver advertises <code>rwnd=0</code>. Later, buffer frees up and receiver sends <code>rwnd=2000</code> update, which gets LOST in transit! Both sides wait indefinitely!</li>
+            <li><strong>Deadlock Solution (Persistence Timer):</strong> When <code>rwnd=0</code>, sender starts Persistence Timer. On expiry, sends a 1-byte <strong>Window Probe Segment</strong>. Receiver replies with current <code>rwnd</code>.</li>
+            <li><strong>Silly Window Syndrome (SWS):</strong>
+              <br/>• <em>Receiver-driven:</em> Receiver advertises tiny 1-byte window. Fixed by <strong>Clark's Solution</strong>: Do not advertise window until $rwnd \ge \min(\text{MSS}, \text{Buffer}/2)$.
+              <br/>• <em>Sender-driven:</em> App writes 1 byte at a time. Fixed by <strong>Nagle's Algorithm</strong>: Send 1st byte immediately; buffer subsequent tiny bytes until full MSS or previous ACK arrives.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <div class="card">
+          <div class="card-title">9. TCP Error Control &amp; Retransmission Engine <span>Reliability</span></div>
+          <ul>
+            <li><strong>Three Error Detection Mechanisms:</strong>
+              <br/>1. <em>Checksum:</em> 16-bit 1s complement sum over header, data, pseudo-header. If corrupt, dropped silently.
+              <br/>2. <em>Acknowledgments:</em> Cumulative ACKs. Confirms all contiguous bytes up to ACK-1.
+              <br/>3. <em>Retransmission Timer (RTO):</em> Resends segment if no ACK received before RTO expires.</li>
+            <li><strong>Retransmission Triggers:</strong>
+              <br/>• <em>RTO Timeout:</em> Heavy loss/congestion indicator $\implies$ drops <code>cwnd = 1 MSS</code>.
+              <br/>• <em>3 Duplicate ACKs (Fast Retransmit):</em> Segment lost but network still delivering packets $\implies$ resends missing segment without waiting for RTO timer.</li>
+            <li><strong>Out-of-Order Segments:</strong> TCP does not drop out-of-order bytes; it buffers them and sends duplicate ACK of last contiguous in-order byte.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">10. Dynamic RTO Formulas (Jacobson &amp; Karn) <span>Mathematical Core</span></div>
+          <ul>
+            <li><strong>Sample RTT:</strong> Time measured between sending segment and receiving ACK.</li>
+            <li><strong>Smoothed RTT (SRTT):</strong> Weighted moving average:
+              <div class="formula">SRTT_{new} = (1 - \alpha) \cdot SRTT_{old} + \alpha \cdot \text{SampleRTT} \quad (\alpha = 0.125)</div></li>
+            <li><strong>RTT Variation (RTTVAR):</strong> Jitter/variance metric:
+              <div class="formula">RTTVAR_{new} = (1 - \beta) \cdot RTTVAR_{old} + \beta \cdot |SRTT - \text{SampleRTT}| \quad (\beta = 0.25)</div></li>
+            <li><strong>Retransmission Timeout (RTO):</strong>
+              <div class="formula">RTO = SRTT + 4 \cdot RTTVAR</div></li>
+            <li><strong>Karn's Algorithm &amp; Exponential Backoff:</strong>
+              <br/>• <em>Rule 1:</em> NEVER update SampleRTT for retransmitted segments (ACK ambiguity).
+              <br/>• <em>Rule 2 (Timer Backoff):</em> On retransmission, double RTO: <code>RTO_new = 2 × RTO_old</code> (exponential backoff up to 64s). Reset to normal formula only after a fresh, non-retransmitted ACK.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">11. Flow Control vs Congestion Control Distinction <span>Key Difference</span></div>
+          <table>
+            <tr><th>Feature</th><th>Flow Control</th><th>Congestion Control</th></tr>
+            <tr><td>Target Entity</td><td>Protects Receiver Buffer</td><td>Protects Global Network Routers</td></tr>
+            <tr><td>Governed By</td><td>Advertised Window (<code>rwnd</code>)</td><td>Congestion Window (<code>cwnd</code>)</td></tr>
+            <tr><td>Metric Origin</td><td>Receiver feedback (ACK field)</td><td>Packet loss &amp; delay inferred by sender</td></tr>
+            <tr><td>Equation</td><td colspan="2"><code>Actual Transmission Window = min(rwnd, cwnd)</code></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AKTU BCS603 Computer Networks — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Page 2 of 3 (Sliding Window, Error Recovery &amp; RTO Formulas)</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">COMPUTER NETWORKS: UNIT 4 — TRANSPORT LAYER (QUICK REVISION)</div>
+        <div class="header-sub">Congestion Control, TCP Timers, UDP Architecture, QoS &amp; Traffic Shaping</div>
+      </div>
+      <div class="page-tag">PAGE 3 OF 3</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Col 1 -->
+      <div>
+        <div class="card">
+          <div class="card-title">12. TCP Congestion Control Algorithms <span>AIMD Architecture</span></div>
+          <ul>
+            <li><strong>Additive Increase Multiplicative Decrease (AIMD):</strong> Increases bandwidth gently; cuts drastically on overload to maintain network stability.</li>
+            <li><strong>Phase 1: Slow Start ($cwnd < ssthresh$):</strong>
+              <br/>• Initial <code>cwnd = 1 MSS</code>.
+              <br/>• For every ACK received: <code>cwnd = cwnd + 1 MSS</code> $\implies$ <em>Doubles every RTT ($2^n$ exponential growth)</em>.
+              <br/>• Transitions to Congestion Avoidance when $cwnd \ge ssthresh$.</li>
+            <li><strong>Phase 2: Congestion Avoidance ($cwnd \ge ssthresh$):</strong>
+              <br/>• Increases by 1 MSS per RTT: <code>cwnd = cwnd + (1 / cwnd)</code> per ACK $\implies$ <em>Linear growth</em>.</li>
+            <li><strong>Loss Detection &amp; Recovery:</strong>
+              <br/>• <em>Case A: RTO Timeout (Severe Congestion):</em>
+              <br/>&nbsp;&nbsp;<code>ssthresh = cwnd / 2</code>, <code>cwnd = 1 MSS</code> $\implies$ Restart Slow Start.
+              <br/>• <em>Case B: 3 Duplicate ACKs (Mild Congestion / Isolated Drop):</em>
+              <br/>&nbsp;&nbsp;<strong>TCP Tahoe:</strong> <code>ssthresh = cwnd / 2</code>, <code>cwnd = 1 MSS</code> (Restart Slow Start).
+              <br/>&nbsp;&nbsp;<strong>TCP Reno:</strong> <code>ssthresh = cwnd / 2</code>, <code>cwnd = ssthresh + 3 MSS</code> (Fast Recovery $\implies$ skips Slow Start).</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">13. TCP Timers Architecture &amp; 11-State FSM <span>RFC 793</span></div>
+          <ul>
+            <li><strong>Four Operational Timers:</strong>
+              <br/>1. <em>RTO Timer:</em> Dynamic retransmission timer per unacknowledged segment.
+              <br/>2. <em>Persistence Timer:</em> Prevents zero-window deadlock; sends periodic probes.
+              <br/>3. <em>Keepalive Timer:</em> 2 hours idle detection. Sends 10 probes @ 75s intervals before resetting.
+              <br/>4. <em>TIME-WAIT Timer:</em> Runs for 2MSL (~120s) before client socket is recycled.</li>
+            <li><strong>TCP 11 States:</strong> CLOSED, LISTEN, SYN-SENT, SYN-RCVD, ESTABLISHED, FIN-WAIT-1, FIN-WAIT-2, CLOSE-WAIT, CLOSING, LAST-ACK, TIME-WAIT.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">14. User Datagram Protocol (UDP RFC 768) <span>Lightweight</span></div>
+          <ul>
+            <li><strong>Properties:</strong> Connectionless, Unreliable, Message-Oriented (preserves application message boundaries), No Congestion Control, Minimal Overhead.</li>
+            <li><strong>8-Byte Header:</strong> <code>Src Port (16b) | Dst Port (16b) | Length (16b) | Checksum (16b)</code>.</li>
+            <li><strong>Length Field:</strong> Header (8B) + Data bytes. Min value = 8.</li>
+            <li><strong>Pseudo-Header (12 Bytes):</strong> IP Source (4B), IP Dest (4B), Zero (1B), Protocol (1B = 17), UDP Length (2B). Used exclusively during 1s-complement checksum computation to detect cross-host delivery errors. Checksum is optional in IPv4 (0 if disabled), mandatory in IPv6.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <div class="card">
+          <div class="card-title">15. Master Comparison: TCP vs UDP <span>Exam Favorite Table</span></div>
+          <table>
+            <tr><th>Parameter</th><th>TCP (RFC 793)</th><th>UDP (RFC 768)</th></tr>
+            <tr><td>Connection</td><td>Connection-Oriented (3-way)</td><td>Connectionless</td></tr>
+            <tr><td>Reliability</td><td>Reliable (ACK + Retransmit)</td><td>Unreliable (Best Effort)</td></tr>
+            <tr><td>Header Size</td><td>20–60 Bytes (Heavy)</td><td>8 Bytes fixed (Lightweight)</td></tr>
+            <tr><td>Data Delivery</td><td>Byte Stream (No boundaries)</td><td>Message / Datagram-oriented</td></tr>
+            <tr><td>Flow / Congestion</td><td>Yes (Sliding window + AIMD)</td><td>None (Blasts at app rate)</td></tr>
+            <tr><td>Speed / Latency</td><td>Slower (Handshake overhead)</td><td>Ultra-fast, lowest latency</td></tr>
+            <tr><td>Communication</td><td>Unicast point-to-point only</td><td>Unicast, Multicast &amp; Broadcast</td></tr>
+            <tr><td>Key Applications</td><td>HTTP/S, FTP, SMTP, SSH</td><td>DNS, DHCP, VoIP, Gaming, RTP</td></tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">16. Quality of Service (QoS) &amp; Traffic Shaping <span>L4 Optimization</span></div>
+          <ul>
+            <li><strong>4 QoS Metrics:</strong> Delay/Latency (propagation+queuing), Jitter (delay variance), Bandwidth/Throughput, Packet Loss rate.</li>
+            <li><strong>Packet Scheduling Disciplines:</strong>
+              <br/>• <em>FIFO:</em> First-in first-out; zero fairness, prone to bufferbloat.
+              <br/>• <em>Priority Queuing:</em> High-priority traffic served first; can starve low-priority.
+              <br/>• <em>Weighted Fair Queuing (WFQ):</em> Allocates guaranteed bandwidth ratio per queue.</li>
+            <li><strong>Leaky Bucket vs Token Bucket Traffic Shapers:</strong>
+              <br/>• <em>Leaky Bucket:</em> Eliminates bursts; outputs at a rigid constant rate. Overflows drop packets.
+              <br/>• <em>Token Bucket:</em> Generates tokens at rate $R$. Allows bursts up to capacity $C$ at maximum rate $M$.
+              <div class="formula">Max Burst Duration: T = C / (M - R)</div>
+              <code>C</code> = Token Capacity, <code>M</code> = Max Burst Transmission Rate, <code>R</code> = Token Arrival Rate.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">17. AKTU Numerical &amp; Formula Cheat Bank <span>High-Yield Formulas</span></div>
+          <ul>
+            <li><code>TCP Header Length (Bytes) = HLEN × 4</code>. If HLEN = <code>0111_2 (7)</code> $\implies 7 \times 4 = 28$ Bytes (20B base + 8B options).</li>
+            <li><code>MSS = MTU - (IP_Header + TCP_Header) = 1500 - 40 = 1460 \text{ Bytes}</code>.</li>
+            <li><code>Slow Start Rounds to reach Threshold: n = \log_2(ssthresh / cwnd_0)</code>.</li>
+            <li><code>Window Utilization / Efficiency: \eta = \frac{W \cdot \text{MSS}}{\text{Bandwidth} \times \text{RTT}}</code>.</li>
+            <li><code>Token Bucket Burst: \text{Max Volume Transmitted} = C + R \cdot T = M \cdot T</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AKTU BCS603 Computer Networks — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Page 3 of 3 (Congestion Control, UDP, QoS, Shaping &amp; Formulas)</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="frHdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="sh9" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="950" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="15" y="15" width="920" height="510" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="10"/>
+
+  <rect x="35" y="30" width="880" height="52" fill="url(#frHdr)" rx="8" filter="url(#sh9)"/>
+  <text x="475" y="62" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="bold" text-anchor="middle">TCP Congestion Detection: Timeout vs Fast Retransmit &amp; Fast Recovery</text>
+
+  <!-- Left: Severe Congestion (RTO Timeout) -->
+  <g transform="translate(45, 105)">
+    <rect x="0" y="0" width="415" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">1. Severe Congestion: RTO Timer Expiration</text>
+
+    <rect x="15" y="38" width="385" height="85" fill="#fef2f2" stroke="#fca5a5" rx="4"/>
+    <text x="25" y="58" fill="#991b1b" font-family="sans-serif" font-size="11" font-weight="bold">Network Diagnosis: Severe Bottleneck!</text>
+    <text x="25" y="76" fill="#7f1d1d" font-family="sans-serif" font-size="10.5">• Multiple packets dropped; intermediate router queues fully choked.</text>
+    <text x="25" y="94" fill="#7f1d1d" font-family="sans-serif" font-size="10.5">• No duplicate ACKs can return to the sender.</text>
+    <text x="25" y="112" fill="#b91c1c" font-family="sans-serif" font-size="10.5" font-weight="bold">Action: Multiplicative decrease to rock bottom!</text>
+
+    <!-- Reaction Rules -->
+    <rect x="15" y="135" width="385" height="115" fill="#ffffff" stroke="#cbd5e1" rx="4"/>
+    <text x="25" y="155" fill="#1e293b" font-family="sans-serif" font-size="11" font-weight="bold">Mandatory Reaction Steps:</text>
+    <text x="25" y="175" fill="#c2410c" font-family="monospace" font-size="11">ssthresh = cwnd / 2</text>
+    <text x="25" y="195" fill="#b91c1c" font-family="monospace" font-size="11">cwnd = 1 MSS  (Reset to ground zero)</text>
+    <text x="25" y="215" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Resets to Slow Start mode (Exponential increase from 1 MSS).</text>
+    <text x="25" y="235" fill="#475569" font-family="sans-serif" font-size="10">High throughput penalty — Takes multiple RTTs to recover speed!</text>
+
+    <!-- Tahoe Box -->
+    <rect x="15" y="265" width="385" height="120" fill="#eff6ff" stroke="#bfdbfe" rx="4"/>
+    <text x="25" y="285" fill="#1e40af" font-family="sans-serif" font-size="11" font-weight="bold">TCP Tahoe Philosophy (RFC 1122):</text>
+    <text x="25" y="303" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Treats ALL packet losses identically (whether Timeout or Dup ACKs).</text>
+    <text x="25" y="321" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Always cuts ssthresh = cwnd / 2, drops cwnd = 1 MSS, and forces</text>
+    <text x="25" y="339" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Slow Start! Highly conservative and causes throughput collapse.</text>
+  </g>
+
+  <!-- Right: Mild Congestion (3 Dup ACKs & Fast Recovery) -->
+  <g transform="translate(480, 105)">
+    <rect x="0" y="0" width="425" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">2. Mild Congestion: 3 Duplicate ACKs (TCP Reno)</text>
+
+    <rect x="15" y="38" width="395" height="85" fill="#f0fdf4" stroke="#86efac" rx="4"/>
+    <text x="25" y="58" fill="#166534" font-family="sans-serif" font-size="11" font-weight="bold">Network Diagnosis: Isolated Packet Loss!</text>
+    <text x="25" y="76" fill="#14532d" font-family="sans-serif" font-size="10.5">• Subsequent segments ARE reaching receiver (triggering Dup ACKs).</text>
+    <text x="25" y="94" fill="#14532d" font-family="sans-serif" font-size="10.5">• Network pipeline is still flowing, not completely jammed.</text>
+    <text x="25" y="112" fill="#15803d" font-family="sans-serif" font-size="10.5" font-weight="bold">Action: Fast Retransmit + Fast Recovery!</text>
+
+    <!-- Reaction Rules -->
+    <rect x="15" y="135" width="395" height="115" fill="#ffffff" stroke="#cbd5e1" rx="4"/>
+    <text x="25" y="155" fill="#1e293b" font-family="sans-serif" font-size="11" font-weight="bold">TCP Reno Reaction Steps (RFC 2581):</text>
+    <text x="25" y="175" fill="#c2410c" font-family="monospace" font-size="11">ssthresh = cwnd / 2</text>
+    <text x="25" y="195" fill="#15803d" font-family="monospace" font-size="11">cwnd = ssthresh + 3 MSS  (Fast Recovery)</text>
+    <text x="25" y="215" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">Resends missing segment immediately (Fast Retransmit).</text>
+    <text x="25" y="235" fill="#15803d" font-family="sans-serif" font-size="10" font-weight="bold">Skips Slow Start completely! Resumes Congestion Avoidance directly.</text>
+
+    <!-- Modern Extensions Box -->
+    <rect x="15" y="265" width="395" height="120" fill="#f5f3ff" stroke="#c4b5fd" rx="4"/>
+    <text x="25" y="285" fill="#6b21a8" font-family="sans-serif" font-size="11" font-weight="bold">Modern TCP Variants (NewReno &amp; SACK):</text>
+    <text x="25" y="303" fill="#581c87" font-family="sans-serif" font-size="10.5">• <tspan font-weight="bold">TCP NewReno (RFC 6582):</tspan> Handles multiple packet drops in 1 window.</text>
+    <text x="25" y="321" fill="#581c87" font-family="sans-serif" font-size="10.5">• <tspan font-weight="bold">TCP SACK (RFC 2018):</tspan> Selective Acknowledgment allows receiver to</text>
+    <text x="25" y="339" fill="#581c87" font-family="sans-serif" font-size="10.5">  report non-contiguous blocks, retransmitting only lost chunks!</text>
+  </g>
+</svg>

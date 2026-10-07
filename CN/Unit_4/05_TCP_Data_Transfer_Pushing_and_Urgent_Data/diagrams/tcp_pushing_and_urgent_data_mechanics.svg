@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pshHdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <filter id="sh5" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="950" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="15" y="15" width="920" height="510" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="10"/>
+
+  <rect x="35" y="30" width="880" height="52" fill="url(#pshHdr)" rx="8" filter="url(#sh5)"/>
+  <text x="475" y="62" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="bold" text-anchor="middle">TCP Pushing Data (PSH Flag) &amp; Urgent Data (URG Flag / Pointer)</text>
+
+  <!-- Left: Pushing Data (PSH) -->
+  <g transform="translate(45, 105)">
+    <rect x="0" y="0" width="415" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">1. Pushing Data Mechanics (PSH Flag = 1)</text>
+
+    <!-- Normal Buffering vs PSH -->
+    <rect x="15" y="38" width="385" height="110" fill="#ffffff" stroke="#e2e8f0" rx="4"/>
+    <text x="25" y="58" fill="#475569" font-family="sans-serif" font-size="11" font-weight="bold">Default TCP Buffering Behavior:</text>
+    <text x="25" y="76" fill="#64748b" font-family="sans-serif" font-size="10.5">• Sending TCP waits until buffer accumulates MSS bytes.</text>
+    <text x="25" y="94" fill="#64748b" font-family="sans-serif" font-size="10.5">• Receiving TCP buffers segments until application requests read.</text>
+    <text x="25" y="112" fill="#b91c1c" font-family="sans-serif" font-size="10.5" font-weight="bold">High delay — Unacceptable for interactive shells (Telnet / SSH)!</text>
+
+    <!-- PSH Mode -->
+    <rect x="15" y="160" width="385" height="120" fill="#f0fdf4" stroke="#86efac" rx="4"/>
+    <text x="25" y="182" fill="#166534" font-family="sans-serif" font-size="11" font-weight="bold">With PSH Flag SET (PSH = 1):</text>
+    <text x="25" y="202" fill="#14532d" font-family="sans-serif" font-size="10.5">• Sending TCP flushes send buffer immediately without waiting.</text>
+    <text x="25" y="222" fill="#14532d" font-family="sans-serif" font-size="10.5">• Segment transmitted across network instantly.</text>
+    <text x="25" y="242" fill="#14532d" font-family="sans-serif" font-size="10.5">• Receiving TCP delivers data directly to application layer,</text>
+    <text x="25" y="258" fill="#14532d" font-family="sans-serif" font-size="10.5">  completely bypassing receive buffer delay!</text>
+
+    <rect x="15" y="295" width="385" height="90" fill="#eff6ff" stroke="#bfdbfe" rx="4"/>
+    <text x="25" y="318" fill="#1e40af" font-family="sans-serif" font-size="11" font-weight="bold">Typical Interactive Use Case:</text>
+    <text x="25" y="338" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">User types a single character in SSH / Telnet session.</text>
+    <text x="25" y="356" fill="#1e3a8a" font-family="sans-serif" font-size="10.5">PSH flag forces instant echo back to terminal screen!</text>
+  </g>
+
+  <!-- Right: Urgent Data (URG) -->
+  <g transform="translate(480, 105)">
+    <rect x="0" y="0" width="425" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">2. Urgent Data &amp; Urgent Pointer (URG Flag = 1)</text>
+
+    <!-- Buffer with Urgent Byte Range -->
+    <g transform="translate(20, 45)">
+      <text x="0" y="15" fill="#334155" font-family="sans-serif" font-size="11" font-weight="bold">TCP Data Stream Buffer Layout:</text>
+      
+      <!-- Normal Data before -->
+      <rect x="0" y="25" width="120" height="45" fill="#e2e8f0" stroke="#94a3b8" rx="3"/>
+      <text x="60" y="52" fill="#475569" font-family="sans-serif" font-size="10" text-anchor="middle">Normal Data</text>
+
+      <!-- Urgent Data Block -->
+      <rect x="120" y="25" width="160" height="45" fill="#fee2e2" stroke="#ef4444" stroke-width="2" rx="3"/>
+      <text x="200" y="45" fill="#b91c1c" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle">URGENT DATA</text>
+      <text x="200" y="60" fill="#991b1b" font-family="monospace" font-size="9" text-anchor="middle">Ctrl+C / Abort Signal</text>
+
+      <!-- Remaining Normal Data -->
+      <rect x="280" y="25" width="105" height="45" fill="#e2e8f0" stroke="#94a3b8" rx="3"/>
+      <text x="332" y="52" fill="#475569" font-family="sans-serif" font-size="10" text-anchor="middle">Normal Data</text>
+
+      <!-- Pointer Arrow -->
+      <line x1="280" y1="85" x2="280" y2="72" stroke="#b91c1c" stroke-width="2.5"/>
+      <polygon points="275,75 280,70 285,75" fill="#b91c1c"/>
+      <text x="280" y="102" fill="#b91c1c" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Urgent Pointer</text>
+    </g>
+
+    <!-- Mathematical Formula Box -->
+    <g transform="translate(20, 170)">
+      <rect x="0" y="0" width="385" height="95" fill="#fff7ed" stroke="#fed7aa" rx="4"/>
+      <text x="15" y="20" fill="#9a3412" font-family="sans-serif" font-size="11" font-weight="bold">Urgent Pointer Calculation Formula:</text>
+      <text x="15" y="42" fill="#c2410c" font-family="monospace" font-size="11">End of Urgent Byte = Seq Number + Urgent Pointer - 1</text>
+      <text x="15" y="62" fill="#7c2d12" font-family="sans-serif" font-size="10">• URG flag = 1 indicates 16-bit Urgent Pointer field is valid.</text>
+      <text x="15" y="78" fill="#7c2d12" font-family="sans-serif" font-size="10">• Urgent data is extracted &amp; processed out-of-order ahead of queue!</text>
+    </g>
+
+    <!-- Use Case -->
+    <g transform="translate(20, 280)">
+      <rect x="0" y="0" width="385" height="105" fill="#f8fafc" stroke="#cbd5e1" rx="4"/>
+      <text x="15" y="22" fill="#0f172a" font-family="sans-serif" font-size="11" font-weight="bold">Real-World Out-of-Band Abort Case:</text>
+      <text x="15" y="42" fill="#475569" font-family="sans-serif" font-size="10.5">While downloading a massive 10 GB file via FTP, user presses</text>
+      <text x="15" y="60" fill="#b91c1c" font-family="monospace" font-size="10.5" font-weight="bold">Ctrl + C (Abort command).</text>
+      <text x="15" y="78" fill="#475569" font-family="sans-serif" font-size="10.5">Without URG, abort command waits behind thousands of queued bytes!</text>
+      <text x="15" y="96" fill="#15803d" font-family="sans-serif" font-size="10.5" font-weight="bold">With URG, server stops transmission instantly!</text>
+    </g>
+  </g>
+</svg>
