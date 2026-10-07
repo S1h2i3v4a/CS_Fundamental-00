@@ -1,0 +1,233 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 04: Equivalence & Canonical Minimal Cover</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 04: Equivalence & Canonical Minimal Cover</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr04" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg04)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">FD Equivalence &amp; Canonical Minimal Cover Pipeline</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Testing F ≡ G via Mutual Closure &amp; 3-Phase Canonical Cover Reduction (Fc)</text>
+
+  <!-- LEFT: EQUIVALENCE OF FD SETS -->
+  <g transform="translate(35, 80)">
+    <rect width="445" height="410" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.6"/>
+    <text x="222" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. Equivalence of FD Sets (F ≡ G)</text>
+    <text x="222" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Formal Condition: F⁺ = G⁺  (Both cover each other)</text>
+
+    <!-- Condition 1 -->
+    <rect x="20" y="65" width="405" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#38bdf8">Condition 1: Check F ⊆ G⁺  (G covers F)</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">For every functional dependency X → Y in set F:</text>
+    <text x="50" y="123" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">Compute X⁺ using ONLY dependencies in G.</text>
+    <text x="50" y="140" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Verify that  Y ⊆ X⁺_G. If all satisfy, G covers F.</text>
+
+    <!-- Condition 2 -->
+    <rect x="20" y="170" width="405" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="192" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#38bdf8">Condition 2: Check G ⊆ F⁺  (F covers G)</text>
+    <text x="35" y="210" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">For every functional dependency A → B in set G:</text>
+    <text x="50" y="228" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">Compute A⁺ using ONLY dependencies in F.</text>
+    <text x="50" y="245" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Verify that  B ⊆ A⁺_F. If all satisfy, F covers G.</text>
+
+    <!-- Verdict -->
+    <rect x="20" y="275" width="405" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="297" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#a7f3d0">Equivalence Verdict Matrix</text>
+    <text x="35" y="318" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If BOTH conditions true  ⇒  F ≡ G (Strictly Equivalent).</text>
+    <text x="35" y="336" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If F ⊆ G⁺ but G ⊈ F⁺   ⇒  G is strictly stronger than F.</text>
+    <text x="35" y="354" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If G ⊆ F⁺ but F ⊈ G⁺   ⇒  F is strictly stronger than G.</text>
+    <text x="35" y="372" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">• If neither holds         ⇒  F and G are non-comparable.</text>
+  </g>
+
+  <!-- RIGHT: CANONICAL MINIMAL COVER ALGORITHM -->
+  <g transform="translate(515, 80)">
+    <rect width="450" height="410" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. 3-Phase Canonical Minimal Cover (Fc)</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Produces unique, streamlined, non-redundant FD set</text>
+
+    <!-- Phase 1 -->
+    <rect x="20" y="65" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">Phase 1: Singleton RHS Decomposition</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">Break all compound RHS into single attributes:</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">X → {A, B, C}  becomes  X → A,  X → B,  X → C</text>
+
+    <!-- Phase 2 -->
+    <rect x="20" y="150" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="172" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">Phase 2: Eliminate Extraneous LHS Attributes</text>
+    <text x="35" y="190" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">For any compound LHS (eg: AB → C), check if A or B is useless:</text>
+    <text x="35" y="208" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Check (A)⁺ without B. If C ∈ A⁺, then B is extraneous! Drop B!</text>
+    <text x="35" y="225" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Dependency simplifies from AB → C to A → C.</text>
+
+    <!-- Phase 3 -->
+    <rect x="20" y="255" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="277" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">Phase 3: Eliminate Redundant Dependencies</text>
+    <text x="35" y="295" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">For each FD X → Y in current set:</text>
+    <text x="35" y="313" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Temporarily remove X → Y. Compute X⁺ with remaining set.</text>
+    <text x="35" y="330" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">If Y ∈ X⁺_remaining, then X → Y was redundant! Permanently drop it!</text>
+
+    <!-- Output badge -->
+    <rect x="20" y="360" width="410" height="35" rx="6" fill="#064e3b" stroke="#059669"/>
+    <text x="225" y="382" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Output: Irreducible Canonical Minimal Cover Fc</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Equivalence of Functional Dependency Sets ($F \equiv G$), Mutual Closure Testing, Canonical Cover ($F_c$), Extraneous Attribute Elimination, Redundant Dependency Elimination, Solved Gateway AKTU Numericals.</p>
+<p>---</p>
+<h2>1. Equivalence of Two FD Sets ($F \equiv G$)</h2>
+<p>Do functional dependency sets $F$ aur $G$ tab <strong>Equivalent</strong> kehlaate hain jab unke dwara generate kiye gaye closures exactly same hon:</p>
+<p>$$F \equiv G \iff F^+ = G^+$$</p>
+<h3>1.1 Fast Mutual Cover Testing Algorithm</h3>
+<p>Inhe test karne ke liye saare combinations ka closure nikalne ki zaroorat nahi hoti. Sirf do tests perform karne hote hain:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Test 1: Does $G$ cover $F$? ($F \subseteq G^+$)</strong></p>
+<p>   - For every dependency $X </p>
+<p>ightarrow Y \in F$:</p>
+<p>     - Compute the attribute closure of $X$ using <strong>ONLY the dependencies of $G$</strong> ($X^+_G$).</p>
+<p>     - If $Y \subseteq X^+_G$ holds for every FD in $F$, then $G$ covers $F$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Test 2: Does $F$ cover $G$? ($G \subseteq F^+$)</strong></p>
+<p>   - For every dependency $A </p>
+<p>ightarrow B \in G$:</p>
+<p>     - Compute the attribute closure of $A$ using <strong>ONLY the dependencies of $F$</strong> ($A^+_F$).</p>
+<p>     - If $B \subseteq A^+_F$ holds for every FD in $G$, then $F$ covers $G$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>Conclusion:</strong></p>
+<p>   - If BOTH Test 1 and Test 2 pass $\implies \mathbf{F \equiv G}$.</p>
+<p>---</p>
+<h2>2. Canonical Cover / Minimal Cover ($F_c$)</h2>
+<p>Database schema ko optimize karne ke liye hume aisa equivalent FD set chahiye jisme koi bhi extra (redundant) attribute ya rule na ho. Is minimal non-redundant set ko <strong>Canonical Cover</strong> ($F_c$) ya <strong>Minimal Cover</strong> kehte hain.</p>
+<h3>2.1 Formal Properties of a Canonical Cover</h3>
+<p>Ek set $F_c$ canonical cover tabhi hota hai jab:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Singleton RHS:</strong> Har FD ke right side par strictly <strong>sirf ek attribute</strong> ho ($X </p>
+<p>ightarrow A$).</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>No Extraneous LHS Attributes:</strong> Left-hand side par koi faltu attribute na ho (e.g., agar $A </p>
+<p>ightarrow B$ se kaam chal raha hai toh $AC </p>
+<p>ightarrow B$ me $C$ extraneous hai).</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>No Redundant Dependencies:</strong> Koi aisi dependency na ho jisko hata dene par bhi closure me koi farq na pade.</p>
+<p>---</p>
+<h2>3. The 3-Phase Canonical Cover Algorithm</h2>
+<p><code></code>`</p>
+<p>Step 1: Right-Hand Side Decomposition</p>
+<p>        RHS ke sabhi multi-attributes ko singleton me tod do.</p>
+<p>        Eg: X → ABC becomes {X → A, X → B, X → C}</p>
+<p>Step 2: Extraneous Attribute Removal (from LHS)</p>
+<p>        Har composite LHS dependency (eg: AB → C) ke liye check karo:</p>
+<p>        - Kya A ko hataya ja sakta hai? Calculate (B)⁺. If C ∈ (B)⁺, then A is extraneous!</p>
+<p>        - Kya B ko hataya ja sakta hai? Calculate (A)⁺. If C ∈ (A)⁺, then B is extraneous!</p>
+<p>        - Extraneous attribute ko permanently delete karo.</p>
+<p>Step 3: Redundant Dependency Removal</p>
+<p>        Har remaining dependency X → Y ke liye:</p>
+<p>        - Us dependency ko temporarily set se bahar nikalo: F' = F - {X → Y}.</p>
+<p>        - Remaining set F' ko use karke X⁺ calculate karo.</p>
+<p>        - Agar Y ∈ X⁺_F', iska matlab X → Y baaki bachi FDs se already derive ho raha hai!</p>
+<p>        - Yeh redundant hai! Isko permanently delete karo!</p>
+<p><code></code>`</p>
+<p>---</p>
+<h2>4. Architectural Diagram</h2>
+<p>---</p>
+<h2>5. Gateway Classes Solved AKTU Examination Numericals</h2>
+<h3>Numerical 1 (Full Canonical Cover Calculation)</h3>
+<p><strong>Question:</strong> Given relation $R(A, B, C)$ and FD set:</p>
+<p>$$F = \{ A </p>
+<p>ightarrow BC, \quad B </p>
+<p>ightarrow C, \quad A </p>
+<p>ightarrow B, \quad AB </p>
+<p>ightarrow C \}$$</p>
+<p>Find the Canonical Cover ($F_c$).</p>
+<p><strong>Step 1: Singleton RHS Decomposition</strong></p>
+<li>$A </li>
+<p>ightarrow BC$ splits into $A </p>
+<p>ightarrow B$ and $A </p>
+<p>ightarrow C$.</p>
+<li>Current set:</li>
+<p>  $$F_1 = \{ A </p>
+<p>ightarrow B, \quad A </p>
+<p>ightarrow C, \quad B </p>
+<p>ightarrow C, \quad A </p>
+<p>ightarrow B, \quad AB </p>
+<p>ightarrow C \}$$</p>
+<li>Duplicate $A </li>
+<p>ightarrow B$ removed:</p>
+<p>  $$F_1 = \{ A </p>
+<p>ightarrow B, \quad A </p>
+<p>ightarrow C, \quad B </p>
+<p>ightarrow C, \quad AB </p>
+<p>ightarrow C \}$$</p>
+<p>**Step 2: Check Extraneous Attribute in $AB </p>
+<p>ightarrow C$**</p>
+<li>Check if $B$ can be dropped from LHS:</li>
+<p>  - Compute closure of $A$ without using $AB </p>
+<p>ightarrow C$:</p>
+<p>    - In $\{A </p>
+<p>ightarrow B, A </p>
+<p>ightarrow C, B </p>
+<p>ightarrow C\}$, $A^+ = \{A, B, C\}$.</p>
+<p>    - Since $C \in A^+$, $A$ alone can derive $C$! Therefore, <strong>$B$ is extraneous</strong> in $AB </p>
+<p>ightarrow C$!</p>
+<p>  - Dependency $AB </p>
+<p>ightarrow C$ simplifies to $A </p>
+<p>ightarrow C$.</p>
+<li>Since $A </li>
+<p>ightarrow C$ already exists in our set, duplicate is removed.</p>
+<li>Set after Step 2:</li>
+<p>  $$F_2 = \{ A </p>
+<p>ightarrow B, \quad A </p>
+<p>ightarrow C, \quad B </p>
+<p>ightarrow C \}$$</p>
+<p><strong>Step 3: Check Redundant Dependencies</strong></p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Test $A </p>
+<p>ightarrow B$:</p>
+<p>   - Remove it. Remaining: $\{A </p>
+<p>ightarrow C, B </p>
+<p>ightarrow C\}$.</p>
+<p>   - $A^+ = \{A, C\}$. Since $B </p>
+<p>otin A^+$, $A </p>
+<p>ightarrow B$ is <strong>NOT redundant</strong>. Keep it.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Test $A </p>
+<p>ightarrow C$:</p>
+<p>   - Remove it. Remaining: $\{A </p>
+<p>ightarrow B, B </p>
+<p>ightarrow C\}$.</p>
+<p>   - $A^+ = \{A, B, C\}$ (using $A </p>
+<p>ightarrow B$ and $B </p>
+<p>ightarrow C$).</p>
+<p>   - Since $C \in A^+$, $A </p>
+<p>ightarrow C$ is derived via transitivity!</p>
+<p>   - Therefore, **$A </p>
+<p>ightarrow C$ is REDUNDANT**! Remove it!</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> Test $B </p>
+<p>ightarrow C$:</p>
+<p>   - Remove it. Remaining: $\{A </p>
+<p>ightarrow B\}$.</p>
+<p>   - $B^+ = \{B\}$. Since $C </p>
+<p>otin B^+$, $B </p>
+<p>ightarrow C$ is <strong>NOT redundant</strong>. Keep it.</p>
+<p><strong>Final Answer:</strong></p>
+<p>$$\mathbf{F_c = \{ A </p>
+<p>ightarrow B, \quad B </p>
+<p>ightarrow C \}}$$</p>
+</body></html>

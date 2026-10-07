@@ -1,0 +1,152 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 11: Join Dependencies (5NF) & Inclusion Rules</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 11: Join Dependencies (5NF) & Inclusion Rules</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg11)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Join Dependencies (JD), 5NF &amp; Inclusion Dependencies</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Project-Join Normal Form (PJNF), N-Way Lossless Join &amp; Master Normal Form Hierarchy</text>
+
+  <!-- LEFT: JOIN DEPENDENCY & 5NF -->
+  <g transform="translate(35, 80)">
+    <rect width="445" height="410" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="222" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">1. Join Dependency (JD) &amp; 5NF (PJNF)</text>
+    <text x="222" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">N-way lossless decomposition beyond binary pairs</text>
+
+    <!-- Definition JD -->
+    <rect x="20" y="65" width="405" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#60a5fa">Join Dependency Definition: ⋈[R1, R2, ... Rn]</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Relation R satisfies JD ⋈[R1, R2, ... Rn] iff:</text>
+    <text x="50" y="125" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">R = π_R1(R) ⋈ π_R2(R) ⋈ ... ⋈ π_Rn(R)</text>
+
+    <!-- 5NF Condition -->
+    <rect x="20" y="150" width="405" height="110" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="172" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Fifth Normal Form (5NF / PJNF) Criteria:</text>
+    <text x="35" y="190" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Relation R is in 5NF iff it is in 4NF and for every</text>
+    <text x="35" y="206" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">non-trivial Join Dependency ⋈[R1, R2, ... Rn]:</text>
+    <text x="35" y="225" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#fbbf24">EVERY Ri MUST BE A SUPER KEY OF R.</text>
+    <text x="35" y="244" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">If this holds, table cannot be losslessly decomposed any further!</text>
+
+    <!-- Inclusion Dependencies -->
+    <rect x="20" y="270" width="405" height="120" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="292" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fed7aa">Inclusion Dependencies (IND): R[X] ⊆ S[Y]</text>
+    <text x="35" y="310" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Subset constraints between relations.</text>
+    <text x="35" y="326" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Every value appearing in column X of R must also appear</text>
+    <text x="35" y="342" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">in column Y of S.</text>
+    <text x="35" y="362" font-family="-apple-system, sans-serif" font-size="9.5" fill="#38bdf8">★ Direct formal basis of FOREIGN KEY and Referential Integrity!</text>
+  </g>
+
+  <!-- RIGHT: MASTER NORMAL FORM TAXONOMY -->
+  <g transform="translate(515, 80)">
+    <rect width="450" height="410" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. Master Normal Form Hierarchy</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Progressive Constraint Nesting: 5NF ⊂ 4NF ⊂ BCNF ⊂ 3NF ⊂ 2NF ⊂ 1NF</text>
+
+    <!-- 1NF to 5NF Stack -->
+    <rect x="20" y="65" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#cbd5e1">1NF: Atomic Domains</text>
+    <text x="35" y="102" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Eliminates multi-valued attributes and composite attributes.</text>
+
+    <rect x="20" y="122" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="142" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">2NF: No Partial Dependencies</text>
+    <text x="35" y="159" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Non-prime attributes must depend on the FULL candidate key.</text>
+
+    <rect x="20" y="179" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="199" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#60a5fa">3NF: No Transitive Dependencies</text>
+    <text x="35" y="216" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">For X → Y: X is Super Key OR Y is Prime. Lossless + Preserved!</text>
+
+    <rect x="20" y="236" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="256" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#c084fc">BCNF: Strict Super Key Determinant</text>
+    <text x="35" y="273" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">For all X → Y: X MUST be Super Key. May lose dependency preservation.</text>
+
+    <rect x="20" y="293" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="313" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f43f5e">4NF: No Multi-Valued Dependencies</text>
+    <text x="35" y="330" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">For all X ↠ Y: X is Super Key. Eliminates cartesian explosion.</text>
+
+    <rect x="20" y="350" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="370" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">5NF: No Join Dependencies (PJNF)</text>
+    <text x="35" y="387" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">All non-trivial JDs implied by candidate keys. Zero join redundancy.</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Join Dependencies $owtie[R_1, \dots, R_n]$, Fifth Normal Form (5NF / Project-Join Normal Form PJNF), Cyclic Constraint Dependencies, Inclusion Dependencies (IND) and Foreign Key Relationship, Master Normal Form Summary.</p>
+<p>---</p>
+<h2>1. Limitations of 4NF: The 3-Way Cyclic Join</h2>
+<p>4NF sirf do independent multi-valued attributes ke binary splits ko handle karta hai ($R </p>
+<p>ightarrow R_1, R_2$).</p>
+<p>Lekin database design me aisi cyclic relationships ho sakti hain jinhe do tables me split karne par <strong>lossless join nahi milta</strong>, lekin <strong>teen ya usse zyada tables me split karne par lossless join mil jaata hai</strong>!</p>
+<li>Is generalisation ko capture karne ke liye <strong>Join Dependency (JD)</strong> define ki jaati hai.</li>
+<p>---</p>
+<h2>2. Join Dependency (JD) Formal Definition</h2>
+<p>Ek relation schema $R$ par <strong>Join Dependency</strong> $\mathbf{owtie[R_1, R_2, \dots, R_n]}$ tab hold karti hai jab relation $R$ apne projections ke natural join ke strictly equal ho:</p>
+<p>$$R = \pi_{R_1}(R) owtie \pi_{R_2}(R) owtie \dots owtie \pi_{R_n}(R)$$</p>
+<p>Where each $R_i \subseteq R$ and $igcup_{i=1}^n R_i = R$.</p>
+<li><strong>Trivial Join Dependency:</strong> Agar kisi ek $R_i = R$ ho jaye, toh JD trivial hoti hai.</li>
+<p>---</p>
+<h2>3. Fifth Normal Form (5NF / Project-Join Normal Form - PJNF)</h2>
+<h3>3.1 Formal Definition</h3>
+<p>Ek relation schema $R$ <strong>Fifth Normal Form (5NF)</strong> me tab hota hai jab:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Wo relation already <strong>4NF</strong> me ho.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Har non-trivial Join Dependency $owtie[R_1, R_2, \dots, R_n]$ ke liye:</p>
+<p>   $$\mathbf{	ext{EVERY } R_i 	ext{ IS A SUPER KEY OF } R}$$</p>
+<h3>3.2 Significance</h3>
+<p>5NF relational database theory ki ultimate normal form maani jaati hai (with respect to projection and join operators).</p>
+<li>Agar koi table 5NF me hai, toh use aage kisi bhi number of tables me bina spurious tuples ke split nahi kiya ja sakta jab tak un tables ka key original relation ka super key na ho!</li>
+<p>---</p>
+<h2>4. Inclusion Dependencies (IND)</h2>
+<h3>4.1 Formal Definition</h3>
+<p>Given two relation schemas $R$ and $S$, attribute sequences $X \subseteq R$ and $Y \subseteq S$ (with matching domain and length):</p>
+<p>$$\mathbf{R[X] \subseteq S[Y]}$$</p>
+<p>Iska matlab hai ki relation $R$ ke kisi bhi tuple me attribute $X$ ki jo values aayengi, unka relation $S$ ke attribute $Y$ me pehle se present hona mandatory hai!</p>
+<h3>4.2 Connection to Foreign Key Constraints</h3>
+<li>Inclusion dependency relational database me <strong>Foreign Key (Referential Integrity)</strong> ka formal theoretical foundation hai!</li>
+<li>SQL syntax:</li>
+<p>  <code></code>`sql</p>
+<p>  FOREIGN KEY (Dept_ID) REFERENCES DEPARTMENT(Dept_ID);</p>
+<p>  <code></code>`</p>
+<p>  Is directly the Inclusion Dependency: $	ext{EMPLOYEE}[	ext{Dept\_ID}] \subseteq 	ext{DEPARTMENT}[	ext{Dept\_ID}]$.</p>
+<p>---</p>
+<h2>5. Architectural Diagram</h2>
+<p>---</p>
+<h2>6. Master Summary of All Normal Forms (AKTU Quick Reference Table)</h2>
+<table><thead><tr><th>Normal Form</th><th>Core Requirement</th><th>Violation Removed</th><th>Lossless Join?</th><th>Dependency Preserving?</th></tr></thead><tbody>
+<tr><td>**1NF**</td><td>Atomic attribute values only</td><td>Multi-valued & composite attributes</td><td>$\checkmark$</td><td>$\checkmark$</td></tr>
+<tr><td>**2NF**</td><td>In 1NF + No Partial Dependencies</td><td>Non-prime depending on proper subset of key</td><td>$\checkmark$</td><td>$\checkmark$</td></tr>
+<tr><td>**3NF**</td></tr>
+</tbody></table>
+<p>ightarrow Y$: $X$ is Super Key <strong>OR</strong> $Y$ is Prime | Transitive dependencies (Non-prime $</p>
+<p>ightarrow$ Non-prime) | $\checkmark$ | <strong>$\checkmark$ (Always Guaranteed!)</strong> |</p>
+<table><thead><tr><th>**BCNF**</th></tr></thead><tbody>
+</tbody></table>
+<p>ightarrow Y$: $X$ <strong>MUST</strong> be Super Key | Overlapping candidate keys redundancy | $\checkmark$ | $	imes$ (May be lost) |</p>
+<table><thead><tr><th>**4NF**</th><th>In BCNF + For every $X 	woheadrightarrow Y$: $X$ is Super Key</th><th>Independent multi-valued attributes (Cartesian product)</th><th>$\checkmark$</th><th>N/A (MVD focus)</th></tr></thead><tbody>
+<tr><td>**5NF (PJNF)**</td><td>In 4NF + Every $R_i$ in JD $owtie[R_1..R_n]$ is Super Key</td><td>N-way join dependencies & spurious tuples</td><td>$\checkmark$</td><td>N/A</td></tr>
+</tbody></table>
+</body></html>

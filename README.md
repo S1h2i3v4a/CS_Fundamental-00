@@ -18,20 +18,21 @@ CS_Fundamental-00/
 │
 └── DBMS/                      # Database Management Systems (AKTU BCS501)
     ├── Unit_1/                # Database Concepts, ER Modeling, Schema Reduction & Relational Algebra
-    └── Unit_2/                # Relational Model, Formal Languages & Complete SQL Mastery
+    ├── Unit_2/                # Relational Model, Formal Languages & Complete SQL Mastery
+    └── Unit_3/                # Relational Database Design & Normalization (1NF to 5NF, FDs, Armstrong, Decompositions)
         ├── 00_Quick_Revision_Short_Notes/
-        ├── 01_Relational_Algebra_Complete_Operators_and_Numericals/
-        ├── 02_Relational_Calculus_TRC_and_DRC/
-        ├── 03_SQL_Foundations_Data_Types_and_DDL_Commands/
-        ├── 04_SQL_DML_and_Integrity_Constraints/
-        ├── 05_SQL_Clauses_Aggregate_Functions_and_Groupings/
-        ├── 06_SQL_Joins_and_Set_Operations/
-        ├── 07_Nested_Subqueries_and_Correlated_Queries/
-        ├── 08_SQL_Views_and_Security_Abstraction/
-        ├── 09_Database_Indexes_and_Access_Paths/
-        ├── 10_Advanced_SQL_PL_SQL_Cursors/
-        ├── 11_Advanced_SQL_Database_Triggers/
-        └── 12_Unit_2_AKTU_PYQs_and_Solved_Queries/
+        ├── 01_Functional_Dependencies_and_Types/
+        ├── 02_Armstrongs_Axioms_and_Inference_Rules/
+        ├── 03_Attribute_Closure_and_Candidate_Key_Algorithms/
+        ├── 04_Equivalence_and_Canonical_Minimal_Cover/
+        ├── 05_Database_Anomalies_and_1NF/
+        ├── 06_Second_Normal_Form_2NF/
+        ├── 07_Third_Normal_Form_3NF/
+        ├── 08_Boyce_Codd_Normal_Form_BCNF/
+        ├── 09_Decomposition_Properties_Lossless_and_Dependency_Preservation/
+        ├── 10_Multivalued_Dependencies_and_Fourth_Normal_Form_4NF/
+        ├── 11_Join_Dependencies_5NF_and_Inclusion_Dependencies/
+        └── 12_Unit_3_AKTU_PYQs_and_Solved_Decompositions/
 ```
 
 ---
@@ -47,6 +48,7 @@ CS_Fundamental-00/
 | **OS** | **Unit 5** | Secondary Storage & File Systems | [3-Page PDF](OS/Unit_5/Unit_5_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](OS/Unit_5/Unit_5_Master_Notes.pdf) |
 | **DBMS** | **Unit 1** | Concepts, ER Modeling & Relational Algebra | [3-Page PDF](DBMS/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_1/Unit_1_Master_Notes.pdf) |
 | **DBMS** | **Unit 2** | Relational Model, Formal Languages & SQL | [3-Page PDF](DBMS/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_2/Unit_2_Master_Notes.pdf) |
+| **DBMS** | **Unit 3** | Database Design & Normalization (1NF to 5NF) | [3-Page PDF](DBMS/Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_3/Unit_3_Master_Notes.pdf) |
 
 ---
 

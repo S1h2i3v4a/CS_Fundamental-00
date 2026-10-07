@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg10)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Multivalued Dependencies (MVD) &amp; Fourth Normal Form (4NF)</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Independent Multi-Valued Facts, Cartesian Tuple Multiplication &amp; 4NF Decomposition</text>
+
+  <!-- MVD FORMAL DEFINITION BANNER -->
+  <g transform="translate(35, 80)">
+    <rect width="930" height="105" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="1.8"/>
+    <text x="30" y="30" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#c084fc">Formal Definition of Multivalued Dependency: X ↠ Y</text>
+    <text x="30" y="52" font-family="-apple-system, sans-serif" font-size="11.5" fill="#cbd5e1">In relation schema R(X, Y, Z), X ↠ Y holds iff for any two tuples t1 and t2 with t1[X] = t2[X],</text>
+    <text x="30" y="70" font-family="-apple-system, sans-serif" font-size="11.5" fill="#cbd5e1">there MUST also exist tuples t3 and t4 in R such that:</text>
+    <text x="50" y="92" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">t3 = (t1[X], t1[Y], t2[Z])    and    t4 = (t1[X], t2[Y], t1[Z])</text>
+  </g>
+
+  <!-- TWO COLUMN: CARTEISAN HAZARD & 4NF DECOMPOSITION -->
+  <!-- Col 1: MVD Cartesian Multiplication Hazard -->
+  <g transform="translate(35, 200)">
+    <rect width="450" height="290" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#f87171">The MVD Cartesian Explosion Hazard</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Table: Course_Info(Course, Lecturer, TextBook)</text>
+
+    <rect x="20" y="65" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fca5a5">Independent Facts Combine Multiplicatively:</text>
+    <text x="30" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Course &apos;DBMS&apos; has 2 Lecturers: {Dr. A, Dr. B}</text>
+    <text x="30" y="122" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Course &apos;DBMS&apos; has 2 Textbooks: {Korth, Navathe}</text>
+    <text x="30" y="138" font-family="-apple-system, sans-serif" font-size="8.5" fill="#f87171">Requires 2 × 2 = 4 tuples in a single unnormalized table!</text>
+
+    <rect x="20" y="150" width="410" height="120" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="172" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Why BCNF Cannot Catch This:</text>
+    <text x="30" y="190" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">There are NO functional dependencies! Every attribute is</text>
+    <text x="30" y="206" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">part of the primary key: {Course, Lecturer, TextBook}.</text>
+    <text x="30" y="224" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">Table is in BCNF, yet suffers from massive redundancy</text>
+    <text x="30" y="240" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">and update anomalies! We need 4NF!</text>
+  </g>
+
+  <!-- Col 2: 4NF Rule & Clean Decomposition -->
+  <g transform="translate(515, 200)">
+    <rect width="450" height="290" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#34d399">Fourth Normal Form (4NF) Solution</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Isolating Independent Multi-Valued Facts</text>
+
+    <rect x="20" y="65" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Formal 4NF Condition:</text>
+    <text x="30" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Relation R is in 4NF iff it is in BCNF and for every</text>
+    <text x="30" y="122" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">non-trivial MVD X ↠ Y:</text>
+    <text x="30" y="137" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#34d399">X MUST BE A SUPER KEY OF R.</text>
+
+    <rect x="20" y="150" width="410" height="120" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="172" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">4NF Decomposition Method:</text>
+    <text x="30" y="190" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Decompose R(X, Y, Z) with X ↠ Y into two schemas:</text>
+    <text x="50" y="208" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#38bdf8">• R1(X, Y)  with Key = {X, Y}</text>
+    <text x="50" y="226" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#38bdf8">• R2(X, Z)  with Key = {X, Z}</text>
+    <text x="30" y="248" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">Decomposed relations: 2 + 2 = 4 rows instead of cross product!</text>
+    <text x="30" y="263" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">Lossless Join guaranteed by Fagin&apos;s Theorem!</text>
+  </g>
+</svg>

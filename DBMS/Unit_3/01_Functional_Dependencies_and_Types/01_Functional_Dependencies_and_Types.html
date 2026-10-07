@@ -1,0 +1,239 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 01: Functional Dependencies & Types</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 01: Functional Dependencies & Types</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr01" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg01)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Functional Dependencies (FD) Architecture &amp; Taxonomy</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Formal Integrity Constraints: Determinants, Dependents, and Classification Hierarchy</text>
+
+  <!-- TOP DEFINITION PANEL -->
+  <g transform="translate(40, 80)">
+    <rect width="920" height="90" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.8"/>
+    <text x="30" y="32" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">Formal Mathematical Definition: X → Y</text>
+    <text x="30" y="55" font-family="-apple-system, sans-serif" font-size="11.5" fill="#cbd5e1">For any two tuples t1 and t2 in relation R:  If  t1[X] = t2[X],  then  t1[Y] MUST equal t2[Y].</text>
+    <text x="30" y="75" font-family="-apple-system, sans-serif" font-size="10.5" fill="#94a3b8">Determinant (X: Left-Hand Side) functionally determines Dependent (Y: Right-Hand Side). Schema-level invariant.</text>
+  </g>
+
+  <!-- THREE COLUMN TAXONOMY -->
+  <!-- Col 1: Trivial vs Non-Trivial -->
+  <g transform="translate(40, 190)">
+    <rect width="290" height="295" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="145" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">1. Trivial vs Non-Trivial</text>
+    <text x="145" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Set Inclusion Criteria</text>
+
+    <rect x="15" y="65" width="260" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Trivial FD (Y ⊆ X)</text>
+    <text x="25" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">RHS is a subset of LHS.</text>
+    <text x="25" y="117" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Always holds. Eg: {Roll, Name} → Roll</text>
+
+    <rect x="15" y="135" width="260" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="155" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Non-Trivial FD (X ∩ Y = ∅)</text>
+    <text x="25" y="173" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">RHS has zero intersection with LHS.</text>
+    <text x="25" y="188" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Carries real information. Eg: Roll → Name</text>
+
+    <rect x="15" y="210" width="260" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="230" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Semi-Non-Trivial FD</text>
+    <text x="25" y="248" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Y ⊄ X but X ∩ Y ≠ ∅.</text>
+    <text x="25" y="263" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Partial overlap. Eg: {Roll, Sub} → {Sub, Marks}</text>
+  </g>
+
+  <!-- Col 2: Full vs Partial -->
+  <g transform="translate(355, 190)">
+    <rect width="290" height="295" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="145" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">2. Full vs Partial FD</text>
+    <text x="145" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Key Subset Dependency</text>
+
+    <rect x="15" y="65" width="260" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Full Functional Dependency</text>
+    <text x="25" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Y depends on entire composite key X,</text>
+    <text x="25" y="117" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">not on any proper subset of X.</text>
+    <text x="25" y="133" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">∀ X&apos; ⊂ X, X&apos; ↛ Y. (Foundation of 2NF)</text>
+    <text x="25" y="148" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Eg: {EmpId, ProjId} → HoursWorked</text>
+
+    <rect x="15" y="170" width="260" height="105" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="190" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">Partial Functional Dependency</text>
+    <text x="25" y="208" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Non-prime attribute depends on a</text>
+    <text x="25" y="222" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">PROPER SUBSET of candidate key.</text>
+    <text x="25" y="238" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">∃ X&apos; ⊂ Key such that X&apos; → Y (Non-Prime).</text>
+    <text x="25" y="254" font-family="-apple-system, sans-serif" font-size="8.5" fill="#f87171">Violates 2NF! Eg: EmpId → EmpName</text>
+  </g>
+
+  <!-- Col 3: Transitive & Multi-valued -->
+  <g transform="translate(670, 190)">
+    <rect width="290" height="295" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="145" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fbbf24">3. Transitive &amp; Advanced</text>
+    <text x="145" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Chained &amp; Multi-Attribute Rules</text>
+
+    <rect x="15" y="65" width="260" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Transitive Dependency</text>
+    <text x="25" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">A → B and B → C, where B is non-key.</text>
+    <text x="25" y="118" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">C depends on A via non-key attribute B.</text>
+    <text x="25" y="134" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Violates 3NF! Causes update anomalies.</text>
+    <text x="25" y="149" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Eg: Roll → DeptCode, DeptCode → DeptHOD</text>
+
+    <rect x="15" y="170" width="260" height="105" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="190" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a855f7">Multivalued Dependency (MVD)</text>
+    <text x="25" y="208" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">X ↠ Y: One X maps to a set of Y values</text>
+    <text x="25" y="222" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">independently of other attributes.</text>
+    <text x="25" y="238" font-family="-apple-system, sans-serif" font-size="9" fill="#c084fc">Violates 4NF! Multiplicative cartesian tuples.</text>
+    <text x="25" y="254" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Eg: Course ↠ Book, Course ↠ Lecturer</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Formal Definition of FD, Determinant vs Dependent, Schema Constraints vs Instance Data, Trivial, Non-Trivial, Semi-Trivial, Full vs Partial FDs.</p>
+<p>---</p>
+<h2>1. Functional Dependency (FD) Core Concept & Philosophy</h2>
+<p>Database design mein Functional Dependency relation ke attributes ke beech ka ek <strong>semantic integrity constraint</strong> hota hai. Yeh decide karta hai ki ek table ke andar values kis tarah interrelated hain aur redundancy kahan paida ho rahi hai.</p>
+<h3>1.1 Formal Mathematical Definition</h3>
+<p>Ek relation schema $R(A_1, A_2, \dots, A_n)$ par, jisme $X \subseteq R$ aur $Y \subseteq R$ attributes ke sets hain:</p>
+<p>$$\mathbf{X </p>
+<p>ightarrow Y}$$</p>
+<p>Yeh Functional Dependency tabhi valid maani jaati hai jab relation $R$ ke kisi bhi valid legal instance mein:</p>
+<p>$$</p>
+<p>orall t_1, t_2 \in R, \quad 	ext{if } t_1[X] = t_2[X] \implies t_1[Y] = t_2[Y]$$</p>
+<li><strong>Bilingual Explanation:</strong> Agar do tuples (rows) $t_1$ aur $t_2$ ke paas attribute set $X$ ki value exactly same hai, toh unke attribute set $Y$ ki value bhi compulsory roop se <strong>same honi chahiye</strong>!</li>
+<li><strong>Determinant ($X$):</strong> Left-Hand Side (LHS) attribute jo decide karta hai.</li>
+<li><strong>Dependent ($Y$):</strong> Right-Hand Side (RHS) attribute jo decide hota hai.</li>
+<p><code></code>`</p>
+<p>+---------------+                      +---------------+</p>
+<table><thead><tr><th>LHS: X</th><th>───────────────────></th><th>RHS: Y</th></tr></thead><tbody>
+<tr><td>(Determinant)</td><td></td><td>(Dependent)</td></tr>
+</tbody></table>
+<p>+---------------+                      +---------------+</p>
+<p> Eg: Roll_No                            Eg: Student_Name, Branch</p>
+<p><code></code>`</p>
+<div class="callout-warn"><strong>Notice:</strong>
+<p style="color:#475569; margin: 4px 0;">**Schema Constraint vs Instance Property:**</p>
+<p style="color:#475569; margin: 4px 0;">Functional Dependency table ke current snapshot ya instance ko dekh kar final nahi ki ja sakti! Yeh **real-world business logic aur schema rules** par depend karti hai.</p>
+<p style="color:#475569; margin: 4px 0;">Instance me do alag students ka naam same ho sakta hai ya coincidence se kuch rows match kar sakti hain, par FD schema level rule hota hai jo har bhavishya (future) ke instance par bhi hold karna chahiye.</p>
+<p>---</p>
+<h2>2. Comprehensive Taxonomy of Functional Dependencies</h2>
+<p>Functional Dependencies ko unke attribute relationship aur mathematical properties ke basis par classify kiya jaata hai:</p>
+<h3>2.1 Trivial Functional Dependency</h3>
+<li><strong>Condition:</strong> $Y \subseteq X$ (RHS is a subset of LHS).</li>
+<li><strong>Explanation:</strong> Jab right side ka attribute already left side ke attribute set ka part ho.</li>
+<li><strong>Validity:</strong> Yeh har relation instance par <strong>hamesha true</strong> hoti hai, bina kisi data ko check kiye!</li>
+<li><strong>Examples:</strong></li>
+<p>  - $\{A, B\} </p>
+<p>ightarrow A$</p>
+<p>  - $\{Roll\_No, Name\} </p>
+<p>ightarrow Roll\_No$</p>
+<p>  - $A </p>
+<p>ightarrow A$</p>
+<h3>2.2 Non-Trivial Functional Dependency</h3>
+<li><strong>Condition:</strong> $X \cap Y = \emptyset$ (LHS and RHS have zero common attributes).</li>
+<li><strong>Explanation:</strong> Jab right side ka koi bhi attribute left side me present nahi hota.</li>
+<li><strong>Significance:</strong> Real-world database design me Non-Trivial FDs hi meaningful information aur constraints capture karti hain!</li>
+<li><strong>Examples:</strong></li>
+<p>  - $Roll\_No </p>
+<p>ightarrow Student\_Name$</p>
+<p>  - $Emp\_ID </p>
+<p>ightarrow Salary$</p>
+<p>  - $\{Dept\_ID, Project\_ID\} </p>
+<p>ightarrow Budget$</p>
+<h3>2.3 Semi-Non-Trivial (Semi-Trivial) FD</h3>
+<li><strong>Condition:</strong> $Y </li>
+<p>ot\subseteq X$ and $X \cap Y </p>
+<p>e \emptyset$.</p>
+<li><strong>Explanation:</strong> Jab RHS ka kuch part LHS me common ho, par RHS poori tarah LHS ka subset na ho.</li>
+<li><strong>Example:</strong></li>
+<p>  - $\{A, B\} </p>
+<p>ightarrow \{B, C\}$</p>
+<p>  - By Decomposition Rule: $\{A, B\} </p>
+<p>ightarrow B$ (Trivial) and $\{A, B\} </p>
+<p>ightarrow C$ (Non-Trivial).</p>
+<p>---</p>
+<h2>3. Full vs Partial Functional Dependencies (Gateway to 2NF)</h2>
+<p>Yeh distinction Normalization ke <strong>Second Normal Form (2NF)</strong> ka core pillar hai!</p>
+<table><thead><tr><th>Parameter</th><th>Full Functional Dependency</th><th>Partial Functional Dependency</th></tr></thead><tbody>
+<tr><td>**Formal Definition**</td></tr>
+</tbody></table>
+<p>ightarrow Y$ holds, and $</p>
+<p>orall X' \subset X$, $X' </p>
+<p>ot</p>
+<p>ightarrow Y$ | $\exists X' \subset X$ such that $X' </p>
+<p>ightarrow Y$ |</p>
+<table><thead><tr><th>**Simple Meaning**</th><th>$Y$ poore composite key par depend karta hai, kisi akele tukde par nahi.</th><th>$Y$ composite key ke kisi ek chote hisse (proper subset) par depend kar jata hai.</th></tr></thead><tbody>
+<tr><td>**Candidate Key Type**</td><td>Composite Candidate Key required</td><td>Composite Candidate Key required</td></tr>
+<tr><td>**Impact on Database**</td><td>Normalization ke liye desirable (2NF satisfied)</td><td>Redundancy paida karta hai (**Violates 2NF!**)</td></tr>
+<tr><td>**Real Example**</td></tr>
+</tbody></table>
+<p>ightarrow Hours\_Worked$ | $\{Emp\_ID, Project\_ID\} </p>
+<p>ightarrow Emp\_Name$ ($Emp\_ID </p>
+<p>ightarrow Emp\_Name$) |</p>
+<p>---</p>
+<h2>4. Transitive Functional Dependency (Gateway to 3NF)</h2>
+<li><strong>Definition:</strong> Jab ek non-key attribute kisi doosre non-key attribute par functionally depend karta hai through an indirect chain:</li>
+<p>  $$X </p>
+<p>ightarrow Y \quad 	ext{and} \quad Y </p>
+<p>ightarrow Z \implies X </p>
+<p>ightarrow Z$$</p>
+<p>  Where $X$ is candidate key, but $Y$ is NOT a super key and $Z$ is a non-prime attribute.</p>
+<li><strong>Real-World Pitfall:</strong></li>
+<p>  - $Roll\_No </p>
+<p>ightarrow Department\_Code$</p>
+<p>  - $Department\_Code </p>
+<p>ightarrow Department\_Head$</p>
+<p>  - Yahan $Roll\_No </p>
+<p>ightarrow Department\_Head$ indirectly transitive hai. Agar department head change hoga, toh har student ki row me update karna padega (Update Anomaly).</p>
+<p>  - Yeh dependency <strong>Third Normal Form (3NF)</strong> ko violate karti hai!</p>
+<p>---</p>
+<h2>5. Architectural Diagram</h2>
+<p>---</p>
+<h2>6. Summary Comparison Table for Quick Revision</h2>
+<table><thead><tr><th>FD Type</th><th>Mathematical Form</th><th>Always Valid?</th><th>Violates Normal Form?</th><th>Real-Life Example</th></tr></thead><tbody>
+<tr><td>**Trivial**</td><td>$Y \subseteq X$</td><td>Yes (Trivially)</td><td>None</td></tr>
+</tbody></table>
+<p>ightarrow A$ |</p>
+<table><thead><tr><th>**Non-Trivial**</th><th>$X \cap Y = \emptyset$</th><th>Depends on schema</th><th>Core constraint</th></tr></thead><tbody>
+</tbody></table>
+<p>ightarrow Emp\_Salary$ |</p>
+<table><thead><tr><th>**Semi-Trivial**</th></tr></thead><tbody>
+</tbody></table>
+<p>ot\subseteq X \land X \cap Y </p>
+<p>e \emptyset$ | Depends on schema | Can be decomposed | $\{A, B\} </p>
+<p>ightarrow \{B, C\}$ |</p>
+<table><thead><tr><th>**Partial**</th></tr></thead><tbody>
+</tbody></table>
+<p>ightarrow 	ext{Non-Prime}$ | Depends on schema | <strong>Violates 2NF</strong> | $Emp\_ID </p>
+<p>ightarrow Emp\_Name$ in Project allocation |</p>
+<table><thead><tr><th>**Transitive**</th></tr></thead><tbody>
+</tbody></table>
+<p>ightarrow X </p>
+<p>ightarrow Y$ | Depends on schema | <strong>Violates 3NF</strong> | $Student </p>
+<p>ightarrow Dept </p>
+<p>ightarrow HOD$ |</p>
+<table><thead><tr><th>**Multivalued**</th><th>$X 	woheadrightarrow Y$</th><th>Independent multi-facts</th><th>**Violates 4NF**</th><th>$Course 	woheadrightarrow Books$</th></tr></thead><tbody>
+</tbody></table>
+</body></html>

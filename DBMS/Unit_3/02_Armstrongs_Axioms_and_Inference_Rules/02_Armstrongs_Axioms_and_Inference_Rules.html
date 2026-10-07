@@ -1,0 +1,249 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 02: Armstrong's Axioms & Inference Rules</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 02: Armstrong's Axioms & Inference Rules</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg02)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Armstrong&apos;s Axioms &amp; Inference Rules Tree</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Sound &amp; Complete Axiomatic System for Functional Dependency Closure Generation (F⁺)</text>
+
+  <!-- TOP GUARANTEES PANEL -->
+  <g transform="translate(40, 80)">
+    <rect width="920" height="65" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">Two Foundational Guarantees of Armstrong&apos;s Axioms:</text>
+    <text x="25" y="48" font-family="-apple-system, sans-serif" font-size="11" fill="#cbd5e1">1. Soundness: Every derived FD is guaranteed to be logically true and valid in every legal database instance.</text>
+    <text x="500" y="48" font-family="-apple-system, sans-serif" font-size="11" fill="#cbd5e1">2. Completeness: Repeated application generates ALL logically implied FDs (Closure F⁺).</text>
+  </g>
+
+  <!-- LEFT: PRIMARY AXIOMS (CORE) -->
+  <g transform="translate(40, 160)">
+    <rect width="445" height="325" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="222" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">Primary Axioms (Core Inference Rules)</text>
+    <text x="222" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Self-evident, mathematically irreducible</text>
+
+    <!-- Axiom 1: Reflexivity -->
+    <rect x="20" y="65" width="405" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#a7f3d0">1. Reflexivity Rule (Subset Property)</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="10.5" fill="#cbd5e1">If Y ⊆ X,  then  X → Y</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Example: {RollNo, Name} → RollNo  and  {RollNo, Name} → Name</text>
+
+    <!-- Axiom 2: Augmentation -->
+    <rect x="20" y="145" width="405" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="167" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#a7f3d0">2. Augmentation Rule (Additive Property)</text>
+    <text x="35" y="185" font-family="-apple-system, sans-serif" font-size="10.5" fill="#cbd5e1">If X → Y,  then  XZ → YZ  (for any attribute set Z)</text>
+    <text x="35" y="204" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Example: If RollNo → Name, then {RollNo, Sub} → {Name, Sub}</text>
+
+    <!-- Axiom 3: Transitivity -->
+    <rect x="20" y="230" width="405" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="252" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#a7f3d0">3. Transitivity Rule (Chaining Property)</text>
+    <text x="35" y="270" font-family="-apple-system, sans-serif" font-size="10.5" fill="#cbd5e1">If X → Y  and  Y → Z,  then  X → Z</text>
+    <text x="35" y="289" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Example: If RollNo → DeptCode and DeptCode → DeptName, then RollNo → DeptName</text>
+  </g>
+
+  <!-- RIGHT: SECONDARY / DERIVED RULES -->
+  <g transform="translate(515, 160)">
+    <rect width="445" height="325" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.6"/>
+    <text x="222" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">Secondary Rules (Derived from Core Axioms)</text>
+    <text x="222" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Proven via combinations of Primary Axioms</text>
+
+    <!-- Derived 1: Union -->
+    <rect x="20" y="65" width="405" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="85" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">4. Union / Additive Rule</text>
+    <text x="35" y="103" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">If X → Y and X → Z, then X → YZ   [Proof: X → XY, XY → YZ ∴ X → YZ]</text>
+
+    <!-- Derived 2: Decomposition -->
+    <rect x="20" y="130" width="405" height="62" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="150" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">5. Decomposition / Projective Rule</text>
+    <text x="35" y="168" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">If X → YZ, then X → Y and X → Z   (Note: RHS splits, NEVER split LHS!)</text>
+
+    <!-- Derived 3: Pseudo-transitivity -->
+    <rect x="20" y="200" width="405" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="220" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">6. Pseudo-Transitivity Rule</text>
+    <text x="35" y="238" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">If X → Y and WY → Z, then WX → Z   [Proof: WX → WY, WY → Z ∴ WX → Z]</text>
+
+    <!-- Derived 4: Composition -->
+    <rect x="20" y="265" width="405" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="285" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">7. Composition Rule</text>
+    <text x="35" y="301" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">If X → Y and A → B, then XA → YB</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Axiomatic System for FDs, Primary Axioms (Reflexivity, Augmentation, Transitivity), Derived Secondary Rules, Soundness and Completeness Proofs, Exam Traps.</p>
+<p>---</p>
+<h2>1. Why Do We Need Inference Rules?</h2>
+<p>Given a set of functional dependencies $F$ on relation schema $R$, bahut si aisi dependencies hoti hain jo direct $F$ me written nahi hoti, lekin wo logically hold karti hain.</p>
+<li>Un sabhi logically implied dependencies ke poore collection ko <strong>Closure of Functional Dependencies</strong> ($F^+$) kehte hain.</li>
+<li>William W. Armstrong ne 1974 me formal inference rules ka ek set propose kiya jisse bina actual data check kiye, purely algebraic method se saari valid dependencies derive ki ja sakein.</li>
+<p>---</p>
+<h2>2. Primary Axioms (Armstrong's Core Axioms)</h2>
+<p>Yeh teen basic axioms irreducible hain aur baaki saare rules inhi ke basis par prove hote hain:</p>
+<h3>2.1 Reflexivity Rule (Subset Axiom)</h3>
+<li><strong>Statement:</strong> Agar $Y \subseteq X$, toh $X </li>
+<p>ightarrow Y$ hamesha valid hai.</p>
+<li><strong>Hindi:</strong> Agar right-hand side attribute left-hand side ka hissa hai, toh dependency trivially hold karegi.</li>
+<li><strong>Example:</strong> $\{Roll\_No, Name\} </li>
+<p>ightarrow Roll\_No$.</p>
+<h3>2.2 Augmentation Rule (Additive Axiom)</h3>
+<li><strong>Statement:</strong> Agar $X </li>
+<p>ightarrow Y$, toh kisi bhi attribute set $Z$ ke liye $XZ </p>
+<p>ightarrow YZ$ valid hoga.</p>
+<li><strong>Hindi:</strong> Dono taraf agar same attributes jod diye jayein, toh dependency intact rehti hai.</li>
+<li><strong>Example:</strong> Agar $Roll\_No </li>
+<p>ightarrow Name$, toh $\{Roll\_No, Semester\} </p>
+<p>ightarrow \{Name, Semester\}$.</p>
+<h3>2.3 Transitivity Rule (Chaining Axiom)</h3>
+<li><strong>Statement:</strong> Agar $X </li>
+<p>ightarrow Y$ aur $Y </p>
+<p>ightarrow Z$, toh $X </p>
+<p>ightarrow Z$ valid hoga.</p>
+<li><strong>Hindi:</strong> Dependency chain banakar aage propagate hoti hai.</li>
+<li><strong>Example:</strong> $Roll\_No </li>
+<p>ightarrow Dept\_ID$ aur $Dept\_ID </p>
+<p>ightarrow Dept\_Name \implies Roll\_No </p>
+<p>ightarrow Dept\_Name$.</p>
+<p>---</p>
+<h2>3. Secondary / Derived Inference Rules (With Formal Proofs)</h2>
+<p>Primary axioms ko use karke hum practical calculations ke liye ye secondary rules derive karte hain:</p>
+<h3>3.1 Union / Additive Rule</h3>
+<li><strong>Statement:</strong> Agar $X </li>
+<p>ightarrow Y$ aur $X </p>
+<p>ightarrow Z$, toh $X </p>
+<p>ightarrow YZ$.</p>
+<li><strong>Formal Proof:</strong></li>
+<p>  1. $X </p>
+<p>ightarrow Y$ (Given)</p>
+<p>  2. $X </p>
+<p>ightarrow XX$ (Reflexivity) $\implies$ Augmenting step 1 by $X$: $X </p>
+<p>ightarrow XY$.</p>
+<p>  3. $X </p>
+<p>ightarrow Z$ (Given) $\implies$ Augmenting by $Y$: $XY </p>
+<p>ightarrow YZ$.</p>
+<p>  4. By Transitivity ($X </p>
+<p>ightarrow XY$ and $XY </p>
+<p>ightarrow YZ$): **$X </p>
+<p>ightarrow YZ$**. (Q.E.D.)</p>
+<h3>3.2 Decomposition / Projective Rule</h3>
+<li><strong>Statement:</strong> Agar $X </li>
+<p>ightarrow YZ$, toh $X </p>
+<p>ightarrow Y$ aur $X </p>
+<p>ightarrow Z$.</p>
+<li><strong>Formal Proof:</strong></li>
+<p>  1. $YZ </p>
+<p>ightarrow Y$ (Reflexivity, because $Y \subseteq YZ$).</p>
+<p>  2. $X </p>
+<p>ightarrow YZ$ (Given).</p>
+<p>  3. By Transitivity: **$X </p>
+<p>ightarrow Y$**.</p>
+<p>  4. Similarly, $YZ </p>
+<p>ightarrow Z$ (Reflexivity) $\implies$ By Transitivity: **$X </p>
+<p>ightarrow Z$**. (Q.E.D.)</p>
+<div class="callout-warn"><strong>Notice:</strong>
+<p style="color:#475569; margin: 4px 0;">**CRITICAL AKTU EXAM TRAP:**</p>
+<p style="color:#475569; margin: 4px 0;">Right-Hand Side (RHS) attributes ko decompose kiya ja sakta hai ($X</p>
+<p>ightarrow YZ \implies X </p>
+<p>ightarrow Y, X </p>
+<p>ightarrow Z$).</p>
+<p style="color:#475569; margin: 4px 0;">Par **Left-Hand Side (LHS) ko KABHI decompose nahi kiya ja sakta!**</p>
+<p style="color:#475569; margin: 4px 0;">$$XY</p>
+<p>ightarrow Z \quad \mathbf{</p>
+<p>ot\implies} \quad X </p>
+<p>ightarrow Z 	ext{ or } Y </p>
+<p>ightarrow Z$$</p>
+<p style="color:#475569; margin: 4px 0;">Example: $\{Date\_of\_Birth, Mother\_Name\}</p>
+<p>ightarrow Person$, lekin akele $Date\_of\_Birth </p>
+<p>ot</p>
+<p>ightarrow Person$!</p>
+<h3>3.3 Pseudo-Transitivity Rule</h3>
+<li><strong>Statement:</strong> Agar $X </li>
+<p>ightarrow Y$ aur $WY </p>
+<p>ightarrow Z$, toh $WX </p>
+<p>ightarrow Z$.</p>
+<li><strong>Formal Proof:</strong></li>
+<p>  1. $X </p>
+<p>ightarrow Y$ (Given) $\implies$ Augment by $W$: $WX </p>
+<p>ightarrow WY$.</p>
+<p>  2. $WY </p>
+<p>ightarrow Z$ (Given).</p>
+<p>  3. By Transitivity ($WX </p>
+<p>ightarrow WY$ and $WY </p>
+<p>ightarrow Z$): **$WX </p>
+<p>ightarrow Z$**. (Q.E.D.)</p>
+<h3>3.4 Composition Rule</h3>
+<li><strong>Statement:</strong> Agar $X </li>
+<p>ightarrow Y$ aur $A </p>
+<p>ightarrow B$, toh $XA </p>
+<p>ightarrow YB$.</p>
+<li><strong>Formal Proof:</strong></li>
+<p>  1. $X </p>
+<p>ightarrow Y \implies XA </p>
+<p>ightarrow YA$ (Augment by $A$).</p>
+<p>  2. $A </p>
+<p>ightarrow B \implies YA </p>
+<p>ightarrow YB$ (Augment by $Y$).</p>
+<p>  3. By Transitivity: **$XA </p>
+<p>ightarrow YB$**.</p>
+<p>---</p>
+<h2>4. Soundness and Completeness (Theoretical Guarantees)</h2>
+<p>Armstrong's Axiom system computer science ke sabse robust axiomatic frameworks me se ek hai kyunki yeh do essential properties satisfy karta hai:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Soundness (Sabhi derived FDs sahi hain):</strong></p>
+<p>   - Agar koi FD $X </p>
+<p>ightarrow Y$ Armstrong axioms se derive hoti hai, toh wo relation $R$ ke har legal instance me 100% physically valid hogi. Koi bhi wrong/false dependency derive nahi ho sakti!</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Completeness (Koi bhi valid FD chootegi nahi):</strong></p>
+<p>   - Agar koi FD $X </p>
+<p>ightarrow Y$ relation schema ke rules ke hisaab se logically imply hoti hai, toh wo Armstrong axioms ke finite steps se zaroor derive ho sakti hai. Iska matlab closure $F^+$ poori tarah calculate ho sakta hai!</p>
+<p>---</p>
+<h2>5. Architectural Diagram</h2>
+<p>---</p>
+<h2>6. Solved AKTU Practice Derivation</h2>
+<p><strong>Problem:</strong> Given $F = \{A </p>
+<p>ightarrow B, B </p>
+<p>ightarrow C, CD </p>
+<p>ightarrow E\}$. Prove that $AD </p>
+<p>ightarrow E$ holds using Armstrong's Axioms.</p>
+<p><strong>Solution Step-by-Step:</strong></p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> $A </p>
+<p>ightarrow B$ (Given)</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> $B </p>
+<p>ightarrow C$ (Given)</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> From (1) and (2), by <strong>Transitivity Rule</strong>: $A </p>
+<p>ightarrow C$.</p>
+<p>4. Take $A </p>
+<p>ightarrow C$ and augment both sides with attribute $D$ (<strong>Augmentation Rule</strong>):  </p>
+<p>   $$AD </p>
+<p>ightarrow CD$$</p>
+<p>5. Given $CD </p>
+<p>ightarrow E$.</p>
+<p>6. From step 4 ($AD </p>
+<p>ightarrow CD$) and step 5 ($CD </p>
+<p>ightarrow E$), by <strong>Transitivity Rule</strong>:  </p>
+<p>   $$\mathbf{AD </p>
+<p>ightarrow E}$$</p>
+<p>Hence Proved!</p>
+</body></html>

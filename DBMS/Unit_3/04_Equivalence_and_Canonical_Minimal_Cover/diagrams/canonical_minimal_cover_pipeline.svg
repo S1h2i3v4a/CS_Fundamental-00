@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr04" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg04)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">FD Equivalence &amp; Canonical Minimal Cover Pipeline</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Testing F ≡ G via Mutual Closure &amp; 3-Phase Canonical Cover Reduction (Fc)</text>
+
+  <!-- LEFT: EQUIVALENCE OF FD SETS -->
+  <g transform="translate(35, 80)">
+    <rect width="445" height="410" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.6"/>
+    <text x="222" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. Equivalence of FD Sets (F ≡ G)</text>
+    <text x="222" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Formal Condition: F⁺ = G⁺  (Both cover each other)</text>
+
+    <!-- Condition 1 -->
+    <rect x="20" y="65" width="405" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#38bdf8">Condition 1: Check F ⊆ G⁺  (G covers F)</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">For every functional dependency X → Y in set F:</text>
+    <text x="50" y="123" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">Compute X⁺ using ONLY dependencies in G.</text>
+    <text x="50" y="140" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Verify that  Y ⊆ X⁺_G. If all satisfy, G covers F.</text>
+
+    <!-- Condition 2 -->
+    <rect x="20" y="170" width="405" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="192" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#38bdf8">Condition 2: Check G ⊆ F⁺  (F covers G)</text>
+    <text x="35" y="210" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">For every functional dependency A → B in set G:</text>
+    <text x="50" y="228" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">Compute A⁺ using ONLY dependencies in F.</text>
+    <text x="50" y="245" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Verify that  B ⊆ A⁺_F. If all satisfy, F covers G.</text>
+
+    <!-- Verdict -->
+    <rect x="20" y="275" width="405" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="297" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#a7f3d0">Equivalence Verdict Matrix</text>
+    <text x="35" y="318" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If BOTH conditions true  ⇒  F ≡ G (Strictly Equivalent).</text>
+    <text x="35" y="336" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If F ⊆ G⁺ but G ⊈ F⁺   ⇒  G is strictly stronger than F.</text>
+    <text x="35" y="354" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If G ⊆ F⁺ but F ⊈ G⁺   ⇒  F is strictly stronger than G.</text>
+    <text x="35" y="372" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">• If neither holds         ⇒  F and G are non-comparable.</text>
+  </g>
+
+  <!-- RIGHT: CANONICAL MINIMAL COVER ALGORITHM -->
+  <g transform="translate(515, 80)">
+    <rect width="450" height="410" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. 3-Phase Canonical Minimal Cover (Fc)</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Produces unique, streamlined, non-redundant FD set</text>
+
+    <!-- Phase 1 -->
+    <rect x="20" y="65" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">Phase 1: Singleton RHS Decomposition</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">Break all compound RHS into single attributes:</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">X → {A, B, C}  becomes  X → A,  X → B,  X → C</text>
+
+    <!-- Phase 2 -->
+    <rect x="20" y="150" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="172" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">Phase 2: Eliminate Extraneous LHS Attributes</text>
+    <text x="35" y="190" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">For any compound LHS (eg: AB → C), check if A or B is useless:</text>
+    <text x="35" y="208" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Check (A)⁺ without B. If C ∈ A⁺, then B is extraneous! Drop B!</text>
+    <text x="35" y="225" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Dependency simplifies from AB → C to A → C.</text>
+
+    <!-- Phase 3 -->
+    <rect x="20" y="255" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="277" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">Phase 3: Eliminate Redundant Dependencies</text>
+    <text x="35" y="295" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">For each FD X → Y in current set:</text>
+    <text x="35" y="313" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Temporarily remove X → Y. Compute X⁺ with remaining set.</text>
+    <text x="35" y="330" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">If Y ∈ X⁺_remaining, then X → Y was redundant! Permanently drop it!</text>
+
+    <!-- Output badge -->
+    <rect x="20" y="360" width="410" height="35" rx="6" fill="#064e3b" stroke="#059669"/>
+    <text x="225" y="382" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Output: Irreducible Canonical Minimal Cover Fc</text>
+  </g>
+</svg>

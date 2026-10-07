@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg09)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Relational Decomposition Properties</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">The Two Non-Negotiable Pillars: Lossless Join Property &amp; Dependency Preservation</text>
+
+  <!-- LEFT: LOSSLESS JOIN (NON-ADDITIVE) -->
+  <g transform="translate(35, 80)">
+    <rect width="445" height="410" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="222" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">1. Lossless Join Decomposition (Non-Additive)</text>
+    <text x="222" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Mandatory Condition: R = R1 ⋈ R2 (Zero Spurious Tuples)</text>
+
+    <!-- Definition -->
+    <rect x="20" y="65" width="405" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Mathematical Criteria for Binary Split:</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">A decomposition of R into R1 and R2 is Lossless iff:</text>
+    <text x="50" y="125" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">(R1 ∩ R2) → R1   OR   (R1 ∩ R2) → R2</text>
+
+    <!-- Meaning -->
+    <rect x="20" y="150" width="405" height="110" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="172" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Intuition &amp; Key Meaning:</text>
+    <text x="35" y="190" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">The common attribute set (R1 ∩ R2) MUST be a</text>
+    <text x="35" y="206" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#38bdf8">SUPER KEY in at least one of the decomposed schemas!</text>
+    <text x="35" y="225" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">If this condition fails, joining R1 ⋈ R2 produces extra</text>
+    <text x="35" y="240" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">fake, bogus records called &quot;Spurious Tuples&quot;!</text>
+
+    <!-- Guarantee badge -->
+    <rect x="20" y="270" width="405" height="120" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="292" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">Lossless Guarantees by Normal Form:</text>
+    <text x="35" y="312" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• 2NF Decomposition: Always Lossless (✓)</text>
+    <text x="35" y="330" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• 3NF Decomposition: Always Lossless (✓)</text>
+    <text x="35" y="348" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• BCNF Decomposition: Always Lossless (✓)</text>
+    <text x="35" y="368" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">• 4NF &amp; 5NF: Always Lossless (✓)</text>
+  </g>
+
+  <!-- RIGHT: DEPENDENCY PRESERVATION -->
+  <g transform="translate(515, 80)">
+    <rect width="450" height="410" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">2. Dependency Preservation Property</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Condition: (F1 ∪ F2 ∪ ... ∪ Fk)⁺ = F⁺</text>
+
+    <!-- Definition -->
+    <rect x="20" y="65" width="410" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#38bdf8">Formal Criteria:</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">For each decomposed relation Ri, project dependencies:</text>
+    <text x="50" y="122" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">Fi = π_Ri(F) = { X → Y ∈ F⁺ | XY ⊆ Ri }</text>
+    <text x="35" y="138" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Preservation holds if the union of all Fi implies every FD in original F.</text>
+
+    <!-- Real-World Purpose -->
+    <rect x="20" y="160" width="410" height="100" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="182" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Operational Benefit in Industry DBMS:</text>
+    <text x="35" y="200" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Integrity constraints can be validated on individual</text>
+    <text x="35" y="216" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">tables upon INSERT / UPDATE without executing heavy</text>
+    <text x="35" y="232" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">and expensive cross-table JOIN operations!</text>
+
+    <!-- Normal form comparison -->
+    <rect x="20" y="270" width="410" height="120" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="292" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Preservation Status by Normal Form:</text>
+    <text x="35" y="312" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">• 3NF Decomposition: ALWAYS Preserved (✓ guaranteed!)</text>
+    <text x="35" y="332" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">• BCNF Decomposition: NOT always preserved (✕)</text>
+    <text x="35" y="352" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">  Some FDs may span across multiple tables in BCNF.</text>
+    <text x="35" y="372" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">  Trade-off: Pick 3NF for preservation, BCNF for zero redundancy.</text>
+  </g>
+</svg>

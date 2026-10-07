@@ -1,0 +1,229 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 12: AKTU PYQs & Solved Decompositions</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 12: AKTU PYQs & Solved Decompositions</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg12)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">AKTU Exam Normalization Decision Tree</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Step-by-Step Numerical Solving Pipeline for 10-Mark AKTU Semester Questions</text>
+
+  <!-- STEP 1 -->
+  <g transform="translate(40, 90)">
+    <rect width="210" height="90" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="105" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#38bdf8">Step 1: Candidate Keys</text>
+    <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Partition LHS/RHS.</text>
+    <text x="15" y="66" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Compute closures X⁺.</text>
+    <text x="15" y="82" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">Identify Prime &amp; Non-Prime</text>
+  </g>
+
+  <!-- ARROW 1 -->
+  <line x1="250" y1="135" x2="275" y2="135" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr12)"/>
+
+  <!-- STEP 2 -->
+  <g transform="translate(280, 90)">
+    <rect width="210" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="105" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#34d399">Step 2: Check 2NF</text>
+    <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Look for Partial FDs:</text>
+    <text x="15" y="66" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">  Proper subset CK → Non-Prime?</text>
+    <text x="15" y="82" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If YES → FAILS 2NF. Decompose!</text>
+  </g>
+
+  <!-- ARROW 2 -->
+  <line x1="490" y1="135" x2="515" y2="135" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr12)"/>
+
+  <!-- STEP 3 -->
+  <g transform="translate(520, 90)">
+    <rect width="210" height="90" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.6"/>
+    <text x="105" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#fbbf24">Step 3: Check 3NF</text>
+    <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• For each non-trivial X → Y:</text>
+    <text x="15" y="66" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">  Is X a Super Key?</text>
+    <text x="15" y="82" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">  OR is Y a Prime Attribute?</text>
+  </g>
+
+  <!-- ARROW 3 -->
+  <line x1="730" y1="135" x2="755" y2="135" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr12)"/>
+
+  <!-- STEP 4 -->
+  <g transform="translate(760, 90)">
+    <rect width="200" height="90" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="1.6"/>
+    <text x="100" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#c084fc">Step 4: Check BCNF</text>
+    <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• For every X → Y:</text>
+    <text x="15" y="66" font-family="-apple-system, sans-serif" font-size="9" fill="#f43f5e">  Is X strictly a Super Key?</text>
+    <text x="15" y="82" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Zero prime exceptions!</text>
+  </g>
+
+  <!-- BOTTOM: VERIFICATION & DECOMPOSITION STRATEGY -->
+  <g transform="translate(40, 210)">
+    <rect width="920" height="280" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="460" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#38bdf8">Final Step: Lossless Join &amp; Dependency Preservation Audit</text>
+
+    <!-- Box 1 -->
+    <rect x="20" y="50" width="430" height="100" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="72" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#34d399">Decomposition into 3NF (Lossless + Preserving)</text>
+    <text x="35" y="92" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Compute Canonical Cover Fc.</text>
+    <text x="35" y="108" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Ri = X ∪ Y for each X → Y ∈ Fc.</text>
+    <text x="35" y="124" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">3. Add candidate key relation if not present.</text>
+    <text x="35" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">✓ Guarantees BOTH Lossless Join AND Dependency Preservation!</text>
+
+    <!-- Box 2 -->
+    <rect x="470" y="50" width="430" height="100" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="485" y="72" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#c084fc">Decomposition into BCNF (Lossless Guaranteed)</text>
+    <text x="485" y="92" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Find dependency X → Y violating BCNF (X not Super Key).</text>
+    <text x="485" y="108" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Decompose R into R1(X ∪ Y) and R2(R - Y).</text>
+    <text x="485" y="124" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">3. Repeat recursively for sub-relations not in BCNF.</text>
+    <text x="485" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">⚠ Check if any FD was lost! Document trade-off.</text>
+
+    <!-- Box 3 -->
+    <rect x="20" y="165" width="880" height="100" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="188" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fbbf24">AKTU High-Scoring Examination Presentation Checklist</text>
+    <text x="35" y="208" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Explicitly list Candidate Keys with step-by-step closures.</text>
+    <text x="35" y="224" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. List Prime vs Non-Prime attributes in clear bullet points.</text>
+    <text x="35" y="240" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">3. Write each FD and state test outcome: &quot;Holds 2NF because... Holds 3NF because...&quot;</text>
+    <text x="35" y="256" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">4. Draw final schema diagram with primary keys underlined.</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Previous Years Exam Questions (2019-2024), 7-Mark & 10-Mark Numerical Solutions, Finding Candidate Keys, Determining Highest Normal Form, Lossless 3NF/BCNF Decomposition.</p>
+<p>---</p>
+<h2>1. AKTU PYQ 1 (10 Marks — 2022-23 End-Sem)</h2>
+<p><strong>Question:</strong>  </p>
+<p>Given a relation $R(A, B, C, D, E, F)$ with the following set of functional dependencies:</p>
+<p>$$F = \{ A </p>
+<p>ightarrow B, \quad C </p>
+<p>ightarrow DE, \quad AC </p>
+<p>ightarrow F \}$$</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Find all Candidate Keys of $R$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Identify Prime and Non-Prime attributes.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> Determine the highest normal form of $R$.</p>
+<p>4. Decompose the relation into 3NF ensuring Lossless Join and Dependency Preservation.</p>
+<h3>Solution:</h3>
+<p>#### Step 1: Candidate Keys</p>
+<li>Attributes on RHS: $\{B, D, E, F\}$.</li>
+<li>Attributes <strong>NEVER on RHS</strong>: $\{A, C\}$.</li>
+<li>Essential attribute set = $\{AC\}$.</li>
+<li>Compute closure of $\{AC\}$:</li>
+<p>  - $(AC)^+ = \{A, C\}$</p>
+<p>  - Using $A </p>
+<p>ightarrow B \implies \{A, C, B\}$</p>
+<p>  - Using $C </p>
+<p>ightarrow DE \implies \{A, C, B, D, E\}$</p>
+<p>  - Using $AC </p>
+<p>ightarrow F \implies \{A, B, C, D, E, F\} = R$.</p>
+<li>Since $(AC)^+ = R$ and no proper subset of $\{AC\}$ can determine $R$, <strong>$\{AC\}$ is the ONLY Candidate Key</strong>.</li>
+<p>#### Step 2: Attribute Classification</p>
+<li><strong>Prime Attributes:</strong> $\{A, C\}$</li>
+<li><strong>Non-Prime Attributes:</strong> $\{B, D, E, F\}$</li>
+<p>#### Step 3: Highest Normal Form Test</p>
+<p>Let us test each FD in $F$:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> $A </p>
+<p>ightarrow B$:</p>
+<p>   - Determinant $A$ is a proper subset of Candidate Key $\{AC\}$.</p>
+<p>   - Dependent $B$ is a <strong>Non-Prime Attribute</strong>.</p>
+<p>   - This is a <strong>Partial Dependency</strong>!</p>
+<p>   - <strong>Verdict:</strong> Violates 2NF!</p>
+<li><strong>Highest Normal Form = 1NF.</strong></li>
+<p>#### Step 4: Decomposition into 3NF (Using Bernstein Synthesis)</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Find Canonical Cover $F_c$:</strong></p>
+<p>   - $F = \{ A </p>
+<p>ightarrow B, C </p>
+<p>ightarrow D, C </p>
+<p>ightarrow E, AC </p>
+<p>ightarrow F \}$.</p>
+<p>   - Check extraneous attributes in $AC </p>
+<p>ightarrow F$:</p>
+<p>     - $A^+ = \{A, B\}$ (No $F$).</p>
+<p>     - $C^+ = \{C, D, E\}$ (No $F$).</p>
+<p>     - Neither is extraneous.</p>
+<p>   - Check redundant FDs: None.</p>
+<p>   - $F_c = \{ A </p>
+<p>ightarrow B, \quad C </p>
+<p>ightarrow D, \quad C </p>
+<p>ightarrow E, \quad AC </p>
+<p>ightarrow F \}$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Form Relations from $F_c$:</strong></p>
+<p>   - $R_1(\mathbf{A}, B)$ with Key = $A$ (from $A </p>
+<p>ightarrow B$).</p>
+<p>   - $R_2(\mathbf{C}, D, E)$ with Key = $C$ (from $C </p>
+<p>ightarrow D, C </p>
+<p>ightarrow E$).</p>
+<p>   - $R_3(\mathbf{A, C}, F)$ with Key = $\{AC\}$ (from $AC </p>
+<p>ightarrow F$).</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>Candidate Key Check:</strong></p>
+<p>   - $R_3$ already contains the candidate key $\{AC\}$!</p>
+<p>4. <strong>Final 3NF Relations:</strong></p>
+<p>   - $\mathbf{R_1(A, B)}$, $\mathbf{R_2(C, D, E)}$, $\mathbf{R_3(A, C, F)}$.</p>
+<p>   - <strong>Properties:</strong> Lossless Join ($\checkmark$) and Dependency Preservation ($\checkmark$).</p>
+<p>---</p>
+<h2>2. AKTU PYQ 2 (7 Marks — 2021-22 End-Sem)</h2>
+<p><strong>Question:</strong>  </p>
+<p>Relation $R(A, B, C, D)$ has $F = \{ AB </p>
+<p>ightarrow C, \quad C </p>
+<p>ightarrow D, \quad D </p>
+<p>ightarrow A \}$.  </p>
+<p>Is this relation in 3NF? Is it in BCNF? Justify your answer.</p>
+<h3>Solution:</h3>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Candidate Keys:</strong></p>
+<p>   - $(AB)^+ = \{A, B, C, D\} = R \implies \mathbf{AB}$ is CK.</p>
+<p>   - $(BC)^+ = \{B, C, D, A\} = R \implies \mathbf{BC}$ is CK.</p>
+<p>   - $(BD)^+ = \{B, D, A, C\} = R \implies \mathbf{BD}$ is CK.</p>
+<p>   - Prime Attributes = $\{A, B, C, D\}$. Non-Prime = $\emptyset$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> **Test 3NF Condition (For every $X </p>
+<p>ightarrow Y$: $X$ is Super Key OR $Y$ is Prime):**</p>
+<p>   - $AB </p>
+<p>ightarrow C$: $AB$ is Candidate Key (Super Key). $\checkmark$</p>
+<p>   - $C </p>
+<p>ightarrow D$: $C$ is not Super Key, but $D$ is <strong>Prime Attribute</strong> (in $BD$). $\checkmark$</p>
+<p>   - $D </p>
+<p>ightarrow A$: $D$ is not Super Key, but $A$ is <strong>Prime Attribute</strong> (in $AB$). $\checkmark$</p>
+<p>   - <strong>Relation IS in 3NF!</strong></p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> **Test BCNF Condition (For every $X </p>
+<p>ightarrow Y$: $X$ MUST be Super Key):**</p>
+<p>   - In $C </p>
+<p>ightarrow D$: Determinant $C$ is NOT a Super Key ($C^+ = \{A, C, D\} </p>
+<p>e R$).</p>
+<p>   - In $D </p>
+<p>ightarrow A$: Determinant $D$ is NOT a Super Key ($D^+ = \{A, D\} </p>
+<p>e R$).</p>
+<p>   - <strong>Relation FAILS BCNF!</strong></p>
+<p>4. <strong>Conclusion:</strong> Relation is in <strong>3NF but NOT in BCNF</strong>.</p>
+<p>---</p>
+<h2>3. AKTU PYQ 3 (10 Marks — 2020-21 End-Sem)</h2>
+<p><strong>Question:</strong>  </p>
+<p>Explain Lossless Join Decomposition and Dependency Preservation with suitable examples. State the necessary condition for a binary decomposition to be lossless.</p>
+<h3>Solution:</h3>
+<p>*(Complete formal definitions, the binary condition theorem $(R_1 \cap R_2) </p>
+<p>ightarrow R_1 \lor (R_1 \cap R_2) </p>
+<p>ightarrow R_2$, and tabular counter-example demonstrating spurious tuples as detailed in Module 09).*</p>
+<p>---</p>
+<h2>4. Architectural Diagram</h2>
+</body></html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 07: Third Normal Form (3NF)</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 07: Third Normal Form (3NF)</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg07)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Third Normal Form (3NF) &amp; Transitive Dependency</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Universal 3NF Condition: Super Key LHS or Prime Attribute RHS &amp; 3NF Synthesis</text>
+
+  <!-- FORMAL 3NF CONDITION BOX -->
+  <g transform="translate(35, 80)">
+    <rect width="930" height="105" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="30" y="30" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">The Golden Rule of Third Normal Form (3NF):</text>
+    <text x="30" y="52" font-family="-apple-system, sans-serif" font-size="11.5" fill="#cbd5e1">Relation R is in 3NF iff for every non-trivial functional dependency X → Y, at least ONE holds:</text>
+    <text x="50" y="72" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#34d399">Condition 1: X is a SUPER KEY of R  (X is Key Determinant)</text>
+    <text x="50" y="92" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fbbf24">OR Condition 2: Y is a PRIME ATTRIBUTE  (Y is part of some Candidate Key)</text>
+  </g>
+
+  <!-- TWO COLUMN ANALYSIS -->
+  <!-- Col 1: Transitive Dependency Breakdown -->
+  <g transform="translate(35, 200)">
+    <rect width="450" height="290" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#f87171">Transitive Dependency Hazard</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Chained Non-Key Determination: Key → X → Y</text>
+
+    <rect x="20" y="65" width="410" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fca5a5">Example: Student(Roll, DeptCode, DeptHOD)</text>
+    <text x="30" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Roll → DeptCode  and  DeptCode → DeptHOD</text>
+    <text x="30" y="122" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Neither DeptCode is Super Key NOR DeptHOD is Prime!</text>
+
+    <rect x="20" y="145" width="410" height="125" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="167" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">Why 3NF Prohibits This:</text>
+    <text x="30" y="187" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If HOD changes, multiple student rows must update.</text>
+    <text x="30" y="205" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If all students in a department leave, HOD info is lost!</text>
+    <text x="30" y="225" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">Decomposition fix: S1(Roll, DeptCode) &amp; S2(DeptCode, DeptHOD)</text>
+    <text x="30" y="245" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Lossless Join + Dependency Preservation guaranteed in 3NF!</text>
+  </g>
+
+  <!-- Col 2: 3NF Synthesis (Bernstein) Algorithm -->
+  <g transform="translate(515, 200)">
+    <rect width="450" height="290" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#34d399">3NF Synthesis Algorithm (Lossless + Preserving)</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Bernstein&apos;s Proven Polynomial Procedure</text>
+
+    <!-- Step 1 -->
+    <rect x="20" y="65" width="410" height="48" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="85" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Step 1: Compute Canonical Cover Fc</text>
+    <text x="30" y="101" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Simplify F into minimal canonical cover Fc.</text>
+
+    <!-- Step 2 -->
+    <rect x="20" y="120" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="139" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Step 2: Create Sub-Relations</text>
+    <text x="30" y="155" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">For each FD X → Y in Fc, make Ri = X ∪ Y.</text>
+
+    <!-- Step 3 -->
+    <rect x="20" y="177" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="196" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Step 3: Ensure Candidate Key Inclusion</text>
+    <text x="30" y="212" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If no Ri contains a Candidate Key of R, add R_key = CK.</text>
+
+    <!-- Step 4 -->
+    <rect x="20" y="234" width="410" height="45" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="252" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Step 4: Eliminate Subsumed Relations</text>
+    <text x="30" y="268" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">If Rj ⊆ Rk, discard Rj. Output final schema!</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Third Normal Form Criteria, Removal of Transitive Dependency, Universal 3NF Test Condition ($X$ is Super Key OR $Y$ is Prime Attribute), Bernstein's 3NF Synthesis Algorithm, Gateway Classes Solved Numericals.</p>
+<p>---</p>
+<h2>1. Third Normal Form (3NF) Formal Definition</h2>
+<p>Ek relation schema $R$ <strong>Third Normal Form (3NF)</strong> me tab hota hai jab:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Wo relation already <strong>2NF</strong> me ho.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Us relation me <strong>koi bhi Transitive Dependency na ho</strong>.</p>
+<h3>1.1 The Universal 3NF Test Condition (AKTU Standard)</h3>
+<p>Relation $R$ ke har non-trivial functional dependency $X </p>
+<p>ightarrow Y$ ke liye, neeche diye gaye do conditions me se <strong>kam se kam ek condition</strong> true honi chahiye:</p>
+<p>$$\mathbf{X </p>
+<p>ightarrow Y 	ext{ satisfies 3NF if:}}$$</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>$X$ is a Super Key of $R$</strong> (Determinant super key hai)  </p>
+<p>   $$\mathbf{OR}$$</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>$Y$ is a Prime Attribute</strong> ($Y$ kisi bhi candidate key ka hissa hai)</p>
+<p style="color:#475569; margin: 4px 0;">[!TIP]</p>
+<p style="color:#475569; margin: 4px 0;">Agar kisi FD me LHS Super Key nahi hai, lekin uska RHS Prime Attribute hai, toh wo dependency **3NF me fully ALLOWED hai**! Yeh 3NF ka sabse bada relaxer hai jo ise BCNF se alag banata hai!</p>
+<p>---</p>
+<h2>2. Transitive Dependency Hazard</h2>
+<li><strong>Transitive Dependency:</strong> Jab ek non-prime attribute kisi doosre non-prime attribute par depend karta hai through candidate key:</li>
+<p>  $$	ext{Key} </p>
+<p>ightarrow X \quad 	ext{and} \quad X </p>
+<p>ightarrow Y \implies 	ext{Key} </p>
+<p>ightarrow Y$$</p>
+<p>  (Where $X$ is not a super key and $Y$ is non-prime).</p>
+<li><strong>Practical Hazard:</strong> Redundancy, Update Anomaly, aur Deletion Anomaly paida hoti hai.</li>
+<p>---</p>
+<h2>3. Bernstein's 3NF Synthesis Algorithm</h2>
+<p>Yeh algorithm guarantee karta hai ki relation 3NF me decompose ho jaye aur saath hi <strong>Lossless Join</strong> aur <strong>Dependency Preservation</strong> dono properties 100% preserve rahein:</p>
+<p><code></code>`</p>
+<p>Algorithm: 3NF_Synthesis(R, F)</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Find Canonical Cover Fc of F.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> For each FD (X → Y) in Fc:</p>
+<p>       Create a new relation schema: Ri = X ∪ Y;</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> If none of the generated relations Ri contains a Candidate Key of R:</p>
+<p>       Create an additional relation R_key containing any candidate key of R;</p>
+<p>4. Eliminate redundant relations:</p>
+<p>       If Rj ⊆ Rk, remove Rj;</p>
+<p>5. Return the resulting set of relations.</p>
+<p><code></code>`</p>
+<p>---</p>
+<h2>4. Architectural Diagram</h2>
+<p>---</p>
+<h2>5. Gateway Classes Solved AKTU Examination Problem</h2>
+<p><strong>Problem:</strong> Given relation $R(A, B, C, D)$ with FD set:</p>
+<p>$$F = \{ AB </p>
+<p>ightarrow C, \quad C </p>
+<p>ightarrow D, \quad D </p>
+<p>ightarrow A \}$$</p>
+<p>Find all Candidate Keys, determine the highest Normal Form of $R$, and decompose into 3NF if not already in 3NF.</p>
+<h3>Step 1: Find Candidate Keys</h3>
+<li>Attributes on RHS: $\{A, C, D\}$.</li>
+<li>Attribute $B$ never appears on RHS $\implies B$ must be in every key!</li>
+<li>$(AB)^+ = \{A, B, C, D\} = R \implies \mathbf{AB}$ is a Candidate Key.</li>
+<li>$(BC)^+ = \{B, C, D, A\} = R \implies \mathbf{BC}$ is a Candidate Key (via $C </li>
+<p>ightarrow D </p>
+<p>ightarrow A$).</p>
+<li>$(BD)^+ = \{B, D, A, C\} = R \implies \mathbf{BD}$ is a Candidate Key (via $D </li>
+<p>ightarrow A$, then $AB </p>
+<p>ightarrow C$).</p>
+<li><strong>Candidate Keys:</strong> $\{AB, BC, BD\}$.</li>
+<li><strong>Prime Attributes:</strong> $\{A, B, C, D\}$ (All attributes are Prime!).</li>
+<li><strong>Non-Prime Attributes:</strong> $\emptyset$ (None!).</li>
+<h3>Step 2: Determine Highest Normal Form</h3>
+<p>Let us test each FD in $F$:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> $AB </p>
+<p>ightarrow C$:</p>
+<p>   - Is LHS $AB$ a Super Key? <strong>YES</strong> ($AB$ is a Candidate Key). $\implies$ Satisfies 3NF and BCNF.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> $C </p>
+<p>ightarrow D$:</p>
+<p>   - Is LHS $C$ a Super Key? <strong>NO</strong> ($C^+ = \{A, C, D\} </p>
+<p>e R$).</p>
+<p>   - Is RHS $D$ a Prime Attribute? <strong>YES</strong> ($D$ is part of Candidate Key $BD$). $\implies$ <strong>Satisfies 3NF!</strong></p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> $D </p>
+<p>ightarrow A$:</p>
+<p>   - Is LHS $D$ a Super Key? <strong>NO</strong> ($D^+ = \{A, D\} </p>
+<p>e R$).</p>
+<p>   - Is RHS $A$ a Prime Attribute? <strong>YES</strong> ($A$ is part of Candidate Key $AB$). $\implies$ <strong>Satisfies 3NF!</strong></p>
+<h3>Conclusion:</h3>
+<li>Relation $R$ is in <strong>3NF</strong> because for every FD where LHS is not a super key, RHS is a prime attribute!</li>
+<li>Relation $R$ is <strong>NOT in BCNF</strong> because in $C </li>
+<p>ightarrow D$ and $D </p>
+<p>ightarrow A$, the determinants $C$ and $D$ are not super keys!</p>
+<li><strong>Highest Normal Form = 3NF.</strong></li>
+</body></html>

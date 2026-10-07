@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg07)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Third Normal Form (3NF) &amp; Transitive Dependency</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Universal 3NF Condition: Super Key LHS or Prime Attribute RHS &amp; 3NF Synthesis</text>
+
+  <!-- FORMAL 3NF CONDITION BOX -->
+  <g transform="translate(35, 80)">
+    <rect width="930" height="105" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="30" y="30" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">The Golden Rule of Third Normal Form (3NF):</text>
+    <text x="30" y="52" font-family="-apple-system, sans-serif" font-size="11.5" fill="#cbd5e1">Relation R is in 3NF iff for every non-trivial functional dependency X → Y, at least ONE holds:</text>
+    <text x="50" y="72" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#34d399">Condition 1: X is a SUPER KEY of R  (X is Key Determinant)</text>
+    <text x="50" y="92" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fbbf24">OR Condition 2: Y is a PRIME ATTRIBUTE  (Y is part of some Candidate Key)</text>
+  </g>
+
+  <!-- TWO COLUMN ANALYSIS -->
+  <!-- Col 1: Transitive Dependency Breakdown -->
+  <g transform="translate(35, 200)">
+    <rect width="450" height="290" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#f87171">Transitive Dependency Hazard</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Chained Non-Key Determination: Key → X → Y</text>
+
+    <rect x="20" y="65" width="410" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fca5a5">Example: Student(Roll, DeptCode, DeptHOD)</text>
+    <text x="30" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Roll → DeptCode  and  DeptCode → DeptHOD</text>
+    <text x="30" y="122" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Neither DeptCode is Super Key NOR DeptHOD is Prime!</text>
+
+    <rect x="20" y="145" width="410" height="125" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="167" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">Why 3NF Prohibits This:</text>
+    <text x="30" y="187" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If HOD changes, multiple student rows must update.</text>
+    <text x="30" y="205" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If all students in a department leave, HOD info is lost!</text>
+    <text x="30" y="225" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">Decomposition fix: S1(Roll, DeptCode) &amp; S2(DeptCode, DeptHOD)</text>
+    <text x="30" y="245" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Lossless Join + Dependency Preservation guaranteed in 3NF!</text>
+  </g>
+
+  <!-- Col 2: 3NF Synthesis (Bernstein) Algorithm -->
+  <g transform="translate(515, 200)">
+    <rect width="450" height="290" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#34d399">3NF Synthesis Algorithm (Lossless + Preserving)</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Bernstein&apos;s Proven Polynomial Procedure</text>
+
+    <!-- Step 1 -->
+    <rect x="20" y="65" width="410" height="48" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="85" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Step 1: Compute Canonical Cover Fc</text>
+    <text x="30" y="101" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Simplify F into minimal canonical cover Fc.</text>
+
+    <!-- Step 2 -->
+    <rect x="20" y="120" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="139" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Step 2: Create Sub-Relations</text>
+    <text x="30" y="155" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">For each FD X → Y in Fc, make Ri = X ∪ Y.</text>
+
+    <!-- Step 3 -->
+    <rect x="20" y="177" width="410" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="196" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Step 3: Ensure Candidate Key Inclusion</text>
+    <text x="30" y="212" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If no Ri contains a Candidate Key of R, add R_key = CK.</text>
+
+    <!-- Step 4 -->
+    <rect x="20" y="234" width="410" height="45" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="252" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Step 4: Eliminate Subsumed Relations</text>
+    <text x="30" y="268" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">If Rj ⊆ Rk, discard Rj. Output final schema!</text>
+  </g>
+</svg>

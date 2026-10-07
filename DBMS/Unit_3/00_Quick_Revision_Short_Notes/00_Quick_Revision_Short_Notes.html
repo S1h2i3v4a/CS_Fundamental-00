@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DBMS Unit 3: Ultra Quick Revision Short Notes (Exact 3 Pages)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 7.6pt;
+    line-height: 1.28;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 7mm 8mm 6mm 8mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-bar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 4.5px 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .header-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 7pt;
+    color: #93c5fd;
+    font-weight: 500;
+  }
+  .page-tag {
+    background: #3b82f6;
+    color: #ffffff;
+    padding: 1.5px 6px;
+    border-radius: 3px;
+    font-size: 6.8pt;
+    font-weight: 700;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5.5px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+  }
+  .card {
+    border: 0.8px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 4.5px 6.5px;
+    background: #ffffff;
+    margin-bottom: 4.5px;
+  }
+  .card-header {
+    font-size: 7.9pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1.2px solid #e2e8f0;
+    padding-bottom: 1.5px;
+    margin-bottom: 3.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-header-accent {
+    color: #b91c1c;
+    border-bottom-color: #fecaca;
+  }
+  .card-header-green {
+    color: #047857;
+    border-bottom-color: #a7f3d0;
+  }
+  .badge {
+    font-size: 6.2pt;
+    padding: 1px 4px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 6.7pt;
+    margin: 2.5px 0;
+  }
+  th, td {
+    border: 0.6px solid #cbd5e1;
+    padding: 2px 4px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  tr:nth-child(even) { background-color: #f8fafc; }
+  ul {
+    margin: 1.5px 0 2.5px 12px;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 1.2px;
+  }
+  .formula-box {
+    background: #f8fafc;
+    border-left: 2.5px solid #2563eb;
+    padding: 2.5px 5.5px;
+    margin: 2.5px 0;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 6.9pt;
+    color: #0f172a;
+  }
+  .warn-box {
+    background: #fef2f2;
+    border-left: 2.5px solid #ef4444;
+    padding: 2.5px 5.5px;
+    margin: 2.5px 0;
+    font-size: 6.7pt;
+    color: #7f1d1d;
+  }
+  .success-box {
+    background: #ecfdf5;
+    border-left: 2.5px solid #10b981;
+    padding: 2.5px 5.5px;
+    margin: 2.5px 0;
+    font-size: 6.7pt;
+    color: #064e3b;
+  }
+  .footer-bar {
+    border-top: 0.8px solid #cbd5e1;
+    padding-top: 2.5px;
+    font-size: 6.2pt;
+    color: #64748b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  code {
+    font-family: Consolas, Monaco, monospace;
+    font-size: 6.8pt;
+    background: #f1f5f9;
+    padding: 0.5px 2.5px;
+    border-radius: 2px;
+    color: #0f172a;
+  }
+  strong { color: #0f172a; }
+</style>
+</head>
+<body>
+
+<!-- ======================================================== -->
+<!-- PAGE 1: FUNCTIONAL DEPENDENCIES, ARMSTRONG, CLOSURE & CK -->
+<!-- ======================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">DBMS Unit 3: Database Design &amp; Normalization</div>
+        <div class="header-sub">AKTU BCS501 | Gateway Classes Complete Revision Notes</div>
+      </div>
+      <div class="page-tag">Page 1 of 3: FDs &amp; Candidate Keys</div>
+    </div>
+
+    <!-- ROW 1: CORE FD & TAXONOMY -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>1. Functional Dependency (FD: X → Y)</span>
+          <span class="badge badge-blue">Schema Invariant</span>
+        </div>
+        <p><strong>Formal Rule:</strong> In relation <code>R</code>, <code>X → Y</code> holds iff ∀ tuples <code>t1, t2 ∈ R</code>:
+        <br><strong>If t1[X] = t2[X] ⇒ t1[Y] MUST equal t2[Y]</strong>.</p>
+        <div class="formula-box">Determinant: X (LHS) ──[Decides]──&gt; Dependent: Y (RHS)</div>
+        <ul>
+          <li><strong>Instance vs Schema:</strong> FD schema rule hota hai, data ke coincidence par depend nahi karta!</li>
+          <li><strong>Closure Property:</strong> Har relation instance me integrity enforce karta hai.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>2. FD Taxonomy &amp; Classification</span>
+          <span class="badge badge-green">Core Theory</span>
+        </div>
+        <table>
+          <tr><th>FD Type</th><th>Formal Condition</th><th>Example &amp; Meaning</th></tr>
+          <tr><td><strong>Trivial</strong></td><td>Y ⊆ X</td><td>{Roll, Name} → Roll (Always true)</td></tr>
+          <tr><td><strong>Non-Trivial</strong></td><td>X ∩ Y = ∅</td><td>Roll → Name (Real constraint)</td></tr>
+          <tr><td><strong>Semi-Trivial</strong></td><td>Y ⊄ X &amp; X ∩ Y ≠ ∅</td><td>{Roll, Sub} → {Sub, Marks}</td></tr>
+          <tr><td><strong>Full FD</strong></td><td>∀ X' ⊂ X, X' ↛ Y</td><td>Y depends on FULL composite key (2NF)</td></tr>
+          <tr><td><strong>Partial FD</strong></td><td>∃ X' ⊂ Key, X' → Y</td><td>Non-prime depends on part of key (Violates 2NF!)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ROW 2: ARMSTRONG'S AXIOMS -->
+    <div class="card">
+      <div class="card-header card-header-green">
+        <span>3. Armstrong's Axioms (Sound &amp; Complete Axiomatic Inference System)</span>
+        <span class="badge badge-green">F⁺ Generation</span>
+      </div>
+      <div class="grid-3">
+        <div>
+          <strong>Primary Axiom 1: Reflexivity</strong>
+          <div class="formula-box">If Y ⊆ X ⇒ X → Y</div>
+          <span style="font-size:6.3pt; color:#475569;">Subset property: Har attribute set apne sub-parts ko trivially determine karta hai.</span>
+        </div>
+        <div>
+          <strong>Primary Axiom 2: Augmentation</strong>
+          <div class="formula-box">If X → Y ⇒ XZ → YZ (∀ Z)</div>
+          <span style="font-size:6.3pt; color:#475569;">Additive property: Dono taraf koi bhi attribute jod sakte hain.</span>
+        </div>
+        <div>
+          <strong>Primary Axiom 3: Transitivity</strong>
+          <div class="formula-box">If X → Y &amp; Y → Z ⇒ X → Z</div>
+          <span style="font-size:6.3pt; color:#475569;">Chaining property: Dependency aage chain banakar transfer hoti hai.</span>
+        </div>
+      </div>
+      <div class="grid-3" style="margin-top: 3px;">
+        <div>
+          <strong>Derived 4: Union / Additive</strong>
+          <div class="formula-box">X → Y &amp; X → Z ⇒ X → YZ</div>
+          <span style="font-size:6.3pt; color:#475569;">LHS same ho toh RHS combine ho sakta hai.</span>
+        </div>
+        <div>
+          <strong>Derived 5: Decomposition</strong>
+          <div class="formula-box">X → YZ ⇒ X → Y &amp; X → Z</div>
+          <span style="font-size:6.3pt; color:#475569;">RHS split hota hai. LHS KABHI split nahi hota!</span>
+        </div>
+        <div>
+          <strong>Derived 6: Pseudo-Transitivity</strong>
+          <div class="formula-box">X → Y &amp; WY → Z ⇒ WX → Z</div>
+          <span style="font-size:6.3pt; color:#475569;">Useful for proving implied dependencies.</span>
+        </div>
+      </div>
+      <div class="success-box" style="margin-top:2px;">
+        <strong>Soundness:</strong> Derived FD hamesha physically valid hogi. | <strong>Completeness:</strong> Saari logically implied FDs (Closure F⁺) nikal aayengi.
+      </div>
+    </div>
+
+    <!-- ROW 3: ATTRIBUTE CLOSURE & CANDIDATE KEY ALGORITHM -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>4. Attribute Closure Algorithm (X⁺)</span>
+          <span class="badge badge-blue">Polynomial O(|F|·|R|)</span>
+        </div>
+        <ol style="margin: 1.5px 0 2px 14px; padding: 0;">
+          <li><strong>Init:</strong> Set <code>closure = X</code>.</li>
+          <li><strong>Loop:</strong> Repeat for each <code>Y → Z ∈ F</code>:
+            <br>If <code>Y ⊆ closure</code>, then <code>closure = closure ∪ Z</code>.</li>
+          <li><strong>Fixed-Point:</strong> Loop tab tak chalao jab tak koi naya attribute add na ho. Return <code>closure</code> as <strong>X⁺</strong>.</li>
+        </ol>
+        <div class="warn-box">
+          <strong>Key Applications:</strong><br>
+          • Check if A → B holds: Test if B ⊆ A⁺.<br>
+          • Super Key Test: Check if X⁺ contains ALL attributes (X⁺ = R).
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-accent">
+          <span>5. Fast Candidate Key Discovery (3-Category Matrix)</span>
+          <span class="badge badge-red">AKTU Exam Cheat</span>
+        </div>
+        <table>
+          <tr><th>Category</th><th>Attribute Position</th><th>Key Presence Rule</th></tr>
+          <tr><td><strong>Category A (Essential)</strong></td><td>NEVER on RHS</td><td><strong>MUST be in EVERY Candidate Key!</strong></td></tr>
+          <tr><td><strong>Category B (Pivot)</strong></td><td>Both on LHS &amp; RHS</td><td>Test combinations with Category A.</td></tr>
+          <tr><td><strong>Category C (Extraneous)</strong></td><td>ONLY on RHS (Never LHS)</td><td><strong>CANNOT be in ANY Candidate Key!</strong></td></tr>
+        </table>
+        <div class="formula-box">
+          <strong>Prime Attribute:</strong> Member of ANY Candidate Key.<br>
+          <strong>Non-Prime Attribute:</strong> NOT part of ANY Candidate Key.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>CS_Fundamental-00 | BCS501 DBMS Revision Series</span>
+    <span>Page 1 of 3</span>
+    <span>Unit 3: Database Design &amp; Normalization</span>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PAGE 2: CANONICAL COVER & NORMAL FORMS (1NF, 2NF, 3NF, BCNF) -->
+<!-- ======================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">DBMS Unit 3: Database Design &amp; Normalization</div>
+        <div class="header-sub">AKTU BCS501 | Gateway Classes Complete Revision Notes</div>
+      </div>
+      <div class="page-tag">Page 2 of 3: Canonical Cover &amp; Normal Forms</div>
+    </div>
+
+    <!-- ROW 1: EQUIVALENCE & CANONICAL COVER -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>6. Equivalence of FD Sets (F ≡ G)</span>
+          <span class="badge badge-blue">F⁺ = G⁺ Test</span>
+        </div>
+        <p>Do sets F aur G tabhi equivalent hote hain jab dono ek doosre ko cover karein:</p>
+        <ul>
+          <li><strong>Test 1 (G covers F):</strong> ∀ X → Y ∈ F, check if Y ⊆ X⁺_G.</li>
+          <li><strong>Test 2 (F covers G):</strong> ∀ A → B ∈ G, check if B ⊆ A⁺_F.</li>
+        </ul>
+        <div class="success-box">Both tests pass ⇒ <strong>F ≡ G</strong>. Polynomial time verification!</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>7. Canonical Minimal Cover (Fc) 3-Step Method</span>
+          <span class="badge badge-green">Irreducible Set</span>
+        </div>
+        <ol style="margin: 1.5px 0 2px 14px; padding: 0;">
+          <li><strong>Singleton RHS:</strong> Break X → ABC into X → A, X → B, X → C.</li>
+          <li><strong>Remove Extraneous LHS:</strong> In AB → C, if C ∈ (A)⁺ without B, drop B!</li>
+          <li><strong>Remove Redundant FDs:</strong> For each X → Y, test if Y ∈ X⁺_(F - {X→Y}). If YES, delete!</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ROW 2: ANOMALIES & 1NF -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header card-header-accent">
+          <span>8. The 3 Database Anomalies</span>
+          <span class="badge badge-red">Root: Redundancy</span>
+        </div>
+        <ul>
+          <li><strong>Insertion Anomaly:</strong> Cannot insert an independent entity without a primary key (NULL not allowed).</li>
+          <li><strong>Deletion Anomaly:</strong> Deleting one tuple inadvertently destroys unrelated secondary entity data.</li>
+          <li><strong>Update Anomaly:</strong> Redundant copies cause data inconsistency if some rows fail to update.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>9. First Normal Form (1NF)</span>
+          <span class="badge badge-blue">Atomic Values</span>
+        </div>
+        <p><strong>Rule:</strong> All attribute domains must contain strictly <strong>atomic (indivisible) values</strong>.</p>
+        <ul>
+          <li>Eliminate Multi-valued attributes (lists/arrays in cells).</li>
+          <li>Decompose Composite attributes (Address → City, PIN).</li>
+          <li>Eliminate Repeating groups (numbered columns like Skill_1, Skill_2).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ROW 3: 2NF, 3NF & BCNF COMPARISON -->
+    <div class="card">
+      <div class="card-header">
+        <span>10. Core Normal Forms In-Depth (2NF, 3NF, BCNF)</span>
+        <span class="badge badge-amber">Master Decision Matrix</span>
+      </div>
+      <table>
+        <tr>
+          <th>Normal Form</th>
+          <th>Prerequisite</th>
+          <th>Formal Condition to Satisfy</th>
+          <th>Violation Signature</th>
+          <th>How to Decompose</th>
+        </tr>
+        <tr>
+          <td><strong>2NF</strong></td>
+          <td>1NF</td>
+          <td><strong>No Partial Dependency:</strong> Every non-prime attribute must depend on the FULL candidate key.</td>
+          <td><code>Proper Subset of CK → Non-Prime</code></td>
+          <td>R1(X', Y) with key X', and R2(R - Y).</td>
+        </tr>
+        <tr>
+          <td><strong>3NF</strong></td>
+          <td>2NF</td>
+          <td><strong>No Transitive Dependency:</strong> For every non-trivial X → Y:<br><strong>X is Super Key  OR  Y is Prime Attribute</strong></td>
+          <td><code>Non-Key → Non-Prime</code> (LHS not SK and RHS not Prime)</td>
+          <td><strong>Bernstein Synthesis:</strong> Ri = X ∪ Y from Canonical Cover Fc. Add CK if needed.</td>
+        </tr>
+        <tr>
+          <td><strong>BCNF</strong></td>
+          <td>1NF</td>
+          <td><strong>Strict Super Key:</strong> For every non-trivial X → Y:<br><strong>X MUST BE A SUPER KEY OF R</strong> (Zero Prime exceptions!)</td>
+          <td><code>LHS is NOT a Super Key</code> (Even if RHS is Prime!)</td>
+          <td>R1(X ∪ Y) and R2(R - Y). Guaranteed lossless, but may lose FD preservation!</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ROW 4: CRITICAL THEOREMS -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>11. Special Theorem: Simple Candidate Keys</span>
+          <span class="badge badge-green">Speed Shortcut</span>
+        </div>
+        <p><strong>Theorem:</strong> Agar kisi relation ke sabhi candidate keys <strong>Single Attribute (Simple)</strong> hain, toh wo relation <strong>AUTOMATICALLY 2NF</strong> me hota hai!</p>
+        <span style="font-size:6.3pt; color:#475569;">Proof: Single attribute ka koi non-empty proper subset nahi hota, isliye partial dependency mathematically impossible hai!</span>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-accent">
+          <span>12. The Great 3NF vs BCNF Trade-Off</span>
+          <span class="badge badge-red">Industry Standard</span>
+        </div>
+        <ul>
+          <li><strong>3NF:</strong> Always guarantees <strong>Lossless Join</strong> AND <strong>Dependency Preservation</strong>. Slight redundancy allowed.</li>
+          <li><strong>BCNF:</strong> Eliminates ALL functional redundancy, but <strong>MAY LOSE functional dependencies</strong>!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>CS_Fundamental-00 | BCS501 DBMS Revision Series</span>
+    <span>Page 2 of 3</span>
+    <span>Unit 3: Database Design &amp; Normalization</span>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PAGE 3: DECOMPOSITION, 4NF, 5NF & AKTU PYQ CHEAT SHEET -->
+<!-- ======================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">DBMS Unit 3: Database Design &amp; Normalization</div>
+        <div class="header-sub">AKTU BCS501 | Gateway Classes Complete Revision Notes</div>
+      </div>
+      <div class="page-tag">Page 3 of 3: Decompositions, 4NF, 5NF &amp; PYQs</div>
+    </div>
+
+    <!-- ROW 1: DECOMPOSITION PROPERTIES -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>13. Lossless Join (Non-Additive) Decomposition</span>
+          <span class="badge badge-green">Mandatory R = R1 ⋈ R2</span>
+        </div>
+        <p><strong>Binary Decomposition Theorem:</strong> Split of <code>R</code> into <code>R1, R2</code> is Lossless iff:</p>
+        <div class="formula-box">(R1 ∩ R2) → R1   OR   (R1 ∩ R2) → R2</div>
+        <p><strong>Intuition:</strong> Common attribute set MUST be a <strong>Super Key in at least one</strong> table!</p>
+        <div class="warn-box">If this condition fails ⇒ <strong>Spurious Tuples</strong> (fake records) appear upon natural join!</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>14. Dependency Preservation Property</span>
+          <span class="badge badge-blue">(F1 ∪ ... ∪ Fk)⁺ = F⁺</span>
+        </div>
+        <p>Decomposition is dependency preserving if all original constraints can be checked within individual tables without executing expensive cross-table joins.</p>
+        <ul>
+          <li><code>Fi = π_Ri(F) = { X → Y ∈ F⁺ | XY ⊆ Ri }</code></li>
+          <li><strong>3NF:</strong> Always preserves all FDs (✓).</li>
+          <li><strong>BCNF:</strong> May not preserve some FDs (✕).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ROW 2: 4NF & 5NF -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>15. Multivalued Dependencies (MVD) &amp; 4NF</span>
+          <span class="badge badge-blue">Independent Multi-Facts</span>
+        </div>
+        <p><strong>MVD Definition (X ↠ Y):</strong> Y values associated with X are independent of Z values. Causes <code>m × n</code> Cartesian explosion!</p>
+        <div class="formula-box">t1[X]=t2[X] ⇒ ∃ t3, t4 with swapped Y and Z coordinates</div>
+        <p><strong>4NF Condition:</strong> Relation in BCNF, and ∀ non-trivial <code>X ↠ Y</code>:<br><strong>X MUST BE A SUPER KEY OF R.</strong></p>
+        <span style="font-size:6.3pt; color:#475569;">Fagin's Split: R(X,Y,Z) decomposes into R1(X,Y) and R2(X,Z).</span>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>16. Join Dependencies (JD) &amp; 5NF (PJNF)</span>
+          <span class="badge badge-green">Ultimate Projection Form</span>
+        </div>
+        <p><strong>Join Dependency:</strong> <code>⋈[R1, R2, ... Rn]</code> holds if <code>R = ⋈ π_Ri(R)</code>. Models 3-way cyclic relationships.</p>
+        <p><strong>5NF Condition:</strong> In 4NF, and for every non-trivial JD:<br><strong>EVERY Ri MUST BE A SUPER KEY OF R.</strong></p>
+        <div class="formula-box">
+          <strong>Inclusion Dependency (IND):</strong> R[X] ⊆ S[Y].<br>
+          Theoretical foundation of <strong>Foreign Key &amp; Referential Integrity</strong>!
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3: AKTU EXAM 10-MARK STEP-BY-STEP ALGORITHM -->
+    <div class="card">
+      <div class="card-header card-header-accent">
+        <span>17. Universal AKTU 10-Mark Normalization Solving Algorithm</span>
+        <span class="badge badge-red">Guaranteed Full Marks</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <p><strong>Step 1: Find All Candidate Keys</strong></p>
+          <ul>
+            <li>Partition attributes: Cat A (Never RHS), Cat B (Both), Cat C (Never LHS).</li>
+            <li>Compute (Cat A)⁺. If equal to R ⇒ Unique Candidate Key!</li>
+            <li>If not, combine with Cat B singles/pairs. Identify Prime vs Non-Prime.</li>
+          </ul>
+          <p><strong>Step 2: Test 2NF (Partial Dependency)</strong></p>
+          <ul>
+            <li>Is any Non-Prime attribute determined by a proper subset of CK?</li>
+            <li>If YES ⇒ Violates 2NF (Highest NF = 1NF). Decompose into R1(X', Y) &amp; R2(R - Y).</li>
+          </ul>
+        </div>
+        <div>
+          <p><strong>Step 3: Test 3NF (Transitive Dependency)</strong></p>
+          <ul>
+            <li>For every X → Y: Is X a Super Key? OR Is Y a Prime Attribute?</li>
+            <li>If neither holds ⇒ Violates 3NF. Highest NF = 2NF. Decompose via Bernstein.</li>
+          </ul>
+          <p><strong>Step 4: Test BCNF (Strict Super Key)</strong></p>
+          <ul>
+            <li>For every X → Y: Is X strictly a Super Key?</li>
+            <li>If NO ⇒ Highest NF = 3NF. Decompose R into R1(X ∪ Y) &amp; R2(R - Y).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 4: MASTER NORMAL FORM HIERARCHY -->
+    <div class="card">
+      <div class="card-header">
+        <span>18. Master Normal Form Inclusion &amp; Anomaly Elimination Summary</span>
+        <span class="badge badge-amber">Complete Hierarchy</span>
+      </div>
+      <table>
+        <tr><th>Normal Form</th><th>Hierarchy Inclusion</th><th>Specific Anomaly Eliminated</th><th>Exam Test Rule</th></tr>
+        <tr><td><strong>1NF</strong></td><td>Base Relational</td><td>Non-atomic domains, multi-valued cells</td><td>All cell values atomic</td></tr>
+        <tr><td><strong>2NF</strong></td><td>2NF ⊂ 1NF</td><td>Partial dependency on composite keys</td><td>No Proper Subset of CK → Non-Prime</td></tr>
+        <tr><td><strong>3NF</strong></td><td>3NF ⊂ 2NF</td><td>Transitive dependency through non-keys</td><td>LHS Super Key OR RHS Prime Attribute</td></tr>
+        <tr><td><strong>BCNF</strong></td><td>BCNF ⊂ 3NF</td><td>Anomalies from overlapping candidate keys</td><td>LHS MUST be Super Key</td></tr>
+        <tr><td><strong>4NF</strong></td><td>4NF ⊂ BCNF</td><td>Cartesian explosion of independent facts</td><td>All MVD determinants are Super Keys</td></tr>
+        <tr><td><strong>5NF (PJNF)</strong></td><td>5NF ⊂ 4NF</td><td>N-way join spurious tuples &amp; redundancy</td><td>All JD components are Super Keys</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>CS_Fundamental-00 | BCS501 DBMS Revision Series</span>
+    <span>Page 3 of 3</span>
+    <span>Unit 3: Database Design &amp; Normalization</span>
+  </div>
+</div>
+
+</body>
+</html>

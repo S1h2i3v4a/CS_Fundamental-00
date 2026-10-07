@@ -1,0 +1,164 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 05: Database Anomalies & 1NF</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 05: Database Anomalies & 1NF</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg05)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Database Anomalies &amp; First Normal Form (1NF)</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">The Pitfalls of Data Redundancy: Insertion, Deletion, Update Anomalies &amp; Atomic Domain Enforcement</text>
+
+  <!-- TOP SUMMARY: THE 3 ANOMALIES -->
+  <g transform="translate(35, 80)">
+    <rect width="930" height="200" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.8"/>
+    <text x="465" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#f87171">Root Cause: Data Redundancy &amp; Unnormalized Relation Flaws</text>
+
+    <!-- Anomaly 1: Insertion -->
+    <rect x="20" y="48" width="280" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="70" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#fca5a5">1. Insertion Anomaly</text>
+    <text x="35" y="90" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Cannot insert independent entity</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">without parent or primary key.</text>
+    <text x="35" y="125" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Pitfall: Cannot add new Department</text>
+    <text x="35" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">until at least one student enrolls</text>
+    <text x="35" y="155" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">(Primary Key cannot be NULL!).</text>
+
+    <!-- Anomaly 2: Deletion -->
+    <rect x="325" y="48" width="280" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="340" y="70" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#fca5a5">2. Deletion Anomaly</text>
+    <text x="340" y="90" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Deleting one record inadvertently</text>
+    <text x="340" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">erases critical secondary facts.</text>
+    <text x="340" y="125" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Pitfall: Deleting the last student in</text>
+    <text x="340" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Civil Engineering permanently destroys</text>
+    <text x="340" y="155" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">all Department and HOD data!</text>
+
+    <!-- Anomaly 3: Update -->
+    <rect x="630" y="48" width="280" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="645" y="70" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#fca5a5">3. Update Anomaly</text>
+    <text x="645" y="90" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Redundant data stored across rows</text>
+    <text x="645" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">leads to severe inconsistency.</text>
+    <text x="645" y="125" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Pitfall: If Dept HOD changes,</text>
+    <text x="645" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">updating 500 student rows is required;</text>
+    <text x="645" y="155" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">missing 1 row creates split data.</text>
+  </g>
+
+  <!-- BOTTOM: FIRST NORMAL FORM (1NF) -->
+  <g transform="translate(35, 300)">
+    <rect width="930" height="190" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="465" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">First Normal Form (1NF) — Atomic Value Mandate</text>
+
+    <!-- Rule 1: Multi-Valued Attributes -->
+    <rect x="20" y="45" width="280" height="130" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="68" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Eliminate Multivalued Values</text>
+    <text x="35" y="88" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">A cell must contain only 1 value.</text>
+    <text x="35" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Violation: Phone: [981..., 942...]</text>
+    <text x="35" y="125" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Fix: Split into separate rows or</text>
+    <text x="35" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">a dedicated Student_Phone table.</text>
+
+    <!-- Rule 2: Composite Attributes -->
+    <rect x="325" y="45" width="280" height="130" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="340" y="68" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Decompose Composite Values</text>
+    <text x="340" y="88" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Attributes must be indivisible.</text>
+    <text x="340" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Violation: Name: &quot;Dr. Amit Sharma&quot;</text>
+    <text x="340" y="125" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Fix: Decompose into First_Name,</text>
+    <text x="340" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Middle_Name, Last_Name fields.</text>
+
+    <!-- Rule 3: Repeating Groups -->
+    <rect x="630" y="45" width="280" height="130" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="645" y="68" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Eliminate Repeating Groups</text>
+    <text x="645" y="88" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Fixed numbered columns are invalid.</text>
+    <text x="645" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Violation: Skill_1, Skill_2, Skill_3...</text>
+    <text x="645" y="125" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Fix: Normalized relation with composite</text>
+    <text x="645" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">key: {Emp_ID, Skill}.</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Relational Database Normalization Philosophy, Dr. E.F. Codd's Objectives, Insertion Anomaly, Deletion Anomaly, Modification/Update Anomaly, 1NF Atomic Value Rules, Repeating Groups Elimination.</p>
+<p>---</p>
+<h2>1. Why Normalization? Core Philosophy & Objectives</h2>
+<p>Jab ek single table me multiple alag-alag entities ka data bina soche-samjhe combine kar diya jaata hai, toh database me <strong>Data Redundancy</strong> (unnecessary duplicate values) aa jaati hai.</p>
+<li>Data Redundancy storage waste karti hai aur query performance degrade karti hai.</li>
+<li>Sabse bada khatra: <strong>Operational Anomalies</strong> (Insert, Update, Delete ke waqt data corrupt hona).</li>
+<p><strong>Normalization</strong> ek systematic formal process hai jisme unnormalized relation ko progressively higher normal forms (1NF $</p>
+<p>ightarrow$ 2NF $</p>
+<p>ightarrow$ 3NF $</p>
+<p>ightarrow$ BCNF) me decompose kiya jaata hai taaki:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Redundancy minimize ho sake.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Anomalies eliminate ho sakein.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> Lossless join and integrity constraints preserve rahein.</p>
+<p>---</p>
+<h2>2. The Three Classic Database Anomalies</h2>
+<p>Maan lijiye hamare paas ek combined table hai:</p>
+<p><code>STUDENT_DEPT(Roll_No, Name, Branch, HOD, HOD_Cabin)</code></p>
+<table><thead><tr><th>Roll_No</th><th>Name</th><th>Branch</th><th>HOD</th><th>HOD_Cabin</th></tr></thead><tbody>
+<tr><td>101</td><td>Aman</td><td>CSE</td><td>Dr. Sharma</td><td>Block-A, 101</td></tr>
+<tr><td>102</td><td>Priya</td><td>CSE</td><td>Dr. Sharma</td><td>Block-A, 101</td></tr>
+<tr><td>103</td><td>Rohan</td><td>ECE</td><td>Dr. Verma</td><td>Block-B, 204</td></tr>
+<tr><td>104</td><td>Sneha</td><td>ME</td><td>Dr. Gupta</td><td>Block-C, 301</td></tr>
+</tbody></table>
+<h3>2.1 Insertion Anomaly</h3>
+<li><strong>Definition:</strong> Kisi nayi information ko database me add na kar paana jab tak kisi unrelated entity ka data available na ho.</li>
+<li><strong>Example:</strong> College me ek naya department shuru hua: <code>AI_DS</code>, jiske HOD <code>Dr. Kapoor</code> hain. Lekin abhi tak kisi student ne admission nahi liya.</li>
+<li><strong>Problem:</strong> Kyunki <code>Roll_No</code> Primary Key hai (aur Primary Key NULL nahi ho sakti by Entity Integrity Constraint), hum naye department ka record table me <strong>insert hi nahi kar sakte</strong>!</li>
+<h3>2.2 Deletion Anomaly</h3>
+<li><strong>Definition:</strong> Kisi ek entity ka data delete karte waqt kisi important secondary entity ka data accidently permanent delete ho jaana.</li>
+<li><strong>Example:</strong> <code>Mechanical Engineering (ME)</code> department me sirf ek student <code>104 - Sneha</code> padh rahi thi. Sneha ne college chhod diya aur uska record delete kiya gaya.</li>
+<li><strong>Problem:</strong> Sneha ki row delete hote hi ME branch, uske HOD <code>Dr. Gupta</code>, aur cabin number ka saara record database se <strong>hamesha ke liye gayab ho gaya</strong>!</li>
+<h3>2.3 Update / Modification Anomaly</h3>
+<li><strong>Definition:</strong> Redundant data ko update karte waqt agar sabhi copies update na hon, toh data inconsistency create hona.</li>
+<li><strong>Example:</strong> CSE ke HOD <code>Dr. Sharma</code> retire ho gaye aur nayi HOD <code>Dr. Anita</code> ban gayi.</li>
+<li><strong>Problem:</strong> Agar CSE me 500 students hain, toh 500 rows me jakar HOD change karna padega. Agar server crash ya network issue ki wajah se 490 rows update hui aur 10 reh gayi, toh database contradictory answer dega!</li>
+<p>---</p>
+<h2>3. First Normal Form (1NF)</h2>
+<h3>3.1 Formal Definition of 1NF</h3>
+<p style="color:#475569; margin: 4px 0;">A relation schema $R$ is in **First Normal Form (1NF)** if and only if the domain of each attribute contains only **atomic (indivisible) values**, and each attribute value in a tuple is a **single value** from that domain.</p>
+<h3>3.2 1NF Violations and Solutions</h3>
+<p>#### 1. Multi-Valued Attributes</p>
+<li><strong>Violation:</strong> Kisi ek cell ke andar multiple values pack karna:</li>
+<p>  <code>Roll_No: 101 | Name: Aman | Mobile: [9899112233, 9811223344]</code></p>
+<li><strong>1NF Solution:</strong> Multiple values ko alag-alag rows me expand karo:</li>
+<p>  - Row 1: <code>(101, Aman, 9899112233)</code></p>
+<p>  - Row 2: <code>(101, Aman, 9811223344)</code></p>
+<p>  - Or create a separate related table: <code>STUDENT_PHONE(Roll_No, Phone)</code>.</p>
+<p>#### 2. Composite Attributes</p>
+<li><strong>Violation:</strong> Aise attributes jo sub-parts me divide ho sakte hain unhe single column me rakhna:</li>
+<p>  <code>Address: "Flat 402, Royal Apts, Sector 62, Noida, UP, 201301"</code></p>
+<li><strong>1NF Solution:</strong> Break into atomic sub-components: <code>House_No</code>, <code>Street</code>, <code>Sector</code>, <code>City</code>, <code>State</code>, <code>Pincode</code>.</li>
+<p>#### 3. Repeating Groups / Numbered Columns</p>
+<li><strong>Violation:</strong> Ek hi type ke data ke liye predefined numbered columns banana:</li>
+<p>  <code>STUDENT(Roll_No, Skill_1, Skill_2, Skill_3)</code></p>
+<li><strong>1NF Solution:</strong> Dynamic child table create karo: <code>STUDENT_SKILLS(Roll_No, Skill)</code>.</li>
+<p>---</p>
+<h2>4. Architectural Diagram</h2>
+<p>---</p>
+<h2>5. Summary Checklist: Is Relation in 1NF?</h2>
+<li>[x] Har column atomic values store karta hai? (No lists, no sets, no JSON arrays inside cells).</li>
+<li>[x] Har row uniquely identifiable hai? (Primary Key identified).</li>
+<li>[x] Columns ke names unique hain?</li>
+<li>[x] Rows ka order meaningful nahi hai?</li>
+</body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 08: Boyce-Codd Normal Form (BCNF)</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 08: Boyce-Codd Normal Form (BCNF)</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg08)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Boyce-Codd Normal Form (BCNF) Architecture</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Strict Determinant Requirement: Every LHS Must Be a Super Key &amp; 3NF vs BCNF Trade-Offs</text>
+
+  <!-- BCNF CONDITION BANNER -->
+  <g transform="translate(35, 80)">
+    <rect width="930" height="95" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="1.8"/>
+    <text x="30" y="30" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#c084fc">Boyce-Codd Normal Form (BCNF / Strict 3.5NF):</text>
+    <text x="30" y="52" font-family="-apple-system, sans-serif" font-size="11.5" fill="#cbd5e1">Relation R is in BCNF iff for every non-trivial functional dependency X → Y:</text>
+    <text x="50" y="75" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#f43f5e">X MUST BE A SUPER KEY OF R.  (No exceptions! Zero prime relaxers!)</text>
+  </g>
+
+  <!-- TWO COLUMN: 3NF vs BCNF COMPARISON -->
+  <g transform="translate(35, 190)">
+    <rect width="450" height="305" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#60a5fa">3NF vs BCNF Strict Comparison</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Mathematical Inclusions &amp; Trade-Offs</text>
+
+    <rect x="20" y="65" width="410" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Inclusion Hierarchy</text>
+    <text x="30" y="103" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">BCNF ⊂ 3NF ⊂ 2NF ⊂ 1NF</text>
+    <text x="30" y="117" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Every BCNF is 3NF. But not every 3NF is BCNF!</text>
+
+    <rect x="20" y="135" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="155" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">Lossless Join Property</text>
+    <text x="30" y="173" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• 3NF Decomposition: Always Lossless (Non-additive).</text>
+    <text x="30" y="190" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• BCNF Decomposition: Always Lossless.</text>
+
+    <rect x="20" y="220" width="410" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="240" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">Dependency Preservation (The Critical Divergence)</text>
+    <text x="30" y="258" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">• 3NF: ALWAYS preserves all functional dependencies.</text>
+    <text x="30" y="275" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">• BCNF: MAY LOSE functional dependencies upon split!</text>
+  </g>
+
+  <!-- RIGHT: CLASSIC BCNF ANOMALY EXAMPLE -->
+  <g transform="translate(515, 190)">
+    <rect width="450" height="305" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#fbbf24">Classic Gateway BCNF Problem</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Relation R(Student, Subject, Teacher)</text>
+
+    <rect x="20" y="65" width="410" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fed7aa">Given Dependencies:</text>
+    <text x="30" y="103" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. {Student, Subject} → Teacher</text>
+    <text x="30" y="120" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Teacher → Subject  (Each teacher teaches 1 subject)</text>
+    <text x="30" y="137" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Candidate Keys: {Student, Subject} and {Student, Teacher}</text>
+
+    <rect x="20" y="160" width="410" height="125" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="30" y="180" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Why it is in 3NF but NOT in BCNF:</text>
+    <text x="30" y="198" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">In Teacher → Subject:</text>
+    <text x="30" y="215" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Teacher is NOT a Super Key (Fails BCNF!).</text>
+    <text x="30" y="232" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">• Subject IS a Prime Attribute (Passes 3NF!).</text>
+    <text x="30" y="252" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">Decomposing into R1(Teacher, Subject) &amp; R2(Student, Teacher)</text>
+    <text x="30" y="268" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">LOSES the dependency {Student, Subject} → Teacher!</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Boyce-Codd Normal Form (BCNF), Strict Super Key Determinant Condition, BCNF vs 3NF Deep Comparison, The Classic Database Trade-Off: Dependency Preservation vs Redundancy, Solved Gateway AKTU Numerical.</p>
+<p>---</p>
+<h2>1. Motivation Behind BCNF</h2>
+<p>1974 me Raymond Boyce aur Edgar Codd ne observe kiya ki 3NF kuch specific conditions me redundancy aur anomalies ko poori tarah eliminate nahi kar pata.</p>
+<li>Yeh situation tab aati hai jab ek table me <strong>multiple overlapping Candidate Keys</strong> hoti hain!</li>
+<li>3NF ka relaxer rule ("$Y$ is a Prime Attribute") un dependencies ko allow kar deta hai jisme determinant Super Key nahi hota.</li>
+<li>Is loophole ko close karne ke liye <strong>Boyce-Codd Normal Form (BCNF)</strong> introduce kiya gaya, jise aksar <strong>3.5 Normal Form</strong> bhi kaha jaata hai.</li>
+<p>---</p>
+<h2>2. Formal Definition of BCNF</h2>
+<p>Ek relation schema $R$ <strong>Boyce-Codd Normal Form (BCNF)</strong> me tab hota hai jab:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Wo relation already <strong>1NF</strong> me ho.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Har non-trivial functional dependency $X </p>
+<p>ightarrow Y$ ke liye:</p>
+<p>$$\mathbf{X 	ext{ MUST BE A SUPER KEY OF } R}$$</p>
+<p>Yahan koi "OR" condition nahi hai! Determinant $X$ ko compulsory roop se Super Key hona hi padega!</p>
+<p>---</p>
+<h2>3. Comprehensive Comparison: 3NF vs BCNF</h2>
+<table><thead><tr><th>Parameter</th><th>Third Normal Form (3NF)</th><th>Boyce-Codd Normal Form (BCNF)</th></tr></thead><tbody>
+<tr></tr>
+</tbody></table>
+<p>ightarrow Y$)<strong> | $X$ is Super Key </strong>OR<strong> $Y$ is Prime Attribute | $X$ </strong>MUST** be Super Key |</p>
+<table><thead><tr><th>**Strictness**</th><th>Relaxed (allows prime attribute on RHS)</th><th>Extremely strict (zero exceptions)</th></tr></thead><tbody>
+<tr><td>**Lossless Join Decomposition**</td><td>Always guaranteed ($\checkmark$)</td><td>Always guaranteed ($\checkmark$)</td></tr>
+<tr><td>**Dependency Preservation**</td><td>**Always guaranteed ($\checkmark$)**</td><td>**NOT always possible ($	imes$)**</td></tr>
+<tr><td>**Storage Redundancy**</td><td>Minimal (slight redundancy may remain)</td><td>Zero redundancy for functional dependencies</td></tr>
+<tr><td>**Practical Industry Choice**</td><td>Most widely used in transactional DBs</td><td>Used when dependency loss is acceptable</td></tr>
+</tbody></table>
+<p>---</p>
+<h2>4. Architectural Diagram</h2>
+<p>---</p>
+<h2>5. Classic Gateway Classes Solved Numerical: The Trade-Off Case</h2>
+<p><strong>Problem:</strong> Given relation $R(	ext{Student}, 	ext{Subject}, 	ext{Teacher})$ with functional dependencies:</p>
+<p>$$F = \{ \quad \{	ext{Student}, 	ext{Subject}\} </p>
+<p>ightarrow 	ext{Teacher}, \quad 	ext{Teacher} </p>
+<p>ightarrow 	ext{Subject} \quad \}$$</p>
+<p>*(Assumption: Har student ek subject ke liye ek teacher ko assign hota hai, aur har teacher sirf ek subject padhata hai).*</p>
+<h3>Step 1: Candidate Keys</h3>
+<li>$(	ext{Student}, 	ext{Subject})^+ = \{	ext{Student}, 	ext{Subject}, 	ext{Teacher}\} = R \implies \{\mathbf{Student, Subject}\}$ is Candidate Key 1.</li>
+<li>$(	ext{Student}, 	ext{Teacher})^+ = \{	ext{Student}, 	ext{Teacher}, 	ext{Subject}\} = R \implies \{\mathbf{Student, Teacher}\}$ is Candidate Key 2.</li>
+<li><strong>Prime Attributes:</strong> $\{	ext{Student}, 	ext{Subject}, 	ext{Teacher}\}$ (All attributes are Prime!).</li>
+<h3>Step 2: 3NF Test</h3>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> $\{	ext{Student}, 	ext{Subject}\} </p>
+<p>ightarrow 	ext{Teacher}$:</p>
+<p>   - LHS $\{	ext{Student}, 	ext{Subject}\}$ is a Candidate Key (Super Key). $\implies$ <strong>Satisfies 3NF</strong>.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> $	ext{Teacher} </p>
+<p>ightarrow 	ext{Subject}$:</p>
+<p>   - LHS $	ext{Teacher}$ is NOT a Super Key.</p>
+<p>   - RHS $	ext{Subject}$ IS a Prime Attribute (part of Candidate Key 1).</p>
+<p>   - $\implies$ <strong>Satisfies 3NF!</strong></p>
+<li><strong>Verdict for 3NF:</strong> Relation $R$ is in <strong>3NF</strong>!</li>
+<h3>Step 3: BCNF Test</h3>
+<li>Look at $	ext{Teacher} </li>
+<p>ightarrow 	ext{Subject}$:</p>
+<p>  - Determinant $	ext{Teacher}$ is <strong>NOT a Super Key</strong>!</p>
+<p>  - In BCNF, there is NO prime attribute relaxation!</p>
+<li><strong>Verdict for BCNF:</strong> Relation $R$ <strong>FAILS BCNF</strong>!</li>
+<h3>Step 4: Decomposing into BCNF & The Great Loss</h3>
+<p>To bring into BCNF, decompose using the violating dependency $	ext{Teacher} </p>
+<p>ightarrow 	ext{Subject}$:</p>
+<li>$R_1(\mathbf{Teacher}, 	ext{Subject})$ with Key = $	ext{Teacher}$ (in BCNF).</li>
+<li>$R_2(\mathbf{Student, Teacher})$ with Key = $\{	ext{Student}, 	ext{Teacher}\}$ (in BCNF).</li>
+<li>Both sub-relations are in BCNF and the join is Lossless ($R_1 \cap R_2 = \{	ext{Teacher}\}$, which is a key in $R_1$).</li>
+<li><strong>The Critical Flaw:</strong> Original dependency $\{	ext{Student}, 	ext{Subject}\} </li>
+<p>ightarrow 	ext{Teacher}$ cannot be tested in either $R_1$ or $R_2$ alone!</p>
+<li><strong>Dependency Preservation is LOST!</strong></li>
+</body></html>

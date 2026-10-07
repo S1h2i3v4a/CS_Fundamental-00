@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr01" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg01)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Functional Dependencies (FD) Architecture &amp; Taxonomy</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Formal Integrity Constraints: Determinants, Dependents, and Classification Hierarchy</text>
+
+  <!-- TOP DEFINITION PANEL -->
+  <g transform="translate(40, 80)">
+    <rect width="920" height="90" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.8"/>
+    <text x="30" y="32" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">Formal Mathematical Definition: X → Y</text>
+    <text x="30" y="55" font-family="-apple-system, sans-serif" font-size="11.5" fill="#cbd5e1">For any two tuples t1 and t2 in relation R:  If  t1[X] = t2[X],  then  t1[Y] MUST equal t2[Y].</text>
+    <text x="30" y="75" font-family="-apple-system, sans-serif" font-size="10.5" fill="#94a3b8">Determinant (X: Left-Hand Side) functionally determines Dependent (Y: Right-Hand Side). Schema-level invariant.</text>
+  </g>
+
+  <!-- THREE COLUMN TAXONOMY -->
+  <!-- Col 1: Trivial vs Non-Trivial -->
+  <g transform="translate(40, 190)">
+    <rect width="290" height="295" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="145" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">1. Trivial vs Non-Trivial</text>
+    <text x="145" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Set Inclusion Criteria</text>
+
+    <rect x="15" y="65" width="260" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Trivial FD (Y ⊆ X)</text>
+    <text x="25" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">RHS is a subset of LHS.</text>
+    <text x="25" y="117" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Always holds. Eg: {Roll, Name} → Roll</text>
+
+    <rect x="15" y="135" width="260" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="155" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Non-Trivial FD (X ∩ Y = ∅)</text>
+    <text x="25" y="173" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">RHS has zero intersection with LHS.</text>
+    <text x="25" y="188" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Carries real information. Eg: Roll → Name</text>
+
+    <rect x="15" y="210" width="260" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="230" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Semi-Non-Trivial FD</text>
+    <text x="25" y="248" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Y ⊄ X but X ∩ Y ≠ ∅.</text>
+    <text x="25" y="263" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Partial overlap. Eg: {Roll, Sub} → {Sub, Marks}</text>
+  </g>
+
+  <!-- Col 2: Full vs Partial -->
+  <g transform="translate(355, 190)">
+    <rect width="290" height="295" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="145" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">2. Full vs Partial FD</text>
+    <text x="145" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Key Subset Dependency</text>
+
+    <rect x="15" y="65" width="260" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Full Functional Dependency</text>
+    <text x="25" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Y depends on entire composite key X,</text>
+    <text x="25" y="117" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">not on any proper subset of X.</text>
+    <text x="25" y="133" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">∀ X&apos; ⊂ X, X&apos; ↛ Y. (Foundation of 2NF)</text>
+    <text x="25" y="148" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Eg: {EmpId, ProjId} → HoursWorked</text>
+
+    <rect x="15" y="170" width="260" height="105" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="190" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">Partial Functional Dependency</text>
+    <text x="25" y="208" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Non-prime attribute depends on a</text>
+    <text x="25" y="222" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">PROPER SUBSET of candidate key.</text>
+    <text x="25" y="238" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">∃ X&apos; ⊂ Key such that X&apos; → Y (Non-Prime).</text>
+    <text x="25" y="254" font-family="-apple-system, sans-serif" font-size="8.5" fill="#f87171">Violates 2NF! Eg: EmpId → EmpName</text>
+  </g>
+
+  <!-- Col 3: Transitive & Multi-valued -->
+  <g transform="translate(670, 190)">
+    <rect width="290" height="295" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="145" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fbbf24">3. Transitive &amp; Advanced</text>
+    <text x="145" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Chained &amp; Multi-Attribute Rules</text>
+
+    <rect x="15" y="65" width="260" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Transitive Dependency</text>
+    <text x="25" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">A → B and B → C, where B is non-key.</text>
+    <text x="25" y="118" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">C depends on A via non-key attribute B.</text>
+    <text x="25" y="134" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Violates 3NF! Causes update anomalies.</text>
+    <text x="25" y="149" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Eg: Roll → DeptCode, DeptCode → DeptHOD</text>
+
+    <rect x="15" y="170" width="260" height="105" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="190" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a855f7">Multivalued Dependency (MVD)</text>
+    <text x="25" y="208" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">X ↠ Y: One X maps to a set of Y values</text>
+    <text x="25" y="222" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">independently of other attributes.</text>
+    <text x="25" y="238" font-family="-apple-system, sans-serif" font-size="9" fill="#c084fc">Violates 4NF! Multiplicative cartesian tuples.</text>
+    <text x="25" y="254" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Eg: Course ↠ Book, Course ↠ Lecturer</text>
+  </g>
+</svg>

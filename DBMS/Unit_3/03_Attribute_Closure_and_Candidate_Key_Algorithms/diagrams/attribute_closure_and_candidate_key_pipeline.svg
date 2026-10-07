@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr03" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg03)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Attribute Closure Algorithm &amp; Candidate Key Pipeline</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Systematic Algorithm: Closure Calculation X⁺, Super Key Verification, and Minimal Candidate Key Finding</text>
+
+  <!-- LEFT: ATTRIBUTE CLOSURE ALGORITHM -->
+  <g transform="translate(35, 80)">
+    <rect width="445" height="410" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="222" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">1. Attribute Closure Algorithm (X⁺)</text>
+    <text x="222" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Computes all attributes functionally determined by X</text>
+
+    <!-- Step 1 -->
+    <rect x="20" y="65" width="405" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#60a5fa">Step 1: Initialization</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">closure = X   (Every attribute determines itself by Reflexivity)</text>
+
+    <!-- Step 2 -->
+    <rect x="20" y="135" width="405" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="157" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#60a5fa">Step 2: Iterative Expansion Loop</text>
+    <text x="35" y="175" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">Repeat for each dependency Y → Z in FD set F:</text>
+    <text x="50" y="193" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">If  Y ⊆ closure,  then  closure = closure ∪ Z</text>
+    <text x="35" y="210" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Continue passes until a full pass adds NO new attributes (Fixed-point).</text>
+
+    <!-- Step 3 -->
+    <rect x="20" y="230" width="405" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="252" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#60a5fa">Step 3: Termination &amp; Result</text>
+    <text x="35" y="270" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">Return closure as X⁺.</text>
+    <text x="35" y="285" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Time Complexity: O(|F| · |R|), fast polynomial-time execution.</text>
+
+    <!-- Step 4 Uses -->
+    <rect x="20" y="305" width="405" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="325" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fbbf24">Crucial Applications of X⁺</text>
+    <text x="35" y="343" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Testing if A → B holds: Check if B ⊆ A⁺.</text>
+    <text x="35" y="359" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Super Key Test: Check if X⁺ contains ALL attributes of R (X⁺ = R).</text>
+    <text x="35" y="375" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Equivalence of FD Sets &amp; Canonical Cover verification.</text>
+  </g>
+
+  <!-- RIGHT: CANDIDATE KEY SHORTCUT & CLASSIFICATION -->
+  <g transform="translate(515, 80)">
+    <rect width="450" height="410" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. Candidate Key Discovery Strategy</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Gateway Classes 3-Category Attribute Partitioning Method</text>
+
+    <!-- Category 1 -->
+    <rect x="20" y="65" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#34d399">Category A: Never on RHS (Essential Attributes)</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">Attributes that NEVER appear on the right side of any FD.</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">★ MUST be present in EVERY Candidate Key of relation R!</text>
+
+    <!-- Category 2 -->
+    <rect x="20" y="150" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="172" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#60a5fa">Category B: Both on LHS and RHS (Pivot Attributes)</text>
+    <text x="35" y="190" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">Attributes that appear on both sides of dependencies.</text>
+    <text x="35" y="207" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">May or may not be part of keys. Tested in combinations with Category A.</text>
+
+    <!-- Category 3 -->
+    <rect x="20" y="235" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="257" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#f87171">Category C: Never on LHS (Extraneous Attributes)</text>
+    <text x="35" y="275" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">Attributes that appear ONLY on the right-hand side.</text>
+    <text x="35" y="292" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">★ Can NEVER be part of ANY minimal Candidate Key!</text>
+
+    <!-- Prime vs Non-Prime -->
+    <rect x="20" y="320" width="410" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="340" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#e2e8f0">Prime vs Non-Prime Attributes</text>
+    <text x="35" y="357" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Prime Attribute: An attribute that belongs to AT LEAST ONE Candidate Key.</text>
+    <text x="35" y="373" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Non-Prime Attribute: Attribute that is NOT part of ANY Candidate Key.</text>
+  </g>
+</svg>

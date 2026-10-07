@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg02)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Armstrong&apos;s Axioms &amp; Inference Rules Tree</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Sound &amp; Complete Axiomatic System for Functional Dependency Closure Generation (F⁺)</text>
+
+  <!-- TOP GUARANTEES PANEL -->
+  <g transform="translate(40, 80)">
+    <rect width="920" height="65" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">Two Foundational Guarantees of Armstrong&apos;s Axioms:</text>
+    <text x="25" y="48" font-family="-apple-system, sans-serif" font-size="11" fill="#cbd5e1">1. Soundness: Every derived FD is guaranteed to be logically true and valid in every legal database instance.</text>
+    <text x="500" y="48" font-family="-apple-system, sans-serif" font-size="11" fill="#cbd5e1">2. Completeness: Repeated application generates ALL logically implied FDs (Closure F⁺).</text>
+  </g>
+
+  <!-- LEFT: PRIMARY AXIOMS (CORE) -->
+  <g transform="translate(40, 160)">
+    <rect width="445" height="325" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="222" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">Primary Axioms (Core Inference Rules)</text>
+    <text x="222" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Self-evident, mathematically irreducible</text>
+
+    <!-- Axiom 1: Reflexivity -->
+    <rect x="20" y="65" width="405" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#a7f3d0">1. Reflexivity Rule (Subset Property)</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="10.5" fill="#cbd5e1">If Y ⊆ X,  then  X → Y</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Example: {RollNo, Name} → RollNo  and  {RollNo, Name} → Name</text>
+
+    <!-- Axiom 2: Augmentation -->
+    <rect x="20" y="145" width="405" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="167" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#a7f3d0">2. Augmentation Rule (Additive Property)</text>
+    <text x="35" y="185" font-family="-apple-system, sans-serif" font-size="10.5" fill="#cbd5e1">If X → Y,  then  XZ → YZ  (for any attribute set Z)</text>
+    <text x="35" y="204" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Example: If RollNo → Name, then {RollNo, Sub} → {Name, Sub}</text>
+
+    <!-- Axiom 3: Transitivity -->
+    <rect x="20" y="230" width="405" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="252" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#a7f3d0">3. Transitivity Rule (Chaining Property)</text>
+    <text x="35" y="270" font-family="-apple-system, sans-serif" font-size="10.5" fill="#cbd5e1">If X → Y  and  Y → Z,  then  X → Z</text>
+    <text x="35" y="289" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Example: If RollNo → DeptCode and DeptCode → DeptName, then RollNo → DeptName</text>
+  </g>
+
+  <!-- RIGHT: SECONDARY / DERIVED RULES -->
+  <g transform="translate(515, 160)">
+    <rect width="445" height="325" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.6"/>
+    <text x="222" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">Secondary Rules (Derived from Core Axioms)</text>
+    <text x="222" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Proven via combinations of Primary Axioms</text>
+
+    <!-- Derived 1: Union -->
+    <rect x="20" y="65" width="405" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="85" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">4. Union / Additive Rule</text>
+    <text x="35" y="103" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">If X → Y and X → Z, then X → YZ   [Proof: X → XY, XY → YZ ∴ X → YZ]</text>
+
+    <!-- Derived 2: Decomposition -->
+    <rect x="20" y="130" width="405" height="62" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="150" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">5. Decomposition / Projective Rule</text>
+    <text x="35" y="168" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">If X → YZ, then X → Y and X → Z   (Note: RHS splits, NEVER split LHS!)</text>
+
+    <!-- Derived 3: Pseudo-transitivity -->
+    <rect x="20" y="200" width="405" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="220" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">6. Pseudo-Transitivity Rule</text>
+    <text x="35" y="238" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">If X → Y and WY → Z, then WX → Z   [Proof: WX → WY, WY → Z ∴ WX → Z]</text>
+
+    <!-- Derived 4: Composition -->
+    <rect x="20" y="265" width="405" height="50" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="285" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">7. Composition Rule</text>
+    <text x="35" y="301" font-family="-apple-system, sans-serif" font-size="10" fill="#cbd5e1">If X → Y and A → B, then XA → YB</text>
+  </g>
+</svg>
