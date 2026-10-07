@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 04: Electronic Mail Architecture and MIME</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 14mm 14mm 14mm 14mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 8.8pt;
+    line-height: 1.42;
+    margin: 0;
+    padding: 0;
+  }
+  .header-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .course-tag {
+    font-size: 7.2pt;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #93c5fd;
+    font-weight: 700;
+  }
+  h1 {
+    font-size: 15pt;
+    margin: 3px 0 2px 0;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .meta-sub {
+    font-size: 7.6pt;
+    color: #cbd5e1;
+  }
+  h2 {
+    font-size: 11pt;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #e2e8f0;
+    padding-bottom: 3px;
+    margin: 12px 0 6px 0;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 9.3pt;
+    color: #0f172a;
+    margin: 8px 0 4px 0;
+    font-weight: 700;
+  }
+  p, ul, ol {
+    margin: 3px 0 6px 0;
+  }
+  ul, ol {
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 2.5px;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: Consolas, monospace;
+    font-size: 8.0pt;
+  }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+    font-size: 7.6pt;
+    line-height: 1.35;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    margin: 6px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 7.8pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 4px 7px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #1e3a8a;
+    font-weight: 700;
+  }
+  .callout {
+    background: #eff6ff;
+    border-left: 3.5px solid #2563eb;
+    padding: 7px 10px;
+    border-radius: 0 4px 4px 0;
+    margin: 8px 0;
+    font-size: 8.2pt;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 2px;
+  }
+  .callout-warn {
+    background: #fef2f2;
+    border-left: 3.5px solid #ef4444;
+  }
+  .callout-warn .callout-title {
+    color: #991b1b;
+  }
+  .svg-container {
+    text-align: center;
+    margin: 10px 0;
+    padding: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+  }
+  .svg-container svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .formula-box {
+    background: #f8fafc;
+    border: 1px solid #93c5fd;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    color: #1e3a8a;
+    font-weight: 600;
+    margin: 6px 0;
+  }
+</style>
+</head>
+<body>
+<div class="header-card">
+  <div class="course-tag">Computer Networks (BCS603) — Unit 5: Application Layer</div>
+  <h1>Module 04: Electronic Mail Architecture and MIME</h1>
+  <div class="meta-sub">Gateway Classes Lecture Series | Dr. Nidhi Parashar Ma'am | Author: Shivam Keshari</div>
+</div>
+
+    <div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="emailBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="aliceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+    <linearGradient id="bobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="950" height="480" fill="url(#emailBg)" rx="10"/>
+
+  <text x="475" y="32" fill="#38bdf8" font-family="-apple-system, Segoe UI, sans-serif" font-size="19" font-weight="800" text-anchor="middle" letter-spacing="0.5">ELECTRONIC MAIL (E-MAIL) 4-TIER ARCHITECTURE &amp; MIME</text>
+  <text x="475" y="52" fill="#94a3b8" font-family="-apple-system, Segoe UI, sans-serif" font-size="12" text-anchor="middle">User Agent (UA), Message Transfer Agent (MTA / SMTP), Message Access Agent (MAA / POP3 / IMAP) &amp; MIME</text>
+
+  <!-- Alice Host (Sender) -->
+  <rect x="30" y="80" width="160" height="150" fill="url(#aliceGrad)" rx="8" stroke="#f472b6" stroke-width="2"/>
+  <text x="110" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Alice (Sender)</text>
+  <rect x="45" y="125" width="130" height="40" fill="#831843" rx="4"/>
+  <text x="110" y="145" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">User Agent (UA)</text>
+  <text x="110" y="158" fill="#fbcfe8" font-family="Segoe UI, sans-serif" font-size="8.5" text-anchor="middle">Outlook / Webmail</text>
+  <rect x="45" y="175" width="130" height="35" fill="#500724" rx="4"/>
+  <text x="110" y="195" fill="#fdf2f8" font-family="Segoe UI, sans-serif" font-size="9.5" text-anchor="middle">MTA Client (SMTP)</text>
+
+  <!-- Alice Mail Server -->
+  <rect x="250" y="80" width="180" height="160" fill="#047857" rx="8" stroke="#34d399" stroke-width="2"/>
+  <text x="340" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="13.5" font-weight="700" text-anchor="middle">Alice Mail Server</text>
+  <rect x="265" y="125" width="150" height="35" fill="#064e3b" rx="4"/>
+  <text x="340" y="145" fill="#a7f3d0" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700" text-anchor="middle">MTA Server (Port 25)</text>
+  <rect x="265" y="170" width="150" height="50" fill="#022c22" rx="4"/>
+  <text x="340" y="190" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700" text-anchor="middle">Spool / Queue Buffer</text>
+  <text x="340" y="208" fill="#6ee7b7" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Holds Outgoing Mail</text>
+
+  <!-- Bob Mail Server -->
+  <rect x="520" y="80" width="180" height="160" fill="#1e3a8a" rx="8" stroke="#60a5fa" stroke-width="2"/>
+  <text x="610" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="13.5" font-weight="700" text-anchor="middle">Bob Mail Server</text>
+  <rect x="535" y="125" width="150" height="35" fill="#172554" rx="4"/>
+  <text x="610" y="145" fill="#bfdbfe" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700" text-anchor="middle">MTA Server (Port 25)</text>
+  <rect x="535" y="170" width="150" height="50" fill="#0f172a" rx="4"/>
+  <text x="610" y="190" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700" text-anchor="middle">Mailbox Storage</text>
+  <text x="610" y="208" fill="#93c5fd" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">MAA Server (POP3/IMAP)</text>
+
+  <!-- Bob Host (Receiver) -->
+  <rect x="760" y="80" width="160" height="150" fill="url(#bobGrad)" rx="8" stroke="#93c5fd" stroke-width="2"/>
+  <text x="840" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Bob (Receiver)</text>
+  <rect x="775" y="125" width="130" height="40" fill="#172554" rx="4"/>
+  <text x="840" y="145" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">User Agent (UA)</text>
+  <text x="840" y="158" fill="#bfdbfe" font-family="Segoe UI, sans-serif" font-size="8.5" text-anchor="middle">Thunderbird / App</text>
+  <rect x="775" y="175" width="130" height="35" fill="#0f172a" rx="4"/>
+  <text x="840" y="195" fill="#93c5fd" font-family="Segoe UI, sans-serif" font-size="9.5" text-anchor="middle">MAA Client (PULL)</text>
+
+  <!-- Transfer Arrows -->
+  <line x1="190" y1="145" x2="250" y2="145" stroke="#ec4899" stroke-width="2"/>
+  <text x="220" y="137" fill="#f472b6" font-family="Segoe UI, sans-serif" font-size="9" font-weight="700" text-anchor="middle">SMTP Push</text>
+
+  <line x1="430" y1="145" x2="520" y2="145" stroke="#38bdf8" stroke-width="2.5"/>
+  <text x="475" y="137" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="9" font-weight="700" text-anchor="middle">Internet SMTP Relay</text>
+
+  <line x1="700" y1="145" x2="760" y2="145" stroke="#facc15" stroke-width="2"/>
+  <text x="730" y="137" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="9" font-weight="700" text-anchor="middle">POP3 / IMAP Pull</text>
+
+  <!-- Bottom Panel: MIME & Architecture Breakdown -->
+  <rect x="30" y="270" width="890" height="190" fill="#0f172a" rx="8" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Col 1: 4 E-Mail Scenarios -->
+  <rect x="45" y="285" width="270" height="160" fill="#1e293b" rx="5"/>
+  <text x="180" y="305" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">1. Four E-Mail Scenarios</text>
+  <text x="55" y="325" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Scenario 1:</b> Both on same timesharing host.</text>
+  <text x="55" y="343" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Scenario 2:</b> Direct connection between 2 hosts.</text>
+  <text x="55" y="361" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Scenario 3:</b> Alice remote, Bob local.</text>
+  <text x="55" y="379" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="9">• <b>Scenario 4 (Modern Web):</b></text>
+  <text x="63" y="395" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  Both Alice &amp; Bob connected to mail servers.</text>
+  <text x="63" y="410" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  Requires SMTP for PUSH + POP3/IMAP for PULL.</text>
+
+  <!-- Col 2: UA vs MTA vs MAA -->
+  <rect x="340" y="285" width="270" height="160" fill="#1e293b" rx="5"/>
+  <text x="475" y="305" fill="#34d399" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">2. Core Architectural Roles</text>
+  <text x="350" y="325" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>User Agent (UA):</b> Client UI to compose,</text>
+  <text x="358" y="341" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  read, and organize email messages.</text>
+  <text x="350" y="359" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Message Transfer Agent (MTA):</b> SMTP daemon</text>
+  <text x="358" y="375" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  pushing mail from sender to destination server.</text>
+  <text x="350" y="393" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Message Access Agent (MAA):</b> POP3 / IMAP</text>
+  <text x="358" y="409" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  pulling mail from mailbox to recipient machine.</text>
+
+  <!-- Col 3: MIME Architecture -->
+  <rect x="635" y="285" width="270" height="160" fill="#1e293b" rx="5"/>
+  <text x="770" y="305" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">3. MIME (RFC 2045 - 2049)</text>
+  <text x="645" y="325" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>SMTP Limitation:</b> Can only send 7-bit ASCII.</text>
+  <text x="645" y="343" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>MIME Solution:</b> Encodes binary, audio, video</text>
+  <text x="653" y="359" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  into 7-bit ASCII before passing to SMTP.</text>
+  <text x="645" y="377" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>MIME-Version:</b> 1.0</text>
+  <text x="645" y="395" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Content-Type:</b> text, image, audio, multipart</text>
+  <text x="645" y="413" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Transfer-Encoding:</b> Base64, Quoted-Printable</text>
+</svg></div>
+    <h2>1. Electronic Mail 4-Scenario Evolutionary Framework</h2>
+    <p>E-mail relies on a store-and-forward architecture transitioning from local single-system file append to a 4-tier distributed internet model.</p>
+    <div class="callout">
+      <div class="callout-title">The Fundamental Architectural Rule</div>
+      SMTP is exclusively a <b>PUSH protocol</b> (sending client &rarr; server &rarr; server). Retrieving stored messages from a mailbox requires a <b>PULL protocol</b> (POP3 or IMAP4).
+    </div>
+    <h2>2. Functional Component Triad</h2>
+    <table>
+      <tr><th>Component</th><th>Abbr.</th><th>Role &amp; Protocol Assignment</th></tr>
+      <tr><td><b>User Agent</b></td><td>UA</td><td>Client application interface for composing, reading, and managing mail (CLI: mailx, GUI: Outlook/Webmail).</td></tr>
+      <tr><td><b>Message Transfer Agent</b></td><td>MTA</td><td>Daemon responsible for relaying mail across the IP network using <b>SMTP (Port 25)</b>.</td></tr>
+      <tr><td><b>Message Access Agent</b></td><td>MAA</td><td>Client-server retrieval mechanism for pulling stored mail to client using <b>POP3 (Port 110)</b> or <b>IMAP4 (Port 143)</b>.</td></tr>
+    </table>
+    <h2>3. MIME Header Fields (RFC 2045)</h2>
+    <div class="formula-box">Base64 Encoding Ratio: 3 raw bytes (24 bits) &rarr; 4 printable ASCII characters (33% size expansion)</div>
+    <ul>
+      <li><b>MIME-Version:</b> Identifies protocol iteration (Standard value: <code>1.0</code>).</li>
+      <li><b>Content-Type:</b> Declares media type and subtype (e.g., <code>multipart/mixed</code>, <code>image/jpeg</code>).</li>
+      <li><b>Content-Transfer-Encoding:</b> Declares transformation scheme (<code>base64</code>, <code>quoted-printable</code>).</li>
+    </ul>
+    
+</body>
+</html>

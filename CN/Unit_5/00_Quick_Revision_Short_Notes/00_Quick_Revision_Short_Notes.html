@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 5: Ultra Quick Revision Short Notes (Exact 3 Pages)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 6.7pt;
+    line-height: 1.15;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 4.5mm 5.5mm 3.5mm 5.5mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-bar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 3px 7px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3px;
+  }
+  .header-title {
+    font-size: 8.8pt;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 6.2pt;
+    color: #93c5fd;
+    font-weight: 500;
+  }
+  .page-tag {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 6.1pt;
+    font-weight: 700;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3.5px;
+  }
+  .card {
+    border: 1px solid #cbd5e1;
+    border-radius: 3.5px;
+    background: #ffffff;
+    padding: 2.5px 4px;
+    margin-bottom: 3px;
+  }
+  .card-title {
+    font-size: 7.0pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1px;
+    margin-bottom: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-title span {
+    font-size: 5.7pt;
+    color: #64748b;
+    font-weight: 500;
+  }
+  p, ul {
+    margin: 1.2px 0;
+    padding-left: 9px;
+  }
+  li {
+    margin-bottom: 0.8px;
+  }
+  strong {
+    color: #0f172a;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 0.5px 2px;
+    border-radius: 2px;
+    font-family: monospace;
+    font-size: 6.0pt;
+  }
+  .formula {
+    background: #eff6ff;
+    border-left: 2px solid #2563eb;
+    padding: 1.2px 3.5px;
+    margin: 1.2px 0;
+    font-family: monospace;
+    font-size: 6.0pt;
+    color: #1e3a8a;
+    font-weight: 600;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5px 0;
+    font-size: 5.9pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 1.2px 2.5px;
+    text-align: left;
+  }
+  th {
+    background: #f1f5f9;
+    color: #1e3a8a;
+    font-weight: 700;
+  }
+  .footer-bar {
+    border-top: 1px solid #cbd5e1;
+    padding-top: 1.5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 5.6pt;
+    color: #64748b;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">COMPUTER NETWORKS: UNIT 5 — APPLICATION LAYER &amp; SECURITY (QUICK REVISION)</div>
+        <div class="header-sub">BCS603 Gateway Classes Architecture | DNS, HTTP/HTTPS, TELNET &amp; E-Mail Architecture</div>
+      </div>
+      <div class="page-tag">PAGE 1 OF 3</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Col 1 -->
+      <div>
+        <div class="card">
+          <div class="card-title">1. Domain Name System (DNS) Architecture <span>Port 53 (UDP/TCP)</span></div>
+          <ul>
+            <li><strong>Core Purpose:</strong> Distributed, hierarchical database translating human-friendly domain names (e.g., <code>aktu.ac.in</code>) into 32-bit/128-bit IP addresses.</li>
+            <li><strong>Transport Ports:</strong> UDP Port 53 for interactive standard queries (&le; 512B); TCP Port 53 for zone transfers and extended replies (&gt; 512B).</li>
+            <li><strong>3 Domain Space Divisions:</strong>
+              <br/>• <em>Generic Domains (gTLD):</em> <code>.com</code> (commercial), <code>.edu</code> (education), <code>.gov</code> (govt), <code>.org</code> (non-profit), <code>.net</code>.
+              <br/>• <em>Country Domains (ccTLD):</em> 2-letter country code: <code>.in</code>, <code>.us</code>, <code>.uk</code>.
+              <br/>• <em>Inverse Domains (PTR):</em> Reverse mapping (IP &rarr; Hostname) via <code>in-addr.arpa</code>.</li>
+            <li><strong>Recursive vs Iterative Resolution:</strong>
+              <br/>• <em>Recursive:</em> Queried server takes full burden to resolve and return final IP to client stub resolver.
+              <br/>• <em>Iterative:</em> Queried server returns best-effort referral IP pointer to next subordinate nameserver.</li>
+            <li><strong>Caching &amp; TTL:</strong> Answers cached locally for <code>TTL</code> seconds to reduce internet traversal delay.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">2. DNS Resource Records (RR) Anatomy <span>Format</span></div>
+          <div class="formula">&lt;Domain_Name, Value, Type, TTL&gt;</div>
+          <table>
+            <tr><th>Type</th><th>Mapping Target</th><th>Practical Example</th></tr>
+            <tr><td><b>A</b></td><td>Hostname &rarr; IPv4 (32-bit)</td><td><code>aktu.ac.in &rarr; 14.139.233.10</code></td></tr>
+            <tr><td><b>AAAA</b></td><td>Hostname &rarr; IPv6 (128-bit)</td><td><code>aktu.ac.in &rarr; 2404:6800::</code></td></tr>
+            <tr><td><b>CNAME</b></td><td>Alias &rarr; Canonical Name</td><td><code>www.aktu.ac.in &rarr; aktu.ac.in</code></td></tr>
+            <tr><td><b>MX</b></td><td>Domain &rarr; Mail Exchanger</td><td><code>aktu.ac.in &rarr; mail.aktu.ac.in</code></td></tr>
+            <tr><td><b>NS</b></td><td>Zone &rarr; Authoritative Server</td><td><code>aktu.ac.in &rarr; ns1.aktu.ac.in</code></td></tr>
+            <tr><td><b>PTR</b></td><td>IP &rarr; Hostname (Reverse)</td><td><code>10.233.139.14.in-addr.arpa</code></td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <div class="card">
+          <div class="card-title">3. World Wide Web &amp; HTTP / HTTPS <span>Port 80 vs 443</span></div>
+          <ul>
+            <li><strong>URL Syntax:</strong> <code>protocol://host:port/path</code> (e.g., <code>http://aktu.ac.in:80/syllabus</code>).</li>
+            <li><strong>Stateless Nature:</strong> HTTP maintains zero client history between requests. Stateful sessions managed via <strong>Cookies</strong> and <strong>JWT</strong>.</li>
+            <li><strong>HTTP Methods:</strong> <code>GET</code> (fetch resource, idempotent), <code>POST</code> (submit payload/data), <code>HEAD</code> (headers only), <code>PUT</code> (create/replace), <code>DELETE</code>.</li>
+            <li><strong>Status Families:</strong> 1xx (Info), 2xx (Success: <code>200 OK</code>), 3xx (Redirection: <code>301 Moved</code>, <code>304 Not Modified</code>), 4xx (Client Error: <code>400 Bad</code>, <code>404 Not Found</code>), 5xx (Server: <code>500 Error</code>).</li>
+            <li><strong>Persistent vs Non-Persistent HTTP:</strong>
+              <br/>• <em>HTTP/1.0 (Non-Persistent):</em> 1 TCP connection per object (2 RTT overhead).
+              <br/>• <em>HTTP/1.1 (Persistent):</em> Single TCP connection for all objects (<code>Connection: keep-alive</code>) + Pipelining.</li>
+            <li><strong>HTTP vs HTTPS:</strong> HTTPS runs HTTP over <strong>TLS/SSL (Port 443)</strong>; provides AES encryption, HMAC integrity, and CA Certificate authentication.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">4. Remote Login &amp; TELNET Protocol <span>Port 23 (RFC 854)</span></div>
+          <ul>
+            <li><strong>Local vs Remote Login:</strong> Local login interacts directly with local terminal driver; Remote login sends keystrokes over TCP to remote pseudoterminal driver (PTY).</li>
+            <li><strong>Network Virtual Terminal (NVT):</strong> Universal intermediate representation. 7-bit ASCII characters (0–127); 8th bit high for control commands.</li>
+            <li><strong>Commands:</strong> Starts with <strong>IAC (Interpret As Command = 255 / 0xFF)</strong>. <code>WILL</code>, <code>DO</code>, <code>WONT</code>, <code>DONT</code> for option negotiation.</li>
+            <li><strong>Modes:</strong> Default (character echo), Character (keystroke per packet), Line (local buffer edited before Enter).</li>
+            <li><strong>Vulnerability:</strong> Cleartext passwords! Completely replaced by <strong>SSH (Port 22)</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">5. Electronic Mail (E-Mail) Architecture &amp; MIME <span>4 Tiers</span></div>
+          <ul>
+            <li><strong>4 Scenarios:</strong> 1 (Same system), 2 (Direct connected hosts), 3 (Alice remote, Bob local), 4 (Modern: Both connected to independent mail servers).</li>
+            <li><strong>Triad Components:</strong> User Agent (UA - Compose/Read), Message Transfer Agent (MTA - SMTP Push), Message Access Agent (MAA - POP3/IMAP Pull).</li>
+            <li><strong>MIME (RFC 2045):</strong> Overcomes SMTP 7-bit ASCII limitation; encodes multimedia/binary into ASCII. Headers: <code>MIME-Version</code>, <code>Content-Type</code>, <code>Content-Transfer-Encoding</code> (Base64 ratio 3 raw bytes &rarr; 4 ASCII chars).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AKTU BCS603 Computer Networks — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Page 1 of 3 (DNS, Web Protocols, TELNET &amp; E-Mail Foundations)</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">COMPUTER NETWORKS: UNIT 5 — APPLICATION LAYER &amp; SECURITY (QUICK REVISION)</div>
+        <div class="header-sub">SMTP, Email Gateways, POP3 vs IMAP4, FTP Dual Connections &amp; TFTP</div>
+      </div>
+      <div class="page-tag">PAGE 2 OF 3</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Col 1 -->
+      <div>
+        <div class="card">
+          <div class="card-title">6. Simple Mail Transfer Protocol (SMTP) <span>Port 25 / 587</span></div>
+          <ul>
+            <li><strong>Protocol Nature:</strong> Strictly a <strong>PUSH Protocol</strong> executing over TCP Port 25 (server relay) and Port 587 (client submission).</li>
+            <li><strong>3-Phase Operational Cycle:</strong>
+              <br/>• <em>1. Connection:</em> Server sends <code>220</code> &rarr; Client sends <code>HELO / EHLO</code> &rarr; Server sends <code>250 OK</code>.
+              <br/>• <em>2. Mail Transaction:</em>
+              <br/>&nbsp;&nbsp;&bull; <code>MAIL FROM: &lt;sender@domain&gt;</code> &rarr; <code>250 OK</code>
+              <br/>&nbsp;&nbsp;&bull; <code>RCPT TO: &lt;recv@domain&gt;</code> &rarr; <code>250 OK</code>
+              <br/>&nbsp;&nbsp;&bull; <code>DATA</code> &rarr; <code>354 Start mail input</code> &rarr; Body text &rarr; <code>&lt;CRLF&gt;.&lt;CRLF&gt;</code> &rarr; <code>250 Queued</code>.
+              <br/>• <em>3. Teardown:</em> Client sends <code>QUIT</code> &rarr; Server sends <code>221 Closing</code>.</li>
+            <li><strong>Relays &amp; MX Lookup:</strong> Messages route through intermediate MTAs using DNS MX priority preference records.</li>
+            <li><strong>Email Security Gateways (AKTU PYQ):</strong> On-premise appliances (Cisco IronPort, Barracuda, Fortinet FortiMail, Symantec) and Cloud (Proofpoint, Mimecast) for spam filtering, DLP, and antivirus scanning.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">7. Mail Access Protocols: POP3 vs IMAP4 <span>PULL Engine</span></div>
+          <table>
+            <tr><th>Parameter</th><th>POP3 (RFC 1939)</th><th>IMAP4 (RFC 3501)</th></tr>
+            <tr><td><b>Ports</b></td><td>Port 110 (995 SSL)</td><td>Port 143 (993 SSL)</td></tr>
+            <tr><td><b>Storage</b></td><td>Local client disk</td><td>Central server database</td></tr>
+            <tr><td><b>Sync</b></td><td>No multi-device sync</td><td>Full real-time synchronization</td></tr>
+            <tr><td><b>Modes</b></td><td>Delete Mode &amp; Keep Mode</td><td>Continuous server stateful</td></tr>
+            <tr><td><b>Flags</b></td><td>Local flags only</td><td><code>\Seen</code>, <code>\Flagged</code> synced</td></tr>
+            <tr><td><b>Folders</b></td><td>No server folders</td><td>Create/manage server folders</td></tr>
+            <tr><td><b>Partial Fetch</b></td><td>Full message download</td><td>Header preview &amp; search</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <div class="card">
+          <div class="card-title">8. File Transfer Protocol (FTP RFC 959) <span>Dual Connections</span></div>
+          <ul>
+            <li><strong>Why Dual Connections?</strong> Separation of concerns: control uses 7-bit ASCII lines; data transfers raw bytes without command choking. Allows <code>ABOR</code> mid-transfer.</li>
+            <li><strong>Control Connection (Port 21):</strong> Stays open throughout session. 7-bit ASCII commands (<code>USER</code>, <code>PASS</code>, <code>RETR</code>, <code>STOR</code>, <code>QUIT</code>) and 3-digit replies.</li>
+            <li><strong>Data Connection (Port 20 / PASV):</strong> Opens dynamically per file transfer / directory list; closes immediately upon completion.</li>
+            <li><strong>Active Mode (PORT):</strong> Client sends <code>PORT IP,p1,p2</code>. Server initiates data connection FROM Port 20 TO Client. <em>Fails behind client NAT firewalls!</em></li>
+            <li><strong>Passive Mode (PASV):</strong> Client sends <code>PASV</code>. Server opens random high port $P$ ($>1023$) &rarr; Client connects TO Server. <em>Firewall friendly!</em></li>
+            <li><strong>Port Math:</strong> $\text{Port} = p_1 \times 256 + p_2$. (e.g., $(16, 32) \implies 16 \times 256 + 32 = 4128$).</li>
+            <li><strong>Anonymous FTP:</strong> Username <code>anonymous</code>, Password = user email.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">9. TFTP vs FTP vs HTTP Comparison <span>RFC 1350</span></div>
+          <ul>
+            <li><strong>TFTP (Trivial FTP):</strong> Lightweight, UDP Port 69. No authentication. Fixed 512-byte blocks with Stop-and-Wait ACK. Block size &lt; 512B signals EOF. Used in PXE network boot and router IOS firmware flashing.</li>
+          </ul>
+          <table>
+            <tr><th>Feature</th><th>FTP (RFC 959)</th><th>TFTP (RFC 1350)</th><th>HTTP (RFC 2616)</th></tr>
+            <tr><td><b>Transport</b></td><td>TCP 20 &amp; 21</td><td>UDP 69</td><td>TCP 80 / 443</td></tr>
+            <tr><td><b>Channels</b></td><td>Dual Connections</td><td>Connectionless</td><td>Single Stream</td></tr>
+            <tr><td><b>Auth</b></td><td>Mandatory</td><td>None (Zero)</td><td>Header / Token</td></tr>
+            <tr><td><b>Directory</b></td><td>Full browsing</td><td>No listing</td><td>URL paths</td></tr>
+            <tr><td><b>Footprint</b></td><td>Heavy daemon</td><td>Fits in ROM/BIOS</td><td>Rich client/cache</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AKTU BCS603 Computer Networks — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Page 2 of 3 (SMTP, Mail Access, FTP Dual Channels &amp; TFTP)</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">COMPUTER NETWORKS: UNIT 5 — APPLICATION LAYER &amp; SECURITY (QUICK REVISION)</div>
+        <div class="header-sub">SNMP Management, Cryptography, RSA Math, Compression &amp; Diagnostic Commands</div>
+      </div>
+      <div class="page-tag">PAGE 3 OF 3</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Col 1 -->
+      <div>
+        <div class="card">
+          <div class="card-title">10. Network Management &amp; SNMP <span>UDP 161 &amp; 162</span></div>
+          <ul>
+            <li><strong>Framework:</strong> Manager (client on NMS) polls Agents (servers on routers/switches).</li>
+            <li><strong>Ports:</strong> UDP 161 (Agent receives Get/Set); UDP 162 (Manager receives Traps).</li>
+            <li><strong>Management Triad (Slide 65 Analogy):</strong>
+              <br/>• <em>SMI:</em> Grammar/syntax rules using ASN.1 and BER encoding.
+              <br/>• <em>MIB:</em> Object database tree. Prefix: <code>1.3.6.1.2.1</code> (mib-2).
+              <br/>• <em>SNMP:</em> Protocol packet formats and message passing.</li>
+            <li><strong>3 Functions:</strong> Status Polling (<code>Get</code>), Remote Configuration (<code>Set</code>), Emergency Alarms (<code>Trap</code>).</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">11. Cryptography Foundations &amp; Symmetric Ciphers <span>DES &amp; AES</span></div>
+          <ul>
+            <li><strong>4 Pillars:</strong> Confidentiality, Integrity, Authentication, Non-repudiation.</li>
+            <li><strong>Symmetric:</strong> Single shared key $K$. $C = E_K(P)$, $P = D_K(C)$. Key distribution challenge: $N(N-1)/2$ keys.</li>
+            <li><strong>Classical:</strong> Substitution (Caesar shift $k=3$, Monoalphabetic vs Polyalphabetic) vs Transposition (Rail Fence, Columnar).</li>
+            <li><strong>DES:</strong> 64-bit block, 56-bit key, 16 Feistel rounds (Broken).</li>
+            <li><strong>AES:</strong> 128-bit block, 128/192/256-bit key, SPN network (SubBytes, ShiftRows, MixColumns, AddRoundKey). Global gold standard.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">12. Data Compression Techniques <span>Lossless &amp; Lossy</span></div>
+          <ul>
+            <li><strong>Compression Ratio:</strong> $\text{CR} = \text{Uncompressed} / \text{Compressed}$.</li>
+            <li><strong>Lossless (Exact bits):</strong>
+              <br/>• <em>Run-Length (RLE):</em> <code>AAAAABBBCCDA &rarr; A5B3C2D1A1</code>.
+              <br/>• <em>Huffman:</em> Variable-length prefix codes based on character probabilities.
+              <br/>• <em>Lempel-Ziv (LZW):</em> Dynamic dictionary table index pointers (ZIP/PNG).</li>
+            <li><strong>Lossy Audio Masking (Slide 87–88):</strong>
+              <br/>• <em>Frequency Masking:</em> Louder tone drowns nearby soft frequencies.
+              <br/>• <em>Temporal Masking:</em> Loud impulse (hammer) temporarily desensitizes ear.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <div class="card">
+          <div class="card-title">13. RSA Asymmetric Algorithm &amp; Math <span>AKTU PYQ</span></div>
+          <ul>
+            <li><strong>Key Selection Steps:</strong>
+              <br/>1. Choose distinct large primes $p$ and $q$.
+              <br/>2. Modulus: $n = p \times q$.
+              <br/>3. Totient: $\phi(n) = (p - 1)(q - 1)$.
+              <br/>4. Public exponent $e$: $1 < e < \phi(n)$ and $\gcd(e, \phi(n)) = 1$.
+              <br/>5. Private exponent $d$: $d \cdot e \equiv 1 \pmod{\phi(n)} \implies d = e^{-1} \pmod{\phi(n)}$.
+              <br/>6. Public Key = $(e, n)$, Private Key = $(d, n)$.</li>
+            <li><strong>Formulas:</strong> $C = P^e \bmod n$ and $P = C^d \bmod n$ (where $P < n$).</li>
+            <li><strong>Solved Example (Character "F"):</strong>
+              <br/>• $p=3, q=11 \implies n=33, \phi(n)=20$.
+              <br/>• Choose $e=3 \implies \gcd(3, 20)=1$.
+              <br/>• $3d \equiv 1 \pmod{20} \implies 3 \times 7 = 21 \implies d=7$.
+              <br/>• Plaintext $P = 5$ ('F').
+              <br/>• <strong>Encrypt:</strong> $C = 5^3 \bmod 33 = 125 \bmod 33 = 26$.
+              <br/>• <strong>Decrypt:</strong> $P = 26^7 \bmod 33 = 5$ ('F') &check;.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">14. Firewalls &amp; 5 Diagnostic Commands <span>Slides 89–93</span></div>
+          <ul>
+            <li><strong>Firewalls:</strong> Packet Filtering (L3/L4 stateless IP/Port matching), Stateful Inspection (L4 connection state table), Application Proxy (L7 payload inspection).</li>
+            <li><strong>Digital Signatures:</strong> Hash signed with sender's Private Key $S = E_{\text{PR}_A}(H(M))$; verified with Public Key.</li>
+            <li><strong>5 Networking Commands:</strong>
+              <br/>• <code>ipconfig /all</code>: Shows IP, MAC, Subnet, Gateway, DNS; <code>/flushdns</code>.
+              <br/>• <code>nslookup &lt;domain&gt;</code>: Resolves hostname to IP &amp; queries MX/A records.
+              <br/>• <code>tracert &lt;target&gt;</code>: Incremental IP TTL hops &amp; latency discovery.
+              <br/>• <code>ping &lt;target&gt;</code>: ICMP Echo Request (Type 8) &amp; Reply (Type 0).
+              <br/>• <code>netstat -ano</code>: Displays active TCP links, listening ports &amp; PIDs.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AKTU BCS603 Computer Networks — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Page 3 of 3 (SNMP, Cryptography, RSA Math, Compression &amp; Commands)</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 07: File Transfer Protocol (FTP) Architecture</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 14mm 14mm 14mm 14mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 8.8pt;
+    line-height: 1.42;
+    margin: 0;
+    padding: 0;
+  }
+  .header-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .course-tag {
+    font-size: 7.2pt;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #93c5fd;
+    font-weight: 700;
+  }
+  h1 {
+    font-size: 15pt;
+    margin: 3px 0 2px 0;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .meta-sub {
+    font-size: 7.6pt;
+    color: #cbd5e1;
+  }
+  h2 {
+    font-size: 11pt;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #e2e8f0;
+    padding-bottom: 3px;
+    margin: 12px 0 6px 0;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 9.3pt;
+    color: #0f172a;
+    margin: 8px 0 4px 0;
+    font-weight: 700;
+  }
+  p, ul, ol {
+    margin: 3px 0 6px 0;
+  }
+  ul, ol {
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 2.5px;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: Consolas, monospace;
+    font-size: 8.0pt;
+  }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+    font-size: 7.6pt;
+    line-height: 1.35;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    margin: 6px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 7.8pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 4px 7px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #1e3a8a;
+    font-weight: 700;
+  }
+  .callout {
+    background: #eff6ff;
+    border-left: 3.5px solid #2563eb;
+    padding: 7px 10px;
+    border-radius: 0 4px 4px 0;
+    margin: 8px 0;
+    font-size: 8.2pt;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 2px;
+  }
+  .callout-warn {
+    background: #fef2f2;
+    border-left: 3.5px solid #ef4444;
+  }
+  .callout-warn .callout-title {
+    color: #991b1b;
+  }
+  .svg-container {
+    text-align: center;
+    margin: 10px 0;
+    padding: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+  }
+  .svg-container svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .formula-box {
+    background: #f8fafc;
+    border: 1px solid #93c5fd;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    color: #1e3a8a;
+    font-weight: 600;
+    margin: 6px 0;
+  }
+</style>
+</head>
+<body>
+<div class="header-card">
+  <div class="course-tag">Computer Networks (BCS603) — Unit 5: Application Layer</div>
+  <h1>Module 07: File Transfer Protocol (FTP) Architecture</h1>
+  <div class="meta-sub">Gateway Classes Lecture Series | Dr. Nidhi Parashar Ma'am | Author: Shivam Keshari</div>
+</div>
+
+    <div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ftpBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="ftpClient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="ftpServer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="950" height="480" fill="url(#ftpBg)" rx="10"/>
+
+  <text x="475" y="32" fill="#38bdf8" font-family="-apple-system, Segoe UI, sans-serif" font-size="19" font-weight="800" text-anchor="middle" letter-spacing="0.5">FILE TRANSFER PROTOCOL (FTP) DUAL-CONNECTION ARCHITECTURE</text>
+  <text x="475" y="52" fill="#94a3b8" font-family="-apple-system, Segoe UI, sans-serif" font-size="12" text-anchor="middle">Separation of Control (Port 21) &amp; Data (Port 20), Active Mode (PORT) vs Passive Mode (PASV)</text>
+
+  <!-- Left: FTP Client Host -->
+  <rect x="40" y="80" width="220" height="195" fill="url(#ftpClient)" rx="8" stroke="#38bdf8" stroke-width="2"/>
+  <text x="150" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" text-anchor="middle">FTP Client Machine</text>
+  <rect x="55" y="125" width="190" height="42" fill="#0c4a6e" rx="4"/>
+  <text x="150" y="145" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">User Interface (CLI / GUI)</text>
+  <text x="150" y="159" fill="#bae6fd" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Issues get, put, ls commands</text>
+  <rect x="55" y="175" width="190" height="42" fill="#0369a1" rx="4"/>
+  <text x="150" y="195" fill="#ffffff" font-family="Consolas, monospace" font-size="10.5" font-weight="700" text-anchor="middle">Control Process (PI)</text>
+  <text x="150" y="209" fill="#e0f2fe" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Client Port N (>1023)</text>
+  <rect x="55" y="223" width="190" height="42" fill="#0284c7" rx="4"/>
+  <text x="150" y="243" fill="#ffffff" font-family="Consolas, monospace" font-size="10.5" font-weight="700" text-anchor="middle">Data Transfer Process (DTP)</text>
+  <text x="150" y="257" fill="#e0f2fe" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Client Port N+1 (>1023)</text>
+
+  <!-- Center: Dual Connections Flow -->
+  <!-- 1. Control Connection (Permanent) -->
+  <rect x="300" y="105" width="350" height="65" fill="#1e293b" rx="6" stroke="#38bdf8" stroke-width="2"/>
+  <text x="475" y="125" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" text-anchor="middle">CONTROL CONNECTION (TCP PORT 21)</text>
+  <text x="475" y="143" fill="#e2e8f0" font-family="Consolas, monospace" font-size="9.5" text-anchor="middle">7-bit ASCII Commands &amp; 3-Digit Replies</text>
+  <text x="475" y="158" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Persistent: Stays alive throughout full interactive session</text>
+
+  <!-- 2. Data Connection (Ephemeral) -->
+  <rect x="300" y="195" width="350" height="70" fill="#1e293b" rx="6" stroke="#4ade80" stroke-width="2"/>
+  <text x="475" y="215" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" text-anchor="middle">DATA CONNECTION (TCP PORT 20 / DYNAMIC)</text>
+  <text x="475" y="233" fill="#e2e8f0" font-family="Consolas, monospace" font-size="9.5" text-anchor="middle">Binary / ASCII Raw File Transmission Stream</text>
+  <text x="475" y="248" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Non-Persistent: Opens dynamically per file, closes upon finish</text>
+
+  <!-- Stream Arrows -->
+  <line x1="245" y1="137" x2="300" y2="137" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="650" y1="137" x2="695" y2="137" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="245" y1="230" x2="300" y2="230" stroke="#4ade80" stroke-width="2.5"/>
+  <line x1="650" y1="230" x2="695" y2="230" stroke="#4ade80" stroke-width="2.5"/>
+
+  <!-- Right: FTP Server Host -->
+  <rect x="695" y="80" width="220" height="195" fill="url(#ftpServer)" rx="8" stroke="#a78bfa" stroke-width="2"/>
+  <text x="805" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" text-anchor="middle">FTP Server Machine</text>
+  <rect x="710" y="125" width="190" height="42" fill="#4c1d95" rx="4"/>
+  <text x="805" y="145" fill="#facc15" font-family="Consolas, monospace" font-size="10.5" font-weight="700" text-anchor="middle">Server Control PI (Port 21)</text>
+  <text x="805" y="159" fill="#ddd6fe" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Manages Auth &amp; Commands</text>
+  <rect x="710" y="175" width="190" height="42" fill="#5b21b6" rx="4"/>
+  <text x="805" y="195" fill="#ffffff" font-family="Consolas, monospace" font-size="10.5" font-weight="700" text-anchor="middle">Server Data DTP (Port 20)</text>
+  <text x="805" y="209" fill="#ddd6fe" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Active: 20 | Passive: Dynamic</text>
+  <rect x="710" y="223" width="190" height="42" fill="#4c1d95" rx="4"/>
+  <text x="805" y="243" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">Server File System</text>
+  <text x="805" y="257" fill="#ede9fe" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Disk Storage Directory</text>
+
+  <!-- Bottom Panel: Active vs Passive FTP Breakdown -->
+  <rect x="40" y="295" width="875" height="170" fill="#0f172a" rx="8" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Col 1: Why Dual Connections? -->
+  <rect x="55" y="310" width="265" height="140" fill="#1e293b" rx="5"/>
+  <text x="187" y="330" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">1. Why Dual Connections?</text>
+  <text x="65" y="350" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Separation of Concerns:</b> Control uses</text>
+  <text x="73" y="366" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  simple 7-bit ASCII lines; Data transfers raw bytes.</text>
+  <text x="65" y="384" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Interactive Control:</b> User can abort</text>
+  <text x="73" y="400" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  a huge 10GB file transfer mid-way via Port 21.</text>
+  <text x="65" y="418" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• Prevents command choking during file transfer.</text>
+
+  <!-- Col 2: Active FTP Mode -->
+  <rect x="342" y="310" width="265" height="140" fill="#1e293b" rx="5"/>
+  <text x="474" y="330" fill="#34d399" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">2. Active FTP Mode (PORT)</text>
+  <text x="352" y="350" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• Client connects to Server Port 21.</text>
+  <text x="352" y="368" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• Client sends <code>PORT IP,p1,p2</code> command.</text>
+  <text x="352" y="386" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Server initiates data connection</b> FROM</text>
+  <text x="360" y="402" fill="#facc15" font-family="Consolas, monospace" font-size="8.5">  Port 20 TO Client's Port N+1.</text>
+  <text x="352" y="420" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="8.5">• <b>Firewall Problem:</b> Client NAT blocks server's incoming SYN!</text>
+
+  <!-- Col 3: Passive FTP Mode -->
+  <rect x="630" y="310" width="270" height="140" fill="#1e293b" rx="5"/>
+  <text x="765" y="330" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">3. Passive FTP Mode (PASV)</text>
+  <text x="640" y="350" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• Client sends <code>PASV</code> command to Server.</text>
+  <text x="640" y="368" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• Server opens random port P (&gt;1023) and</text>
+  <text x="648" y="384" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="8.5">  replies: <code>227 Entering Passive Mode (IP,p1,p2)</code>.</text>
+  <text x="640" y="402" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="9">• <b>Client initiates data connection</b> TO Server.</text>
+  <text x="640" y="420" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="8.5">• <b>Firewall Friendly:</b> Outbound connections allowed!</text>
+</svg></div>
+    <h2>1. FTP Dual-Connection Architecture</h2>
+    <p>File Transfer Protocol establishes two discrete logical connections over TCP: an interactive Control Connection and an ephemeral Data Connection.</p>
+    <div class="callout">
+      <div class="callout-title">Functional Connection Roles</div>
+      <b>Control Connection (Port 21):</b> Stays persistently open throughout session; transmits 7-bit ASCII commands and 3-digit replies.<br/>
+      <b>Data Connection (Port 20 / PASV):</b> Opens dynamically per file transfer / directory listing; closes automatically upon completion.
+    </div>
+    <h2>2. Active Mode vs Passive Mode FTP</h2>
+    <table>
+      <tr><th>Criterion</th><th>Active Mode (PORT)</th><th>Passive Mode (PASV)</th></tr>
+      <tr><td><b>Data Connection Initiator</b></td><td>Server initiates connection to Client</td><td>Client initiates connection to Server</td></tr>
+      <tr><td><b>Server Data Port</b></td><td>Fixed Well-Known Port 20</td><td>Ephemeral dynamic unreserved port (&gt;1023)</td></tr>
+      <tr><td><b>Client Firewall Traversal</b></td><td>Fails: Client NAT firewall blocks unsolicited server SYN</td><td>Succeeds: Outbound connection permitted by firewall state tables</td></tr>
+    </table>
+    <h2>3. Key FTP Commands</h2>
+    <ul>
+      <li><code>USER / PASS</code>: Client authentication credentials.</li>
+      <li><code>PORT / PASV</code>: Selects active vs passive data connection negotiation mode.</li>
+      <li><code>RETR / STOR</code>: Retrieves file from server / stores local file to server.</li>
+      <li><code>QUIT</code>: Gracefully closes control connection.</li>
+    </ul>
+    
+</body>
+</html>

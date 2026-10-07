@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="rsaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="pubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="privGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b91c1c"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="950" height="480" fill="url(#rsaBg)" rx="10"/>
+
+  <text x="475" y="32" fill="#38bdf8" font-family="-apple-system, Segoe UI, sans-serif" font-size="19" font-weight="800" text-anchor="middle" letter-spacing="0.5">ASYMMETRIC CRYPTOGRAPHY &amp; RSA ALGORITHM</text>
+  <text x="475" y="52" fill="#94a3b8" font-family="-apple-system, Segoe UI, sans-serif" font-size="12" text-anchor="middle">Public-Key Mechanics, Prime Modulus Math, Key Generation Steps &amp; Solved AKTU Example</text>
+
+  <!-- Left: Alice (Sender with Bob's Public Key) -->
+  <rect x="40" y="80" width="220" height="185" fill="#1e3a8a" rx="8" stroke="#38bdf8" stroke-width="2"/>
+  <text x="150" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Alice (Sender)</text>
+  <rect x="55" y="125" width="190" height="35" fill="#172554" rx="4"/>
+  <text x="150" y="145" fill="#facc15" font-family="Consolas, monospace" font-size="10.5" font-weight="700" text-anchor="middle">Plaintext P = 5 ("F")</text>
+  <text x="150" y="157" fill="#bfdbfe" font-family="Segoe UI, sans-serif" font-size="8.5" text-anchor="middle">(Restriction: P &lt; n)</text>
+
+  <!-- Alice Key used: Bob Public Key -->
+  <rect x="55" y="170" width="190" height="42" fill="url(#pubGrad)" rx="4"/>
+  <text x="150" y="190" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">Bob's Public Key (e, n)</text>
+  <text x="150" y="204" fill="#e0f2fe" font-family="Consolas, monospace" font-size="9.5" text-anchor="middle">e = 3, n = 33</text>
+
+  <rect x="55" y="220" width="190" height="35" fill="#0f172a" rx="4"/>
+  <text x="150" y="240" fill="#4ade80" font-family="Consolas, monospace" font-size="9.5" font-weight="700" text-anchor="middle">C = P^e mod n = 5^3 mod 33 = 26</text>
+
+  <!-- Center: Ciphertext Channel -->
+  <rect x="300" y="130" width="350" height="70" fill="#0f172a" rx="6" stroke="#facc15" stroke-width="1.5"/>
+  <text x="475" y="152" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" text-anchor="middle">PUBLIC INTERNET TRANSIT CHANNEL</text>
+  <text x="475" y="172" fill="#38bdf8" font-family="Consolas, monospace" font-size="12" font-weight="700" text-anchor="middle">Ciphertext C = 26 Transmitted</text>
+  <text x="475" y="188" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Eve cannot decrypt without Bob's secret private key d</text>
+
+  <!-- Connecting Lines -->
+  <line x1="260" y1="165" x2="300" y2="165" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="650" y1="165" x2="690" y2="165" stroke="#4ade80" stroke-width="2.5"/>
+
+  <!-- Right: Bob (Receiver with Private Key) -->
+  <rect x="690" y="80" width="220" height="185" fill="#064e3b" rx="8" stroke="#34d399" stroke-width="2"/>
+  <text x="800" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Bob (Receiver)</text>
+  <rect x="705" y="125" width="190" height="35" fill="#022c22" rx="4"/>
+  <text x="800" y="145" fill="#facc15" font-family="Consolas, monospace" font-size="10.5" font-weight="700" text-anchor="middle">Received C = 26</text>
+
+  <!-- Bob Key used: Bob Private Key -->
+  <rect x="705" y="170" width="190" height="42" fill="url(#privGrad)" rx="4"/>
+  <text x="800" y="190" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">Bob's Private Key (d, n)</text>
+  <text x="800" y="204" fill="#fee2e2" font-family="Consolas, monospace" font-size="9.5" text-anchor="middle">d = 7 (Kept Strictly Secret)</text>
+
+  <rect x="705" y="220" width="190" height="35" fill="#022c22" rx="4"/>
+  <text x="800" y="240" fill="#4ade80" font-family="Consolas, monospace" font-size="9.5" font-weight="700" text-anchor="middle">P = C^d mod n = 26^7 mod 33 = 5 ("F")</text>
+
+  <!-- Bottom Panel: 6 Step RSA Algorithm & Numerical Box -->
+  <rect x="40" y="280" width="870" height="180" fill="#0f172a" rx="8" stroke="#334155" stroke-width="1.5"/>
+  <text x="475" y="302" fill="#e2e8f0" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" text-anchor="middle">RSA ALGORITHM STEP-BY-STEP MATHEMATICAL FOUNDATIONS (SLIDES 78 - 82)</text>
+
+  <!-- 3 Cols -->
+  <rect x="55" y="315" width="265" height="135" fill="#1e293b" rx="5"/>
+  <text x="187" y="335" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">1. Key Generation Steps</text>
+  <text x="65" y="355" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• 1. Choose 2 large primes: <b>p</b> and <b>q</b>.</text>
+  <text x="65" y="373" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• 2. Compute modulus: <code>n = p × q</code>.</text>
+  <text x="65" y="391" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• 3. Compute Euler phi: <code>φ(n) = (p-1)(q-1)</code>.</text>
+  <text x="65" y="409" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• 4. Choose <b>e</b>: <code>1 &lt; e &lt; φ(n)</code> &amp; <code>gcd(e, φ(n)) = 1</code>.</text>
+  <text x="65" y="427" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• 5. Compute <b>d</b>: <code>d × e ≡ 1 mod φ(n)</code>.</text>
+
+  <rect x="342" y="315" width="265" height="135" fill="#1e293b" rx="5"/>
+  <text x="474" y="335" fill="#34d399" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">2. Encryption &amp; Decryption</text>
+  <text x="352" y="355" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Public Key:</b> <code>(e, n)</code> | <b>Private Key:</b> <code>(d, n)</code></text>
+  <text x="352" y="373" fill="#38bdf8" font-family="Consolas, monospace" font-size="9.5">• <b>Encryption:</b> C = P^e mod n</text>
+  <text x="352" y="391" fill="#4ade80" font-family="Consolas, monospace" font-size="9.5">• <b>Decryption:</b> P = C^d mod n</text>
+  <text x="352" y="409" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="9">• <b>Security Foundation:</b> Integer Factorization</text>
+  <text x="360" y="425" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  Factoring large n (~2048 bits) is intractable.</text>
+
+  <rect x="630" y="315" width="265" height="135" fill="#1e293b" rx="5"/>
+  <text x="762" y="335" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">3. Solved Numerical Example</text>
+  <text x="640" y="355" fill="#cbd5e1" font-family="Consolas, monospace" font-size="8.5">• p = 3, q = 11 → n = 33, φ(n) = 20</text>
+  <text x="640" y="373" fill="#cbd5e1" font-family="Consolas, monospace" font-size="8.5">• Choose e = 3 (gcd(3, 20) = 1)</text>
+  <text x="640" y="391" fill="#cbd5e1" font-family="Consolas, monospace" font-size="8.5">• d: 3d ≡ 1 mod 20 → 3×7 = 21 ≡ 1 → d = 7</text>
+  <text x="640" y="409" fill="#38bdf8" font-family="Consolas, monospace" font-size="8.5">• Encrypt P=5: C = 5^3 mod 33 = 125 mod 33 = 26</text>
+  <text x="640" y="427" fill="#4ade80" font-family="Consolas, monospace" font-size="8.5">• Decrypt C=26: P = 26^7 mod 33 = 5 ("F")</text>
+</svg>

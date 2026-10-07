@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 06: Mail Access Protocols: POP3 vs IMAP4</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 14mm 14mm 14mm 14mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 8.8pt;
+    line-height: 1.42;
+    margin: 0;
+    padding: 0;
+  }
+  .header-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .course-tag {
+    font-size: 7.2pt;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #93c5fd;
+    font-weight: 700;
+  }
+  h1 {
+    font-size: 15pt;
+    margin: 3px 0 2px 0;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .meta-sub {
+    font-size: 7.6pt;
+    color: #cbd5e1;
+  }
+  h2 {
+    font-size: 11pt;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #e2e8f0;
+    padding-bottom: 3px;
+    margin: 12px 0 6px 0;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 9.3pt;
+    color: #0f172a;
+    margin: 8px 0 4px 0;
+    font-weight: 700;
+  }
+  p, ul, ol {
+    margin: 3px 0 6px 0;
+  }
+  ul, ol {
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 2.5px;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: Consolas, monospace;
+    font-size: 8.0pt;
+  }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+    font-size: 7.6pt;
+    line-height: 1.35;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    margin: 6px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 7.8pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 4px 7px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #1e3a8a;
+    font-weight: 700;
+  }
+  .callout {
+    background: #eff6ff;
+    border-left: 3.5px solid #2563eb;
+    padding: 7px 10px;
+    border-radius: 0 4px 4px 0;
+    margin: 8px 0;
+    font-size: 8.2pt;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 2px;
+  }
+  .callout-warn {
+    background: #fef2f2;
+    border-left: 3.5px solid #ef4444;
+  }
+  .callout-warn .callout-title {
+    color: #991b1b;
+  }
+  .svg-container {
+    text-align: center;
+    margin: 10px 0;
+    padding: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+  }
+  .svg-container svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .formula-box {
+    background: #f8fafc;
+    border: 1px solid #93c5fd;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    color: #1e3a8a;
+    font-weight: 600;
+    margin: 6px 0;
+  }
+</style>
+</head>
+<body>
+<div class="header-card">
+  <div class="course-tag">Computer Networks (BCS603) — Unit 5: Application Layer</div>
+  <h1>Module 06: Mail Access Protocols: POP3 vs IMAP4</h1>
+  <div class="meta-sub">Gateway Classes Lecture Series | Dr. Nidhi Parashar Ma'am | Author: Shivam Keshari</div>
+</div>
+
+    <div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="maaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="pop3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="imap4Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="950" height="480" fill="url(#maaBg)" rx="10"/>
+
+  <text x="475" y="32" fill="#38bdf8" font-family="-apple-system, Segoe UI, sans-serif" font-size="19" font-weight="800" text-anchor="middle" letter-spacing="0.5">MESSAGE ACCESS PROTOCOLS: POP3 vs IMAP4 ARCHITECTURE</text>
+  <text x="475" y="52" fill="#94a3b8" font-family="-apple-system, Segoe UI, sans-serif" font-size="12" text-anchor="middle">Mail Retrieval Mechanics, Delete vs Keep Mode, Server-Side Folder Synchronization &amp; Bandwidth</text>
+
+  <!-- Left: POP3 Architecture Box -->
+  <rect x="40" y="80" width="415" height="205" fill="#1e293b" rx="8" stroke="#ea580c" stroke-width="2"/>
+  <rect x="40" y="80" width="415" height="35" fill="url(#pop3Grad)" rx="8"/>
+  <text x="247" y="103" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="13" font-weight="800" text-anchor="middle">POP3 (Post Office Protocol v3 — RFC 1939)</text>
+
+  <text x="55" y="135" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Port:</b> TCP Port 110 (Cleartext) | Port 995 (POP3S over SSL)</text>
+  <text x="55" y="153" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Core Philosophy:</b> Simple offline download-and-read model.</text>
+  <text x="55" y="171" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Delete Mode:</b> Mailbox mail deleted from server upon download.</text>
+  <text x="55" y="189" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Keep Mode:</b> Copies kept on server, but states not synchronized.</text>
+  <text x="55" y="207" fill="#f87171" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Single Device Bound:</b> Multi-device usage causes state divergence.</text>
+  <text x="55" y="225" fill="#f87171" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>No Folder Hierarchy:</b> Cannot create or organize server-side folders.</text>
+  <text x="55" y="243" fill="#f87171" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Full Download Only:</b> Must download full message including attachments.</text>
+  <rect x="55" y="255" width="385" height="22" fill="#7c2d12" rx="3"/>
+  <text x="247" y="270" fill="#fed7aa" font-family="Consolas, monospace" font-size="9" font-weight="700" text-anchor="middle">Commands: USER, PASS, STAT, LIST, RETR, DELE, QUIT</text>
+
+  <!-- Right: IMAP4 Architecture Box -->
+  <rect x="495" y="80" width="415" height="205" fill="#1e293b" rx="8" stroke="#2563eb" stroke-width="2"/>
+  <rect x="495" y="80" width="415" height="35" fill="url(#imap4Grad)" rx="8"/>
+  <text x="702" y="103" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="13" font-weight="800" text-anchor="middle">IMAP4 (Internet Message Access Protocol v4 — RFC 3501)</text>
+
+  <text x="510" y="135" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Port:</b> TCP Port 143 (Cleartext) | Port 993 (IMAPS over SSL)</text>
+  <text x="510" y="153" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Core Philosophy:</b> Dynamic client-server synchronized database.</text>
+  <text x="510" y="171" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Multi-Device Sync:</b> Phone, laptop &amp; webmail see identical mailbox state.</text>
+  <text x="510" y="189" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Message Flags:</b> \Seen, \Answered, \Flagged, \Deleted tracked centrally.</text>
+  <text x="510" y="207" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Server Folders:</b> Create, rename, delete hierarchical folders on server.</text>
+  <text x="510" y="225" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Partial Fetch:</b> Download headers or preview without 20MB attachments.</text>
+  <text x="510" y="243" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Server-Side Search:</b> Search keywords without downloading all emails.</text>
+  <rect x="510" y="255" width="385" height="22" fill="#1e3a8a" rx="3"/>
+  <text x="702" y="270" fill="#93c5fd" font-family="Consolas, monospace" font-size="9" font-weight="700" text-anchor="middle">Commands: LOGIN, SELECT, FETCH, STORE, COPY, SEARCH, LOGOUT</text>
+
+  <!-- Bottom: 10-Point Master Comparison Matrix -->
+  <rect x="40" y="300" width="870" height="165" fill="#0f172a" rx="8" stroke="#334155" stroke-width="1.5"/>
+  <text x="475" y="322" fill="#e2e8f0" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" text-anchor="middle">MASTER COMPARATIVE MATRIX: POP3 vs IMAP4</text>
+
+  <!-- 3 Cols Summary -->
+  <rect x="55" y="335" width="265" height="115" fill="#1e293b" rx="5"/>
+  <text x="187" y="355" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">1. Protocol Role &amp; Ports</text>
+  <text x="65" y="375" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Type:</b> Both are Message Access (PULL)</text>
+  <text x="65" y="393" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>POP3:</b> Port 110 (Clear) / 995 (SSL)</text>
+  <text x="65" y="411" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>IMAP4:</b> Port 143 (Clear) / 993 (SSL)</text>
+  <text x="65" y="429" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>SMTP Role:</b> Pushes mail; cannot pull.</text>
+
+  <rect x="342" y="335" width="265" height="115" fill="#1e293b" rx="5"/>
+  <text x="474" y="355" fill="#34d399" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">2. Storage &amp; Sync Mechanics</text>
+  <text x="352" y="375" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>POP3:</b> Local client machine storage.</text>
+  <text x="352" y="393" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>IMAP4:</b> Central mail server storage.</text>
+  <text x="352" y="411" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Read Status:</b> POP3 cannot sync read tags;</text>
+  <text x="360" y="427" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  IMAP4 syncs across all logged-in devices.</text>
+
+  <rect x="630" y="335" width="265" height="115" fill="#1e293b" rx="5"/>
+  <text x="762" y="355" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">3. Bandwidth &amp; Resource Efficiency</text>
+  <text x="640" y="375" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>POP3:</b> Requires full file download.</text>
+  <text x="640" y="393" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>IMAP4:</b> Headers-only preview saves data.</text>
+  <text x="640" y="411" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Server Load:</b> POP3 has very low RAM churn;</text>
+  <text x="648" y="427" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  IMAP4 requires robust high-RAM servers.</text>
+</svg></div>
+    <h2>1. Message Access Paradigm (PULL vs PUSH)</h2>
+    <p>While SMTP handles inter-server PUSH operations, client devices require PULL protocols (POP3 or IMAP4) to retrieve messages from intermediate mailbox buffers.</p>
+    <div class="callout">
+      <div class="callout-title">Architectural Divergence</div>
+      POP3 views the mail server as a temporary post office drop box; IMAP4 views the server as a perpetual, synchronized cloud database.
+    </div>
+    <h2>2. POP3 Operational Modes</h2>
+    <ul>
+      <li><b>Delete Mode:</b> Mail is transferred to client hard drive and immediately purged from server spool.</li>
+      <li><b>Keep Mode:</b> Messages persist on the server following retrieval, but message state changes remain strictly local.</li>
+    </ul>
+    <h2>3. Master Comparative Breakdown: POP3 vs IMAP4</h2>
+    <table>
+      <tr><th>Criterion</th><th>POP3 (RFC 1939)</th><th>IMAP4 (RFC 3501)</th></tr>
+      <tr><td><b>Well-Known Ports</b></td><td>Port 110 (Plain) / 995 (SSL)</td><td>Port 143 (Plain) / 993 (SSL)</td></tr>
+      <tr><td><b>Primary Storage Target</b></td><td>Client host disk</td><td>Server-side database storage</td></tr>
+      <tr><td><b>Multi-Device Consistency</b></td><td>Fails across multiple concurrent devices</td><td>Maintains real-time status synchronization</td></tr>
+      <tr><td><b>Partial Retrieval</b></td><td>Requires complete segment download</td><td>Allows isolated header and MIME part preview</td></tr>
+      <tr><td><b>Server Complexity</b></td><td>Minimal memory and disk utilization</td><td>Resource intensive (CPU, indexing, disk quota)</td></tr>
+    </table>
+    
+</body>
+</html>

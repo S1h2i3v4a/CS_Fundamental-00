@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cryptoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="symmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="950" height="480" fill="url(#cryptoBg)" rx="10"/>
+
+  <text x="475" y="32" fill="#38bdf8" font-family="-apple-system, Segoe UI, sans-serif" font-size="19" font-weight="800" text-anchor="middle" letter-spacing="0.5">CRYPTOGRAPHY FOUNDATIONS &amp; SYMMETRIC CIPHERS</text>
+  <text x="475" y="52" fill="#94a3b8" font-family="-apple-system, Segoe UI, sans-serif" font-size="12" text-anchor="middle">Confidentiality, Substitution vs Transposition Ciphers, DES &amp; AES Block Cipher Architecture</text>
+
+  <!-- Alice (Sender) -->
+  <rect x="40" y="80" width="160" height="150" fill="#1e3a8a" rx="8" stroke="#60a5fa" stroke-width="2"/>
+  <text x="120" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Alice (Sender)</text>
+  <rect x="55" y="125" width="130" height="35" fill="#172554" rx="4"/>
+  <text x="120" y="145" fill="#facc15" font-family="Consolas, monospace" font-size="10.5" font-weight="700" text-anchor="middle">Plaintext (P)</text>
+  <text x="120" y="157" fill="#bfdbfe" font-family="Segoe UI, sans-serif" font-size="8.5" text-anchor="middle">Original Message</text>
+  <rect x="55" y="170" width="130" height="45" fill="#0f172a" rx="4"/>
+  <text x="120" y="188" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700" text-anchor="middle">Encryption (E)</text>
+  <text x="120" y="202" fill="#93c5fd" font-family="Consolas, monospace" font-size="9" text-anchor="middle">C = E(K, P)</text>
+
+  <!-- Center Channel & Key Distribution -->
+  <!-- Top: Shared Secret Key -->
+  <rect x="375" y="75" width="200" height="45" fill="url(#keyGrad)" rx="6" stroke="#fbbf24" stroke-width="2"/>
+  <text x="475" y="95" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800" text-anchor="middle">SHARED SECRET KEY (K)</text>
+  <text x="475" y="110" fill="#fef3c7" font-family="Segoe UI, sans-serif" font-size="9" text-anchor="middle">Must be shared via secure channel</text>
+
+  <line x1="420" y1="120" x2="200" y2="185" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="530" y1="120" x2="750" y2="185" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- Insecure Transit Channel -->
+  <rect x="250" y="155" width="450" height="60" fill="#0f172a" rx="6" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="475" y="175" fill="#f87171" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">INSECURE INTERNET / TRANSMISSION CHANNEL</text>
+  <text x="475" y="195" fill="#facc15" font-family="Consolas, monospace" font-size="11" font-weight="700" text-anchor="middle">Ciphertext (C) = "KHOOR" (Scrambled Bits)</text>
+  <text x="475" y="208" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5" text-anchor="middle">Passive Eve eavesdropping cannot read plaintext without K</text>
+
+  <!-- Bob (Receiver) -->
+  <rect x="750" y="80" width="160" height="150" fill="url(#symmGrad)" rx="8" stroke="#34d399" stroke-width="2"/>
+  <text x="830" y="108" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Bob (Receiver)</text>
+  <rect x="765" y="125" width="130" height="45" fill="#064e3b" rx="4"/>
+  <text x="830" y="143" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700" text-anchor="middle">Decryption (D)</text>
+  <text x="830" y="157" fill="#a7f3d0" font-family="Consolas, monospace" font-size="9" text-anchor="middle">P = D(K, C)</text>
+  <rect x="765" y="178" width="130" height="35" fill="#022c22" rx="4"/>
+  <text x="830" y="198" fill="#facc15" font-family="Consolas, monospace" font-size="10.5" font-weight="700" text-anchor="middle">Plaintext (P)</text>
+  <text x="830" y="210" fill="#d1fae5" font-family="Segoe UI, sans-serif" font-size="8.5" text-anchor="middle">Decrypted Message</text>
+
+  <!-- Connectors -->
+  <line x1="200" y1="185" x2="250" y2="185" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="700" y1="185" x2="750" y2="185" stroke="#4ade80" stroke-width="2"/>
+
+  <!-- Bottom Panel: Substitution, Transposition & Modern Ciphers -->
+  <rect x="40" y="260" width="870" height="200" fill="#0f172a" rx="8" stroke="#334155" stroke-width="1.5"/>
+  <text x="475" y="280" fill="#e2e8f0" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" text-anchor="middle">CLASSICAL vs MODERN SYMMETRIC CRYPTOGRAPHY (SLIDES 73 - 76)</text>
+
+  <!-- Col 1: Substitution Ciphers -->
+  <rect x="55" y="295" width="265" height="150" fill="#1e293b" rx="5"/>
+  <text x="187" y="315" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">1. Substitution Ciphers</text>
+  <text x="65" y="333" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• Characters replaced by other symbols.</text>
+  <text x="65" y="351" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Monoalphabetic:</b> Fixed 1-to-1 mapping.</text>
+  <text x="73" y="367" fill="#facc15" font-family="Consolas, monospace" font-size="8.5">  Caesar (Shift 3): HELLO -> KHOOR</text>
+  <text x="65" y="385" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Polyalphabetic:</b> Character mapping changes</text>
+  <text x="73" y="401" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  based on position (Vigenère cipher).</text>
+  <text x="65" y="419" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="8.5">• Vulnerable to letter frequency analysis!</text>
+
+  <!-- Col 2: Transposition Ciphers -->
+  <rect x="342" y="295" width="265" height="150" fill="#1e293b" rx="5"/>
+  <text x="474" y="315" fill="#34d399" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">2. Transposition Ciphers</text>
+  <text x="352" y="333" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• Characters retain identity; positions shuffle.</text>
+  <text x="352" y="351" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Rail Fence Cipher:</b> Plaintext written</text>
+  <text x="360" y="367" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  in zig-zag diagonal rows and read row-by-row.</text>
+  <text x="352" y="385" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Columnar Transposition:</b> Written in matrix</text>
+  <text x="360" y="401" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  grid and read out based on key order.</text>
+  <text x="352" y="419" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="8.5">• Frequency analysis shows standard English letter ratios.</text>
+
+  <!-- Col 3: Modern Ciphers (DES & AES) -->
+  <rect x="630" y="295" width="265" height="150" fill="#1e293b" rx="5"/>
+  <text x="762" y="315" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">3. Modern Block Ciphers</text>
+  <text x="640" y="333" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>DES (Data Encryption Standard):</b></text>
+  <text x="648" y="349" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  64-bit block, 56-bit key, 16 Feistel rounds.</text>
+  <text x="648" y="363" fill="#ef4444" font-family="Segoe UI, sans-serif" font-size="8.5">  (Broken via brute force due to small key).</text>
+  <text x="640" y="381" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>AES (Advanced Encryption Standard):</b></text>
+  <text x="648" y="397" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="8.5">  128-bit block, 128/192/256-bit key.</text>
+  <text x="648" y="411" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="8.5">  SPN rounds (SubBytes, ShiftRows, MixColumns).</text>
+  <text x="640" y="429" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="8.5">• Global standard for military &amp; TLS data.</text>
+</svg>

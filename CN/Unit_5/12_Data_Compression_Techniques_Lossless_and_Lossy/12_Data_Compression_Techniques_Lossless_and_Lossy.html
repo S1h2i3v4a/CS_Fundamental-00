@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 12: Data Compression Techniques (Lossless & Lossy)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 14mm 14mm 14mm 14mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 8.8pt;
+    line-height: 1.42;
+    margin: 0;
+    padding: 0;
+  }
+  .header-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .course-tag {
+    font-size: 7.2pt;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #93c5fd;
+    font-weight: 700;
+  }
+  h1 {
+    font-size: 15pt;
+    margin: 3px 0 2px 0;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .meta-sub {
+    font-size: 7.6pt;
+    color: #cbd5e1;
+  }
+  h2 {
+    font-size: 11pt;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #e2e8f0;
+    padding-bottom: 3px;
+    margin: 12px 0 6px 0;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 9.3pt;
+    color: #0f172a;
+    margin: 8px 0 4px 0;
+    font-weight: 700;
+  }
+  p, ul, ol {
+    margin: 3px 0 6px 0;
+  }
+  ul, ol {
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 2.5px;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: Consolas, monospace;
+    font-size: 8.0pt;
+  }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+    font-size: 7.6pt;
+    line-height: 1.35;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    margin: 6px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 7.8pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 4px 7px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #1e3a8a;
+    font-weight: 700;
+  }
+  .callout {
+    background: #eff6ff;
+    border-left: 3.5px solid #2563eb;
+    padding: 7px 10px;
+    border-radius: 0 4px 4px 0;
+    margin: 8px 0;
+    font-size: 8.2pt;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 2px;
+  }
+  .callout-warn {
+    background: #fef2f2;
+    border-left: 3.5px solid #ef4444;
+  }
+  .callout-warn .callout-title {
+    color: #991b1b;
+  }
+  .svg-container {
+    text-align: center;
+    margin: 10px 0;
+    padding: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+  }
+  .svg-container svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .formula-box {
+    background: #f8fafc;
+    border: 1px solid #93c5fd;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    color: #1e3a8a;
+    font-weight: 600;
+    margin: 6px 0;
+  }
+</style>
+</head>
+<body>
+<div class="header-card">
+  <div class="course-tag">Computer Networks (BCS603) — Unit 5: Application Layer</div>
+  <h1>Module 12: Data Compression Techniques (Lossless & Lossy)</h1>
+  <div class="meta-sub">Gateway Classes Lecture Series | Dr. Nidhi Parashar Ma'am | Author: Shivam Keshari</div>
+</div>
+
+    <div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="compBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="losslessGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="lossyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="950" height="480" fill="url(#compBg)" rx="10"/>
+
+  <text x="475" y="32" fill="#38bdf8" font-family="-apple-system, Segoe UI, sans-serif" font-size="19" font-weight="800" text-anchor="middle" letter-spacing="0.5">DATA COMPRESSION: LOSSLESS vs LOSSY ARCHITECTURE</text>
+  <text x="475" y="52" fill="#94a3b8" font-family="-apple-system, Segoe UI, sans-serif" font-size="12" text-anchor="middle">Run-Length Encoding, Huffman, Lempel-Ziv (LZ), Audio Psychoacoustics &amp; Temporal Masking</text>
+
+  <!-- Left: Lossless Compression -->
+  <rect x="40" y="80" width="415" height="195" fill="#1e293b" rx="8" stroke="#059669" stroke-width="2"/>
+  <rect x="40" y="80" width="415" height="35" fill="url(#losslessGrad)" rx="8"/>
+  <text x="247" y="103" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="13" font-weight="800" text-anchor="middle">LOSSLESS COMPRESSION (Zero Data Loss)</text>
+
+  <text x="55" y="133" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Principle:</b> Exact bit-for-bit mathematical restoration.</text>
+  <text x="55" y="151" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Mandatory For:</b> Text code (.c, .java), Databases, Executable binaries.</text>
+  <text x="55" y="169" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>1. Run-Length Encoding (RLE):</b> Replaces repeated streaks.</text>
+  <text x="65" y="185" fill="#a7f3d0" font-family="Consolas, monospace" font-size="9">  "AAAAABBBCCDA" -> "A5B3C2D1A1" (12 bytes -> 10 bytes)</text>
+  <text x="55" y="203" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>2. Huffman Coding:</b> Variable length prefix codes based on freq.</text>
+  <text x="55" y="221" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>3. Lempel-Ziv (LZ77 / LZW):</b> Dictionary table index replaces words.</text>
+  <rect x="55" y="235" width="385" height="25" fill="#064e3b" rx="3"/>
+  <text x="247" y="252" fill="#d1fae5" font-family="Consolas, monospace" font-size="9" font-weight="700" text-anchor="middle">Formats: ZIP, GZIP, PNG, 7z, FLAC, TIFF</text>
+
+  <!-- Right: Lossy Compression -->
+  <rect x="495" y="80" width="415" height="195" fill="#1e293b" rx="8" stroke="#d97706" stroke-width="2"/>
+  <rect x="495" y="80" width="415" height="35" fill="url(#lossyGrad)" rx="8"/>
+  <text x="702" y="103" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="13" font-weight="800" text-anchor="middle">LOSSY COMPRESSION (Perceptual Pruning)</text>
+
+  <text x="510" y="133" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Principle:</b> Discards imperceptible details for massive size cuts.</text>
+  <text x="510" y="151" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Mandatory For:</b> Streaming Video (YouTube), Music, Photos.</text>
+  <text x="510" y="169" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Audio Psychoacoustics &amp; Masking (Slide 87 - 88):</b></text>
+  <text x="520" y="185" fill="#fde68a" font-family="Segoe UI, sans-serif" font-size="9">  • <b>Frequency Masking:</b> Loud tone drowns weaker tone at nearby Hz.</text>
+  <text x="520" y="201" fill="#fde68a" font-family="Segoe UI, sans-serif" font-size="9">  • <b>Temporal Masking:</b> Loud strike (hammer) desensitizes ear briefly.</text>
+  <text x="510" y="221" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9.5">• <b>Image Compression (JPEG):</b> Discrete Cosine Transform (DCT).</text>
+  <rect x="510" y="235" width="385" height="25" fill="#78350f" rx="3"/>
+  <text x="702" y="252" fill="#fef3c7" font-family="Consolas, monospace" font-size="9" font-weight="700" text-anchor="middle">Formats: MP3, AAC, JPEG, MPEG, H.264, MP4</text>
+
+  <!-- Bottom Panel: Master Comparison & Formulas -->
+  <rect x="40" y="295" width="870" height="165" fill="#0f172a" rx="8" stroke="#334155" stroke-width="1.5"/>
+  <text x="475" y="315" fill="#e2e8f0" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" text-anchor="middle">DATA COMPRESSION COMPARATIVE MATRIX &amp; METRICS (SLIDE 84 - 88)</text>
+
+  <!-- Col 1: Metrics -->
+  <rect x="55" y="330" width="265" height="115" fill="#1e293b" rx="5"/>
+  <text x="187" y="350" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">1. Metrics &amp; Equations</text>
+  <text x="65" y="370" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Compression Ratio:</b></text>
+  <text x="73" y="386" fill="#facc15" font-family="Consolas, monospace" font-size="8.5">  CR = Uncompressed Size / Compressed Size</text>
+  <text x="65" y="404" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Space Savings:</b></text>
+  <text x="73" y="420" fill="#facc15" font-family="Consolas, monospace" font-size="8.5">  Savings = 1 - (Compressed / Original)</text>
+
+  <!-- Col 2: Lossless vs Lossy -->
+  <rect x="342" y="330" width="265" height="115" fill="#1e293b" rx="5"/>
+  <text x="474" y="350" fill="#34d399" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">2. Fidelity vs Compression Ratio</text>
+  <text x="352" y="370" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Lossless Ratio:</b> Modest (usually 2:1 to 4:1).</text>
+  <text x="352" y="388" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Lossy Ratio:</b> Extreme (10:1 to 50:1+).</text>
+  <text x="352" y="406" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• Decompressing lossy video does not match</text>
+  <text x="360" y="422" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="8.5">  original raw RGB sensor matrix bit-for-bit.</text>
+
+  <!-- Col 3: Audio Masking Analogy -->
+  <rect x="630" y="330" width="265" height="115" fill="#1e293b" rx="5"/>
+  <text x="762" y="350" fill="#facc15" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">3. Psychoacoustic Masking</text>
+  <text x="640" y="370" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• <b>Slide 88 Hammer Analogy:</b></text>
+  <text x="648" y="386" fill="#fde68a" font-family="Segoe UI, sans-serif" font-size="8.5">  When a loud hammer strikes, ear cannot</text>
+  <text x="648" y="400" fill="#fde68a" font-family="Segoe UI, sans-serif" font-size="8.5">  detect a pin dropping immediately after.</text>
+  <text x="640" y="418" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="9">• Discarding masked sounds saves 90% space!</text>
+</svg></div>
+    <h2>1. Data Compression Paradigms</h2>
+    <p>Compression maximizes network transmission throughput and minimizes mass storage consumption by eliminating data redundancy.</p>
+    <div class="callout">
+      <div class="callout-title">Lossless vs Lossy Segmentation</div>
+      <b>Lossless:</b> Strict bit-for-bit mathematical identity restoration (RLE, Huffman, Lempel-Ziv).<br/>
+      <b>Lossy:</b> Psychoacoustic and visual human perception threshold pruning (MP3, JPEG, H.264).
+    </div>
+    <h2>2. Lossless Compression Schemes</h2>
+    <table>
+      <tr><th>Algorithm</th><th>Operational Method</th><th>Target Data Stream</th></tr>
+      <tr><td><b>Run-Length Encoding (RLE)</b></td><td>Substitutes contiguous identical byte runs with character-count pairs</td><td>Scanned monochrome documents, fax bitmaps</td></tr>
+      <tr><td><b>Huffman Coding</b></td><td>Builds minimum redundancy binary prefix trees based on symbol probabilities</td><td>Variable-length character streams</td></tr>
+      <tr><td><b>Lempel-Ziv (LZW)</b></td><td>Maintains dynamic dictionary table substituting recurrent words with pointers</td><td>General archive utilities (ZIP, GZIP, PNG)</td></tr>
+    </table>
+    <h2>3. Psychoacoustic Audio Masking Mechanics</h2>
+    <ul>
+      <li><b>Frequency Masking:</b> A dominant louder sound tone suppresses softer tones residing within the critical spectral band.</li>
+      <li><b>Temporal Masking (Slide 88):</b> Loud auditory impulses render the human cochlea unresponsive for several milliseconds immediately preceding and following the transient event.</li>
+    </ul>
+    
+</body>
+</html>
