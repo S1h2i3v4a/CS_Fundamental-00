@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DBMS Unit 5: Timestamp Ordering Protocols</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm 15mm 15mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.5;
+    font-size: 9.5pt;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    color: #0f172a;
+    font-size: 19pt;
+    font-weight: 800;
+    border-bottom: 2.5px solid #2563eb;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  h2 {
+    color: #1e3a8a;
+    font-size: 13pt;
+    font-weight: 700;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 3px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+  }
+  h3 {
+    color: #0f172a;
+    font-size: 10.5pt;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+  p, li {
+    color: #334155;
+    margin-top: 3px;
+    margin-bottom: 6px;
+  }
+  ul, ol {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 8.8pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 5px 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  .diagram-container {
+    text-align: center;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .diagram-container img {
+    max-width: 95%;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+  }
+  .diagram-caption {
+    font-size: 8pt;
+    color: #64748b;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .callout {
+    background-color: #f8fafc;
+    border-left: 3.5px solid #2563eb;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 3px;
+    font-size: 9.2pt;
+  }
+  .callout-warn {
+    background-color: #fef2f2;
+    border-left-color: #ef4444;
+  }
+  .callout-warn .callout-title {
+    color: #991b1b;
+  }
+  .callout-success {
+    background-color: #f0fdf4;
+    border-left-color: #22c55e;
+  }
+  .callout-success .callout-title {
+    color: #166534;
+  }
+  code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 8.5pt;
+    background-color: #f1f5f9;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #0f172a;
+  }
+  pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 8.2pt;
+    overflow-x: auto;
+    margin: 8px 0;
+  }
+  pre code {
+    background: transparent;
+    color: #f8fafc;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+<h1>Module 04: Timestamp Ordering Protocols</h1>
+        <p><strong>AKTU BCS501 | Unit 5: Concurrency Control Techniques</strong></p>
+        <div class="diagram-container">
+            <img src="diagrams/basic_timestamp_ordering_protocol.svg" alt="Timestamp Ordering Protocol">
+            <div class="diagram-caption">Figure 4.1: Basic Timestamp Ordering Rules &amp; Metadata Architecture</div>
+        </div>
+        <h2>1. Timestamp Assignment &amp; Data Item Metadata</h2>
+        <p>Every transaction receives a unique timestamp TS(Ti) at start. Data items maintain <code>read_TS(X)</code> (largest timestamp of any reader) and <code>write_TS(X)</code> (largest timestamp of any writer).</p>
+        <h2>2. Basic TO Rules Summary</h2>
+        <div class="callout callout-warn">
+            <div class="callout-title">Read and Write Check Conditions</div>
+            • <strong>read(X):</strong> If TS(T) &lt; write_TS(X) → ABORT T. Else execute and set read_TS(X) = max(read_TS(X), TS(T)).<br>
+            • <strong>write(X):</strong> If TS(T) &lt; read_TS(X) or TS(T) &lt; write_TS(X) → ABORT T. Else execute and set write_TS(X) = TS(T).
+        </div>
+        <h2>3. Deadlock-Free Guarantee vs Cascading Aborts</h2>
+        <p>Because conflicting transactions are immediately aborted rather than forced to wait in queues, Timestamp Ordering is 100% deadlock-free. However, restart overhead can be high under contention.</p>
+        
+</body>
+</html>

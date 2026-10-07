@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DBMS Unit 5: Validation-Based Protocol & Phantom Phenomena</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm 15mm 15mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.5;
+    font-size: 9.5pt;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    color: #0f172a;
+    font-size: 19pt;
+    font-weight: 800;
+    border-bottom: 2.5px solid #2563eb;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  h2 {
+    color: #1e3a8a;
+    font-size: 13pt;
+    font-weight: 700;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 3px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+  }
+  h3 {
+    color: #0f172a;
+    font-size: 10.5pt;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+  p, li {
+    color: #334155;
+    margin-top: 3px;
+    margin-bottom: 6px;
+  }
+  ul, ol {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 8.8pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 5px 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  .diagram-container {
+    text-align: center;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .diagram-container img {
+    max-width: 95%;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+  }
+  .diagram-caption {
+    font-size: 8pt;
+    color: #64748b;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .callout {
+    background-color: #f8fafc;
+    border-left: 3.5px solid #2563eb;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 3px;
+    font-size: 9.2pt;
+  }
+  .callout-warn {
+    background-color: #fef2f2;
+    border-left-color: #ef4444;
+  }
+  .callout-warn .callout-title {
+    color: #991b1b;
+  }
+  .callout-success {
+    background-color: #f0fdf4;
+    border-left-color: #22c55e;
+  }
+  .callout-success .callout-title {
+    color: #166534;
+  }
+  code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 8.5pt;
+    background-color: #f1f5f9;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #0f172a;
+  }
+  pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 8.2pt;
+    overflow-x: auto;
+    margin: 8px 0;
+  }
+  pre code {
+    background: transparent;
+    color: #f8fafc;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+<h1>Module 08: Validation-Based Protocol (OCC) and Phantom Phenomena</h1>
+        <p><strong>AKTU BCS501 | Unit 5: Concurrency Control Techniques</strong></p>
+        <div class="diagram-container">
+            <img src="diagrams/validation_based_protocol_and_occ_phases.svg" alt="Validation-Based Protocol">
+            <div class="diagram-caption">Figure 8.1: The 3 OCC Execution Phases, Validation Conditions &amp; Phantom Prevention</div>
+        </div>
+        <h2>1. The 3 Phases of OCC</h2>
+        <p>1. <strong>Read Phase:</strong> Reads DB and buffers updates locally in memory.<br>
+        2. <strong>Validation Phase:</strong> Checks conflict conditions; assigns TS(T).<br>
+        3. <strong>Write Phase:</strong> Commits updates to disk if validation passes.</p>
+        <h2>2. The Phantom Phenomenon</h2>
+        <p>Predicate queries (e.g., SELECT COUNT(*) WHERE Salary &gt; 50k) can see phantom records if concurrent transactions insert new matching rows. Solved via <strong>Index-Range Locking</strong> on B+ Tree leaves or Predicate Locking.</p>
+        
+</body>
+</html>

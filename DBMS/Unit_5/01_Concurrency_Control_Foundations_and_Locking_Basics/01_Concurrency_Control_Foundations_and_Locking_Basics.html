@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DBMS Unit 5: Concurrency Control Foundations & Locking Basics</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm 15mm 15mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.5;
+    font-size: 9.5pt;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    color: #0f172a;
+    font-size: 19pt;
+    font-weight: 800;
+    border-bottom: 2.5px solid #2563eb;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  h2 {
+    color: #1e3a8a;
+    font-size: 13pt;
+    font-weight: 700;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 3px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+  }
+  h3 {
+    color: #0f172a;
+    font-size: 10.5pt;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+  p, li {
+    color: #334155;
+    margin-top: 3px;
+    margin-bottom: 6px;
+  }
+  ul, ol {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 8.8pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 5px 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  .diagram-container {
+    text-align: center;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .diagram-container img {
+    max-width: 95%;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+  }
+  .diagram-caption {
+    font-size: 8pt;
+    color: #64748b;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .callout {
+    background-color: #f8fafc;
+    border-left: 3.5px solid #2563eb;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 3px;
+    font-size: 9.2pt;
+  }
+  .callout-warn {
+    background-color: #fef2f2;
+    border-left-color: #ef4444;
+  }
+  .callout-warn .callout-title {
+    color: #991b1b;
+  }
+  .callout-success {
+    background-color: #f0fdf4;
+    border-left-color: #22c55e;
+  }
+  .callout-success .callout-title {
+    color: #166534;
+  }
+  code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 8.5pt;
+    background-color: #f1f5f9;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #0f172a;
+  }
+  pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 8.2pt;
+    overflow-x: auto;
+    margin: 8px 0;
+  }
+  pre code {
+    background: transparent;
+    color: #f8fafc;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+<h1>Module 01: Concurrency Control Foundations and Locking Basics</h1>
+        <p><strong>AKTU BCS501 | Unit 5: Concurrency Control Techniques</strong></p>
+        <div class="diagram-container">
+            <img src="diagrams/concurrency_control_foundations_and_locking_basics.svg" alt="Locking Foundations">
+            <div class="diagram-caption">Figure 1.1: Binary vs Shared/Exclusive Locks &amp; Lock Compatibility Architecture</div>
+        </div>
+        <h2>1. Concurrency Control Overview &amp; Motivation</h2>
+        <p>Concurrency Control Manager ensures Isolation and Consistency across concurrent transactions. Without proper synchronization, interleaved operations cause Dirty Reads, Lost Updates, and Unrepeatable Reads.</p>
+        <h2>2. Binary vs Shared/Exclusive (Read/Write) Locks</h2>
+        <p>Binary locks allow only 1 transaction per item (0 = Unlocked, 1 = Locked), severely bottlenecking throughput. Two-Mode Locks support Shared mode S(X) for concurrent readers and Exclusive mode X(X) for writers.</p>
+        <div class="callout callout-success">
+            <div class="callout-title">Compatibility Rule</div>
+            Shared locks are mutually compatible with other Shared locks. Exclusive locks are mutually exclusive with ALL locks.
+        </div>
+        <h2>3. Lock Compatibility Matrix</h2>
+        <table>
+            <tr><th>Mode Held \ Requested</th><th>Shared (S)</th><th>Exclusive (X)</th></tr>
+            <tr><td><strong>Shared (S)</strong></td><td>TRUE (Compatible)</td><td>FALSE (Conflict)</td></tr>
+            <tr><td><strong>Exclusive (X)</strong></td><td>FALSE (Conflict)</td><td>FALSE (Conflict)</td></tr>
+        </table>
+        <h2>4. Lock Manager Internal Operations</h2>
+        <p>Lock Manager maintains a hash table of locks with transaction wait queues and reader count <code>no_of_reads(X)</code>. Lock is fully released to unlocked state only when reader counter reaches 0.</p>
+        
+</body>
+</html>

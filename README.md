@@ -20,7 +20,8 @@ CS_Fundamental-00/
     ├── Unit_1/                # Database Concepts, ER Modeling, Schema Reduction & Relational Algebra
     ├── Unit_2/                # Relational Model, Formal Languages & Complete SQL Mastery
     ├── Unit_3/                # Relational Database Design & Normalization (1NF to 5NF, FDs, Armstrong, Decompositions)
-    └── Unit_4/                # Transaction Processing Concept & Distributed Databases (ACID, CSR, VSR, 2PL, Recovery, DDBMS)
+    ├── Unit_4/                # Transaction Processing Concept & Distributed Databases (ACID, CSR, VSR, 2PL, Recovery, DDBMS)
+    └── Unit_5/                # Concurrency Control Techniques & Case Study of Oracle (2PL Variants, MVCC, MGL 5x5 Matrix, 2PC, Oracle)
 ```
 
 ---
@@ -38,6 +39,8 @@ CS_Fundamental-00/
 | **DBMS** | **Unit 2** | Relational Model, Formal Languages & SQL | [3-Page PDF](DBMS/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_2/Unit_2_Master_Notes.pdf) |
 | **DBMS** | **Unit 3** | Database Design & Normalization (1NF to 5NF) | [3-Page PDF](DBMS/Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_3/Unit_3_Master_Notes.pdf) |
 | **DBMS** | **Unit 4** | Transaction Processing & Distributed Databases | [3-Page PDF](DBMS/Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_4/Unit_4_Master_Notes.pdf) |
+| **DBMS** | **Unit 5** | Concurrency Control Techniques & Oracle | [3-Page PDF](DBMS/Unit_5/Unit_5_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_5/Unit_5_Master_Notes.pdf) |
+
 
 
 ---

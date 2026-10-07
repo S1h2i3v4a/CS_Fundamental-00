@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="phaseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="600" fill="url(#bgGrad)"/>
+  <rect x="20" y="20" width="960" height="560" rx="14" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,6"/>
+
+  <text x="500" y="55" fill="#f8fafc" font-family="'Segoe UI', Roboto, sans-serif" font-size="21" font-weight="900" text-anchor="middle" letter-spacing="0.5">RECOVERY WITH CONCURRENT TRANSACTIONS &amp; 2PC</text>
+  <text x="500" y="80" fill="#94a3b8" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Concurrent Checkpoints, Undo/Redo Logging &amp; Two-Phase Commit Protocol (AKTU BCS501 Slide 56-62)</text>
+
+  <!-- Left: Concurrent Recovery & Checkpointing -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="110" width="430" height="235" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="50" y="110" width="430" height="32" rx="10" fill="#0284c7"/>
+    <text x="265" y="132" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="800" text-anchor="middle">1. Recovery with Concurrent Execution</text>
+
+    <text x="70" y="165" fill="#facc15" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">The Recovery Goal under Concurrency:</text>
+    <text x="70" y="185" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">When multiple transactions execute concurrently and a system crash</text>
+    <text x="70" y="201" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">occurs, maintain ACID properties across ALL interleaved states.</text>
+
+    <line x1="70" y1="215" x2="450" y2="215" stroke="#475569" stroke-width="1"/>
+
+    <text x="70" y="235" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Transaction Log Structure:</text>
+    <text x="70" y="253" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">• Records read/write updates with Before-Image and After-Image.</text>
+    <text x="70" y="271" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">• <strong>Checkpoint Snapshot:</strong> Takes state snapshot, logs active list L.</text>
+    <text x="70" y="289" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">• REDO List: Committed after checkpoint → roll forward.</text>
+    <text x="70" y="307" fill="#f87171" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">• UNDO List: Active and uncommitted at crash → roll back.</text>
+  </g>
+
+  <!-- Right: Two-Phase Commit (2PC) Protocol (Slide 60-62) -->
+  <g filter="url(#shadow)">
+    <rect x="510" y="110" width="440" height="235" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect x="510" y="110" width="440" height="32" rx="10" fill="#059669"/>
+    <text x="730" y="132" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="800" text-anchor="middle">2. Two-Phase Commit (2PC) Protocol</text>
+
+    <!-- Phase 1 -->
+    <rect x="530" y="155" width="400" height="75" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="545" y="176" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Phase 1: Prepare Phase (Voting Phase)</text>
+    <text x="545" y="196" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">1. Coordinator sends <code>PREPARE</code> request to all participating nodes.</text>
+    <text x="545" y="212" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">2. Each node checks resources, writes log, and votes <code>VOTE_COMMIT</code> or <code>VOTE_ABORT</code>.</text>
+
+    <!-- Phase 2 -->
+    <rect x="530" y="240" width="400" height="90" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+    <text x="545" y="261" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Phase 2: Commit Phase (Decision Phase)</text>
+    <text x="545" y="281" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">1. If ALL nodes voted VOTE_COMMIT → Coordinator sends <code>GLOBAL_COMMIT</code>.</text>
+    <text x="545" y="297" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">2. If EVEN ONE node voted VOTE_ABORT → Coordinator sends <code>GLOBAL_ABORT</code>.</text>
+    <text x="545" y="313" fill="#a7f3d0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">Nodes execute decision, write log, and send ACK back to coordinator.</text>
+  </g>
+
+  <!-- Bottom: Summary of Guarantees -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="365" width="900" height="195" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <rect x="50" y="365" width="900" height="30" rx="10" fill="#b45309"/>
+    <text x="500" y="386" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="800" text-anchor="middle">3. Atomic Commitment Guarantees in Distributed Systems</text>
+
+    <text x="70" y="420" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">✓ All-or-Nothing Distributed Atomicity:</text>
+    <text x="85" y="440" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">2PC ensures that across all geographically distributed database instances, a transaction either commits everywhere or rolls back everywhere.</text>
+
+    <text x="70" y="468" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">✓ Crash Resiliency through Persistent Logs:</text>
+    <text x="85" y="488" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">Both Coordinator and Cohorts flush decision records to stable storage before transmitting network messages.</text>
+
+    <text x="70" y="515" fill="#f87171" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">✗ Blocking Nature (Coordinator Failure Hazard):</text>
+    <text x="85" y="535" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">If Coordinator crashes after participants vote commit, participants remain blocked in limbo waiting for decision.</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="500" y="582" fill="#64748b" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600" text-anchor="middle">DBMS Unit 5: Concurrency Control Techniques | AKTU BCS501 Semester V</text>
+</svg>

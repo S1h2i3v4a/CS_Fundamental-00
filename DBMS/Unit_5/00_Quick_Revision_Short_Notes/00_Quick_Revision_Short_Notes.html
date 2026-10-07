@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DBMS Unit 5: Ultra Quick Revision Short Notes (Exact 3 Pages)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 7.2pt;
+    line-height: 1.24;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 6mm 7.5mm 5mm 7.5mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-bar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 4px 9px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .header-title {
+    font-size: 9.8pt;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 6.8pt;
+    color: #93c5fd;
+    font-weight: 500;
+  }
+  .page-tag {
+    background: #3b82f6;
+    color: #ffffff;
+    padding: 1.5px 6px;
+    border-radius: 3px;
+    font-size: 6.5pt;
+    font-weight: 700;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+  }
+  .card {
+    border: 0.8px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 3.5px 5.5px;
+    background: #ffffff;
+    margin-bottom: 3.5px;
+  }
+  .card-header {
+    font-size: 7.6pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1.2px solid #e2e8f0;
+    padding-bottom: 1.5px;
+    margin-bottom: 2.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-header-accent {
+    color: #b91c1c;
+    border-bottom-color: #fecaca;
+  }
+  .card-header-green {
+    color: #047857;
+    border-bottom-color: #a7f3d0;
+  }
+  .badge {
+    font-size: 5.8pt;
+    padding: 1px 3.5px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 6.4pt;
+    margin: 1.5px 0;
+  }
+  th, td {
+    border: 0.6px solid #cbd5e1;
+    padding: 1.5px 3px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  tr:nth-child(even) { background-color: #f8fafc; }
+  ul {
+    margin: 1.5px 0 2px 10px;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 1px;
+  }
+  .formula-box {
+    background: #f8fafc;
+    border-left: 2.5px solid #2563eb;
+    padding: 2px 4.5px;
+    margin: 1.5px 0;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 6.5pt;
+    color: #0f172a;
+  }
+  .warn-box {
+    background: #fef2f2;
+    border-left: 2.5px solid #ef4444;
+    padding: 1.5px 4.5px;
+    margin: 1.5px 0;
+    font-size: 6.4pt;
+    color: #7f1d1d;
+  }
+  .footer-bar {
+    border-top: 0.8px solid #cbd5e1;
+    padding-top: 1.5px;
+    font-size: 5.8pt;
+    color: #64748b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  code {
+    font-family: Consolas, Monaco, monospace;
+    font-size: 6.4pt;
+    background: #f1f5f9;
+    padding: 0.5px 2px;
+    border-radius: 2px;
+    color: #0f172a;
+  }
+  strong { color: #0f172a; }
+</style>
+</head>
+<body>
+
+<!-- ======================================================== -->
+<!-- PAGE 1: LOCKING TECHNIQUES & 2PL VARIANTS -->
+<!-- ======================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">DBMS Unit 5: Concurrency Control Techniques</div>
+        <div class="header-sub">AKTU BCS501 | Gateway Classes Complete Revision Notes</div>
+      </div>
+      <div class="page-tag">Page 1 of 3: Locking &amp; 2PL</div>
+    </div>
+
+    <!-- ROW 1: CONCURRENCY NEED & LOCK BASICS -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>1. Concurrency Control Motivation</span>
+          <span class="badge badge-blue">ACID Isolation</span>
+        </div>
+        <p style="margin:1px 0;">Coordinates concurrent execution to avoid 4 major anomalies:</p>
+        <ul>
+          <li><strong>Dirty Read (WR):</strong> Reading uncommitted data that later aborts.</li>
+          <li><strong>Lost Update (WW):</strong> Two writes overwrite without intermediate visibility.</li>
+          <li><strong>Unrepeatable Read (RW):</strong> Reading different values in same txn.</li>
+          <li><strong>Phantom Read:</strong> Range query tuple count changes via inserts.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>2. Lock Types &amp; Compatibility</span>
+          <span class="badge badge-green">Lock Manager</span>
+        </div>
+        <ul>
+          <li><strong>Binary Lock (0/1):</strong> 0 = Unlocked, 1 = Locked. Only 1 txn allowed (Bottleneck).</li>
+          <li><strong>Shared Lock S(X):</strong> Read permission. Multiple readers allowed.</li>
+          <li><strong>Exclusive Lock X(X):</strong> Read and Write permission. Strictly 1 txn.</li>
+        </ul>
+        <table>
+          <tr><th>Held \ Requested</th><th>Shared (S)</th><th>Exclusive (X)</th></tr>
+          <tr><td><strong>Shared (S)</strong></td><td>TRUE (Compatible)</td><td>FALSE (Conflict)</td></tr>
+          <tr><td><strong>Exclusive (X)</strong></td><td>FALSE (Conflict)</td><td>FALSE (Conflict)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ROW 2: TWO-PHASE LOCKING (2PL) -->
+    <div class="card">
+      <div class="card-header card-header-accent">
+        <span>3. Two-Phase Locking (2PL) Protocol &amp; Lock Point</span>
+        <span class="badge badge-red">Serializability Theorem</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="formula-box">
+            Phase 1: Growing Phase (Locks acquired only; no release)<br>
+            Lock Point: Instant when the LAST lock is acquired<br>
+            Phase 2: Shrinking Phase (Locks released only; no acquire)
+          </div>
+          <p style="margin:1px 0;"><strong>Golden Rule:</strong> Once a transaction releases any lock, it can NEVER acquire any new lock!</p>
+        </div>
+        <div>
+          <div class="warn-box">
+            <strong>Lock Conversion Rules:</strong><br>
+            • <strong>Upgrading (S → X):</strong> Allowed ONLY in Growing Phase if T is sole reader.<br>
+            • <strong>Downgrading (X → S):</strong> Allowed in Shrinking Phase to increase read concurrency.
+          </div>
+          <p style="margin:1px 0;"><strong>Serial Order:</strong> Equivalent serial order equals the order of transactions reaching their <strong>Lock Points</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3: 2PL VARIANTS COMPARISON -->
+    <div class="card">
+      <div class="card-header">
+        <span>4. Master 2PL Protocol Variants Comparison Matrix</span>
+        <span class="badge badge-amber">AKTU 10M Question</span>
+      </div>
+      <table>
+        <tr><th>Variant</th><th>Lock Holding &amp; Release Rule</th><th>Deadlock-Free?</th><th>Cascadeless?</th><th>Industry Role</th></tr>
+        <tr>
+          <td><strong>Basic 2PL</strong></td>
+          <td>Growing phase then Shrinking phase. Locks released anytime in phase 2.</td>
+          <td>No (Deadlock possible)</td>
+          <td>No (Cascading abort possible)</td>
+          <td>Theoretical baseline</td>
+        </tr>
+        <tr>
+          <td><strong>Conservative 2PL</strong></td>
+          <td>Pre-declares and locks ALL required items before execution starts.</td>
+          <td><strong>YES (Guaranteed!)</strong></td>
+          <td>No</td>
+          <td>Static/Embedded DBs</td>
+        </tr>
+        <tr>
+          <td><strong>Strict 2PL</strong></td>
+          <td>All <strong>Exclusive (X) locks held until Commit / Abort</strong>. Shared locks released in phase 2.</td>
+          <td>No (Deadlock possible)</td>
+          <td><strong>YES (Strict &amp; Cascadeless)</strong></td>
+          <td><strong>Industry Standard (PostgreSQL, MySQL)</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Rigorous 2PL</strong></td>
+          <td>All <strong>Shared (S) and Exclusive (X) locks held until Commit / Abort</strong>.</td>
+          <td>No (Deadlock possible)</td>
+          <td><strong>YES (Commit Order CSR)</strong></td>
+          <td>Financial engines</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>DBMS Unit 5: Concurrency Control Techniques | AKTU BCS501</span>
+    <span>Page 1 of 3</span>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PAGE 2: TIMESTAMPS, THOMAS RULE, MVCC & OCC -->
+<!-- ======================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">DBMS Unit 5: Concurrency Control Techniques</div>
+        <div class="header-sub">AKTU BCS501 | Gateway Classes Complete Revision Notes</div>
+      </div>
+      <div class="page-tag">Page 2 of 3: Timestamps &amp; MVCC</div>
+    </div>
+
+    <!-- ROW 1: TIMESTAMPS & THOMAS' WRITE RULE -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>5. Basic Timestamp Ordering (TO)</span>
+          <span class="badge badge-blue">Deadlock-Free</span>
+        </div>
+        <p style="margin:1px 0;">TS(T) assigned at start. Item timestamps: <code>read_TS(X)</code> &amp; <code>write_TS(X)</code>.</p>
+        <div class="formula-box">
+          <strong>read(X):</strong> If TS(T) &lt; write_TS(X) → ABORT T.<br>
+          Else: execute and read_TS(X) = max(read_TS(X), TS(T)).<br>
+          <strong>write(X):</strong> If TS(T) &lt; read_TS(X) or TS(T) &lt; write_TS(X) → ABORT T.<br>
+          Else: execute and write_TS(X) = TS(T).
+        </div>
+        <p style="margin:1px 0;"><strong>Advantage:</strong> 100% Deadlock-Free (No waiting cycles!).</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>6. Thomas' Write Rule &amp; VSR</span>
+          <span class="badge badge-green">Obsolete Writes</span>
+        </div>
+        <p style="margin:1px 0;">Modifies Basic TO for write operations:</p>
+        <div class="warn-box">
+          1. If TS(T) &lt; read_TS(X) → ABORT and ROLLBACK T.<br>
+          2. <strong>If TS(T) &lt; write_TS(X) → IGNORE write, CONTINUE processing!</strong><br>
+          3. Else → Execute write, write_TS(X) = TS(T).
+        </div>
+        <p style="margin:1px 0;"><strong>AKTU Theorem:</strong> Enforces <strong>View Serializability (VSR)</strong> using Blind Writes, rejecting fewer writes than Basic TO!</p>
+      </div>
+    </div>
+
+    <!-- ROW 2: MVCC & MV2PL -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>7. Multi-Version (MVCC) &amp; MVTO</span>
+          <span class="badge badge-amber">Non-Blocking Readers</span>
+        </div>
+        <p style="margin:1px 0;">Writes append new version $X_k \langle 	ext{val}, RTS, WTS angle$.</p>
+        <ul>
+          <li><strong>Mantra:</strong> Readers never block writers; writers never block readers!</li>
+          <li><strong>MVTO read(X):</strong> Reads $X_i$ with largest $WTS(X_i) \le TS(T)$. <strong>Read is ALWAYS granted (Never aborts)!</strong></li>
+          <li><strong>MVTO write(X):</strong> If $RTS(X_i) > TS(T) \implies$ Abort. Else creates new version $X_{k+1}$ with $WTS = RTS = TS(T)$.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-accent">
+          <span>8. MV2PL &amp; Certify Locks</span>
+          <span class="badge badge-red">3 Lock Modes</span>
+        </div>
+        <p style="margin:1px 0;">Employs Read Lock (RL), Write Lock (WL), Certify Lock (CL):</p>
+        <table>
+          <tr><th>Held \ Req</th><th>RL</th><th>WL</th><th>CL</th></tr>
+          <tr><td><strong>RL</strong></td><td>YES</td><td>YES</td><td>NO</td></tr>
+          <tr><td><strong>WL</strong></td><td>YES</td><td>NO</td><td>NO</td></tr>
+          <tr><td><strong>CL</strong></td><td>NO</td><td>NO</td><td>NO</td></tr>
+        </table>
+        <p style="margin:1px 0;">WL upgrades to CL at commit phase. Eliminates cascading rollbacks!</p>
+      </div>
+    </div>
+
+    <!-- ROW 3: OCC & PHANTOMS -->
+    <div class="card">
+      <div class="card-header">
+        <span>9. Validation-Based Protocol (OCC) &amp; Phantom Phenomena</span>
+        <span class="badge badge-blue">Optimistic CC</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <strong style="color:#1e3a8a;">The 3 Phases of OCC:</strong>
+          <ul>
+            <li><strong>Read Phase:</strong> Reads DB freely; writes buffered locally in memory.</li>
+            <li><strong>Validation Phase:</strong> Assigned $TS(T)$; validates conflict conditions.</li>
+            <li><strong>Write Phase:</strong> Local copies flushed to DB disk upon validation pass.</li>
+          </ul>
+          <div class="formula-box">Condition 2: $WritePhase(T_i) < WritePhase(T_j) 	ext{ and } RS(T_j) \cap WS(T_i) = \emptyset$</div>
+        </div>
+        <div>
+          <strong style="color:#b91c1c;">The Phantom Phenomenon:</strong>
+          <ul>
+            <li>Predicate query count altered by concurrent dynamic tuple insertions.</li>
+            <li>Existing row locks cannot protect non-existent records.</li>
+            <li><strong>Solution:</strong> <strong>Index-Range Locking</strong> on B+ Tree leaf keys covering search range.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>DBMS Unit 5: Concurrency Control Techniques | AKTU BCS501</span>
+    <span>Page 2 of 3</span>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PAGE 3: MULTIPLE GRANULARITY, RECOVERY, 2PC & ORACLE -->
+<!-- ======================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">DBMS Unit 5: Concurrency Control Techniques</div>
+        <div class="header-sub">AKTU BCS501 | Gateway Classes Complete Revision Notes</div>
+      </div>
+      <div class="page-tag">Page 3 of 3: MGL, 2PC &amp; Oracle</div>
+    </div>
+
+    <!-- ROW 1: GRANULARITY & INTENTION LOCKS -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>10. Granularity Tree Hierarchy</span>
+          <span class="badge badge-blue">db → f → p → r</span>
+        </div>
+        <p style="margin:1px 0;">Tree: Database ($db$) → Files ($f_1, f_2$) → Pages ($p_{11}, p_{12}$) → Records ($r_{111}$).</p>
+        <ul>
+          <li><strong>Fine (Record):</strong> High concurrency, high locking overhead.</li>
+          <li><strong>Coarse (File):</strong> Low concurrency, minimal locking overhead.</li>
+          <li><strong>Subtree Invariant:</strong> Locking node $N$ locks all its descendants!</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>11. Intention Locks &amp; 5x5 Matrix (Slide 69)</span>
+          <span class="badge badge-green">IS, IX, SIX</span>
+        </div>
+        <table>
+          <tr><th>Held \ Req</th><th>IS</th><th>IX</th><th>S</th><th>SIX</th><th>X</th></tr>
+          <tr><td><strong>IS</strong></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+          <tr><td><strong>IX</strong></td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td><strong>S</strong></td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
+          <tr><td><strong>SIX</strong></td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td><strong>X</strong></td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ROW 2: MGL PROTOCOL RULES (SLIDE 70) -->
+    <div class="card">
+      <div class="card-header card-header-accent">
+        <span>12. The 6 Mandatory Rules of MGL Protocol (Slide 70)</span>
+        <span class="badge badge-red">AKTU Exam Theorem</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li><strong>Rule 1:</strong> Adhere strictly to 5×5 lock compatibility matrix.</li>
+            <li><strong>Rule 2:</strong> Root of tree ($db$) must be locked first, in any mode.</li>
+            <li><strong>Rule 3 (S / IS):</strong> Lock node $N$ in $S$ or $IS$ only if parent is locked in $IS$ or $IX$.</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><strong>Rule 4 (X / IX / SIX):</strong> Lock node $N$ in $X, IX, SIX$ only if parent locked in $IX$ or $SIX$.</li>
+            <li><strong>Rule 5 (2PL):</strong> Lock only if no node has been unlocked (Growing phase).</li>
+            <li><strong>Rule 6 (Bottom-Up):</strong> Unlock $N$ only if NONE of its children are currently locked!</li>
+          </ul>
+        </div>
+      </div>
+      <div class="formula-box" style="text-align:center;">
+        Direction: Locking is strictly <strong>TOP-DOWN</strong> | Unlocking is strictly <strong>BOTTOM-UP</strong>
+      </div>
+    </div>
+
+    <!-- ROW 3: RECOVERY, 2PC & ORACLE CASE STUDY -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>13. Concurrent Recovery &amp; 2PC</span>
+          <span class="badge badge-amber">Distributed Atomicity</span>
+        </div>
+        <ul>
+          <li><strong>Concurrent Recovery:</strong> Checkpoint records active list $L$. $T_i$ with commit → REDO (forward). $T_i$ active at crash → UNDO (backward).</li>
+          <li><strong>Two-Phase Commit (2PC):</strong>
+            <ul>
+              <li><strong>Phase 1 (Prepare):</strong> Coordinator sends PREPARE → Nodes vote COMMIT or ABORT.</li>
+              <li><strong>Phase 2 (Commit):</strong> If all vote COMMIT → GLOBAL_COMMIT; else GLOBAL_ABORT.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>14. Oracle Case Study (AKTU Syllabus)</span>
+          <span class="badge badge-green">Industry Engine</span>
+        </div>
+        <ul>
+          <li><strong>MVCC &amp; SCN:</strong> System Change Number increments at commit.</li>
+          <li><strong>Undo Segments:</strong> Reconstructs Consistent Read (CR) buffer for older queries without blocking writers.</li>
+          <li><strong>ORA-01555 Snapshot Too Old:</strong> Occurs when query's required undo blocks are overwritten. Solution: Increase UNDO_RETENTION.</li>
+          <li><strong>Zero Lock Escalation:</strong> Row locks in block ITL; never escalates.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>DBMS Unit 5: Concurrency Control Techniques | AKTU BCS501</span>
+    <span>Page 3 of 3</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="600" fill="url(#bgGrad)"/>
+  <rect x="20" y="20" width="960" height="560" rx="14" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,6"/>
+
+  <text x="500" y="55" fill="#f8fafc" font-family="'Segoe UI', Roboto, sans-serif" font-size="21" font-weight="900" text-anchor="middle" letter-spacing="0.5">AKTU UNIT 5 MASTER EXAM DECISION FLOWCHART</text>
+  <text x="500" y="80" fill="#94a3b8" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Step-by-Step Problem Solving Algorithms for 10-Mark AKTU Concurrency Questions (BCS501)</text>
+
+  <!-- Flowchart Container -->
+  <g filter="url(#shadow)">
+    <!-- Step 1: Question Classifier -->
+    <rect x="360" y="110" width="280" height="50" rx="8" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+    <text x="500" y="132" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="800" text-anchor="middle">Step 1: Identify Concurrency Technique</text>
+    <text x="500" y="148" fill="#dbeafe" font-family="'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600" text-anchor="middle">Is question on Locking, Timestamps, MGL, or Oracle?</text>
+
+    <!-- Branch Arrows -->
+    <line x1="420" y1="160" x2="200" y2="210" stroke="#f59e0b" stroke-width="2"/>
+    <line x1="500" y1="160" x2="500" y2="210" stroke="#10b981" stroke-width="2"/>
+    <line x1="580" y1="160" x2="800" y2="210" stroke="#ec4899" stroke-width="2"/>
+
+    <!-- Branch 1: 2PL & Locking -->
+    <rect x="60" y="210" width="280" height="150" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <rect x="60" y="210" width="280" height="28" rx="8" fill="#d97706"/>
+    <text x="200" y="229" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800" text-anchor="middle">Branch A: Locking &amp; 2PL</text>
+    <text x="75" y="255" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• Check Growing vs Shrinking Phase</text>
+    <text x="75" y="272" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• Any lock acquired after unlock? → Violates 2PL</text>
+    <text x="75" y="290" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• X-locks held till commit? → Strict 2PL</text>
+    <text x="75" y="308" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• All locks held till commit? → Rigorous 2PL</text>
+    <text x="75" y="326" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">✓ Pre-locking all items? → Conservative 2PL</text>
+
+    <!-- Branch 2: Timestamp & Thomas Rule -->
+    <rect x="360" y="210" width="280" height="150" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect x="360" y="210" width="280" height="28" rx="8" fill="#059669"/>
+    <text x="500" y="229" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800" text-anchor="middle">Branch B: Timestamps &amp; Thomas Rule</text>
+    <text x="375" y="255" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• read(X): TS(T) &lt; write_TS(X) → ABORT</text>
+    <text x="375" y="272" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• write(X): TS(T) &lt; read_TS(X) → ABORT</text>
+    <text x="375" y="290" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• write(X) with TS(T) &lt; write_TS(X):</text>
+    <text x="385" y="306" fill="#fca5a5" font-family="'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="700">→ Basic TO: ABORT T</text>
+    <text x="385" y="322" fill="#a7f3d0" font-family="'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="700">→ Thomas Rule: IGNORE &amp; CONTINUE (VSR)</text>
+
+    <!-- Branch 3: Multiple Granularity Locking -->
+    <rect x="660" y="210" width="280" height="150" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="2"/>
+    <rect x="660" y="210" width="280" height="28" rx="8" fill="#db2777"/>
+    <text x="800" y="229" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800" text-anchor="middle">Branch C: Multiple Granularity (MGL)</text>
+    <text x="675" y="255" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• Draw 5×5 Compatibility Matrix (IS, IX, S, SIX, X)</text>
+    <text x="675" y="272" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• Locking: Top-down from root (db)</text>
+    <text x="675" y="290" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• Unlocking: Bottom-up from leaves</text>
+    <text x="675" y="308" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• S requires IS/IX on parent</text>
+    <text x="675" y="326" fill="#e2e8f0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">• X requires IX/SIX on parent</text>
+  </g>
+
+  <!-- Step 2: AKTU Standard Problem Formats -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="380" width="900" height="180" rx="10" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+    <rect x="50" y="380" width="900" height="28" rx="10" fill="#334155"/>
+    <text x="500" y="399" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="800" text-anchor="middle">AKTU BCS501 Past 5-Year Question Patterns</text>
+
+    <text x="70" y="430" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800">Q1 (10 Marks): Explain Concurrent Control Mechanism &amp; Compare 2PL vs Timestamp Ordering (2022-23)</text>
+    <text x="85" y="448" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">→ Draw 2PL growing/shrinking curve + TO read/write rules. Mention Deadlocks in 2PL vs Deadlock-freedom in TO.</text>
+
+    <text x="70" y="475" fill="#fbbf24" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800">Q2 (10 Marks): What is Multiple Granularity Locking? Explain Compatibility Matrix &amp; Rules (2018-19, 2021-22)</text>
+    <text x="85" y="493" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">→ Draw Granularity Tree (db → f → p → r), draw 5×5 matrix, and list the 6 rules of MGL protocol.</text>
+
+    <text x="70" y="520" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800">Q3 (10 Marks): Explain Oracle Concurrency Control &amp; Multi-Version Read Consistency (2020-21)</text>
+    <text x="85" y="538" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">→ Detail SCN mechanism, Undo Segments / CR buffer reconstruction, ORA-01555 causes, and lack of lock escalation.</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="500" y="582" fill="#64748b" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600" text-anchor="middle">DBMS Unit 5: Concurrency Control Techniques | AKTU BCS501 Semester V</text>
+</svg>

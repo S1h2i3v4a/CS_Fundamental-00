@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="treeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="600" fill="url(#bgGrad)"/>
+  <rect x="20" y="20" width="960" height="560" rx="14" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,6"/>
+
+  <text x="500" y="55" fill="#f8fafc" font-family="'Segoe UI', Roboto, sans-serif" font-size="21" font-weight="900" text-anchor="middle" letter-spacing="0.5">GRANULARITY OF DATA ITEMS &amp; HIERARCHICAL TREE</text>
+  <text x="500" y="80" fill="#94a3b8" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Fine vs Coarse Granularity, Concurrency Trade-offs &amp; Tree Hierarchy (AKTU BCS501)</text>
+
+  <!-- Left: Hierarchical Tree Diagram (Slide 68 Alignment) -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="110" width="460" height="430" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="50" y="110" width="460" height="34" rx="10" fill="#0284c7"/>
+    <text x="280" y="133" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="800" text-anchor="middle">1. Granularity Hierarchy Tree Structure</text>
+
+    <!-- Root: Database (db) -->
+    <circle cx="280" cy="185" r="24" fill="url(#treeGrad)" stroke="#60a5fa" stroke-width="2"/>
+    <text x="280" y="191" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="900" text-anchor="middle">db</text>
+    <text x="325" y="188" fill="#93c5fd" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">(Entire Database)</text>
+
+    <!-- Tree lines to files -->
+    <line x1="280" y1="209" x2="160" y2="250" stroke="#94a3b8" stroke-width="2"/>
+    <line x1="280" y1="209" x2="400" y2="250" stroke="#94a3b8" stroke-width="2"/>
+
+    <!-- Level 2: Files (f1, f2) -->
+    <circle cx="160" cy="265" r="20" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="160" y="271" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="800" text-anchor="middle">f1</text>
+    <circle cx="400" cy="265" r="20" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="400" y="271" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="800" text-anchor="middle">f2</text>
+    <text x="435" y="270" fill="#94a3b8" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">(Files / Tables)</text>
+
+    <!-- Tree lines to pages -->
+    <line x1="160" y1="285" x2="110" y2="335" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="160" y1="285" x2="210" y2="335" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="400" y1="285" x2="350" y2="335" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="400" y1="285" x2="450" y2="335" stroke="#64748b" stroke-width="1.5"/>
+
+    <!-- Level 3: Pages/Blocks -->
+    <circle cx="110" cy="350" r="16" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+    <text x="110" y="355" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">p11</text>
+    <circle cx="210" cy="350" r="16" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+    <text x="210" y="355" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">p12</text>
+    <circle cx="350" cy="350" r="16" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+    <text x="350" y="355" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">p21</text>
+    <circle cx="450" cy="350" r="16" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+    <text x="450" y="355" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">p22</text>
+
+    <!-- Tree lines to records -->
+    <line x1="110" y1="366" x2="90" y2="420" stroke="#475569" stroke-width="1"/>
+    <line x1="110" y1="366" x2="130" y2="420" stroke="#475569" stroke-width="1"/>
+    <line x1="210" y1="366" x2="190" y2="420" stroke="#475569" stroke-width="1"/>
+    <line x1="210" y1="366" x2="230" y2="420" stroke="#475569" stroke-width="1"/>
+
+    <!-- Level 4: Records -->
+    <circle cx="90" cy="435" r="12" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+    <text x="90" y="439" fill="#fde68a" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" font-weight="700" text-anchor="middle">r1</text>
+    <circle cx="130" cy="435" r="12" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+    <text x="130" y="439" fill="#fde68a" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" font-weight="700" text-anchor="middle">r2</text>
+    <circle cx="190" cy="435" r="12" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+    <text x="190" y="439" fill="#fde68a" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" font-weight="700" text-anchor="middle">r3</text>
+    <circle cx="230" cy="435" r="12" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+    <text x="230" y="439" fill="#fde68a" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" font-weight="700" text-anchor="middle">r4</text>
+    <text x="280" y="440" fill="#94a3b8" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">(Individual Records)</text>
+
+    <!-- Boundary box on fine vs coarse -->
+    <rect x="70" y="475" width="420" height="50" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="280" y="495" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">↑ COARSE (High in tree: db, files) ↑</text>
+    <text x="280" y="513" fill="#f59e0b" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">↓ FINE (Low in tree: records, fields) ↓</text>
+  </g>
+
+  <!-- Right: Concurrency vs Overhead Trade-off Table -->
+  <g filter="url(#shadow)">
+    <rect x="540" y="110" width="410" height="430" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect x="540" y="110" width="410" height="34" rx="10" fill="#059669"/>
+    <text x="745" y="133" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="800" text-anchor="middle">2. Concurrency vs Overhead Trade-off</text>
+
+    <rect x="560" y="160" width="370" height="110" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="745" y="183" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="800" text-anchor="middle">Fine Granularity (Record / Field Level)</text>
+    <text x="575" y="205" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">✓ High Concurrency: Many txns access different records</text>
+    <text x="575" y="225" fill="#f87171" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">✗ High Locking Overhead: Millions of locks in Lock Table</text>
+    <text x="575" y="245" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-style="italic">Ideal for Online Transaction Processing (OLTP) like Banking.</text>
+
+    <rect x="560" y="290" width="370" height="110" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="745" y="313" fill="#fbbf24" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="800" text-anchor="middle">Coarse Granularity (File / Database Level)</text>
+    <text x="575" y="335" fill="#f87171" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">✗ Low Concurrency: One txn blocks entire table</text>
+    <text x="575" y="355" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">✓ Low Locking Overhead: Single lock entry manages all rows</text>
+    <text x="575" y="375" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-style="italic">Ideal for Batch Processing, Bulk Analytics, Reports.</text>
+
+    <!-- Bottom summary -->
+    <rect x="560" y="420" width="370" height="105" rx="8" fill="#0f172a" stroke="#6366f1" stroke-width="1.5"/>
+    <text x="745" y="443" fill="#a5b4fc" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800" text-anchor="middle">The Architectural Dilemma</text>
+    <text x="575" y="465" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">• How can a DBMS support BOTH fine-grained record updates</text>
+    <text x="585" y="481" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">AND coarse-grained table scans efficiently?</text>
+    <text x="575" y="503" fill="#facc15" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">→ Solution: Multiple Granularity Locking (MGL) &amp; Intention Locks!</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="500" y="582" fill="#64748b" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600" text-anchor="middle">DBMS Unit 5: Concurrency Control Techniques | AKTU BCS501 Semester V</text>
+</svg>

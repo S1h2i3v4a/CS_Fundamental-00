@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="600" fill="url(#bgGrad)"/>
+  <rect x="20" y="20" width="960" height="560" rx="14" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,6"/>
+
+  <text x="500" y="55" fill="#f8fafc" font-family="'Segoe UI', Roboto, sans-serif" font-size="21" font-weight="900" text-anchor="middle" letter-spacing="0.5">MULTIPLE GRANULARITY LOCKING (MGL) RULES</text>
+  <text x="500" y="80" fill="#94a3b8" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Top-Down Locking, Bottom-Up Unlocking &amp; 2PL Enforcement (AKTU BCS501 Slide 70)</text>
+
+  <!-- Left: The 6 Strict Rules of MGL Protocol -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="110" width="460" height="430" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="50" y="110" width="460" height="34" rx="10" fill="#0284c7"/>
+    <text x="280" y="133" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="800" text-anchor="middle">1. The 6 Mandatory Protocol Rules (Slide 70)</text>
+
+    <text x="70" y="170" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Rule 1: Adhere to Compatibility</text>
+    <text x="70" y="188" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">The 5×5 lock compatibility matrix must strictly be adhered to.</text>
+
+    <text x="70" y="215" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Rule 2: Lock Root of Tree First</text>
+    <text x="70" y="233" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">The root of the tree (db) MUST be locked first, in any valid mode.</text>
+
+    <text x="70" y="260" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Rule 3: Rule for Locking in S or IS Mode</text>
+    <text x="70" y="278" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">Node N can be locked in S or IS mode ONLY if its parent node is</text>
+    <text x="70" y="294" fill="#a7f3d0" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">already locked by transaction T in either IS or IX mode.</text>
+
+    <text x="70" y="322" fill="#fbbf24" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Rule 4: Rule for Locking in X, IX, or SIX Mode</text>
+    <text x="70" y="340" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">Node N can be locked in X, IX, or SIX mode ONLY if its parent</text>
+    <text x="70" y="356" fill="#fde68a" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">is already locked by transaction T in either IX or SIX mode.</text>
+
+    <text x="70" y="385" fill="#f87171" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Rule 5: 2PL Compliance (No Lock after Unlock)</text>
+    <text x="70" y="403" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">Transaction T can lock a node ONLY if it has not yet unlocked any node.</text>
+
+    <text x="70" y="432" fill="#c084fc" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Rule 6: Bottom-Up Unlocking Order</text>
+    <text x="70" y="450" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">Transaction T can unlock a node N ONLY if NONE of the children</text>
+    <text x="70" y="466" fill="#e9d5ff" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">of node N are currently locked by T!</text>
+  </g>
+
+  <!-- Right: Practical Locking Trace Example -->
+  <g filter="url(#shadow)">
+    <rect x="540" y="110" width="410" height="430" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect x="540" y="110" width="410" height="34" rx="10" fill="#059669"/>
+    <text x="745" y="133" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="800" text-anchor="middle">2. Step-by-Step Locking Walkthrough</text>
+
+    <rect x="560" y="160" width="370" height="150" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="575" y="183" fill="#38bdf8" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Scenario 1: T1 wants to write Record r1 in File f1</text>
+    <text x="575" y="205" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">1. Top-Down: T1 locks Root (db) in <strong>IX mode</strong></text>
+    <text x="575" y="225" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">2. T1 locks File (f1) in <strong>IX mode</strong></text>
+    <text x="575" y="245" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">3. T1 locks Page (p11) in <strong>IX mode</strong></text>
+    <text x="575" y="265" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="800">4. T1 locks Record (r1) in EXCLUSIVE mode: X(r1)</text>
+    <text x="575" y="285" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-style="italic">Target reached! All ancestors safely flagged with IX.</text>
+
+    <rect x="560" y="325" width="370" height="195" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="575" y="348" fill="#fbbf24" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="800">Scenario 2: Concurrent T2 wants to read Table f2</text>
+    <text x="575" y="370" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">1. T2 requests IS on Root (db) → GRANTED! (IX &amp; IS compat)</text>
+    <text x="575" y="390" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600">2. T2 requests S on File f2 → GRANTED! (f2 has no writer)</text>
+    <text x="575" y="410" fill="#34d399" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="800">Result: Both transactions execute concurrently without conflict!</text>
+
+    <text x="575" y="440" fill="#f87171" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800">Unlocking Order (Bottom-Up):</text>
+    <text x="575" y="460" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">T1 must unlock r1 FIRST, then p11, then f1, then db!</text>
+    <text x="575" y="478" fill="#cbd5e1" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600">Unlocking db before r1 is an absolute protocol violation!</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="500" y="582" fill="#64748b" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600" text-anchor="middle">DBMS Unit 5: Concurrency Control Techniques | AKTU BCS501 Semester V</text>
+</svg>
