@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cngHdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="sh14" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="950" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="15" y="15" width="920" height="510" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="10"/>
+
+  <rect x="35" y="30" width="880" height="52" fill="url(#cngHdr)" rx="8" filter="url(#sh14)"/>
+  <text x="475" y="62" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="bold" text-anchor="middle">Network Layer Congestion Control: Traffic Shaping &amp; Bucket Algorithms</text>
+
+  <!-- Left: Leaky Bucket -->
+  <g transform="translate(45, 105)">
+    <rect x="0" y="0" width="415" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">1. Leaky Bucket Algorithm (Traffic Smoothing)</text>
+
+    <!-- Bucket Graphic -->
+    <g transform="translate(100, 45)">
+      <!-- Input packets -->
+      <text x="100" y="15" fill="#b45309" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Bursty Unpredictable Input</text>
+      <line x1="100" y1="22" x2="100" y2="45" stroke="#d97706" stroke-width="2" stroke-dasharray="3,3"/>
+
+      <!-- Bucket container -->
+      <polygon points="40,45 160,45 140,165 60,165" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+      <text x="100" y="110" fill="#1e40af" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Water Buffer (Queue)</text>
+      <text x="100" y="128" fill="#3b82f6" font-family="sans-serif" font-size="10" text-anchor="middle">Capacity = C</text>
+
+      <!-- Hole & Output -->
+      <rect x="90" y="165" width="20" height="15" fill="#2563eb"/>
+      <line x1="100" y1="180" x2="100" y2="215" stroke="#16a34a" stroke-width="3"/>
+      <text x="100" y="235" fill="#15803d" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Constant Uniform Output Rate (r)</text>
+    </g>
+
+    <g transform="translate(20, 290)">
+      <rect x="0" y="0" width="375" height="95" fill="#fffbeb" stroke="#fcd34d" rx="4"/>
+      <text x="15" y="20" fill="#92400e" font-family="sans-serif" font-size="11" font-weight="bold">Core Working Principle:</text>
+      <text x="15" y="38" fill="#78350f" font-family="sans-serif" font-size="10.5">• Input can arrive in bursts of any rate.</text>
+      <text x="15" y="56" fill="#78350f" font-family="sans-serif" font-size="10.5">• If buffer fills completely, extra packets are <tspan font-weight="bold" fill="#b91c1c">DISCARDED</tspan>.</text>
+      <text x="15" y="74" fill="#78350f" font-family="sans-serif" font-size="10.5">• Output flow is strictly constant (Cannot send bursts!).</text>
+    </g>
+  </g>
+
+  <!-- Right: Token Bucket & Closed Loop -->
+  <g transform="translate(480, 105)">
+    <rect x="0" y="0" width="425" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">2. Token Bucket Algorithm (Allows Controlled Bursts)</text>
+
+    <!-- Token Bucket Box -->
+    <rect x="20" y="38" width="385" height="150" fill="#f0fdf4" stroke="#86efac" rx="5"/>
+    <text x="30" y="60" fill="#166534" font-family="sans-serif" font-size="11" font-weight="bold">• Tokens generated at fixed rate R tokens/sec.</text>
+    <text x="30" y="80" fill="#166534" font-family="sans-serif" font-size="11">• Bucket accumulates up to maximum Capacity C tokens.</text>
+    <text x="30" y="100" fill="#166534" font-family="sans-serif" font-size="11">• To transmit K bytes, host must grab K tokens.</text>
+    <text x="30" y="125" fill="#14532d" font-family="sans-serif" font-size="11" font-weight="bold">Burst Duration Formula (AKTU Numerical):</text>
+    <text x="30" y="145" fill="#15803d" font-family="monospace" font-size="11.5">Burst Time:  T = C / (M - R)</text>
+    <text x="30" y="165" fill="#64748b" font-family="sans-serif" font-size="10">(M = Peak Transmission Rate, R = Token Generation Rate)</text>
+
+    <!-- Closed-Loop Control Methods -->
+    <text x="20" y="212" fill="#0f172a" font-family="sans-serif" font-size="12" font-weight="bold">Closed-Loop Congestion Control Mechanisms:</text>
+
+    <g transform="translate(20, 225)">
+      <rect x="0" y="0" width="385" height="155" fill="#ffffff" stroke="#e2e8f0" rx="4"/>
+      <text x="15" y="22" fill="#b91c1c" font-family="sans-serif" font-size="11" font-weight="bold">1. Choke Packets:</text>
+      <text x="15" y="38" fill="#475569" font-family="sans-serif" font-size="10.5">Congested router generates ICMP packet directly to sender to slow down.</text>
+
+      <text x="15" y="62" fill="#b91c1c" font-family="sans-serif" font-size="11" font-weight="bold">2. Hop-by-Hop Backpressure:</text>
+      <text x="15" y="78" fill="#475569" font-family="sans-serif" font-size="10.5">Upstream router throttles previous neighbor link immediately.</text>
+
+      <text x="15" y="102" fill="#15803d" font-family="sans-serif" font-size="11" font-weight="bold">3. Explicit Congestion Notification (ECN):</text>
+      <text x="15" y="118" fill="#475569" font-family="sans-serif" font-size="10.5">Router marks ECN bits in IPv4/IPv6 header (RFC 3168).</text>
+      <text x="15" y="136" fill="#15803d" font-family="sans-serif" font-size="10.5" font-weight="bold">Prevents packet drops by proactively informing TCP endpoints!</text>
+    </g>
+  </g>
+</svg>

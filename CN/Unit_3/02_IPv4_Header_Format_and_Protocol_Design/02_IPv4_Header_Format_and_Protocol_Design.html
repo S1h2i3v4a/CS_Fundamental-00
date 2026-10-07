@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 3: IPv4 Header Format & Protocol Architecture</title>
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-top: 30px; }
+h2 { color: #1e3a8a; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin-top: 24px; }
+h3 { color: #1e40af; margin-top: 18px; }
+h4 { color: #334155; margin-top: 14px; }
+p, li { font-size: 14.5px; }
+code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13.5px; }
+pre { background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px; }
+th, td { border: 1px solid #cbd5e1; padding: 9px 12px; text-align: left; }
+th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f1f5f9; }
+blockquote { border-left: 4px solid #2563eb; margin: 16px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; }
+.diagram-container { text-align: center; margin: 25px 0; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-red { background: #fee2e2; color: #991b1b; }
+.formula-box { background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 6px; padding: 14px; margin: 16px 0; }
+
+</style>
+</head>
+<body>
+
+<h1>Module 02: IPv4 Header Format & Protocol Architecture</h1>
+<p class="badge badge-blue">Unit 3: Network Layer</p>
+<p class="badge badge-green">IPv4 Datagram Specification</p>
+<p>Field-by-field architectural decomposition of the standard 20 to 60-byte IPv4 header, scaling factors, TTL loop protection, protocol multiplexing, and solved packet dissection numericals.</p>
+
+<div class="diagram-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ipGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#334155"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="440" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Standard IPv4 Datagram Header Architecture (20 to 60 Bytes)</text>
+
+  <!-- Top: Field-by-Field 32-Bit Grid Format -->
+  <rect x="35" y="55" width="780" height="235" rx="6" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="780" height="26" rx="6" fill="url(#ipGrad)"/>
+  <text x="425" y="72" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">IPv4 Header Structure: 32 Bits (4 Bytes) per Row</text>
+
+  <!-- Bit ruler -->
+  <g transform="translate(45, 88)">
+    <text x="0" y="0" font-size="7" fill="#64748b">Bit 0</text>
+    <text x="95" y="0" font-size="7" fill="#64748b">Bit 4</text>
+    <text x="190" y="0" font-size="7" fill="#64748b">Bit 8</text>
+    <text x="380" y="0" font-size="7" fill="#64748b">Bit 16</text>
+    <text x="740" y="0" font-size="7" fill="#64748b">Bit 31</text>
+
+    <!-- Row 1: VER, HLEN, ToS, Total Length -->
+    <rect x="0" y="5" width="95" height="28" fill="#e0f2fe" stroke="#0284c7"/>
+    <text x="47" y="22" font-size="8.5" font-weight="bold" fill="#0369a1" text-anchor="middle">VER (4b)</text>
+
+    <rect x="95" y="5" width="95" height="28" fill="#e0f2fe" stroke="#0284c7"/>
+    <text x="142" y="22" font-size="8.5" font-weight="bold" fill="#0369a1" text-anchor="middle">HLEN (4b)</text>
+
+    <rect x="190" y="5" width="190" height="28" fill="#fef3c7" stroke="#d97706"/>
+    <text x="285" y="22" font-size="8.5" font-weight="bold" fill="#92400e" text-anchor="middle">Type of Service / DSCP (8b)</text>
+
+    <rect x="380" y="5" width="380" height="28" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="570" y="22" font-size="8.5" font-weight="bold" fill="#166534" text-anchor="middle">Total Length (16 bits, Max 65,535 Bytes)</text>
+
+    <!-- Row 2: Identification, Flags, Fragment Offset -->
+    <rect x="0" y="33" width="380" height="28" fill="#ede9fe" stroke="#7c3aed"/>
+    <text x="190" y="50" font-size="8.5" font-weight="bold" fill="#6d28d9" text-anchor="middle">Identification (16 bits)</text>
+
+    <rect x="380" y="33" width="75" height="28" fill="#fee2e2" stroke="#dc2626"/>
+    <text x="417" y="50" font-size="8.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Flags (3b)</text>
+
+    <rect x="455" y="33" width="305" height="28" fill="#ffedd5" stroke="#ea580c"/>
+    <text x="607" y="50" font-size="8.5" font-weight="bold" fill="#c2410c" text-anchor="middle">Fragment Offset (13 bits, in 8-byte units)</text>
+
+    <!-- Row 3: TTL, Protocol, Header Checksum -->
+    <rect x="0" y="61" width="190" height="28" fill="#fef2f2" stroke="#ef4444"/>
+    <text x="95" y="78" font-size="8.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Time to Live / TTL (8b)</text>
+
+    <rect x="190" y="61" width="190" height="28" fill="#f0fdf4" stroke="#22c55e"/>
+    <text x="285" y="78" font-size="8.5" font-weight="bold" fill="#15803d" text-anchor="middle">Protocol (8b, 1=ICMP, 6=TCP, 17=UDP)</text>
+
+    <rect x="380" y="61" width="380" height="28" fill="#eff6ff" stroke="#3b82f6"/>
+    <text x="570" y="78" font-size="8.5" font-weight="bold" fill="#1e40af" text-anchor="middle">Header Checksum (16 bits, 1's Complement)</text>
+
+    <!-- Row 4: Source IP Address -->
+    <rect x="0" y="89" width="760" height="28" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+    <text x="380" y="106" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">Source IP Address (32 bits / 4 Bytes)</text>
+
+    <!-- Row 5: Destination IP Address -->
+    <rect x="0" y="117" width="760" height="28" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+    <text x="380" y="134" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">Destination IP Address (32 bits / 4 Bytes)</text>
+
+    <!-- Row 6: Options & Padding -->
+    <rect x="0" y="145" width="760" height="24" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="3"/>
+    <text x="380" y="160" font-size="8" fill="#64748b" text-anchor="middle">Options (0 to 40 Bytes, Variable) + Padding (if needed)</text>
+  </g>
+
+  <!-- Left Bottom: Core Header Formulas & Rules -->
+  <rect x="35" y="300" width="375" height="125" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="300" width="375" height="24" rx="6" fill="#0284c7"/>
+  <text x="222" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Key Header Fields &amp; Scaling Multipliers</text>
+
+  <text x="50" y="338" fill="#0f172a" font-size="8.5" font-weight="bold">HLEN Multiplier (4-Byte Rule):</text>
+  <text x="195" y="338" fill="#0369a1" font-size="8.5" font-family="monospace">Header Length = HLEN × 4 Bytes</text>
+  <text x="50" y="352" fill="#334155" font-size="8">Min HLEN = 5 (5 × 4 = 20 Bytes). Max HLEN = 15 (15 × 4 = 60 Bytes).</text>
+
+  <text x="50" y="372" fill="#0f172a" font-size="8.5" font-weight="bold">Payload Length Formula:</text>
+  <text x="180" y="372" fill="#166534" font-size="8.5" font-family="monospace">Data Length = Total Length - (HLEN × 4)</text>
+
+  <text x="50" y="394" fill="#0f172a" font-size="8.5" font-weight="bold">Time to Live (TTL):</text>
+  <text x="150" y="394" fill="#991b1b" font-size="8">Decremented by 1 at every router hop. If TTL reaches 0: Packet dropped + ICMP Time Exceeded (prevents infinite loops!).</text>
+
+  <!-- Right Bottom: Protocol Numbers & Checksum -->
+  <rect x="440" y="300" width="375" height="125" rx="6" fill="#ffffff" stroke="#ea580c" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="300" width="375" height="24" rx="6" fill="#0f172a"/>
+  <text x="627" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Protocol Identifiers &amp; 16-Bit Checksum Calculation</text>
+
+  <text x="455" y="338" fill="#0f172a" font-size="8.5" font-weight="bold">Upper Protocol Numbers:</text>
+  <text x="455" y="352" fill="#334155" font-size="8">1 = ICMP | 2 = IGMP | 6 = TCP | 17 = UDP | 89 = OSPF</text>
+
+  <text x="455" y="372" fill="#0f172a" font-size="8.5" font-weight="bold">Checksum Verification:</text>
+  <text x="455" y="386" fill="#334155" font-size="8">Checksum covers ONLY the header (not payload). Recalculated at EVERY router hop because TTL decrements!</text>
+
+  <text x="455" y="408" fill="#0f172a" font-size="8.5" font-weight="bold">Flags Anatomy (3 Bits):</text>
+  <text x="560" y="408" fill="#c2410c" font-size="8" font-family="monospace">Bit 0: Reserved (0) | Bit 1: DF (Don't Fragment) | Bit 2: MF (More Fragments)</text>
+</svg>
+</div>
+
+<h2>1. The 32-Bit Word Header Structure</h2>
+<p>IPv4 organizes header fields into 32-bit (4-byte) rows. HLEN measures length in 4-byte increments (5 to 15), dictating a header size between 20 and 60 bytes. Total Length spans up to 65,535 bytes.</p>
+
+<h2>2. Fragmentation and Lifetime Fields</h2>
+<div class="formula-box">
+  <h4>Fundamental Equations</h4>
+  <code>Header Size (Bytes) = HLEN × 4</code><br>
+  <code>Payload Size = Total Length - (HLEN × 4)</code><br>
+  <code>Byte Offset = Fragment Offset × 8</code><br>
+  <code>Hop Cost: TTL_new = TTL_old - 1 (Dropped when TTL == 0)</code>
+</div>
+
+</body>
+</html>

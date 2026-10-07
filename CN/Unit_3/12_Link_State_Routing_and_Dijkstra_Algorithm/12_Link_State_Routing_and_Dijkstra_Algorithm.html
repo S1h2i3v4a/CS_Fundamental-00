@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 3: Link State Routing and Dijkstra Algorithm</title>
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-top: 30px; }
+h2 { color: #1e3a8a; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin-top: 24px; }
+h3 { color: #1e40af; margin-top: 18px; }
+h4 { color: #334155; margin-top: 14px; }
+p, li { font-size: 14.5px; }
+code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13.5px; }
+pre { background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px; }
+th, td { border: 1px solid #cbd5e1; padding: 9px 12px; text-align: left; }
+th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f1f5f9; }
+blockquote { border-left: 4px solid #2563eb; margin: 16px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; }
+.diagram-container { text-align: center; margin: 25px 0; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-purple { background: #f3e8ff; color: #6b21a8; }
+.badge-amber { background: #fef3c7; color: #92400e; }
+.formula-box { background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 6px; padding: 14px; margin: 16px 0; }
+
+</style>
+</head>
+<body>
+
+<h1>Module 12: Link State Routing and Dijkstra Algorithm</h1>
+<p class="badge badge-blue">Unit 3: Network Layer</p>
+<p class="badge badge-purple">Global Topology & Dijkstra SPF</p>
+<p>Link State Protocol Architecture (OSPF/IS-IS), 5 Execution Phases, LSP Reliable Flooding, Step-by-Step Dijkstra Numerical, and Master DVR vs LSR Comparison.</p>
+
+<div class="diagram-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="lsrHdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <filter id="sh12" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="950" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="15" y="15" width="920" height="510" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="10"/>
+
+  <rect x="35" y="30" width="880" height="52" fill="url(#lsrHdr)" rx="8" filter="url(#sh12)"/>
+  <text x="475" y="62" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="bold" text-anchor="middle">Link State Routing (LSR): LSP Reliable Flooding &amp; Dijkstra's Algorithm</text>
+
+  <!-- Left: 5 Steps of LSR & LSP Packet Format -->
+  <g transform="translate(45, 105)">
+    <rect x="0" y="0" width="415" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">5 Phases of Link State Routing (OSPF / IS-IS)</text>
+
+    <g transform="translate(20, 36)">
+      <text x="0" y="16" fill="#0f766e" font-family="sans-serif" font-size="11.5" font-weight="bold">1. Discover Neighbors:</text>
+      <text x="0" y="30" fill="#334155" font-family="sans-serif" font-size="11">Send HELLO packets to learn local interface neighbours.</text>
+
+      <text x="0" y="54" fill="#0f766e" font-family="sans-serif" font-size="11.5" font-weight="bold">2. Measure Link Metrics:</text>
+      <text x="0" y="68" fill="#334155" font-family="sans-serif" font-size="11">Send ECHO packets to measure round-trip delay, bandwidth.</text>
+
+      <text x="0" y="92" fill="#0f766e" font-family="sans-serif" font-size="11.5" font-weight="bold">3. Build Link State Packet (LSP):</text>
+      <text x="0" y="106" fill="#334155" font-family="sans-serif" font-size="11">Create LSP containing Node ID, sequence no, &amp; neighbor costs.</text>
+
+      <text x="0" y="130" fill="#0f766e" font-family="sans-serif" font-size="11.5" font-weight="bold">4. Reliable Flooding of LSPs:</text>
+      <text x="0" y="144" fill="#334155" font-family="sans-serif" font-size="11">Distribute LSP to every router in the AS using ACKs.</text>
+
+      <text x="0" y="168" fill="#0f766e" font-family="sans-serif" font-size="11.5" font-weight="bold">5. Compute Shortest Path Tree:</text>
+      <text x="0" y="182" fill="#334155" font-family="sans-serif" font-size="11">Every node runs Dijkstra algorithm on its complete LSDB.</text>
+    </g>
+
+    <!-- LSP Packet Structure -->
+    <text x="20" y="240" fill="#0f172a" font-family="sans-serif" font-size="12" font-weight="bold">Structure of a Link State Packet (LSP):</text>
+    <rect x="20" y="252" width="375" height="135" fill="#f0fdfa" stroke="#5eead4" rx="4"/>
+    <text x="30" y="272" fill="#134e4a" font-family="monospace" font-size="10.5">• Source Router ID: R1</text>
+    <text x="30" y="292" fill="#134e4a" font-family="monospace" font-size="10.5">• Sequence Number: 0x0000004A (Prevents old packet reuse)</text>
+    <text x="30" y="312" fill="#134e4a" font-family="monospace" font-size="10.5">• Age: 3600 seconds (Decremented to prevent zombie entries)</text>
+    <text x="30" y="332" fill="#134e4a" font-family="monospace" font-size="10.5">• Neighbor 1: R2 (Metric = 2)</text>
+    <text x="30" y="352" fill="#134e4a" font-family="monospace" font-size="10.5">• Neighbor 2: R3 (Metric = 5)</text>
+    <text x="30" y="372" fill="#134e4a" font-family="monospace" font-size="10.5">• Neighbor 3: R4 (Metric = 1)</text>
+  </g>
+
+  <!-- Right: Dijkstra Algorithm Graph & Tree -->
+  <g transform="translate(480, 105)">
+    <rect x="0" y="0" width="425" height="400" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">Dijkstra Shortest Path Tree (Source = Node U)</text>
+
+    <!-- Network Graph Nodes -->
+    <g transform="translate(40, 50)">
+      <!-- U -->
+      <circle cx="40" cy="50" r="18" fill="#14b8a6" stroke="#0f766e" stroke-width="2"/>
+      <text x="40" y="55" fill="#ffffff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">U</text>
+
+      <!-- V -->
+      <circle cx="160" cy="15" r="18" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+      <text x="160" y="20" fill="#0369a1" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">V</text>
+
+      <!-- W -->
+      <circle cx="160" cy="85" r="18" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+      <text x="160" y="90" fill="#0369a1" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">W</text>
+
+      <!-- X -->
+      <circle cx="280" cy="50" r="18" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+      <text x="280" y="55" fill="#0369a1" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">X</text>
+
+      <!-- Edges -->
+      <line x1="58" y1="45" x2="142" y2="20" stroke="#0f766e" stroke-width="2.5"/>
+      <text x="95" y="25" fill="#0f766e" font-family="sans-serif" font-size="10" font-weight="bold">2</text>
+
+      <line x1="58" y1="55" x2="142" y2="80" stroke="#0f766e" stroke-width="2.5"/>
+      <text x="95" y="80" fill="#0f766e" font-family="sans-serif" font-size="10" font-weight="bold">5</text>
+
+      <line x1="160" y1="33" x2="160" y2="67" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="170" y="55" fill="#64748b" font-family="sans-serif" font-size="10">3</text>
+
+      <line x1="178" y1="20" x2="262" y2="45" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="225" y="25" fill="#64748b" font-family="sans-serif" font-size="10">1</text>
+
+      <line x1="178" y1="80" x2="262" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="225" y="80" fill="#64748b" font-family="sans-serif" font-size="10">2</text>
+    </g>
+
+    <!-- Dijkstra Execution Trace Table -->
+    <text x="20" y="195" fill="#0f172a" font-family="sans-serif" font-size="12" font-weight="bold">Step-by-Step Dijkstra Trace:</text>
+
+    <rect x="15" y="210" width="395" height="22" fill="#e2e8f0" rx="3"/>
+    <text x="25" y="225" fill="#475569" font-family="sans-serif" font-size="10" font-weight="bold">Step</text>
+    <text x="70" y="225" fill="#475569" font-family="sans-serif" font-size="10" font-weight="bold">Confirmed Set N'</text>
+    <text x="185" y="225" fill="#475569" font-family="sans-serif" font-size="10" font-weight="bold">D(V), p(V)</text>
+    <text x="265" y="225" fill="#475569" font-family="sans-serif" font-size="10" font-weight="bold">D(W), p(W)</text>
+    <text x="345" y="225" fill="#475569" font-family="sans-serif" font-size="10" font-weight="bold">D(X), p(X)</text>
+
+    <text x="25" y="250" fill="#1e293b" font-family="monospace" font-size="10">0</text>
+    <text x="70" y="250" fill="#1e293b" font-family="monospace" font-size="10">{U}</text>
+    <text x="185" y="250" fill="#15803d" font-family="monospace" font-size="10">2, U*</text>
+    <text x="265" y="250" fill="#1e293b" font-family="monospace" font-size="10">5, U</text>
+    <text x="345" y="250" fill="#1e293b" font-family="monospace" font-size="10">inf</text>
+
+    <text x="25" y="272" fill="#1e293b" font-family="monospace" font-size="10">1</text>
+    <text x="70" y="272" fill="#1e293b" font-family="monospace" font-size="10">{U, V}</text>
+    <text x="185" y="272" fill="#64748b" font-family="monospace" font-size="10">-</text>
+    <text x="265" y="272" fill="#1e293b" font-family="monospace" font-size="10">5, U</text>
+    <text x="345" y="272" fill="#15803d" font-family="monospace" font-size="10">3, V* (2+1)</text>
+
+    <text x="25" y="294" fill="#1e293b" font-family="monospace" font-size="10">2</text>
+    <text x="70" y="294" fill="#1e293b" font-family="monospace" font-size="10">{U, V, X}</text>
+    <text x="185" y="294" fill="#64748b" font-family="monospace" font-size="10">-</text>
+    <text x="265" y="294" fill="#15803d" font-family="monospace" font-size="10">5, U*</text>
+    <text x="345" y="294" fill="#64748b" font-family="monospace" font-size="10">-</text>
+
+    <!-- Computed Routing Table -->
+    <rect x="15" y="320" width="395" height="65" fill="#eff6ff" stroke="#bfdbfe" rx="4"/>
+    <text x="25" y="340" fill="#1e40af" font-family="sans-serif" font-size="10.5" font-weight="bold">Resulting Routing Table at Router U:</text>
+    <text x="25" y="358" fill="#1e3a8a" font-family="monospace" font-size="10">• Dest V: Cost = 2, Next Hop = V (Direct link)</text>
+    <text x="25" y="374" fill="#1e3a8a" font-family="monospace" font-size="10">• Dest X: Cost = 3, Next Hop = V | Dest W: Cost = 5, Next Hop = W</text>
+  </g>
+</svg>
+</div>
+
+<h2>1. 5 Phases of Link State Routing</h2>
+<div class="formula-box">
+  <code>1. Discover neighbors via periodic HELLO packets.</code><br>
+  <code>2. Measure link cost/latency via ECHO test.</code><br>
+  <code>3. Construct Link State Packet (LSP) with Seq Number & Age.</code><br>
+  <code>4. Reliable Flooding of LSP to all routers in Autonomous System.</code><br>
+  <code>5. Execute Dijkstra's Algorithm independently on Link State Database (LSDB).</code>
+</div>
+
+<h2>2. DVR vs LSR Master Comparison</h2>
+<table>
+  <tr><th>Feature</th><th>Distance Vector (RIP)</th><th>Link State (OSPF)</th></tr>
+  <tr><td><b>Graph Knowledge</b></td><td>Local view only (Neighbor vectors)</td><td>Complete global topology (LSDB)</td></tr>
+  <tr><td><b>Update Sharing</b></td><td>Shares entire table with neighbors</td><td>Shares neighbor state with entire network</td></tr>
+  <tr><td><b>Convergence</b></td><td>Slow (Count-to-Infinity loops)</td><td>Fast & mathematically loop-free</td></tr>
+  <tr><td><b>Resource Overhead</b></td><td>Minimal memory & CPU</td><td>High CPU for Dijkstra graph execution</td></tr>
+</table>
+
+</body>
+</html>

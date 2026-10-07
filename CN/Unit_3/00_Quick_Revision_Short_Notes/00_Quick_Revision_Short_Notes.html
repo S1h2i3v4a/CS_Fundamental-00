@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 3: Ultra Quick Revision Short Notes (Exact 3 Pages)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 6.8pt;
+    line-height: 1.18;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 5mm 6mm 4mm 6mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-bar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 3.5px 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5px;
+  }
+  .header-title {
+    font-size: 9pt;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 6.3pt;
+    color: #93c5fd;
+    font-weight: 500;
+  }
+  .page-tag {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 6.2pt;
+    font-weight: 700;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+  }
+  .card {
+    border: 1px solid #cbd5e1;
+    border-radius: 3.5px;
+    background: #ffffff;
+    padding: 3px 4.5px;
+    margin-bottom: 3.5px;
+  }
+  .card-title {
+    font-size: 7.1pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1.5px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-title span {
+    font-size: 5.8pt;
+    color: #64748b;
+    font-weight: 500;
+  }
+  p, ul {
+    margin: 1.5px 0;
+    padding-left: 10px;
+  }
+  li {
+    margin-bottom: 1px;
+  }
+  strong {
+    color: #0f172a;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 0.5px 2.5px;
+    border-radius: 2px;
+    font-family: monospace;
+    font-size: 6.1pt;
+  }
+  .formula {
+    background: #eff6ff;
+    border-left: 2px solid #2563eb;
+    padding: 1.5px 4px;
+    margin: 1.5px 0;
+    font-family: monospace;
+    font-size: 6.1pt;
+  }
+  .warn {
+    background: #fffbeb;
+    border-left: 2px solid #f59e0b;
+    padding: 1.5px 4px;
+    margin: 1.5px 0;
+    font-size: 6.1pt;
+  }
+  .footer-bar {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 5.6pt;
+    color: #64748b;
+  }
+  table.mini {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2px 0;
+    font-size: 5.9pt;
+  }
+  table.mini th, table.mini td {
+    border: 1px solid #cbd5e1;
+    padding: 1.5px 3px;
+    text-align: left;
+  }
+  table.mini th {
+    background: #f8fafc;
+    font-weight: 700;
+    color: #1e293b;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========================================================================== -->
+<!-- PAGE 1: Foundations, IPv4 Header, Fragmentation & Classful Addressing -->
+<!-- ========================================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">AKTU BCS603 COMPUTER NETWORKS — UNIT 3 QUICK REVISION</div>
+        <div class="header-sub">Network Layer: Foundations, IPv4 Header Architecture, Fragmentation & Classful Addressing</div>
+      </div>
+      <div class="page-tag">PAGE 1 OF 3</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="card-title">1. Network Layer Foundations & Switching <span>Mod 01</span></div>
+        <ul>
+          <li><strong>Role:</strong> Host-to-Host end-to-end packet delivery across heterogeneous internetworks.</li>
+          <li><strong>Store-and-Forward:</strong> Router stores entire frame, verifies checksum, routes via table, and forwards.</li>
+          <li><strong>Routing vs Forwarding:</strong>
+            <ul>
+              <li><strong>Routing (Control Plane):</strong> Software algorithms (OSPF, BGP) computing end-to-end optimal path.</li>
+              <li><strong>Forwarding (Data Plane):</strong> Fast hardware engine transferring packet from input to output port.</li>
+            </ul>
+          </li>
+          <li><strong>Datagram vs Virtual Circuit (VC):</strong>
+            <ul>
+              <li><em>Datagram (Internet):</em> Connectionless, stateless routers, full 32-bit IP in every packet, dynamic reroute on failure, out-of-order delivery.</li>
+              <li><em>Virtual Circuit (ATM/X.25):</em> 3-way handshake setup, stateful switches, 16-bit VCI tag, router crash kills circuit, guaranteed in-order.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="card-title">2. IPv4 Datagram Header Architecture (20-60B) <span>Mod 02</span></div>
+        <ul>
+          <li><strong>VER (4b):</strong> Strictly <code>4</code> for IPv4 (<code>0100</code> binary).</li>
+          <li><strong>HLEN (4b):</strong> Header length in 4-byte words. <code>Min = 5 (20B)</code>, <code>Max = 15 (60B)</code>.</li>
+          <li><strong>ToS / DiffServ (8b):</strong> Quality of Service priority bits.</li>
+          <li><strong>Total Length (16b):</strong> Header + Payload in bytes. <code>Max = 65,535B</code>.</li>
+          <li><strong>TTL (8b):</strong> Time-to-Live. Decremented by 1 at each router; at 0, packet dropped & ICMP Type 11 sent.</li>
+          <li><strong>Protocol (8b):</strong> L4 multiplexing: <code>1=ICMP, 6=TCP, 17=UDP, 2=IGMP, 89=OSPF</code>.</li>
+          <li><strong>Header Checksum (16b):</strong> 1's complement sum of 16-bit words. Verifies <em>header only</em>; recomputed at every hop due to TTL.</li>
+        </ul>
+        <div class="formula">Payload Size = Total Length - (HLEN × 4) Bytes</div>
+      </div>
+    </div>
+
+    <!-- Card 3: Fragmentation -->
+    <div class="card">
+      <div class="card-title">3. IPv4 Fragmentation & MTU Mathematics <span>Mod 03</span></div>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li><strong>MTU (Maximum Transmission Unit):</strong> Max L2 data payload (Ethernet MTU = 1500 Bytes).</li>
+            <li><strong>Identification (16b):</strong> Unique packet ID copied to all fragments for reassembly.</li>
+            <li><strong>Flags (3b):</strong>
+              <ul>
+                <li>Bit 0: Reserved (Must be 0).</li>
+                <li>Bit 1: <strong>DF (Don't Fragment):</strong> If 1 and packet > MTU, drop & send ICMP Type 3 Code 4.</li>
+                <li>Bit 2: <strong>MF (More Fragments):</strong> <code>1</code> = More fragments follow; <code>0</code> = Last fragment.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="formula">
+            <strong>Fragment Offset (13 bits):</strong><br>
+            Offset = (Relative Byte Position of 1st Data Byte) / 8<br>
+            <em>Golden Rule:</em> Data payload in all fragments (except last) must be a strict multiple of 8!
+          </div>
+          <div class="warn">
+            <strong>Reassembly:</strong> Done strictly at <strong>Destination Host</strong> (not by intermediate routers) to prevent router buffering bottleneck.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Classful Addressing -->
+    <div class="card">
+      <div class="card-title">4. IPv4 Classful Addressing Architecture & Special IP Blocks <span>Mod 04</span></div>
+      <table class="mini">
+        <tr><th>Class</th><th>Leading Bits</th><th>1st Octet Range</th><th>NetID / HostID Bits</th><th>Default Mask</th><th>Networks / Hosts</th></tr>
+        <tr><td><b>A</b></td><td><code>0</code></td><td>1 – 126</td><td>8b / 24b</td><td>255.0.0.0 (/8)</td><td>126 / 16,777,214</td></tr>
+        <tr><td><b>B</b></td><td><code>10</code></td><td>128 – 191</td><td>16b / 16b</td><td>255.255.0.0 (/16)</td><td>16,384 / 65,534</td></tr>
+        <tr><td><b>C</b></td><td><code>110</code></td><td>192 – 223</td><td>24b / 8b</td><td>255.255.255.0 (/24)</td><td>2,097,152 / 254</td></tr>
+        <tr><td><b>D</b></td><td><code>1110</code></td><td>224 – 239</td><td>Multicast Group</td><td>N/A (No NetID/HostID)</td><td>Multicast addressing</td></tr>
+        <tr><td><b>E</b></td><td><code>1111</code></td><td>240 – 255</td><td>Reserved / Experimental</td><td>N/A</td><td>Research & Military</td></tr>
+      </table>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li><strong>Private IPs (RFC 1918 - Non-routable):</strong>
+              <ul>
+                <li>Class A: <code>10.0.0.0 – 10.255.255.255</code> (/8)</li>
+                <li>Class B: <code>172.16.0.0 – 172.31.255.255</code> (/12)</li>
+                <li>Class C: <code>192.168.0.0 – 192.168.255.255</code> (/16)</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><strong>Special IP Addresses:</strong>
+              <ul>
+                <li><code>127.0.0.0/8 (127.0.0.1):</code> Loopback testing.</li>
+                <li><code>0.0.0.0:</code> "This host on this network" (DHCP discover).</li>
+                <li><code>255.255.255.255:</code> Limited Broadcast (never routed).</li>
+                <li><code>NetID.All-1s:</code> Directed Broadcast Address (DBA).</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AKTU BCS603 Computer Networks — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Unit 3: Network Layer Architecture</span>
+    <span>Page 1 of 3</span>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- PAGE 2: Subnetting, CIDR, Supernetting, NAT/PAT, IPv6 & ARP -->
+<!-- ========================================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">AKTU BCS603 COMPUTER NETWORKS — UNIT 3 QUICK REVISION</div>
+        <div class="header-sub">Subnetting Math, CIDR (/n), Supernetting, NAT/PAT Overload, IPv6 40B Header & ARP/RARP</div>
+      </div>
+      <div class="page-tag">PAGE 2 OF 3</div>
+    </div>
+
+    <!-- Grid 2: Subnetting & CIDR -->
+    <div class="grid-2">
+      <!-- Card 5: Subnetting -->
+      <div class="card">
+        <div class="card-title">5. Subnetting Mechanics & Classful Design <span>Mod 05</span></div>
+        <ul>
+          <li><strong>Purpose:</strong> Divides large wasteful host space into smaller departmental logical networks without changing external NetID.</li>
+          <li><strong>Bit Borrowing:</strong> Borrow $s$ MSB bits from Host ID to form Subnet ID.</li>
+        </ul>
+        <div class="formula">
+          • Subnets Formed = 2^s<br>
+          • Usable Hosts/Subnet = 2^h - 2 (Subtract Subnet ID & DBA)<br>
+          • Block Size (Jump) = 256 - Interesting Mask Octet = 2^h<br>
+          • Router Subnet ID = Destination IP AND Subnet Mask
+        </div>
+        <div class="warn">
+          <strong>Example:</strong> Class C <code>192.168.1.0</code> with 4 subnets $\implies s=2, h=6$. Mask = <code>255.255.255.192 (/26)</code>. Block size = 64. Subnets: <code>.0, .64, .128, .192</code>. Usable hosts = 62.
+        </div>
+      </div>
+
+      <!-- Card 6: CIDR & Supernetting -->
+      <div class="card">
+        <div class="card-title">6. CIDR & Supernetting (Route Aggregation) <span>Mod 06</span></div>
+        <ul>
+          <li><strong>CIDR (RFC 1519):</strong> Eliminates class boundaries. Notation <code>IP/n</code>.</li>
+          <li><strong>3 Rules of CIDR Allocation:</strong>
+            <ol>
+              <li>Addresses in block must be contiguous.</li>
+              <li>Total IPs $N = 2^{32-n}$ must be a power of 2.</li>
+              <li>First address in decimal must be divisible by $N$.</li>
+            </ol>
+          </li>
+          <li><strong>Supernetting:</strong> Aggregates contiguous Class C/CIDR routes into 1 entry (reduces global router tables). Prefix length decreases ($/24 	o /22$).</li>
+          <li><strong>Longest Prefix Match (LPM):</strong> When multiple routes match a destination, router picks the one with the <strong>longest prefix length</strong> (most specific mask).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Grid 2: NAT/PAT & IPv6 -->
+    <div class="grid-2">
+      <!-- Card 7: NAT & PAT -->
+      <div class="card">
+        <div class="card-title">7. NAT & PAT (Port Address Translation) <span>Mod 07</span></div>
+        <ul>
+          <li><strong>NAT (RFC 1631):</strong> Maps private RFC 1918 IPs to registered public IPs.</li>
+          <li><strong>Types:</strong>
+            <ul>
+              <li><em>Static NAT:</em> 1:1 permanent mapping (Servers).</li>
+              <li><em>Dynamic NAT:</em> Pool of public IPs assigned dynamically.</li>
+              <li><em>PAT (NAT Overload):</em> Thousands of private IPs share <strong>1 single public IP</strong> using unique L4 Port numbers!</li>
+            </ul>
+          </li>
+          <li><strong>Translation Table:</strong> Maps <code>[Private IP:Port]</code> $\leftrightarrow$ <code>[Public IP:NAT Port]</code>.</li>
+        </ul>
+      </div>
+
+      <!-- Card 8: IPv6 Architecture -->
+      <div class="card">
+        <div class="card-title">8. IPv6 Architecture & Transition <span>Mod 07</span></div>
+        <ul>
+          <li><strong>Address Space:</strong> 128 bits ($16$ bytes) = $2^{128} pprox 3.4 	imes 10^{38}$ IPs.</li>
+          <li><strong>Base Header:</strong> Fixed 40 Bytes. No checksum (removed), no broadcast (replaced by multicast/anycast).</li>
+          <li><strong>8 Fields:</strong> Version(4), Traffic Class(8), Flow Label(20), Payload Len(16), Next Hdr(8), Hop Limit(8), Src IP(128), Dst IP(128).</li>
+          <li><strong>Transition Strategies:</strong>
+            <ul>
+              <li><em>Dual Stack:</em> Routers run both IPv4 and IPv6 stacks.</li>
+              <li><em>Tunneling:</em> IPv6 encapsulated inside IPv4 packet.</li>
+              <li><em>NAT-PT / Translation:</em> Header format translation gateways.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 9: ARP & RARP -->
+    <div class="card">
+      <div class="card-title">9. Address Resolution Protocol (ARP) & RARP <span>Mod 08</span></div>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li><strong>Purpose:</strong> Resolves Layer 3 Logical IP $	o$ Layer 2 Physical MAC.</li>
+            <li><strong>ARP Request:</strong> Broadcast (<code>FF:FF:FF:FF:FF:FF</code>): <em>"Who has IP X? Tell Y"</em>.</li>
+            <li><strong>ARP Reply:</strong> Unicast back to requester: <em>"I have IP X! My MAC is B"</em>.</li>
+            <li><strong>ARP Cache:</strong> RAM table storing <code>(IP, MAC, TTL)</code> to avoid repeated broadcasts. Dynamic entries age out (120-300s).</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><strong>ARP 28B Packet:</strong> HW Type (1=Eth), Prot Type (0x0800), HW Len (6), Prot Len (4), Opcode (1=Req, 2=Rep), Sender MAC/IP, Target MAC/IP.</li>
+            <li><strong>Gratuitous ARP:</strong> Host ARPs its own IP to detect IP conflicts or update neighbor caches on NIC change.</li>
+            <li><strong>RARP:</strong> MAC $	o$ IP resolution for diskless nodes (Replaced by DHCP).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AKTU BCS603 Computer Networks — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Unit 3: Subnetting, CIDR, NAT, IPv6 & ARP</span>
+    <span>Page 2 of 3</span>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- PAGE 3: DHCP, ICMP, Routing Protocols, Congestion Control & PYQs -->
+<!-- ========================================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">AKTU BCS603 COMPUTER NETWORKS — UNIT 3 QUICK REVISION</div>
+        <div class="header-sub">DHCP DORA, ICMP Diagnostics, Unicast Routing (DVR, LSR, BGP), Congestion Control & PYQs</div>
+      </div>
+      <div class="page-tag">PAGE 3 OF 3</div>
+    </div>
+
+    <!-- Grid 2: DHCP & ICMP -->
+    <div class="grid-2">
+      <!-- Card 10: DHCP -->
+      <div class="card">
+        <div class="card-title">10. Dynamic Host Configuration (DHCP) <span>Mod 09</span></div>
+        <ul>
+          <li><strong>Role:</strong> Dynamic auto-assignment of IP, Mask, Gateway, DNS.</li>
+          <li><strong>DORA Sequence (UDP Client:68, Server:67):</strong>
+            <ul>
+              <li><strong>Discover:</strong> Client broadcasts (<code>255.255.255.255</code>) from <code>0.0.0.0</code>.</li>
+              <li><strong>Offer:</strong> Server proposes IP lease, mask, server ID.</li>
+              <li><strong>Request:</strong> Client broadcasts accepting server's offer.</li>
+              <li><strong>ACK:</strong> Server confirms lease with gateway and DNS info.</li>
+            </ul>
+          </li>
+          <li><strong>DHCP Relay Agent:</strong> Router unicasts client broadcast across subnets.</li>
+          <li><strong>Lease Timers:</strong> T1 (50% time) unicast renew; T2 (87.5%) broadcast rebinding.</li>
+        </ul>
+      </div>
+
+      <!-- Card 11: ICMP -->
+      <div class="card">
+        <div class="card-title">11. Internet Control Message Protocol (ICMP) <span>Mod 10</span></div>
+        <ul>
+          <li><strong>Role:</strong> Network layer (Prot=1) error reporting and queries.</li>
+          <li><strong>Error Types:</strong>
+            <ul>
+              <li><em>Type 3:</em> Destination Unreachable (Code 0=Net, 1=Host, 3=Port).</li>
+              <li><em>Type 11:</em> Time Exceeded (Code 0=TTL Expired, 1=Reassembly).</li>
+              <li><em>Type 12:</em> Parameter Problem. <em>Type 5:</em> Redirection.</li>
+            </ul>
+          </li>
+          <li><strong>Query Types:</strong> Type 8 (Echo Req) & Type 0 (Echo Rep) $\implies$ <code>ping</code>.</li>
+          <li><strong>Traceroute:</strong> Sends packets with TTL=1, 2, 3... Intermediate routers drop packet and return ICMP Type 11. Target returns ICMP Type 3 Code 3.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Grid 2: Routing Algorithms -->
+    <div class="grid-2">
+      <!-- Card 12: DVR -->
+      <div class="card">
+        <div class="card-title">12. Distance Vector Routing & Count-to-Infinity <span>Mod 11</span></div>
+        <ul>
+          <li><strong>Algorithm:</strong> Bellman-Ford: $D_x(y) = \min_v \{ c(x,v) + D_v(y) \}$.</li>
+          <li><strong>RIP Protocol:</strong> Periodic broadcast to immediate neighbors every 30s.</li>
+          <li><strong>Count-to-Infinity Problem:</strong> Link failure creates routing loops where nodes increment metric slowly to infinity (ping-pong bounce).</li>
+          <li><strong>Mitigations:</strong>
+            <ul>
+              <li><em>Define Infinity = 16</em> (Caps maximum loop count).</li>
+              <li><em>Split Horizon:</em> Never advertise route back to neighbor learned from.</li>
+              <li><em>Poison Reverse:</em> Advertise reverse route with metric = $\infty$ (16).</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 13: LSR -->
+      <div class="card">
+        <div class="card-title">13. Link State Routing & Dijkstra <span>Mod 12</span></div>
+        <ul>
+          <li><strong>Algorithm:</strong> Dijkstra Shortest Path Tree (OSPF / IS-IS).</li>
+          <li><strong>5 Phases:</strong> (1) Discover neighbors via HELLO, (2) Measure link cost, (3) Build LSP, (4) Reliable Flooding of LSPs to all routers, (5) Run Dijkstra on complete LSDB.</li>
+          <li><strong>DVR vs LSR:</strong> DVR has local view and slow convergence (loops); LSR has global topology map, fast convergence, loop-free, but higher CPU/RAM overhead.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Grid 2: BGP & Congestion Control -->
+    <div class="grid-2">
+      <!-- Card 14: BGP & Hierarchical -->
+      <div class="card">
+        <div class="card-title">14. Path Vector (BGP) & Hierarchical Routing <span>Mod 13</span></div>
+        <ul>
+          <li><strong>BGP-4:</strong> Inter-domain routing across Autonomous Systems (AS).</li>
+          <li><strong>Path Vector:</strong> Advertises complete <code>AS-PATH: [AS200, AS100]</code>.</li>
+          <li><strong>Loop Discard Rule:</strong> If router sees its own AS in AS-PATH, <em>discards update instantly!</em></li>
+          <li><strong>Hierarchical Routing:</strong> Regions/clusters reduce tables from $O(N)$ to $O(\ln N)$. Optimal Kamoun-Klein size: $S = 2 \cdot e \cdot \ln N$.</li>
+        </ul>
+      </div>
+
+      <!-- Card 15: Congestion Control -->
+      <div class="card">
+        <div class="card-title">15. Congestion Control & Traffic Shaping <span>Mod 14</span></div>
+        <ul>
+          <li><strong>Open-Loop (Prevention):</strong> Retransmission, window, drop policies.</li>
+          <li><strong>Closed-Loop (Reaction):</strong> Choke packets, backpressure, ECN bits.</li>
+          <li><strong>Leaky Bucket:</strong> Rigid constant output rate (Drops bursts).</li>
+          <li><strong>Token Bucket:</strong> Generates tokens at rate $R$, bucket capacity $C$. Allows bursts! Burst time: $T = C / (M - R)$.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 16: Top AKTU PYQs -->
+    <div class="card">
+      <div class="card-title">16. Top 5 AKTU Semester Exam PYQs (10-Marks Long Questions) <span>Mod 14</span></div>
+      <table class="mini">
+        <tr><th>Question Topic</th><th>Key Derivation / Diagram to Draw</th><th>Ref Module</th></tr>
+        <tr><td><b>Datagram vs Virtual Circuit</b></td><td>Setup phase, stateless vs stateful, VCI tag, router failure rerouting table</td><td>Module 01</td></tr>
+        <tr><td><b>IPv4 Header Format & Fields</b></td><td>Draw 32-bit grid: VER, HLEN, Total Len, Identification, Flags, Offset, TTL, Prot, Checksum</td><td>Module 02</td></tr>
+        <tr><td><b>Subnetting Numericals</b></td><td>Formula $2^s \ge N$, borrow bits, jump size $= 256 - 	ext{mask}$, first/last usable IP, broadcast</td><td>Module 05</td></tr>
+        <tr><td><b>Count-to-Infinity & Solutions</b></td><td>Linear 3-node graph, link failure loop increment, Split Horizon with Poison Reverse</td><td>Module 11</td></tr>
+        <tr><td><b>Leaky vs Token Bucket</b></td><td>Draw water bucket with hole vs token bucket with tokens; burst formula $T = C/(M-R)$</td><td>Module 14</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AKTU BCS603 Computer Networks — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Unit 3: Routing Protocols, Congestion Control & PYQs</span>
+    <span>Page 3 of 3</span>
+  </div>
+</div>
+
+</body>
+</html>

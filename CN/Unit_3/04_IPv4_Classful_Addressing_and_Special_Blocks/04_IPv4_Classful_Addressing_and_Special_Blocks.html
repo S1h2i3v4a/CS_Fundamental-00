@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 3: IPv4 Classful Addressing & Special Purpose Blocks</title>
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-top: 30px; }
+h2 { color: #1e3a8a; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin-top: 24px; }
+h3 { color: #1e40af; margin-top: 18px; }
+h4 { color: #334155; margin-top: 14px; }
+p, li { font-size: 14.5px; }
+code { background: #f1f5f9; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13.5px; }
+pre { background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px; }
+th, td { border: 1px solid #cbd5e1; padding: 9px 12px; text-align: left; }
+th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f1f5f9; }
+blockquote { border-left: 4px solid #2563eb; margin: 16px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; }
+.diagram-container { text-align: center; margin: 25px 0; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-red { background: #fee2e2; color: #991b1b; }
+.formula-box { background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 6px; padding: 14px; margin: 16px 0; }
+
+</style>
+</head>
+<body>
+
+<h1>Module 04: IPv4 Classful Addressing & Special Purpose Blocks</h1>
+<p class="badge badge-blue">Unit 3: Network Layer</p>
+<p class="badge badge-green">Logical Addressing & Address Classes</p>
+<p>Complete mathematical exploration of IPv4 Class A, B, C, D, and E architectures, NetID vs HostID divisions, default subnet masks, usable host calculations ($2^H - 2$), and RFC 1918 private address ranges.</p>
+
+<div class="diagram-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="clGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#312e81"/><stop offset="100%" stop-color="#4f46e5"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="440" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">IPv4 Classful Addressing Hierarchy: Classes A, B, C, D &amp; E Breakdown</text>
+
+  <!-- Left: Class Structure Grid -->
+  <rect x="35" y="55" width="410" height="235" rx="6" fill="#ffffff" stroke="#312e81" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="410" height="26" rx="6" fill="url(#clGrad)"/>
+  <text x="240" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">1. Class Bit Patterns &amp; Address Ranges</text>
+
+  <g transform="translate(45, 90)">
+    <!-- Class A -->
+    <rect x="0" y="0" width="30" height="25" fill="#1e3a8a"/><text x="15" y="16" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">0</text>
+    <rect x="30" y="0" width="90" height="25" fill="#dbeafe" stroke="#3b82f6"/><text x="75" y="16" fill="#1e40af" font-size="8" font-weight="bold" text-anchor="middle">NetID (7b)</text>
+    <rect x="120" y="0" width="270" height="25" fill="#f1f5f9" stroke="#94a3b8"/><text x="255" y="16" fill="#0f172a" font-size="8" text-anchor="middle">HostID (24 bits = 16,777,214 Hosts)</text>
+
+    <!-- Class B -->
+    <rect x="0" y="30" width="45" height="25" fill="#1e3a8a"/><text x="22" y="46" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">10</text>
+    <rect x="45" y="30" width="150" height="25" fill="#dbeafe" stroke="#3b82f6"/><text x="120" y="46" fill="#1e40af" font-size="8" font-weight="bold" text-anchor="middle">NetID (14 bits = 16,384 Nets)</text>
+    <rect x="195" y="30" width="195" height="25" fill="#f1f5f9" stroke="#94a3b8"/><text x="292" y="46" fill="#0f172a" font-size="8" text-anchor="middle">HostID (16 bits = 65,534 Hosts)</text>
+
+    <!-- Class C -->
+    <rect x="0" y="60" width="60" height="25" fill="#1e3a8a"/><text x="30" y="76" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">110</text>
+    <rect x="60" y="60" width="230" height="25" fill="#dbeafe" stroke="#3b82f6"/><text x="175" y="76" fill="#1e40af" font-size="8" font-weight="bold" text-anchor="middle">NetID (21 bits = 2,097,152 Nets)</text>
+    <rect x="290" y="60" width="100" height="25" fill="#f1f5f9" stroke="#94a3b8"/><text x="340" y="76" fill="#0f172a" font-size="8" text-anchor="middle">Host (8b: 254)</text>
+
+    <!-- Class D -->
+    <rect x="0" y="90" width="75" height="25" fill="#d97706"/><text x="37" y="106" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">1110</text>
+    <rect x="75" y="90" width="315" height="25" fill="#fef3c7" stroke="#f59e0b"/><text x="232" y="106" fill="#92400e" font-size="8" font-weight="bold" text-anchor="middle">Multicast Group Address (28 bits)</text>
+
+    <!-- Class E -->
+    <rect x="0" y="120" width="75" height="25" fill="#475569"/><text x="37" y="136" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">1111</text>
+    <rect x="75" y="120" width="315" height="25" fill="#f8fafc" stroke="#64748b"/><text x="232" y="136" fill="#475569" font-size="8" font-weight="bold" text-anchor="middle">Reserved for Future / Research &amp; Development</text>
+  </g>
+
+  <rect x="45" y="245" width="390" height="38" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="55" y="259" fill="#1e40af" font-size="8.5" font-weight="bold">Default Subnet Masks:</text>
+  <text x="55" y="272" fill="#334155" font-size="8">Class A: 255.0.0.0 (/8) | Class B: 255.255.0.0 (/16) | Class C: 255.255.255.0 (/24)</text>
+
+  <!-- Right: Address Ranges & Special IP Blocks -->
+  <rect x="460" y="55" width="355" height="235" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="460" y="55" width="355" height="26" rx="6" fill="#0f172a"/>
+  <text x="637" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">2. Class Decimal Ranges &amp; Special Blocks</text>
+
+  <!-- Table of ranges -->
+  <g transform="translate(470, 90)">
+    <rect x="0" y="0" width="60" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="30" y="14" font-size="8" font-weight="bold" text-anchor="middle">Class A</text>
+    <rect x="60" y="0" width="130" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="125" y="14" font-size="8" font-family="monospace" text-anchor="middle">0.0.0.0 - 127.255.255.255</text>
+    <rect x="190" y="0" width="145" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="262" y="14" font-size="7.5" fill="#64748b" text-anchor="middle">Leading bits: 0...</text>
+
+    <rect x="0" y="22" width="60" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="30" y="36" font-size="8" font-weight="bold" text-anchor="middle">Class B</text>
+    <rect x="60" y="22" width="130" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="125" y="36" font-size="8" font-family="monospace" text-anchor="middle">128.0.0.0 - 191.255.255.255</text>
+    <rect x="190" y="22" width="145" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="262" y="36" font-size="7.5" fill="#64748b" text-anchor="middle">Leading bits: 10...</text>
+
+    <rect x="0" y="44" width="60" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="30" y="58" font-size="8" font-weight="bold" text-anchor="middle">Class C</text>
+    <rect x="60" y="44" width="130" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="125" y="58" font-size="8" font-family="monospace" text-anchor="middle">192.0.0.0 - 223.255.255.255</text>
+    <rect x="190" y="44" width="145" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="262" y="58" font-size="7.5" fill="#64748b" text-anchor="middle">Leading bits: 110...</text>
+
+    <rect x="0" y="66" width="60" height="20" fill="#fef3c7" stroke="#f59e0b"/><text x="30" y="80" font-size="8" font-weight="bold" fill="#92400e" text-anchor="middle">Class D</text>
+    <rect x="60" y="66" width="130" height="20" fill="#fef3c7" stroke="#f59e0b"/><text x="125" y="80" font-size="8" font-family="monospace" fill="#92400e" text-anchor="middle">224.0.0.0 - 239.255.255.255</text>
+    <rect x="190" y="66" width="145" height="20" fill="#fef3c7" stroke="#f59e0b"/><text x="262" y="80" font-size="7.5" fill="#92400e" text-anchor="middle">Multicast Groups</text>
+
+    <rect x="0" y="88" width="60" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="30" y="102" font-size="8" font-weight="bold" text-anchor="middle">Class E</text>
+    <rect x="60" y="88" width="130" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="125" y="102" font-size="8" font-family="monospace" text-anchor="middle">240.0.0.0 - 255.255.255.255</text>
+    <rect x="190" y="88" width="145" height="20" fill="#f8fafc" stroke="#cbd5e1"/><text x="262" y="102" font-size="7.5" fill="#64748b" text-anchor="middle">Experimental / R&amp;D</text>
+  </g>
+
+  <rect x="470" y="205" width="335" height="78" rx="4" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="480" y="219" fill="#166534" font-size="8.5" font-weight="bold">RFC 1918 Private IPv4 Ranges (Non-Routable):</text>
+  <text x="480" y="233" fill="#334155" font-size="8">• Class A: 10.0.0.0 to 10.255.255.255 (10.0.0.0/8)</text>
+  <text x="480" y="246" fill="#334155" font-size="8">• Class B: 172.16.0.0 to 172.31.255.255 (172.16.0.0/12)</text>
+  <text x="480" y="259" fill="#334155" font-size="8">• Class C: 192.168.0.0 to 192.168.255.255 (192.168.0.0/16)</text>
+  <text x="480" y="274" fill="#15803d" font-size="7.5" font-weight="bold">Conserves global IPv4 space; requires NAT for internet access!</text>
+
+  <!-- Bottom: Special Purpose IP Addresses -->
+  <rect x="35" y="300" width="780" height="125" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="300" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Special Purpose IPv4 Addresses (Never Assigned to Regular Host NICs)</text>
+
+  <text x="50" y="340" fill="#0f172a" font-size="9" font-weight="bold">This Host (0.0.0.0):</text>
+  <text x="175" y="340" fill="#334155" font-size="8.5">Used by host during bootstrapping (DHCP Discover) when it doesn't yet know its own IP address.</text>
+
+  <text x="50" y="360" fill="#0f172a" font-size="9" font-weight="bold">Loopback (127.0.0.1 - 127.x.x.x):</text>
+  <text x="235" y="360" fill="#334155" font-size="8.5">Packets never leave the local machine. Used to test local TCP/IP stack software (localhost).</text>
+
+  <text x="50" y="380" fill="#0f172a" font-size="9" font-weight="bold">Limited Broadcast (255.255.255.255):</text>
+  <text x="250" y="380" fill="#334155" font-size="8.5">Broadcast to all hosts on the local network segment. Strictly NEVER forwarded by routers!</text>
+
+  <text x="50" y="400" fill="#0f172a" font-size="9" font-weight="bold">Directed Broadcast (HostID = All 1s):</text>
+  <text x="260" y="400" fill="#334155" font-size="8.5">E.g., 192.168.1.255. Delivered to all hosts in that specific remote network.</text>
+
+  <text x="50" y="418" fill="#0f172a" font-size="9" font-weight="bold">Network ID (HostID = All 0s):</text>
+  <text x="235" y="418" fill="#1e3a8a" font-size="8.5">E.g., 192.168.1.0. Identifies the entire network itself; cannot be assigned to an individual host interface.</text>
+</svg>
+</div>
+
+<h2>1. The 5 Address Classes</h2>
+<p>Classful addressing divides the 32-bit address space based on leading bits: Class A (0, /8), Class B (10, /16), Class C (110, /24), Class D (1110, Multicast), and Class E (1111, Experimental).</p>
+
+<h2>2. Usable Host Capacity Equation</h2>
+<div class="formula-box">
+  <h4>Address Exclusion Rules</h4>
+  <code>Usable Hosts = 2^H - 2</code><br>
+  <code>Excluded: Network Address (HostID = All 0s) and Directed Broadcast (HostID = All 1s)</code><br>
+  <code>Private IP Blocks: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16</code>
+</div>
+
+</body>
+</html>

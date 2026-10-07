@@ -10,7 +10,7 @@ Welcome to the comprehensive, highly structured Computer Networks repository map
 | :---: | :--- | :---: | :---: | :---: | :---: |
 | [**Unit 1**](Unit_1) | **Introduction &amp; Physical Layer** | 15 Modules (`00` to `14`) | [3-Page PDF](Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf) | [Master Notes](Unit_1/Unit_1_Master_Notes.pdf) | **READY** ✅ |
 | [**Unit 2**](Unit_2) | **Data Link Layer &amp; Medium Access Sublayer** | 15 Modules (`00` to `14`) | [3-Page PDF](Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf) | [Master Notes](Unit_2/Unit_2_Master_Notes.pdf) | **READY** ✅ |
-| **Unit 3** | Network Layer &amp; Routing Algorithms | TBD | TBD | TBD | Upcoming ⏳ |
+| [**Unit 3**](Unit_3) | **Network Layer (Routing & Addressing)** | 15 Modules (`00` to `14`) | [3-Page PDF](Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf) | [Master Notes](Unit_3/Unit_3_Master_Notes.pdf) | **READY** ✅ |
 | **Unit 4** | Transport Layer &amp; Congestion Control | TBD | TBD | TBD | Upcoming ⏳ |
 | **Unit 5** | Application Layer &amp; Network Security | TBD | TBD | TBD | Upcoming ⏳ |
 

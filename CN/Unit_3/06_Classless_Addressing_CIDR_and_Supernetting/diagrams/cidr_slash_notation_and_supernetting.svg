@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cidrHdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#0d9488"/>
+    </linearGradient>
+    <linearGradient id="prefGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ccfbf1"/>
+      <stop offset="100%" stop-color="#99f6e4"/>
+    </linearGradient>
+    <filter id="shadow6" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="950" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="15" y="15" width="920" height="510" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="10"/>
+
+  <rect x="35" y="30" width="880" height="52" fill="url(#cidrHdr)" rx="8" filter="url(#shadow6)"/>
+  <text x="475" y="62" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="bold" text-anchor="middle">CIDR Slash Notation, Block Rules &amp; Supernetting (Route Aggregation)</text>
+
+  <g transform="translate(45, 105)">
+    <text x="0" y="18" fill="#0f172a" font-family="sans-serif" font-size="14" font-weight="bold">1. CIDR Address Breakdown: 200.16.0.0 / 22</text>
+    
+    <rect x="0" y="30" width="580" height="42" fill="url(#prefGrad)" stroke="#0d9488" stroke-width="2" rx="5"/>
+    <text x="290" y="56" fill="#115e59" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">Network Prefix: n = 22 Bits (Mask: 255.255.252.0)</text>
+
+    <rect x="590" y="30" width="270" height="42" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="5"/>
+    <text x="725" y="56" fill="#92400e" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">Host Bits: 32 - n = 10 Bits (1024 IPs)</text>
+  </g>
+
+  <g transform="translate(45, 205)">
+    <rect x="0" y="0" width="415" height="145" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5" rx="7"/>
+    <text x="15" y="24" fill="#0f766e" font-family="sans-serif" font-size="13" font-weight="bold">3 Mandatory Rules for CIDR Allocation</text>
+    
+    <text x="15" y="55" fill="#134e4a" font-family="sans-serif" font-size="12">• <tspan font-weight="bold">Rule 1 (Contiguous):</tspan> All addresses must be continuous.</text>
+    <text x="15" y="85" fill="#134e4a" font-family="sans-serif" font-size="12">• <tspan font-weight="bold">Rule 2 (Power of 2):</tspan> Total IPs N = 2^(32 - n) (e.g. 1024, 2048).</text>
+    <text x="15" y="115" fill="#134e4a" font-family="sans-serif" font-size="12">• <tspan font-weight="bold">Rule 3 (Divisible):</tspan> First IP (in decimal) must be divisible by N.</text>
+  </g>
+
+  <g transform="translate(480, 205)">
+    <rect x="0" y="0" width="425" height="145" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.5" rx="7"/>
+    <text x="15" y="24" fill="#92400e" font-family="sans-serif" font-size="13" font-weight="bold">Supernetting: 4 Class C Networks Aggregated</text>
+    
+    <g transform="translate(15, 38)">
+      <rect x="0" y="0" width="88" height="26" fill="#ffffff" stroke="#94a3b8" rx="3"/>
+      <text x="44" y="17" fill="#334155" font-family="monospace" font-size="10" text-anchor="middle">198.16.0.0/24</text>
+
+      <rect x="98" y="0" width="88" height="26" fill="#ffffff" stroke="#94a3b8" rx="3"/>
+      <text x="142" y="17" fill="#334155" font-family="monospace" font-size="10" text-anchor="middle">198.16.1.0/24</text>
+
+      <rect x="196" y="0" width="88" height="26" fill="#ffffff" stroke="#94a3b8" rx="3"/>
+      <text x="240" y="17" fill="#334155" font-family="monospace" font-size="10" text-anchor="middle">198.16.2.0/24</text>
+
+      <rect x="294" y="0" width="88" height="26" fill="#ffffff" stroke="#94a3b8" rx="3"/>
+      <text x="338" y="17" fill="#334155" font-family="monospace" font-size="10" text-anchor="middle">198.16.3.0/24</text>
+    </g>
+
+    <text x="200" y="85" fill="#b45309" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">↓ Merged into Single Routing Table Entry ↓</text>
+    
+    <rect x="40" y="96" width="340" height="34" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="5"/>
+    <text x="210" y="118" fill="#78350f" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Supernet: 198.16.0.0 / 22 (Mask: 255.255.252.0)</text>
+  </g>
+
+  <g transform="translate(45, 370)">
+    <rect x="0" y="0" width="860" height="135" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" rx="7"/>
+    <text x="20" y="24" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="bold">Longest Prefix Match (LPM) Routing Table Decision Rule</text>
+    
+    <rect x="20" y="36" width="820" height="24" fill="#e2e8f0" rx="3"/>
+    <text x="30" y="52" fill="#475569" font-family="sans-serif" font-size="11" font-weight="bold">Destination Network</text>
+    <text x="240" y="52" fill="#475569" font-family="sans-serif" font-size="11" font-weight="bold">Prefix Length</text>
+    <text x="380" y="52" fill="#475569" font-family="sans-serif" font-size="11" font-weight="bold">Next Hop / Interface</text>
+    <text x="560" y="52" fill="#475569" font-family="sans-serif" font-size="11" font-weight="bold">Packet: 200.24.16.99 (Evaluation)</text>
+
+    <text x="30" y="78" fill="#1e293b" font-family="monospace" font-size="11">200.24.0.0</text>
+    <text x="240" y="78" fill="#1e293b" font-family="monospace" font-size="11">/16 (255.255.0.0)</text>
+    <text x="380" y="78" fill="#1e293b" font-family="monospace" font-size="11">Interface eth0</text>
+    <text x="560" y="78" fill="#64748b" font-family="sans-serif" font-size="11">Matches (16-bit match)</text>
+
+    <text x="30" y="102" fill="#1e293b" font-family="monospace" font-size="11">200.24.16.0</text>
+    <text x="240" y="102" fill="#1e293b" font-family="monospace" font-size="11">/20 (255.255.240.0)</text>
+    <text x="380" y="102" fill="#1e293b" font-family="monospace" font-size="11">Interface eth1</text>
+    <text x="560" y="102" fill="#64748b" font-family="sans-serif" font-size="11">Matches (20-bit match)</text>
+
+    <rect x="25" y="112" width="810" height="20" fill="#dcfce7" rx="3"/>
+    <text x="30" y="126" fill="#166534" font-family="monospace" font-size="11" font-weight="bold">200.24.16.64</text>
+    <text x="240" y="126" fill="#166534" font-family="monospace" font-size="11" font-weight="bold">/26 (255.255.255.192)</text>
+    <text x="380" y="126" fill="#166534" font-family="monospace" font-size="11" font-weight="bold">Interface eth2</text>
+    <text x="560" y="126" fill="#166534" font-family="sans-serif" font-size="11" font-weight="bold">Selected! Longest Prefix (26 bits)</text>
+  </g>
+</svg>
