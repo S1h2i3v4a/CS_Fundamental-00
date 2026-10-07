@@ -1,0 +1,166 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 01: Relational Algebra Operators</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+</head><body>
+<h1>Module 01: Relational Algebra Complete Operators and Solved Numericals</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr01" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg01)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Relational Algebra Operator Hierarchy &amp; Query Pipeline</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Procedural Foundations: Fundamental Operators, Joins, Division &amp; Query Tree</text>
+
+  <!-- LEFT: FUNDAMENTAL OPERATORS -->
+  <g transform="translate(35, 85)">
+    <rect width="280" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="140" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. Fundamental Operators</text>
+    <text x="140" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">(Cannot be expressed using others)</text>
+
+    <!-- Selection -->
+    <rect x="15" y="65" width="250" height="55" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="85" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#38bdf8">Selection: σ[p](R)</text>
+    <text x="25" y="103" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Filters rows by condition. Horizontal slice.</text>
+
+    <!-- Projection -->
+    <rect x="15" y="130" width="250" height="55" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="150" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#38bdf8">Projection: π[A](R)</text>
+    <text x="25" y="168" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Filters columns. Vertical slice. Drops dupes!</text>
+
+    <!-- Union -->
+    <rect x="15" y="195" width="250" height="55" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="215" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#38bdf8">Union: R ∪ S</text>
+    <text x="25" y="233" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Combines all tuples. Requires compatibility.</text>
+
+    <!-- Set Difference -->
+    <rect x="15" y="260" width="250" height="55" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="280" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#38bdf8">Set Difference: R - S</text>
+    <text x="25" y="298" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Tuples in R but NOT in S. Non-commutative.</text>
+
+    <!-- Cartesian Product -->
+    <rect x="15" y="325" width="250" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="345" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#38bdf8">Cartesian Product: R × S</text>
+    <text x="25" y="363" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Cross product: deg=m+n, card=m*n</text>
+    <text x="25" y="376" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Rename: ρ[S(B1..Bn)](R)</text>
+  </g>
+
+  <!-- MIDDLE: JOIN OPERATORS -->
+  <g transform="translate(345, 85)">
+    <rect width="310" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="155" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. Derived Joins &amp; Division</text>
+    <text x="155" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">(Synthesized from fundamental)</text>
+
+    <!-- Theta & Equi Join -->
+    <rect x="15" y="65" width="280" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="85" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Theta &amp; Equi Join: R ⋈[θ] S</text>
+    <text x="25" y="102" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">R ⋈[θ] S ≡ σ[θ](R × S)</text>
+    <text x="25" y="117" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Equi Join uses equality (=) condition on columns.</text>
+
+    <!-- Natural Join -->
+    <rect x="15" y="145" width="280" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="165" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Natural Join: R ⋈ S</text>
+    <text x="25" y="182" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Equi-join on common attribute names.</text>
+    <text x="25" y="196" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Automatically projects out duplicate columns!</text>
+
+    <!-- Outer Joins -->
+    <rect x="15" y="220" width="280" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="240" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Outer Joins (Preserve Dangling Tuples)</text>
+    <text x="25" y="258" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Left Outer (R ⟕ S): Keeps all R tuples + NULL</text>
+    <text x="25" y="273" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Right Outer (R ⟖ S): Keeps all S tuples + NULL</text>
+    <text x="25" y="288" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Full Outer (R ⟗ S): Keeps all tuples from both</text>
+
+    <!-- Division Operator -->
+    <rect x="15" y="315" width="280" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="335" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f472b6">Division Operator: R ÷ S</text>
+    <text x="25" y="352" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Expresses "FOR ALL / EVERY" queries.</text>
+    <text x="25" y="367" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fde68a">π[A](R) - π[A]((π[A](R) × S) - R)</text>
+  </g>
+
+  <!-- RIGHT: QUERY EVALUATION TREE -->
+  <g transform="translate(685, 85)">
+    <rect width="280" height="400" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="140" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">3. Relational Query Tree</text>
+    <text x="140" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">"Suppliers of RED Parts in Delhi"</text>
+
+    <!-- Root: Projection -->
+    <rect x="50" y="70" width="180" height="36" rx="6" fill="#3b82f6"/>
+    <text x="140" y="93" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#fff">π[S.sname] (Final Result)</text>
+    <line x1="140" y1="106" x2="140" y2="130" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr01)"/>
+
+    <!-- Node 2: Natural Join -->
+    <rect x="50" y="130" width="180" height="36" rx="6" fill="#10b981"/>
+    <text x="140" y="153" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#fff">Join: ⋈[sid]</text>
+    <line x1="90" y1="166" x2="60" y2="200" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr01)"/>
+    <line x1="190" y1="166" x2="220" y2="200" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr01)"/>
+
+    <!-- Left Branch: Supplier Delhi -->
+    <rect x="15" y="200" width="115" height="42" rx="5" fill="#0f172a" stroke="#3b82f6"/>
+    <text x="72" y="218" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#93c5fd">σ[city='Delhi']</text>
+    <text x="72" y="233" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" font-weight="bold" fill="#fff">SUPPLIER</text>
+
+    <!-- Right Branch: Catalog & Red Parts -->
+    <rect x="150" y="200" width="115" height="42" rx="5" fill="#0f172a" stroke="#10b981"/>
+    <text x="207" y="218" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#a7f3d0">Join: ⋈[pid]</text>
+    <text x="207" y="233" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" font-weight="bold" fill="#fff">CATALOG</text>
+
+    <line x1="207" y1="242" x2="207" y2="270" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr01)"/>
+
+    <!-- Leaf: Parts Red -->
+    <rect x="145" y="270" width="125" height="44" rx="5" fill="#0f172a" stroke="#ec4899"/>
+    <text x="207" y="288" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#f472b6">σ[color='RED']</text>
+    <text x="207" y="303" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" font-weight="bold" fill="#fff">PARTS</text>
+
+    <!-- Note Box -->
+    <rect x="15" y="335" width="250" height="50" rx="6" fill="#0f172a" stroke="#eab308"/>
+    <text x="25" y="352" font-family="-apple-system, sans-serif" font-size="8.5" font-weight="bold" fill="#fde047">Heuristic Optimization Rule:</text>
+    <text x="25" y="367" font-family="-apple-system, sans-serif" font-size="8" fill="#cbd5e1">Push Selections (σ) and Projections (π)</text>
+    <text x="25" y="378" font-family="-apple-system, sans-serif" font-size="8" fill="#cbd5e1">down before performing expensive Joins!</text>
+  </g>
+</svg>
+</div>
+<div class="callout">Procedural Query Foundation: Relational Algebra specifies WHAT data to retrieve and the exact procedural STEP-BY-STEP pipeline.</div>
+<h2>1. Fundamental Operators</h2>
+<p>Fundamental operators are atomic. The 5 core operators are Selection (σ), Projection (π), Union (&cup;), Set Difference (-), and Cartesian Product (&times;).</p>
+<table>
+<tr><th>Operator</th><th>Symbol</th><th>Dimension</th><th>Key Behavior</th><th>Closure Property</th></tr>
+<tr><td>Selection</td><td>σ<sub>p</sub>(R)</td><td>Horizontal (Rows)</td><td>Filters tuples based on predicate condition p.</td><td>Preserves degree, reduces cardinality.</td></tr>
+<tr><td>Projection</td><td>π<sub>A</sub>(R)</td><td>Vertical (Cols)</td><td>Extracts specified columns and automatically eliminates duplicate rows.</td><td>Reduces degree to |A|.</td></tr>
+<tr><td>Union</td><td>R &cup; S</td><td>Row Concatenation</td><td>Combines tuples. Requires Union Compatibility (same degree &amp; domains).</td><td>Removes duplicates.</td></tr>
+<tr><td>Set Difference</td><td>R - S</td><td>Tuple Subtraction</td><td>Tuples present in R but absent in S. Non-commutative (R - S ≠ S - R).</td><td>Union compatible.</td></tr>
+<tr><td>Cartesian Product</td><td>R &times; S</td><td>All Combinations</td><td>Pairs every tuple of R with every tuple of S. deg = m + n, card = m * n.</td><td>No condition needed.</td></tr>
+</table>
+<h2>2. Derived Joins &amp; Division</h2>
+<p>Natural Join (R &bowtie; S) performs an equality join on common columns and drops redundant duplicate columns. Outer joins (Left, Right, Full) preserve non-matching dangling tuples by padding missing values with NULLs.</p>
+<div class="callout-warn">Division Operator (R &divide; S): Formulated as π<sub>A</sub>(R) - π<sub>A</sub>((π<sub>A</sub>(R) &times; S) - R). Used to answer "FOR ALL / EVERY" queries.</div>
+<h2>3. Solved AKTU Numerical Schema</h2>
+<p>Suppliers-Parts Database: SUPPLIERS(<u>sid</u>, sname, address), PARTS(<u>pid</u>, pname, color), CATALOG(<u>sid</u>, <u>pid</u>, cost).</p>
+<pre><code>-- Find names of suppliers who supply some RED part:
+π[sname]( SUPPLIERS &bowtie; π[sid]( CATALOG &bowtie; σ[color = 'RED'](PARTS) ) )
+
+-- Find suppliers who supply EVERY part:
+π[sid, pid](CATALOG) &divide; π[pid](PARTS)</code></pre>
+</body></html>

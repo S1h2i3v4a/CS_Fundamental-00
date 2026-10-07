@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg02)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Relational Calculus: TRC vs DRC Foundations</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Declarative Non-Procedural Query Languages, Quantifiers &amp; Codd's Equivalence</text>
+
+  <!-- LEFT: TUPLE RELATIONAL CALCULUS -->
+  <g transform="translate(40, 85)">
+    <rect width="430" height="310" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="215" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">Tuple Relational Calculus (TRC)</text>
+    <text x="215" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Filters entire tuples: { t | P(t) }</text>
+
+    <!-- Syntax box -->
+    <rect x="20" y="65" width="390" height="48" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="215" y="86" text-anchor="middle" font-family="monospace" font-size="11" fill="#38bdf8">{ t | t ∈ EMPLOYEE ∧ t.salary &gt; 50000 }</text>
+    <text x="215" y="103" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">"Find all tuples t in EMPLOYEE having salary &gt; 50k"</text>
+
+    <!-- Quantifiers -->
+    <rect x="20" y="125" width="390" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="145" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a5f3fc">First-Order Logic Quantifiers:</text>
+    <text x="35" y="165" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Existential Quantifier (∃): ∃s ∈ R (P(s)) - True if at least one exists</text>
+    <text x="35" y="185" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Universal Quantifier (∀): ∀s ∈ R (P(s)) - True if all satisfy P</text>
+    <text x="35" y="200" font-family="-apple-system, sans-serif" font-size="9" fill="#fde68a">Equivalence: ∀s (P(s)) ≡ ¬(∃s (¬P(s)))</text>
+
+    <!-- Safe Expression Callout -->
+    <rect x="20" y="220" width="390" height="65" rx="6" fill="#0f172a" stroke="#ef4444"/>
+    <text x="35" y="240" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f87171">Safe TRC Expressions</text>
+    <text x="35" y="258" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Query MUST NOT produce infinite tuples!</text>
+    <text x="35" y="273" font-family="-apple-system, sans-serif" font-size="9" fill="#fca5a5">Unsafe: { t | ¬(t ∈ EMPLOYEE) } → Returns infinite universe!</text>
+  </g>
+
+  <!-- RIGHT: DOMAIN RELATIONAL CALCULUS -->
+  <g transform="translate(530, 85)">
+    <rect width="430" height="310" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="215" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">Domain Relational Calculus (DRC)</text>
+    <text x="215" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Filters individual attribute domain variables: { ⟨x1..xn⟩ | P }</text>
+
+    <!-- Syntax box -->
+    <rect x="20" y="65" width="390" height="48" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="215" y="86" text-anchor="middle" font-family="monospace" font-size="11" fill="#34d399">{ ⟨e, n⟩ | ∃d, s (⟨e, n, d, s⟩ ∈ EMP ∧ d='Sales') }</text>
+    <text x="215" y="103" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">"Get EmpID (e) and Name (n) of employees in Sales dept"</text>
+
+    <!-- Attribute Mapping -->
+    <rect x="20" y="125" width="390" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="145" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Domain Variables vs Tuples:</text>
+    <text x="35" y="165" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• TRC variable represents an entire row/tuple (t.name, t.age).</text>
+    <text x="35" y="185" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• DRC variables represent specific column values (⟨id, name, sal⟩).</text>
+    <text x="35" y="200" font-family="-apple-system, sans-serif" font-size="9" fill="#fde68a">Foundation of QBE (Query-By-Example) visual query builders!</text>
+
+    <!-- Comparison -->
+    <rect x="20" y="220" width="390" height="65" rx="6" fill="#0f172a" stroke="#10b981"/>
+    <text x="35" y="240" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#6ee7b7">Safe DRC Expressions</text>
+    <text x="35" y="258" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">All values in result must come from the domain of the database.</text>
+    <text x="35" y="273" font-family="-apple-system, sans-serif" font-size="9" fill="#6ee7b7">Guarantees safety across finite relation states.</text>
+  </g>
+
+  <!-- BOTTOM: CODD'S THEOREM EQUIVALENCE -->
+  <g transform="translate(40, 415)">
+    <rect width="920" height="75" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <text x="460" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fbbf24">Codd's Theorem (Relational Completeness Equivalence)</text>
+    <text x="460" y="52" text-anchor="middle" font-family="monospace" font-size="12" fill="#38bdf8">Relational Algebra ≡ Safe TRC ≡ Safe DRC</text>
+    <text x="460" y="68" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Every query expressible in Relational Algebra can be written in Safe TRC and Safe DRC, forming the bedrock of modern SQL.</text>
+  </g>
+</svg>

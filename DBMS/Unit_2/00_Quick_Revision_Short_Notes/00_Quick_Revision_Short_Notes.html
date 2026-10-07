@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DBMS Unit 2 - 3-Page Rapid Recall Notes</title>
+<style>
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #0f172a;
+  background-color: #ffffff;
+  -webkit-print-color-adjust: exact;
+}
+.page {
+  width: 210mm;
+  height: 297mm;
+  max-height: 297mm;
+  padding: 8mm 9mm 6mm 9mm;
+  box-sizing: border-box;
+  page-break-after: always;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.header {
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.header-left h1 {
+  font-size: 11.5pt;
+  font-weight: 800;
+  color: #1e3a8a;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+.header-left p {
+  font-size: 7.2pt;
+  color: #475569;
+  margin: 1px 0 0 0;
+  font-weight: 600;
+}
+.header-right {
+  text-align: right;
+  font-size: 7.5pt;
+  font-weight: 700;
+  color: #2563eb;
+}
+.footer {
+  border-top: 1px solid #cbd5e1;
+  padding-top: 2px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 6.8pt;
+  color: #64748b;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+.box {
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 4px 6px;
+  background: #f8fafc;
+  margin-bottom: 4px;
+}
+.box-title {
+  font-size: 8.2pt;
+  font-weight: 700;
+  color: #1e40af;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.box-title span.badge {
+  font-size: 6.2pt;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-amber { background: #fef3c7; color: #b45309; }
+.badge-emerald { background: #d1fae5; color: #065f46; }
+.badge-purple { background: #f3e8ff; color: #6b21a8; }
+.badge-rose { background: #ffe4e6; color: #9f1239; }
+
+p, li {
+  font-size: 7.1pt;
+  line-height: 1.25;
+  margin: 1.5px 0;
+  color: #1e293b;
+}
+ul {
+  padding-left: 12px;
+  margin: 2px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 6.8pt;
+  margin: 2px 0;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 2px 4px;
+  text-align: left;
+}
+th {
+  background: #e2e8f0;
+  font-weight: 700;
+  color: #0f172a;
+}
+code {
+  font-family: Consolas, Monaco, monospace;
+  font-size: 6.8pt;
+  background: #f1f5f9;
+  padding: 0.5px 2px;
+  border-radius: 2px;
+  color: #0369a1;
+}
+.formula {
+  background: #eff6ff;
+  border-left: 2.5px solid #2563eb;
+  padding: 2px 4px;
+  font-family: monospace;
+  font-size: 6.8pt;
+  font-weight: 600;
+  color: #1e40af;
+  margin: 2px 0;
+}
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <h1>DBMS UNIT 2: RAPID RECALL SHORT NOTES</h1>
+      <p>AKTU BCS501 | Relational Algebra, Relational Calculus, SQL Foundations & DDL</p>
+    </div>
+    <div class="header-right">PAGE 1 OF 3</div>
+  </div>
+
+  <div class="content">
+    <div class="grid-2">
+      <!-- 1. Relational Algebra Fundamental -->
+      <div class="box">
+        <div class="box-title">1. Relational Algebra (5 Core Operators) <span class="badge badge-blue">Procedural</span></div>
+        <p>User specifies <b>WHAT</b> data &amp; <b>HOW</b> to retrieve it step-by-step.</p>
+        <ul>
+          <li><b>Selection (&sigma;<sub>p</sub>(R)):</b> Horizontal slice of rows satisfying condition p. Preserves degree, reduces cardinality.</li>
+          <li><b>Projection (&pi;<sub>A</sub>(R)):</b> Vertical slice of columns. <b>Automatically removes duplicate rows!</b> Degree = |A|.</li>
+          <li><b>Union (R &cup; S):</b> Merges tuples. Requires <b>Union Compatibility</b> (same degree &amp; matching attribute domains).</li>
+          <li><b>Set Difference (R - S):</b> Tuples in R but absent in S. Non-commutative (R - S &ne; S - R). Union-compatible.</li>
+          <li><b>Cartesian Product (R &times; S):</b> Pairs every row. deg = m + n, card = m * n.</li>
+        </ul>
+      </div>
+
+      <!-- 2. Derived Joins & Division -->
+      <div class="box">
+        <div class="box-title">2. Derived Joins &amp; Division Operator <span class="badge badge-emerald">Joins &amp; Math</span></div>
+        <ul>
+          <li><b>Theta Join (R &bowtie;<sub>&theta;</sub> S):</b> &sigma;<sub>&theta;</sub>(R &times; S). Equi-join uses equality (=).</li>
+          <li><b>Natural Join (R &bowtie; S):</b> Equi-join on common column names + projects out duplicate columns automatically.</li>
+          <li><b>Outer Joins:</b> Preserves dangling unmatched tuples with NULLs.
+            <br>&bull; Left Outer (R &LeftThreetimes; S) &bull; Right Outer (R &RightThreetimes; S) &bull; Full Outer (R &fullouterjoin; S).</li>
+          <li><b>Division Operator (R &divide; S):</b> Solves "<b>FOR ALL / EVERY</b>" queries.
+            <div class="formula">R(A, B) &divide; S(B) = &pi;<sub>A</sub>(R) - &pi;<sub>A</sub>((&pi;<sub>A</sub>(R) &times; S) - R)</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Relational Calculus -->
+    <div class="box">
+      <div class="box-title">3. Relational Calculus (TRC vs DRC) &amp; Codd's Theorem <span class="badge badge-purple">Declarative</span></div>
+      <div class="grid-2">
+        <div>
+          <p><b>Tuple Relational Calculus (TRC):</b> <code>{ t | P(t) }</code>. Variable t represents an entire row. Uses quantifiers &exist; (Exists) and &forall; (For all). De Morgan: &forall;s(P(s)) &equiv; &not;(&exist;s(&not;P(s))).</p>
+          <p><b>Domain Relational Calculus (DRC):</b> <code>{ &lang;x1, x2..&rang; | P }</code>. Variables represent column attribute domains. Basis of visual QBE query languages.</p>
+        </div>
+        <div>
+          <p><b>Safe Expressions:</b> A query is safe if it produces a finite set of tuples bounded within the active domain. Unsafe: <code>{ t | &not;(t &isin; R) }</code>.</p>
+          <div class="formula">CODD'S THEOREM: Relational Algebra &equiv; Safe TRC &equiv; Safe DRC</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- 4. SQL Data Types -->
+      <div class="box">
+        <div class="box-title">4. SQL Data Types &amp; Storage <span class="badge badge-amber">Storage</span></div>
+        <ul>
+          <li><b>CHAR(n):</b> Fixed-length string. Padded with trailing spaces.</li>
+          <li><b>VARCHAR(n) / VARCHAR2:</b> Variable-length string. Space-efficient.</li>
+          <li><b>INT, BIGINT:</b> Exact whole numbers without fractions.</li>
+          <li><b>DECIMAL(p, s):</b> Fixed-point precision p with s decimal digits.</li>
+          <li><b>DATE, TIMESTAMP:</b> YYYY-MM-DD calendar and microsecond timestamps.</li>
+          <li><b>BLOB, CLOB:</b> Binary &amp; Character Large Objects (Images, PDFs).</li>
+        </ul>
+      </div>
+
+      <!-- 5. SQL Command Families -->
+      <div class="box">
+        <div class="box-title">5. SQL Commands Classification <span class="badge badge-blue">Taxonomy</span></div>
+        <ul>
+          <li><b>DDL (Data Definition):</b> Schema objects create/alter. Auto-committed! <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>, <code>TRUNCATE</code>, <code>RENAME</code>.</li>
+          <li><b>DML (Data Manipulation):</b> Tuples manage. <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.</li>
+          <li><b>DCL (Data Control):</b> Security. <code>GRANT</code>, <code>REVOKE</code>.</li>
+          <li><b>TCL (Transaction Control):</b> Integrity. <code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6. DDL vs DML: TRUNCATE vs DROP vs DELETE -->
+    <div class="box">
+      <div class="box-title">6. DROP vs TRUNCATE vs DELETE Comparison <span class="badge badge-rose">10-Marker Must</span></div>
+      <table>
+        <tr>
+          <th>Evaluation Parameter</th>
+          <th>DROP TABLE</th>
+          <th>TRUNCATE TABLE</th>
+          <th>DELETE FROM</th>
+        </tr>
+        <tr>
+          <td><b>Command Category</b></td>
+          <td><b>DDL</b> (Data Definition)</td>
+          <td><b>DDL</b> (Data Definition)</td>
+          <td><b>DML</b> (Data Manipulation)</td>
+        </tr>
+        <tr>
+          <td><b>Schema Status</b></td>
+          <td><b>Schema + Data destroyed</b> completely.</td>
+          <td><b>Data deleted</b>; Schema preserved.</td>
+          <td><b>Data deleted</b>; Schema preserved.</td>
+        </tr>
+        <tr>
+          <td><b>WHERE Clause</b></td>
+          <td>Not Applicable.</td>
+          <td><b>Not supported</b> (all rows purged).</td>
+          <td><b>Supported</b> (<code>WHERE id = 5</code>).</td>
+        </tr>
+        <tr>
+          <td><b>Rollback Capability</b></td>
+          <td><b>Cannot rollback</b> (Auto-committed).</td>
+          <td><b>Cannot rollback</b> (Auto-committed).</td>
+          <td><b>Can rollback</b> (Logged in undo).</td>
+        </tr>
+        <tr>
+          <td><b>Execution Speed</b></td>
+          <td>Instant disk deallocation.</td>
+          <td><b>Lightning Fast</b> (Resets HWM).</td>
+          <td>Slower (Row-by-row undo logging).</td>
+        </tr>
+        <tr>
+          <td><b>Triggers Fired</b></td>
+          <td>DROP trigger only.</td>
+          <td>No DELETE triggers fired!</td>
+          <td>Fires row-level DELETE triggers.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental Curricula &bull; DBMS Unit 2</span>
+    <span>Page 1 of 3 (Algebra, Calculus &amp; DDL)</span>
+    <span>AKTU BCS501 Ready</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <h1>DBMS UNIT 2: RAPID RECALL SHORT NOTES</h1>
+      <p>AKTU BCS501 | DML, Integrity Constraints, Aggregate Functions & Clauses Pipeline</p>
+    </div>
+    <div class="header-right">PAGE 2 OF 3</div>
+  </div>
+
+  <div class="content">
+    <div class="grid-2">
+      <!-- 1. DML Statements -->
+      <div class="box">
+        <div class="box-title">1. SQL DML Operations <span class="badge badge-blue">DML Commands</span></div>
+        <ul>
+          <li><b>INSERT INTO:</b> Inserts single/bulk tuples.
+            <br><code>INSERT INTO Emp (ID, Name) VALUES (101, 'Aman');</code></li>
+          <li><b>UPDATE:</b> Modifies existing column values.
+            <br><code>UPDATE Emp SET Sal = Sal * 1.1 WHERE Dept = 'IT';</code>
+            <br><i>Precaution: Missing WHERE updates all rows in table!</i></li>
+          <li><b>DELETE FROM:</b> Purges candidate rows.
+            <br><code>DELETE FROM Emp WHERE Resigned = 1;</code></li>
+          <li><b>SELECT:</b> Declarative query data extraction.</li>
+        </ul>
+      </div>
+
+      <!-- 2. SQL Integrity Constraints -->
+      <div class="box">
+        <div class="box-title">2. SQL Integrity Constraints Hierarchy <span class="badge badge-emerald">Constraints</span></div>
+        <ul>
+          <li><b>NOT NULL:</b> Column cannot store NULL values.</li>
+          <li><b>UNIQUE:</b> All rows distinct (allows NULLs in standard SQL).</li>
+          <li><b>PRIMARY KEY:</b> NOT NULL + UNIQUE table identifier.</li>
+          <li><b>FOREIGN KEY:</b> References parent table primary key.</li>
+          <li><b>CHECK:</b> Custom condition validation (<code>CHECK (Salary &gt; 0)</code>).</li>
+          <li><b>DEFAULT:</b> Fallback value on empty insert.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Referential Integrity Actions -->
+    <div class="box">
+      <div class="box-title">3. Foreign Key Referential Actions (ON DELETE / ON UPDATE) <span class="badge badge-rose">Integrity Rules</span></div>
+      <div class="grid-2">
+        <div>
+          <p><b>1. CASCADE:</b> Deleting/updating parent row automatically deletes/updates corresponding child records.</p>
+          <p><b>2. SET NULL:</b> Deleting parent row sets foreign key column in child to <code>NULL</code> (Child must allow NULLs).</p>
+        </div>
+        <div>
+          <p><b>3. SET DEFAULT:</b> Resets child foreign key to default defined value.</p>
+          <p><b>4. RESTRICT / NO ACTION (Default):</b> Rejects parent deletion with an error if dependent child records exist!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Execution Pipeline -->
+    <div class="box">
+      <div class="box-title">4. Physical SQL Clauses Execution Order (Engine Pipeline) <span class="badge badge-amber">Engine Logic</span></div>
+      <div class="formula">
+        1. FROM &amp; JOIN &rarr; 2. WHERE &rarr; 3. GROUP BY &rarr; 4. HAVING &rarr; 5. SELECT &rarr; 6. DISTINCT &rarr; 7. ORDER BY &rarr; 8. LIMIT
+      </div>
+      <p><b>Crucial Rule:</b> WHERE clause executes BEFORE SELECT, so you <b>CANNOT use column aliases in WHERE</b>! ORDER BY executes AFTER SELECT, so aliases are perfectly valid in ORDER BY.</p>
+    </div>
+
+    <div class="grid-2">
+      <!-- 5. Aggregate Functions -->
+      <div class="box">
+        <div class="box-title">5. The 5 Aggregate Functions <span class="badge badge-purple">Aggregates</span></div>
+        <ul>
+          <li><b>COUNT(*):</b> Counts total rows including NULL rows.</li>
+          <li><b>COUNT(col):</b> Counts non-NULL column entries.</li>
+          <li><b>SUM(col):</b> Sums non-NULL numeric values.</li>
+          <li><b>AVG(col):</b> Arithmetic mean: Sum / non-NULL count.</li>
+          <li><b>MIN / MAX(col):</b> Extremum values (numeric/string/date).</li>
+          <li><b>Golden Rule:</b> All aggregates ignore NULLs (except COUNT(*)).</li>
+        </ul>
+      </div>
+
+      <!-- 6. GROUP BY Rules -->
+      <div class="box">
+        <div class="box-title">6. GROUP BY Projection Rule <span class="badge badge-blue">Grouping</span></div>
+        <p>Partitions candidate rows into summary buckets.</p>
+        <p><b>Golden Projection Rule:</b> When using GROUP BY, columns in the SELECT list MUST either:</p>
+        <ul>
+          <li>Be explicitly listed in the GROUP BY clause, OR</li>
+          <li>Be wrapped inside an aggregate function (SUM, AVG, etc.).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7. WHERE vs HAVING -->
+    <div class="box">
+      <div class="box-title">7. WHERE vs HAVING (Top AKTU 10-Marker Comparison) <span class="badge badge-rose">Exam Classic</span></div>
+      <table>
+        <tr>
+          <th>Comparison Parameter</th>
+          <th>WHERE Clause</th>
+          <th>HAVING Clause</th>
+        </tr>
+        <tr>
+          <td><b>Operation Scope</b></td>
+          <td>Operates on <b>individual rows (tuples)</b>.</td>
+          <td>Operates on <b>grouped summary buckets</b>.</td>
+        </tr>
+        <tr>
+          <td><b>Execution Timing</b></td>
+          <td>Executes <b>BEFORE</b> GROUP BY partitioning.</td>
+          <td>Executes <b>AFTER</b> GROUP BY aggregation.</td>
+        </tr>
+        <tr>
+          <td><b>Aggregate Functions</b></td>
+          <td><b>Strictly Forbidden</b> (<code>WHERE AVG(sal) &gt; 50k</code> is ERROR).</td>
+          <td><b>Designed for aggregates</b> (<code>HAVING AVG(sal) &gt; 50k</code>).</td>
+        </tr>
+        <tr>
+          <td><b>Syntax Example</b></td>
+          <td><code>SELECT Dept, AVG(Sal) FROM Emp WHERE Status='Active' GROUP BY Dept HAVING AVG(Sal) &gt; 60000;</code></td>
+          <td>Can appear without GROUP BY (filters whole table aggregate).</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental Curricula &bull; DBMS Unit 2</span>
+    <span>Page 2 of 3 (DML, Constraints &amp; Aggregates)</span>
+    <span>AKTU BCS501 Ready</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <h1>DBMS UNIT 2: RAPID RECALL SHORT NOTES</h1>
+      <p>AKTU BCS501 | Joins, Subqueries, Views, Indexes, Cursors & Triggers</p>
+    </div>
+    <div class="header-right">PAGE 3 OF 3</div>
+  </div>
+
+  <div class="content">
+    <div class="grid-2">
+      <!-- 1. SQL Joins & Set Operations -->
+      <div class="box">
+        <div class="box-title">1. SQL Joins &amp; Set Operations <span class="badge badge-blue">Joins &amp; Sets</span></div>
+        <ul>
+          <li><b>INNER JOIN:</b> Returns only matching records.</li>
+          <li><b>SELF JOIN:</b> Joins table with itself (Employee &amp; Manager).</li>
+          <li><b>OUTER JOINS:</b> Retains unmatched dangling rows with NULL.
+            <br>&bull; LEFT OUTER &bull; RIGHT OUTER &bull; FULL OUTER.</li>
+          <li><b>UNION vs UNION ALL:</b>
+            <br>&bull; <i>UNION:</i> Deduplicates results (internal sort overhead).
+            <br>&bull; <i>UNION ALL:</i> Preserves duplicates. Extremely fast!</li>
+          <li><b>INTERSECT:</b> Common rows &bull; <b>MINUS:</b> Subtracts rows.</li>
+        </ul>
+      </div>
+
+      <!-- 2. Subqueries -->
+      <div class="box">
+        <div class="box-title">2. Nested vs Correlated Subqueries <span class="badge badge-emerald">Subqueries</span></div>
+        <ul>
+          <li><b>Scalar Subquery:</b> Returns single value (=, &gt;, &lt;).</li>
+          <li><b>Multi-Row:</b> <code>IN</code>, <code>&gt; ANY</code> (&gt; MIN), <code>&gt; ALL</code> (&gt; MAX).</li>
+          <li><b>Correlated Subquery:</b> Inner query references outer row attributes; executes row-by-row (O(N*M) nested loop).</li>
+          <li><b>EXISTS vs NOT EXISTS:</b> Boolean short-circuit evaluation! Stops immediately upon finding first match. Faster than IN on large indexed tables.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- 3. Views -->
+      <div class="box">
+        <div class="box-title">3. SQL Views &amp; Security <span class="badge badge-purple">Virtual Views</span></div>
+        <ul>
+          <li><b>View:</b> Virtual table; stores query in data dictionary.</li>
+          <li><b>Benefits:</b> Column security masking, complex join simplification, logical data independence.</li>
+          <li><b>Updatable View Rules:</b> Single base table, contains Primary Key, NO aggregates, NO GROUP BY/DISTINCT.</li>
+          <li><b>WITH CHECK OPTION:</b> Rejects inserts/updates violating the view's WHERE predicate filter.</li>
+          <li><b>Materialized View:</b> Physically stored snapshot on disk (OLAP).</li>
+        </ul>
+      </div>
+
+      <!-- 4. Indexes -->
+      <div class="box">
+        <div class="box-title">4. Database Indexes (B-Tree) <span class="badge badge-amber">Storage Index</span></div>
+        <ul>
+          <li><b>Clustered Index:</b> Data physically sorted on disk in index order. Leaf nodes contain actual rows. <b>Only 1 per table</b> (Auto on PK).</li>
+          <li><b>Non-Clustered:</b> Separate B-Tree. Leaf nodes contain Key + Row Pointer. Multiple allowed.</li>
+          <li><b>Dense Index:</b> Index entry for EVERY row (Any table).</li>
+          <li><b>Sparse Index:</b> 1 entry per disk block (Requires sorted table!).</li>
+          <li><b>Trade-off:</b> Fast SELECT O(log N) vs slower INSERT/UPDATE.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- 5. PL/SQL Cursors -->
+      <div class="box">
+        <div class="box-title">5. PL/SQL Cursors (Memory Pointer) <span class="badge badge-blue">PL/SQL</span></div>
+        <ul>
+          <li><b>Implicit Cursors:</b> Auto-managed by DBMS for all DML.
+            <br>Attributes: <code>SQL%FOUND</code>, <code>SQL%NOTFOUND</code>, <code>SQL%ROWCOUNT</code>, <code>SQL%ISOPEN</code>.</li>
+          <li><b>Explicit Cursors (4-Step Lifecycle):</b>
+            <br>1. <code>DECLARE</code> (define query) &rarr; 2. <code>OPEN</code> (execute active set) &rarr; 3. <code>FETCH</code> (load into variables) &rarr; 4. <code>CLOSE</code> (free memory).</li>
+          <li><b>Cursor FOR Loop:</b> Auto opens, fetches &amp; closes cursor.</li>
+        </ul>
+      </div>
+
+      <!-- 6. Database Triggers -->
+      <div class="box">
+        <div class="box-title">6. Database Triggers (ECA Model) <span class="badge badge-rose">Automation</span></div>
+        <ul>
+          <li><b>Event:</b> INSERT, UPDATE, DELETE on table.</li>
+          <li><b>Timing:</b> <code>BEFORE</code> (validation) vs <code>AFTER</code> (auditing/logs).</li>
+          <li><b>Granularity:</b> <code>FOR EACH ROW</code> (Row-level) vs Statement-level.</li>
+          <li><b>Pseudo-records:</b> <code>:NEW</code> (incoming values) and <code>:OLD</code> (pre-update values). Reference: <code>:NEW.Salary</code>.</li>
+          <li><b>AKTU Example:</b> Prevent salary reduction:
+            <br><code>IF :NEW.Salary &lt; :OLD.Salary THEN RAISE_APPLICATION_ERROR(-20001, 'Err'); END IF;</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7. Solved AKTU Dual Query Bank -->
+    <div class="box">
+      <div class="box-title">7. Solved AKTU Examination Problem: Suppliers-Parts Database <span class="badge badge-emerald">10-Marker PYQ</span></div>
+      <table>
+        <tr>
+          <th>Target Query Goal</th>
+          <th>Relational Algebra Solution</th>
+          <th>SQL Query Solution</th>
+        </tr>
+        <tr>
+          <td><b>Suppliers of RED parts</b></td>
+          <td>&pi;<sub>sname</sub>(Suppliers &bowtie; &pi;<sub>sid</sub>(Cat &bowtie; &sigma;<sub>color='RED'</sub>(Parts)))</td>
+          <td><code>SELECT DISTINCT S.sname FROM Suppliers S JOIN Catalog C ON S.sid=C.sid JOIN Parts P ON C.pid=P.pid WHERE P.color='RED';</code></td>
+        </tr>
+        <tr>
+          <td><b>Suppliers of ALL parts (Division)</b></td>
+          <td>&pi;<sub>sname</sub>(Suppliers &bowtie; (&pi;<sub>sid, pid</sub>(Cat) &divide; &pi;<sub>pid</sub>(Parts)))</td>
+          <td><code>SELECT S.sname FROM Suppliers S JOIN Catalog C ON S.sid=C.sid GROUP BY S.sid, S.sname HAVING COUNT(DISTINCT C.pid) = (SELECT COUNT(*) FROM Parts);</code></td>
+        </tr>
+        <tr>
+          <td><b>Suppliers of NO Red parts</b></td>
+          <td>&pi;<sub>sid</sub>(Suppliers) - &pi;<sub>sid</sub>(Cat &bowtie; &sigma;<sub>color='RED'</sub>(Parts))</td>
+          <td><code>SELECT sname FROM Suppliers WHERE sid NOT IN (SELECT C.sid FROM Catalog C JOIN Parts P ON C.pid=P.pid WHERE P.color='RED');</code></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental Curricula &bull; DBMS Unit 2</span>
+    <span>Page 3 of 3 (Joins, Views, Indexes &amp; PYQs)</span>
+    <span>AKTU BCS501 Ready</span>
+  </div>
+</div>
+
+</body>
+</html>

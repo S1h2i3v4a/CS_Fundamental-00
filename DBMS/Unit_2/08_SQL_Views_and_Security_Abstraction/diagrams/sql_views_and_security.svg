@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg08)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">SQL Views Architecture &amp; Security Abstraction</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Virtual Tables, Security Column Masking, Updatability Rules &amp; Materialized Views</text>
+
+  <!-- LEFT: WHAT IS A VIEW -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. View Concepts &amp; Architecture</text>
+
+    <!-- Virtual Table Definition -->
+    <rect x="20" y="55" width="400" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="75" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">What is a View? (Virtual Table)</text>
+    <text x="35" y="93" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• A view stores NO physical data rows on disk!</text>
+    <text x="35" y="108" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Only the SQL query definition is stored in the Data Dictionary.</text>
+    <text x="35" y="125" font-family="monospace" font-size="8" fill="#a5f3fc">CREATE VIEW IT_Emp AS SELECT EmpID, Name FROM Employee WHERE Dept='IT';</text>
+
+    <!-- Key Benefits -->
+    <rect x="20" y="155" width="400" height="110" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="175" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">3 Fundamental Advantages:</text>
+    <text x="35" y="195" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">1. Security &amp; Data Hiding: Masks confidential columns (Salary, SSN).</text>
+    <text x="35" y="213" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">2. Query Simplification: Hides complex 5-table joins behind a simple view.</text>
+    <text x="35" y="231" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">3. Logical Data Independence: Base table schema changes do not break apps.</text>
+    <text x="35" y="250" font-family="-apple-system, sans-serif" font-size="8" fill="#fbbf24">GRANT SELECT ON IT_Emp TO 'analyst_user';</text>
+
+    <!-- Materialized Views -->
+    <rect x="20" y="280" width="400" height="90" rx="6" fill="#0f172a" stroke="#10b981"/>
+    <text x="35" y="300" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">Materialized View (Physical Persistence)</text>
+    <text x="35" y="318" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Physically saves query result on disk (Data Warehouse / OLAP).</text>
+    <text x="35" y="335" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Periodic refresh on schedule: REFRESH COMPLETE ON DEMAND.</text>
+    <text x="35" y="352" font-family="-apple-system, sans-serif" font-size="8" fill="#a7f3d0">Accelerates analytical aggregation queries by 100x!</text>
+  </g>
+
+  <!-- RIGHT: UPDATABLE VIEWS & CHECK OPTION -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">2. Updatable Views &amp; WITH CHECK OPTION</text>
+
+    <!-- Updatability Criteria -->
+    <rect x="20" y="55" width="400" height="150" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="78" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fde047">When is a View Updatable (INSERT/UPDATE)?</text>
+    <text x="35" y="98" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">A view can be updated IF and ONLY IF:</text>
+    <text x="35" y="115" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">1. It is derived from exactly ONE base table.</text>
+    <text x="35" y="132" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">2. Contains the Primary Key of the underlying table.</text>
+    <text x="35" y="149" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">3. Contains NO aggregate functions (SUM, AVG, COUNT).</text>
+    <text x="35" y="166" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">4. Contains NO GROUP BY, HAVING, or DISTINCT clauses.</text>
+    <text x="35" y="185" font-family="-apple-system, sans-serif" font-size="8.5" fill="#f87171">5. Base table NOT NULL columns without default must be present!</text>
+
+    <!-- WITH CHECK OPTION -->
+    <rect x="20" y="220" width="400" height="150" rx="6" fill="#0f172a" stroke="#eab308"/>
+    <text x="35" y="242" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">WITH CHECK OPTION (Integrity Guard)</text>
+    <text x="35" y="262" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Prevents inserts/updates that violate the view's WHERE predicate!</text>
+    <rect x="35" y="275" width="370" height="50" rx="4" fill="#1e293b"/>
+    <text x="45" y="292" font-family="monospace" font-size="8" fill="#38bdf8">CREATE VIEW Sales_Staff AS SELECT * FROM Emp</text>
+    <text x="45" y="306" font-family="monospace" font-size="8" fill="#fbbf24">WHERE Dept = 'Sales' WITH CHECK OPTION;</text>
+    <text x="35" y="342" font-family="-apple-system, sans-serif" font-size="8" fill="#fca5a5">Trying to INSERT an 'HR' employee through Sales_Staff will be REJECTED!</text>
+  </g>
+</svg>

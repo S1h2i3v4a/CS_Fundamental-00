@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg04)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">SQL DML Operations &amp; Relational Integrity Enforcement</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Data Manipulation Commands, Constraints Hierarchy &amp; Referential Cascade Rules</text>
+
+  <!-- LEFT: DML COMMANDS -->
+  <g transform="translate(40, 85)">
+    <rect width="430" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="215" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. DML Operations (Data Manipulation)</text>
+
+    <!-- INSERT -->
+    <rect x="20" y="55" width="390" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="75" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">INSERT INTO (Tuple Insertion)</text>
+    <text x="35" y="93" font-family="monospace" font-size="8.5" fill="#a5f3fc">INSERT INTO Student (Roll, Name) VALUES (101, 'Aman');</text>
+    <text x="35" y="110" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Bulk Insert: INSERT INTO Backup SELECT * FROM Student;</text>
+
+    <!-- UPDATE -->
+    <rect x="20" y="135" width="390" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="155" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">UPDATE (Tuple Modification)</text>
+    <text x="35" y="173" font-family="monospace" font-size="8.5" fill="#fef08a">UPDATE Employee SET Salary = Salary * 1.1 WHERE Dept='IT';</text>
+    <text x="35" y="190" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fca5a5">Warning: Missing WHERE updates ALL rows in the table!</text>
+
+    <!-- DELETE -->
+    <rect x="20" y="215" width="390" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="235" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">DELETE FROM (Row Deletion)</text>
+    <text x="35" y="253" font-family="monospace" font-size="8.5" fill="#fca5a5">DELETE FROM Student WHERE CPI &lt; 5.0;</text>
+    <text x="35" y="270" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">Maintains undo log; triggers foreign key cascade checks.</text>
+
+    <!-- SELECT -->
+    <rect x="20" y="295" width="390" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="315" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">SELECT (Data Retrieval Expression)</text>
+    <text x="35" y="333" font-family="monospace" font-size="8.5" fill="#a7f3d0">SELECT Name, CPI FROM Student WHERE Dept='CSE' ORDER BY CPI DESC;</text>
+    <text x="35" y="350" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Combines relational algebra σ, π, joins, and aggregation into one declarative query.</text>
+  </g>
+
+  <!-- RIGHT: CONSTRAINTS & CASCADES -->
+  <g transform="translate(530, 85)">
+    <rect width="430" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="215" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. SQL Integrity Constraints &amp; Cascades</text>
+
+    <!-- 6 SQL Constraints -->
+    <rect x="20" y="55" width="390" height="150" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="78" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">The 6 SQL Constraints Matrix:</text>
+    <text x="35" y="98" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• NOT NULL: Column cannot store NULL values.</text>
+    <text x="35" y="115" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• UNIQUE: All values in column must be distinct (allows NULLs).</text>
+    <text x="35" y="132" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• PRIMARY KEY: NOT NULL + UNIQUE. Table identifier.</text>
+    <text x="35" y="149" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• FOREIGN KEY: References parent table primary key.</text>
+    <text x="35" y="166" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• CHECK: Custom condition validation (e.g. <code>CHECK (Salary &gt; 0)</code>).</text>
+    <text x="35" y="183" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• DEFAULT: Default fallback value when no value is supplied.</text>
+
+    <!-- Referential Actions Box -->
+    <rect x="20" y="215" width="390" height="165" rx="6" fill="#0f172a" stroke="#eab308"/>
+    <text x="35" y="235" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fde047">Foreign Key Referential Integrity Actions:</text>
+    <text x="35" y="255" font-family="monospace" font-size="8.5" fill="#a5f3fc">ON DELETE / ON UPDATE &lt;ACTION&gt;</text>
+    <text x="35" y="275" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">1. CASCADE: Deleting/updating parent auto-deletes/updates child rows.</text>
+    <text x="35" y="295" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">2. SET NULL: Deleting parent sets foreign key in child to NULL.</text>
+    <text x="35" y="315" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">3. SET DEFAULT: Deleting parent resets child FK to its default value.</text>
+    <text x="35" y="335" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">4. RESTRICT / NO ACTION: Rejects parent deletion if child row exists!</text>
+    <text x="35" y="355" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fde68a">Default action in SQL is RESTRICT (prevents orphaned records).</text>
+  </g>
+</svg>

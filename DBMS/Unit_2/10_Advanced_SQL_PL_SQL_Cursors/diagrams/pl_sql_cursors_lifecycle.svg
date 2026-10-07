@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg10)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">PL/SQL Cursors Architecture &amp; Lifecycle Management</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Implicit Cursors, Explicit Cursor Lifecycle (DECLARE, OPEN, FETCH, CLOSE) &amp; Attributes</text>
+
+  <!-- LEFT: IMPLICIT CURSORS -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. Implicit Cursors (Automatic)</text>
+
+    <!-- Definition -->
+    <rect x="20" y="55" width="400" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="78" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">What is an Implicit Cursor?</text>
+    <text x="35" y="98" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Automatically opened by Oracle / DBMS engine for every SQL statement.</text>
+    <text x="35" y="115" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Manages memory work area for single-row SELECT, INSERT, UPDATE, DELETE.</text>
+    <text x="35" y="132" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Programmers cannot control open/close actions.</text>
+
+    <!-- Implicit Cursor Attributes -->
+    <rect x="20" y="165" width="400" height="205" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="188" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">The 4 SQL% Implicit Attributes:</text>
+    <text x="35" y="210" font-family="monospace" font-size="9" fill="#a5f3fc">1. SQL%FOUND:</text>
+    <text x="45" y="225" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">TRUE if DML statement inserted/updated/deleted at least one row.</text>
+    <text x="35" y="245" font-family="monospace" font-size="9" fill="#fca5a5">2. SQL%NOTFOUND:</text>
+    <text x="45" y="260" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">TRUE if no rows were affected by the recent SQL statement.</text>
+    <text x="35" y="280" font-family="monospace" font-size="9" fill="#fef08a">3. SQL%ROWCOUNT:</text>
+    <text x="45" y="295" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Integer count of rows affected by the last SQL command.</text>
+    <text x="35" y="315" font-family="monospace" font-size="9" fill="#c084fc">4. SQL%ISOPEN:</text>
+    <text x="45" y="330" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Always FALSE for implicit cursors (auto closes upon finish).</text>
+    <text x="35" y="355" font-family="monospace" font-size="8" fill="#38bdf8">UPDATE Emp SET Sal=Sal*1.1 WHERE Dept='IT'; DBMS_OUTPUT.PUT(SQL%ROWCOUNT);</text>
+  </g>
+
+  <!-- RIGHT: EXPLICIT CURSORS LIFECYCLE -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. Explicit Cursors (4 Lifecycle Steps)</text>
+
+    <!-- Step 1: DECLARE -->
+    <rect x="20" y="55" width="400" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="75" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#38bdf8">1. DECLARE (Name cursor and assign query)</text>
+    <text x="35" y="93" font-family="monospace" font-size="8" fill="#a5f3fc">CURSOR cur_emp IS SELECT EmpID, Name, Salary FROM Employee;</text>
+    <text x="35" y="107" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Allocates private SQL work area in PGA memory.</text>
+
+    <!-- Step 2: OPEN -->
+    <rect x="20" y="130" width="400" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="150" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">2. OPEN (Execute query and populate Active Set)</text>
+    <text x="35" y="168" font-family="monospace" font-size="8" fill="#a7f3d0">OPEN cur_emp;</text>
+    <text x="35" y="180" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Executes query; pointer positioned BEFORE first row of active set.</text>
+
+    <!-- Step 3: FETCH -->
+    <rect x="20" y="200" width="400" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="220" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#fbbf24">3. FETCH (Load current row into variables)</text>
+    <text x="35" y="238" font-family="monospace" font-size="8" fill="#fef08a">LOOP FETCH cur_emp INTO v_id, v_name, v_sal; EXIT WHEN cur_emp%NOTFOUND;</text>
+    <text x="35" y="255" font-family="-apple-system, sans-serif" font-size="8" fill="#cbd5e1">Advances cursor pointer row-by-row sequentially.</text>
+
+    <!-- Step 4: CLOSE -->
+    <rect x="20" y="285" width="400" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="305" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f87171">4. CLOSE (Release work area memory)</text>
+    <text x="35" y="323" font-family="monospace" font-size="8" fill="#fca5a5">CLOSE cur_emp;</text>
+    <text x="35" y="337" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Frees active set memory buffer back to database server.</text>
+
+    <!-- Cursor FOR Loop -->
+    <rect x="20" y="360" width="400" height="25" rx="4" fill="#0f172a"/>
+    <text x="35" y="377" font-family="-apple-system, sans-serif" font-size="8" fill="#38bdf8">Pro Tip: FOR rec IN cur_emp LOOP automatically opens, fetches &amp; closes!</text>
+  </g>
+</svg>

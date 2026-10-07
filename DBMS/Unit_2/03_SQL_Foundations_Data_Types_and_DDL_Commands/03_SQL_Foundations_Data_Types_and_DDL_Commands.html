@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 03: SQL Foundations and DDL</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+</head><body>
+<h1>Module 03: SQL Foundations, Data Types, and DDL Commands</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg03)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">SQL Command Ecosystem &amp; DDL Structural Lifecycle</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Characteristics, Data Types &amp; DDL Commands: CREATE, ALTER, DROP, TRUNCATE</text>
+
+  <!-- LEFT: SQL TAXONOMY -->
+  <g transform="translate(40, 85)">
+    <rect width="430" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="215" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. SQL Core Characteristics &amp; Types</text>
+
+    <!-- Data Types -->
+    <rect x="20" y="55" width="390" height="155" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="78" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#38bdf8">Essential SQL Data Types &amp; Storage:</text>
+    <text x="35" y="98" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• CHAR(n): Fixed-length string. Space padded if shorter. Fast for fixed codes.</text>
+    <text x="35" y="116" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• VARCHAR(n) / VARCHAR2(n): Variable-length. Space efficient.</text>
+    <text x="35" y="134" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• INT, SMALLINT, BIGINT: Discrete integer values.</text>
+    <text x="35" y="152" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• DECIMAL(p, s) / NUMERIC: Fixed-point precision p with s decimals (currency).</text>
+    <text x="35" y="170" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• DATE, TIME, TIMESTAMP: Calendar date &amp; fractional second timestamps.</text>
+    <text x="35" y="188" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">• BLOB, CLOB: Binary &amp; Character Large Objects (Images, PDFs, JSON).</text>
+
+    <!-- Commands Taxonomy -->
+    <rect x="20" y="225" width="390" height="155" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="248" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">The 4 SQL Command Families:</text>
+    <text x="35" y="268" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• DDL (Data Definition): CREATE, ALTER, DROP, TRUNCATE, RENAME.</text>
+    <text x="35" y="286" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• DML (Data Manipulation): SELECT, INSERT, UPDATE, DELETE.</text>
+    <text x="35" y="304" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• DCL (Data Control): GRANT, REVOKE (Permissions &amp; security).</text>
+    <text x="35" y="322" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• TCL (Transaction Control): COMMIT, ROLLBACK, SAVEPOINT.</text>
+    <text x="35" y="342" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">DDL operations are AUTO-COMMITTED! Cannot be rolled back!</text>
+  </g>
+
+  <!-- RIGHT: DDL OPERATIONS LIFECYCLE -->
+  <g transform="translate(530, 85)">
+    <rect width="430" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="215" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. DDL Structural Commands Deep Dive</text>
+
+    <!-- CREATE TABLE -->
+    <rect x="20" y="55" width="390" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="75" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#38bdf8">CREATE TABLE</text>
+    <text x="35" y="92" font-family="monospace" font-size="8.5" fill="#a5f3fc">CREATE TABLE Student (Roll INT PRIMARY KEY, Name VARCHAR(50));</text>
+    <text x="35" y="107" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Allocates data dictionary metadata and initial disk extent.</text>
+
+    <!-- ALTER TABLE -->
+    <rect x="20" y="130" width="390" height="110" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="150" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#fbbf24">ALTER TABLE (Structural Modifications)</text>
+    <text x="35" y="168" font-family="monospace" font-size="8" fill="#fef08a">• ADD:    ALTER TABLE Student ADD Email VARCHAR(100);</text>
+    <text x="35" y="185" font-family="monospace" font-size="8" fill="#fef08a">• DROP:   ALTER TABLE Student DROP COLUMN Email;</text>
+    <text x="35" y="202" font-family="monospace" font-size="8" fill="#fef08a">• MODIFY: ALTER TABLE Student MODIFY Name VARCHAR(100);</text>
+    <text x="35" y="219" font-family="monospace" font-size="8" fill="#fef08a">• RENAME: ALTER TABLE Student RENAME COLUMN Roll TO RollNo;</text>
+
+    <!-- DROP vs TRUNCATE vs DELETE -->
+    <rect x="20" y="250" width="390" height="130" rx="6" fill="#0f172a" stroke="#ef4444"/>
+    <text x="35" y="270" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f87171">TRUNCATE vs DROP vs DELETE (AKTU Comparison)</text>
+    <text x="35" y="290" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">1. DROP: Deletes table DATA + SCHEMA completely from disk. Free space.</text>
+    <text x="35" y="310" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">2. TRUNCATE: Deletes ALL rows. SCHEMA remains. High speed (resets HWM).</text>
+    <text x="35" y="330" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">3. DELETE: DML command. Deletes specific rows. Generates undo logs.</text>
+    <text x="35" y="350" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fde68a">TRUNCATE is DDL (Auto-commit, no WHERE clause, lightning fast!).</text>
+  </g>
+</svg>
+</div>
+<div class="callout">DDL Auto-Commit: DDL commands (CREATE, ALTER, DROP, TRUNCATE) modify the data dictionary directly and are automatically committed!</div>
+<h2>1. Essential SQL Data Types</h2>
+<table>
+<tr><th>Type</th><th>Storage</th><th>Description</th></tr>
+<tr><td><code>CHAR(n)</code></td><td>Fixed n bytes</td><td>Fixed length string padded with trailing spaces. Ideal for fixed-width identifiers.</td></tr>
+<tr><td><code>VARCHAR(n)</code></td><td>Variable length</td><td>Dynamic string up to n characters. Space-efficient for names and descriptions.</td></tr>
+<tr><td><code>DECIMAL(p, s)</code></td><td>Exact precision</td><td>Fixed-point numeric with p total digits and s fractional digits (e.g. monetary amounts).</td></tr>
+<tr><td><code>TIMESTAMP</code></td><td>Date + Time</td><td>Calendar date, hour, minute, second, and fractional microsecond values.</td></tr>
+</table>
+<h2>2. TRUNCATE vs DROP vs DELETE</h2>
+<table>
+<tr><th>Feature</th><th>DROP</th><th>TRUNCATE</th><th>DELETE</th></tr>
+<tr><td>Category</td><td>DDL</td><td>DDL</td><td>DML</td></tr>
+<tr><td>Schema State</td><td>Completely Removed</td><td>Preserved</td><td>Preserved</td></tr>
+<tr><td>Rollback</td><td>No</td><td>No</td><td>Yes (via ROLLBACK)</td></tr>
+<tr><td>WHERE Clause</td><td>No</td><td>No</td><td>Yes</td></tr>
+<tr><td>Speed</td><td>Instant</td><td>Fast (Resets HWM)</td><td>Slower (Row logging)</td></tr>
+</table>
+</body></html>

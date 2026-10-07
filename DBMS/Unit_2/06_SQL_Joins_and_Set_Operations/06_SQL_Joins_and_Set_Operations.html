@@ -1,0 +1,105 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 06: SQL Joins and Set Operations</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+</head><body>
+<h1>Module 06: SQL Joins and Set Operations</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg06)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">SQL Joins Architecture &amp; Set Operations Ecosystem</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Inner, Natural, Self, Left/Right/Full Outer Joins &amp; UNION / INTERSECT / MINUS</text>
+
+  <!-- LEFT: JOIN TYPES -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. SQL Join Classifications</text>
+
+    <!-- INNER JOIN -->
+    <rect x="20" y="50" width="400" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="70" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">INNER JOIN / EQUI JOIN</text>
+    <text x="35" y="88" font-family="monospace" font-size="8.5" fill="#a5f3fc">SELECT * FROM Emp E INNER JOIN Dept D ON E.DeptID = D.DeptID;</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Returns only rows where the join predicate condition evaluates to TRUE.</text>
+
+    <!-- NATURAL JOIN & SELF JOIN -->
+    <rect x="20" y="130" width="400" height="80" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="150" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">NATURAL JOIN &amp; SELF JOIN</text>
+    <text x="35" y="168" font-family="monospace" font-size="8.5" fill="#fef08a">SELECT * FROM Emp NATURAL JOIN Dept; (Auto matches same column name)</text>
+    <text x="35" y="185" font-family="monospace" font-size="8.5" fill="#6ee7b7">SELECT E.Name, M.Name AS Manager FROM Emp E JOIN Emp M ON E.MgrID=M.EmpID;</text>
+    <text x="35" y="200" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Self Join joins a table with itself using distinct table aliases.</text>
+
+    <!-- OUTER JOINS -->
+    <rect x="20" y="220" width="400" height="150" rx="6" fill="#0f172a" stroke="#eab308"/>
+    <text x="35" y="240" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fde047">OUTER JOINS (Handling Dangling Records)</text>
+    <text x="35" y="260" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">1. LEFT OUTER JOIN: All rows from Left table + matching Right (or NULL).</text>
+    <text x="35" y="280" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">2. RIGHT OUTER JOIN: All rows from Right table + matching Left (or NULL).</text>
+    <text x="35" y="300" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">3. FULL OUTER JOIN: All rows from both tables combined.</text>
+    <rect x="35" y="315" width="370" height="42" rx="4" fill="#1e293b"/>
+    <text x="45" y="332" font-family="monospace" font-size="8" fill="#38bdf8">SELECT E.Name, D.DeptName FROM Emp E</text>
+    <text x="45" y="347" font-family="monospace" font-size="8" fill="#fbbf24">LEFT OUTER JOIN Dept D ON E.DeptID = D.DeptID;</text>
+  </g>
+
+  <!-- RIGHT: SET OPERATIONS -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. SQL Set Operations</text>
+
+    <!-- Union Compatibility -->
+    <rect x="20" y="50" width="400" height="55" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="70" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#a7f3d0">Mandatory Rule: Union Compatibility</text>
+    <text x="35" y="88" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Both queries must project identical column counts with matching data types!</text>
+
+    <!-- UNION vs UNION ALL -->
+    <rect x="20" y="115" width="400" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="135" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#38bdf8">UNION vs UNION ALL</text>
+    <text x="35" y="153" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• UNION: Combines results and removes duplicate rows (Internal sort).</text>
+    <text x="35" y="171" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• UNION ALL: Combines results and preserves duplicates. Much faster!</text>
+    <text x="35" y="190" font-family="monospace" font-size="8" fill="#fef08a">SELECT City FROM Customers UNION ALL SELECT City FROM Suppliers;</text>
+
+    <!-- INTERSECT -->
+    <rect x="20" y="220" width="400" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="240" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#34d399">INTERSECT</text>
+    <text x="35" y="258" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Returns only rows common to both query results.</text>
+    <text x="35" y="275" font-family="monospace" font-size="8" fill="#a7f3d0">SELECT CustID FROM Active_2023 INTERSECT SELECT CustID FROM Active_2024;</text>
+
+    <!-- MINUS / EXCEPT -->
+    <rect x="20" y="300" width="400" height="70" rx="6" fill="#0f172a" stroke="#ef4444"/>
+    <text x="35" y="320" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f87171">MINUS / EXCEPT</text>
+    <text x="35" y="338" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Returns rows in Query 1 that do NOT appear in Query 2.</text>
+    <text x="35" y="355" font-family="monospace" font-size="8" fill="#fca5a5">SELECT ProdID FROM All_Products MINUS SELECT ProdID FROM Sold_Products;</text>
+  </g>
+</svg>
+</div>
+<div class="callout">Data Unification: Joins combine columns from related tables horizontally, while Set Operations append rows from union-compatible queries vertically.</div>
+<h2>1. SQL Outer Joins</h2>
+<table>
+<tr><th>Join Type</th><th>Left Table Tuples</th><th>Right Table Tuples</th><th>Unmatched Value</th></tr>
+<tr><td>LEFT OUTER</td><td>100% Retained</td><td>Only Matches</td><td>Padded with NULL</td></tr>
+<tr><td>RIGHT OUTER</td><td>Only Matches</td><td>100% Retained</td><td>Padded with NULL</td></tr>
+<tr><td>FULL OUTER</td><td>100% Retained</td><td>100% Retained</td><td>Padded with NULL</td></tr>
+</table>
+<h2>2. UNION vs UNION ALL</h2>
+<p>UNION performs an internal sort-merge to eliminate duplicate rows. UNION ALL appends row streams directly without deduplication, offering superior performance.</p>
+</body></html>

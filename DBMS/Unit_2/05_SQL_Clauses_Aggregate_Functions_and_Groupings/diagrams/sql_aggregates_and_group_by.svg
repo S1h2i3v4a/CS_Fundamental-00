@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr05" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg05)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">SQL Clauses Order of Execution &amp; Aggregation Pipeline</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Written Syntax Order vs True Physical Engine Execution Order, GROUP BY &amp; HAVING</text>
+
+  <!-- LEFT: EXECUTION TIMELINE (1 to 7) -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">Physical SQL Execution Order (Engine)</text>
+
+    <!-- Step 1: FROM & JOIN -->
+    <rect x="20" y="50" width="400" height="42" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="68" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">1. FROM &amp; JOIN</text>
+    <text x="35" y="83" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Identifies tables and calculates Cartesian product / Joins.</text>
+
+    <!-- Step 2: WHERE -->
+    <rect x="20" y="100" width="400" height="42" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="118" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">2. WHERE (Row Filtering)</text>
+    <text x="35" y="133" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Filters individual tuples BEFORE grouping. No aggregate functions allowed!</text>
+
+    <!-- Step 3: GROUP BY -->
+    <rect x="20" y="150" width="400" height="42" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="168" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">3. GROUP BY (Bucket Creation)</text>
+    <text x="35" y="183" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Groups rows having identical values in specified columns into summary buckets.</text>
+
+    <!-- Step 4: HAVING -->
+    <rect x="20" y="200" width="400" height="42" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="218" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">4. HAVING (Group Filtering)</text>
+    <text x="35" y="233" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Filters grouped buckets AFTER aggregation (e.g. HAVING COUNT(*) &gt; 5).</text>
+
+    <!-- Step 5: SELECT -->
+    <rect x="20" y="250" width="400" height="42" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="268" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">5. SELECT &amp; Expressions</text>
+    <text x="35" y="283" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Evaluates selected columns, expressions, aliases and DISTINCT keyword.</text>
+
+    <!-- Step 6: ORDER BY -->
+    <rect x="20" y="300" width="400" height="42" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="318" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#c084fc">6. ORDER BY (Sorting)</text>
+    <text x="35" y="333" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Sorts final resulting records ASC / DESC. Column aliases can now be used.</text>
+
+    <!-- Step 7: LIMIT -->
+    <rect x="20" y="350" width="400" height="35" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="367" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#94a3b8">7. LIMIT / OFFSET: Top-N rows</text>
+  </g>
+
+  <!-- RIGHT: AGGREGATES & COMPARISON -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">Aggregates &amp; WHERE vs HAVING</text>
+
+    <!-- 5 Aggregate functions -->
+    <rect x="20" y="50" width="400" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="70" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">The 5 Core Aggregate Functions:</text>
+    <text x="35" y="90" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• COUNT(*): Counts total rows including NULLs.</text>
+    <text x="35" y="106" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• COUNT(col): Counts non-NULL entries in that column.</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• SUM(col): Sums non-NULL numeric values.</text>
+    <text x="35" y="138" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• AVG(col): Computes arithmetic mean (ignores NULLs!).</text>
+    <text x="35" y="154" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• MIN(col) / MAX(col): Minimum / maximum value.</text>
+    <text x="35" y="172" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fbbf24">Golden Rule: All aggregates IGNORE NULLs (except COUNT(*))!</text>
+
+    <!-- WHERE vs HAVING Table -->
+    <rect x="20" y="195" width="400" height="185" rx="6" fill="#0f172a" stroke="#eab308"/>
+    <text x="35" y="215" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fde047">WHERE vs HAVING (10-Marker Comparison):</text>
+    <text x="35" y="235" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Level: WHERE operates on individual rows; HAVING on grouped buckets.</text>
+    <text x="35" y="255" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Timing: WHERE executes BEFORE GROUP BY; HAVING executes AFTER.</text>
+    <text x="35" y="275" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Aggregates: WHERE cannot use SUM/AVG; HAVING can use all aggregates.</text>
+    <text x="35" y="295" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Can exist without GROUP BY: WHERE yes; HAVING acts as whole table filter.</text>
+    <rect x="35" y="310" width="370" height="55" rx="4" fill="#1e293b"/>
+    <text x="45" y="328" font-family="monospace" font-size="8" fill="#38bdf8">SELECT Dept, AVG(Salary) FROM Employee</text>
+    <text x="45" y="342" font-family="monospace" font-size="8" fill="#fbbf24">WHERE Salary &gt; 30000 GROUP BY Dept</text>
+    <text x="45" y="356" font-family="monospace" font-size="8" fill="#f87171">HAVING AVG(Salary) &gt; 60000;</text>
+  </g>
+</svg>

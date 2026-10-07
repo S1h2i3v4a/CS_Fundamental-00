@@ -1,0 +1,104 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 07: Nested Subqueries and Correlated Queries</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+</head><body>
+<h1>Module 07: Nested Subqueries and Correlated Queries</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg07)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">SQL Nested Subqueries vs Correlated Subqueries</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Independent Evaluation vs Row-by-Row Execution, IN, ANY, ALL, EXISTS</text>
+
+  <!-- LEFT: INDEPENDENT SUBQUERIES -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. Independent Nested Subqueries</text>
+    <text x="220" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Inner query runs ONCE and passes result to outer</text>
+
+    <!-- Single Row -->
+    <rect x="20" y="60" width="400" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="80" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Scalar Subquery (Single Value Return)</text>
+    <text x="35" y="98" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Uses scalar comparison operators: =, &gt;, &lt;, &gt;=, &lt;=</text>
+    <text x="35" y="115" font-family="monospace" font-size="8" fill="#a5f3fc">SELECT Name FROM Emp WHERE Salary &gt; (SELECT AVG(Salary) FROM Emp);</text>
+    <text x="35" y="130" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Inner subquery executes once → returns scalar 50000 → outer query filters.</text>
+
+    <!-- Multi Row: IN, ANY, ALL -->
+    <rect x="20" y="160" width="400" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="180" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Multi-Row Subquery Operators:</text>
+    <text x="35" y="200" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• IN: Matches any value in returned result list.</text>
+    <text x="35" y="218" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• &gt; ANY: Greater than at least ONE value (equivalent to &gt; MIN).</text>
+    <text x="35" y="236" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• &gt; ALL: Greater than EVERY value in the list (equivalent to &gt; MAX).</text>
+    <text x="35" y="255" font-family="monospace" font-size="8" fill="#fef08a">SELECT Name FROM Emp WHERE Salary &gt; ALL (SELECT Salary FROM Emp WHERE Dept='Sales');</text>
+    <text x="35" y="275" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Finds employees earning strictly more than ALL Sales employees.</text>
+
+    <!-- Performance note -->
+    <rect x="20" y="310" width="400" height="60" rx="6" fill="#0f172a" stroke="#10b981"/>
+    <text x="35" y="330" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#34d399">Performance Characteristics:</text>
+    <text x="35" y="348" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Subquery executes exactly once. Result cached in RAM. Complexity: O(N + M).</text>
+  </g>
+
+  <!-- RIGHT: CORRELATED SUBQUERIES -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">2. Correlated Subqueries &amp; EXISTS</text>
+    <text x="220" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Inner query references outer table row &amp; executes FOR EACH ROW</text>
+
+    <!-- Correlated execution loop -->
+    <rect x="20" y="60" width="400" height="120" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="80" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Correlated Execution Loop</text>
+    <text x="35" y="98" font-family="monospace" font-size="8" fill="#fde68a">SELECT E1.Name, E1.Salary FROM Employee E1</text>
+    <text x="35" y="112" font-family="monospace" font-size="8" fill="#fde68a">WHERE E1.Salary &gt; (SELECT AVG(E2.Salary) FROM Employee E2</text>
+    <text x="35" y="126" font-family="monospace" font-size="8" fill="#f87171">                   WHERE E2.DeptID = E1.DeptID); -- Correlation link!</text>
+    <text x="35" y="145" font-family="-apple-system, sans-serif" font-size="8" fill="#cbd5e1">"Find employees earning more than their own department average."</text>
+    <text x="35" y="160" font-family="-apple-system, sans-serif" font-size="8" fill="#fca5a5">If outer table has 10,000 rows, inner subquery runs 10,000 times! O(N*M).</text>
+
+    <!-- EXISTS & NOT EXISTS -->
+    <rect x="20" y="195" width="400" height="125" rx="6" fill="#0f172a" stroke="#10b981"/>
+    <text x="35" y="215" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">EXISTS vs NOT EXISTS (Boolean Short-Circuit)</text>
+    <text x="35" y="233" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• EXISTS: Returns TRUE as soon as FIRST matching record is found!</text>
+    <text x="35" y="250" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Never pulls actual data columns; only verifies existence.</text>
+    <text x="35" y="270" font-family="monospace" font-size="8" fill="#a7f3d0">SELECT C.CustName FROM Customers C WHERE EXISTS</text>
+    <text x="35" y="285" font-family="monospace" font-size="8" fill="#a7f3d0">(SELECT 1 FROM Orders O WHERE O.CustID = C.CustID);</text>
+    <text x="35" y="303" font-family="-apple-system, sans-serif" font-size="8" fill="#6ee7b7">Significantly faster than 'IN' when dealing with large subquery sets!</text>
+
+    <!-- Summary Box -->
+    <rect x="20" y="335" width="400" height="45" rx="6" fill="#0f172a" stroke="#3b82f6"/>
+    <text x="35" y="352" font-family="-apple-system, sans-serif" font-size="8.5" font-weight="bold" fill="#38bdf8">Golden Rule:</text>
+    <text x="35" y="367" font-family="-apple-system, sans-serif" font-size="8" fill="#cbd5e1">Use EXISTS over IN when subquery table is large and indexed!</text>
+  </g>
+</svg>
+</div>
+<div class="callout">Nested vs Correlated: Independent subqueries execute once; correlated subqueries evaluate repeatedly for every candidate row of the outer query.</div>
+<h2>1. Multi-Row Operators</h2>
+<table>
+<tr><th>Operator</th><th>Logic</th><th>Equivalence</th></tr>
+<tr><td><code>IN</code></td><td>Matches any value in the returned list.</td><td>= ANY</td></tr>
+<tr><td><code>&gt; ANY</code></td><td>Greater than at least one value in the list.</td><td>&gt; MIN(...)</td></tr>
+<tr><td><code>&gt; ALL</code></td><td>Greater than every single value in the list.</td><td>&gt; MAX(...)</td></tr>
+</table>
+<h2>2. EXISTS Short-Circuiting</h2>
+<p>EXISTS terminates immediately upon finding the first match, making it superior to IN when querying large correlated tables.</p>
+</body></html>

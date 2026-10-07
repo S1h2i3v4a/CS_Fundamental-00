@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg11)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Database Triggers Architecture &amp; Event-Condition-Action</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">BEFORE / AFTER Triggers, Row-Level vs Statement-Level, :NEW / :OLD Pseudo-Records</text>
+
+  <!-- LEFT: TRIGGER CLASSIFICATION -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. Trigger Taxonomy &amp; Timing</text>
+
+    <!-- ECA Model -->
+    <rect x="20" y="55" width="400" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="75" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">The ECA (Event-Condition-Action) Model</text>
+    <text x="35" y="93" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Event: INSERT, UPDATE, DELETE on table.</text>
+    <text x="35" y="108" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Condition: Optional WHEN clause predicate.</text>
+    <text x="35" y="120" font-family="-apple-system, sans-serif" font-size="8.5" fill="#a7f3d0">• Action: PL/SQL block executed automatically.</text>
+
+    <!-- BEFORE vs AFTER -->
+    <rect x="20" y="135" width="400" height="110" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="155" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Trigger Timing: BEFORE vs AFTER</text>
+    <text x="35" y="175" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• BEFORE Trigger: Fires BEFORE the change is applied to the table.</text>
+    <text x="45" y="190" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Used for input validation, sanitization, or preventing unauthorized ops.</text>
+    <text x="35" y="210" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• AFTER Trigger: Fires AFTER the table is successfully modified.</text>
+    <text x="45" y="225" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Used for auditing, writing change logs, or synchronizing secondary tables.</text>
+
+    <!-- Granularity: Row vs Statement -->
+    <rect x="20" y="255" width="400" height="115" rx="6" fill="#0f172a" stroke="#10b981"/>
+    <text x="35" y="275" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">Granularity: Row-Level vs Statement-Level</text>
+    <text x="35" y="295" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Row-Level (FOR EACH ROW): Fires once for EACH tuple affected.</text>
+    <text x="45" y="310" font-family="-apple-system, sans-serif" font-size="8" fill="#a5f3fc">Can access :NEW and :OLD attribute values.</text>
+    <text x="35" y="330" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Statement-Level (Default): Fires once per SQL command.</text>
+    <text x="45" y="345" font-family="-apple-system, sans-serif" font-size="8" fill="#94a3b8">Fires 1 time even if UPDATE modifies 10,000 rows. No :NEW/:OLD access.</text>
+  </g>
+
+  <!-- RIGHT: PSEUDO-RECORDS & CODE EXAMPLE -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. Pseudo-Records &amp; Solved Case Study</text>
+
+    <!-- Pseudo Records Matrix -->
+    <rect x="20" y="55" width="400" height="105" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="75" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">:NEW and :OLD Availability Matrix:</text>
+    <text x="35" y="95" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• INSERT: :NEW contains values being inserted; :OLD is NULL.</text>
+    <text x="35" y="112" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• UPDATE: :OLD has previous values; :NEW has incoming values.</text>
+    <text x="35" y="130" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• DELETE: :OLD has row being deleted; :NEW is NULL.</text>
+    <text x="35" y="148" font-family="-apple-system, sans-serif" font-size="8" fill="#fde68a">In PL/SQL body, reference as :NEW.col and :OLD.col</text>
+
+    <!-- Solved Code Example -->
+    <rect x="20" y="170" width="400" height="200" rx="6" fill="#0f172a" stroke="#eab308"/>
+    <text x="35" y="190" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#fde047">AKTU Case Study: Prevent Salary Reduction</text>
+    <rect x="35" y="200" width="370" height="155" rx="4" fill="#1e293b"/>
+    <text x="45" y="218" font-family="monospace" font-size="7.8" fill="#38bdf8">CREATE OR REPLACE TRIGGER prevent_salary_decrease</text>
+    <text x="45" y="232" font-family="monospace" font-size="7.8" fill="#38bdf8">BEFORE UPDATE OF Salary ON Employee</text>
+    <text x="45" y="246" font-family="monospace" font-size="7.8" fill="#fbbf24">FOR EACH ROW</text>
+    <text x="45" y="260" font-family="monospace" font-size="7.8" fill="#fff">BEGIN</text>
+    <text x="55" y="274" font-family="monospace" font-size="7.8" fill="#f87171">    IF :NEW.Salary &lt; :OLD.Salary THEN</text>
+    <text x="65" y="288" font-family="monospace" font-size="7.8" fill="#fca5a5">        RAISE_APPLICATION_ERROR(-20001,</text>
+    <text x="75" y="302" font-family="monospace" font-size="7.8" fill="#fca5a5">            'Salary decrease is strictly forbidden!');</text>
+    <text x="55" y="316" font-family="monospace" font-size="7.8" fill="#f87171">    END IF;</text>
+    <text x="45" y="330" font-family="monospace" font-size="7.8" fill="#fff">END;</text>
+    <text x="35" y="365" font-family="-apple-system, sans-serif" font-size="8" fill="#34d399">Enforces corporate business rule transparently across all client apps!</text>
+  </g>
+</svg>

@@ -17,20 +17,21 @@ CS_Fundamental-00/
 │   └── Unit_5/                # Storage Management, Disk Scheduling, File Systems & Protection
 │
 └── DBMS/                      # Database Management Systems (AKTU BCS501)
-    └── Unit_1/                # Database Concepts, ER Modeling, Schema Reduction & Relational Algebra
+    ├── Unit_1/                # Database Concepts, ER Modeling, Schema Reduction & Relational Algebra
+    └── Unit_2/                # Relational Model, Formal Languages & Complete SQL Mastery
         ├── 00_Quick_Revision_Short_Notes/
-        ├── 01_Database_System_Concepts_and_Architecture/
-        ├── 02_File_System_vs_DBMS/
-        ├── 03_Database_Users_and_DBA_Roles/
-        ├── 04_Data_Models_and_Languages/
-        ├── 05_ER_Model_Entities_and_Attributes/
-        ├── 06_Relationships_Cardinalities_and_Weak_Entities/
-        ├── 07_Relational_Keys_in_Depth/
-        ├── 08_Extended_ER_Features_EER/
-        ├── 09_ER_to_Relational_Mapping_and_Table_Reduction/
-        ├── 10_Relational_Data_Model_and_Integrity_Constraints/
-        ├── 11_Relational_Algebra_and_Calculus/
-        └── 12_Unit_1_AKTU_PYQs_and_Solved_Case_Studies/
+        ├── 01_Relational_Algebra_Complete_Operators_and_Numericals/
+        ├── 02_Relational_Calculus_TRC_and_DRC/
+        ├── 03_SQL_Foundations_Data_Types_and_DDL_Commands/
+        ├── 04_SQL_DML_and_Integrity_Constraints/
+        ├── 05_SQL_Clauses_Aggregate_Functions_and_Groupings/
+        ├── 06_SQL_Joins_and_Set_Operations/
+        ├── 07_Nested_Subqueries_and_Correlated_Queries/
+        ├── 08_SQL_Views_and_Security_Abstraction/
+        ├── 09_Database_Indexes_and_Access_Paths/
+        ├── 10_Advanced_SQL_PL_SQL_Cursors/
+        ├── 11_Advanced_SQL_Database_Triggers/
+        └── 12_Unit_2_AKTU_PYQs_and_Solved_Queries/
 ```
 
 ---
@@ -45,6 +46,7 @@ CS_Fundamental-00/
 | **OS** | **Unit 4** | Virtual Memory & Thrashing | [3-Page PDF](OS/Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](OS/Unit_4/Unit_4_Master_Notes.pdf) |
 | **OS** | **Unit 5** | Secondary Storage & File Systems | [3-Page PDF](OS/Unit_5/Unit_5_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](OS/Unit_5/Unit_5_Master_Notes.pdf) |
 | **DBMS** | **Unit 1** | Concepts, ER Modeling & Relational Algebra | [3-Page PDF](DBMS/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_1/Unit_1_Master_Notes.pdf) |
+| **DBMS** | **Unit 2** | Relational Model, Formal Languages & SQL | [3-Page PDF](DBMS/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_2/Unit_2_Master_Notes.pdf) |
 
 ---
 

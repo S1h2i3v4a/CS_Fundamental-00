@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg12)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">AKTU Unit 2 Past 5-Year Solved Examination Papers</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Relational Algebra vs SQL Dual Query Bank (Suppliers-Parts, Library, Student-Course)</text>
+
+  <!-- LEFT: RELATIONAL ALGEBRA NUMERICALS -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. Relational Algebra PYQ Solutions</text>
+
+    <!-- Schema -->
+    <rect x="20" y="50" width="400" height="45" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="68" font-family="monospace" font-size="8" fill="#a5f3fc">Suppliers(sid, sname, city) | Parts(pid, pname, color)</text>
+    <text x="35" y="82" font-family="monospace" font-size="8" fill="#a5f3fc">Catalog(sid, pid, cost)</text>
+
+    <!-- Q1 -->
+    <rect x="20" y="105" width="400" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#fbbf24">Q1: Suppliers of RED parts (AKTU 2021-22)</text>
+    <text x="35" y="142" font-family="monospace" font-size="8" fill="#38bdf8">π[sname](Suppliers ⋈ π[sid](Catalog ⋈ σ[color='RED'](Parts)))</text>
+    <text x="35" y="156" font-family="-apple-system, sans-serif" font-size="7.8" fill="#94a3b8">Joins Catalog with filtered red parts, then projects supplier names.</text>
+
+    <!-- Q2 -->
+    <rect x="20" y="175" width="400" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="192" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#fbbf24">Q2: Suppliers who supply ALL parts (AKTU 2022-23)</text>
+    <text x="35" y="212" font-family="monospace" font-size="8" fill="#f472b6">π[sname](Suppliers ⋈ (π[sid, pid](Catalog) ÷ π[pid](Parts)))</text>
+    <text x="35" y="226" font-family="-apple-system, sans-serif" font-size="7.8" fill="#94a3b8">Applies Division Operator (÷) to solve universal quantification.</text>
+
+    <!-- Q3 -->
+    <rect x="20" y="245" width="400" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="262" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#fbbf24">Q3: Suppliers of at least 1 Red AND 1 Green part</text>
+    <text x="35" y="282" font-family="monospace" font-size="7.8" fill="#a7f3d0">π[sname](Suppliers ⋈ (π[sid](Cat ⋈ σ[col='RED'](P)) ∩ π[sid](Cat ⋈ σ[col='GREEN'](P))))</text>
+    <text x="35" y="296" font-family="-apple-system, sans-serif" font-size="7.8" fill="#94a3b8">Uses Set Intersection (∩) of two supplier ID projections.</text>
+
+    <!-- Q4 -->
+    <rect x="20" y="315" width="400" height="60" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="332" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#fbbf24">Q4: Suppliers who supply NO Red parts (AKTU 2023-24)</text>
+    <text x="35" y="352" font-family="monospace" font-size="8" fill="#fca5a5">π[sname](Suppliers) - π[sname](Suppliers ⋈ π[sid](Cat ⋈ σ[col='RED'](P)))</text>
+    <text x="35" y="366" font-family="-apple-system, sans-serif" font-size="7.8" fill="#94a3b8">Uses Set Difference (-) to subtract red part suppliers from all suppliers.</text>
+  </g>
+
+  <!-- RIGHT: SQL EQUIVALENT SOLUTIONS -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. SQL Query Dual Solutions</text>
+
+    <!-- SQL Q1 -->
+    <rect x="20" y="50" width="400" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="68" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#38bdf8">SQL Q1: Suppliers of RED parts (Join Approach)</text>
+    <text x="35" y="86" font-family="monospace" font-size="8" fill="#a5f3fc">SELECT DISTINCT S.sname FROM Suppliers S</text>
+    <text x="35" y="100" font-family="monospace" font-size="8" fill="#a5f3fc">JOIN Catalog C ON S.sid=C.sid JOIN Parts P ON C.pid=P.pid</text>
+    <text x="35" y="114" font-family="monospace" font-size="8" fill="#a5f3fc">WHERE P.color = 'RED';</text>
+
+    <!-- SQL Q2 -->
+    <rect x="20" y="135" width="400" height="90" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="152" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#f472b6">SQL Q2: Suppliers of ALL parts (NOT EXISTS / Group By)</text>
+    <text x="35" y="170" font-family="monospace" font-size="8" fill="#fbcfe8">SELECT S.sname FROM Suppliers S JOIN Catalog C ON S.sid=C.sid</text>
+    <text x="35" y="184" font-family="monospace" font-size="8" fill="#fbcfe8">GROUP BY S.sid, S.sname</text>
+    <text x="35" y="198" font-family="monospace" font-size="8" fill="#fbcfe8">HAVING COUNT(DISTINCT C.pid) = (SELECT COUNT(*) FROM Parts);</text>
+    <text x="35" y="213" font-family="-apple-system, sans-serif" font-size="7.8" fill="#94a3b8">Elegant COUNT aggregation approach solves relational division!</text>
+
+    <!-- SQL Q3 -->
+    <rect x="20" y="235" width="400" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="252" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#a7f3d0">SQL Q3: Library Database (Book Issued by Student)</text>
+    <text x="35" y="270" font-family="monospace" font-size="8" fill="#a7f3d0">SELECT S.Name, B.Title FROM Student S</text>
+    <text x="35" y="284" font-family="monospace" font-size="8" fill="#a7f3d0">JOIN Issue I ON S.RollNo=I.RollNo JOIN Book B ON I.ISBN=B.ISBN;</text>
+
+    <!-- SQL Q4 -->
+    <rect x="20" y="310" width="400" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="327" font-family="-apple-system, sans-serif" font-size="9" font-weight="bold" fill="#f87171">SQL Q4: Students who borrowed NO books</text>
+    <text x="35" y="345" font-family="monospace" font-size="8" fill="#fca5a5">SELECT Name FROM Student WHERE RollNo NOT IN (SELECT RollNo FROM Issue);</text>
+    <text x="35" y="360" font-family="-apple-system, sans-serif" font-size="7.8" fill="#94a3b8">Uses NOT IN anti-join subquery to isolate zero-issue students.</text>
+  </g>
+</svg>

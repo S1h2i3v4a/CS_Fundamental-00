@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg09)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Database Indexes Architecture &amp; B-Tree Access Paths</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Clustered vs Non-Clustered Indexes, Dense vs Sparse Indexing &amp; Query Tuning</text>
+
+  <!-- LEFT: CLUSTERED VS NON-CLUSTERED -->
+  <g transform="translate(40, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#60a5fa">1. Clustered vs Non-Clustered Index</text>
+
+    <!-- Clustered Index -->
+    <rect x="20" y="55" width="400" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="78" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">Clustered Index (Primary Data Ordering)</text>
+    <text x="35" y="98" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Data rows are PHYSICALLY sorted on disk in index key order!</text>
+    <text x="35" y="115" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Leaf nodes contain the ACTUAL DATA ROWS (no pointers needed).</text>
+    <text x="35" y="132" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fbbf24">• Exact ONE Clustered Index allowed per table (data can only be sorted one way!).</text>
+    <text x="35" y="150" font-family="-apple-system, sans-serif" font-size="8.5" fill="#a7f3d0">• Auto-created when you declare a PRIMARY KEY.</text>
+    <text x="35" y="168" font-family="monospace" font-size="8" fill="#a5f3fc">CREATE CLUSTERED INDEX idx_roll ON Student(RollNo);</text>
+
+    <!-- Non-Clustered Index -->
+    <rect x="20" y="205" width="400" height="165" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="228" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">Non-Clustered / Secondary Index</text>
+    <text x="35" y="248" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Physical data is NOT re-sorted. Index is a separate auxiliary structure.</text>
+    <text x="35" y="265" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Leaf nodes contain Index Key + Row Locator (RID / Pointer to data page).</text>
+    <text x="35" y="282" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fbbf24">• Multiple Non-Clustered Indexes allowed per table (e.g., up to 999).</text>
+    <text x="35" y="300" font-family="monospace" font-size="8" fill="#fef08a">CREATE INDEX idx_name_city ON Student(Name, City); -- Composite</text>
+    <text x="35" y="325" font-family="-apple-system, sans-serif" font-size="8.5" fill="#f87171">Trade-off: Fast search O(log N) vs slower INSERT/UPDATE (index maintenance).</text>
+  </g>
+
+  <!-- RIGHT: DENSE VS SPARSE INDEXING -->
+  <g transform="translate(520, 85)">
+    <rect width="440" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="220" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. Dense vs Sparse Indexing</text>
+
+    <!-- Dense Index -->
+    <rect x="20" y="55" width="400" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="78" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Dense Index</text>
+    <text x="35" y="98" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Index record exists for EVERY SINGLE search key value in table.</text>
+    <text x="35" y="115" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Faster search (direct pointer to target record without linear block scan).</text>
+    <text x="35" y="132" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Consumes larger memory and storage space.</text>
+    <text x="35" y="152" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fde68a">Can be built on both sorted and unsorted data files.</text>
+
+    <!-- Sparse Index -->
+    <rect x="20" y="205" width="400" height="165" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="228" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fde047">Sparse Index (Block Anchors)</text>
+    <text x="35" y="248" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Index record exists only for SOME search key values (e.g. 1 per disk block).</text>
+    <text x="35" y="265" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">• Much smaller index size (easily fits in main memory RAM cache).</text>
+    <text x="35" y="285" font-family="-apple-system, sans-serif" font-size="8.5" fill="#f87171">• Strict Requirement: The underlying data file MUST be physically sorted!</text>
+    <text x="35" y="305" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">Search: Follow index to block anchor → perform linear scan inside block.</text>
+    <text x="35" y="330" font-family="-apple-system, sans-serif" font-size="8.5" fill="#38bdf8">Ideal for primary clustered indexes on massive enterprise datasets.</text>
+  </g>
+</svg>
