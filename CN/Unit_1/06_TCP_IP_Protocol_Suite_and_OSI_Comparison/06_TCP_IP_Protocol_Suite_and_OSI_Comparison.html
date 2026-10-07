@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 1: TCP/IP Protocol Suite and OSI Comparison</title>
+<style>
+
+@page {
+  size: A4 portrait;
+  margin: 12mm 15mm 15mm 15mm;
+}
+* {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1e293b;
+  background-color: #ffffff;
+  line-height: 1.5;
+  font-size: 9.5pt;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  color: #0f172a;
+  font-size: 18pt;
+  font-weight: 800;
+  border-bottom: 2.5px solid #2563eb;
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+h2 {
+  color: #1e3a8a;
+  font-size: 13pt;
+  font-weight: 700;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 3px;
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+h3 {
+  color: #0f172a;
+  font-size: 10.5pt;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+p, li {
+  color: #334155;
+  margin-top: 3px;
+  margin-bottom: 6px;
+}
+ul, ol {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 3px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 8.5pt;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 5px 8px;
+  text-align: left;
+}
+th {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-weight: 700;
+}
+tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+.box-tip {
+  background-color: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.box-warn {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.box-highlight {
+  background-color: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.diagram-container {
+  text-align: center;
+  margin: 14px 0;
+  page-break-inside: avoid;
+}
+.diagram-container svg {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+</style>
+</head>
+<body>
+
+<h1>Module 06: TCP/IP Protocol Suite &amp; OSI Comparison</h1>
+<p><strong>AKTU BCS603 Focus:</strong> 4-Layer TCP/IP architecture, protocol stack (IP, ARP, ICMP, TCP, UDP), and authoritative 10-point OSI vs TCP/IP comparison matrix.</p>
+
+<div class="diagram-container">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 430" width="100%" height="100%">
+  <defs>
+    <linearGradient id="osiGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+    <linearGradient id="tcpGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#065f46"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="430" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">OSI Model vs TCP/IP Protocol Suite: Architecture &amp; Layer Mapping</text>
+
+  <!-- Left: OSI 7 Layers -->
+  <rect x="35" y="55" width="230" height="360" rx="6" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="230" height="28" rx="6" fill="url(#osiGrad)"/>
+  <text x="150" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">OSI Reference Model (7 Layers)</text>
+
+  <rect x="45" y="90" width="210" height="38" rx="4" fill="#dbeafe"/><text x="150" y="114" fill="#1e40af" font-size="11" font-weight="bold" text-anchor="middle">7. Application</text>
+  <rect x="45" y="132" width="210" height="38" rx="4" fill="#dbeafe"/><text x="150" y="156" fill="#1e40af" font-size="11" font-weight="bold" text-anchor="middle">6. Presentation</text>
+  <rect x="45" y="174" width="210" height="38" rx="4" fill="#dbeafe"/><text x="150" y="198" fill="#1e40af" font-size="11" font-weight="bold" text-anchor="middle">5. Session</text>
+  <rect x="45" y="216" width="210" height="44" rx="4" fill="#bfdbfe"/><text x="150" y="243" fill="#1e3a8a" font-size="11" font-weight="bold" text-anchor="middle">4. Transport</text>
+  <rect x="45" y="264" width="210" height="44" rx="4" fill="#bfdbfe"/><text x="150" y="291" fill="#1e3a8a" font-size="11" font-weight="bold" text-anchor="middle">3. Network</text>
+  <rect x="45" y="312" width="210" height="44" rx="4" fill="#93c5fd"/><text x="150" y="339" fill="#1e3a8a" font-size="11" font-weight="bold" text-anchor="middle">2. Data Link</text>
+  <rect x="45" y="360" width="210" height="44" rx="4" fill="#93c5fd"/><text x="150" y="387" fill="#1e3a8a" font-size="11" font-weight="bold" text-anchor="middle">1. Physical</text>
+
+  <!-- Middle: Mapping Brackets & Arrows -->
+  <!-- Top 3 OSI layers combine into TCP/IP App layer -->
+  <path d="M 270 95 L 305 95 L 305 150 L 320 150" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <path d="M 270 205 L 305 205 L 305 150" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="295" y="145" fill="#2563eb" font-size="9" font-weight="bold" text-anchor="end">Merged</text>
+
+  <!-- Transport to Transport -->
+  <line x1="270" y1="238" x2="320" y2="238" stroke="#10b981" stroke-width="2"/>
+
+  <!-- Network to Internet -->
+  <line x1="270" y1="286" x2="320" y2="286" stroke="#10b981" stroke-width="2"/>
+
+  <!-- Bottom 2 OSI to Network Access -->
+  <path d="M 270 325 L 305 325 L 305 360 L 320 360" fill="none" stroke="#059669" stroke-width="2"/>
+  <path d="M 270 395 L 305 395 L 305 360" fill="none" stroke="#059669" stroke-width="2"/>
+  <text x="295" y="375" fill="#059669" font-size="9" font-weight="bold" text-anchor="end">Merged</text>
+
+  <!-- Right Left: TCP/IP Stack (4/5 Layers) -->
+  <rect x="330" y="55" width="230" height="360" rx="6" fill="#ffffff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="330" y="55" width="230" height="28" rx="6" fill="url(#tcpGrad)"/>
+  <text x="445" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">TCP/IP Protocol Suite</text>
+
+  <!-- TCP Application -->
+  <rect x="340" y="90" width="210" height="122" rx="4" fill="#d1fae5"/>
+  <text x="445" y="112" fill="#065f46" font-size="12" font-weight="bold" text-anchor="middle">Application Layer</text>
+  <text x="445" y="132" fill="#047857" font-size="9" text-anchor="middle">HTTP, HTTPS, FTP, DNS</text>
+  <text x="445" y="148" fill="#047857" font-size="9" text-anchor="middle">SMTP, POP3, IMAP, SSH</text>
+  <text x="445" y="164" fill="#047857" font-size="9" text-anchor="middle">SNMP, TELNET, DHCP</text>
+  <text x="445" y="195" fill="#64748b" font-size="8" text-anchor="middle">(Handles App + Pres + Sess)</text>
+
+  <!-- TCP Transport -->
+  <rect x="340" y="216" width="210" height="44" rx="4" fill="#a7f3d0"/>
+  <text x="445" y="235" fill="#065f46" font-size="11" font-weight="bold" text-anchor="middle">Transport (Host-to-Host)</text>
+  <text x="445" y="250" fill="#047857" font-size="9" text-anchor="middle">TCP (Reliable) | UDP (Fast)</text>
+
+  <!-- TCP Internet -->
+  <rect x="340" y="264" width="210" height="44" rx="4" fill="#6ee7b7"/>
+  <text x="445" y="283" fill="#064e3b" font-size="11" font-weight="bold" text-anchor="middle">Internet Layer</text>
+  <text x="445" y="298" fill="#064e3b" font-size="9" text-anchor="middle">IP (IPv4/IPv6), ICMP, ARP, RARP</text>
+
+  <!-- TCP Network Access -->
+  <rect x="340" y="312" width="210" height="92" rx="4" fill="#34d399"/>
+  <text x="445" y="340" fill="#064e3b" font-size="11.5" font-weight="bold" text-anchor="middle">Network Access Layer</text>
+  <text x="445" y="358" fill="#064e3b" font-size="9" text-anchor="middle">(Host-to-Network / Link Layer)</text>
+  <text x="445" y="375" fill="#064e3b" font-size="8.5" text-anchor="middle">Ethernet (802.3), Wi-Fi (802.11)</text>
+  <text x="445" y="390" fill="#064e3b" font-size="8" text-anchor="middle">PPP, Token Ring, Physical Medium</text>
+
+  <!-- Far Right: Key Comparison Summary Box -->
+  <rect x="575" y="55" width="245" height="360" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="575" y="55" width="245" height="28" rx="6" fill="#334155"/>
+  <text x="697" y="74" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">OSI vs TCP/IP Comparison</text>
+
+  <rect x="585" y="90" width="225" height="46" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="592" y="106" fill="#0f172a" font-size="9.5" font-weight="bold">1. Development Order:</text>
+  <text x="592" y="122" fill="#475569" font-size="8.5">OSI: Model first, protocols later.</text>
+  <text x="592" y="132" fill="#475569" font-size="8.5">TCP/IP: Protocols first, model later.</text>
+
+  <rect x="585" y="142" width="225" height="46" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="592" y="158" fill="#0f172a" font-size="9.5" font-weight="bold">2. Layer Count:</text>
+  <text x="592" y="174" fill="#475569" font-size="8.5">OSI has 7 strictly defined layers.</text>
+  <text x="592" y="184" fill="#475569" font-size="8.5">TCP/IP has 4 layers (or 5 in practice).</text>
+
+  <rect x="585" y="194" width="225" height="46" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="592" y="210" fill="#0f172a" font-size="9.5" font-weight="bold">3. Network Layer Service:</text>
+  <text x="592" y="226" fill="#475569" font-size="8.5">OSI: Both Connection &amp; Conn-less.</text>
+  <text x="592" y="236" fill="#475569" font-size="8.5">TCP/IP: Strictly Connectionless (IP).</text>
+
+  <rect x="585" y="246" width="225" height="46" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="592" y="262" fill="#0f172a" font-size="9.5" font-weight="bold">4. Transport Layer Service:</text>
+  <text x="592" y="278" fill="#475569" font-size="8.5">OSI: Strictly Connection-oriented.</text>
+  <text x="592" y="288" fill="#475569" font-size="8.5">TCP/IP: Both (TCP Conn, UDP Conn-less).</text>
+
+  <rect x="585" y="298" width="225" height="46" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="592" y="314" fill="#0f172a" font-size="9.5" font-weight="bold">5. Protocols vs Interface:</text>
+  <text x="592" y="330" fill="#475569" font-size="8.5">OSI: Clear separation (Service/SAP).</text>
+  <text x="592" y="340" fill="#475569" font-size="8.5">TCP/IP: Protocols tightly coupled.</text>
+
+  <rect x="585" y="350" width="225" height="58" rx="4" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="592" y="368" fill="#065f46" font-size="9.5" font-weight="bold">Real-World Deployment:</text>
+  <text x="592" y="384" fill="#065f46" font-size="8.5">OSI is a Theoretical Reference Model.</text>
+  <text x="592" y="398" fill="#065f46" font-size="8.5">TCP/IP powers the Entire Modern Global Internet!</text>
+</svg>
+</div>
+
+<h2>1. Core Protocols at Each TCP/IP Layer</h2>
+<ul>
+  <li><strong>Application Layer:</strong> HTTP/HTTPS (Web), FTP (File transfer), SMTP/IMAP (Email), DNS (Domain name resolution), DHCP (Dynamic IP assignment).</li>
+  <li><strong>Transport Layer:</strong>
+    <ul>
+      <li><em>TCP:</em> Connection-oriented, reliable 3-way handshake, checksums, retransmission, flow control (Sliding window), congestion control.</li>
+      <li><em>UDP:</em> Connectionless, low overhead (8-byte header vs 20-byte TCP header), zero handshake latency, suitable for real-time media.</li>
+    </ul>
+  </li>
+  <li><strong>Internet Layer:</strong>
+    <ul>
+      <li><em>IP:</em> Best-effort, connectionless packet forwarding across autonomous networks.</li>
+      <li><em>ARP:</em> Resolves known IP address to unknown 48-bit MAC address via broadcast request and unicast reply.</li>
+      <li><em>ICMP:</em> Out-of-band network diagnostic signals (Echo Request / Echo Reply for <code>ping</code>).</li>
+    </ul>
+  </li>
+  <li><strong>Network Access Layer:</strong> IEEE 802.3 Ethernet framing, IEEE 802.11 Wi-Fi frames, physical transceivers.</li>
+</ul>
+
+<h2>2. OSI vs TCP/IP Architecture Comparison</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>OSI Reference Model</th>
+      <th>TCP/IP Model</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Model Type</strong></td>
+      <td>Conceptual &amp; Descriptive</td>
+      <td>Functional &amp; Implementation standard</td>
+    </tr>
+    <tr>
+      <td><strong>Layer Count</strong></td>
+      <td>7 Layers</td>
+      <td>4 Layers (RFC 1122) / 5 Layers</td>
+    </tr>
+    <tr>
+      <td><strong>Network Layer</strong></td>
+      <td>Connection-oriented and Connectionless</td>
+      <td>Strictly Connectionless (IP Datagram)</td>
+    </tr>
+    <tr>
+      <td><strong>Transport Layer</strong></td>
+      <td>Strictly Connection-oriented</td>
+      <td>Connection-oriented (TCP) &amp; Connectionless (UDP)</td>
+    </tr>
+    <tr>
+      <td><strong>Internet Adoption</strong></td>
+      <td>Never gained widespread commercial adoption</td>
+      <td>The universal lingua franca of the global Internet</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="box-tip">
+  <strong>AKTU Exam Tip:</strong> Jab bhi TCP/IP vs OSI model ka question aaye, 4 vs 7 layer mapping diagram draw karein aur Transport vs Network layer ke connection modes (TCP/UDP vs IP) ka difference table me zaroor highlight karein!
+</div>
+
+</body>
+</html>

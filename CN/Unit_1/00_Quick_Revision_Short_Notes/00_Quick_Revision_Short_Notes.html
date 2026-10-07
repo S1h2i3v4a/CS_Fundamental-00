@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 1: Ultra Quick Revision Short Notes (Exact 3 Pages)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 7.1pt;
+    line-height: 1.22;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 6mm 7.5mm 5mm 7.5mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-bar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 4px 9px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .header-title {
+    font-size: 9.8pt;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 6.8pt;
+    color: #93c5fd;
+    font-weight: 500;
+  }
+  .page-tag {
+    background: #3b82f6;
+    color: #ffffff;
+    padding: 1.5px 6px;
+    border-radius: 3px;
+    font-size: 6.8pt;
+    font-weight: 700;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 4px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .card {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 4px 6px;
+    background: #ffffff;
+  }
+  .card-header {
+    font-weight: 800;
+    font-size: 7.5pt;
+    color: #1e3a8a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 2px;
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .card-header.green { color: #065f46; }
+  .card-header.amber { color: #92400e; }
+  .card-header.purple { color: #581c87; }
+  .card-header.red { color: #991b1b; }
+  table.dense {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2px 0;
+    font-size: 6.6pt;
+  }
+  table.dense th, table.dense td {
+    border: 0.8px solid #cbd5e1;
+    padding: 1.5px 3.5px;
+    text-align: left;
+  }
+  table.dense th {
+    background: #f1f5f9;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  ul.dense {
+    margin: 1px 0;
+    padding-left: 12px;
+  }
+  ul.dense li {
+    margin-bottom: 1.2px;
+  }
+  .formula-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 3px;
+    padding: 2.5px 5px;
+    font-family: monospace;
+    font-size: 6.8pt;
+    color: #1e40af;
+    margin: 2px 0;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.5px 3.5px;
+    border-radius: 2px;
+    font-size: 5.8pt;
+    font-weight: 700;
+  }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  .footer-bar {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 6pt;
+    color: #64748b;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1: FUNDAMENTALS, TOPOLOGIES, NETWORKS & PROTOCOLS ================= -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <span class="header-title">COMPUTER NETWORKS — UNIT 1: QUICK REVISION SHEET</span>
+        <span class="header-sub"> | AKTU BCS603 / GATE CS Core Exam Cheat Sheet</span>
+      </div>
+      <span class="page-tag">PAGE 1 OF 3</span>
+    </div>
+
+    <!-- Section 1: Components & Transmission Modes -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">1. 5 Core Components of Data Communication</div>
+        <ul class="dense">
+          <li><strong>1. Message:</strong> Actual data payload to communicate (Text, Number, Audio, Video).</li>
+          <li><strong>2. Sender:</strong> Workstation/phone generating the source bit stream.</li>
+          <li><strong>3. Receiver:</strong> Sink device accepting the delivered information.</li>
+          <li><strong>4. Transmission Medium:</strong> Guided (Twisted pair, Coax, Fiber) or Unguided (RF).</li>
+          <li><strong>5. Protocol:</strong> Agreed rules governing Syntax, Semantics, and Timing.</li>
+        </ul>
+        <div class="formula-box">Effectiveness: Delivery (Right node), Accuracy, Timeliness, Jitter (Delay variance)</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header green">2. Data Flow &amp; Transmission Modes</div>
+        <table class="dense">
+          <tr><th>Mode</th><th>Direction</th><th>Channel Allocation</th><th>Real-World Example</th></tr>
+          <tr><td><strong>Simplex</strong></td><td>Strictly 1-Way (Unidirectional)</td><td>100% capacity in 1 direction</td><td>Keyboard to CPU, TV broadcast</td></tr>
+          <tr><td><strong>Half-Duplex</strong></td><td>2-Way, but 1 at a time</td><td>Alternating time sharing</td><td>Walkie-Talkie ("Over &amp; Out")</td></tr>
+          <tr><td><strong>Full-Duplex</strong></td><td>Simultaneous 2-Way</td><td>Divided / Separate channels</td><td>Telephone Call, Switched Ethernet</td></tr>
+        </table>
+        <div style="font-size:6.3pt; color:#475569; margin-top:2px;">
+          <strong>Connections:</strong> <em>Point-to-Point</em> (Dedicated link) vs <em>Multipoint</em> (Shared capacity among &gt;2 nodes).
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Topologies Formula Matrix -->
+    <div class="card" style="margin-bottom:4px;">
+      <div class="card-header amber">3. Physical Network Topologies Formula &amp; Trade-off Matrix (for n Nodes)</div>
+      <table class="dense">
+        <tr>
+          <th>Topology</th>
+          <th>Physical Links Formula</th>
+          <th>I/O Ports/Node</th>
+          <th>Cabling Cost</th>
+          <th>Fault Tolerance Profile</th>
+          <th>Key Failure Bottleneck</th>
+        </tr>
+        <tr>
+          <td><strong>Mesh</strong></td>
+          <td><code>n(n - 1) / 2</code></td>
+          <td><code>n - 1</code></td>
+          <td><span class="badge badge-amber">Highest O(n²)</span></td>
+          <td>Maximum; Dedicated alternate routes</td>
+          <td>Excessive wiring &amp; physical port saturation</td>
+        </tr>
+        <tr>
+          <td><strong>Star</strong></td>
+          <td><code>n</code></td>
+          <td><code>1</code></td>
+          <td><span class="badge badge-blue">Moderate O(n)</span></td>
+          <td>High (1 broken cable isolates only that host)</td>
+          <td><strong>Central Hub / Switch Failure collapses entire network</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Bus</strong></td>
+          <td><code>1 backbone + n drops</code></td>
+          <td><code>1 tap</code></td>
+          <td><span class="badge badge-green">Lowest O(1)</span></td>
+          <td>Poor (Backbone cut halts entire bus)</td>
+          <td>Cable break or missing terminator stops all reflections</td>
+        </tr>
+        <tr>
+          <td><strong>Ring</strong></td>
+          <td><code>n</code> (Unidirectional)</td>
+          <td><code>2 (In / Out)</code></td>
+          <td><span class="badge badge-blue">Low to Moderate</span></td>
+          <td>Single point of failure (Dual ring FDDI fixes)</td>
+          <td>Token circulation break halts transmission</td>
+        </tr>
+        <tr>
+          <td><strong>Tree / Hybrid</strong></td>
+          <td>Hierarchical ($n-1$)</td>
+          <td>1 per leaf</td>
+          <td>Moderate to High</td>
+          <td>Isolated to sub-branch</td>
+          <td>Root hub / Trunk line failure disconnects branches</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Section 3: Categories & ISP Architecture -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header purple">4. Geographical Network Categories</div>
+        <table class="dense">
+          <tr><th>Category</th><th>Range</th><th>Typical Medium</th><th>Standard</th></tr>
+          <tr><td><strong>PAN</strong></td><td>&lt; 10 m</td><td>Bluetooth, Zigbee, IrDA</td><td>IEEE 802.15</td></tr>
+          <tr><td><strong>LAN</strong></td><td>100 m - 2 km</td><td>Twisted Pair, Wi-Fi</td><td>IEEE 802.3, 802.11</td></tr>
+          <tr><td><strong>MAN</strong></td><td>5 - 50 km</td><td>Optical Fiber, Coaxial</td><td>Cable TV, Metro Eth</td></tr>
+          <tr><td><strong>WAN</strong></td><td>&gt; 100 km</td><td>Submarine Fiber, Satellite</td><td>IP, BGP, MPLS</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-header">5. 3-Tier ISP Architecture &amp; Internet Structure</div>
+        <ul class="dense">
+          <li><strong>Tier 1 ISPs:</strong> Global backbone carriers (AT&amp;T, Lumen, Tata). Own trans-oceanic cables. <em>Zero transit fees</em>; free settlement peering.</li>
+          <li><strong>Tier 2 ISPs:</strong> Regional operators (Airtel, Jio). Buy transit from Tier 1; peer at <strong>IXPs (Internet Exchange Points)</strong>.</li>
+          <li><strong>Tier 3 ISPs:</strong> Local retail broadband (ACT, Hathway, FTTH). Last-mile access to homes and businesses.</li>
+          <li><strong>POP (Point of Presence):</strong> Physical interface facility where external networks hook into an ISP backbone.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 4: Protocols, Standards & SAPs -->
+    <div class="card">
+      <div class="card-header green">6. Protocols, Standards Organizations &amp; Layering Principles</div>
+      <div class="grid-3">
+        <div>
+          <strong>Protocol 3 Elements:</strong>
+          <ul class="dense">
+            <li><strong>Syntax:</strong> Data structure &amp; bit field layout.</li>
+            <li><strong>Semantics:</strong> Meaning &amp; control actions.</li>
+            <li><strong>Timing:</strong> Speed matching &amp; sequencing.</li>
+          </ul>
+        </div>
+        <div>
+          <strong>De Jure vs De Facto:</strong>
+          <ul class="dense">
+            <li><em>De Jure:</em> Legally approved by treaty bodies (ISO 7498, IEEE 802.3).</li>
+            <li><em>De Facto:</em> Established by industry adoption without formal law (TCP/IP).</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Standards Organizations:</strong>
+          <ul class="dense">
+            <li><strong>ISO:</strong> OSI Reference Model (7 Layers).</li>
+            <li><strong>IEEE:</strong> LAN standards (802.3, 802.11).</li>
+            <li><strong>IETF:</strong> Internet Standards via RFCs.</li>
+            <li><strong>ITU-T:</strong> Telecommunications sector.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="formula-box">
+        <strong>Service Access Points (SAPs):</strong> Layer (N-1) offers service to Layer N through SAPs using Primitives: Request, Indication, Response, Confirm.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Computer Networks (BCS603) — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Page 1 of 3: Fundamentals, Topologies, Networks &amp; Standards</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 2: OSI MODEL, TCP/IP SUITE & ADDRESSING ================= -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <span class="header-title">COMPUTER NETWORKS — UNIT 1: QUICK REVISION SHEET</span>
+        <span class="header-sub"> | OSI 7-Layer Model, TCP/IP Suite &amp; Addressing Hierarchy</span>
+      </div>
+      <span class="page-tag">PAGE 2 OF 3</span>
+    </div>
+
+    <!-- Section 1: OSI 7 Layers Detailed Breakdown -->
+    <div class="card" style="margin-bottom:4px;">
+      <div class="card-header">1. OSI 7-Layer Reference Model (ISO 7498) Functional Deep Dive</div>
+      <table class="dense">
+        <tr>
+          <th>#</th>
+          <th>Layer Name</th>
+          <th>PDU</th>
+          <th>Primary Core Functions &amp; Protocols</th>
+          <th>Addressing &amp; Hardware</th>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td><strong>Application</strong></td>
+          <td>Data</td>
+          <td>Direct network interface for user software: File transfer (FTP), Web browsing (HTTP/HTTPS), Email (SMTP/POP3/IMAP), Name resolution (DNS), Dynamic config (DHCP).</td>
+          <td>URL / URI, Email IDs</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td><strong>Presentation</strong></td>
+          <td>Data</td>
+          <td><strong>Translation:</strong> Character encoding (ASCII, EBCDIC). <strong>Encryption/Decryption:</strong> Cryptographic security (SSL/TLS). <strong>Compression:</strong> Lossy &amp; lossless payload reduction.</td>
+          <td>MIME Types</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td><strong>Session</strong></td>
+          <td>Data</td>
+          <td><strong>Dialog Control:</strong> Enforces simplex, half-duplex, or full-duplex session turns. <strong>Synchronization &amp; Checkpoints:</strong> Inserts recovery checkpoints in large data streams.</td>
+          <td>Session IDs, Tokens</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td><strong>Transport</strong></td>
+          <td>Segment / Datagram</td>
+          <td><strong>"Heart of OSI":</strong> End-to-end process-to-process delivery. Segmentation &amp; Reassembly, Port addressing, Connection-oriented (TCP) vs Connectionless (UDP), End-to-end flow &amp; error control.</td>
+          <td><strong>Port Numbers</strong> (16-bit: 0 - 65535)</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td><strong>Network</strong></td>
+          <td>Packet</td>
+          <td>Source-to-destination <strong>Host-to-Host</strong> delivery across heterogeneous internetworks. Logical IP addressing, Routing algorithms (Dijkstra, Distance Vector), Packetizing &amp; fragmentation.</td>
+          <td><strong>Logical IP Address</strong> (32/128-bit)<br><em>Routers, L3 Switches</em></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td><strong>Data Link</strong></td>
+          <td>Frame</td>
+          <td>Hop-to-hop <strong>Node-to-Node</strong> frame delivery. Framing (Bit/Byte stuffing), Physical MAC addressing, Flow control, Error control (CRC Trailer), Shared medium access control (CSMA/CD).</td>
+          <td><strong>Physical MAC Address</strong> (48-bit)<br><em>Bridges, L2 Switches, NIC</em></td>
+        </tr>
+        <tr>
+          <td><strong>1</strong></td>
+          <td><strong>Physical</strong></td>
+          <td>Bits</td>
+          <td>Transmission of raw binary stream (0s and 1s) over physical media. Voltage levels, Bit duration, Line coding (Manchester/NRZ), Transmission mode (Simplex/Duplex), Pinouts (RJ-45).</td>
+          <td>Signal Voltages, Optical pulses<br><em>Repeaters, Hubs, Modems</em></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Section 2: Encapsulation & Delivery Scopes -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header green">2. Encapsulation &amp; Trailer T2 Anatomy</div>
+        <ul class="dense">
+          <li><strong>Encapsulation (Top-to-Bottom):</strong> Har layer apna protocol header append karti hai ($H_7 	o H_6 	o H_5 	o H_4 	o H_3 	o H_2$).</li>
+          <li><strong>Unique DLL Trailer ($T_2$):</strong> Data link layer akeli layer hai jo Header ($H_2$) ke sath <strong>Trailer ($T_2$)</strong> bhi append karti hai.</li>
+          <li>$T_2$ carries <strong>CRC Checksum</strong> hardware bit-error detection ke liye!</li>
+          <li><strong>Decapsulation (Bottom-to-Top):</strong> Receiving host par headers inspect aur strip hote hain.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header purple">3. The 3 Distinct Delivery Scopes (AKTU Must-Know)</div>
+        <ul class="dense">
+          <li><strong>1. Hop-to-Hop (Data Link Layer):</strong> Frame ko ek router/switch se agle adjacent router tak move karta hai using <strong>MAC Addresses</strong>. MAC changes at every hop!</li>
+          <li><strong>2. Host-to-Host (Network Layer):</strong> Packet ko source host computer se destination host tak deliver karta hai using <strong>IP Addresses</strong>. IP stays constant end-to-end!</li>
+          <li><strong>3. Process-to-Process (Transport Layer):</strong> Packet ko computer ke exact running application (e.g. Chrome tab) tak deliver karta hai using <strong>Port Numbers</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 3: TCP/IP vs OSI Comparison Matrix -->
+    <div class="card" style="margin-bottom:4px;">
+      <div class="card-header amber">4. Master 10-Point Comparison: OSI Model vs TCP/IP Protocol Suite</div>
+      <table class="dense">
+        <tr><th>Comparison Dimension</th><th>OSI Reference Model</th><th>TCP/IP Protocol Suite</th></tr>
+        <tr><td><strong>Origin &amp; Design Goal</strong></td><td>ISO standard (1984); Conceptual theoretical reference model.</td><td>ARPANET / DoD (1970s); Practical implementation for working network.</td></tr>
+        <tr><td><strong>Layer Architecture</strong></td><td>Strictly <strong>7 Layers</strong>.</td><td><strong>4 Layers</strong> (Network Access, Internet, Transport, Application).</td></tr>
+        <tr><td><strong>Protocol vs Service Separation</strong></td><td>Clear, strict separation (Service, Interface, Protocol).</td><td>Loose separation; Layers are built around specific protocols.</td></tr>
+        <tr><td><strong>Network Layer Service</strong></td><td>Supports both <strong>Connection-Oriented &amp; Connectionless</strong>.</td><td>Strictly <strong>Connectionless</strong> (Internet Protocol - IP datagrams).</td></tr>
+        <tr><td><strong>Transport Layer Service</strong></td><td>Strictly <strong>Connection-Oriented</strong>.</td><td>Supports both <strong>Connection-Oriented (TCP) &amp; Connectionless (UDP)</strong>.</td></tr>
+        <tr><td><strong>Session &amp; Presentation Layers</strong></td><td>Separate dedicated layers with distinct protocols.</td><td>No separate layers; Functions handled inside Application layer.</td></tr>
+        <tr><td><strong>Protocol Independence</strong></td><td>Protocols easily replaceable; Model developed before protocols.</td><td>Protocols tightly coupled; Hard to replace IP or TCP.</td></tr>
+        <tr><td><strong>Global Commercial Dominance</strong></td><td>Never gained widespread commercial adoption.</td><td><strong>Universal standard powering the entire global Internet!</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- Section 4: 4 Addressing Levels -->
+    <div class="card">
+      <div class="card-header red">5. 4 Levels of Network Addressing in TCP/IP</div>
+      <div class="grid-2">
+        <div>
+          <ul class="dense">
+            <li><strong>Physical (MAC) Address:</strong> 48-bit (6 Bytes). Hexadecimal format: <code>00:1A:2B:3C:4D:5E</code>. First 24 bits = OUI (Vendor ID); Last 24 bits = NIC Serial. Burned into hardware.</li>
+            <li><strong>Logical (IP) Address:</strong> Universal host identifier across subnets. IPv4 = 32-bit (4 Bytes dotted-decimal <code>192.168.1.1</code>); IPv6 = 128-bit (16 Bytes hex).</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="dense">
+            <li><strong>Port Address:</strong> 16-bit integer (0 to 65,535). Well-known: 0-1023 (HTTP 80, HTTPS 443, DNS 53, SSH 22). Registered: 1024-49151. Dynamic: 49152-65535.</li>
+            <li><strong>Specific / Application Address:</strong> User-friendly URLs (<code>www.aktu.ac.in</code>) and emails. DNS resolves URL $	o$ IP.</li>
+          </ul>
+          <div class="formula-box"><strong>Socket Address</strong> = IP Address : Port Number (e.g. 192.168.1.10 : 8080)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Computer Networks (BCS603) — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Page 2 of 3: OSI 7 Layers, TCP/IP Suite &amp; Addressing Hierarchy</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 3: PHYSICAL LAYER, CAPACITY, PERFORMANCE & DEVICES ================= -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <span class="header-title">COMPUTER NETWORKS — UNIT 1: QUICK REVISION SHEET</span>
+        <span class="header-sub"> | Physical Layer, Capacity Formulas, Delays, Line Coding &amp; Devices</span>
+      </div>
+      <span class="page-tag">PAGE 3 OF 3</span>
+    </div>
+
+    <!-- Section 1: Impairments & Channel Capacity -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header red">1. Transmission Impairments &amp; Decibels</div>
+        <ul class="dense">
+          <li><strong>Attenuation:</strong> Loss of energy over distance. Solved by Amplifiers/Repeaters.
+            <div class="formula-box">dB = 10 log₁₀(P₂ / P₁) | dB = 20 log₁₀(V₂ / V₁)</div>
+            Power halved $\implies -3	ext{ dB}$. Multi-stage: $	ext{dB}_{	ext{total}} = 	ext{dB}_1 + 	ext{dB}_2$.
+          </li>
+          <li><strong>Distortion:</strong> Phase shift in composite signals (frequencies travel at different velocities).</li>
+          <li><strong>Noise:</strong> Thermal ($kTB$), Induced, Crosstalk (wire coupling), Impulse (lightning spikes).
+            <div class="formula-box">SNR = P_signal / P_noise | SNR_dB = 10 log₁₀(SNR)</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header green">2. Nyquist vs Shannon Channel Capacity</div>
+        <ul class="dense">
+          <li><strong>Nyquist (Noiseless Ideal Channel):</strong>
+            <div class="formula-box">C = 2 · B · log₂(M) bps | Baud = 2 · B</div>
+            $B$ = Bandwidth (Hz), $M$ = Discrete signal voltage levels.
+          </li>
+          <li><strong>Shannon (Noisy Real-World Channel):</strong>
+            <div class="formula-box">C = B · log₂(1 + SNR) bps (Absolute Physical Ceiling!)</div>
+            Linear SNR $= 10^{	ext{SNR}_{	ext{dB}} / 10}$. If $B=3000	ext{ Hz}, 	ext{SNR}=31.62	ext{ dB} \implies C pprox 31.6	ext{ kbps}$.
+          </li>
+          <li><strong>Synthesis (Find M):</strong> $2B \log_2(M) \le C_{	ext{Shannon}} \implies M \le \sqrt{1 + 	ext{SNR}}$.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 2: Network Latency & BDP -->
+    <div class="card" style="margin-bottom:4px;">
+      <div class="card-header">3. Network Latency Breakdown (4 Delay Components) &amp; Performance Metrics</div>
+      <div class="grid-2">
+        <div>
+          <ul class="dense">
+            <li><strong>Transmission Delay:</strong> $T_t = rac{L}{B}$ (Packet Length $L$ / Bandwidth $B$). Independent of distance!</li>
+            <li><strong>Propagation Delay:</strong> $T_p = rac{d}{v}$ (Distance $d$ / Wave velocity $v pprox 2 	imes 10^8	ext{ m/s}$). Independent of packet size!</li>
+            <li><strong>Queuing Delay ($T_q$):</strong> Time waiting in intermediate router buffer queues.</li>
+            <li><strong>Processing Delay ($T_{	ext{proc}}$):</strong> Header inspection, CRC verify, route lookup.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="formula-box">Total Latency T = Tt + Tp + Tq + Tproc | RTT ≈ 2 · Tp + Tt</div>
+          <div class="formula-box">BDP (Bandwidth-Delay Product) = Bandwidth · Tp (Bits in Flight)</div>
+          <ul class="dense">
+            <li><strong>Throughput:</strong> Actual measured delivery rate ($\le 	ext{Bandwidth}$).</li>
+            <li><strong>Goodput:</strong> Application payload delivery rate (excludes headers).</li>
+            <li><strong>Jitter:</strong> Delay variance between successive arriving packets.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Line Coding Schemes -->
+    <div class="card" style="margin-bottom:4px;">
+      <div class="card-header amber">4. Digital Transmission &amp; Line Coding Schemes (Bit Stream: 0 1 0 0 1 1 1 0)</div>
+      <table class="dense">
+        <tr><th>Scheme</th><th>Rule for Bit '0'</th><th>Rule for Bit '1'</th><th>Self-Sync</th><th>DC Component</th></tr>
+        <tr><td><strong>Polar NRZ-L</strong></td><td>High Voltage ($+V$)</td><td>Low Voltage ($-V$)</td><td>Poor on runs</td><td>Moderate</td></tr>
+        <tr><td><strong>Polar NRZ-I</strong></td><td>No change (Stay at current level)</td><td><strong>Inversion</strong> at start of interval</td><td>Syncs on 1s only</td><td>Moderate</td></tr>
+        <tr><td><strong>Polar RZ</strong></td><td>Negative ($-V$) returns to $0	ext{ V}$ at mid-bit</td><td>Positive ($+V$) returns to $0	ext{ V}$ at mid-bit</td><td>Good</td><td>None</td></tr>
+        <tr><td><strong>Manchester (802.3)</strong></td><td><strong>High-to-Low transition (↓)</strong> at mid-bit</td><td><strong>Low-to-High transition (↑)</strong> at mid-bit</td><td><strong>Perfect (Every bit)</strong></td><td><strong>Zero (None)</strong></td></tr>
+        <tr><td><strong>Diff Manchester</strong></td><td>Transition at START of bit interval</td><td>NO transition at start of bit interval</td><td><strong>Perfect (Mid-bit)</strong></td><td><strong>Zero (None)</strong></td></tr>
+        <tr><td><strong>Bipolar AMI</strong></td><td>Zero Voltage ($0	ext{ V}$)</td><td><strong>Alternating</strong> $+V$ and $-V$ pulses</td><td>Syncs on 1s only</td><td><strong>Zero (None)</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- Section 4: Switching & Hardware Devices -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header purple">5. Switching Techniques Compared</div>
+        <ul class="dense">
+          <li><strong>Circuit Switching:</strong> Dedicated physical path. 3 Phases (Setup $	o$ Data $	o$ Teardown). Zero queuing delay, but bandwidth wasted during silence. (PSTN Telephone).</li>
+          <li><strong>Message Switching:</strong> Entire message stored and forwarded at every node. Huge hard drive buffers required. High delay. (Telegraph).</li>
+          <li><strong>Packet Switching:</strong> Small packets (MTU). Statistical multiplexing, concurrent pipelining.
+            <ul class="dense">
+              <li><em>Datagram (Connectionless):</em> Packets routed independently; can arrive out-of-order; robust. (IP).</li>
+              <li><em>Virtual Circuit (Connection-oriented):</em> Pre-planned path (SVC/PVC); in-order arrival; uses VCI. (ATM).</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">6. Network Devices &amp; Domain Separation Matrix</div>
+        <table class="dense">
+          <tr><th>Device</th><th>Layer</th><th>Collision Domain</th><th>Broadcast Domain</th></tr>
+          <tr><td><strong>Repeater / Hub</strong></td><td>L1 Physical</td><td>1 (Single shared pool)</td><td>1 (Floods all)</td></tr>
+          <tr><td><strong>Bridge / Switch</strong></td><td>L2 Data Link</td><td><strong>N (1 per port)</strong></td><td>1 (Floods broadcast)</td></tr>
+          <tr><td><strong>Router</strong></td><td>L3 Network</td><td><strong>N (1 per port)</strong></td><td><strong>N (Blocks broadcast)</strong></td></tr>
+          <tr><td><strong>Gateway</strong></td><td>L4-7 All</td><td>Separate</td><td>Separate</td></tr>
+        </table>
+        <div style="font-size:6.3pt; color:#475569; margin-top:2px;">
+          <strong>Golden Rule:</strong> Switches break Collision Domains. Routers break BOTH Collision and Broadcast Domains!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Computer Networks (BCS603) — Dr. Nidhi Parashar / Gateway Classes Notes</span>
+    <span>Page 3 of 3: Physical Layer, Capacity, Latency, Line Coding &amp; Devices</span>
+  </div>
+</div>
+
+</body>
+</html>

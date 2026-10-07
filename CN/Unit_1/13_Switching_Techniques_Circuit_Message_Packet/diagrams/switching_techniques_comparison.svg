@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 430" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cirGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+    <linearGradient id="msgGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9a3412"/><stop offset="100%" stop-color="#f97316"/></linearGradient>
+    <linearGradient id="pktGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#065f46"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="430" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Comparative Switching Paradigms: Circuit vs Message vs Packet Switching</text>
+
+  <!-- Column 1: Circuit Switching -->
+  <rect x="35" y="55" width="245" height="235" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="245" height="26" rx="6" fill="url(#cirGrad)"/>
+  <text x="157" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">1. Circuit Switching</text>
+
+  <rect x="45" y="90" width="225" height="50" rx="3" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="157" y="108" fill="#1e3a8a" font-size="9.5" font-weight="bold" text-anchor="middle">Dedicated End-to-End Physical Path</text>
+  <text x="157" y="125" fill="#475569" font-size="8.5" text-anchor="middle">Phase 1: Setup → Phase 2: Data → Phase 3: Teardown</text>
+
+  <text x="45" y="156" fill="#0f172a" font-size="9" font-weight="bold">• Guaranteed Bandwidth &amp; Zero Queuing Delay.</text>
+  <text x="45" y="172" fill="#334155" font-size="8.5">• Fixed continuous data transfer.</text>
+  <text x="45" y="188" fill="#dc2626" font-size="8.5" font-weight="bold">• Inefficient: Wastes bandwidth during silence.</text>
+  <text x="45" y="204" fill="#334155" font-size="8.5">• High setup connection delay upfront.</text>
+  <text x="45" y="220" fill="#334155" font-size="8.5">• E.g., Traditional PSTN Landline Telephone.</text>
+  <text x="45" y="240" fill="#1e40af" font-size="8.5" font-weight="bold">Space-division (Crossbar) / Time-division (TSI)</text>
+
+  <!-- Column 2: Message Switching -->
+  <rect x="302" y="55" width="245" height="235" rx="6" fill="#ffffff" stroke="#f97316" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="302" y="55" width="245" height="26" rx="6" fill="url(#msgGrad)"/>
+  <text x="424" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">2. Message Switching</text>
+
+  <rect x="312" y="90" width="225" height="50" rx="3" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="424" y="108" fill="#9a3412" font-size="9.5" font-weight="bold" text-anchor="middle">Store-and-Forward (Entire Message)</text>
+  <text x="424" y="125" fill="#475569" font-size="8.5" text-anchor="middle">Entire file stored at each router before forwarding</text>
+
+  <text x="312" y="156" fill="#0f172a" font-size="9" font-weight="bold">• No dedicated path required.</text>
+  <text x="312" y="172" fill="#334155" font-size="8.5">• Dynamic routing based on intermediate load.</text>
+  <text x="312" y="188" fill="#dc2626" font-size="8.5" font-weight="bold">• Huge intermediate hard disk buffers required.</text>
+  <text x="312" y="204" fill="#334155" font-size="8.5">• Incompatible with real-time interactive voice/video.</text>
+  <text x="312" y="220" fill="#334155" font-size="8.5">• E.g., Telegraph networks, Telegram, Old Email.</text>
+  <text x="312" y="240" fill="#b45309" font-size="8.5" font-weight="bold">Obsolete for real-time computer networks</text>
+
+  <!-- Column 3: Packet Switching -->
+  <rect x="570" y="55" width="245" height="235" rx="6" fill="#ffffff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="570" y="55" width="245" height="26" rx="6" fill="url(#pktGrad)"/>
+  <text x="692" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">3. Packet Switching</text>
+
+  <rect x="580" y="90" width="225" height="50" rx="3" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="692" y="108" fill="#065f46" font-size="9.5" font-weight="bold" text-anchor="middle">Store-and-Forward (Small Packets)</text>
+  <text x="692" y="125" fill="#475569" font-size="8.5" text-anchor="middle">Message divided into bounded packets (MTU)</text>
+
+  <text x="580" y="156" fill="#0f172a" font-size="9" font-weight="bold">• Pipelining effect drastically lowers overall delay!</text>
+  <text x="580" y="172" fill="#334155" font-size="8.5">• Small RAM buffer requirements in routers.</text>
+  <text x="580" y="188" fill="#059669" font-size="8.5" font-weight="bold">• Maximum channel bandwidth efficiency.</text>
+  <text x="580" y="204" fill="#334155" font-size="8.5">• Two approaches:</text>
+  <text x="590" y="220" fill="#065f46" font-size="8.5">• A. Datagram (Connectionless - IP)</text>
+  <text x="590" y="235" fill="#065f46" font-size="8.5">• B. Virtual Circuit (Connection-oriented - ATM/X.25)</text>
+
+  <!-- Bottom Comparison: Datagram vs Virtual Circuit -->
+  <rect x="35" y="300" width="780" height="115" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="300" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="316" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Packet Switching Sub-Types: Datagram Approach vs Virtual Circuit (VC) Approach</text>
+
+  <rect x="45" y="332" width="365" height="72" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="227" y="348" fill="#1e3a8a" font-size="10" font-weight="bold" text-anchor="middle">Datagram Approach (Connectionless)</text>
+  <text x="55" y="364" fill="#334155" font-size="8.5">• Each packet is treated completely independently.</text>
+  <text x="55" y="378" fill="#334155" font-size="8.5">• Packets may follow different routes and arrive out-of-order.</text>
+  <text x="55" y="392" fill="#334155" font-size="8.5">• Full source &amp; destination IP in every header. Robust against node crashes.</text>
+
+  <rect x="430" y="332" width="375" height="72" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="617" y="348" fill="#065f46" font-size="10" font-weight="bold" text-anchor="middle">Virtual Circuit Approach (Connection-Oriented)</text>
+  <text x="440" y="364" fill="#334155" font-size="8.5">• Pre-planned route determined during setup phase before data flows.</text>
+  <text x="440" y="378" fill="#334155" font-size="8.5">• All packets follow same route and arrive strictly in-order.</text>
+  <text x="440" y="392" fill="#334155" font-size="8.5">• Uses short VCI (Virtual Circuit ID). Vulnerable to intermediate router failure.</text>
+</svg>

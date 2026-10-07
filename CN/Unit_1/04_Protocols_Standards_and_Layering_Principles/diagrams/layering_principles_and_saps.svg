@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="layerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="sapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="850" height="420" fill="#f8fafc" rx="8"/>
+
+  <!-- Top Title -->
+  <rect x="25" y="12" width="800" height="36" rx="6" fill="#0f172a"/>
+  <text x="425" y="35" fill="#ffffff" font-size="15" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Network Architecture Principles: Layering, Services, Interfaces &amp; SAPs</text>
+
+  <!-- Left Side: Layering Architecture Model -->
+  <rect x="35" y="60" width="460" height="345" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="35" y="60" width="460" height="26" rx="6" fill="#1e3a8a"/>
+  <text x="265" y="78" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Layered Architecture &amp; Service Interfaces</text>
+
+  <!-- Layer N+1 -->
+  <rect x="55" y="100" width="180" height="45" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="145" y="122" fill="#1e40af" font-size="11" font-weight="bold" text-anchor="middle">Layer (N + 1)</text>
+  <text x="145" y="136" fill="#475569" font-size="8.5" text-anchor="middle">Service User Node A</text>
+
+  <rect x="295" y="100" width="180" height="45" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="385" y="122" fill="#1e40af" font-size="11" font-weight="bold" text-anchor="middle">Layer (N + 1)</text>
+  <text x="385" y="136" fill="#475569" font-size="8.5" text-anchor="middle">Service User Node B</text>
+
+  <!-- Peer Protocol N+1 -->
+  <line x1="235" y1="122" x2="295" y2="122" stroke="#2563eb" stroke-width="2" stroke-dasharray="4"/>
+  <text x="265" y="116" fill="#2563eb" font-size="8" font-weight="bold" text-anchor="middle">Virtual Peer Protocol</text>
+
+  <!-- SAP Interfaces between N+1 and N -->
+  <circle cx="145" cy="162" r="10" fill="url(#sapGrad)"/>
+  <text x="145" y="165" fill="#ffffff" font-size="8" font-weight="bold" text-anchor="middle">SAP</text>
+  <text x="85" y="166" fill="#b45309" font-size="9" font-weight="bold">SAP (N)</text>
+
+  <circle cx="385" cy="162" r="10" fill="url(#sapGrad)"/>
+  <text x="385" y="165" fill="#ffffff" font-size="8" font-weight="bold" text-anchor="middle">SAP</text>
+  <text x="445" y="166" fill="#b45309" font-size="9" font-weight="bold">SAP (N)</text>
+
+  <line x1="145" y1="145" x2="145" y2="178" stroke="#f59e0b" stroke-width="2"/>
+  <line x1="385" y1="145" x2="385" y2="178" stroke="#f59e0b" stroke-width="2"/>
+
+  <!-- Layer N -->
+  <rect x="55" y="180" width="180" height="45" rx="5" fill="url(#layerGrad)" filter="url(#shadow)"/>
+  <text x="145" y="202" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Layer (N)</text>
+  <text x="145" y="216" fill="#bfdbfe" font-size="8.5" text-anchor="middle">Service Provider Node A</text>
+
+  <rect x="295" y="180" width="180" height="45" rx="5" fill="url(#layerGrad)" filter="url(#shadow)"/>
+  <text x="385" y="202" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Layer (N)</text>
+  <text x="385" y="216" fill="#bfdbfe" font-size="8.5" text-anchor="middle">Service Provider Node B</text>
+
+  <!-- Peer Protocol N -->
+  <line x1="235" y1="202" x2="295" y2="202" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4"/>
+  <text x="265" y="196" fill="#1e3a8a" font-size="8" font-weight="bold" text-anchor="middle">Layer N Protocol</text>
+
+  <!-- SAP Interfaces between N and N-1 -->
+  <circle cx="145" cy="242" r="10" fill="url(#sapGrad)"/>
+  <text x="145" y="245" fill="#ffffff" font-size="8" font-weight="bold" text-anchor="middle">SAP</text>
+  <circle cx="385" cy="242" r="10" fill="url(#sapGrad)"/>
+  <text x="385" y="245" fill="#ffffff" font-size="8" font-weight="bold" text-anchor="middle">SAP</text>
+
+  <line x1="145" y1="225" x2="145" y2="258" stroke="#f59e0b" stroke-width="2"/>
+  <line x1="385" y1="225" x2="385" y2="258" stroke="#f59e0b" stroke-width="2"/>
+
+  <!-- Layer N-1 -->
+  <rect x="55" y="260" width="180" height="45" rx="5" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="145" y="282" fill="#0f172a" font-size="11" font-weight="bold" text-anchor="middle">Layer (N - 1)</text>
+  <text x="145" y="296" fill="#475569" font-size="8.5" text-anchor="middle">Lower Service Layer</text>
+
+  <rect x="295" y="260" width="180" height="45" rx="5" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="385" y="282" fill="#0f172a" font-size="11" font-weight="bold" text-anchor="middle">Layer (N - 1)</text>
+  <text x="385" y="296" fill="#475569" font-size="8.5" text-anchor="middle">Lower Service Layer</text>
+
+  <!-- Physical Transmission Path -->
+  <path d="M 145 305 L 145 350 L 385 350 L 385 305" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="265" y="342" fill="#dc2626" font-size="9" font-weight="bold" text-anchor="middle">Actual Physical Bit Transmission Path</text>
+
+  <text x="265" y="380" fill="#475569" font-size="8.5" text-anchor="middle">Vertical Communication: Service Primitives (Request, Indication, Response, Confirm)</text>
+  <text x="265" y="394" fill="#1e3a8a" font-size="8.5" font-weight="bold" text-anchor="middle">Horizontal Communication: Virtual Peer Protocol between identical layers</text>
+
+  <!-- Right Side: 3 Elements of Protocol & Standards Organizations -->
+  <rect x="515" y="60" width="300" height="345" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="515" y="60" width="300" height="26" rx="6" fill="#065f46"/>
+  <text x="665" y="78" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">3 Elements of Protocol &amp; Standards</text>
+
+  <!-- 3 Protocol Key Elements -->
+  <rect x="525" y="95" width="280" height="42" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="535" y="112" fill="#065f46" font-size="10.5" font-weight="bold">1. Syntax (Structure / Format)</text>
+  <text x="535" y="128" fill="#475569" font-size="8.5">Data format, fields, byte order, header layout.</text>
+
+  <rect x="525" y="145" width="280" height="42" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="535" y="162" fill="#065f46" font-size="10.5" font-weight="bold">2. Semantics (Meaning of Bits)</text>
+  <text x="535" y="178" fill="#475569" font-size="8.5">Interpretation of control fields; action on error.</text>
+
+  <rect x="525" y="195" width="280" height="42" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="535" y="212" fill="#065f46" font-size="10.5" font-weight="bold">3. Timing (Speed &amp; Sequencing)</text>
+  <text x="535" y="228" fill="#475569" font-size="8.5">When data is sent and how fast (flow control).</text>
+
+  <!-- Standards Organizations -->
+  <text x="665" y="258" fill="#0f172a" font-size="10.5" font-weight="bold" text-anchor="middle">Key Standards Organizations</text>
+
+  <rect x="525" y="268" width="280" height="125" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="535" y="285" fill="#1e3a8a" font-size="9" font-weight="bold">• ISO:</text>
+  <text x="575" y="285" fill="#334155" font-size="8.5">Int'l Organization for Standardization (OSI)</text>
+  <text x="535" y="303" fill="#1e3a8a" font-size="9" font-weight="bold">• IEEE:</text>
+  <text x="575" y="303" fill="#334155" font-size="8.5">Institute of Electrical &amp; Electronics Engineers (802)</text>
+  <text x="535" y="321" fill="#1e3a8a" font-size="9" font-weight="bold">• ITU-T:</text>
+  <text x="575" y="321" fill="#334155" font-size="8.5">Telecom Standardization Sector (V-series, X-series)</text>
+  <text x="535" y="339" fill="#1e3a8a" font-size="9" font-weight="bold">• IETF:</text>
+  <text x="575" y="339" fill="#334155" font-size="8.5">Internet Engineering Task Force (RFCs)</text>
+  <text x="535" y="357" fill="#1e3a8a" font-size="9" font-weight="bold">• ANSI:</text>
+  <text x="575" y="357" fill="#334155" font-size="8.5">American National Standards Institute (ASCII)</text>
+  <text x="535" y="375" fill="#1e3a8a" font-size="9" font-weight="bold">• EIA/TIA:</text>
+  <text x="585" y="375" fill="#334155" font-size="8.5">Electronic Industries Alliance (RS-232, T568B)</text>
+</svg>

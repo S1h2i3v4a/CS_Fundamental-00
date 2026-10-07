@@ -50,3 +50,6 @@ CS_Fundamental-00/
 2. **100% Valid XML Vector SVGs:** Every single diagram is handcrafted vector XML with standard UTF-8 characters, eliminating image render failures on GitHub web and mobile.
 3. **Bilingual Hinglish Mastery:** Complex academic database and kernel concepts are presented in conversational Hinglish with real-world analogies, formal SQL/relational syntax, and solved university exam problems.
 4. **Standalone & Consolidated PDFs:** Headless Microsoft Edge compiles beautiful typography with printed tables and callout blocks for offline study.
+
+### 🌐 Computer Networks (CN) — AKTU BCS603
+- [**Unit 1: Introduction & Physical Layer**](CN/Unit_1) — 15 Modules, 15 Valid XML SVGs, [3-Page Revision Sheet](CN/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf), [Master Notes PDF](CN/Unit_1/Unit_1_Master_Notes.pdf) ✅

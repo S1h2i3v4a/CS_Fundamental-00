@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 430" width="100%" height="100%">
+  <defs>
+    <linearGradient id="guidedGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+    <linearGradient id="unguidGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#065f46"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="430" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Physical Transmission Media (Guided vs Unguided) &amp; Multiplexing (FDM, WDM, TDM)</text>
+
+  <!-- Left: Guided Media -->
+  <rect x="35" y="55" width="375" height="215" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="375" height="26" rx="6" fill="url(#guidedGrad)"/>
+  <text x="222" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">A. Guided Media (Wired Conduits)</text>
+
+  <!-- Twisted pair -->
+  <text x="45" y="98" fill="#1e3a8a" font-size="10" font-weight="bold">1. Twisted Pair (UTP / STP):</text>
+  <text x="45" y="112" fill="#475569" font-size="8.5">• Twisting cancels electromagnetic interference (EMI) &amp; crosstalk.</text>
+  <text x="45" y="124" fill="#475569" font-size="8.5">• Cat 5e (100 MHz, 1 Gbps), Cat 6 (250 MHz, 10 Gbps up to 55m). RJ-45.</text>
+
+  <!-- Coaxial -->
+  <text x="45" y="142" fill="#1e3a8a" font-size="10" font-weight="bold">2. Coaxial Cable:</text>
+  <text x="45" y="156" fill="#475569" font-size="8.5">• Center copper core, dielectric insulator, metallic braided shield, jacket.</text>
+  <text x="45" y="168" fill="#475569" font-size="8.5">• 50 Ω Baseband (digital), 75 Ω Broadband (analog cable TV). BNC connector.</text>
+
+  <!-- Optical fiber -->
+  <text x="45" y="186" fill="#1e3a8a" font-size="10" font-weight="bold">3. Optical Fiber (Glass / Silica):</text>
+  <text x="45" y="200" fill="#475569" font-size="8.5">• Total Internal Reflection (TIR): Core index n₁ &gt; Cladding index n₂.</text>
+  <text x="45" y="214" fill="#475569" font-size="8.5">• Single-mode (narrow core, laser, 100s km) vs Multi-mode (LED, short haul).</text>
+  <text x="45" y="228" fill="#059669" font-size="8.5" font-weight="bold">• Immense bandwidth, immune to EMI, zero spark hazard, lowest loss.</text>
+
+  <!-- Right: Unguided Media -->
+  <rect x="440" y="55" width="375" height="215" rx="6" fill="#ffffff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="55" width="375" height="26" rx="6" fill="url(#unguidGrad)"/>
+  <text x="627" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">B. Unguided Media (Wireless Propagation)</text>
+
+  <!-- Radio waves -->
+  <text x="450" y="98" fill="#065f46" font-size="10" font-weight="bold">1. Radio Waves (3 kHz to 1 GHz):</text>
+  <text x="450" y="112" fill="#475569" font-size="8.5">• Omnidirectional antenna (broadcasts in all directions).</text>
+  <text x="450" y="124" fill="#475569" font-size="8.5">• Penetrates walls &amp; buildings easily. FM Radio, AM, TV broadcast.</text>
+
+  <!-- Microwaves -->
+  <text x="450" y="142" fill="#065f46" font-size="10" font-weight="bold">2. Terrestrial &amp; Satellite Microwaves (1 to 300 GHz):</text>
+  <text x="450" y="156" fill="#475569" font-size="8.5">• Strictly Unidirectional line-of-sight propagation (dish antennas).</text>
+  <text x="450" y="168" fill="#475569" font-size="8.5">• Blocked by obstacles; requires repeater towers every 40-50 km.</text>
+  <text x="450" y="180" fill="#475569" font-size="8.5">• Geosynchronous Satellite uplink (6 GHz) &amp; downlink (4 GHz).</text>
+
+  <!-- Infrared -->
+  <text x="450" y="198" fill="#065f46" font-size="10" font-weight="bold">3. Infrared (300 GHz to 400 THz):</text>
+  <text x="450" y="212" fill="#475569" font-size="8.5">• Strictly Short-range closed-room line-of-sight.</text>
+  <text x="450" y="226" fill="#475569" font-size="8.5">• Cannot penetrate walls (high security). TV remotes, wireless mice.</text>
+
+  <!-- Bottom: Multiplexing Techniques (FDM, WDM, TDM) -->
+  <rect x="35" y="280" width="780" height="135" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="280" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="296" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Multiplexing: Combining Multiple Signals onto a Single Physical Channel</text>
+
+  <!-- FDM Box -->
+  <rect x="45" y="312" width="245" height="92" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="167" y="330" fill="#1e3a8a" font-size="10.5" font-weight="bold" text-anchor="middle">FDM (Frequency Division)</text>
+  <text x="55" y="348" fill="#475569" font-size="8.5">• Analog signals divided into frequency bands.</text>
+  <text x="55" y="362" fill="#475569" font-size="8.5">• Separated by Guard Bands to avoid overlap.</text>
+  <text x="55" y="376" fill="#475569" font-size="8.5">• E.g., Radio broadcast, Cable TV channels.</text>
+  <text x="55" y="392" fill="#1e40af" font-size="8" font-weight="bold">Channel bandwidth &gt;&gt; Signal bandwidth</text>
+
+  <!-- WDM Box -->
+  <rect x="302" y="312" width="245" height="92" rx="4" fill="#fdf2f8" stroke="#fbcfe8"/>
+  <text x="424" y="330" fill="#9d174d" font-size="10.5" font-weight="bold" text-anchor="middle">WDM (Wavelength Division)</text>
+  <text x="312" y="348" fill="#475569" font-size="8.5">• Optical equivalent of FDM for Fiber cables.</text>
+  <text x="312" y="362" fill="#475569" font-size="8.5">• Combines different wavelengths (colors of light).</text>
+  <text x="312" y="376" fill="#475569" font-size="8.5">• Multiplexer/Demultiplexer uses optical prism.</text>
+  <text x="312" y="392" fill="#9d174d" font-size="8" font-weight="bold">DWDM delivers Terabits/sec over 1 fiber!</text>
+
+  <!-- TDM Box -->
+  <rect x="560" y="312" width="245" height="92" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="682" y="330" fill="#065f46" font-size="10.5" font-weight="bold" text-anchor="middle">TDM (Time Division)</text>
+  <text x="570" y="348" fill="#475569" font-size="8.5">• Digital signals share full bandwidth in time slots.</text>
+  <text x="570" y="362" fill="#475569" font-size="8.5">• Synchronous TDM: Pre-allocated time slots.</text>
+  <text x="570" y="376" fill="#475569" font-size="8.5">• Statistical TDM: On-demand dynamic slots.</text>
+  <text x="570" y="392" fill="#059669" font-size="8" font-weight="bold">Eliminates wasted idle time slots!</text>
+</svg>

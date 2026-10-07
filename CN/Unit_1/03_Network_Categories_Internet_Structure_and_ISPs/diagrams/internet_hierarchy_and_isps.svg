@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tier1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+    <linearGradient id="tier2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="tier3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="ixpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9a3412"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="850" height="420" fill="#f8fafc" rx="8"/>
+
+  <!-- Top Title -->
+  <rect x="25" y="12" width="800" height="36" rx="6" fill="#0f172a"/>
+  <text x="425" y="35" fill="#ffffff" font-size="15" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Organization of the Global Internet &amp; 3-Tier ISP Architecture</text>
+
+  <!-- Left Side: Network Categories Distance Spectrum -->
+  <rect x="25" y="60" width="220" height="345" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="25" y="60" width="220" height="28" rx="6" fill="#334155"/>
+  <text x="135" y="79" fill="#ffffff" font-size="11" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Network Categories (Scale)</text>
+
+  <!-- PAN -->
+  <rect x="35" y="98" width="200" height="50" rx="4" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="45" y="116" fill="#1e40af" font-size="11" font-weight="bold">PAN (Personal Area)</text>
+  <text x="45" y="132" fill="#475569" font-size="9">Range: &lt; 10 meters (Bluetooth, Zigbee)</text>
+  <text x="45" y="143" fill="#64748b" font-size="8">E.g., Smartwatch, Wireless Earbuds</text>
+
+  <!-- LAN -->
+  <rect x="35" y="156" width="200" height="52" rx="4" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="45" y="174" fill="#166534" font-size="11" font-weight="bold">LAN (Local Area)</text>
+  <text x="45" y="190" fill="#475569" font-size="9">Range: Room to 1-2 km (Building/Campus)</text>
+  <text x="45" y="202" fill="#64748b" font-size="8">E.g., College Lab, Wi-Fi 802.11, Ethernet</text>
+
+  <!-- MAN -->
+  <rect x="35" y="216" width="200" height="52" rx="4" fill="#fefce8" stroke="#fde047"/>
+  <text x="45" y="234" fill="#854d0e" font-size="11" font-weight="bold">MAN (Metropolitan Area)</text>
+  <text x="45" y="250" fill="#475569" font-size="9">Range: 5 km - 50 km (City Wide)</text>
+  <text x="45" y="262" fill="#64748b" font-size="8">E.g., Cable TV Network, Municipal Fiber</text>
+
+  <!-- WAN -->
+  <rect x="35" y="276" width="200" height="60" rx="4" fill="#fdf2f8" stroke="#f472b6"/>
+  <text x="45" y="294" fill="#9d174d" font-size="11" font-weight="bold">WAN (Wide Area)</text>
+  <text x="45" y="310" fill="#475569" font-size="9">Range: Country / Worldwide (&gt; 100 km)</text>
+  <text x="45" y="322" fill="#64748b" font-size="8">E.g., Global Internet, Leased Fiber Backbones</text>
+
+  <rect x="35" y="344" width="200" height="50" rx="4" fill="#f1f5f9"/>
+  <text x="135" y="362" fill="#0f172a" font-size="9" font-weight="bold" text-anchor="middle">WLAN (Wireless LAN)</text>
+  <text x="135" y="377" fill="#475569" font-size="8" text-anchor="middle">IEEE 802.11 Wi-Fi (RF Spread Spectrum)</text>
+
+  <!-- Right Side: 3-Tier ISP Architecture -->
+  <rect x="260" y="60" width="565" height="345" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+
+  <!-- Tier 1 National / International Backbone -->
+  <rect x="280" y="75" width="525" height="65" rx="6" fill="url(#tier1Grad)" filter="url(#shadow)"/>
+  <text x="542" y="98" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">Tier 1 ISPs (National / Global Backbone Providers)</text>
+  <text x="542" y="116" fill="#c7d2fe" font-size="9.5" text-anchor="middle">Global Transoceanic Optical Fiber • Zero Transit Fees • Free Peering Agreements</text>
+  <text x="542" y="130" fill="#a5b4fc" font-size="8.5" text-anchor="middle">E.g., AT&amp;T, Lumen, Tata Communications, Verizon, NTT</text>
+
+  <!-- Peering / IXP Exchange Bar -->
+  <rect x="350" y="152" width="385" height="28" rx="4" fill="url(#ixpGrad)"/>
+  <text x="542" y="170" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">IXP (Internet Exchange Points) &amp; Private Peering Links</text>
+
+  <!-- Tier 2 Regional ISPs -->
+  <rect x="280" y="192" width="250" height="70" rx="6" fill="url(#tier2Grad)" filter="url(#shadow)"/>
+  <text x="405" y="214" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">Tier 2 ISP (Regional)</text>
+  <text x="405" y="230" fill="#bfdbfe" font-size="8.5" text-anchor="middle">Buys Transit from Tier 1</text>
+  <text x="405" y="244" fill="#ffffff" font-size="8" text-anchor="middle">Peers with other Tier 2 at IXPs</text>
+
+  <rect x="555" y="192" width="250" height="70" rx="6" fill="url(#tier2Grad)" filter="url(#shadow)"/>
+  <text x="680" y="214" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">Tier 2 ISP (Regional)</text>
+  <text x="680" y="230" fill="#bfdbfe" font-size="8.5" text-anchor="middle">State / Multi-City Coverage</text>
+  <text x="680" y="244" fill="#ffffff" font-size="8" text-anchor="middle">E.g., Jio, Airtel, Vodafone Idea</text>
+
+  <!-- Tier 3 Local Access Providers -->
+  <rect x="280" y="295" width="165" height="60" rx="5" fill="url(#tier3Grad)"/>
+  <text x="362" y="315" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Tier 3 (Local ISP)</text>
+  <text x="362" y="330" fill="#a7f3d0" font-size="8" text-anchor="middle">Retail Last-Mile Provider</text>
+  <text x="362" y="342" fill="#ffffff" font-size="8" text-anchor="middle">Hathway, ACT Fibernet</text>
+
+  <rect x="460" y="295" width="165" height="60" rx="5" fill="url(#tier3Grad)"/>
+  <text x="542" y="315" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Tier 3 (Local ISP)</text>
+  <text x="542" y="330" fill="#a7f3d0" font-size="8" text-anchor="middle">Fiber to the Home (FTTH)</text>
+  <text x="542" y="342" fill="#ffffff" font-size="8" text-anchor="middle">Local Cable Broadband</text>
+
+  <rect x="640" y="295" width="165" height="60" rx="5" fill="url(#tier3Grad)"/>
+  <text x="722" y="315" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Enterprise Customer</text>
+  <text x="722" y="330" fill="#a7f3d0" font-size="8" text-anchor="middle">Direct Leased Lines</text>
+  <text x="722" y="342" fill="#ffffff" font-size="8" text-anchor="middle">Universities / Tech Parks</text>
+
+  <!-- End Users -->
+  <rect x="280" y="368" width="525" height="26" rx="4" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="542" y="385" fill="#0f172a" font-size="9" font-weight="bold" text-anchor="middle">Residential End Users / Mobile Smartphones / IoT Endpoints (POP Access)</text>
+
+  <!-- Connecting Lines -->
+  <line x1="405" y1="140" x2="405" y2="192" stroke="#2563eb" stroke-width="2"/>
+  <line x1="680" y1="140" x2="680" y2="192" stroke="#2563eb" stroke-width="2"/>
+  <line x1="362" y1="262" x2="362" y2="295" stroke="#059669" stroke-width="2"/>
+  <line x1="542" y1="262" x2="542" y2="295" stroke="#059669" stroke-width="2"/>
+  <line x1="680" y1="262" x2="722" y2="295" stroke="#059669" stroke-width="2"/>
+</svg>

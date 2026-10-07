@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 1: Digital Transmission & Line Coding Techniques</title>
+<style>
+
+@page {
+  size: A4 portrait;
+  margin: 12mm 15mm 15mm 15mm;
+}
+* {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1e293b;
+  background-color: #ffffff;
+  line-height: 1.5;
+  font-size: 9.5pt;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  color: #0f172a;
+  font-size: 18pt;
+  font-weight: 800;
+  border-bottom: 2.5px solid #2563eb;
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+h2 {
+  color: #1e3a8a;
+  font-size: 13pt;
+  font-weight: 700;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 3px;
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+h3 {
+  color: #0f172a;
+  font-size: 10.5pt;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+p, li {
+  color: #334155;
+  margin-top: 3px;
+  margin-bottom: 6px;
+}
+ul, ol {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 3px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 8.5pt;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 5px 8px;
+  text-align: left;
+}
+th {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-weight: 700;
+}
+tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+.box-tip {
+  background-color: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.box-warn {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.box-highlight {
+  background-color: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.diagram-container {
+  text-align: center;
+  margin: 14px 0;
+  page-break-inside: avoid;
+}
+.diagram-container svg {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+</style>
+</head>
+<body>
+
+<h1>Module 11: Digital Transmission &amp; Line Coding Techniques</h1>
+<p><strong>AKTU BCS603 Exam Mandatory:</strong> Comprehensive waveform generation, transition rules, DC component elimination, and comparative analysis of Line Coding techniques.</p>
+
+<div class="diagram-container">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="440" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Line Coding Waveforms for Bit Stream: 0 1 0 0 1 1 1 0 (AKTU PYQ)</text>
+
+  <!-- Bit Column Header Coordinates: 8 bits across width 560 (70px per bit) starting at x=220 -->
+  <!-- Bit labels -->
+  <rect x="220" y="52" width="580" height="25" rx="3" fill="#e2e8f0"/>
+  <text x="255" y="69" fill="#0f172a" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">0</text>
+  <text x="325" y="69" fill="#0f172a" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">1</text>
+  <text x="395" y="69" fill="#0f172a" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">0</text>
+  <text x="465" y="69" fill="#0f172a" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">0</text>
+  <text x="535" y="69" fill="#0f172a" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">1</text>
+  <text x="605" y="69" fill="#0f172a" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">1</text>
+  <text x="675" y="69" fill="#0f172a" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">1</text>
+  <text x="745" y="69" fill="#0f172a" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">0</text>
+
+  <!-- Vertical grid guidelines -->
+  <line x1="220" y1="52" x2="220" y2="420" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2"/>
+  <line x1="290" y1="52" x2="290" y2="420" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2"/>
+  <line x1="360" y1="52" x2="360" y2="420" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2"/>
+  <line x1="430" y1="52" x2="430" y2="420" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2"/>
+  <line x1="500" y1="52" x2="500" y2="420" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2"/>
+  <line x1="570" y1="52" x2="570" y2="420" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2"/>
+  <line x1="640" y1="52" x2="640" y2="420" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2"/>
+  <line x1="710" y1="52" x2="710" y2="420" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2"/>
+  <line x1="780" y1="52" x2="780" y2="420" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2"/>
+
+  <!-- Scheme 1: NRZ-L (Polar) -->
+  <!-- 0 = +V, 1 = -V (or 0=low, 1=high in unipolar; standard polar NRZ-L: 0=High, 1=Low) -->
+  <text x="35" y="105" fill="#1e3a8a" font-size="11" font-weight="bold">1. Polar NRZ-L</text>
+  <text x="35" y="118" fill="#64748b" font-size="8.5">(0: High +V, 1: Low -V)</text>
+  <!-- 0: high(220-290, y=92), 1: low(290-360, y=116), 0: high(360-430), 0: high(430-500), 1: low(500-570), 1: low(570-640), 1: low(640-710), 0: high(710-780) -->
+  <path d="M 220 92 L 290 92 L 290 116 L 360 116 L 360 92 L 500 92 L 500 116 L 710 116 L 710 92 L 780 92" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+
+  <!-- Scheme 2: NRZ-I (Invert on 1, No change on 0) -->
+  <text x="35" y="155" fill="#065f46" font-size="11" font-weight="bold">2. Polar NRZ-I</text>
+  <text x="35" y="168" fill="#64748b" font-size="8.5">(Inversion at beginning of 1)</text>
+  <!-- Init High. Bit 0: stay High (220-290). Bit 1: invert to Low (290-360). Bit 0: stay Low (360-430). Bit 0: stay Low (430-500). Bit 1: invert to High (500-570). Bit 1: invert to Low (570-640). Bit 1: invert to High (640-710). Bit 0: stay High (710-780). -->
+  <path d="M 220 142 L 290 142 L 290 166 L 500 166 L 500 142 L 570 142 L 570 166 L 640 166 L 640 142 L 780 142" fill="none" stroke="#10b981" stroke-width="2.5"/>
+
+  <!-- Scheme 3: RZ (Return to Zero) -->
+  <text x="35" y="205" fill="#92400e" font-size="11" font-weight="bold">3. Polar RZ</text>
+  <text x="35" y="218" fill="#64748b" font-size="8.5">(Mid-bit return to 0V)</text>
+  <!-- 0: -V then 0V. 1: +V then 0V. mid-points at 255, 325, 395, 465, 535, 605, 675, 745. levels: +V=192, 0=204, -V=216 -->
+  <path d="M 220 216 L 255 216 L 255 204 L 290 204 L 290 192 L 325 192 L 325 204 L 360 204 L 360 216 L 395 216 L 395 204 L 430 204 L 430 216 L 465 216 L 465 204 L 500 204 L 500 192 L 535 192 L 535 204 L 570 204 L 570 192 L 605 192 L 605 204 L 640 204 L 640 192 L 675 192 L 675 204 L 710 204 L 710 216 L 745 216 L 745 204 L 780 204" fill="none" stroke="#f59e0b" stroke-width="2"/>
+
+  <!-- Scheme 4: Manchester (IEEE 802.3) -->
+  <text x="35" y="255" fill="#581c87" font-size="11" font-weight="bold">4. Manchester (802.3)</text>
+  <text x="35" y="268" fill="#64748b" font-size="8.5">(0: High→Low, 1: Low→High)</text>
+  <!-- 0: H to L (220-255 H, 255-290 L). 1: L to H (290-325 L, 325-360 H). Levels: H=242, L=266 -->
+  <!-- 0: 220-255 H, 255-290 L. Then bit 1: 290-325 L, 325-360 H. Bit 0: 360-395 H, 395-430 L. Bit 0: 430-465 H, 465-500 L. Bit 1: 500-535 L, 535-570 H. Bit 1: 570-605 L, 605-640 H. Bit 1: 640-675 L, 675-710 H. Bit 0: 710-745 H, 745-780 L. -->
+  <path d="M 220 242 L 255 242 L 255 266 L 290 266 L 290 266 L 325 266 L 325 242 L 360 242 L 360 242 L 395 242 L 395 266 L 430 266 L 430 242 L 465 242 L 465 266 L 500 266 L 500 266 L 535 266 L 535 242 L 570 242 L 570 266 L 605 266 L 605 242 L 640 242 L 640 266 L 675 266 L 675 242 L 710 242 L 710 242 L 745 242 L 745 266 L 780 266" fill="none" stroke="#8b5cf6" stroke-width="2.5"/>
+
+  <!-- Scheme 5: Differential Manchester -->
+  <text x="35" y="305" fill="#be185d" font-size="11" font-weight="bold">5. Diff Manchester</text>
+  <text x="35" y="318" fill="#64748b" font-size="8.5">(0: Trans at start, 1: No trans)</text>
+  <!-- Always trans at mid-bit! Bit 0: transition at start. Bit 1: no transition at start. -->
+  <!-- Levels: H=292, L=316. Assume start H to L. -->
+  <path d="M 220 316 L 255 316 L 255 292 L 290 292 L 290 292 L 325 292 L 325 316 L 360 316 L 360 292 L 395 292 L 395 316 L 430 316 L 430 292 L 465 292 L 465 316 L 500 316 L 500 316 L 535 316 L 535 292 L 570 292 L 570 292 L 605 292 L 605 316 L 640 316 L 640 316 L 675 316 L 675 292 L 710 292 L 710 316 L 745 316 L 745 292 L 780 292" fill="none" stroke="#ec4899" stroke-width="2.5"/>
+
+  <!-- Scheme 6: Bipolar AMI (Alternate Mark Inversion) -->
+  <text x="35" y="355" fill="#0f172a" font-size="11" font-weight="bold">6. Bipolar AMI</text>
+  <text x="35" y="368" fill="#64748b" font-size="8.5">(0: 0V, 1: Alternating ±V)</text>
+  <!-- Levels: +V=342, 0V=354, -V=366. Bits: 0, 1, 0, 0, 1, 1, 1, 0. -->
+  <!-- 0: 0V. 1st 1: +V. 0: 0V. 0: 0V. 2nd 1: -V. 3rd 1: +V. 4th 1: -V. 0: 0V. -->
+  <path d="M 220 354 L 290 354 L 290 342 L 360 342 L 360 354 L 500 354 L 500 366 L 570 366 L 570 342 L 640 342 L 640 366 L 710 366 L 710 354 L 780 354" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+
+  <!-- Bottom Legend Bar -->
+  <rect x="25" y="390" width="800" height="38" rx="4" fill="#0f172a"/>
+  <text x="425" y="413" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">Self-Synchronization: Manchester &amp; Differential Manchester have mid-bit transitions for every single bit (Zero DC Component!)</text>
+</svg>
+</div>
+
+<h2>1. Line Coding Schemes Comparison Matrix</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Scheme</th>
+      <th>Baud Rate (S)</th>
+      <th>DC Component</th>
+      <th>Self-Sync Capability</th>
+      <th>Primary Practical Application</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Unipolar NRZ</strong></td>
+      <td><code>N / 2</code></td>
+      <td>Heavy (Undesirable)</td>
+      <td>None on consecutive bits</td>
+      <td>Obsolete legacy links</td>
+    </tr>
+    <tr>
+      <td><strong>Polar NRZ-L</strong></td>
+      <td><code>N / 2</code></td>
+      <td>Low to Moderate</td>
+      <td>None during long identical runs</td>
+      <td>RS-232 serial interfaces</td>
+    </tr>
+    <tr>
+      <td><strong>Polar NRZ-I</strong></td>
+      <td><code>N / 2</code></td>
+      <td>Low to Moderate</td>
+      <td>Syncs on 1s; loses sync on 0s</td>
+      <td>USB 2.0 (with bit stuffing)</td>
+    </tr>
+    <tr>
+      <td><strong>Manchester</strong></td>
+      <td><code>N</code> (Double)</td>
+      <td><strong>Zero (None)</strong></td>
+      <td><strong>Perfect (Mid-bit transition)</strong></td>
+      <td>Classic 10Base-T Ethernet</td>
+    </tr>
+    <tr>
+      <td><strong>Diff Manchester</strong></td>
+      <td><code>N</code> (Double)</td>
+      <td><strong>Zero (None)</strong></td>
+      <td><strong>Perfect (Mid-bit transition)</strong></td>
+      <td>Token Ring (IEEE 802.5)</td>
+    </tr>
+    <tr>
+      <td><strong>Bipolar AMI</strong></td>
+      <td><code>N / 2</code></td>
+      <td><strong>Zero (None)</strong></td>
+      <td>Syncs on 1s; loses sync on 0s</td>
+      <td>T1 / DS1 carrier telephone lines</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="box-warn">
+  <strong>AKTU Common Student Mistake:</strong> NRZ-I me transition sirf tab hota hai jab bit <strong>1</strong> aati hai! Agar bit 0 aati hai to signal bilkul change nahi hota. Is rule ko ulti mat draw karna!
+</div>
+
+</body>
+</html>

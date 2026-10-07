@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CN Unit 1: Network Performance Metrics & Latency Analysis</title>
+<style>
+
+@page {
+  size: A4 portrait;
+  margin: 12mm 15mm 15mm 15mm;
+}
+* {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1e293b;
+  background-color: #ffffff;
+  line-height: 1.5;
+  font-size: 9.5pt;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  color: #0f172a;
+  font-size: 18pt;
+  font-weight: 800;
+  border-bottom: 2.5px solid #2563eb;
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+h2 {
+  color: #1e3a8a;
+  font-size: 13pt;
+  font-weight: 700;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 3px;
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+h3 {
+  color: #0f172a;
+  font-size: 10.5pt;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+p, li {
+  color: #334155;
+  margin-top: 3px;
+  margin-bottom: 6px;
+}
+ul, ol {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 3px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 8.5pt;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 5px 8px;
+  text-align: left;
+}
+th {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-weight: 700;
+}
+tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+.box-tip {
+  background-color: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.box-warn {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.box-highlight {
+  background-color: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+}
+.diagram-container {
+  text-align: center;
+  margin: 14px 0;
+  page-break-inside: avoid;
+}
+.diagram-container svg {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+</style>
+</head>
+<body>
+
+<h1>Module 10: Network Performance Metrics &amp; Latency Analysis</h1>
+<p><strong>AKTU BCS603 Focus:</strong> Latency decomposition ($T_t$, $T_p$, $T_q$, $T_{proc}$), Bandwidth-Delay Product (BDP), Round Trip Time (RTT), and jitter.</p>
+
+<div class="diagram-container">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="delGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+    <linearGradient id="bdpGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#065f46"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="420" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Network Latency Breakdown: 4 Delay Components &amp; Bandwidth-Delay Product</text>
+
+  <!-- 4 Delays Row -->
+  <!-- Delay 1: Transmission Delay -->
+  <rect x="35" y="55" width="185" height="180" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="185" height="26" rx="6" fill="#2563eb"/>
+  <text x="127" y="73" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">1. Transmission Delay (Tt)</text>
+  <rect x="45" y="90" width="165" height="36" rx="3" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="127" y="112" fill="#1e3a8a" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Tt = L / B</text>
+  <text x="45" y="142" fill="#0f172a" font-size="8.5" font-weight="bold">• L = Packet Length (Bits)</text>
+  <text x="45" y="158" fill="#0f172a" font-size="8.5" font-weight="bold">• B = Bandwidth (bps)</text>
+  <text x="45" y="174" fill="#475569" font-size="8">• Time to push all packet bits onto the physical link.</text>
+  <text x="45" y="200" fill="#2563eb" font-size="8" font-weight="bold">Depends on Hardware / Card rate</text>
+  <text x="45" y="222" fill="#64748b" font-size="7.5">Zero distance dependency!</text>
+
+  <!-- Delay 2: Propagation Delay -->
+  <rect x="230" y="55" width="185" height="180" rx="6" fill="#ffffff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="230" y="55" width="185" height="26" rx="6" fill="#10b981"/>
+  <text x="322" y="73" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">2. Propagation Delay (Tp)</text>
+  <rect x="240" y="90" width="165" height="36" rx="3" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="322" y="112" fill="#065f46" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Tp = d / v</text>
+  <text x="240" y="142" fill="#0f172a" font-size="8.5" font-weight="bold">• d = Distance of cable (m)</text>
+  <text x="240" y="158" fill="#0f172a" font-size="8.5" font-weight="bold">• v = Velocity of propagation</text>
+  <text x="240" y="174" fill="#475569" font-size="8">• v ≈ 2 × 10⁸ m/s in copper/glass</text>
+  <text x="240" y="200" fill="#059669" font-size="8" font-weight="bold">Time for 1 bit to traverse wire</text>
+  <text x="240" y="222" fill="#64748b" font-size="7.5">Zero packet size dependency!</text>
+
+  <!-- Delay 3: Queuing Delay -->
+  <rect x="425" y="55" width="185" height="180" rx="6" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="425" y="55" width="185" height="26" rx="6" fill="#f59e0b"/>
+  <text x="517" y="73" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">3. Queuing Delay (Tq)</text>
+  <rect x="435" y="90" width="165" height="36" rx="3" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="517" y="112" fill="#92400e" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Tq = f(Traffic, Load)</text>
+  <text x="435" y="142" fill="#0f172a" font-size="8.5" font-weight="bold">• Buffer queue wait time</text>
+  <text x="435" y="158" fill="#475569" font-size="8">• Dynamic &amp; non-deterministic</text>
+  <text x="435" y="174" fill="#475569" font-size="8">• High load causes buffer overflow</text>
+  <text x="435" y="200" fill="#b45309" font-size="8" font-weight="bold">Leads to packet drops &amp; loss</text>
+  <text x="435" y="222" fill="#64748b" font-size="7.5">Solved by Active Queue Mgmt</text>
+
+  <!-- Delay 4: Processing Delay -->
+  <rect x="620" y="55" width="185" height="180" rx="6" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="620" y="55" width="185" height="26" rx="6" fill="#8b5cf6"/>
+  <text x="712" y="73" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">4. Processing Delay (Tproc)</text>
+  <rect x="630" y="90" width="165" height="36" rx="3" fill="#f5f3ff" stroke="#ddd6fe"/>
+  <text x="712" y="112" fill="#581c87" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Tproc = CPU Lookup</text>
+  <text x="630" y="142" fill="#0f172a" font-size="8.5" font-weight="bold">• Checksum validation</text>
+  <text x="630" y="158" fill="#475569" font-size="8">• Routing table FIB lookup</text>
+  <text x="630" y="174" fill="#475569" font-size="8">• Header decryption/inspection</text>
+  <text x="630" y="200" fill="#6b21a8" font-size="8" font-weight="bold">Microseconds in modern ASIC</text>
+  <text x="630" y="222" fill="#64748b" font-size="7.5">Hardware accelerated</text>
+
+  <!-- Bottom: Bandwidth-Delay Product (BDP) Pipe Model -->
+  <rect x="35" y="250" width="770" height="155" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="250" width="770" height="24" rx="6" fill="#065f46"/>
+  <text x="420" y="266" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Bandwidth-Delay Product (BDP): Volume of the Network "Pipe"</text>
+
+  <!-- Pipe Graphic -->
+  <rect x="60" y="285" width="380" height="40" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="250" y="310" fill="#065f46" font-size="11" font-weight="bold" text-anchor="middle">Network Pipe (Cross-section = Bandwidth B)</text>
+  <!-- Length d = Propagation Delay Tp -->
+  <line x1="60" y1="332" x2="440" y2="332" stroke="#047857" stroke-width="1.5"/>
+  <polygon points="60,330 52,332 60,334" fill="#047857"/>
+  <polygon points="440,330 448,332 440,334" fill="#047857"/>
+  <text x="250" y="344" fill="#047857" font-size="9" text-anchor="middle">Length = Propagation Delay (Tp)</text>
+
+  <!-- BDP Formula box -->
+  <rect x="465" y="282" width="320" height="110" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="625" y="302" fill="#065f46" font-size="11.5" font-weight="bold" font-family="monospace" text-anchor="middle">BDP = Bandwidth · Tp (Bits)</text>
+  <text x="475" y="322" fill="#334155" font-size="8.5">• BDP defines maximum bits "in flight" on the wire.</text>
+  <text x="475" y="338" fill="#334155" font-size="8.5">• Crucial for TCP Window Size tuning ($W \ge 2 	imes 	ext{BDP}$).</text>
+  <text x="475" y="354" fill="#0f172a" font-size="8.5" font-weight="bold">• Total Delay = Tt + Tp + Tq + Tproc</text>
+  <text x="475" y="370" fill="#1e3a8a" font-size="8.5" font-weight="bold">• RTT (Round Trip Time) ≈ 2 · Tp + Tt</text>
+  <text x="475" y="386" fill="#dc2626" font-size="8">Jitter: Delay variation between successive packets.</text>
+</svg>
+</div>
+
+<h2>1. Transmission Delay vs Propagation Delay (AKTU Favorite)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Transmission Delay ($T_t$)</th>
+      <th>Propagation Delay ($T_p$)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Core Formula</strong></td>
+      <td><code>Tt = L / B</code></td>
+      <td><code>Tp = d / v</code></td>
+    </tr>
+    <tr>
+      <td><strong>Governing Factors</strong></td>
+      <td>Packet Size ($L$) &amp; Link Bandwidth ($B$)</td>
+      <td>Cable Distance ($d$) &amp; Wave Speed ($v$)</td>
+    </tr>
+    <tr>
+      <td><strong>Analogous Meaning</strong></td>
+      <td>Kitni der me pura packet car parking se nikla</td>
+      <td>Car ko highway par chalne me kitna time laga</td>
+    </tr>
+    <tr>
+      <td><strong>Independent Of</strong></td>
+      <td>Distance between nodes</td>
+      <td>Packet size and transmission bit rate</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>2. Channel Parameter Ratio $a$</h2>
+<p>Data link layer protocols ki efficiency ratio $a$ par depend karti hai:</p>
+$$a = rac{T_p}{T_t} = rac{d \cdot B}{v \cdot L}$$
+<p>Agar $a \gg 1$ (High bandwidth, long distance jaise Satellite links), to Stop-and-Wait protocol extremely inefficient ho jata hai ($U pprox rac{1}{1 + 2a} 	o 0$).</p>
+
+<div class="box-tip">
+  <strong>AKTU Exam Tip:</strong> Numerical solve karte waqt bytes ko hamesha pehle bits me convert karein ($1	ext{ Byte} = 8	ext{ bits}$), aur Mega ($10^6$) ya Kilo ($10^3$) units ko standard SI units me convert karna na bhoolein!
+</div>
+
+</body>
+</html>

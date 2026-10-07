@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="attenGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#991b1b"/><stop offset="100%" stop-color="#ef4444"/></linearGradient>
+    <linearGradient id="distGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9a3412"/><stop offset="100%" stop-color="#f97316"/></linearGradient>
+    <linearGradient id="noiseGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="420" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Transmission Impairments in Physical Media: Attenuation, Distortion &amp; Noise</text>
+
+  <!-- Impairment 1: Attenuation -->
+  <rect x="35" y="55" width="245" height="230" rx="6" fill="#ffffff" stroke="#ef4444" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="245" height="26" rx="6" fill="url(#attenGrad)"/>
+  <text x="157" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">1. Attenuation (Loss of Energy)</text>
+
+  <!-- Attenuation Waveform -->
+  <path d="M 45 130 Q 60 95, 75 130 T 105 130" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="75" y="92" fill="#2563eb" font-size="8.5" text-anchor="middle">Original Signal</text>
+
+  <!-- Medium resistor / distance -->
+  <line x1="110" y1="130" x2="150" y2="130" stroke="#94a3b8" stroke-width="2" stroke-dasharray="3"/>
+
+  <path d="M 155 130 Q 170 115, 185 130 T 215 130" fill="none" stroke="#ef4444" stroke-width="2"/>
+  <text x="185" y="112" fill="#ef4444" font-size="8" text-anchor="middle">Attenuated Signal</text>
+
+  <!-- Amplifier Box -->
+  <polygon points="225,115 255,130 225,145" fill="#10b981"/>
+  <text x="240" y="158" fill="#047857" font-size="8" font-weight="bold" text-anchor="middle">Amp (+dB)</text>
+
+  <rect x="45" y="168" width="225" height="42" rx="4" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="157" y="185" fill="#991b1b" font-size="9" font-weight="bold" text-anchor="middle">dB = 10 log₁₀(P₂ / P₁)</text>
+  <text x="157" y="200" fill="#7f1d1d" font-size="8" text-anchor="middle">Negative dB = Loss | Positive dB = Gain</text>
+
+  <text x="45" y="228" fill="#334155" font-size="8.5">• Signal weakens over distance as heat</text>
+  <text x="45" y="244" fill="#334155" font-size="8.5">• Solved by: Amplifiers / Repeaters</text>
+  <text x="45" y="260" fill="#334155" font-size="8.5">• dB = 20 log₁₀(V₂ / V₁) for Voltages</text>
+
+  <!-- Impairment 2: Distortion -->
+  <rect x="302" y="55" width="245" height="230" rx="6" fill="#ffffff" stroke="#f97316" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="302" y="55" width="245" height="26" rx="6" fill="url(#distGrad)"/>
+  <text x="424" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">2. Distortion (Change in Shape)</text>
+
+  <!-- Composite Signal & Component Phase shifts -->
+  <path d="M 315 110 Q 330 90, 345 110 T 375 110" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  <path d="M 315 130 Q 325 118, 335 130 T 355 130 T 375 130" fill="none" stroke="#10b981" stroke-width="1.5"/>
+  <text x="345" y="150" fill="#475569" font-size="8" text-anchor="middle">In Phase (At Sender)</text>
+
+  <text x="390" y="125" fill="#94a3b8" font-size="14">→</text>
+
+  <path d="M 425 110 Q 440 90, 455 110 T 485 110" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  <path d="M 435 130 Q 445 118, 455 130 T 475 130 T 495 130" fill="none" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="460" y="150" fill="#ea580c" font-size="8" text-anchor="middle">Out of Phase (At Receiver)</text>
+
+  <rect x="312" y="168" width="225" height="42" rx="4" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="424" y="185" fill="#9a3412" font-size="9" font-weight="bold" text-anchor="middle">Phase Shift &amp; Delay Spread</text>
+  <text x="424" y="200" fill="#7c2d12" font-size="8" text-anchor="middle">Different frequencies travel at different speeds</text>
+
+  <text x="312" y="228" fill="#334155" font-size="8.5">• Occurs exclusively in composite signals</text>
+  <text x="312" y="244" fill="#334155" font-size="8.5">• Harmonic components arrive at different times</text>
+  <text x="312" y="260" fill="#334155" font-size="8.5">• Creates Inter-Symbol Interference (ISI)</text>
+
+  <!-- Impairment 3: Noise -->
+  <rect x="570" y="55" width="245" height="230" rx="6" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="570" y="55" width="245" height="26" rx="6" fill="url(#noiseGrad)"/>
+  <text x="692" y="73" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">3. Noise (External Corruption)</text>
+
+  <!-- Noise waveform addition -->
+  <path d="M 580 120 Q 595 105, 610 120 T 640 120" fill="none" stroke="#16a34a" stroke-width="2"/>
+  <text x="648" y="122" fill="#64748b" font-size="11">+</text>
+  <path d="M 660 120 L 664 105 L 668 135 L 672 110 L 676 125 L 680 120" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="688" y="122" fill="#64748b" font-size="11">=</text>
+  <path d="M 698 120 Q 703 100, 712 115 T 725 135 T 740 120" fill="none" stroke="#7c3aed" stroke-width="2"/>
+
+  <rect x="580" y="168" width="225" height="42" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="692" y="185" fill="#1e40af" font-size="9" font-weight="bold" text-anchor="middle">SNR = Signal Power / Noise Power</text>
+  <text x="692" y="200" fill="#1e3a8a" font-size="8" text-anchor="middle">SNR_dB = 10 log₁₀(SNR)</text>
+
+  <text x="580" y="228" fill="#334155" font-size="8.5">• Thermal Noise (Johnson-Nyquist kTB)</text>
+  <text x="580" y="244" fill="#334155" font-size="8.5">• Induced Noise (Motors, power cables)</text>
+  <text x="580" y="260" fill="#334155" font-size="8.5">• Crosstalk (Wire-pair interference)</text>
+  <text x="580" y="274" fill="#334155" font-size="8.5">• Impulse Noise (Spikes/Lightning - data killer)</text>
+
+  <!-- Bottom Master Formula & Comparison Bar -->
+  <rect x="35" y="295" width="780" height="110" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#sh)"/>
+  <rect x="35" y="295" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="311" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Key Impairment Formulas &amp; Engineering Solutions</text>
+
+  <text x="50" y="338" fill="#0f172a" font-size="9.5" font-weight="bold">Loss in Decibels:</text>
+  <text x="160" y="338" fill="#2563eb" font-size="9.5">dB = 10 log₁₀(P₂ / P₁)</text>
+  <text x="320" y="338" fill="#475569" font-size="8.5">If P₂ = 0.5 P₁, dB = 10 log₁₀(0.5) = -3 dB (Half power loss)</text>
+
+  <text x="50" y="362" fill="#0f172a" font-size="9.5" font-weight="bold">Cascaded Decibels:</text>
+  <text x="160" y="362" fill="#059669" font-size="9.5">dB_total = dB₁ + dB₂ + dB₃</text>
+  <text x="320" y="362" fill="#475569" font-size="8.5">Decibels simply ADD across multi-stage amplifiers and cable spans!</text>
+
+  <text x="50" y="386" fill="#0f172a" font-size="9.5" font-weight="bold">Signal-to-Noise Ratio:</text>
+  <text x="160" y="386" fill="#d97706" font-size="9.5">SNR_dB = 10 log₁₀(SNR)</text>
+  <text x="320" y="386" fill="#475569" font-size="8.5">If SNR = 1000, SNR_dB = 10 log₁₀(1000) = 30 dB (Clean transmission)</text>
+</svg>

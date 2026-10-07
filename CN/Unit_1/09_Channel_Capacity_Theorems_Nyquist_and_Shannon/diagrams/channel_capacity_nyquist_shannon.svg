@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="nyqGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+    <linearGradient id="shanGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#065f46"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="420" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Data Rate Limits: Nyquist Bit Rate vs Shannon Capacity Theorem</text>
+
+  <!-- Left: Nyquist Bit Rate (Noiseless) -->
+  <rect x="35" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="375" height="28" rx="6" fill="url(#nyqGrad)"/>
+  <text x="222" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">1. Nyquist Bit Rate (Noiseless Channel)</text>
+
+  <rect x="50" y="95" width="345" height="48" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="222" y="118" fill="#1e3a8a" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">C = 2 · B · log₂(M) bps</text>
+  <text x="222" y="134" fill="#1e40af" font-size="9" text-anchor="middle">B = Bandwidth (Hertz) | M = Number of Discrete Signal Levels</text>
+
+  <text x="50" y="162" fill="#0f172a" font-size="9.5" font-weight="bold">• Assumption: Theoretical channel with ZERO noise.</text>
+  <text x="50" y="178" fill="#334155" font-size="9">• Baud Rate (Signal Rate) = 2 · B signals/second.</text>
+  <text x="50" y="194" fill="#334155" font-size="9">• Bits carried per signal element = log₂(M) bits.</text>
+  <text x="50" y="210" fill="#334155" font-size="9">• Example: B = 3000 Hz, Binary signal (M = 2):</text>
+  <text x="65" y="226" fill="#1e40af" font-size="9" font-family="monospace">C = 2 · 3000 · log₂(2) = 6,000 bps = 6 kbps</text>
+  <text x="50" y="246" fill="#334155" font-size="9">• If M = 4 levels (2 bits/level): C = 12,000 bps = 12 kbps</text>
+  <text x="50" y="262" fill="#334155" font-size="9">• If M = 16 levels (4 bits/level): C = 24,000 bps = 24 kbps</text>
+  <text x="50" y="280" fill="#dc2626" font-size="8.5" font-weight="bold">Notice: Nyquist allows infinite speed if M → ∞ (Impossible in real world!)</text>
+
+  <!-- Right: Shannon Channel Capacity (Noisy) -->
+  <rect x="440" y="55" width="375" height="235" rx="6" fill="#ffffff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="55" width="375" height="28" rx="6" fill="url(#shanGrad)"/>
+  <text x="627" y="74" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">2. Shannon Capacity (Noisy Real-World Channel)</text>
+
+  <rect x="455" y="95" width="345" height="48" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="627" y="118" fill="#065f46" font-size="13" font-weight="bold" font-family="monospace" text-anchor="middle">C = B · log₂(1 + SNR) bps</text>
+  <text x="627" y="134" fill="#047857" font-size="9" text-anchor="middle">B = Bandwidth (Hertz) | SNR = Signal Power / Noise Power (Linear)</text>
+
+  <text x="455" y="162" fill="#0f172a" font-size="9.5" font-weight="bold">• Assumption: Real physical channel with Thermal Noise.</text>
+  <text x="455" y="178" fill="#334155" font-size="9">• Sets the ABSOLUTE THEORETICAL UPPER BOUND on data rate.</text>
+  <text x="455" y="194" fill="#334155" font-size="9">• Converting dB to Linear SNR:</text>
+  <text x="470" y="210" fill="#065f46" font-size="9" font-family="monospace">SNR_dB = 10 log₁₀(SNR) ⇒ SNR = 10^(SNR_dB / 10)</text>
+  <text x="455" y="230" fill="#334155" font-size="9">• Real Telephone Line Example: B = 3000 Hz, SNR_dB = 31.62 dB:</text>
+  <text x="470" y="246" fill="#065f46" font-size="9" font-family="monospace">SNR = 10^3.162 ≈ 1452 ⇒ log₂(1453) ≈ 10.5 bits</text>
+  <text x="470" y="262" fill="#065f46" font-size="9" font-family="monospace">C = 3000 · 10.5 ≈ 31,500 bps = 31.5 kbps (V.34 Modem limit!)</text>
+  <text x="455" y="280" fill="#166534" font-size="8.5" font-weight="bold">Shannon capacity CANNOT be exceeded, no matter how many levels M are used!</text>
+
+  <!-- Bottom: Synthesis & Combining Shannon with Nyquist -->
+  <rect x="35" y="302" width="780" height="105" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="302" width="780" height="24" rx="6" fill="#0f172a"/>
+  <text x="425" y="318" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Engineering Synthesis: How Engineers Combine Shannon &amp; Nyquist to Find Signal Levels (M)</text>
+
+  <text x="50" y="342" fill="#0f172a" font-size="9.5" font-weight="bold">Step 1 (Upper Bound):</text>
+  <text x="175" y="342" fill="#334155" font-size="9">Use Shannon's formula to find the maximum possible error-free channel capacity: C_max = B · log₂(1 + SNR)</text>
+
+  <text x="50" y="364" fill="#0f172a" font-size="9.5" font-weight="bold">Step 2 (Signal Levels M):</text>
+  <text x="175" y="364" fill="#334155" font-size="9">Equate Nyquist rate to Shannon Capacity: 2 · B · log₂(M) = C_max ⇒ log₂(M) = C_max / (2B) ⇒ M = 2^(C_max / 2B)</text>
+
+  <text x="50" y="386" fill="#0f172a" font-size="9.5" font-weight="bold">Practical Lesson:</text>
+  <text x="175" y="386" fill="#2563eb" font-size="9">Shannon tells us the fundamental physics ceiling; Nyquist tells us how many signal levels (constellation points) we must engineer!</text>
+</svg>

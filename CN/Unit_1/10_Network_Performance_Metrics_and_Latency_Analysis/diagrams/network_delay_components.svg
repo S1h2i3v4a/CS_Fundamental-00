@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="delGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+    <linearGradient id="bdpGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#065f46"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+    <filter id="sh" x="-2%" y="-5%" width="104%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect width="850" height="420" fill="#f8fafc" rx="8"/>
+
+  <rect x="25" y="10" width="800" height="34" rx="5" fill="#0f172a"/>
+  <text x="425" y="32" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Network Latency Breakdown: 4 Delay Components &amp; Bandwidth-Delay Product</text>
+
+  <!-- 4 Delays Row -->
+  <!-- Delay 1: Transmission Delay -->
+  <rect x="35" y="55" width="185" height="180" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="55" width="185" height="26" rx="6" fill="#2563eb"/>
+  <text x="127" y="73" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">1. Transmission Delay (Tt)</text>
+  <rect x="45" y="90" width="165" height="36" rx="3" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="127" y="112" fill="#1e3a8a" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Tt = L / B</text>
+  <text x="45" y="142" fill="#0f172a" font-size="8.5" font-weight="bold">• L = Packet Length (Bits)</text>
+  <text x="45" y="158" fill="#0f172a" font-size="8.5" font-weight="bold">• B = Bandwidth (bps)</text>
+  <text x="45" y="174" fill="#475569" font-size="8">• Time to push all packet bits onto the physical link.</text>
+  <text x="45" y="200" fill="#2563eb" font-size="8" font-weight="bold">Depends on Hardware / Card rate</text>
+  <text x="45" y="222" fill="#64748b" font-size="7.5">Zero distance dependency!</text>
+
+  <!-- Delay 2: Propagation Delay -->
+  <rect x="230" y="55" width="185" height="180" rx="6" fill="#ffffff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="230" y="55" width="185" height="26" rx="6" fill="#10b981"/>
+  <text x="322" y="73" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">2. Propagation Delay (Tp)</text>
+  <rect x="240" y="90" width="165" height="36" rx="3" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="322" y="112" fill="#065f46" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Tp = d / v</text>
+  <text x="240" y="142" fill="#0f172a" font-size="8.5" font-weight="bold">• d = Distance of cable (m)</text>
+  <text x="240" y="158" fill="#0f172a" font-size="8.5" font-weight="bold">• v = Velocity of propagation</text>
+  <text x="240" y="174" fill="#475569" font-size="8">• v ≈ 2 × 10⁸ m/s in copper/glass</text>
+  <text x="240" y="200" fill="#059669" font-size="8" font-weight="bold">Time for 1 bit to traverse wire</text>
+  <text x="240" y="222" fill="#64748b" font-size="7.5">Zero packet size dependency!</text>
+
+  <!-- Delay 3: Queuing Delay -->
+  <rect x="425" y="55" width="185" height="180" rx="6" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="425" y="55" width="185" height="26" rx="6" fill="#f59e0b"/>
+  <text x="517" y="73" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">3. Queuing Delay (Tq)</text>
+  <rect x="435" y="90" width="165" height="36" rx="3" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="517" y="112" fill="#92400e" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Tq = f(Traffic, Load)</text>
+  <text x="435" y="142" fill="#0f172a" font-size="8.5" font-weight="bold">• Buffer queue wait time</text>
+  <text x="435" y="158" fill="#475569" font-size="8">• Dynamic &amp; non-deterministic</text>
+  <text x="435" y="174" fill="#475569" font-size="8">• High load causes buffer overflow</text>
+  <text x="435" y="200" fill="#b45309" font-size="8" font-weight="bold">Leads to packet drops &amp; loss</text>
+  <text x="435" y="222" fill="#64748b" font-size="7.5">Solved by Active Queue Mgmt</text>
+
+  <!-- Delay 4: Processing Delay -->
+  <rect x="620" y="55" width="185" height="180" rx="6" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="620" y="55" width="185" height="26" rx="6" fill="#8b5cf6"/>
+  <text x="712" y="73" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">4. Processing Delay (Tproc)</text>
+  <rect x="630" y="90" width="165" height="36" rx="3" fill="#f5f3ff" stroke="#ddd6fe"/>
+  <text x="712" y="112" fill="#581c87" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Tproc = CPU Lookup</text>
+  <text x="630" y="142" fill="#0f172a" font-size="8.5" font-weight="bold">• Checksum validation</text>
+  <text x="630" y="158" fill="#475569" font-size="8">• Routing table FIB lookup</text>
+  <text x="630" y="174" fill="#475569" font-size="8">• Header decryption/inspection</text>
+  <text x="630" y="200" fill="#6b21a8" font-size="8" font-weight="bold">Microseconds in modern ASIC</text>
+  <text x="630" y="222" fill="#64748b" font-size="7.5">Hardware accelerated</text>
+
+  <!-- Bottom: Bandwidth-Delay Product (BDP) Pipe Model -->
+  <rect x="35" y="250" width="770" height="155" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="35" y="250" width="770" height="24" rx="6" fill="#065f46"/>
+  <text x="420" y="266" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Bandwidth-Delay Product (BDP): Volume of the Network "Pipe"</text>
+
+  <!-- Pipe Graphic -->
+  <rect x="60" y="285" width="380" height="40" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="250" y="310" fill="#065f46" font-size="11" font-weight="bold" text-anchor="middle">Network Pipe (Cross-section = Bandwidth B)</text>
+  <!-- Length d = Propagation Delay Tp -->
+  <line x1="60" y1="332" x2="440" y2="332" stroke="#047857" stroke-width="1.5"/>
+  <polygon points="60,330 52,332 60,334" fill="#047857"/>
+  <polygon points="440,330 448,332 440,334" fill="#047857"/>
+  <text x="250" y="344" fill="#047857" font-size="9" text-anchor="middle">Length = Propagation Delay (Tp)</text>
+
+  <!-- BDP Formula box -->
+  <rect x="465" y="282" width="320" height="110" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="625" y="302" fill="#065f46" font-size="11.5" font-weight="bold" font-family="monospace" text-anchor="middle">BDP = Bandwidth · Tp (Bits)</text>
+  <text x="475" y="322" fill="#334155" font-size="8.5">• BDP defines maximum bits "in flight" on the wire.</text>
+  <text x="475" y="338" fill="#334155" font-size="8.5">• Crucial for TCP Window Size tuning ($W \ge 2 	imes 	ext{BDP}$).</text>
+  <text x="475" y="354" fill="#0f172a" font-size="8.5" font-weight="bold">• Total Delay = Tt + Tp + Tq + Tproc</text>
+  <text x="475" y="370" fill="#1e3a8a" font-size="8.5" font-weight="bold">• RTT (Round Trip Time) ≈ 2 · Tp + Tt</text>
+  <text x="475" y="386" fill="#dc2626" font-size="8">Jitter: Delay variation between successive packets.</text>
+</svg>
