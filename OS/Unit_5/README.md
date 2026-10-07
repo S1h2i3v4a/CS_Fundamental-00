@@ -1,0 +1,32 @@
+# Unit 5: I/O Management, Disk Scheduling, RAID & File Systems
+
+> **Comprehensive In-Depth Notes, Architectural Vector Diagrams & AKTU BCS401 Semester Solutions**
+> **B.Tech Computer Science & Engineering / Information Technology (AKTU / Core CS)**
+
+---
+
+## 📑 Repository Structure & Priority Navigation
+
+| Index | Module Name | Core Topics Covered | Standalone PDF | Diagram Preview |
+| :---: | :--- | :--- | :---: | :---: |
+| **00** | [**00_Quick_Revision_Short_Notes**](./00_Quick_Revision_Short_Notes/) | **Exact 3-Page Recall Sheet:** I/O, Disk Formulas, RAID Table, Scheduling Traces, Inodes & Protection | [Download PDF](./00_Quick_Revision_Short_Notes/Unit_5_Quick_Revision_3_Page_Notes.pdf) | [3-Page Sheet](./00_Quick_Revision_Short_Notes/Unit_5_Quick_Revision_3_Page_Notes.html) |
+| **01** | [**01_IO_Hardware_and_Kernel_Subsystems**](./01_IO_Hardware_and_Kernel_Subsystems/) | Polling, Interrupts (IVT, ISR), DMA Architecture, Buffering, Spooling & Caching | [Download PDF](./01_IO_Hardware_and_Kernel_Subsystems/01_IO_Hardware_and_Kernel_Subsystems.pdf) | [Architecture](./01_IO_Hardware_and_Kernel_Subsystems/diagrams/io_hardware_and_dma_architecture.svg) |
+| **02** | [**02_Disk_Storage_and_Physical_Architecture**](./02_Disk_Storage_and_Physical_Architecture/) | Platters, Tracks, Sectors, Cylinders, Seek Time, Rotational Latency & Numerical Formulas | [Download PDF](./02_Disk_Storage_and_Physical_Architecture/02_Disk_Storage_and_Physical_Architecture.pdf) | [Geometry](./02_Disk_Storage_and_Physical_Architecture/diagrams/magnetic_disk_physical_geometry.svg) |
+| **03** | [**03_Disk_Scheduling_FCFS_and_SSTF**](./03_Disk_Scheduling_FCFS_and_SSTF/) | FCFS (640 cyl) vs SSTF (236 cyl), Starvation Analysis & Mechanical Seek Traces | [Download PDF](./03_Disk_Scheduling_FCFS_and_SSTF/03_Disk_Scheduling_FCFS_and_SSTF.pdf) | [Trace](./03_Disk_Scheduling_FCFS_and_SSTF/diagrams/disk_scheduling_fcfs_vs_sstf.svg) |
+| **04** | [**04_Disk_Scheduling_SCAN_and_CSCAN**](./04_Disk_Scheduling_SCAN_and_CSCAN/) | Elevator SCAN (236 cyl) vs Circular C-SCAN (382 cyl), Boundary Trips & Fairness | [Download PDF](./04_Disk_Scheduling_SCAN_and_CSCAN/04_Disk_Scheduling_SCAN_and_CSCAN.pdf) | [Elevator](./04_Disk_Scheduling_SCAN_and_CSCAN/diagrams/disk_scheduling_scan_and_cscan.svg) |
+| **05** | [**05_Disk_Scheduling_LOOK_and_CLOOK**](./05_Disk_Scheduling_LOOK_and_CLOOK/) | LOOK (208 cyl - Best) vs C-LOOK (322 cyl), Boundary Reversal Optimizations | [Download PDF](./05_Disk_Scheduling_LOOK_and_CLOOK/05_Disk_Scheduling_LOOK_and_CLOOK.pdf) | [Optimization](./05_Disk_Scheduling_LOOK_and_CLOOK/diagrams/disk_scheduling_look_and_clook.svg) |
+| **06** | [**06_RAID_Architecture_Levels_0_to_6**](./06_RAID_Architecture_Levels_0_to_6/) | Striping, Mirroring, Parity, RAID 0, 1, 5, 6, 10 vs 01, Write Penalty & Tolerances | [Download PDF](./06_RAID_Architecture_Levels_0_to_6/06_RAID_Architecture_Levels_0_to_6.pdf) | [RAID Matrix](./06_RAID_Architecture_Levels_0_to_6/diagrams/raid_levels_architecture.svg) |
+| **07** | [**07_File_Concept_and_Access_Methods**](./07_File_Concept_and_Access_Methods/) | File Attributes, File Control Block (FCB), Sequential vs Direct/Random vs Indexed Access | [Download PDF](./07_File_Concept_and_Access_Methods/07_File_Concept_and_Access_Methods.pdf) | [File Access](./07_File_Concept_and_Access_Methods/diagrams/file_structure_and_access_methods.svg) |
+| **08** | [**08_Directory_Structures_and_File_Sharing**](./08_Directory_Structures_and_File_Sharing/) | Single, Two-level, Hierarchical Trees, Acyclic Graphs, Hard Links vs Soft Symlinks | [Download PDF](./08_Directory_Structures_and_File_Sharing/08_Directory_Structures_and_File_Sharing.pdf) | [Directory](./08_Directory_Structures_and_File_Sharing/diagrams/directory_structures_and_links.svg) |
+| **09** | [**09_File_System_Implementation_and_VFS**](./09_File_System_Implementation_and_VFS/) | Superblock, Inodes, In-memory Open File Tables, Linux Virtual File System (VFS) Layers | [Download PDF](./09_File_System_Implementation_and_VFS/09_File_System_Implementation_and_VFS.pdf) | [VFS Stack](./09_File_System_Implementation_and_VFS/diagrams/file_system_implementation_and_vfs.svg) |
+| **10** | [**10_UNIX_Inode_Architecture_and_Calculations**](./10_UNIX_Inode_Architecture_and_Calculations/) | Direct, Single, Double & Triple Indirect pointers, 16 GB and 4 TB Max File Size Math | [Download PDF](./10_UNIX_Inode_Architecture_and_Calculations/10_UNIX_Inode_Architecture_and_Calculations.pdf) | [Inode Tree](./10_UNIX_Inode_Architecture_and_Calculations/diagrams/unix_inode_architecture.svg) |
+| **11** | [**11_File_Allocation_Methods**](./11_File_Allocation_Methods/) | Contiguous Allocation, Linked Allocation, FAT Table & Multilevel Indexed Allocation | [Download PDF](./11_File_Allocation_Methods/11_File_Allocation_Methods.pdf) | [Allocations](./11_File_Allocation_Methods/diagrams/file_allocation_methods_comparison.svg) |
+| **12** | [**12_Free_Space_Management_Techniques**](./12_Free_Space_Management_Techniques/) | Bit Vector / Bitmap math, Linked Free List, Grouping, Counting & RAM Overhead formulas | [Download PDF](./12_Free_Space_Management_Techniques/12_Free_Space_Management_Techniques.pdf) | [Free Space](./12_Free_Space_Management_Techniques/diagrams/free_space_management_schemes.svg) |
+| **13** | [**13_File_System_Protection_and_Access_Matrix**](./13_File_System_Protection_and_Access_Matrix/) | Access Matrix model, ACL vs Capability Lists, UNIX 9-bit octal permissions (`chmod 754`) | [Download PDF](./13_File_System_Protection_and_Access_Matrix/13_File_System_Protection_and_Access_Matrix.pdf) | [Protection](./13_File_System_Protection_and_Access_Matrix/diagrams/file_protection_access_matrix.svg) |
+| **14** | [**14_Unit_5_AKTU_PYQs_and_Interview_Cheatsheet**](./14_Unit_5_AKTU_PYQs_and_Interview_Cheatsheet/) | Solved 10-markers, Disk Scheduling Benchmark, Inode Derivation, SSDs vs HDDs, FAANG Q&A | [Download PDF](./14_Unit_5_AKTU_PYQs_and_Interview_Cheatsheet/14_Unit_5_AKTU_PYQs_and_Interview_Cheatsheet.pdf) | [Benchmark](./14_Unit_5_AKTU_PYQs_and_Interview_Cheatsheet/diagrams/aktu_pyq_disk_scheduling_benchmark.svg) |
+
+---
+
+## 🎯 Primary Master Documents
+- 📘 **[Unit 5 Master Consolidated Notes PDF](./Unit_5_Master_Notes.pdf)** *(All 14 Modules merged with diagrams)*
+- ⚡ **[Unit 5 Quick Revision 3-Page Notes PDF](./Unit_5_Quick_Revision_3_Page_Notes.pdf)** *(Strict 3-Page Recall Sheet)*

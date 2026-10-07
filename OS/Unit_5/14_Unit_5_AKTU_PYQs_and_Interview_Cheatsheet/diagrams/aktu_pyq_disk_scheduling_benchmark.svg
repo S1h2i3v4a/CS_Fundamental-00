@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg14)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Unit 5 Master Benchmark &amp; Formula Cheatsheet</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Disk Scheduling Comparison, UNIX Inode Sizing &amp; RAID Architecture Summary</text>
+
+  <!-- BENCHMARK CHART -->
+  <rect x="30" y="85" width="460" height="400" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+  <rect x="30" y="85" width="460" height="32" rx="10" fill="#1e3a8a"/>
+  <text x="45" y="106" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">Disk Scheduling Cylinder Movement (Benchmark)</text>
+  <text x="45" y="132" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Queue: 98, 183, 37, 122, 14, 124, 65, 67 | Head: 53 (0 - 199)</text>
+
+  <!-- Bar Chart -->
+  <g transform="translate(45, 150)">
+    <!-- FCFS -->
+    <text x="0" y="25" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">FCFS</text>
+    <rect x="70" y="12" width="350" height="20" fill="#ef4444" rx="4"/>
+    <text x="428" y="27" font-family="monospace" font-size="11" font-weight="bold" fill="#fff">640 cyl</text>
+
+    <!-- SSTF -->
+    <text x="0" y="65" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">SSTF</text>
+    <rect x="70" y="52" width="129" height="20" fill="#f59e0b" rx="4"/>
+    <text x="207" y="67" font-family="monospace" font-size="11" font-weight="bold" fill="#fff">236 cyl</text>
+
+    <!-- SCAN -->
+    <text x="0" y="105" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">SCAN</text>
+    <rect x="70" y="92" width="129" height="20" fill="#0284c7" rx="4"/>
+    <text x="207" y="107" font-family="monospace" font-size="11" font-weight="bold" fill="#fff">236 cyl</text>
+
+    <!-- C-SCAN -->
+    <text x="0" y="145" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#818cf8">C-SCAN</text>
+    <rect x="70" y="132" width="209" height="20" fill="#6366f1" rx="4"/>
+    <text x="287" y="147" font-family="monospace" font-size="11" font-weight="bold" fill="#fff">382 cyl</text>
+
+    <!-- LOOK -->
+    <text x="0" y="185" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">LOOK</text>
+    <rect x="70" y="172" width="114" height="20" fill="#10b981" rx="4"/>
+    <text x="192" y="187" font-family="monospace" font-size="11" font-weight="bold" fill="#fff">208 cyl (Best!)</text>
+
+    <!-- C-LOOK -->
+    <text x="0" y="225" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#c084fc">C-LOOK</text>
+    <rect x="70" y="212" width="176" height="20" fill="#a855f7" rx="4"/>
+    <text x="254" y="227" font-family="monospace" font-size="11" font-weight="bold" fill="#fff">322 cyl</text>
+  </g>
+
+  <rect x="45" y="405" width="430" height="65" rx="6" fill="#0f172a" stroke="#475569"/>
+  <text x="55" y="424" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#38bdf8">Key Exam Observation:</text>
+  <text x="55" y="442" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">LOOK eliminates unnecessary trips to disk boundary (0 and 199).</text>
+  <text x="55" y="458" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">LOOK achieves highest throughput (208 cylinders vs FCFS 640 cylinders)!</text>
+
+  <!-- FORMULA & CHEATSHEET COLUMN -->
+  <rect x="510" y="85" width="460" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <rect x="510" y="85" width="460" height="32" rx="10" fill="#064e3b"/>
+  <text x="525" y="106" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">Master Numerical Formulas (AKTU 10-Marks)</text>
+
+  <!-- FORMULA 1: DISK ACCESS TIME -->
+  <rect x="525" y="125" width="430" height="75" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="535" y="142" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#60a5fa">1. Total Disk Access Time Formula</text>
+  <text x="535" y="160" font-family="monospace" font-size="10" fill="#f8fafc">T_access = T_seek + T_rotational + T_transfer + T_controller</text>
+  <text x="535" y="176" font-family="monospace" font-size="9.5" fill="#38bdf8">T_rotational = 60 / (2 * RPM) seconds = 30000 / RPM ms</text>
+  <text x="535" y="192" font-family="monospace" font-size="9.5" fill="#cbd5e1">For 7200 RPM: Avg Latency = 60 / 14400 = 4.167 ms</text>
+
+  <!-- FORMULA 2: UNIX INODE SIZING -->
+  <rect x="525" y="210" width="430" height="95" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="535" y="227" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#fbbf24">2. UNIX Inode Max File Size Formula</text>
+  <text x="535" y="244" font-family="monospace" font-size="9.5" fill="#f8fafc">Entries/Block (K) = Block_Size / Pointer_Size</text>
+  <text x="535" y="260" font-family="monospace" font-size="9.5" fill="#38bdf8">Max Size = (12 + K + K^2 + K^3) * Block_Size</text>
+  <text x="535" y="276" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">For Block=4KB, Ptr=4B -> K = 1024</text>
+  <text x="535" y="292" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">K^3 * 4KB = (2^10)^3 * 2^12 B = 2^42 B = 4 TB limit!</text>
+
+  <!-- FORMULA 3: RAID COMPARISON -->
+  <rect x="525" y="315" width="430" height="75" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="535" y="332" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#c084fc">3. RAID Usable Capacity &amp; Fault Tolerance</text>
+  <text x="535" y="350" font-family="monospace" font-size="9" fill="#cbd5e1">RAID 0: Capacity = N * S | Fault Tolerance = 0 disks</text>
+  <text x="535" y="365" font-family="monospace" font-size="9" fill="#cbd5e1">RAID 1: Capacity = S     | Fault Tolerance = N - 1 disks</text>
+  <text x="535" y="380" font-family="monospace" font-size="9" fill="#34d399">RAID 5: Capacity = (N-1)*S | Fault Tolerance = 1 disk (Parity P)</text>
+
+  <!-- FORMULA 4: BITMAP OVERHEAD -->
+  <rect x="525" y="400" width="430" height="70" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="535" y="417" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#f87171">4. Bitmap Overhead</text>
+  <text x="535" y="434" font-family="monospace" font-size="9.5" fill="#f8fafc">Bitmap_Bytes = Disk_Size / (8 * Block_Size)</text>
+  <text x="535" y="452" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Increases with disk capacity; reduced 8x when block size quadrupled.</text>
+</svg>

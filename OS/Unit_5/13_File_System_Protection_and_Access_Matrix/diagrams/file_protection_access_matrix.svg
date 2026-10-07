@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg13" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg13)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">File System Protection &amp; Access Control Matrix</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Access Matrix Model, ACL vs Capability Lists, and UNIX 9-Bit Permissions</text>
+
+  <!-- ACCESS MATRIX TABLE -->
+  <rect x="30" y="85" width="460" height="235" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+  <rect x="30" y="85" width="460" height="32" rx="10" fill="#1e3a8a"/>
+  <text x="45" y="106" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">The Access Matrix Model (Domains x Objects)</text>
+
+  <g transform="translate(45, 128)">
+    <!-- Header -->
+    <rect x="0" y="0" width="80" height="28" fill="#0f172a" stroke="#475569"/>
+    <text x="40" y="18" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#94a3b8" text-anchor="middle">Domain \ Obj</text>
+    
+    <rect x="80" y="0" width="105" height="28" fill="#0f172a" stroke="#475569"/>
+    <text x="132" y="18" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#38bdf8" text-anchor="middle">File F1</text>
+    
+    <rect x="185" y="0" width="105" height="28" fill="#0f172a" stroke="#475569"/>
+    <text x="237" y="18" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#38bdf8" text-anchor="middle">File F2</text>
+    
+    <rect x="290" y="0" width="140" height="28" fill="#0f172a" stroke="#475569"/>
+    <text x="360" y="18" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#38bdf8" text-anchor="middle">Printer P1</text>
+    
+    <!-- Row D1 -->
+    <rect x="0" y="28" width="80" height="40" fill="#0f172a" stroke="#475569"/>
+    <text x="40" y="52" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a78bfa" text-anchor="middle">Domain D1</text>
+    
+    <rect x="80" y="28" width="105" height="40" fill="#1e293b" stroke="#334155"/>
+    <text x="132" y="52" font-family="monospace" font-size="11" fill="#34d399" text-anchor="middle">read, write</text>
+    
+    <rect x="185" y="28" width="105" height="40" fill="#1e293b" stroke="#334155"/>
+    <text x="237" y="52" font-family="monospace" font-size="11" fill="#94a3b8" text-anchor="middle">-</text>
+    
+    <rect x="290" y="28" width="140" height="40" fill="#1e293b" stroke="#334155"/>
+    <text x="360" y="52" font-family="monospace" font-size="11" fill="#f59e0b" text-anchor="middle">print</text>
+
+    <!-- Row D2 -->
+    <rect x="0" y="68" width="80" height="40" fill="#0f172a" stroke="#475569"/>
+    <text x="40" y="92" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a78bfa" text-anchor="middle">Domain D2</text>
+    
+    <rect x="80" y="68" width="105" height="40" fill="#1e293b" stroke="#334155"/>
+    <text x="132" y="92" font-family="monospace" font-size="11" fill="#34d399" text-anchor="middle">read</text>
+    
+    <rect x="185" y="68" width="105" height="40" fill="#1e293b" stroke="#334155"/>
+    <text x="237" y="92" font-family="monospace" font-size="11" fill="#34d399" text-anchor="middle">read, write, exec</text>
+    
+    <rect x="290" y="68" width="140" height="40" fill="#1e293b" stroke="#334155"/>
+    <text x="360" y="92" font-family="monospace" font-size="11" fill="#94a3b8" text-anchor="middle">-</text>
+
+    <!-- Row D3 -->
+    <rect x="0" y="108" width="80" height="40" fill="#0f172a" stroke="#475569"/>
+    <text x="40" y="132" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a78bfa" text-anchor="middle">Domain D3</text>
+    
+    <rect x="80" y="108" width="105" height="40" fill="#1e293b" stroke="#334155"/>
+    <text x="132" y="132" font-family="monospace" font-size="11" fill="#94a3b8" text-anchor="middle">-</text>
+    
+    <rect x="185" y="108" width="105" height="40" fill="#1e293b" stroke="#334155"/>
+    <text x="237" y="132" font-family="monospace" font-size="11" fill="#34d399" text-anchor="middle">read</text>
+    
+    <rect x="290" y="108" width="140" height="40" fill="#1e293b" stroke="#334155"/>
+    <text x="360" y="132" font-family="monospace" font-size="11" fill="#f59e0b" text-anchor="middle">print</text>
+  </g>
+  <text x="45" y="306" font-family="-apple-system, sans-serif" font-size="10.5" fill="#cbd5e1">Matrix is Sparse: Storing full 2D table wastes 95%+ space!</text>
+
+  <!-- DECOMPOSITION: ACL VS C-LIST -->
+  <rect x="510" y="85" width="460" height="235" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <rect x="510" y="85" width="460" height="32" rx="10" fill="#064e3b"/>
+  <text x="525" y="106" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">Decomposition: ACL vs Capability List</text>
+
+  <rect x="525" y="128" width="205" height="90" rx="6" fill="#0f172a" stroke="#3b82f6"/>
+  <text x="627" y="146" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#60a5fa" text-anchor="middle">ACL (Column Slices)</text>
+  <text x="535" y="165" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Attached to OBJECT (File F1):</text>
+  <text x="535" y="182" font-family="monospace" font-size="9.5" fill="#e2e8f0">- Domain D1: [R, W]</text>
+  <text x="535" y="198" font-family="monospace" font-size="9.5" fill="#e2e8f0">- Domain D2: [R]</text>
+  <text x="535" y="212" font-family="-apple-system, sans-serif" font-size="8.5" fill="#34d399">Used by: NTFS, POSIX ACLs</text>
+
+  <rect x="745" y="128" width="210" height="90" rx="6" fill="#0f172a" stroke="#a855f7"/>
+  <text x="850" y="146" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#c084fc" text-anchor="middle">Capability List (Row Slices)</text>
+  <text x="755" y="165" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Attached to DOMAIN (User/Proc D1):</text>
+  <text x="755" y="182" font-family="monospace" font-size="9.5" fill="#e2e8f0">- Token(F1): [R, W]</text>
+  <text x="755" y="198" font-family="monospace" font-size="9.5" fill="#e2e8f0">- Token(P1): [Print]</text>
+  <text x="755" y="212" font-family="-apple-system, sans-serif" font-size="8.5" fill="#a855f7">Used by: Microkernels, Hydra</text>
+
+  <text x="525" y="240" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#f8fafc">Comparison Summary:</text>
+  <text x="525" y="258" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Revocation: Easy in ACL (modify file's list); Hard in C-List (find tokens).</text>
+  <text x="525" y="275" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Access Check: Fast in C-List (ticket presented); Slow in ACL (search list).</text>
+  <text x="525" y="292" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">3. Least Privilege: C-List enforces principle of least privilege naturally.</text>
+
+  <!-- UNIX 9-BIT PERMISSION DECODER -->
+  <rect x="30" y="335" width="940" height="165" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="30" y="335" width="940" height="30" rx="10" fill="#78350f"/>
+  <text x="45" y="355" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fbbf24">UNIX / Linux 9-Bit File Protection Architecture (chmod 754)</text>
+
+  <g transform="translate(60, 380)">
+    <!-- USER / OWNER -->
+    <rect x="0" y="0" width="260" height="85" rx="6" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="130" y="20" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#60a5fa" text-anchor="middle">OWNER (User `u`)</text>
+    <text x="130" y="44" font-family="monospace" font-size="18" font-weight="bold" fill="#34d399" text-anchor="middle">r w x  (4 + 2 + 1 = 7)</text>
+    <text x="130" y="68" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8" text-anchor="middle">Full Read, Write, Execute</text>
+
+    <!-- GROUP -->
+    <rect x="300" y="0" width="260" height="85" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+    <text x="430" y="20" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399" text-anchor="middle">GROUP (`g`)</text>
+    <text x="430" y="44" font-family="monospace" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">r - x  (4 + 0 + 1 = 5)</text>
+    <text x="430" y="68" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8" text-anchor="middle">Read and Execute Only</text>
+
+    <!-- OTHERS -->
+    <rect x="600" y="0" width="260" height="85" rx="6" fill="#0f172a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="730" y="20" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171" text-anchor="middle">OTHERS (`o`)</text>
+    <text x="730" y="44" font-family="monospace" font-size="18" font-weight="bold" fill="#f87171" text-anchor="middle">r - -  (4 + 0 + 0 = 4)</text>
+    <text x="730" y="68" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8" text-anchor="middle">Read Only Access</text>
+  </g>
+
+  <text x="500" y="488" font-family="monospace" font-size="11" fill="#e2e8f0" text-anchor="middle">Resulting Octal Representation: chmod 754 file.txt  |  Special Bits: SUID (4000), SGID (2000), Sticky Bit (1000)</text>
+</svg>

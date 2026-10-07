@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Unit 5: I/O Management, Disk Scheduling & File Systems - 3-Page Recall Notes</title>
+<style>
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #0f172a;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  font-size: 8.0pt;
+  line-height: 1.25;
+}
+.page {
+  width: 210mm;
+  height: 296mm;
+  max-height: 296mm;
+  padding: 8mm 10mm 6mm 10mm;
+  margin: 0 auto;
+  overflow: hidden;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+.page:last-child {
+  page-break-after: avoid;
+}
+.header {
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.header h1 {
+  margin: 0;
+  font-size: 12.5pt;
+  color: #1e3a8a;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.header .badge {
+  font-size: 7.0pt;
+  font-weight: bold;
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.sec-title {
+  font-size: 8.8pt;
+  font-weight: 800;
+  color: #1e40af;
+  background: #f1f5f9;
+  border-left: 3px solid #2563eb;
+  padding: 2px 6px;
+  margin: 4px 0 2px 0;
+  text-transform: uppercase;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+}
+.box {
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 3px 5px;
+  background: #f8fafc;
+}
+.box-title {
+  font-weight: bold;
+  font-size: 8.0pt;
+  color: #0f172a;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7.3pt;
+  margin: 2px 0;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 2.5px 4px;
+  text-align: left;
+}
+th {
+  background: #e2e8f0;
+  color: #0f172a;
+  font-weight: 700;
+}
+tr:nth-child(even) {
+  background: #ffffff;
+}
+.code {
+  font-family: Consolas, Monaco, monospace;
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-size: 7.2pt;
+}
+.alert {
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 7.3pt;
+  margin: 2px 0;
+}
+.formula {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-weight: bold;
+  color: #166534;
+  font-size: 7.4pt;
+}
+ul, ol {
+  margin: 1px 0;
+  padding-left: 14px;
+}
+li {
+  margin-bottom: 1.5px;
+}
+.footer {
+  margin-top: auto;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 2px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 6.8pt;
+  color: #64748b;
+}
+</style>
+</head>
+<body>
+
+<!-- ========================================================================= -->
+<!-- PAGE 1: I/O HARDWARE, KERNEL SUBSYSTEMS & PHYSICAL DISK GEOMETRY -->
+<!-- ========================================================================= -->
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>UNIT 5: I/O HARDWARE, KERNEL SUBSYSTEMS & DISK STORAGE</h1>
+      <span style="font-size: 7.2pt; color: #475569; font-weight: 600;">AKTU BCS401 High-Yield Rapid Recall • Page 1 of 3</span>
+    </div>
+    <span class="badge">I/O & PHYSICAL STORAGE</span>
+  </div>
+
+  <!-- SECTION 1: I/O HARDWARE -->
+  <div class="sec-title">1. I/O Hardware Architecture & Communication Mechanisms</div>
+  <div class="grid-3">
+    <div class="box">
+      <div class="box-title" style="color: #1e40af;">Device Controller & Registers</div>
+      Electronic component on motherboard/expansion card bridging device and system bus:
+      <ul>
+        <li><b>Data-In Register:</b> Host reads data received from device.</li>
+        <li><b>Data-Out Register:</b> Host writes data to send to device.</li>
+        <li><b>Status Register:</b> Bits for <i>Busy, Ready, Error</i> flags.</li>
+        <li><b>Control Register:</b> Host writes commands (Read, Write, Seek).</li>
+      </ul>
+      <b>Addressing:</b> PMIO (Port I/O: special <code>in</code>/<code>out</code> CPU instructions) vs MMIO (Memory-Mapped I/O: registers mapped to RAM address space, accessed via standard pointers).
+    </div>
+
+    <div class="box">
+      <div class="box-title" style="color: #059669;">Polling vs Interrupt-Driven I/O</div>
+      <ul>
+        <li><b>Polling (Busy-Waiting):</b> CPU repeatedly reads Status Register <i>Busy</i> bit in tight loop. Simple; acceptable for ultra-fast devices, but totally starves CPU on slow devices.</li>
+        <li><b>Interrupt-Driven I/O:</b> CPU initiates I/O and switches to another process. Device controller asserts Interrupt Request Line (IRL) when ready. CPU halts current instruction, saves context, indexes <b>Interrupt Vector Table (IVT)</b>, and invokes <b>Interrupt Service Routine (ISR)</b>.</li>
+        <li><b>Interrupt Hardware:</b> Non-Maskable (NMI: fatal hardware faults) vs Maskable (can be delayed during critical sections).</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="box-title" style="color: #b45309;">Direct Memory Access (DMA)</div>
+      Specialized hardware bypasses CPU for high-speed block transfers (Disks, NICs):
+      <ul>
+        <li><b>Architecture:</b> CPU programs DMAC (DMA Controller) with Source Address, Destination Address, Transfer Count, and Command (R/W), then yields bus control.</li>
+        <li><b>Execution:</b> DMAC transfers entire data blocks directly between device buffer and physical RAM.</li>
+        <li><b>Cycle Stealing:</b> DMAC snatches memory bus cycles from CPU while CPU computes internally from L1/L2 cache.</li>
+        <li><b>Completion:</b> DMAC generates exactly <b>1 interrupt per block</b> (instead of 1 interrupt per byte).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 2: KERNEL I/O SUBSYSTEM -->
+  <div class="sec-title">2. Kernel I/O Subsystem Services & Abstractions</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">I/O Scheduling, Buffering & Caching</div>
+      <ul>
+        <li><b>I/O Scheduling:</b> OS reorders pending request queues to optimize physical device efficiency, minimize seek latency, and ensure fairness across processes.</li>
+        <li><b>Buffering:</b> Memory area holding data during transfer to resolve:
+          <ul>
+            <li><i>Speed Mismatch:</i> Fast CPU vs slow modem/disk.</li>
+            <li><i>Transfer Size Mismatch:</i> Network packets vs disk block chunks.</li>
+            <li><i>Copy Semantics:</i> Preserving application data state at <code>write()</code> time.</li>
+            <li><i>Schemes:</i> Single Buffering, Double Buffering (Ping-Pong: CPU processes buf 1 while device fills buf 2), Circular Buffering.</li>
+          </ul>
+        </li>
+        <li><b>Caching vs Buffering:</b> Caching keeps copies of frequently read data in fast RAM; Buffering temporarily holds transit data between producer and consumer.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="box-title">Spooling, Error Handling & Device Reservation</div>
+      <ul>
+        <li><b>Spooling (Simultaneous Peripheral Operations On-Line):</b> Disk buffer holding output jobs for non-sharable / non-multiplexable devices (e.g. Printer, Tape drives). OS printer daemon consumes spool queue sequentially while user processes finish immediately without blocking.</li>
+        <li><b>Error Handling:</b> Transient errors (parity faults, transient seek errors) auto-retried with exponential backoff. Permanent errors propagated via system error codes (<code>errno</code>: <code>EIO</code>, <code>ENOSPC</code>).</li>
+        <li><b>I/O Protection:</b> All I/O instructions are privileged (Kernel Mode only). User applications invoke I/O strictly via System Calls (Trap to Kernel).</li>
+        <li><b>Device Streams:</b> UNIX STREAMS architecture enables modular pipelining of device drivers, protocol stacks, and line disciplines.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 3: PHYSICAL DISK GEOMETRY -->
+  <div class="sec-title">3. Physical Magnetic Disk Geometry & Access Latency Equations</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title" style="color: #1e3a8a;">Physical Architecture & Terminology</div>
+      <ul>
+        <li><b>Platters & Spindle:</b> Stack of circular aluminum/glass platters coated with magnetic material rotating on a common spindle at constant angular velocity (5400, 7200, 10000, 15000 RPM).</li>
+        <li><b>Tracks & Sectors:</b> Each surface is divided into concentric rings called <b>Tracks</b>. Each track is partitioned into <b>Sectors</b> (standard 512 Bytes or Advanced Format 4 KB).</li>
+        <li><b>Cylinders:</b> Set of all tracks at identical radial distance across all platter surfaces. Data across a cylinder can be accessed without moving the mechanical arm!</li>
+        <li><b>Read/Write Heads:</b> Aerodynamically float on an air cushion (~nanometers above platter) mounted on a synchronized movable actuator arm.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="box-title" style="color: #b45309;">Access Time Formulas & Solved Numerical</div>
+      <div class="formula">
+        T_access = T_seek + T_rotational + T_transfer + T_controller
+      </div>
+      <ul>
+        <li><b>Seek Time (T_seek):</b> Time to move actuator arm to target cylinder (Dominant mechanical bottleneck: 3 - 9 ms).</li>
+        <li><b>Rotational Latency (T_rotational):</b> Time for target sector to rotate under head.
+          <div class="code">T_rot(avg) = 60 / (2 * RPM) sec = 30000 / RPM ms</div>
+          <i>For 7200 RPM:</i> T_rot(avg) = 30,000 / 7200 = <b>4.167 ms</b>.
+        </li>
+        <li><b>Transfer Time:</b> T_trans = (Bytes to transfer) / (Transfer Rate).</li>
+        <li><b>Controller Overhead:</b> Handshake & bus protocol delay (~0.1 - 0.5 ms).</li>
+      </ul>
+      <div class="alert">
+        <b>AKTU Numerical:</b> 7200 RPM, avg seek 6 ms, transfer rate 50 MB/s. Time to read 512 B sector?<br>
+        T = 6 ms (seek) + 4.167 ms (rot) + (512 / 50*10^6 = 0.01 ms) + 0.2 ms = <b>10.377 ms</b>.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental • Unit 5: I/O Hardware & Storage</span>
+    <span>Page 1 of 3</span>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- PAGE 2: DISK SCHEDULING ALGORITHMS & RAID ARCHITECTURE -->
+<!-- ========================================================================= -->
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>UNIT 5: DISK SCHEDULING ALGORITHMS & RAID ARCHITECTURE</h1>
+      <span style="font-size: 7.2pt; color: #475569; font-weight: 600;">AKTU BCS401 High-Yield Rapid Recall • Page 2 of 3</span>
+    </div>
+    <span class="badge">SCHEDULING & FAULT TOLERANCE</span>
+  </div>
+
+  <!-- SECTION 1: DISK SCHEDULING MASTER BENCHMARK -->
+  <div class="sec-title">1. Disk Scheduling Algorithms Master Benchmark & Comparison</div>
+  <div class="alert" style="margin-bottom: 3px;">
+    <b>Standard Benchmark Parameters (AKTU PYQ):</b> Request Queue = <code>98, 183, 37, 122, 14, 124, 65, 67</code> | Initial Head = <b>53</b> | Disk Range = <b>0 to 199</b> | Direction = <b>Towards Higher Cylinders</b>
+  </div>
+
+  <table>
+    <tr>
+      <th style="width: 14%;">Algorithm</th>
+      <th style="width: 38%;">Head Movement Trace Path</th>
+      <th style="width: 12%;">Seek Count</th>
+      <th style="width: 18%;">Core Pros</th>
+      <th style="width: 18%;">Core Cons</th>
+    </tr>
+    <tr>
+      <td><b>FCFS</b><br><span style="font-size: 6.8pt; color: #64748b;">First-Come</span></td>
+      <td>53 &rarr; 98 &rarr; 183 &rarr; 37 &rarr; 122 &rarr; 14 &rarr; 124 &rarr; 65 &rarr; 67</td>
+      <td><b style="color: #ef4444;">640 cyl</b></td>
+      <td>100% Fair, Zero overhead, No starvation</td>
+      <td>Disastrous mechanical wild swings; worst seek count</td>
+    </tr>
+    <tr>
+      <td><b>SSTF</b><br><span style="font-size: 6.8pt; color: #64748b;">Shortest Seek</span></td>
+      <td>53 &rarr; 65 &rarr; 67 &rarr; 37 &rarr; 14 &rarr; 98 &rarr; 122 &rarr; 124 &rarr; 183</td>
+      <td><b style="color: #f59e0b;">236 cyl</b></td>
+      <td>High throughput, greedily minimizes seek time</td>
+      <td><b>Starvation</b> of edge/distant requests under heavy load</td>
+    </tr>
+    <tr>
+      <td><b>SCAN</b><br><span style="font-size: 6.8pt; color: #64748b;">Elevator</span></td>
+      <td>53 &rarr; 65 &rarr; 67 &rarr; 98 &rarr; 122 &rarr; 124 &rarr; 183 &rarr; <b>199</b> &rarr; 37 &rarr; 14</td>
+      <td><b style="color: #0284c7;">236 cyl</b></td>
+      <td>Prevents starvation, uniform mechanical sweep</td>
+      <td>Always travels to disk boundary (199); favors middle</td>
+    </tr>
+    <tr>
+      <td><b>C-SCAN</b><br><span style="font-size: 6.8pt; color: #64748b;">Circular SCAN</span></td>
+      <td>53 &rarr; ... &rarr; 183 &rarr; <b>199</b> &rarr; <b>0</b> (no service) &rarr; 14 &rarr; 37</td>
+      <td><b style="color: #6366f1;">382 cyl</b></td>
+      <td>Uniform wait time across all cylinders</td>
+      <td>Wastes seek time on full return sweep (199 &rarr; 0)</td>
+    </tr>
+    <tr>
+      <td><b>LOOK</b><br><span style="font-size: 6.8pt; color: #64748b;">Boundary Opt.</span></td>
+      <td>53 &rarr; 65 &rarr; 67 &rarr; 98 &rarr; 122 &rarr; 124 &rarr; <b>183</b> &rarr; 37 &rarr; 14</td>
+      <td><b style="color: #10b981;">208 cyl (Best)</b></td>
+      <td><b>Optimal!</b> Reverses at last request; skips boundaries</td>
+      <td>Direction state tracking overhead in kernel</td>
+    </tr>
+    <tr>
+      <td><b>C-LOOK</b><br><span style="font-size: 6.8pt; color: #64748b;">Circular LOOK</span></td>
+      <td>53 &rarr; ... &rarr; <b>183</b> &rarr; <b>14</b> (jumps to lowest request) &rarr; 37</td>
+      <td><b style="color: #8b5cf6;">322 cyl</b></td>
+      <td>Uniform waiting without traversing dead ends</td>
+      <td>Higher seek than LOOK due to return hop</td>
+    </tr>
+  </table>
+
+  <!-- SECTION 2: RAID ARCHITECTURE -->
+  <div class="sec-title">2. RAID Architecture (Redundant Array of Independent Disks)</div>
+  <div class="grid-3" style="margin-bottom: 3px;">
+    <div class="box">
+      <div class="box-title" style="color: #1e40af;">1. Striping (Performance)</div>
+      Data split into consecutive chunks/stripes spread across multiple disks in parallel. Increases read/write throughput via multi-channel parallelism. <i>Provides 0 fault tolerance.</i>
+    </div>
+    <div class="box">
+      <div class="box-title" style="color: #059669;">2. Mirroring (Redundancy)</div>
+      Identical copy of data written simultaneously to duplicate mirror disk. 100% data protection against single disk failure; fast read load balancing. <i>50% storage overhead.</i>
+    </div>
+    <div class="box">
+      <div class="box-title" style="color: #b45309;">3. Parity (Error Recovery)</div>
+      Bitwise XOR error-correcting code (<code class="code">P = D1 &oplus; D2 &oplus; D3</code>). If any disk fails: <code class="code">D1 = P &oplus; D2 &oplus; D3</code>. Saves storage vs mirroring.
+    </div>
+  </div>
+
+  <table>
+    <tr>
+      <th style="width: 13%;">RAID Level</th>
+      <th style="width: 25%;">Architecture & Parity Strategy</th>
+      <th style="width: 14%;">Usable Capacity</th>
+      <th style="width: 10%;">Min Disks</th>
+      <th style="width: 14%;">Fault Tolerance</th>
+      <th style="width: 24%;">Write Penalty & Primary Use Case</th>
+    </tr>
+    <tr>
+      <td><b>RAID 0</b></td>
+      <td>Block-level Striping without redundancy</td>
+      <td><b>N &times; S (100%)</b></td>
+      <td>2</td>
+      <td><b>0 disks</b> (Data loss)</td>
+      <td>0 penalty. High-speed video editing, scratch disks.</td>
+    </tr>
+    <tr>
+      <td><b>RAID 1</b></td>
+      <td>Disk Mirroring (Shadowing)</td>
+      <td><b>1 &times; S (50% if N=2)</b></td>
+      <td>2</td>
+      <td><b>N - 1 disks</b></td>
+      <td>2&times; writes. OS system boot drives, critical DB logs.</td>
+    </tr>
+    <tr>
+      <td><b>RAID 2</b></td>
+      <td>Bit-level Striping + Hamming Code ECC</td>
+      <td>(N - ECC) &times; S</td>
+      <td>3</td>
+      <td>1 disk</td>
+      <td>Heavy controller ECC overhead. Obsolete.</td>
+    </tr>
+    <tr>
+      <td><b>RAID 3</b></td>
+      <td>Byte-level Striping + Dedicated Parity disk</td>
+      <td>(N - 1) &times; S</td>
+      <td>3</td>
+      <td>1 disk</td>
+      <td>Dedicated parity disk is heavy I/O bottleneck.</td>
+    </tr>
+    <tr>
+      <td><b>RAID 4</b></td>
+      <td>Block-level Striping + Dedicated Parity disk</td>
+      <td>(N - 1) &times; S</td>
+      <td>3</td>
+      <td>1 disk</td>
+      <td>Parity disk bottleneck on small concurrent writes.</td>
+    </tr>
+    <tr>
+      <td><b>RAID 5</b></td>
+      <td>Block-level Striping + <b>Distributed Parity</b></td>
+      <td><b>(N - 1) &times; S</b></td>
+      <td>3</td>
+      <td><b>1 disk</b> failure</td>
+      <td><b>4 I/Os write penalty</b> (2 reads + 2 writes). Enterprise servers.</td>
+    </tr>
+    <tr>
+      <td><b>RAID 6</b></td>
+      <td>Dual Distributed Parity (P + Q Reed-Solomon)</td>
+      <td><b>(N - 2) &times; S</b></td>
+      <td>4</td>
+      <td><b>2 disks</b> failure</td>
+      <td><b>6 I/Os write penalty</b> (3 reads + 3 writes). Large archival arrays.</td>
+    </tr>
+    <tr>
+      <td><b>RAID 10 (1+0)</b></td>
+      <td>Striped set of Mirrored pairs</td>
+      <td><b>(N / 2) &times; S</b></td>
+      <td>4</td>
+      <td>1 per mirrored pair</td>
+      <td>High performance & faster rebuild than RAID 0+1. Production DBs.</td>
+    </tr>
+  </table>
+
+  <div class="alert" style="margin-top: 3px;">
+    <b>RAID 5 Write Penalty Derivation:</b> Updating 1 block requires: Read old data, Read old parity, Compute new parity (<code class="code">P_new = P_old &oplus; D_old &oplus; D_new</code>), Write new data, Write new parity = <b>2 Reads + 2 Writes = 4 Disk I/O operations</b>.
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental • Unit 5: Scheduling & RAID</span>
+    <span>Page 2 of 3</span>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- PAGE 3: FILE SYSTEMS, INODES, ALLOCATION, FREE SPACE & PROTECTION -->
+<!-- ========================================================================= -->
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>UNIT 5: FILE SYSTEMS, INODES, ALLOCATION & PROTECTION</h1>
+      <span style="font-size: 7.2pt; color: #475569; font-weight: 600;">AKTU BCS401 High-Yield Rapid Recall • Page 3 of 3</span>
+    </div>
+    <span class="badge">VFS, INODES & SECURITY</span>
+  </div>
+
+  <!-- SECTION 1: FILE CONCEPTS & VFS -->
+  <div class="sec-title">1. File Concept, Directory Systems & Virtual File System (VFS)</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">File Control Block (FCB) & Directories</div>
+      <ul>
+        <li><b>FCB / Inode:</b> File metadata container: Identifier, Type, Size, Permissions (rwx), Timestamps (atime, mtime, ctime), Owner ID, and Disk Block Pointers. Does NOT store file name in UNIX!</li>
+        <li><b>Directory Structures:</b> Single-Level (name collision), Two-Level (user isolation), Hierarchical Tree (paths <code>/a/b/c</code>), Acyclic Graph (shared files via links).</li>
+        <li><b>Hard Link:</b> New directory entry pointing to <i>existing Inode</i>. Increments <code>i_nlink</code>. Deleting original preserves data. Cannot cross filesystems.</li>
+        <li><b>Soft (Symbolic) Link:</b> New file with <i>distinct Inode</i> containing destination path text string. Can cross filesystems; creates dangling link if target deleted.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="box-title">Virtual File System (VFS) Architecture</div>
+      Kernel abstraction layer decoupling generic POSIX system calls (<code>open</code>, <code>read</code>, <code>write</code>) from concrete filesystem implementations (ext4, NTFS, NFS, FAT):
+      <ul>
+        <li><b>Superblock Object:</b> Entire mounted filesystem metadata (magic number, block size, total blocks, free blocks).</li>
+        <li><b>Inode Object:</b> Individual file physical metadata and block pointers.</li>
+        <li><b>Dentry Object:</b> Directory entry mapping human-readable string path names to Inode numbers; cached in fast RAM <b>dcache</b>.</li>
+        <li><b>File Object:</b> Per-process open file instance (file offset pointer, access mode flags).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 2: FILE ALLOCATION & INODE SIZING -->
+  <div class="sec-title">2. File Allocation Methods & UNIX Inode Mathematical Derivation</div>
+  <table>
+    <tr>
+      <th>Method</th>
+      <th>Block Layout Scheme</th>
+      <th>Access Performance</th>
+      <th>Fragmentation</th>
+      <th>Key Trade-off</th>
+    </tr>
+    <tr>
+      <td><b>Contiguous</b></td>
+      <td>Sequential contiguous disk blocks</td>
+      <td>Fast Sequential & <b>O(1) Direct</b></td>
+      <td><b>External Fragmentation</b></td>
+      <td>File size cannot grow dynamically without relocation</td>
+    </tr>
+    <tr>
+      <td><b>Linked</b></td>
+      <td>Each block stores pointer to next block</td>
+      <td>Sequential only; <b>O(N) Direct</b></td>
+      <td>Zero External; internal only</td>
+      <td>Slow seek traversal; 1 corrupted pointer destroys rest of file</td>
+    </tr>
+    <tr>
+      <td><b>FAT</b></td>
+      <td>Pointers stored in dedicated RAM table</td>
+      <td>Fast Linked traversal in RAM</td>
+      <td>Zero External</td>
+      <td>Entire FAT table must reside in physical RAM (memory cost)</td>
+    </tr>
+    <tr>
+      <td><b>Indexed</b></td>
+      <td>Index block stores pointers to all blocks</td>
+      <td><b>O(1) Direct & Fast Sequential</b></td>
+      <td>Zero External</td>
+      <td>Index block overhead for small files; requires multilevel index</td>
+    </tr>
+  </table>
+
+  <div class="grid-2" style="margin-top: 3px;">
+    <div class="box">
+      <div class="box-title" style="color: #1e3a8a;">UNIX Inode Sizing Math (AKTU 10-Marks)</div>
+      Inode has 12 Direct, 1 Single, 1 Double, 1 Triple Indirect pointer.
+      <div class="code">Pointers/Block K = Block_Size / Pointer_Size</div>
+      <i>Given: Block = 4 KB, Pointer = 4 B &rArr; K = 4096 / 4 = 1024 (2<sup>10</sup>)</i>
+      <ul>
+        <li>Direct: 12 &times; 4 KB = <b>48 KB</b></li>
+        <li>Single Indirect: 1 &times; 1024 &times; 4 KB = <b>4 MB</b></li>
+        <li>Double Indirect: 1 &times; (1024)<sup>2</sup> &times; 4 KB = <b>4 GB</b></li>
+        <li>Triple Indirect: 1 &times; (1024)<sup>3</sup> &times; 4 KB = <b>4 TB</b></li>
+      </ul>
+      <div class="formula">Max File Size = 48 KB + 4 MB + 4 GB + 4 TB &approx; 4 TB</div>
+    </div>
+
+    <div class="box">
+      <div class="box-title" style="color: #059669;">Free Space Management Schemes</div>
+      <ul>
+        <li><b>Bit Vector / Bitmap:</b> 1 bit per block (0=Alloc, 1=Free). Block# = (0-words &times; 32) + offset. CPU <code>bsf</code>/<code>ffs</code> instructions give O(1) allocation.
+          <div class="code">RAM Bytes = Disk_Size / (8 * Block_Size)</div>
+          <i>1.3 TB Disk with 512 B block = 302.68 MB RAM! (4KB block = 37.8 MB)</i>
+        </li>
+        <li><b>Linked Free List:</b> Pointers inside free blocks. Zero space waste, but disastrous seek traversal.</li>
+        <li><b>Grouping:</b> 1st free block holds (N-1) free block pointers + 1 pointer to next group block. 1 read yields N-1 blocks.</li>
+        <li><b>Counting:</b> Stores tuples <code>(start_block, count)</code> for contiguous extents; stored in B-Tree (ext4, XFS).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 3: FILE PROTECTION & ACCESS MATRIX -->
+  <div class="sec-title">3. File Protection & Access Matrix Model</div>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">Access Matrix: ACL vs Capability List</div>
+      Theoretical 2D Matrix of Domains (Rows) &times; Objects (Columns):
+      <ul>
+        <li><b>Access Control Lists (ACL):</b> Decompose matrix by <b>Columns</b>. List attached to File (<code class="code">F1 &rarr; [(UserA, rw), (UserB, r)]</code>).
+          <br><b>Pros:</b> Trivial to revoke rights. <b>Cons:</b> Slower lookup on every open. Used in Windows NTFS, POSIX ACLs.</li>
+        <li><b>Capability Lists (C-Lists):</b> Decompose matrix by <b>Rows</b>. Ticket/Token badge attached to Process (<code class="code">ProcA &rarr; [(F1, rw), (Printer, print)]</code>).
+          <br><b>Pros:</b> O(1) instant verification. <b>Cons:</b> Extremely hard revocation. Used in seL4 microkernel.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="box-title">UNIX 9-Bit Octal Permissions (chmod 754)</div>
+      Divided into 3 classes: <b>Owner (u)</b>, <b>Group (g)</b>, <b>Others (o)</b>:
+      <div class="code">r = 4 (Read), w = 2 (Write), x = 1 (Execute)</div>
+      <ul>
+        <li><b>chmod 754:</b>
+          <ul>
+            <li>Owner: 4 + 2 + 1 = <b>7</b> (rwx - full access)</li>
+            <li>Group: 4 + 0 + 1 = <b>5</b> (r-x - read & execute)</li>
+            <li>Others: 4 + 0 + 0 = <b>4</b> (r-- - read only)</li>
+          </ul>
+        </li>
+        <li><b>Special Modes:</b> SUID (4000: runs as owner, e.g. <code>passwd</code>), SGID (2000), Sticky Bit (1000: only owner can delete, e.g. <code>/tmp</code> 1777).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental • Unit 5: Inodes, Allocation & Protection</span>
+    <span>Page 3 of 3</span>
+  </div>
+</div>
+
+</body>
+</html>

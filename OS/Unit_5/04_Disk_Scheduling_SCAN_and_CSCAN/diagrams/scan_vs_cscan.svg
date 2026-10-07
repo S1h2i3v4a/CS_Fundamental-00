@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Disk Scheduling: SCAN (Elevator) vs C-SCAN (Circular)</text>
+  
+  <text x="500" y="65" fill="#fde68a" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Queue: 98, 183, 37, 122, 14, 124, 65, 67 | Head = 53 | Direction: Towards 0</text>
+
+  <!-- Left Side: SCAN Algorithm -->
+  <g transform="translate(60, 90)">
+    <rect width="420" height="390" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="210" y="28" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SCAN (Elevator Algorithm)</text>
+    
+    <text x="25" y="60" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Rule: Disk arm ek direction me aakhiri end (0) tak jata hai,</text>
+    <text x="25" y="78" fill="#cbd5e1" font-family="sans-serif" font-size="11">  phir reverse hokar doosre end ki taraf badhta hai.</text>
+    
+    <text x="25" y="105" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="bold">Path: 53 → 37 → 14 → 0 → 65 → 67 → 98 → 122 → 124 → 183</text>
+    
+    <text x="25" y="135" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Calculations:</text>
+    <text x="25" y="155" fill="#cbd5e1" font-family="sans-serif" font-size="10">• Downward to End 0: (53 - 0) = 53 tracks</text>
+    <text x="25" y="175" fill="#cbd5e1" font-family="sans-serif" font-size="10">• Reverse from 0 to 183: (183 - 0) = 183 tracks</text>
+    <text x="25" y="205" fill="#fde68a" font-family="sans-serif" font-size="11" font-weight="bold">Total Movement = 53 + 183 = 236 Cylinders</text>
+    
+    <rect x="25" y="235" width="370" height="38" rx="6" fill="#0369a1"/>
+    <text x="210" y="259" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Total Head Movement = 236 Cylinders</text>
+    
+    <text x="25" y="300" fill="#4ade80" font-family="sans-serif" font-size="10.5" font-weight="bold">• Advantage: No starvation! (Like an elevator)</text>
+    <text x="25" y="320" fill="#f87171" font-family="sans-serif" font-size="10.5">• Inequity: Middle cylinders get serviced twice as often</text>
+    <text x="25" y="338" fill="#fca5a5" font-family="sans-serif" font-size="10">  as boundary cylinders.</text>
+  </g>
+
+  <!-- Right Side: C-SCAN Algorithm -->
+  <g transform="translate(520, 90)">
+    <rect width="420" height="390" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
+    <text x="210" y="28" fill="#c084fc" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">C-SCAN (Circular SCAN)</text>
+    
+    <text x="25" y="60" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Rule: Arm sirf EK DIRECTION me requests serve karta hai.</text>
+    <text x="25" y="78" fill="#cbd5e1" font-family="sans-serif" font-size="11">  End par pahunch kar sidha bina service kiye start par aata hai.</text>
+    
+    <text x="25" y="105" fill="#c084fc" font-family="sans-serif" font-size="11" font-weight="bold">Path (Moving Up): 53 → ... → 199 → 0 → 14 → 37</text>
+    
+    <text x="25" y="135" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Calculations (Upwards direction):</text>
+    <text x="25" y="155" fill="#cbd5e1" font-family="sans-serif" font-size="10">• 53 to 199: (199 - 53) = 146 tracks</text>
+    <text x="25" y="175" fill="#cbd5e1" font-family="sans-serif" font-size="10">• Fly-back 199 to 0: (199 - 0) = 199 tracks (No service)</text>
+    <text x="25" y="195" fill="#cbd5e1" font-family="sans-serif" font-size="10">• 0 to 37: (37 - 0) = 37 tracks</text>
+    
+    <rect x="25" y="235" width="370" height="38" rx="6" fill="#581c87"/>
+    <text x="210" y="259" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Total Movement = 146 + 199 + 37 = 382 Cylinders</text>
+    
+    <text x="25" y="300" fill="#4ade80" font-family="sans-serif" font-size="10.5" font-weight="bold">• Advantage: Uniform waiting time for all cylinders!</text>
+    <text x="25" y="320" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• Treats cylinders as a continuous circular ring.</text>
+  </g>
+</svg>

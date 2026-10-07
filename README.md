@@ -9,7 +9,8 @@ Welcome to the **CS Fundamentals** repository! Yeh repository Computer Science k
 - 📄 **[Unit 2: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 2 (Concurrency & Synchronization) condensed into **EXACT 3 PAGES**!
 - 📄 **[Unit 3: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 3 (CPU Scheduling & Deadlock) condensed into **EXACT 3 PAGES**!
 - 📄 **[Unit 4: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 4 (Memory Management & Virtual Memory) condensed into **EXACT 3 PAGES**!
-- 📘 **[Unit 1 Guide](./OS/Unit_1/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 2 Guide](./OS/Unit_2/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 3 Guide](./OS/Unit_3/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 4 Guide](./OS/Unit_4/00_Quick_Revision_Short_Notes/README.md)**
+- 📄 **[Unit 5: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_5/Unit_5_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 5 (I/O Systems, Disk Scheduling, RAID & File Management) condensed into **EXACT 3 PAGES**!
+- 📘 **[Unit 1 Guide](./OS/Unit_1/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 2 Guide](./OS/Unit_2/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 3 Guide](./OS/Unit_3/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 4 Guide](./OS/Unit_4/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 5 Guide](./OS/Unit_5/00_Quick_Revision_Short_Notes/README.md)**
 
 ---
 
@@ -102,6 +103,25 @@ CS_Fundamental-00/
         ├── 13_Thrashing_and_Working_Set_Model/   <-- Priority 13: CPU Thrashing, Working Set (Delta), PFF
         ├── 14_Locality_of_Reference_and_Cache_Organization/ <-- Priority 14: Temporal/Spatial Locality, Cache Mappings
         └── 15_Unit_4_AKTU_PYQs_and_Interview_Cheatsheet/ <-- Priority 15: AKTU PYQs, Formula Sheet, Interview Q&As
+    └── Unit_5/                                  <-- Unit 5 Folder (Priorities 00 to 14)
+        ├── README.md                            <-- Unit 5 Complete Roadmap
+        ├── Unit_5_Quick_Revision_3_Page_Notes.pdf <-- 3-Page Rapid Recall PDF
+        ├── Unit_5_Master_Notes.pdf              <-- 21-Page Consolidated Master PDF
+        ├── 00_Quick_Revision_Short_Notes/       <-- Priority 00: 3-Page Ultra High-Yield Notes
+        ├── 01_IO_Hardware_and_Kernel_Subsystems/ <-- Priority 01: Polling, Interrupts, DMA, Buffering, Spooling
+        ├── 02_Disk_Storage_and_Physical_Architecture/ <-- Priority 02: Platters, Tracks, Sectors, Latency Math
+        ├── 03_Disk_Scheduling_FCFS_and_SSTF/    <-- Priority 03: FCFS (640 cyl) vs SSTF (236 cyl), Starvation
+        ├── 04_Disk_Scheduling_SCAN_and_CSCAN/   <-- Priority 04: SCAN Elevator (236 cyl) vs C-SCAN (382 cyl)
+        ├── 05_Disk_Scheduling_LOOK_and_CLOOK/   <-- Priority 05: LOOK (208 cyl - Best) vs C-LOOK (322 cyl)
+        ├── 06_RAID_Architecture_Levels_0_to_6/  <-- Priority 06: Striping, Mirroring, Parity, RAID 0-6 & 10
+        ├── 07_File_Concept_and_Access_Methods/  <-- Priority 07: File Attributes, FCB, Sequential & Direct
+        ├── 08_Directory_Structures_and_File_Sharing/ <-- Priority 08: Single/Two/Tree/Acyclic, Hard & Soft Links
+        ├── 09_File_System_Implementation_and_VFS/ <-- Priority 09: Superblock, Inodes, Dentry, Linux VFS
+        ├── 10_UNIX_Inode_Architecture_and_Calculations/ <-- Priority 10: Direct/Indirect Pointers, 4TB File Sizing
+        ├── 11_File_Allocation_Methods/          <-- Priority 11: Contiguous, Linked, FAT, Indexed Allocations
+        ├── 12_Free_Space_Management_Techniques/ <-- Priority 12: Bit Vector (Bitmap), Free List, Grouping, Counting
+        ├── 13_File_System_Protection_and_Access_Matrix/ <-- Priority 13: Access Matrix, ACL, Capability, chmod 754
+        └── 14_Unit_5_AKTU_PYQs_and_Interview_Cheatsheet/ <-- Priority 14: Solved 10-Markers, SSDs vs HDDs, FAANG Q&A
 ```
 
 ---

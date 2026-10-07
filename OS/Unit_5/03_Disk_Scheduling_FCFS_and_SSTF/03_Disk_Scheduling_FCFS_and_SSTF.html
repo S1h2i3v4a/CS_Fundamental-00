@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 03: Disk Scheduling - FCFS and SSTF</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 03: Disk Scheduling &mdash; FCFS and SSTF</h1>
+<p><span class="badge">AKTU BCS401</span> <span class="badge">Unit 5</span> <span class="badge">Disk Arm Optimization</span></p>
+
+<h2>1. Algorithm Principles</h2>
+<ul>
+  <li><strong>FCFS:</strong> Pure FIFO order. Fair with no starvation, but causes wild head swings.</li>
+  <li><strong>SSTF:</strong> Greedy local minimum search. Drastically reduces seek time, but causes <strong>Starvation</strong>.</li>
+</ul>
+
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Disk Scheduling: FCFS vs SSTF Head Movement Comparison</text>
+  
+  <text x="500" y="65" fill="#fde68a" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Queue: 98, 183, 37, 122, 14, 124, 65, 67 | Initial Head Position = 53</text>
+
+  <!-- Left Side: FCFS Trace -->
+  <g transform="translate(60, 90)">
+    <rect width="420" height="390" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="210" y="28" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">1. FCFS (First-Come, First-Served)</text>
+    
+    <text x="25" y="60" fill="#cbd5e1" font-family="sans-serif" font-size="11">Sequence: 53 &rarr; 98 &rarr; 183 &rarr; 37 &rarr; 122 &rarr; 14 &rarr; 124 &rarr; 65 &rarr; 67</text>
+    
+    <text x="25" y="90" fill="#94a3b8" font-family="sans-serif" font-size="10.5">Calculations:</text>
+    <text x="25" y="110" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |98 - 53| = 45</text>
+    <text x="25" y="128" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |183 - 98| = 85</text>
+    <text x="25" y="146" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |37 - 183| = 146 (Wild swing across disk!)</text>
+    <text x="25" y="164" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |122 - 37| = 85</text>
+    <text x="25" y="182" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |14 - 122| = 108</text>
+    <text x="25" y="200" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |124 - 14| = 110</text>
+    <text x="25" y="218" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |65 - 124| = 59</text>
+    <text x="25" y="236" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |67 - 65| = 2</text>
+    
+    <rect x="25" y="260" width="370" height="40" rx="6" fill="#0c4a6e"/>
+    <text x="210" y="285" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">Total Head Movement = 640 Cylinders</text>
+    
+    <text x="25" y="330" fill="#f87171" font-family="sans-serif" font-size="10.5" font-weight="bold">&bull; Drawback: Zero optimization; wild head swings.</text>
+    <text x="25" y="350" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Advantage: Simple, fair, no starvation.</text>
+  </g>
+
+  <!-- Right Side: SSTF Trace -->
+  <g transform="translate(520, 90)">
+    <rect width="420" height="390" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="210" y="28" fill="#34d399" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">2. SSTF (Shortest Seek Time First)</text>
+    
+    <text x="25" y="60" fill="#4ade80" font-family="sans-serif" font-size="11" font-weight="bold">Sequence: 53 &rarr; 65 &rarr; 67 &rarr; 37 &rarr; 14 &rarr; 98 &rarr; 122 &rarr; 124 &rarr; 183</text>
+    
+    <text x="25" y="90" fill="#94a3b8" font-family="sans-serif" font-size="10.5">Calculations (Always pick nearest cylinder):</text>
+    <text x="25" y="110" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |65 - 53| = 12</text>
+    <text x="25" y="128" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |67 - 65| = 2</text>
+    <text x="25" y="146" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |37 - 67| = 30</text>
+    <text x="25" y="164" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |14 - 37| = 23</text>
+    <text x="25" y="182" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |98 - 14| = 84</text>
+    <text x="25" y="200" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |122 - 98| = 24</text>
+    <text x="25" y="218" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |124 - 122| = 2</text>
+    <text x="25" y="236" fill="#cbd5e1" font-family="sans-serif" font-size="10">&bull; |183 - 124| = 59</text>
+    
+    <rect x="25" y="260" width="370" height="40" rx="6" fill="#065f46"/>
+    <text x="210" y="285" fill="#4ade80" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">Total Head Movement = 236 Cylinders (63% Less!)</text>
+    
+    <text x="25" y="330" fill="#f87171" font-family="sans-serif" font-size="10.5" font-weight="bold">&bull; Serious Flaw: Starvation of far requests!</text>
+    <text x="25" y="350" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">&bull; Greedy algorithm; not globally optimal.</text>
+  </g>
+</svg>
+</div>
+
+<h2>2. Solved Numerical Summary</h2>
+<p>Queue: 98, 183, 37, 122, 14, 124, 65, 67 | Head = 53</p>
+<div class="callout">
+&bull; <strong>FCFS Head Movement:</strong> <strong>640 Cylinders</strong><br>
+&bull; <strong>SSTF Head Movement:</strong> <strong>236 Cylinders</strong> (63% reduction!)
+</div>
+</body>
+</html>

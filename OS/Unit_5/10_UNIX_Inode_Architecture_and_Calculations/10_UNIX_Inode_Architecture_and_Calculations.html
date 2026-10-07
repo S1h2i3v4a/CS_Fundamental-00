@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 10: UNIX Inode Architecture and Calculations</title>
+
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10.5pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 17pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13.5pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 11.5pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; }
+.diagram { text-align: center; margin: 14px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+</style>
+
+</head>
+<body>
+<h1>Module 10: UNIX Inode Architecture and Calculations</h1>
+<p><span class="badge">AKTU BCS401</span> <span class="badge">Unit 5</span> <span class="badge">Multi-Level Inode Indexing</span></p>
+
+<h2>1. 15-Pointer Hybrid Inode Model</h2>
+<p>UNIX Inodes combine 12 Direct pointers (for ultra-fast small file access) with 1 Single, 1 Double, and 1 Triple Indirect pointer (for huge multi-gigabyte file scaling).</p>
+
+<div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">UNIX Inode Architecture: Direct, Single, Double &amp; Triple Indirect Pointers</text>
+  
+  <!-- Inode Structure Box on Left -->
+  <g transform="translate(60, 70)">
+    <rect width="260" height="420" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="35" rx="10" fill="#0284c7"/>
+    <text x="130" y="23" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">UNIX Inode (128 - 256 B)</text>
+    
+    <text x="15" y="55" fill="#94a3b8" font-size="10">Mode, Owner, Size, Timestamps</text>
+    <line x1="10" y1="62" x2="250" y2="62" stroke="#475569"/>
+    
+    <!-- Direct Blocks 0 to 11 -->
+    <rect x="15" y="70" width="230" height="85" rx="6" fill="#0f172a" stroke="#10b981"/>
+    <text x="25" y="90" fill="#4ade80" font-size="11" font-weight="bold">12 Direct Pointers (0 to 11)</text>
+    <text x="25" y="110" fill="#cbd5e1" font-size="10">Points directly to Data Blocks</text>
+    <text x="25" y="130" fill="#86efac" font-size="10" font-weight="bold">Cap: 12 &times; BlockSize (Fastest!)</text>
+    
+    <!-- Single Indirect -->
+    <rect x="15" y="165" width="230" height="65" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+    <text x="25" y="185" fill="#38bdf8" font-size="11" font-weight="bold">1 Single Indirect Pointer</text>
+    <text x="25" y="205" fill="#cbd5e1" font-size="10">Points to 1 Index Block of pointers</text>
+    <text x="25" y="220" fill="#93c5fd" font-size="10">Cap: (BlockSize / PtrSize) &times; BlockSize</text>
+    
+    <!-- Double Indirect -->
+    <rect x="15" y="240" width="230" height="65" rx="6" fill="#0f172a" stroke="#f59e0b"/>
+    <text x="25" y="260" fill="#fbbf24" font-size="11" font-weight="bold">1 Double Indirect Pointer</text>
+    <text x="25" y="280" fill="#cbd5e1" font-size="10">Points to Index Block of Index Blocks</text>
+    <text x="25" y="295" fill="#fde68a" font-size="10">Cap: (BlockSize / PtrSize)^2 &times; BlockSize</text>
+    
+    <!-- Triple Indirect -->
+    <rect x="15" y="315" width="230" height="65" rx="6" fill="#0f172a" stroke="#a855f7"/>
+    <text x="25" y="335" fill="#c084fc" font-size="11" font-weight="bold">1 Triple Indirect Pointer</text>
+    <text x="25" y="355" fill="#cbd5e1" font-size="10">3 levels of index tree pointers</text>
+    <text x="25" y="370" fill="#e9d5ff" font-size="10">Cap: (BlockSize / PtrSize)^3 &times; BlockSize</text>
+  </g>
+
+  <!-- Pointers Navigation Tree on Right -->
+  <g transform="translate(360, 70)">
+    <rect width="580" height="420" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="290" y="28" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Data Block Dereferencing Mechanics</text>
+    
+    <!-- Direct Data Blocks -->
+    <rect x="30" y="55" width="140" height="40" rx="4" fill="#065f46" stroke="#4ade80"/>
+    <text x="100" y="80" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Direct Data Block</text>
+    <line x1="-80" y1="110" x2="30" y2="75" stroke="#4ade80" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <!-- Single Indirect Tree -->
+    <rect x="30" y="125" width="130" height="40" rx="4" fill="#0c4a6e" stroke="#38bdf8"/>
+    <text x="95" y="150" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">Index Block</text>
+    <line x1="-80" y1="195" x2="30" y2="145" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <rect x="230" y="125" width="140" height="40" rx="4" fill="#065f46" stroke="#4ade80"/>
+    <text x="300" y="150" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Data Block</text>
+    <line x1="160" y1="145" x2="230" y2="145" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <!-- Double Indirect Tree -->
+    <rect x="30" y="200" width="130" height="40" rx="4" fill="#78350f" stroke="#f59e0b"/>
+    <text x="95" y="225" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">Level 1 Index</text>
+    <line x1="-80" y1="270" x2="30" y2="220" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <rect x="210" y="200" width="130" height="40" rx="4" fill="#0c4a6e" stroke="#38bdf8"/>
+    <text x="275" y="225" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">Level 2 Index</text>
+    <line x1="160" y1="220" x2="210" y2="220" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <rect x="390" y="200" width="140" height="40" rx="4" fill="#065f46" stroke="#4ade80"/>
+    <text x="460" y="225" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Data Block</text>
+    <line x1="340" y1="220" x2="390" y2="220" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <!-- Mathematical Derivation Box -->
+    <rect x="20" y="275" width="540" height="130" rx="6" fill="#0f172a" stroke="#10b981"/>
+    <text x="270" y="298" fill="#34d399" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Standard Exam Formula (Block = 1 KB, Pointer = 4 B)</text>
+    <text x="30" y="322" fill="#cbd5e1" font-size="10.5">&bull; Pointers per Index Block (P) = 1024 B / 4 B = 256 = 2^8</text>
+    <text x="30" y="342" fill="#cbd5e1" font-size="10.5">&bull; Direct Blocks = 12 &times; 1 KB = 12 KB</text>
+    <text x="30" y="362" fill="#cbd5e1" font-size="10.5">&bull; Single Indirect = 256 &times; 1 KB = 256 KB</text>
+    <text x="30" y="382" fill="#cbd5e1" font-size="10.5">&bull; Double Indirect = 256^2 &times; 1 KB = 65,536 &times; 1 KB = 64 MB</text>
+    <text x="30" y="400" fill="#fde68a" font-size="10.5" font-weight="bold">&bull; Triple Indirect = 256^3 &times; 1 KB = 16,777,216 &times; 1 KB = 16 GB Max Size!</text>
+  </g>
+</svg>
+</div>
+
+<h2>2. Solved File Capacity Derivation (Block = 1 KB, Ptr = 4 B)</h2>
+<table>
+<tr><th>Pointer Level</th><th>Pointers Count</th><th>Capacity Calculation</th><th>Result</th></tr>
+<tr><td><strong>12 Direct</strong></td><td>12</td><td>12 &times; 1 KB</td><td>12 KB</td></tr>
+<tr><td><strong>1 Single Indirect</strong></td><td>256</td><td>256 &times; 1 KB</td><td>256 KB</td></tr>
+<tr><td><strong>1 Double Indirect</strong></td><td>256^2 = 65,536</td><td>65,536 &times; 1 KB</td><td>64 MB</td></tr>
+<tr><td><strong>1 Triple Indirect</strong></td><td>256^3 = 16,777,216</td><td>16,777,216 &times; 1 KB</td><td>16 GB</td></tr>
+<tr><td><strong>Total Maximum File Size</strong></td><td>&mdash;</td><td>Sum of all levels</td><td><strong>&asymp; 16.064 GB</strong></td></tr>
+</table>
+</body>
+</html>

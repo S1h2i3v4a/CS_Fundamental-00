@@ -9,6 +9,7 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 - 📄 **[Unit_2_Quick_Revision_3_Page_Notes.pdf](./Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 2 (Concurrency & Synchronization) condensed into **EXACT 3 PAGES**!
 - 📄 **[Unit_3_Quick_Revision_3_Page_Notes.pdf](./Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 3 (CPU Scheduling & Deadlock) condensed into **EXACT 3 PAGES**!
 - 📄 **[Unit_4_Quick_Revision_3_Page_Notes.pdf](./Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 4 (Memory Management & Virtual Memory) condensed into **EXACT 3 PAGES**!
+- 📄 **[Unit_5_Quick_Revision_3_Page_Notes.pdf](./Unit_5/Unit_5_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 5 (I/O Systems, Disk Scheduling, RAID & File Management) condensed into **EXACT 3 PAGES**!
 
 ---
 
@@ -100,6 +101,26 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 
 ---
 
+### 📙 [Unit 5: I/O Management, Disk Scheduling, RAID & File Systems](./Unit_5/README.md)
+*Complete 105-page syllabus coverage organized in sequential priority subfolders (`00_` to `14_`):*
+- **[00_Quick_Revision_Short_Notes](./Unit_5/00_Quick_Revision_Short_Notes/README.md)** *(3-Page High-Yield Cheat Sheet)*
+- **[01_IO_Hardware_and_Kernel_Subsystems](./Unit_5/01_IO_Hardware_and_Kernel_Subsystems/README.md)**
+- **[02_Disk_Storage_and_Physical_Architecture](./Unit_5/02_Disk_Storage_and_Physical_Architecture/README.md)**
+- **[03_Disk_Scheduling_FCFS_and_SSTF](./Unit_5/03_Disk_Scheduling_FCFS_and_SSTF/README.md)**
+- **[04_Disk_Scheduling_SCAN_and_CSCAN](./Unit_5/04_Disk_Scheduling_SCAN_and_CSCAN/README.md)**
+- **[05_Disk_Scheduling_LOOK_and_CLOOK](./Unit_5/05_Disk_Scheduling_LOOK_and_CLOOK/README.md)**
+- **[06_RAID_Architecture_Levels_0_to_6](./Unit_5/06_RAID_Architecture_Levels_0_to_6/README.md)**
+- **[07_File_Concept_and_Access_Methods](./Unit_5/07_File_Concept_and_Access_Methods/README.md)**
+- **[08_Directory_Structures_and_File_Sharing](./Unit_5/08_Directory_Structures_and_File_Sharing/README.md)**
+- **[09_File_System_Implementation_and_VFS](./Unit_5/09_File_System_Implementation_and_VFS/README.md)**
+- **[10_UNIX_Inode_Architecture_and_Calculations](./Unit_5/10_UNIX_Inode_Architecture_and_Calculations/README.md)**
+- **[11_File_Allocation_Methods](./Unit_5/11_File_Allocation_Methods/README.md)**
+- **[12_Free_Space_Management_Techniques](./Unit_5/12_Free_Space_Management_Techniques/README.md)**
+- **[13_File_System_Protection_and_Access_Matrix](./Unit_5/13_File_System_Protection_and_Access_Matrix/README.md)**
+- **[14_Unit_5_AKTU_PYQs_and_Interview_Cheatsheet](./Unit_5/14_Unit_5_AKTU_PYQs_and_Interview_Cheatsheet/README.md)**
+
+---
+
 ## 📚 Master Consolidated PDF Documents
 - 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)** (Unit 1 Exact 3-Page Recall Sheet)
 - 📄 **[Unit_1_Master_Notes.pdf](./Unit_1/Unit_1_Master_Notes.pdf)** (Unit 1 Complete 58-Page Master PDF)
@@ -109,6 +130,9 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 - 📄 **[Unit_3_Master_Notes.pdf](./Unit_3/Unit_3_Master_Notes.pdf)** (Unit 3 Complete 17-Page Master PDF)
 - 📄 **[Unit_4_Quick_Revision_3_Page_Notes.pdf](./Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf)** (Unit 4 Exact 3-Page Recall Sheet)
 - 📄 **[Unit_4_Master_Notes.pdf](./Unit_4/Unit_4_Master_Notes.pdf)** (Unit 4 Complete 19-Page Master PDF)
+- 📄 **[Unit_5_Quick_Revision_3_Page_Notes.pdf](./Unit_5/Unit_5_Quick_Revision_3_Page_Notes.pdf)** (Unit 5 Exact 3-Page Recall Sheet)
+- 📄 **[Unit_5_Master_Notes.pdf](./Unit_5/Unit_5_Master_Notes.pdf)** (Unit 5 Complete 21-Page Master PDF)
 
 ---
 *Created for CS Fundamentals Repository by Shivam Keshari*
+

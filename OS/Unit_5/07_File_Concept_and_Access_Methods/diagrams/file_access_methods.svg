@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="2"/>
+  <text x="500" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">File Organization &amp; Access Mechanisms</text>
+  
+  <!-- Left: File Concept & Attributes -->
+  <g transform="translate(50, 70)">
+    <rect width="420" height="410" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="210" y="28" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">File Structure &amp; Core Attributes</text>
+    
+    <rect x="20" y="45" width="380" height="150" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="35" y="68" fill="#4ade80" font-family="sans-serif" font-size="12" font-weight="bold">Core File Attributes (Stored in FCB / Inode):</text>
+    <text x="35" y="90" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <strong>Name:</strong> Human-readable string (e.g., report.pdf)</text>
+    <text x="35" y="108" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <strong>Identifier:</strong> Unique integer tag (Inode number in Linux)</text>
+    <text x="35" y="126" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <strong>Type:</strong> Extension or magic bytes (.c, .txt, .exe)</text>
+    <text x="35" y="144" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <strong>Location &amp; Size:</strong> Pointer to device &amp; current byte size</text>
+    <text x="35" y="162" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <strong>Protection &amp; Timestamps:</strong> Access rights, creation/mod time</text>
+    
+    <text x="20" y="225" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold">Standard File Operations:</text>
+    <text x="20" y="250" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <code>create()</code>: Allocate space &amp; directory entry</text>
+    <text x="20" y="270" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <code>write()</code> / <code>read()</code>: Transfer bytes at current file pointer</text>
+    <text x="20" y="290" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <code>lseek()</code>: Reposition file pointer without I/O</text>
+    <text x="20" y="310" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <code>truncate()</code>: Erase data keeping attributes intact</text>
+    <text x="20" y="330" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">• <code>unlink()</code>: Release directory reference &amp; free blocks</text>
+  </g>
+
+  <!-- Right: 3 File Access Methods -->
+  <g transform="translate(510, 70)">
+    <rect width="440" height="410" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="220" y="28" fill="#c084fc" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">3 File Access Methods</text>
+    
+    <!-- Method 1: Sequential Access -->
+    <rect x="20" y="45" width="400" height="95" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+    <text x="35" y="68" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold">1. Sequential Access (Tape / Stream Model)</text>
+    <text x="35" y="88" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Information is processed in order, one record after another.</text>
+    <text x="35" y="105" fill="#94a3b8" font-family="sans-serif" font-size="10">Operations: read_next(), write_next(), reset().</text>
+    <text x="35" y="122" fill="#4ade80" font-family="sans-serif" font-size="10">Use case: Audio/video media streams, compilers scanning code.</text>
+    
+    <!-- Method 2: Direct Access -->
+    <rect x="20" y="155" width="400" height="95" rx="6" fill="#0f172a" stroke="#10b981"/>
+    <text x="35" y="178" fill="#34d399" font-family="sans-serif" font-size="12" font-weight="bold">2. Direct / Random Access (Disk Block Model)</text>
+    <text x="35" y="198" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">File is viewed as a numbered sequence of fixed-size blocks.</text>
+    <text x="35" y="215" fill="#94a3b8" font-family="sans-serif" font-size="10">Operations: read(block_n), write(block_n), seek(position).</text>
+    <text x="35" y="232" fill="#4ade80" font-family="sans-serif" font-size="10">Use case: Relational Databases, B-tree indexes, virtual disk images.</text>
+    
+    <!-- Method 3: Indexed Access -->
+    <rect x="20" y="265" width="400" height="125" rx="6" fill="#0f172a" stroke="#f59e0b"/>
+    <text x="35" y="288" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="bold">3. Indexed Sequential Access Method (ISAM)</text>
+    <text x="35" y="308" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Built on top of direct access: Ek alag index table maintain hoti hai.</text>
+    <text x="35" y="325" fill="#cbd5e1" font-family="sans-serif" font-size="10.5">Search index → Get block pointer → Direct seek to record.</text>
+    <text x="35" y="345" fill="#fde68a" font-family="sans-serif" font-size="10">Multi-level indexing used when index file itself becomes too large.</text>
+    <text x="35" y="362" fill="#4ade80" font-family="sans-serif" font-size="10">Use case: Banking databases, enterprise flight reservation systems.</text>
+  </g>
+</svg>
