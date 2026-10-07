@@ -7,6 +7,7 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 ## ⚡ Quick Revision Short Notes (Instant Recall)
 - 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 1 condensed into **EXACT 3 PAGES** for last-minute exam & interview rapid recall!
 - 📄 **[Unit_2_Quick_Revision_3_Page_Notes.pdf](./Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 2 (Concurrency & Synchronization) condensed into **EXACT 3 PAGES**!
+- 📄 **[Unit_3_Quick_Revision_3_Page_Notes.pdf](./Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 3 (CPU Scheduling & Deadlock) condensed into **EXACT 3 PAGES**!
 
 ---
 
@@ -55,11 +56,35 @@ Yeh repository Operating System ke sabhi units ko structured, modular aur priori
 
 ---
 
+### 📙 [Unit 3: CPU Scheduling & Deadlock](./Unit_3/README.md)
+*Complete 263-page syllabus coverage organized in sequential priority subfolders (`00_` to `16_`):*
+- **[00_Quick_Revision_Short_Notes](./Unit_3/00_Quick_Revision_Short_Notes/README.md)** *(3-Page High-Yield Cheat Sheet)*
+- **[01_Process_Concepts_States_and_PCB](./Unit_3/01_Process_Concepts_States_and_PCB/README.md)**
+- **[02_Schedulers_and_Context_Switching](./Unit_3/02_Schedulers_and_Context_Switching/README.md)**
+- **[03_Threads_and_Multithreading_Models](./Unit_3/03_Threads_and_Multithreading_Models/README.md)**
+- **[04_CPU_Scheduling_Concepts_and_Criteria](./Unit_3/04_CPU_Scheduling_Concepts_and_Criteria/README.md)**
+- **[05_FCFS_and_Convoy_Effect](./Unit_3/05_FCFS_and_Convoy_Effect/README.md)**
+- **[06_SJF_and_SRTF_Scheduling](./Unit_3/06_SJF_and_SRTF_Scheduling/README.md)**
+- **[07_Priority_Scheduling_and_Aging](./Unit_3/07_Priority_Scheduling_and_Aging/README.md)**
+- **[08_Round_Robin_Scheduling](./Unit_3/08_Round_Robin_Scheduling/README.md)**
+- **[09_Multilevel_Queue_and_MLFQ](./Unit_3/09_Multilevel_Queue_and_MLFQ/README.md)**
+- **[10_Multiprocessor_Scheduling](./Unit_3/10_Multiprocessor_Scheduling/README.md)**
+- **[11_Deadlock_System_Model_and_Coffman_Conditions](./Unit_3/11_Deadlock_System_Model_and_Coffman_Conditions/README.md)**
+- **[12_Resource_Allocation_Graph_RAG](./Unit_3/12_Resource_Allocation_Graph_RAG/README.md)**
+- **[13_Deadlock_Prevention_and_Havender_Algorithm](./Unit_3/13_Deadlock_Prevention_and_Havender_Algorithm/README.md)**
+- **[14_Deadlock_Avoidance_and_Bankers_Algorithm](./Unit_3/14_Deadlock_Avoidance_and_Bankers_Algorithm/README.md)**
+- **[15_Deadlock_Detection_and_Recovery](./Unit_3/15_Deadlock_Detection_and_Recovery/README.md)**
+- **[16_Unit_3_AKTU_PYQs_and_Interview_Cheatsheet](./Unit_3/16_Unit_3_AKTU_PYQs_and_Interview_Cheatsheet/README.md)**
+
+---
+
 ## 📚 Master Consolidated PDF Documents
 - 📄 **[Unit_1_Quick_Revision_3_Page_Notes.pdf](./Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)** (Unit 1 Exact 3-Page Recall Sheet)
 - 📄 **[Unit_1_Master_Notes.pdf](./Unit_1/Unit_1_Master_Notes.pdf)** (Unit 1 Complete 58-Page Master PDF)
 - 📄 **[Unit_2_Quick_Revision_3_Page_Notes.pdf](./Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)** (Unit 2 Exact 3-Page Recall Sheet)
 - 📄 **[Unit_2_Master_Notes.pdf](./Unit_2/Unit_2_Master_Notes.pdf)** (Unit 2 Complete 17-Page Master PDF)
+- 📄 **[Unit_3_Quick_Revision_3_Page_Notes.pdf](./Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf)** (Unit 3 Exact 3-Page Recall Sheet)
+- 📄 **[Unit_3_Master_Notes.pdf](./Unit_3/Unit_3_Master_Notes.pdf)** (Unit 3 Complete 17-Page Master PDF)
 
 ---
 *Created for CS Fundamentals Repository by Shivam Keshari*

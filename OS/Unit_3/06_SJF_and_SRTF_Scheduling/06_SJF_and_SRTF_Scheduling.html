@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 06: SJF & SRTF Scheduling</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 11pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 18pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 14pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 12pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+.diagram { text-align: center; margin: 15px 0; }
+.diagram svg { max-width: 95%; height: auto; }
+</style>
+</head>
+<body>
+<h1>Module 06: SJF (Non-Preemptive) &amp; SRTF (Preemptive)</h1>
+<p><span class="badge">AKTU BCS401</span> <span class="badge">Unit 3</span> <span class="badge">Optimal Burst Scheduling</span></p>
+
+<h2>1. Execution Comparison &amp; Timelines</h2>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1329"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1100" height="520" rx="14" fill="url(#bg6)" stroke="#334155" stroke-width="2"/>
+  <text x="550" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">SJF (Non-Preemptive) vs SRTF (Preemptive SJF) Execution</text>
+
+  <!-- Left: SJF Non-Preemptive -->
+  <g transform="translate(40, 75)">
+    <rect width="490" height="410" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="245" y="30" fill="#38bdf8" font-size="15" font-weight="bold" text-anchor="middle">SJF (Non-Preemptive)</text>
+
+    <!-- Gantt Chart SJF -->
+    <g transform="translate(25, 60)">
+      <rect x="0" y="0" width="120" height="45" fill="#7f1d1d" stroke="#ef4444"/>
+      <text x="60" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">P4 (BT=6)</text>
+      
+      <rect x="120" y="0" width="50" height="45" fill="#1e3a8a" stroke="#3b82f6"/>
+      <text x="145" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">P1</text>
+
+      <rect x="170" y="0" width="50" height="45" fill="#047857" stroke="#10b981"/>
+      <text x="195" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">P3</text>
+
+      <rect x="220" y="0" width="100" height="45" fill="#d97706" stroke="#fbbf24"/>
+      <text x="270" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">P5 (BT=3)</text>
+
+      <rect x="320" y="0" width="120" height="45" fill="#4c1d95" stroke="#a855f7"/>
+      <text x="380" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">P2 (BT=5)</text>
+
+      <!-- Timestamps -->
+      <text x="0" y="65" fill="#cbd5e1" font-size="10.5" font-family="monospace">0</text>
+      <text x="120" y="65" fill="#cbd5e1" font-size="10.5" font-family="monospace">6</text>
+      <text x="170" y="65" fill="#cbd5e1" font-size="10.5" font-family="monospace">7</text>
+      <text x="220" y="65" fill="#cbd5e1" font-size="10.5" font-family="monospace">8</text>
+      <text x="320" y="65" fill="#cbd5e1" font-size="10.5" font-family="monospace">11</text>
+      <text x="440" y="65" fill="#cbd5e1" font-size="10.5" font-family="monospace">16</text>
+    </g>
+
+    <text x="25" y="160" fill="#f8fafc" font-size="12" font-weight="bold">SJF Properties:</text>
+    <text x="25" y="185" fill="#cbd5e1" font-size="11">• Provably OPTIMAL for minimizing Avg Waiting Time.</text>
+    <text x="25" y="205" fill="#cbd5e1" font-size="11">• Once scheduled, job runs to completion without preemption.</text>
+    <text x="25" y="225" fill="#f87171" font-size="11">• Long jobs suffer Starvation if short jobs arrive repeatedly.</text>
+    <text x="25" y="250" fill="#fbbf24" font-size="11">• Next burst prediction: &tau;_{n+1} = &alpha;*t_n + (1-&alpha;)*&tau;_n</text>
+    
+    <rect x="25" y="280" width="440" height="95" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="35" y="305" fill="#4ade80" font-size="11" font-family="monospace">Average Turnaround Time = 7.8 ms</text>
+    <text x="35" y="330" fill="#38bdf8" font-size="11" font-family="monospace">Average Waiting Time = 4.6 ms</text>
+    <text x="35" y="355" fill="#fbbf24" font-size="11" font-family="monospace">Average Response Time = 4.6 ms (RT == WT)</text>
+  </g>
+
+  <!-- Right: SRTF Preemptive -->
+  <g transform="translate(560, 75)">
+    <rect width="500" height="410" rx="10" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="250" y="30" fill="#4ade80" font-size="15" font-weight="bold" text-anchor="middle">SRTF (Shortest Remaining Time First)</text>
+
+    <!-- Gantt Chart SRTF -->
+    <g transform="translate(25, 60)">
+      <rect x="0" y="0" width="40" height="45" fill="#7f1d1d" stroke="#ef4444"/>
+      <text x="20" y="28" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">P4</text>
+
+      <rect x="40" y="0" width="40" height="45" fill="#1e3a8a" stroke="#3b82f6"/>
+      <text x="60" y="28" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">P2</text>
+
+      <rect x="80" y="0" width="40" height="45" fill="#047857" stroke="#10b981"/>
+      <text x="100" y="28" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">P1</text>
+
+      <rect x="120" y="0" width="70" height="45" fill="#1e3a8a" stroke="#3b82f6"/>
+      <text x="155" y="28" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">P2</text>
+
+      <rect x="190" y="0" width="40" height="45" fill="#047857" stroke="#10b981"/>
+      <text x="210" y="28" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">P3</text>
+
+      <rect x="230" y="0" width="70" height="45" fill="#d97706" stroke="#fbbf24"/>
+      <text x="265" y="28" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">P5</text>
+
+      <rect x="300" y="0" width="150" height="45" fill="#7f1d1d" stroke="#ef4444"/>
+      <text x="375" y="28" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">P4 (rem 5)</text>
+
+      <!-- Timestamps -->
+      <text x="0" y="65" fill="#cbd5e1" font-size="9.5" font-family="monospace">0</text>
+      <text x="40" y="65" fill="#cbd5e1" font-size="9.5" font-family="monospace">1</text>
+      <text x="80" y="65" fill="#cbd5e1" font-size="9.5" font-family="monospace">2</text>
+      <text x="120" y="65" fill="#cbd5e1" font-size="9.5" font-family="monospace">3</text>
+      <text x="190" y="65" fill="#cbd5e1" font-size="9.5" font-family="monospace">7</text>
+      <text x="230" y="65" fill="#cbd5e1" font-size="9.5" font-family="monospace">8</text>
+      <text x="300" y="65" fill="#cbd5e1" font-size="9.5" font-family="monospace">11</text>
+      <text x="450" y="65" fill="#cbd5e1" font-size="9.5" font-family="monospace">16</text>
+    </g>
+
+    <text x="25" y="160" fill="#f8fafc" font-size="12" font-weight="bold">SRTF Preemptive Mechanism:</text>
+    <text x="25" y="185" fill="#cbd5e1" font-size="11">• At every new arrival, remaining time of running job is compared.</text>
+    <text x="25" y="205" fill="#cbd5e1" font-size="11">• If new arrival has strictly shorter remaining burst &rarr; PREEMPT!</text>
+    <text x="25" y="225" fill="#4ade80" font-size="11">• Even lower Avg WT than non-preemptive SJF.</text>
+    <text x="25" y="248" fill="#fbbf24" font-size="11">• Frequent context switches increase CPU overhead.</text>
+
+    <rect x="25" y="280" width="450" height="95" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="35" y="305" fill="#4ade80" font-size="11" font-family="monospace">Average Turnaround Time = 6.2 ms (Lower than SJF)</text>
+    <text x="35" y="330" fill="#38bdf8" font-size="11" font-family="monospace">Average Waiting Time = 3.0 ms (Optimal)</text>
+    <text x="35" y="355" fill="#fbbf24" font-size="11" font-family="monospace">Average Response Time = 1.6 ms (RT != WT)</text>
+  </g>
+</svg></div>
+
+<h2>2. Exponential Smoothing Burst Prediction</h2>
+<div class="callout">
+$$\tau_{n+1} = \alpha t_n + (1 - \alpha) \tau_n$$
+<ul>
+<li><code>t_n</code>: Actual length of n-th CPU burst</li>
+<li><code>&tau;_n</code>: Predicted length of n-th CPU burst</li>
+<li><code>&alpha;</code>: Smoothing weight factor (0 &le; &alpha; &le; 1)</li>
+</ul>
+</div>
+
+<h2>3. Summary Comparison</h2>
+<table>
+<tr><th>Metric</th><th>Non-Preemptive SJF</th><th>Preemptive SJF (SRTF)</th></tr>
+<tr><td><strong>Preemption</strong></td><td>No</td><td>Yes (At each arrival)</td></tr>
+<tr><td><strong>Avg WT</strong></td><td>4.6 ms</td><td>3.0 ms (Lower / Superior)</td></tr>
+<tr><td><strong>Response Time</strong></td><td>RT == WT</td><td>Significantly faster response</td></tr>
+<tr><td><strong>Context Switch Overhead</strong></td><td>Low</td><td>High (Frequent preemption)</td></tr>
+</table>
+</body>
+</html>

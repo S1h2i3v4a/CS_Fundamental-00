@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1329"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1100" height="520" rx="14" fill="url(#bg10)" stroke="#334155" stroke-width="2"/>
+  <text x="550" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Multiprocessor Scheduling Architectures (SMP, Affinity &amp; NUMA)</text>
+
+  <!-- Left: Asymmetric vs Symmetric MP -->
+  <g transform="translate(40, 75)">
+    <rect width="480" height="410" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="240" y="30" fill="#38bdf8" font-size="15" font-weight="bold" text-anchor="middle">Asymmetric vs Symmetric (SMP)</text>
+
+    <!-- AMP -->
+    <rect x="25" y="55" width="430" height="150" rx="6" fill="#0f172a" stroke="#fbbf24"/>
+    <text x="40" y="80" fill="#fbbf24" font-size="13" font-weight="bold">Asymmetric Multiprocessing (AMP / Master-Slave)</text>
+    <text x="40" y="105" fill="#cbd5e1" font-size="10.5">• One Master CPU handles all OS code, scheduling, and I/O.</text>
+    <text x="40" y="125" fill="#cbd5e1" font-size="10.5">• Slave CPUs execute only user application tasks.</text>
+    <text x="40" y="145" fill="#4ade80" font-size="10.5">• Advantage: Zero data sharing race conditions in kernel.</text>
+    <text x="40" y="165" fill="#f87171" font-size="10.5">• Bottleneck: Master CPU becomes system performance bottleneck!</text>
+
+    <!-- SMP -->
+    <rect x="25" y="225" width="430" height="160" rx="6" fill="#0f172a" stroke="#4ade80"/>
+    <text x="40" y="250" fill="#4ade80" font-size="13" font-weight="bold">Symmetric Multiprocessing (SMP) [Industry Standard]</text>
+    <text x="40" y="275" fill="#cbd5e1" font-size="10.5">• Each CPU is self-scheduling (Peers).</text>
+    <text x="40" y="295" fill="#cbd5e1" font-size="10.5">• Can use either 1 Shared Ready Queue or 1 Private Queue per CPU.</text>
+    <text x="40" y="315" fill="#cbd5e1" font-size="10.5">• Synchronization locks required for kernel data structures.</text>
+    <text x="40" y="335" fill="#38bdf8" font-size="10.5">• Maximum scalability across modern multi-core chips.</text>
+  </g>
+
+  <!-- Right: Processor Affinity & Load Balancing -->
+  <g transform="translate(560, 75)">
+    <rect width="500" height="410" rx="10" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="250" y="30" fill="#4ade80" font-size="15" font-weight="bold" text-anchor="middle">Processor Affinity &amp; Load Balancing</text>
+
+    <!-- Processor Affinity -->
+    <rect x="25" y="55" width="450" height="150" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+    <text x="40" y="80" fill="#38bdf8" font-size="13" font-weight="bold">Processor Affinity (Cache Warmth)</text>
+    <text x="40" y="105" fill="#cbd5e1" font-size="10.5">• Process running on CPU 1 populates CPU 1's L1/L2 Cache.</text>
+    <text x="40" y="125" fill="#cbd5e1" font-size="10.5">• If moved to CPU 2, cache becomes invalid (Cache Invalidation cost!).</text>
+    <text x="40" y="145" fill="#a7f3d0" font-size="10.5">• Soft Affinity: OS tries to keep process on same CPU, but can migrate.</text>
+    <text x="40" y="165" fill="#4ade80" font-size="10.5">• Hard Affinity: Process explicitly locked to specific cores (sched_setaffinity).</text>
+
+    <!-- Load Balancing -->
+    <rect x="25" y="225" width="450" height="160" rx="6" fill="#0f172a" stroke="#fbbf24"/>
+    <text x="40" y="250" fill="#fbbf24" font-size="13" font-weight="bold">Load Balancing: Push vs Pull Migration</text>
+    <text x="40" y="275" fill="#cbd5e1" font-size="10.5">• Push Migration: Periodic task checks load. Overloaded CPU se</text>
+    <text x="40" y="295" fill="#cbd5e1" font-size="10.5">  processes ko idle/less-loaded CPUs par push karta hai.</text>
+    <text x="40" y="315" fill="#cbd5e1" font-size="10.5">• Pull Migration: Idle CPU doosre busy CPU ki queue se process pull karta hai.</text>
+    <text x="40" y="340" fill="#f87171" font-size="10.5">• Natural Conflict: Load balancing breaks processor affinity cache benefits!</text>
+  </g>
+</svg>

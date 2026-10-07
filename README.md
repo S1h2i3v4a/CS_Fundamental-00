@@ -7,7 +7,8 @@ Welcome to the **CS Fundamentals** repository! Yeh repository Computer Science k
 ## ⚡ Quick Revision Short Notes (Rapid Recall)
 - 📄 **[Unit 1: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 1 condensed into **EXACT 3 PAGES**!
 - 📄 **[Unit 2: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 2 (Concurrency & Synchronization) condensed into **EXACT 3 PAGES**!
-- 📘 **[Unit 1 Short Notes Guide](./OS/Unit_1/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 2 Short Notes Guide](./OS/Unit_2/00_Quick_Revision_Short_Notes/README.md)**
+- 📄 **[Unit 3: 3-Page Quick Revision Short Notes (PDF)](./OS/Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf)**: Complete Unit 3 (CPU Scheduling & Deadlock) condensed into **EXACT 3 PAGES**!
+- 📘 **[Unit 1 Guide](./OS/Unit_1/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 2 Guide](./OS/Unit_2/00_Quick_Revision_Short_Notes/README.md)** | **[Unit 3 Guide](./OS/Unit_3/00_Quick_Revision_Short_Notes/README.md)**
 
 ---
 
@@ -42,33 +43,54 @@ CS_Fundamental-00/
     │   ├── 17_Advanced_Kernel_and_System_Calls/ <-- Priority 17: Reentrant Kernel, 6-Stage Syscall Trace
     │   ├── 18_OS_Services_and_System_Components/ <-- Priority 18: OS Services Stack, 8 Core Subsystems
     │   └── 19_AKTU_PYQs_and_Interview_Cheatsheet/ <-- Priority 19: 10 Years AKTU PYQs & Solved Answers
-    └── Unit_2/                                  <-- Unit 2 Folder (Priorities 00 to 12)
-        ├── README.md                            <-- Unit 2 Complete Roadmap
-        ├── Unit_2_Quick_Revision_3_Page_Notes.pdf <-- 3-Page Rapid Recall PDF
-        ├── Unit_2_Master_Notes.pdf              <-- 17-Page Consolidated Master PDF
+    ├── Unit_2/                                  <-- Unit 2 Folder (Priorities 00 to 12)
+    │   ├── README.md                            <-- Unit 2 Complete Roadmap
+    │   ├── Unit_2_Quick_Revision_3_Page_Notes.pdf <-- 3-Page Rapid Recall PDF
+    │   ├── Unit_2_Master_Notes.pdf              <-- 17-Page Consolidated Master PDF
+    │   ├── 00_Quick_Revision_Short_Notes/       <-- Priority 00: 3-Page Ultra High-Yield Notes
+    │   ├── 01_Process_Concept_and_Concurrency_Principles/ <-- Priority 01: Race Conditions, Cooperating Processes
+    │   ├── 02_Critical_Section_Problem_and_Criteria/      <-- Priority 02: 4 Sections, 4 Criteria (Mutual Exclusion, Progress)
+    │   ├── 03_Software_Solutions_Peterson_Algorithm/      <-- Priority 03: Peterson's 2-Process Algorithm & Trace
+    │   ├── 04_Software_Solutions_Dekker_Algorithm/        <-- Priority 04: Dekker's Algorithm & Back-off Loop
+    │   ├── 05_Hardware_Synchronization_Test_and_Set/      <-- Priority 05: Atomic TSL, Swap, Spinlocks & Busy Wait
+    │   ├── 06_Semaphores_and_Mutexes/                     <-- Priority 06: Counting vs Binary, Block-Wakeup Queue
+    │   ├── 07_Producer_Consumer_Problem/                  <-- Priority 07: Bounded Buffer, Assembly Race, Deadlock Trap
+    │   ├── 08_Readers_Writers_Problem/                    <-- Priority 08: Reader Priority, First-In Last-Out Lock, Starvation
+    │   ├── 09_Dining_Philosophers_and_Sleeping_Barber/    <-- Priority 09: Circular Wait Deadlock, Barber Queue & Dropout
+    │   ├── 10_Process_Generation_and_Lifecycle/           <-- Priority 10: fork(), 2^n Process Tree, Zombie vs Orphan
+    │   ├── 11_Inter_Process_Communication_IPC/            <-- Priority 11: Shared Memory vs Message Passing, Sync Semantics
+    │   └── 12_Unit_2_AKTU_PYQs_and_Interview_Cheatsheet/  <-- Priority 12: Concurrency PYQs & Solved Answers
+    └── Unit_3/                                  <-- Unit 3 Folder (Priorities 00 to 16)
+        ├── README.md                            <-- Unit 3 Complete Roadmap
+        ├── Unit_3_Quick_Revision_3_Page_Notes.pdf <-- 3-Page Rapid Recall PDF
+        ├── Unit_3_Master_Notes.pdf              <-- 17-Page Consolidated Master PDF
         ├── 00_Quick_Revision_Short_Notes/       <-- Priority 00: 3-Page Ultra High-Yield Notes
-        ├── 01_Process_Concept_and_Concurrency_Principles/ <-- Priority 01: Race Conditions, Cooperating Processes
-        ├── 02_Critical_Section_Problem_and_Criteria/      <-- Priority 02: 4 Sections, 4 Criteria (Mutual Exclusion, Progress)
-        ├── 03_Software_Solutions_Peterson_Algorithm/      <-- Priority 03: Peterson's 2-Process Algorithm & Trace
-        ├── 04_Software_Solutions_Dekker_Algorithm/        <-- Priority 04: Dekker's Algorithm & Back-off Loop
-        ├── 05_Hardware_Synchronization_Test_and_Set/      <-- Priority 05: Atomic TSL, Swap, Spinlocks & Busy Wait
-        ├── 06_Semaphores_and_Mutexes/                     <-- Priority 06: Counting vs Binary, Block-Wakeup Queue
-        ├── 07_Producer_Consumer_Problem/                  <-- Priority 07: Bounded Buffer, Assembly Race, Deadlock Trap
-        ├── 08_Readers_Writers_Problem/                    <-- Priority 08: Reader Priority, First-In Last-Out Lock, Starvation
-        ├── 09_Dining_Philosophers_and_Sleeping_Barber/    <-- Priority 09: Circular Wait Deadlock, Barber Queue & Dropout
-        ├── 10_Process_Generation_and_Lifecycle/           <-- Priority 10: fork(), 2^n Process Tree, Zombie vs Orphan
-        ├── 11_Inter_Process_Communication_IPC/            <-- Priority 11: Shared Memory vs Message Passing, Sync Semantics
-        └── 12_Unit_2_AKTU_PYQs_and_Interview_Cheatsheet/  <-- Priority 12: AKTU PYQs (2014-2023) Solved, Concurrency Mindmap
+        ├── 01_Process_Concepts_States_and_PCB/  <-- Priority 01: Program vs Process, Address Space, 5 & 7 States, PCB
+        ├── 02_Schedulers_and_Context_Switching/ <-- Priority 02: LTS, STS, MTS, Dispatcher Latency, CPU Efficiency
+        ├── 03_Threads_and_Multithreading_Models/ <-- Priority 03: Process vs Thread, ULT vs KLT, Multithreading Models
+        ├── 04_CPU_Scheduling_Concepts_and_Criteria/ <-- Priority 04: CPU-I/O Burst, Preemption, 5 Criteria (TAT, WT, RT)
+        ├── 05_FCFS_and_Convoy_Effect/           <-- Priority 05: FCFS FIFO, Convoy Effect Proof & Solved Numericals
+        ├── 06_SJF_and_SRTF_Scheduling/          <-- Priority 06: SJF Optimality, Exponential Smoothing, SRTF Preemption
+        ├── 07_Priority_Scheduling_and_Aging/    <-- Priority 07: Preemptive Priority, GATE-2017 Trace, Starvation & Aging
+        ├── 08_Round_Robin_Scheduling/           <-- Priority 08: Circular FIFO, Time Quantum Dynamics, 80% Rule
+        ├── 09_Multilevel_Queue_and_MLFQ/        <-- Priority 09: MLQ Static Queues vs MLFQ Dynamic Feedback & Aging
+        ├── 10_Multiprocessor_Scheduling/        <-- Priority 10: AMP vs SMP, Processor Affinity, NUMA, Load Balancing
+        ├── 11_Deadlock_System_Model_and_Coffman_Conditions/ <-- Priority 11: 4 Coffman Conditions, Deadlock vs Starvation
+        ├── 12_Resource_Allocation_Graph_RAG/    <-- Priority 12: RAG Request/Assignment Edges, Single vs Multi Cycle Rules
+        ├── 13_Deadlock_Prevention_and_Havender_Algorithm/ <-- Priority 13: Denying Conditions, Havender's Resource Ordering
+        ├── 14_Deadlock_Avoidance_and_Bankers_Algorithm/ <-- Priority 14: Safe State, Banker's Safety & Resource Request
+        ├── 15_Deadlock_Detection_and_Recovery/  <-- Priority 15: Wait-For Graph (WFG), Detection Matrix, Process Abort
+        └── 16_Unit_3_AKTU_PYQs_and_Interview_Cheatsheet/ <-- Priority 16: AKTU PYQs, Formula Sheet, Unit 3 Mindmap
 ```
 
 ---
 
-## 🚀 Key Highlights of this Repository
-1. **Ultra High-Yield 3-Page Short Notes:** Har Unit exact 3 pages mein available hai quick recall ke liye ([Unit 1](./OS/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf) & [Unit 2](./OS/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf)).
-2. **Perfect GitHub Sorting:** Sabhi subfolders ko zero-padded prefixes (`00_`, `01_`...) diye gaye hain taaki GitHub file browser mein 100% sequential priority order dikhe.
-3. **Hinglish Intuition:** Relatable, clear Hinglish bhasha mein technical concepts explain kiye gaye hain.
-4. **Step-by-Step Code & Execution Traces:** Peterson's turn trace, Dekker's collision resolution, Assembly race conditions on shared `count`, `fork()` process trees ($2^n$).
-5. **Architectural SVG Diagrams:** Dark/Tech-themed high-resolution vector diagrams jo print aur digital reading dono ke liye optimized hain.
+## 🛠️ Key Highlights
+- **Priority-Driven Sequential Sorting:** Har unit ke folders sequential zero-padded prefixes (`00_` to `19_`, `00_` to `12_`, `00_` to `16_`) se organized hain jisse GitHub par automatically exact teaching order me top-to-bottom display hote hain.
+- **Bilingual Hinglish Explanations:** Deep machine-level assembly traces, real-world intuitive analogies, edge cases aur semester exam answers.
+- **Architectural Dark-Mode Diagrams:** Har module me custom vector SVG flowcharts aur diagrams shamil hain.
+- **Single-Click Printable PDFs:** Har chapter ka standalone PDF aur poor unit ka all-in-one consolidated **Master PDF** available hai.
+- **Strict 3-Page Recall Notes:** Revision ke liye exact 3 pages me condense kiye gaye rapid recall documents.
 
 ---
-*Maintained by Shivam Keshari*
+*Created for Computer Science Engineering Students & Aspiring Software Engineers by Shivam Keshari*

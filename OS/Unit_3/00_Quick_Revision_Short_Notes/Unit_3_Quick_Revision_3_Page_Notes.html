@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Unit 3: CPU Scheduling & Deadlock - 3-Page Ultra Revision Notes</title>
+<style>
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #0f172a;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  font-size: 8.8pt;
+  line-height: 1.35;
+}
+.page {
+  width: 210mm;
+  height: 296mm;
+  max-height: 296mm;
+  padding: 10mm 12mm 8mm 12mm;
+  margin: 0 auto;
+  overflow: hidden;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+.page:last-child {
+  page-break-after: avoid;
+}
+.header {
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.header h1 {
+  margin: 0;
+  font-size: 14pt;
+  color: #1e3a8a;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.header .badge {
+  font-size: 7.5pt;
+  font-weight: bold;
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.sec-title {
+  background: #f1f5f9;
+  border-left: 3.5px solid #2563eb;
+  color: #0f172a;
+  font-size: 9pt;
+  font-weight: 700;
+  padding: 2px 6px;
+  margin: 4px 0 3px 0;
+  text-transform: uppercase;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+.card {
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 4px 6px;
+  background: #f8fafc;
+  margin-bottom: 4px;
+}
+.card h4 {
+  margin: 0 0 2px 0;
+  font-size: 8.5pt;
+  color: #1e40af;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7.8pt;
+  margin: 3px 0 4px 0;
+}
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 2px 4px;
+  text-align: left;
+}
+th {
+  background: #e2e8f0;
+  color: #0f172a;
+  font-weight: 700;
+}
+tr:nth-child(even) {
+  background: #f8fafc;
+}
+code {
+  font-family: Consolas, monospace;
+  font-size: 7.8pt;
+  color: #b91c1c;
+  background: #f1f5f9;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+.formula {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: Consolas, monospace;
+  font-size: 7.8pt;
+  color: #166534;
+  margin: 2px 0;
+}
+.footer {
+  margin-top: auto;
+  border-top: 1px solid #cbd5e1;
+  padding-top: 3px;
+  font-size: 7pt;
+  color: #64748b;
+  display: flex;
+  justify-content: space-between;
+}
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1: PROCESSES, SCHEDULERS & METRICS ================= -->
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>UNIT 3: CPU SCHEDULING &amp; DEADLOCK</h1>
+      <span style="font-size: 8pt; color: #64748b; font-weight: 600;">AKTU BCS401 &bull; 3-Page Rapid Recall Cheatsheet</span>
+    </div>
+    <div>
+      <span class="badge">PAGE 1 / 3 &bull; CONCEPTS &amp; SCHEDULERS</span>
+    </div>
+  </div>
+
+  <div class="sec-title">1. Process Concepts &amp; Virtual Address Space</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Program vs Process</h4>
+      <div>&bull; <strong>Program:</strong> Passive entity; static machine binary code on disk.</div>
+      <div>&bull; <strong>Process:</strong> Active entity; Program in execution in RAM with PCB &amp; registers.</div>
+      <div>&bull; <strong>CPU-I/O Burst:</strong> Execution alternates: Compute (CPU) &harr; Wait (I/O).</div>
+    </div>
+    <div class="card">
+      <h4>Process Address Space Layout</h4>
+      <div>&bull; <strong>Text:</strong> Compiled instructions (Read-Only).</div>
+      <div>&bull; <strong>Data:</strong> Global/static variables (.data init, .bss uninit).</div>
+      <div>&bull; <strong>Heap:</strong> Dynamic runtime memory (malloc, new) &rarr; Grows UP.</div>
+      <div>&bull; <strong>Stack:</strong> Local vars, activation frames &rarr; Grows DOWN.</div>
+    </div>
+  </div>
+
+  <div class="sec-title">2. Process States &amp; PCB (Process Control Block)</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>5 &amp; 7 States Life Cycle Model</h4>
+      <div>&bull; <strong>NEW &rarr; READY:</strong> Admitted by Long-Term Scheduler (LTS).</div>
+      <div>&bull; <strong>READY &rarr; RUNNING:</strong> Dispatched by Short-Term Scheduler (STS).</div>
+      <div>&bull; <strong>RUNNING &rarr; READY:</strong> Preempted via timer interrupt/quantum.</div>
+      <div>&bull; <strong>RUNNING &rarr; WAITING:</strong> I/O request or event wait syscall.</div>
+      <div>&bull; <strong>WAITING &rarr; READY:</strong> I/O completion interrupt.</div>
+      <div>&bull; <strong>SUSPENDED (Ready/Blocked):</strong> Swapped to disk by MTS.</div>
+    </div>
+    <div class="card">
+      <h4>PCB Fields (task_struct in Linux)</h4>
+      <div>&bull; <strong>PID / PPID:</strong> Unique integer process / parent ID.</div>
+      <div>&bull; <strong>Process State:</strong> Running, Interruptible, Zombie.</div>
+      <div>&bull; <strong>Program Counter (PC):</strong> Next instruction memory pointer.</div>
+      <div>&bull; <strong>CPU Registers:</strong> Saved hardware context on preemption.</div>
+      <div>&bull; <strong>Scheduling Info:</strong> Priority, nice value, queue pointers.</div>
+      <div>&bull; <strong>Memory &amp; I/O:</strong> Page tables, limits, open file descriptors.</div>
+    </div>
+  </div>
+
+  <div class="sec-title">3. Schedulers Hierarchy &amp; Dispatcher Latency</div>
+  <table>
+    <tr><th>Scheduler</th><th>Alternate Name</th><th>Primary Function</th><th>Speed / Frequency</th><th>Multiprogramming Control</th></tr>
+    <tr><td><strong>Long-Term (LTS)</strong></td><td>Job Scheduler</td><td>Pool (Disk) &rarr; Ready Queue (RAM)</td><td>Slow (Minutes)</td><td>Controls degree of multiprogramming</td></tr>
+    <tr><td><strong>Short-Term (STS)</strong></td><td>CPU Scheduler</td><td>Ready Queue &rarr; CPU Execution</td><td>Ultra-fast (Milliseconds)</td><td>No direct control over degree</td></tr>
+    <tr><td><strong>Medium-Term (MTS)</strong></td><td>Swapper</td><td>RAM &harr; Disk Swap Space</td><td>Medium (Seconds)</td><td>Reduces degree during thrashing</td></tr>
+  </table>
+  <div class="formula">
+    <strong>Context Switch Overhead &amp; Efficiency:</strong> CPU Efficiency (&eta;) = Useful Time / (Useful Time + Overhead) * 100%
+  </div>
+
+  <div class="sec-title">4. Threads &amp; Multithreading Models</div>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Thread Components</h4>
+      <div><strong>Shared:</strong> Code, Data, Heap, Open files, OS signals.</div>
+      <div><strong>Private:</strong> Thread ID (TID), PC, Registers, Call Stack.</div>
+    </div>
+    <div class="card">
+      <h4>ULT vs KLT</h4>
+      <div><strong>ULT:</strong> Fast user-space switch, 1 block blocks all, no multicore.</div>
+      <div><strong>KLT:</strong> Kernel managed, true multicore, independent blocking.</div>
+    </div>
+    <div class="card">
+      <h4>Thread Models</h4>
+      <div>&bull; <strong>M:1:</strong> User library, low kernel cost.</div>
+      <div>&bull; <strong>1:1:</strong> High concurrency (Linux/Win).</div>
+      <div>&bull; <strong>M:N:</strong> Hybrid multiplexing (Go).</div>
+    </div>
+  </div>
+
+  <div class="sec-title">5. Golden Scheduling Performance Criteria</div>
+  <table>
+    <tr><th>Metric</th><th>Formula</th><th>Objective</th><th>Exam / Practical Significance</th></tr>
+    <tr><td><strong>Turnaround Time (TAT)</strong></td><td><code>TAT = Completion Time (CT) - Arrival Time (AT)</code></td><td>MINIMIZE</td><td>Total time spent by process inside system.</td></tr>
+    <tr><td><strong>Waiting Time (WT)</strong></td><td><code>WT = Turnaround Time (TAT) - Burst Time (BT)</code></td><td>MINIMIZE</td><td>Time spent waiting in Ready Queue. Standard benchmark.</td></tr>
+    <tr><td><strong>Response Time (RT)</strong></td><td><code>RT = First CPU Time - Arrival Time (AT)</code></td><td>MINIMIZE</td><td>Delay to first reaction. Non-preemptive me <strong>RT == WT</strong>.</td></tr>
+    <tr><td><strong>Throughput</strong></td><td><code>Completed Processes / Total Time</code></td><td>MAXIMIZE</td><td>Higher is better for overall computational productivity.</td></tr>
+    <tr><td><strong>CPU Utilization</strong></td><td><code>(Active CPU Time / Total Time) * 100%</code></td><td>MAXIMIZE</td><td>Ideal target range: 40% (light) to 90% (heavy load).</td></tr>
+  </table>
+
+  <div class="footer">
+    <span>CS Fundamental Notes &bull; Unit 3 OS</span>
+    <span>Page 1 of 3</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 2: SCHEDULING ALGORITHMS MASTERCLASS ================= -->
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>UNIT 3: CPU SCHEDULING ALGORITHMS</h1>
+      <span style="font-size: 8pt; color: #64748b; font-weight: 600;">AKTU BCS401 &bull; 3-Page Rapid Recall Cheatsheet</span>
+    </div>
+    <div>
+      <span class="badge">PAGE 2 / 3 &bull; ALGORITHMS &amp; NUMERICALS</span>
+    </div>
+  </div>
+
+  <div class="sec-title">1. FCFS &amp; The Convoy Effect</div>
+  <div class="card">
+    <div>&bull; <strong>Mechanism:</strong> Simple FIFO queue. Non-preemptive. Jo pehle arrive hua, wo pehle run karega.</div>
+    <div>&bull; <strong>Convoy Effect:</strong> Ek bada CPU-bound process running rehta hai aur kayi chhote I/O-bound processes queue me block rehte hain. I/O devices idle rehte hain aur Avg WT drastically badh jata hai.</div>
+    <div>&bull; <strong>Numerical Proof:</strong> P1(24), P2(3), P3(3) &rarr; Order P1,P2,P3 gives Avg WT = <strong>17.0 ms</strong> vs Order P2,P3,P1 gives Avg WT = <strong>3.0 ms</strong> (82.3% faster!).</div>
+  </div>
+
+  <div class="sec-title">2. SJF (Non-Preemptive) &amp; SRTF (Preemptive SJF)</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>SJF (Shortest Job First)</h4>
+      <div>&bull; <strong>Optimality:</strong> Provably <em>optimal</em> for minimum Avg WT.</div>
+      <div>&bull; <strong>Limitation:</strong> Future burst time unknown in advance. Long jobs face <strong>Starvation</strong>.</div>
+      <div class="formula"><strong>Exponential Smoothing:</strong> &tau;_{n+1} = &alpha;*t_n + (1-&alpha;)*&tau;_n</div>
+    </div>
+    <div class="card">
+      <h4>SRTF (Shortest Remaining Time First)</h4>
+      <div>&bull; <strong>Preemption:</strong> Naye process ke arrival par Remaining Time compare hota hai. If <code>BT_new &lt; Rem_curr</code> &rarr; Preempt!</div>
+      <div>&bull; <strong>Characteristics:</strong> Even lower Avg WT than SJF. Frequent context switches increase CPU switching overhead.</div>
+    </div>
+  </div>
+
+  <div class="sec-title">3. Priority Scheduling &amp; Aging Technique</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Priority Scheduling</h4>
+      <div>&bull; <strong>Convention:</strong> Typically <strong>Smaller Integer = Higher Priority</strong> (0 = Top).</div>
+      <div>&bull; <strong>Preemptive vs Non-Preemptive:</strong> Higher priority incoming preempts running.</div>
+      <div>&bull; <strong>Starvation:</strong> Continuous stream of high priority jobs denies CPU to low priority.</div>
+    </div>
+    <div class="card">
+      <h4>Aging Technique</h4>
+      <div>&bull; <strong>Solution:</strong> Gradually increases priority of waiting processes as time progresses.</div>
+      <div>&bull; <strong>Formula / Rule:</strong> Increase priority by 1 every &Delta;t (e.g. 15 mins).</div>
+      <div>&bull; Guaranteed prevention of indefinite blocking.</div>
+    </div>
+  </div>
+
+  <div class="sec-title">4. Round Robin (RR) &amp; Quantum Sizing Dynamics</div>
+  <div class="card">
+    <div>&bull; <strong>Mechanism:</strong> Ready Queue is Circular FIFO. Har process ko <strong>Time Quantum 'q'</strong> milta hai. Quantum khatam hote hi timer interrupt process ko tail par bhej deta hai.</div>
+    <div>&bull; <strong>q &rarr; &infin; (Very Large):</strong> Degenerates into FCFS (Convoy effect returns; poor interactive response).</div>
+    <div>&bull; <strong>q &rarr; 0 (Very Small):</strong> Processor sharing, but massive Context Switch Overhead thrashing.</div>
+    <div>&bull; <strong>80% Rule of Thumb:</strong> <em>At least 80% of CPU bursts should be shorter than time quantum 'q'.</em> Typical: 10ms - 100ms.</div>
+  </div>
+
+  <div class="sec-title">5. Comprehensive Numerical Comparison Table</div>
+  <table>
+    <tr><th>Algorithm</th><th>Preemptive?</th><th>Optimal Metric?</th><th>Starvation Risk?</th><th>Best Used In</th></tr>
+    <tr><td><strong>FCFS</strong></td><td>No</td><td>None</td><td>No</td><td>Batch queues, print spoolers</td></tr>
+    <tr><td><strong>SJF</strong></td><td>No</td><td>Minimum Avg WT</td><td>Yes (Long jobs)</td><td>Long-term batch scheduling</td></tr>
+    <tr><td><strong>SRTF</strong></td><td>Yes</td><td>Absolute Minimum Avg WT</td><td>Yes (Long jobs)</td><td>Short-job optimized systems</td></tr>
+    <tr><td><strong>Priority</strong></td><td>Both</td><td>Priority compliance</td><td>Yes (Low priority)</td><td>Real-time and mission-critical OS</td></tr>
+    <tr><td><strong>Round Robin</strong></td><td>Yes</td><td>Best Response Time (RT)</td><td><strong>No (Starvation Free)</strong></td><td>Time-sharing interactive systems</td></tr>
+  </table>
+
+  <div class="sec-title">6. Multilevel Queues &amp; Multiprocessor Scheduling</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>MLQ vs MLFQ</h4>
+      <div>&bull; <strong>MLQ:</strong> Static queue partitions (System, Interactive, Batch). No movement. High starvation risk.</div>
+      <div>&bull; <strong>MLFQ:</strong> Dynamic movement. Jobs demoted on quantum expiry, promoted via Aging. Self-tuning!</div>
+    </div>
+    <div class="card">
+      <h4>Multiprocessor &amp; SMP</h4>
+      <div>&bull; <strong>SMP:</strong> Peers, self-scheduling, per-core queues.</div>
+      <div>&bull; <strong>Processor Affinity:</strong> Process stays on same CPU for warm cache (L1/L2 hits).</div>
+      <div>&bull; <strong>Load Balancing:</strong> Push &amp; Pull migration across cores.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental Notes &bull; Unit 3 OS</span>
+    <span>Page 2 of 3</span>
+  </div>
+</div>
+
+<!-- ================= PAGE 3: DEADLOCK COMPLETE MASTERCLASS ================= -->
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>UNIT 3: DEADLOCK COMPREHENSIVE GUIDE</h1>
+      <span style="font-size: 8pt; color: #64748b; font-weight: 600;">AKTU BCS401 &bull; 3-Page Rapid Recall Cheatsheet</span>
+    </div>
+    <div>
+      <span class="badge">PAGE 3 / 3 &bull; DEADLOCKS &amp; BANKER'S</span>
+    </div>
+  </div>
+
+  <div class="sec-title">1. Deadlock Definition &amp; The 4 Necessary Coffman Conditions</div>
+  <div class="card">
+    <div>&bull; <strong>Definition:</strong> Permanent blocking of a set of processes where each holds a resource and waits for another.</div>
+    <div>&bull; <strong>Deadlock occurs IF AND ONLY IF all 4 conditions hold simultaneously:</strong></div>
+    <div>1. <strong>Mutual Exclusion:</strong> At least 1 non-shareable resource. Only 1 process at a time can use.</div>
+    <div>2. <strong>Hold and Wait:</strong> Process holds 1+ resources while waiting to acquire additional held resources.</div>
+    <div>3. <strong>No Preemption:</strong> Resources cannot be forcibly revoked; released only voluntarily.</div>
+    <div>4. <strong>Circular Wait:</strong> Closed cyclic dependency chain: P0 &rarr; P1 &rarr; P2 &rarr; ... &rarr; Pn &rarr; P0.</div>
+  </div>
+
+  <div class="sec-title">2. Resource Allocation Graph (RAG) &amp; Cycle Rules</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>RAG Components</h4>
+      <div>&bull; <strong>Vertices:</strong> Processes P (Circles), Resources R (Rectangles with dots).</div>
+      <div>&bull; <strong>Request Edge:</strong> <code>Pi &rarr; Rj</code> (Process waits for resource).</div>
+      <div>&bull; <strong>Assignment Edge:</strong> <code>Rj &rarr; Pi</code> (Resource allocated to process).</div>
+    </div>
+    <div class="card">
+      <h4>Golden Cycle Theorems</h4>
+      <div>&bull; <strong>NO Cycle:</strong> 100% Guaranteed <strong>NO DEADLOCK</strong>.</div>
+      <div>&bull; <strong>Single-Instance + Cycle:</strong> <strong>GUARANTEED DEADLOCK</strong>.</div>
+      <div>&bull; <strong>Multi-Instance + Cycle:</strong> <strong>MAY OR MAY NOT</strong> have deadlock (External processes can break cycle!).</div>
+    </div>
+  </div>
+
+  <div class="sec-title">3. Deadlock Handling Strategies &amp; Prevention</div>
+  <table>
+    <tr><th>Strategy</th><th>Methodology</th><th>Core Technique</th></tr>
+    <tr><td><strong>1. Ignorance</strong></td><td>Ostrich Algorithm (Ignore it)</td><td>Used by Linux, Windows (Deadlocks assumed rare; avoidance too costly).</td></tr>
+    <tr><td><strong>2. Prevention</strong></td><td>Invalidate at least 1 Coffman condition</td><td><strong>Havender's Protocol:</strong> Strict linear ordering F: R &rarr; N. Request only if F(Ri) &lt; F(Rj). Cycles mathematically impossible!</td></tr>
+    <tr><td><strong>3. Avoidance</strong></td><td>Dynamic safe-state checking</td><td><strong>Banker's Algorithm:</strong> System never enters Unsafe state.</td></tr>
+    <tr><td><strong>4. Detection</strong></td><td>Periodic graph analysis &amp; recovery</td><td>Wait-For Graph (WFG) cycle detection O(V^2) + Process Abort / Preemption.</td></tr>
+  </table>
+
+  <div class="sec-title">4. Deadlock Avoidance: Banker's Algorithm Masterclass</div>
+  <div class="card">
+    <div class="formula">
+      <strong>Core Matrix Formula:</strong> Need[i][j] = Max[i][j] - Allocation[i][j]
+    </div>
+    <div>&bull; <strong>Safety Algorithm Steps:</strong></div>
+    <div>1. Set <code>Work = Available</code> and <code>Finish[i] = False</code> for all i.</div>
+    <div>2. Find process Pi where <code>Finish[i] == False</code> AND <code>Need_i &le; Work</code>. If none found &rarr; Step 4.</div>
+    <div>3. <code>Work = Work + Allocation_i</code>, <code>Finish[i] = True</code>. Repeat Step 2.</div>
+    <div>4. If all <code>Finish[i] == True</code> &rarr; <strong>SAFE STATE!</strong> Safe Sequence exists.</div>
+    <div>&bull; <strong>Resource Request Algorithm:</strong> 1) Req &le; Need; 2) Req &le; Available; 3) Pretend allocate &amp; run Safety check.</div>
+  </div>
+
+  <div class="sec-title">5. Deadlock Detection &amp; Recovery Protocols</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Detection &amp; Wait-For Graph (WFG)</h4>
+      <div>&bull; Single instance resources: Collapse resource nodes &rarr; WFG.</div>
+      <div>&bull; Cycle detection via DFS in <code>O(V^2)</code> time indicates deadlock.</div>
+      <div>&bull; Multiple instance: Detection matrix algorithm using Request matrix.</div>
+    </div>
+    <div class="card">
+      <h4>Recovery Mechanisms</h4>
+      <div>&bull; <strong>Process Abort:</strong> Abort all vs Abort one-by-one by cost.</div>
+      <div>&bull; <strong>Resource Preemption:</strong> Pick victim, Rollback to checkpoint.</div>
+      <div>&bull; <strong>Starvation Fix:</strong> Include rollback count in victim cost.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CS Fundamental Notes &bull; Unit 3 OS</span>
+    <span>Page 3 of 3</span>
+  </div>
+</div>
+
+</body>
+</html>

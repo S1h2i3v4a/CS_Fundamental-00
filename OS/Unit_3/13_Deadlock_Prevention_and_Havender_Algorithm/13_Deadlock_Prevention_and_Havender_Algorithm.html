@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 13: Deadlock Prevention & Havender</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 11pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 18pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 14pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 12pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+.diagram { text-align: center; margin: 15px 0; }
+.diagram svg { max-width: 95%; height: auto; }
+</style>
+</head>
+<body>
+<h1>Module 13: Deadlock Prevention &amp; Havender's Algorithm</h1>
+<p><span class="badge">AKTU BCS401</span> <span class="badge">Unit 3</span> <span class="badge">Deadlock Elimination</span></p>
+
+<h2>1. Prevention Strategies &amp; Resource Ordering Trace</h2>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg13" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1329"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="ar13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="ar13Red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f87171"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="520" rx="14" fill="url(#bg13)" stroke="#334155" stroke-width="2"/>
+  <text x="550" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Deadlock Prevention Protocols &amp; Havender's Resource Ordering</text>
+
+  <!-- Left: 4 Prevention Strategies Box -->
+  <g transform="translate(40, 75)">
+    <rect width="480" height="410" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="240" y="30" fill="#38bdf8" font-size="15" font-weight="bold" text-anchor="middle">Invalidating the 4 Coffman Conditions</text>
+
+    <!-- 1. Mutual Exclusion -->
+    <rect x="20" y="50" width="440" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="73" fill="#cbd5e1" font-size="12" font-weight="bold">1. Mutual Exclusion Denial</text>
+    <text x="35" y="93" fill="#94a3b8" font-size="10.5">• Make resources shareable (Read-only files). Spooling for printers.</text>
+    <text x="35" y="110" fill="#f87171" font-size="10">• Impractical for inherently non-shareable resources (Mutexes, Tape).</text>
+
+    <!-- 2. Hold and Wait -->
+    <rect x="20" y="135" width="440" height="80" rx="6" fill="#0f172a" stroke="#fbbf24"/>
+    <text x="35" y="158" fill="#fbbf24" font-size="12" font-weight="bold">2. Hold &amp; Wait Denial (Conservative Protocol)</text>
+    <text x="35" y="178" fill="#cbd5e1" font-size="10.5">• Protocol A: Request ALL required resources before execution starts.</text>
+    <text x="35" y="195" fill="#cbd5e1" font-size="10.5">• Protocol B: Release all held resources before requesting new ones.</text>
+    <text x="35" y="210" fill="#fca5a5" font-size="9.5">• Severe Drawback: Extremely low resource utilization &amp; starvation!</text>
+
+    <!-- 3. No Preemption -->
+    <rect x="20" y="225" width="440" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="248" fill="#cbd5e1" font-size="12" font-weight="bold">3. No Preemption Denial</text>
+    <text x="35" y="268" fill="#cbd5e1" font-size="10.5">• If P holding R1 asks for unavailable R2 &rarr; R1 is forcibly preempted!</text>
+    <text x="35" y="285" fill="#fca5a5" font-size="10">• Only feasible for saveable states (CPU registers, RAM pages), not disks.</text>
+
+    <!-- 4. Circular Wait -->
+    <rect x="20" y="310" width="440" height="85" rx="6" fill="#0f172a" stroke="#4ade80"/>
+    <text x="35" y="333" fill="#4ade80" font-size="12" font-weight="bold">4. Circular Wait Denial (Havender's Algorithm)</text>
+    <text x="35" y="353" fill="#a7f3d0" font-size="10.5">• Imposes global strict linear ordering on all resources.</text>
+    <text x="35" y="372" fill="#4ade80" font-size="10.5">• F: R &rarr; N. Process can ONLY request in strictly increasing order!</text>
+  </g>
+
+  <!-- Right: Havender's Resource Ordering Graph Trace -->
+  <g transform="translate(560, 75)">
+    <rect width="500" height="410" rx="10" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="250" y="30" fill="#4ade80" font-size="15" font-weight="bold" text-anchor="middle">Havender's Protocol (Gateway Slide 230 Trace)</text>
+
+    <!-- Diagram elements -->
+    <!-- R1 (Pri=1) -->
+    <rect x="80" y="70" width="90" height="50" rx="6" fill="#047857" stroke="#10b981"/>
+    <text x="125" y="95" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">R1: Tape (1)</text>
+
+    <!-- P1 -->
+    <circle cx="125" cy="180" r="25" fill="#1e3a8a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="125" y="185" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">P1</text>
+
+    <!-- R3 (Pri=3) -->
+    <rect x="210" y="155" width="90" height="50" rx="6" fill="#047857" stroke="#10b981"/>
+    <text x="255" y="180" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">R3: Disk (3)</text>
+
+    <!-- P2 -->
+    <circle cx="370" cy="180" r="25" fill="#1e3a8a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="370" y="185" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">P2</text>
+
+    <!-- Allowed path -->
+    <path d="M 125 120 L 125 155" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#ar13)"/>
+    <path d="M 150 180 L 210 180" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#ar13)"/>
+    <text x="180" y="170" fill="#38bdf8" font-size="10">P1 holds R1, requests R3 (1 &lt; 3 ALLOWED)</text>
+
+    <path d="M 300 180 L 345 180" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#ar13)"/>
+    <text x="325" y="205" fill="#4ade80" font-size="10">P2 holds R3</text>
+
+    <!-- Denied backward edge -->
+    <path d="M 370 155 L 370 95 L 170 95" fill="none" stroke="#f87171" stroke-dasharray="4" stroke-width="2.5" marker-end="url(#ar13Red)"/>
+    <circle cx="270" cy="95" r="14" fill="#7f1d1d"/>
+    <text x="270" y="100" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">&#10007;</text>
+    <text x="270" y="75" fill="#f87171" font-size="10.5" font-weight="bold" text-anchor="middle">BLOCKED! P2 cannot request R1 (3 &gt; 1 Not Allowed!)</text>
+
+    <rect x="25" y="245" width="450" height="135" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="35" y="270" fill="#4ade80" font-size="11" font-weight="bold">Mathematical Proof of Circular Wait Denial:</text>
+    <text x="35" y="290" fill="#cbd5e1" font-size="10">If a cycle existed: F(R0) &lt; F(R1) &lt; F(R2) &lt; ... &lt; F(Rn) &lt; F(R0).</text>
+    <text x="35" y="310" fill="#f87171" font-size="10">This implies F(R0) &lt; F(R0), which is a mathematical IMPOSSIBILITY!</text>
+    <text x="35" y="335" fill="#38bdf8" font-size="10.5">&rArr; Circular Wait can NEVER form in any state under Havender's rule.</text>
+    <text x="35" y="355" fill="#a7f3d0" font-size="10">&rArr; 100% Deadlock Free by Design!</text>
+  </g>
+</svg></div>
+
+<h2>2. The 4 Elimination Protocols</h2>
+<table>
+<tr><th>Coffman Condition</th><th>Elimination Protocol</th><th>Trade-off / Penalty</th></tr>
+<tr><td><strong>Mutual Exclusion</strong></td><td>Spooling / Shared read-only</td><td>Not possible for dedicated hardware</td></tr>
+<tr><td><strong>Hold and Wait</strong></td><td>Request all resources at start</td><td>Very poor resource utilization &amp; starvation</td></tr>
+<tr><td><strong>No Preemption</strong></td><td>Forcibly revoke held resources</td><td>State corruption risk; limited to CPU/RAM</td></tr>
+<tr><td><strong>Circular Wait</strong></td><td>Havender's strict linear ordering</td><td><strong>Best practical method</strong>; programmer discipline needed</td></tr>
+</table>
+</body>
+</html>

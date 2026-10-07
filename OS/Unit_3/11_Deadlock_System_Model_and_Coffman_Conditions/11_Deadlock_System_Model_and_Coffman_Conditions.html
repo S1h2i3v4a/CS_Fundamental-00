@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Module 11: Deadlock System Model & Coffman</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 11pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 18pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 14pt; margin-top: 16px; }
+h3 { color: #334155; font-size: 12pt; margin-top: 12px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8.5pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+.diagram { text-align: center; margin: 15px 0; }
+.diagram svg { max-width: 95%; height: auto; }
+</style>
+</head>
+<body>
+<h1>Module 11: Deadlock System Model &amp; 4 Coffman Conditions</h1>
+<p><span class="badge">AKTU BCS401</span> <span class="badge">Unit 3</span> <span class="badge">Deadlocks</span></p>
+
+<h2>1. The 4 Coffman Conditions &amp; Starvation Comparison</h2>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1329"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1100" height="520" rx="14" fill="url(#bg11)" stroke="#334155" stroke-width="2"/>
+  <text x="550" y="38" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Deadlock System Model &amp; The 4 Coffman Conditions</text>
+
+  <!-- Left: The 4 Necessary Conditions -->
+  <g transform="translate(40, 75)">
+    <rect width="520" height="410" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.5"/>
+    <text x="260" y="30" fill="#f87171" font-size="15" font-weight="bold" text-anchor="middle">4 Necessary Coffman Conditions (Deadlock Arises If ALL 4 Hold)</text>
+
+    <!-- Condition 1 -->
+    <rect x="25" y="55" width="470" height="70" rx="6" fill="#0f172a" stroke="#ef4444"/>
+    <text x="40" y="80" fill="#ef4444" font-size="13" font-weight="bold">1. Mutual Exclusion</text>
+    <text x="40" y="100" fill="#cbd5e1" font-size="10.5">• At least one non-shareable resource. Sirf 1 process at a time can use.</text>
+    <text x="40" y="115" fill="#fca5a5" font-size="10">Example: Printer, Tape drive, Mutual exclusion locks.</text>
+
+    <!-- Condition 2 -->
+    <rect x="25" y="135" width="470" height="70" rx="6" fill="#0f172a" stroke="#fbbf24"/>
+    <text x="40" y="160" fill="#fbbf24" font-size="13" font-weight="bold">2. Hold and Wait</text>
+    <text x="40" y="180" fill="#cbd5e1" font-size="10.5">• Process holds at least 1 resource AND waits to acquire additional ones</text>
+    <text x="40" y="195" fill="#fde68a" font-size="10">which are currently held by other processes.</text>
+
+    <!-- Condition 3 -->
+    <rect x="25" y="215" width="470" height="70" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+    <text x="40" y="240" fill="#38bdf8" font-size="13" font-weight="bold">3. No Preemption</text>
+    <text x="40" y="260" fill="#cbd5e1" font-size="10.5">• Resources cannot be forcibly taken away from a process.</text>
+    <text x="40" y="275" fill="#bae6fd" font-size="10">Resource can only be released voluntarily after task completion.</text>
+
+    <!-- Condition 4 -->
+    <rect x="25" y="295" width="470" height="75" rx="6" fill="#0f172a" stroke="#a855f7"/>
+    <text x="40" y="320" fill="#a855f7" font-size="13" font-weight="bold">4. Circular Wait</text>
+    <text x="40" y="340" fill="#cbd5e1" font-size="10.5">• Closed chain of processes: P0 waits for P1, P1 waits for P2 ... Pn waits for P0.</text>
+    <text x="40" y="358" fill="#e9d5ff" font-size="10">Circular wait implies Hold &amp; Wait condition!</text>
+  </g>
+
+  <!-- Right: Deadlock vs Starvation -->
+  <g transform="translate(580, 75)">
+    <rect width="480" height="410" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="240" y="30" fill="#38bdf8" font-size="15" font-weight="bold" text-anchor="middle">Deadlock vs Starvation (Key Differences)</text>
+
+    <rect x="20" y="55" width="440" height="150" rx="6" fill="#0f172a" stroke="#f87171"/>
+    <text x="35" y="80" fill="#f87171" font-size="13" font-weight="bold">DEADLOCK (Infinite Unresolvable Block)</text>
+    <text x="35" y="105" fill="#cbd5e1" font-size="10.5">• Two or more processes blocked on each other permanently.</text>
+    <text x="35" y="125" fill="#cbd5e1" font-size="10.5">• Waiting state cannot be broken without OS external intervention.</text>
+    <text x="35" y="145" fill="#cbd5e1" font-size="10.5">• Every deadlocked process is starved, but not vice-versa.</text>
+    <text x="35" y="165" fill="#fca5a5" font-size="10.5">• Resources requested are locked in a cyclic dependency.</text>
+
+    <rect x="20" y="220" width="440" height="155" rx="6" fill="#0f172a" stroke="#fbbf24"/>
+    <text x="35" y="245" fill="#fbbf24" font-size="13" font-weight="bold">STARVATION (Indefinite Delay)</text>
+    <text x="35" y="270" fill="#cbd5e1" font-size="10.5">• Low-priority process denied CPU due to continuous high-priority jobs.</text>
+    <text x="35" y="290" fill="#cbd5e1" font-size="10.5">• Resources are free/active, but scheduler denies access.</text>
+    <text x="35" y="310" fill="#cbd5e1" font-size="10.5">• Can resolve naturally when high-priority load subsides.</text>
+    <text x="35" y="330" fill="#4ade80" font-size="10.5">• Prevented easily via Aging mechanism.</text>
+  </g>
+</svg></div>
+
+<h2>2. The 4 Necessary Conditions</h2>
+<ol>
+<li><strong>Mutual Exclusion:</strong> Exclusive, non-shareable resources.</li>
+<li><strong>Hold and Wait:</strong> Holding 1+ resources while waiting for others.</li>
+<li><strong>No Preemption:</strong> Resources cannot be forcibly revoked.</li>
+<li><strong>Circular Wait:</strong> Closed loop of waiting processes.</li>
+</ol>
+</body>
+</html>
