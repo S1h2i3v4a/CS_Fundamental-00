@@ -19,20 +19,8 @@ CS_Fundamental-00/
 └── DBMS/                      # Database Management Systems (AKTU BCS501)
     ├── Unit_1/                # Database Concepts, ER Modeling, Schema Reduction & Relational Algebra
     ├── Unit_2/                # Relational Model, Formal Languages & Complete SQL Mastery
-    └── Unit_3/                # Relational Database Design & Normalization (1NF to 5NF, FDs, Armstrong, Decompositions)
-        ├── 00_Quick_Revision_Short_Notes/
-        ├── 01_Functional_Dependencies_and_Types/
-        ├── 02_Armstrongs_Axioms_and_Inference_Rules/
-        ├── 03_Attribute_Closure_and_Candidate_Key_Algorithms/
-        ├── 04_Equivalence_and_Canonical_Minimal_Cover/
-        ├── 05_Database_Anomalies_and_1NF/
-        ├── 06_Second_Normal_Form_2NF/
-        ├── 07_Third_Normal_Form_3NF/
-        ├── 08_Boyce_Codd_Normal_Form_BCNF/
-        ├── 09_Decomposition_Properties_Lossless_and_Dependency_Preservation/
-        ├── 10_Multivalued_Dependencies_and_Fourth_Normal_Form_4NF/
-        ├── 11_Join_Dependencies_5NF_and_Inclusion_Dependencies/
-        └── 12_Unit_3_AKTU_PYQs_and_Solved_Decompositions/
+    ├── Unit_3/                # Relational Database Design & Normalization (1NF to 5NF, FDs, Armstrong, Decompositions)
+    └── Unit_4/                # Transaction Processing Concept & Distributed Databases (ACID, CSR, VSR, 2PL, Recovery, DDBMS)
 ```
 
 ---
@@ -49,6 +37,8 @@ CS_Fundamental-00/
 | **DBMS** | **Unit 1** | Concepts, ER Modeling & Relational Algebra | [3-Page PDF](DBMS/Unit_1/Unit_1_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_1/Unit_1_Master_Notes.pdf) |
 | **DBMS** | **Unit 2** | Relational Model, Formal Languages & SQL | [3-Page PDF](DBMS/Unit_2/Unit_2_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_2/Unit_2_Master_Notes.pdf) |
 | **DBMS** | **Unit 3** | Database Design & Normalization (1NF to 5NF) | [3-Page PDF](DBMS/Unit_3/Unit_3_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_3/Unit_3_Master_Notes.pdf) |
+| **DBMS** | **Unit 4** | Transaction Processing & Distributed Databases | [3-Page PDF](DBMS/Unit_4/Unit_4_Quick_Revision_3_Page_Notes.pdf) | [Master PDF](DBMS/Unit_4/Unit_4_Master_Notes.pdf) |
+
 
 ---
 

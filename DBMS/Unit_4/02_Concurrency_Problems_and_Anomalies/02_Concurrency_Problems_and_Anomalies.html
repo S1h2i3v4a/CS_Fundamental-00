@@ -1,0 +1,169 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 02: Concurrency Problems & Anomalies</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 02: Concurrency Problems & Anomalies</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg02)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Concurrency Anomalies &amp; Multi-User Hazards</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">The Four Classic Anomalies Occurring in Uncontrolled Interleaved Executions</text>
+
+  <!-- 4 BOXES GRID -->
+  <!-- Box 1: Dirty Read (WR Conflict) -->
+  <g transform="translate(35, 85)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="bold" fill="#fca5a5">1. Dirty Read Problem (Reading Uncommitted Data)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Write-Read (W-R) Conflict Hazard</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">T1 modifies data item A (W1(A)). T2 reads updated A before T1 commits.</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">T1 then FAILS and ABORTS (Rollback to original value)!</text>
+    <text x="25" y="116" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">Consequence: T2 has executed based on a &quot;dirty&quot; value that never existed!</text>
+    <text x="25" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Timeline: W1(A) ──&gt; R2(A) ──&gt; T1 Aborts [Dirty Read by T2!]</text>
+    <text x="25" y="156" font-family="-apple-system, sans-serif" font-size="8.5" fill="#38bdf8">Prevention: Enforce READ COMMITTED or REPEATABLE READ isolation.</text>
+  </g>
+
+  <!-- Box 2: Lost Update (WW Conflict) -->
+  <g transform="translate(515, 85)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="bold" fill="#fed7aa">2. Lost Update Problem (Blind Overwrites)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Write-Write (W-W) Conflict Hazard</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Both T1 and T2 read same data item A. T1 updates A and writes it back.</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">T2 overwrites A with its own calculation without incorporating T1&apos;s change!</text>
+    <text x="25" y="116" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">Consequence: T1&apos;s modification is completely erased and LOST!</text>
+    <text x="25" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Timeline: R1(A) ──&gt; R2(A) ──&gt; W1(A) ──&gt; W2(A) [T1 update lost!]</text>
+    <text x="25" y="156" font-family="-apple-system, sans-serif" font-size="8.5" fill="#38bdf8">Prevention: Strict Two-Phase Locking (Exclusive Locks on Write).</text>
+  </g>
+
+  <!-- Box 3: Unrepeatable Read (RW Conflict) -->
+  <g transform="translate(35, 295)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="bold" fill="#93c5fd">3. Unrepeatable Read (Fuzzy Read)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Read-Write (R-W) Conflict Hazard</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">T1 reads data item A. Meanwhile, T2 updates A and commits.</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">T1 reads A again within same transaction and observes a DIFFERENT value!</text>
+    <text x="25" y="116" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">Consequence: Transaction observes contradictory data during its run.</text>
+    <text x="25" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Timeline: R1(A) ──&gt; W2(A) ──&gt; Commit2 ──&gt; R1(A) [Differs from 1st read!]</text>
+    <text x="25" y="156" font-family="-apple-system, sans-serif" font-size="8.5" fill="#38bdf8">Prevention: REPEATABLE READ isolation level or shared read-locks.</text>
+  </g>
+
+  <!-- Box 4: Phantom Read -->
+  <g transform="translate(515, 295)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="bold" fill="#c084fc">4. Phantom Read Problem (Tuple Insertion Hazard)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Range Query Predicate Interference</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">T1 queries a set of rows matching predicate (eg: salary &gt; 50k: gets 5 rows).</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">T2 inserts a new row matching predicate and commits.</text>
+    <text x="25" y="116" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">T1 repeats same range query and finds 6 rows! A &quot;phantom&quot; row appeared!</text>
+    <text x="25" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Timeline: Query1(range) ──&gt; Insert2 ──&gt; Commit2 ──&gt; Query1(range)</text>
+    <text x="25" y="156" font-family="-apple-system, sans-serif" font-size="8.5" fill="#38bdf8">Prevention: SERIALIZABLE isolation level (Index range / Predicate locking).</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Why Concurrency is Needed, Concurrency Hazards, Dirty Read Problem (WR), Lost Update Problem (WW), Unrepeatable Read Problem (RW), Phantom Read Problem, SQL Isolation Levels.</p>
+<p>---</p>
+<h2>1. Why Do We Need Concurrent Transaction Execution?</h2>
+<p>Single-user database me transactions ek ke baad ek (serially) run hoti hain, jisse koi anomaly nahi hoti. Lekin enterprise DBMS (e.g., IRCTC, Banking, Amazon) me hazaron users ek saath access karte hain.</p>
+<li><strong>Benefits of Concurrency:</strong></li>
+<p>  1. <strong>Higher Throughput:</strong> Unit time me zyada transactions complete hoti hain.</p>
+<p>  2. <strong>Reduced Waiting / Response Time:</strong> Chhote transactions lambe transactions ke peeche block nahi hote.</p>
+<p>  3. <strong>High Resource Utilization:</strong> CPU computation aur Disk I/O parallel me overlap ho sakte hain.</p>
+<p>Lekin agar concurrency ko bina kisi protocol ke allow kiya jaye, toh database me <strong>4 classical anomalies</strong> paida hoti hain!</p>
+<p>---</p>
+<h2>2. The Four Classical Concurrency Anomalies</h2>
+<h3>2.1 Dirty Read Problem (Write-Read Conflict)</h3>
+<li><strong>Scenario:</strong> Transaction $T_1$ data item $A$ ko update karta hai ($W_1(A)$). Abhi $T_1$ ne commit nahi kiya hai.</li>
+<li>Us uncommitted data ko transaction $T_2$ read kar leta hai ($R_2(A)$).</li>
+<li>Uske baad kisi error ki wajah se $T_1$ <strong>Abort</strong> ho jaata hai aur rollback kar diya jaata hai!</li>
+<li><strong>Hazard:</strong> $T_2$ ne ek aisi value par calculation kar li jo physically database me kabhi exist hi nahi karti thi!</li>
+<p><code></code>`</p>
+<p>     T1                   T2</p>
+<p>     │                    │</p>
+<p>   Read(A)                │</p>
+<p>   A = A + 100            │</p>
+<p>   Write(A)               │</p>
+<p>     │                 Read(A)   <-- DIRTY READ! (Uncommitted data)</p>
+<p>     │                 Write(A)</p>
+<p>   [ABORT / ROLLBACK]     │</p>
+<p><code></code>`</p>
+<p>---</p>
+<h3>2.2 Lost Update Problem (Write-Write Conflict)</h3>
+<li><strong>Scenario:</strong> Do transactions $T_1$ aur $T_2$ simultaneously data item $A$ ki initial value ko read karti hain ($A = 1000$).</li>
+<li>$T_1$ ne $A = A - 100$ kiya aur write kar diya ($A = 900$).</li>
+<li>Par turant $T_2$ ne $A = A + 200$ calculate kiya aur bina $T_1$ ke update ko consider kiye write kar diya ($A = 1200$).</li>
+<li><strong>Hazard:</strong> $T_1$ ka subtraction update permanently <strong>Lost</strong> ho gaya! Final balance $1100$ hona chahiye tha, par database me $1200$ reh gaya!</li>
+<p><code></code>`</p>
+<p>     T1                   T2</p>
+<p>     │                    │</p>
+<p>   Read(A) [1000]         │</p>
+<p>     │                 Read(A) [1000]</p>
+<p>   A = A - 100            │</p>
+<p>   Write(A) [900]         │</p>
+<p>     │                 A = A + 200</p>
+<p>     │                 Write(A) [1200]  <-- T1's update is LOST!</p>
+<p><code></code>`</p>
+<p>---</p>
+<h3>2.3 Unrepeatable Read Problem (Read-Write Conflict)</h3>
+<li><strong>Scenario:</strong> Transaction $T_1$ data item $A$ ko read karta hai ($A = 500$).</li>
+<li>Tabhi $T_2$ aata hai, $A$ ko modify karta hai ($A = 700$) aur <strong>Commit</strong> kar deta hai.</li>
+<li>Transaction $T_1$ apne execution ke dauran dobara $A$ ko read karta hai.</li>
+<li><strong>Hazard:</strong> Ek hi transaction ke andar user ko do alag-alag values milti hain! ($500$ and $700$). Is anomaly ko <strong>Fuzzy Read</strong> bhi kehte hain.</li>
+<p>---</p>
+<h3>2.4 Phantom Read Problem (Dynamic Range Hazard)</h3>
+<li><strong>Scenario:</strong> $T_1$ ek range query run karta hai: <code>SELECT * FROM Emp WHERE Salary > 50000</code> aur use 10 records milte hain.</li>
+<li>Is dauran $T_2$ ek naya employee insert karta hai jiska salary \$60,000 hai aur commit kar deta hai.</li>
+<li>$T_1$ jab dobara wahi query run karta hai, toh use 11 records milte hain!</li>
+<li><strong>Hazard:</strong> Naya tuple bina kisi update ke "bhoot" (phantom) ki tarah appear ho gaya!</li>
+<p>---</p>
+<h2>3. SQL-92 Standard Isolation Levels</h2>
+<p>ANSI/SQL standard ne concurrency anomalies ko balance karne ke liye 4 isolation levels define kiye hain:</p>
+<table><thead><tr><th>Isolation Level</th><th>Dirty Read Allowed?</th><th>Unrepeatable Read Allowed?</th><th>Phantom Read Allowed?</th><th>Performance Overhead</th></tr></thead><tbody>
+<tr><td>**Read Uncommitted**</td><td>Yes (⚠️)</td><td>Yes</td><td>Yes</td><td>Lowest overhead</td></tr>
+<tr><td>**Read Committed**</td><td>**No ($\checkmark$)**</td><td>Yes</td><td>Yes</td><td>Default in Oracle / PostgreSQL</td></tr>
+<tr><td>**Repeatable Read**</td><td>**No ($\checkmark$)**</td><td>**No ($\checkmark$)**</td><td>Yes</td><td>Default in MySQL InnoDB</td></tr>
+<tr><td>**Serializable**</td><td>**No ($\checkmark$)**</td><td>**No ($\checkmark$)**</td><td>**No ($\checkmark$)**</td><td>Highest isolation / Slowest</td></tr>
+</tbody></table>
+<p>---</p>
+<h2>4. Architectural Diagram</h2>
+<p>---</p>
+<h2>5. AKTU Semester Numerical & Concept Question</h2>
+<p><strong>Question:</strong> What are the various problems that arise due to concurrent execution of transactions? Explain Dirty Read and Lost Update with suitable transaction schedules. *(AKTU 2020-21, 2022-23)*</p>
+<p><strong>Solution Points:</strong></p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Draw the comparative schedule table showing interleaving of $T_1$ and $T_2$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Write initial values (e.g., $A = 1000$).</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> Trace steps showing how $W_1(A)$ followed by $R_2(A)$ creates dirty read when $T_1$ issues <code>ABORT</code>.</p>
+<p>4. Trace steps showing how concurrent reads followed by overwriting writes result in lost update.</p>
+<p>5. Provide solution: Use Strict 2PL and write-locks.</p>
+</body></html>

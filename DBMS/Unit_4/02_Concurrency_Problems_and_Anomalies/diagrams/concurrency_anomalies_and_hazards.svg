@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg02)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Concurrency Anomalies &amp; Multi-User Hazards</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">The Four Classic Anomalies Occurring in Uncontrolled Interleaved Executions</text>
+
+  <!-- 4 BOXES GRID -->
+  <!-- Box 1: Dirty Read (WR Conflict) -->
+  <g transform="translate(35, 85)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="bold" fill="#fca5a5">1. Dirty Read Problem (Reading Uncommitted Data)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Write-Read (W-R) Conflict Hazard</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">T1 modifies data item A (W1(A)). T2 reads updated A before T1 commits.</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">T1 then FAILS and ABORTS (Rollback to original value)!</text>
+    <text x="25" y="116" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">Consequence: T2 has executed based on a &quot;dirty&quot; value that never existed!</text>
+    <text x="25" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Timeline: W1(A) ──&gt; R2(A) ──&gt; T1 Aborts [Dirty Read by T2!]</text>
+    <text x="25" y="156" font-family="-apple-system, sans-serif" font-size="8.5" fill="#38bdf8">Prevention: Enforce READ COMMITTED or REPEATABLE READ isolation.</text>
+  </g>
+
+  <!-- Box 2: Lost Update (WW Conflict) -->
+  <g transform="translate(515, 85)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="bold" fill="#fed7aa">2. Lost Update Problem (Blind Overwrites)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Write-Write (W-W) Conflict Hazard</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Both T1 and T2 read same data item A. T1 updates A and writes it back.</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">T2 overwrites A with its own calculation without incorporating T1&apos;s change!</text>
+    <text x="25" y="116" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">Consequence: T1&apos;s modification is completely erased and LOST!</text>
+    <text x="25" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Timeline: R1(A) ──&gt; R2(A) ──&gt; W1(A) ──&gt; W2(A) [T1 update lost!]</text>
+    <text x="25" y="156" font-family="-apple-system, sans-serif" font-size="8.5" fill="#38bdf8">Prevention: Strict Two-Phase Locking (Exclusive Locks on Write).</text>
+  </g>
+
+  <!-- Box 3: Unrepeatable Read (RW Conflict) -->
+  <g transform="translate(35, 295)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="bold" fill="#93c5fd">3. Unrepeatable Read (Fuzzy Read)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Read-Write (R-W) Conflict Hazard</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">T1 reads data item A. Meanwhile, T2 updates A and commits.</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">T1 reads A again within same transaction and observes a DIFFERENT value!</text>
+    <text x="25" y="116" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">Consequence: Transaction observes contradictory data during its run.</text>
+    <text x="25" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Timeline: R1(A) ──&gt; W2(A) ──&gt; Commit2 ──&gt; R1(A) [Differs from 1st read!]</text>
+    <text x="25" y="156" font-family="-apple-system, sans-serif" font-size="8.5" fill="#38bdf8">Prevention: REPEATABLE READ isolation level or shared read-locks.</text>
+  </g>
+
+  <!-- Box 4: Phantom Read -->
+  <g transform="translate(515, 295)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="bold" fill="#c084fc">4. Phantom Read Problem (Tuple Insertion Hazard)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Range Query Predicate Interference</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">T1 queries a set of rows matching predicate (eg: salary &gt; 50k: gets 5 rows).</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">T2 inserts a new row matching predicate and commits.</text>
+    <text x="25" y="116" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">T1 repeats same range query and finds 6 rows! A &quot;phantom&quot; row appeared!</text>
+    <text x="25" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Timeline: Query1(range) ──&gt; Insert2 ──&gt; Commit2 ──&gt; Query1(range)</text>
+    <text x="25" y="156" font-family="-apple-system, sans-serif" font-size="8.5" fill="#38bdf8">Prevention: SERIALIZABLE isolation level (Index range / Predicate locking).</text>
+  </g>
+</svg>

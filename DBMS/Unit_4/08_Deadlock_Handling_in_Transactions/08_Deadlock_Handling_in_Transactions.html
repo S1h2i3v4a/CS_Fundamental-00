@@ -1,0 +1,143 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 08: Deadlock Handling in Transactions</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 08: Deadlock Handling in Transactions</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg08)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Deadlock Handling in Database Transactions</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Timestamp Schemes (Wait-Die vs Wound-Wait), Wait-For Graph Detection, and Victim Selection</text>
+
+  <!-- TWO COLUMN: DEADLOCK PREVENTION SCHEMES -->
+  <!-- Col 1: Wait-Die Scheme -->
+  <g transform="translate(35, 85)">
+    <rect width="450" height="235" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.6"/>
+    <text x="225" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">1. Wait-Die Scheme (Non-Preemptive)</text>
+    <text x="225" y="46" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">&quot;Older transaction WAITS, Younger transaction DIES&quot;</text>
+
+    <rect x="20" y="58" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="78" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#38bdf8">Case A: Ti is OLDER than Tj (TS(Ti) &lt; TS(Tj))</text>
+    <text x="35" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Ti requests resource locked by younger Tj.</text>
+    <text x="35" y="115" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#34d399">Action: Ti is ALLOWED TO WAIT.</text>
+
+    <rect x="20" y="142" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="162" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f87171">Case B: Ti is YOUNGER than Tj (TS(Ti) &gt; TS(Tj))</text>
+    <text x="35" y="180" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Ti requests resource locked by older Tj.</text>
+    <text x="35" y="199" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#f87171">Action: Ti DIES (Rolled back and restarted with same TS)!</text>
+  </g>
+
+  <!-- Col 2: Wound-Wait Scheme -->
+  <g transform="translate(515, 85)">
+    <rect width="450" height="235" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">2. Wound-Wait Scheme (Preemptive)</text>
+    <text x="225" y="46" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">&quot;Older transaction WOUNDS, Younger transaction WAITS&quot;</text>
+
+    <rect x="20" y="58" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="78" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#38bdf8">Case A: Ti is OLDER than Tj (TS(Ti) &lt; TS(Tj))</text>
+    <text x="35" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Ti requests resource locked by younger Tj.</text>
+    <text x="35" y="115" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#f87171">Action: Ti WOUNDS Tj! (Tj is preempted &amp; aborted!)</text>
+
+    <rect x="20" y="142" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="162" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#34d399">Case B: Ti is YOUNGER than Tj (TS(Ti) &gt; TS(Tj))</text>
+    <text x="35" y="180" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Ti requests resource locked by older Tj.</text>
+    <text x="35" y="199" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#34d399">Action: Ti is ALLOWED TO WAIT.</text>
+  </g>
+
+  <!-- BOTTOM: DETECTION VIA WAIT-FOR GRAPH & RECOVERY -->
+  <g transform="translate(35, 330)">
+    <rect width="930" height="155" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.6"/>
+    <text x="465" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fbbf24">3. Deadlock Detection (Wait-For Graph) &amp; Recovery Strategy</text>
+
+    <rect x="20" y="42" width="430" height="100" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="63" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fed7aa">Wait-For Graph (WFG) Detection:</text>
+    <text x="35" y="80" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Directed edge Ti → Tj: Ti is waiting for Tj to release lock.</text>
+    <text x="35" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">• System state has Deadlock ⇔ Wait-For Graph contains a CYCLE!</text>
+    <text x="35" y="113" font-family="-apple-system, sans-serif" font-size="9" fill="#38bdf8">Background process runs cycle detection periodically.</text>
+
+    <rect x="470" y="42" width="440" height="100" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="485" y="63" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">3-Step Deadlock Recovery Strategy:</text>
+    <text x="485" y="80" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Selection of Victim: Abort transaction with lowest rollback cost.</text>
+    <text x="485" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Rollback Extent: Partial rollback to savepoint vs Total rollback.</text>
+    <text x="485" y="113" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">3. Starvation Prevention: Add timestamp aging so same victim</text>
+    <text x="485" y="128" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">   is not repeatedly selected and starved!</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Deadlock Definition, Timestamp-Based Prevention (Wait-Die vs Wound-Wait), Wait-For Graph (WFG) Detection, Recovery from Deadlocks (Victim Selection, Rollback, Starvation Prevention).</p>
+<p>---</p>
+<h2>1. What is a Deadlock in Database Systems?</h2>
+<p>Jab do ya do se zyada transactions ek doosre ke dwara hold kiye gaye locks ke release hone ka circular wait karti hain, toh system ek frozen state me chala jaata hai jahan koi bhi transaction aage proceed nahi kar sakti. Is condition ko <strong>Deadlock</strong> kehte hain.</p>
+<li>Example:</li>
+<p>  - $T_1$ holds exclusive lock on $A$, requests lock on $B$.</p>
+<p>  - $T_2$ holds exclusive lock on $B$, requests lock on $A$.</p>
+<p>  - Neither can proceed $\implies$ Deadlock!</p>
+<p>---</p>
+<h2>2. Deadlock Prevention: Timestamp Schemes</h2>
+<p>Deadlock hone se pehle hi prevent karne ke liye DBMS transactions ko monotonic timestamps assign karta hai ($TS(T_i)$). Chhota timestamp matlab <strong>Older (Senior)</strong> transaction!</p>
+<p>Suppose transaction $T_i$ requests a lock held by transaction $T_j$:</p>
+<h3>2.1 Wait-Die Scheme (Non-Preemptive)</h3>
+<li><strong>Rule:</strong></li>
+<p>  - Agar $T_i$ <strong>Older</strong> hai ($TS(T_i) < TS(T_j)$) $\implies T_i$ is allowed to <strong>WAIT</strong>.</p>
+<p>  - Agar $T_i$ <strong>Younger</strong> hai ($TS(T_i) > TS(T_j)$) $\implies T_i$ <strong>DIES</strong> (rolled back and restarted with same timestamp).</p>
+<li><strong>Mnemonic:</strong> *"Older waits, younger dies"*.</li>
+<h3>2.2 Wound-Wait Scheme (Preemptive)</h3>
+<li><strong>Rule:</strong></li>
+<p>  - Agar $T_i$ <strong>Older</strong> hai ($TS(T_i) < TS(T_j)$) $\implies T_i$ <strong>WOUNDS</strong> $T_j$ ($T_j$ is aborted and forced to release lock).</p>
+<p>  - Agar $T_i$ <strong>Younger</strong> hai ($TS(T_i) > TS(T_j)$) $\implies T_i$ is allowed to <strong>WAIT</strong>.</p>
+<li><strong>Mnemonic:</strong> *"Older wounds, younger waits"*.</li>
+<h3>2.3 Wait-Die vs Wound-Wait Comparison (AKTU Exam Favorite)</h3>
+<table><thead><tr><th>Parameter</th><th>Wait-Die Scheme</th><th>Wound-Wait Scheme</th></tr></thead><tbody>
+<tr><td>**Preemption**</td><td>Non-preemptive (Locks never taken away)</td><td>**Preemptive** (Older transaction preempts younger)</td></tr>
+<tr><td>**Number of Rollbacks**</td><td>High (Younger transaction repeatedly aborts)</td><td>**Much Lower** (Younger waits quietly)</td></tr>
+<tr><td>**Lock Holding**</td><td>Resources remain held longer</td><td>Quick release upon wound</td></tr>
+<tr><td>**Restart Policy**</td><td>Restarts with original timestamp to prevent starvation</td><td>Restarts with original timestamp</td></tr>
+</tbody></table>
+<p>---</p>
+<h2>3. Deadlock Detection: Wait-For Graph (WFG)</h2>
+<p>Agar prevention use nahi kiya jaata, toh DBMS transactions ko freely lock lene deta hai aur periodic background thread chala kar deadlock detect karta hai:</p>
+<li><strong>Wait-For Graph $G = (V, E)$:</strong></li>
+<p>  - Vertices $V$: All active transactions.</p>
+<p>  - Directed edge $T_i </p>
+<p>ightarrow T_j$: $T_i$ is waiting for a lock held by $T_j$.</p>
+<li><strong>Theorem:</strong> Deadlock exists in the system <strong>if and only if the Wait-For Graph contains a Directed Cycle</strong>!</li>
+<p>---</p>
+<h2>4. Deadlock Recovery Strategy</h2>
+<p>Jab Wait-For Graph me cycle detect hoti hai, toh system ko deadlock break karne ke liye 3 steps lene padte hain:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Selection of Victim:</strong></p>
+<p>   - Kisi ek transaction ko abort karke locks release karwana.</p>
+<p>   - Victim chunne ke criteria: Jisme sabse kam operations execute hue hon, jiska rollback cost minimum ho, jo kam resources hold kar rahi ho.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Rollback Extent:</strong></p>
+<p>   - <strong>Total Rollback:</strong> Transaction ko start se abort karna.</p>
+<p>   - <strong>Partial Rollback (Savepoints):</strong> Transaction ko sirf us point tak undo karna jahan tak deadlock break ho jaye.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>Starvation Prevention:</strong></p>
+<p>   - Agar ek hi transaction baar-baar victim ban kar abort hoti rahegi, toh wo kabhi finish nahi ho payegi (<strong>Starvation</strong>).</p>
+<p>   - <strong>Solution:</strong> Har baar abort hone par transaction ka priority weight badha diya jaata hai (Aging) taaki wo dobara victim na chuni jaye.</p>
+<p>---</p>
+<h2>5. Architectural Diagram</h2>
+</body></html>

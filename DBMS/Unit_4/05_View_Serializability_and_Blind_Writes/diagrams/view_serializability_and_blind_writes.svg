@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg05)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">View Serializability &amp; Blind Writes Architecture</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">The 3 Formal Rules of View Equivalence &amp; Handling Blind Write Overwrites</text>
+
+  <!-- TOP BANNER: 3 RULES OF VIEW EQUIVALENCE -->
+  <g transform="translate(35, 80)">
+    <rect width="930" height="210" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.8"/>
+    <text x="465" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">The 3 Formal Conditions for View Equivalence (Schedule S ≡_view S&apos;)</text>
+
+    <!-- Rule 1 -->
+    <rect x="20" y="48" width="280" height="145" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="70" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Rule 1: Initial Read</text>
+    <text x="35" y="90" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">For every data item A:</text>
+    <text x="35" y="106" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If Ti reads the initial database value</text>
+    <text x="35" y="120" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">of A in schedule S, then Ti MUST</text>
+    <text x="35" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">also read the initial value of A</text>
+    <text x="35" y="152" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">in schedule S&apos;!</text>
+    <text x="35" y="172" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">(Preserves original state input)</text>
+
+    <!-- Rule 2 -->
+    <rect x="325" y="48" width="280" height="145" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="340" y="70" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Rule 2: Updated Read (Flow)</text>
+    <text x="340" y="90" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">For every data item A:</text>
+    <text x="340" y="106" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If Ti reads the value of A written by</text>
+    <text x="340" y="120" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Tj in schedule S (Wj(A) → Ri(A)),</text>
+    <text x="340" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">then Ti MUST also read the value</text>
+    <text x="340" y="152" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">written by Tj in S&apos;!</text>
+    <text x="340" y="172" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">(Preserves data dependency pipeline)</text>
+
+    <!-- Rule 3 -->
+    <rect x="630" y="48" width="280" height="145" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="645" y="70" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Rule 3: Final Write</text>
+    <text x="645" y="90" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">For every data item A:</text>
+    <text x="645" y="106" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If Ti executes the last/final write</text>
+    <text x="645" y="120" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">operation on A in schedule S,</text>
+    <text x="645" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">then Ti MUST also execute the last</text>
+    <text x="645" y="152" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">write on A in schedule S&apos;!</text>
+    <text x="645" y="172" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">(Preserves final database outcome)</text>
+  </g>
+
+  <!-- BOTTOM: BLIND WRITE ROLE & THEOREM -->
+  <g transform="translate(35, 305)">
+    <rect width="930" height="185" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="465" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#fbbf24">Blind Writes &amp; The Equivalence Theorems</text>
+
+    <!-- Blind write definition -->
+    <rect x="20" y="45" width="430" height="125" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="68" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">What is a Blind Write?</text>
+    <text x="35" y="88" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">A transaction performs W(A) without executing R(A) first.</text>
+    <text x="35" y="104" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">It blindly overwrites A without knowing the existing value.</text>
+    <text x="35" y="124" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">★ The Magical Role of Blind Writes:</text>
+    <text x="35" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If a schedule has NO blind writes and has a cycle in its Precedence Graph,</text>
+    <text x="35" y="154" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">it can NEVER be View Serializable!</text>
+
+    <!-- Fundamental Theorem -->
+    <rect x="470" y="45" width="440" height="125" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="485" y="68" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Crucial Theorems for Fast Solving:</text>
+    <text x="485" y="90" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">1. Conflict Serializable ⇒ ALWAYS View Serializable.</text>
+    <text x="485" y="108" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. If Graph has NO cycle ⇒ Conflict &amp; View Serializable!</text>
+    <text x="485" y="126" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">3. If Graph HAS cycle + NO Blind Writes ⇒ NOT View Serializable!</text>
+    <text x="485" y="146" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">4. If Graph HAS cycle + HAS Blind Writes ⇒ Test view equivalence</text>
+    <text x="485" y="160" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">   with n! serial schedules (Polygraph method).</text>
+  </g>
+</svg>

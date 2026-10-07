@@ -1,0 +1,153 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 12: Distributed Databases & Directory Systems</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 12: Distributed Databases & Directory Systems</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg12)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Distributed Databases: Storage, Directory &amp; 2PC Protocol</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Data Fragmentation (Horizontal, Vertical, Hybrid), Replication, Directory Access (LDAP) &amp; Two-Phase Commit</text>
+
+  <!-- LEFT: DATA FRAGMENTATION -->
+  <g transform="translate(35, 85)">
+    <rect width="450" height="400" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">1. Distributed Data Fragmentation</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Dividing Relations Across Geographically Dispersed Sites</text>
+
+    <!-- Horizontal -->
+    <rect x="20" y="65" width="410" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Horizontal Fragmentation (Rows / Tuples)</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">R1 = σ_p(R). Splits table by selection predicate on rows.</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Reconstruction via UNION: R = R1 ∪ R2 ∪ ... ∪ Rk.</text>
+
+    <!-- Vertical -->
+    <rect x="20" y="150" width="410" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="172" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Vertical Fragmentation (Columns / Attributes)</text>
+    <text x="35" y="190" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">R1 = π_A(R). Splits table by columns. MUST include Primary Key!</text>
+    <text x="35" y="208" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Reconstruction via NATURAL JOIN: R = R1 ⋈ R2 ⋈ ... ⋈ Rk.</text>
+    <text x="35" y="224" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fbbf24">Hybrid/Mixed: Combination of horizontal and vertical splits.</text>
+
+    <!-- 3 Rules -->
+    <rect x="20" y="245" width="410" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="267" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fed7aa">The 3 Sacred Rules of Fragmentation:</text>
+    <text x="35" y="287" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Completeness: Every data item in R must belong to some fragment.</text>
+    <text x="35" y="307" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Reconstruction: Relation R can be reconstructed via ∪ or ⋈.</text>
+    <text x="35" y="327" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">3. Disjointness: Fragments must be non-overlapping (except PK in vertical).</text>
+    <text x="35" y="352" font-family="-apple-system, sans-serif" font-size="9" fill="#38bdf8">Replication: Full (all sites), Partial (some sites), None (partitioned).</text>
+  </g>
+
+  <!-- RIGHT: DIRECTORY SYSTEMS & 2PC PROTOCOL -->
+  <g transform="translate(515, 85)">
+    <rect width="450" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. Directory Systems &amp; 2PC Protocol</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">LDAP Hierarchy &amp; Atomic Distributed Commit</text>
+
+    <!-- Directory System -->
+    <rect x="20" y="65" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#93c5fd">Directory System (LDAP / X.500):</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Hierarchical tree database optimized for ultra-fast READS.</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Directory Information Tree (DIT) with Distinguished Names (DN).</text>
+    <text x="35" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#38bdf8">DAP (Heavy OSI protocol) vs LDAP (Lightweight TCP/IP standard).</text>
+
+    <!-- Two-Phase Commit -->
+    <rect x="20" y="170" width="410" height="210" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="192" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fde68a">Two-Phase Commit (2PC) Protocol:</text>
+
+    <text x="35" y="214" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#a7f3d0">Phase 1: Prepare / Voting Phase</text>
+    <text x="35" y="230" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Coordinator sends &lt;prepare&gt; to all participating sites.</text>
+    <text x="35" y="246" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Sites write redo/undo logs, acquire locks, and vote &quot;YES&quot; or &quot;NO&quot;.</text>
+
+    <text x="35" y="270" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#a7f3d0">Phase 2: Commit / Decision Phase</text>
+    <text x="35" y="286" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• If ALL sites vote &quot;YES&quot; ⇒ Coordinator sends &lt;Global-Commit&gt;!</text>
+    <text x="35" y="302" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">• If ANY site votes &quot;NO&quot; (or timeout) ⇒ Coordinator sends &lt;Global-Abort&gt;!</text>
+    <text x="35" y="322" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Participants execute final decision and reply with acknowledgment.</text>
+    <text x="35" y="342" font-family="-apple-system, sans-serif" font-size="8.5" fill="#34d399">Guarantees distributed Atomicity across multiple database servers!</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Distributed DBMS Architecture, Data Fragmentation (Horizontal, Vertical, Hybrid), Rules of Fragmentation, Data Replication, Directory Systems (LDAP, X.500, DIT), Two-Phase Commit (2PC) Protocol.</p>
+<p>---</p>
+<h2>1. What is a Distributed Database (DDBMS)?</h2>
+<p>Distributed Database multiple interconnected physical sites (nodes) ka collection hota hai jo network ke through communicate karte hain aur user ko single coherent database ki tarah appear hote hain (<strong>Distribution Transparency</strong>).</p>
+<li><strong>Homogeneous DDBMS:</strong> Sabhi sites par same database software (e.g., all Oracle) aur same data models hote hain.</li>
+<li><strong>Heterogeneous DDBMS:</strong> Alag-alag sites par alag DBMS hote hain (e.g., Site 1 on PostgreSQL, Site 2 on MySQL).</li>
+<p>---</p>
+<h2>2. Distributed Data Storage Techniques</h2>
+<h3>2.1 Data Fragmentation</h3>
+<p>Ek relation $R$ ko multiple logical sub-parts me divide karna:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Horizontal Fragmentation:</strong></p>
+<p>   - Relation ko rows (tuples) me divide karta hai using Selection operator $\sigma_p(R)$.</p>
+<p>   - Reconstruction: <strong>Union ($\cup$)</strong> operation.</p>
+<p>   - Example: $R_{	ext{Delhi}} = \sigma_{	ext{City='Delhi'}}(	ext{EMPLOYEE})$ and $R_{	ext{Mumbai}} = \sigma_{	ext{City='Mumbai'}}(	ext{EMPLOYEE})$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Vertical Fragmentation:</strong></p>
+<p>   - Relation ko columns (attributes) me divide karta hai using Projection operator $\pi_A(R)$.</p>
+<p>   - <strong>Crucial Rule:</strong> Primary Key attribute har fragment me present hona <strong>mandatory</strong> hai!</p>
+<p>   - Reconstruction: <strong>Natural Join ($owtie$)</strong> operation.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>Hybrid / Mixed Fragmentation:</strong></p>
+<p>   - Horizontal aur Vertical fragmentation ka combination.</p>
+<h3>2.2 The Three Sacred Rules of Fragmentation</h3>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Completeness:</strong> Original table ka har single data item kisi na kisi fragment me zaroor appear hona chahiye.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Reconstruction:</strong> Fragments ko combine karke original relation bina data loss ke wapas banayi ja sake ($\cup$ for horizontal, $owtie$ for vertical).</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>Disjointness:</strong> Fragments non-overlapping hone chahiye (vertical me sirf Primary Key duplicate hoti hai).</p>
+<h3>2.3 Data Replication</h3>
+<li><strong>Full Replication:</strong> Relation ki identical copy har single network site par store ki jaati hai (Maximum read availability, expensive updates).</li>
+<li><strong>Partial Replication:</strong> Copies sirf un sites par rakhi jaati hain jahan query frequency high ho.</li>
+<li><strong>No Replication:</strong> Har fragment sirf ek single site par rehta hai.</li>
+<p>---</p>
+<h2>3. Directory Systems (LDAP & X.500)</h2>
+<li><strong>Directory Service:</strong> Ek specialized hierarchical database jo <strong>high-frequency READS</strong> aur low-frequency writes ke liye optimize hota hai (e.g., user authentication, phone books, DNS).</li>
+<li><strong>Directory Information Tree (DIT):</strong> Tree structure jisme nodes <strong>Distinguished Names (DN)</strong> se uniquely identify hoti hain (e.g., <code>cn=Shivam,ou=Engineering,dc=example,dc=com</code>).</li>
+<li><strong>DAP vs LDAP:</strong></li>
+<p>  - <strong>DAP (Directory Access Protocol):</strong> Heavyweight OSI protocol stack.</p>
+<p>  - <strong>LDAP (Lightweight DAP):</strong> Modern lightweight standard jo directly TCP/IP par run hota hai.</p>
+<p>---</p>
+<h2>4. Two-Phase Commit (2PC) Protocol</h2>
+<p>Distributed system me sabhi sites par atomicity maintain karne ke liye <strong>Two-Phase Commit Protocol</strong> use hota hai:</p>
+<p><code></code>`</p>
+<p>Coordinator                          Participants (Sites 1..N)</p>
+<p>    │                                           │</p>
+<p>    ├─────────── Prepare? ────────────────────►│  (Phase 1: Voting)</p>
+<p>    │◄────────── Vote YES / NO ────────────────┤  (Locks held & Logged)</p>
+<p>    │                                           │</p>
+<p>    ├────── Global-Commit / Global-Abort ──────►│  (Phase 2: Decision)</p>
+<p>    │◄────────── Acknowledgment ───────────────┤</p>
+<p><code></code>`</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Phase 1: Prepare / Voting Phase:</strong></p>
+<p>   - Coordinator sabhi participants ko <code>Prepare</code> message bhejta hai.</p>
+<p>   - Participants apne local changes log me write karte hain aur <code>VOTE_COMMIT</code> ya <code>VOTE_ABORT</code> reply karte hain.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Phase 2: Commit / Decision Phase:</strong></p>
+<p>   - Agar <strong>SABHI</strong> participants ne <code>YES</code> vote kiya $\implies$ Coordinator <code>GLOBAL_COMMIT</code> bhejta hai.</p>
+<p>   - Agar kisi <strong>EK</strong> participant ne bhi <code>NO</code> vote kiya ya timeout hua $\implies$ Coordinator <code>GLOBAL_ABORT</code> bhejta hai!</p>
+<p>   - Sabhi sites decision apply karke acknowledgment return karti hain.</p>
+<p>---</p>
+<h2>5. Architectural Diagram</h2>
+</body></html>

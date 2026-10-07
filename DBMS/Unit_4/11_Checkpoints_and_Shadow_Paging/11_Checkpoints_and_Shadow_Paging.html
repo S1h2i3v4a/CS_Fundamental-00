@@ -1,0 +1,152 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 11: Checkpoints & Shadow Paging</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 11: Checkpoints & Shadow Paging</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg11)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Checkpoints &amp; Shadow Paging Architecture</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Accelerating Log Recovery (Undo/Redo Lists) &amp; Shadow Directory Atomic Switching</text>
+
+  <!-- LEFT: CHECKPOINT MECHANISM & TIMELINE -->
+  <g transform="translate(35, 85)">
+    <rect width="450" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">1. Checkpointing Mechanism</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Limits Log Scan Distance During System Recovery</text>
+
+    <!-- Why needed -->
+    <rect x="20" y="65" width="410" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Why Are Checkpoints Essential?</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Without checkpoints, recovery must search the ENTIRE log from day 1,</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">re-executing millions of already flushed transactions!</text>
+
+    <!-- Checkpoint procedure -->
+    <rect x="20" y="145" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="167" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Checkpoint Creation Steps:</text>
+    <text x="35" y="187" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Flush all dirty database memory buffers to disk.</text>
+    <text x="35" y="204" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Write &lt;checkpoint L&gt; to log, where L is active transaction list.</text>
+    <text x="35" y="221" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">3. Flush log to stable storage.</text>
+
+    <!-- Resolution algorithm -->
+    <rect x="20" y="250" width="410" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="272" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Recovery Algorithm with Checkpoint:</text>
+    <text x="35" y="292" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Scan log backward to most recent &lt;checkpoint L&gt;.</text>
+    <text x="35" y="309" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Undo-List = L; Redo-List = ∅.</text>
+    <text x="35" y="326" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Scan forward: if &lt;Ti commit&gt; found ⇒ Move Ti to Redo-List.</text>
+    <text x="35" y="343" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If &lt;Ti start&gt; found after checkpoint ⇒ Add Ti to Undo-List.</text>
+    <text x="35" y="363" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">★ Transactions completed BEFORE checkpoint are completely IGNORED!</text>
+  </g>
+
+  <!-- RIGHT: SHADOW PAGING -->
+  <g transform="translate(515, 85)">
+    <rect width="450" height="400" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">2. Shadow Paging Architecture</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Log-Free Atomic Commit via Directory Switching</text>
+
+    <!-- Two Directories -->
+    <rect x="20" y="65" width="410" height="120" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#93c5fd">The Two Page Tables:</text>
+    <text x="35" y="108" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Current Page Table: Kept in memory, points to latest</text>
+    <text x="35" y="123" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">   modified pages written to new disk blocks.</text>
+    <text x="35" y="143" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">2. Shadow Page Table: Kept on non-volatile disk,</text>
+    <text x="35" y="158" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">   points to original unmodified database pages.</text>
+
+    <!-- Commit vs Abort -->
+    <rect x="20" y="195" width="410" height="110" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="217" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fed7aa">Commit vs Abort Mechanism:</text>
+    <text x="35" y="237" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">• Commit: Atomically switch pointer on disk to point</text>
+    <text x="35" y="252" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">  to Current Page Table. Instantly permanent!</text>
+    <text x="35" y="272" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">• Abort / Crash: Simply discard Current Table in RAM!</text>
+    <text x="35" y="287" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">  Database state reverts to Shadow Table without undo.</text>
+
+    <!-- Shadow Paging Pros and Cons -->
+    <rect x="20" y="315" width="410" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="335" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#e2e8f0">Trade-Offs:</text>
+    <text x="35" y="352" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">✓ No log file overhead, instant commit/recovery.</text>
+    <text x="35" y="368" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">✕ Data fragmentation, garbage collection needed, single-user lock.</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Checkpoint Mechanics, Resolving Active Transactions (Undo-List & Redo-List), Shadow Paging Technique, Current vs Shadow Directory, Trade-offs.</p>
+<p>---</p>
+<h2>1. Why Do We Need Checkpoints?</h2>
+<p>Normal Log-based recovery me agar system crash hota hai, toh recovery manager ko log file ke shuru se aakhiri tak poora scan karna padta hai.</p>
+<li>Ek enterprise server jo 6 mahine se chal raha hai, usme millions of transactions honge.</li>
+<li>Un sabhi ko scan karke re-execute karna ghanto (hours) ka time lega!</li>
+<li><strong>Checkpoint</strong> database me ek periodic milestone hota hai jahan tak ke saare changes disk par physically sync ho chuke hote hain.</li>
+<li><strong>Benefit:</strong> Recovery manager ko checkpoint se pehle commit ho chuki transactions ko dubara chhoone ki koi zaroorat nahi hoti!</li>
+<p>---</p>
+<h2>2. Checkpoint Creation Lifecycle</h2>
+<p><code></code>`</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Temporary Freeze: New transaction start operations are queued.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Buffer Flush: RAM ke sabhi modified (dirty) pages ko disk par write kiya jaata hai.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> Checkpoint Record: Log me record likha jaata hai:</p>
+<p>      <checkpoint {T_active_1, T_active_2, ...}></p>
+<p>4. Log Flush: Log file ko stable storage par flush kiya jaata hai.</p>
+<p>5. Resume: Normal execution continues.</p>
+<p><code></code>`</p>
+<p>---</p>
+<h2>3. Recovery Algorithm with Checkpoints (AKTU Solved Pattern)</h2>
+<p>Jab crash hota hai, recovery manager log ko end se scan karte hue peeche aata hai:</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Sabse recent checkpoint record dhundo: $\langle 	ext{checkpoint } L </p>
+<p>angle$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Do empty sets banao:</p>
+<p>   - <strong>Undo-List</strong> $= L$ (Sabhi transactions jo checkpoint ke waqt chal rahi thi).</p>
+<p>   - <strong>Redo-List</strong> $= \emptyset$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> Checkpoint se aage (forward) scan karo:</p>
+<p>   - Agar kisi transaction ka $\langle T_i 	ext{ commit} </p>
+<p>angle$ record milta hai $\implies T_i$ ko Undo-List se nikaal kar <strong>Redo-List</strong> me daal do!</p>
+<p>   - Agar checkpoint ke baad kisi transaction ka $\langle T_j 	ext{ start} </p>
+<p>angle$ milta hai $\implies T_j$ ko <strong>Undo-List</strong> me add kar do!</p>
+<p>4. <strong>Action:</strong></p>
+<p>   - Redo-List ki sabhi transactions ko <strong>REDO</strong> karo (forward replay).</p>
+<p>   - Undo-List ki sabhi transactions ko <strong>UNDO</strong> karo (backward rollback).</p>
+<p>---</p>
+<h2>4. Shadow Paging Technique</h2>
+<p>Shadow paging ek <strong>Log-Free Recovery</strong> architecture hai jo RDBMS me transaction recovery simplify karta hai:</p>
+<p><code></code>`</p>
+<p>[ In-Memory Current Page Table ] ──────► Points to Newly Written Disk Blocks</p>
+<p>[ On-Disk Shadow Page Table ]   ──────► Points to Original Clean Disk Blocks</p>
+<p><code></code>`</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Working:</strong></p>
+<p>   - Transaction start hote waqt Shadow Page Table ko copy karke Current Page Table banaya jaata hai.</p>
+<p>   - Har write operation ek naye disk block par hota hai, aur Current Page Table us naye block ko point karta hai.</p>
+<p>   - Shadow Page Table disk par unmodified rehti hai.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Commit:</strong></p>
+<p>   - Current Page Table ka pointer disk ke root pointer par atomically swap kar diya jaata hai.</p>
+<p>   - Current table ab nayi Shadow Table ban jaati hai!</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>Crash / Abort:</strong></p>
+<p>   - RAM ki Current Page Table ko discard kar do!</p>
+<p>   - Disk par Shadow Page Table pehle se intact hai, isliye zero undo operations me system recover ho jaata hai!</p>
+<p>---</p>
+<h2>5. Architectural Diagram</h2>
+</body></html>

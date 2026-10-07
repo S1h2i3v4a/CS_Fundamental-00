@@ -1,0 +1,205 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 13: AKTU PYQs & Solved Schedules</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 13: AKTU PYQs & Solved Schedules</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg13" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg13)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">AKTU Unit 4 Master Examination Solving Flowchart</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">The 4-Step Decision Pipeline for Scoring Full 10 Marks in Schedule &amp; Recovery Numericals</text>
+
+  <!-- STEP 1 -->
+  <g transform="translate(40, 90)">
+    <rect width="210" height="90" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="105" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#38bdf8">Step 1: Conflict Graph</text>
+    <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Extract RAW, WAR, WAW pairs.</text>
+    <text x="15" y="66" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Draw directed edge Ti → Tj.</text>
+    <text x="15" y="82" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">Acyclic? ⇒ Conflict Serializable!</text>
+  </g>
+
+  <!-- ARROW 1 -->
+  <line x1="250" y1="135" x2="275" y2="135" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr13)"/>
+
+  <!-- STEP 2 -->
+  <g transform="translate(280, 90)">
+    <rect width="210" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="105" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#34d399">Step 2: View &amp; Blind Writes</text>
+    <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• If acyclic ⇒ Already View Ser.</text>
+    <text x="15" y="66" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• If cycle + NO blind write ⇒ NOT!</text>
+    <text x="15" y="82" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Blind write present? Test 3 rules.</text>
+  </g>
+
+  <!-- ARROW 2 -->
+  <line x1="490" y1="135" x2="515" y2="135" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr13)"/>
+
+  <!-- STEP 3 -->
+  <g transform="translate(520, 90)">
+    <rect width="210" height="90" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.6"/>
+    <text x="105" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#fbbf24">Step 3: Recoverability Audit</text>
+    <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Look for W1(A) → R2(A) dirty read.</text>
+    <text x="15" y="66" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Commit(T1) &lt; Commit(T2)?</text>
+    <text x="15" y="82" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">Yes ⇒ Recoverable. Check ACA/Strict.</text>
+  </g>
+
+  <!-- ARROW 3 -->
+  <line x1="730" y1="135" x2="755" y2="135" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr13)"/>
+
+  <!-- STEP 4 -->
+  <g transform="translate(760, 90)">
+    <rect width="200" height="90" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="1.6"/>
+    <text x="100" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#c084fc">Step 4: Log Checkpoint Trace</text>
+    <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Find last &lt;checkpoint L&gt;.</text>
+    <text x="15" y="66" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• Committed after CP ⇒ REDO.</text>
+    <text x="15" y="82" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">Uncommitted at crash ⇒ UNDO.</text>
+  </g>
+
+  <!-- BOTTOM CHECKLIST PANEL -->
+  <g transform="translate(40, 210)">
+    <rect width="920" height="280" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="460" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#38bdf8">Standard Examination Question Patterns &amp; Formulas</text>
+
+    <!-- Pattern 1 -->
+    <rect x="20" y="50" width="430" height="100" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="72" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#34d399">Deadlock Prevention Timestamp Checks</text>
+    <text x="35" y="92" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Wait-Die: TS(Ti) &lt; TS(Tj) ⇒ Ti waits; TS(Ti) &gt; TS(Tj) ⇒ Ti dies.</text>
+    <text x="35" y="108" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Wound-Wait: TS(Ti) &lt; TS(Tj) ⇒ Ti wounds Tj; TS(Ti) &gt; TS(Tj) ⇒ Ti waits.</text>
+    <text x="35" y="128" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">Younger transaction has HIGHER timestamp number!</text>
+
+    <!-- Pattern 2 -->
+    <rect x="470" y="50" width="430" height="100" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="485" y="72" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#c084fc">Distributed Fragmentation Formulas</text>
+    <text x="485" y="92" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Horizontal Reconstruction: R = R1 ∪ R2 ∪ ... ∪ Rk</text>
+    <text x="485" y="108" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Vertical Reconstruction: R = R1 ⋈ R2 ⋈ ... ⋈ Rk</text>
+    <text x="485" y="128" font-family="-apple-system, sans-serif" font-size="9" fill="#a7f3d0">Vertical fragments must share Primary Key for lossless natural join!</text>
+
+    <!-- Pattern 3 -->
+    <rect x="20" y="165" width="880" height="100" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="188" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fbbf24">AKTU Full Marks Scoring Strategy</text>
+    <text x="35" y="208" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Explicitly list all conflicting operations with timestamp order: &quot;W1(A) before R2(A)&quot;.</text>
+    <text x="35" y="224" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Draw the Precedence Graph clearly with arrows and state: &quot;Since graph contains NO cycle, schedule is Conflict Serializable&quot;.</text>
+    <text x="35" y="240" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">3. Show topological sort step-by-step with in-degrees to state equivalent serial schedule.</text>
+    <text x="35" y="256" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">4. For log recovery, present distinct &quot;Undo List&quot; and &quot;Redo List&quot; tables with justification.</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Previous 5 Years University Exam Questions (2019-2024), 10-Mark Schedule Serializability Solutions, Log Recovery Trace Problems, Deadlock Prevention Scenarios.</p>
+<p>---</p>
+<h2>1. AKTU PYQ 1 (10 Marks — 2022-23 End-Sem)</h2>
+<p><strong>Question:</strong>  </p>
+<p>Consider the following schedule $S$ involving transactions $T_1$, $T_2$, and $T_3$:</p>
+<p>$$S: R_1(X); \quad R_2(Z); \quad R_1(Z); \quad R_3(X); \quad R_3(Y); \quad W_1(X); \quad W_3(Y); \quad R_2(Y); \quad W_2(Z); \quad W_2(Y); \quad C_1; \quad C_2; \quad C_3$$</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> Test whether schedule $S$ is Conflict Serializable. If yes, find the equivalent serial schedule.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> Test whether schedule $S$ is Recoverable.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> Test whether schedule $S$ is Cascadeless.</p>
+<h3>Solution:</h3>
+<p>#### 1. Conflict Serializability Test</p>
+<li>Conflicting pairs in $S$:</li>
+<p>  - On $X$: $R_3(X)$ is followed by $W_1(X) \implies \mathbf{T_3 </p>
+<p>ightarrow T_1}$.</p>
+<p>  - On $Y$: $W_3(Y)$ is followed by $R_2(Y) \implies \mathbf{T_3 </p>
+<p>ightarrow T_2}$.</p>
+<p>  - On $Y$: $W_3(Y)$ is followed by $W_2(Y) \implies \mathbf{T_3 </p>
+<p>ightarrow T_2}$ (Already present).</p>
+<p>  - On $Z$: $R_1(Z)$ is followed by $W_2(Z) \implies \mathbf{T_1 </p>
+<p>ightarrow T_2}$.</p>
+<li>Precedence Graph Edges:</li>
+<p>  $$T_3 </p>
+<p>ightarrow T_1, \quad T_3 </p>
+<p>ightarrow T_2, \quad T_1 </p>
+<p>ightarrow T_2$$</p>
+<li><strong>Cycle Check:</strong> No cycles exist in the graph (strictly Acyclic Directed Graph).</li>
+<li><strong>Topological Sorting:</strong></li>
+<p>  - In-degree of $T_3 = 0 \implies \mathbf{T_3}$ is first.</p>
+<p>  - In-degree of $T_1 = 0$ (after removing $T_3$) $\implies \mathbf{T_1}$ is second.</p>
+<p>  - Remaining: $\mathbf{T_2}$ is third.</p>
+<li><strong>Equivalent Serial Schedule:</strong> $\mathbf{T_3 </li>
+<p>ightarrow T_1 </p>
+<p>ightarrow T_2}$.</p>
+<li><strong>Verdict 1:</strong> Schedule $S$ is <strong>Conflict Serializable</strong>!</li>
+<p>#### 2. Recoverability Test</p>
+<li>Look for Dirty Reads ($W_i </li>
+<p>ightarrow R_j$):</p>
+<p>  - $W_3(Y)$ is followed by $R_2(Y)$ while $T_3$ is uncommitted.</p>
+<p>  - So $T_2$ reads uncommitted data from $T_3$.</p>
+<li>Check commit orders:</li>
+<p>  - $T_2$ commits at step $C_2$.</p>
+<p>  - $T_3$ commits at step $C_3$.</p>
+<p>  - Notice: $C_2 < C_3$! That means <strong>$T_2$ COMMITS BEFORE $T_3$ COMMITS</strong>!</p>
+<li>If $T_3$ were to abort, $T_2$ cannot be rolled back!</li>
+<li><strong>Verdict 2:</strong> Schedule $S$ is <strong>IRRECOVERABLE</strong>!</li>
+<p>#### 3. Cascadeless Test</p>
+<li>In a cascadeless schedule, no transaction can read uncommitted data.</li>
+<li>Since $T_2$ reads $Y$ from $T_3$ before $T_3$ commits, dirty read exists.</li>
+<li><strong>Verdict 3:</strong> Schedule $S$ is <strong>NOT Cascadeless</strong>!</li>
+<p>---</p>
+<h2>2. AKTU PYQ 2 (10 Marks — 2021-22 End-Sem)</h2>
+<p><strong>Question:</strong>  </p>
+<p>Explain Log-Based Recovery with Immediate Database Modification. Suppose a system crashes with the following log contents:</p>
+<p><code></code>`</p>
+<p><T1 start></p>
+<p><T1, A, 50, 100></p>
+<p><T2 start></p>
+<p><T2, B, 200, 250></p>
+<p><checkpoint {T1, T2}></p>
+<p><T3 start></p>
+<p><T1 commit></p>
+<p><T2, C, 300, 350></p>
+<p><T3, D, 400, 450></p>
+<p><T2 commit></p>
+<p><CRASH></p>
+<p><code></code>`</p>
+<p>What actions will the recovery manager take during crash recovery? State the Undo-List and Redo-List.</p>
+<h3>Solution:</h3>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Locate Checkpoint:</strong></p>
+<p>   - Checkpoint is $\langle 	ext{checkpoint } \{T_1, T_2\} </p>
+<p>angle$.</p>
+<p>   - Active transactions at checkpoint: $\{T_1, T_2\}$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Initialize Lists:</strong></p>
+<p>   - $	ext{Undo-List} = \{T_1, T_2\}$</p>
+<p>   - $	ext{Redo-List} = \emptyset$</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>Forward Scan from Checkpoint to Crash:</strong></p>
+<p>   - $\langle T_3 	ext{ start} </p>
+<p>angle \implies$ Add $T_3$ to Undo-List: $	ext{Undo-List} = \{T_1, T_2, T_3\}$.</p>
+<p>   - $\langle T_1 	ext{ commit} </p>
+<p>angle \implies$ Move $T_1$ to Redo-List: $	ext{Redo-List} = \{T_1\}$, $	ext{Undo-List} = \{T_2, T_3\}$.</p>
+<p>   - $\langle T_2 	ext{ commit} </p>
+<p>angle \implies$ Move $T_2$ to Redo-List: $	ext{Redo-List} = \{T_1, T_2\}$, $	ext{Undo-List} = \{T_3\}$.</p>
+<p>4. <strong>Final Lists at Crash Point:</strong></p>
+<p>   - $\mathbf{	ext{Redo-List} = \{T_1, T_2\}}$ (Both started and committed).</p>
+<p>   - $\mathbf{	ext{Undo-List} = \{T_3\}}$ (Started, updated $D$, but never committed before crash).</p>
+<p>5. <strong>Recovery Actions Performed:</strong></p>
+<p>   - <strong>Undo Phase:</strong> Rollback $T_3$: Restore data item $D = 400$ (its old value), write $\langle T_3 	ext{ abort} </p>
+<p>angle$.</p>
+<p>   - <strong>Redo Phase:</strong> Replay $T_1$ and $T_2$: Set $A = 100$, $B = 250$, $C = 350$.</p>
+<p>---</p>
+<h2>3. Architectural Diagram</h2>
+</body></html>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg06)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Recoverability &amp; Cascadeless Schedules Hierarchy</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Failure Safety Taxonomy: Irrecoverable, Recoverable, Cascadeless, and Strict Schedules</text>
+
+  <!-- 4 HIERARCHICAL LEVEL CARDS -->
+  <!-- Level 1: Irrecoverable vs Recoverable -->
+  <g transform="translate(35, 85)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fca5a5">1. Irrecoverable vs Recoverable Schedules</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Commit Order on Dependent Reads (W1(A) → R2(A))</text>
+
+    <!-- Irrecoverable -->
+    <rect x="15" y="58" width="420" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="77" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f87171">Irrecoverable Schedule (STRICTLY PROHIBITED!)</text>
+    <text x="25" y="93" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">T2 reads dirty data from T1, and T2 commits BEFORE T1 commits!</text>
+    <text x="25" y="107" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fca5a5">If T1 aborts, T2 cannot be rolled back (Durability violation!).</text>
+
+    <!-- Recoverable -->
+    <rect x="15" y="122" width="420" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="141" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#34d399">Recoverable Schedule (Baseline Requirement)</text>
+    <text x="25" y="157" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If T2 reads uncommitted data from T1, T2 commits AFTER T1 commits.</text>
+    <text x="25" y="171" font-family="-apple-system, sans-serif" font-size="8.5" fill="#a7f3d0">Commit(T1) &lt; Commit(T2). If T1 aborts, T2 can safely rollback.</text>
+  </g>
+
+  <!-- Level 2: Cascading vs Cascadeless -->
+  <g transform="translate(515, 85)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#fbbf24" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fde68a">2. Cascading Rollback vs Cascadeless (ACA)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Chain-Reaction Aborts &amp; Read Constraints</text>
+
+    <!-- Cascading -->
+    <rect x="15" y="58" width="420" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="77" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#fbbf24">Cascading Abort / Rollback</text>
+    <text x="25" y="93" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Failure of 1 transaction forces rollback of 10 dependent transactions.</text>
+    <text x="25" y="107" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fed7aa">Safe and recoverable, but causes massive CPU/IO waste!</text>
+
+    <!-- Cascadeless -->
+    <rect x="15" y="122" width="420" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="141" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#34d399">Cascadeless Schedule (Avoids Cascading Aborts - ACA)</text>
+    <text x="25" y="157" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">T2 can read data item A ONLY AFTER T1 has COMMITTED!</text>
+    <text x="25" y="171" font-family="-apple-system, sans-serif" font-size="8.5" fill="#a7f3d0">Eliminates uncommitted reads entirely. Zero cascading rollbacks!</text>
+  </g>
+
+  <!-- Level 3: Strict Schedule -->
+  <g transform="translate(35, 295)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">3. Strict Schedule (Industrial Gold Standard)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">The Most Robust Schedule for Log Recovery</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Formal Strict Criteria:</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Transaction T2 can NEITHER READ NOR WRITE data item A</text>
+    <text x="25" y="112" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">until the previous transaction T1 that wrote A has COMMITTED or ABORTED!</text>
+    <text x="25" y="132" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Recovery is trivial: Simply restore before-image (old value) on abort!</text>
+    <text x="25" y="152" font-family="-apple-system, sans-serif" font-size="8.5" fill="#34d399">✓ Recoverable  ✓ Cascadeless  ✓ Simplest Undo logic.</text>
+  </g>
+
+  <!-- Level 4: Master Nested Venn Diagram -->
+  <g transform="translate(515, 295)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.6"/>
+    <text x="225" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">4. Master Inclusion Hierarchy</text>
+    <text x="225" y="46" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Strict ⊂ Cascadeless ⊂ Recoverable ⊂ All Schedules</text>
+
+    <!-- Visual nested circles -->
+    <rect x="25" y="60" width="400" height="115" rx="8" fill="#0f172a" stroke="#64748b"/>
+    <text x="40" y="80" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#94a3b8">All Schedules</text>
+
+    <rect x="50" y="85" width="350" height="80" rx="6" fill="#1e293b" stroke="#38bdf8"/>
+    <text x="65" y="103" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#38bdf8">Recoverable Schedules</text>
+
+    <rect x="75" y="110" width="300" height="50" rx="6" fill="#0f172a" stroke="#fbbf24"/>
+    <text x="90" y="128" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#fbbf24">Cascadeless (ACA)</text>
+
+    <rect x="195" y="115" width="170" height="40" rx="4" fill="#064e3b" stroke="#10b981"/>
+    <text x="280" y="140" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#a7f3d0">Strict Schedules</text>
+  </g>
+</svg>

@@ -1,0 +1,181 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 06: Recoverability & Cascadeless Schedules</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 06: Recoverability & Cascadeless Schedules</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg06)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Recoverability &amp; Cascadeless Schedules Hierarchy</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Failure Safety Taxonomy: Irrecoverable, Recoverable, Cascadeless, and Strict Schedules</text>
+
+  <!-- 4 HIERARCHICAL LEVEL CARDS -->
+  <!-- Level 1: Irrecoverable vs Recoverable -->
+  <g transform="translate(35, 85)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fca5a5">1. Irrecoverable vs Recoverable Schedules</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Commit Order on Dependent Reads (W1(A) → R2(A))</text>
+
+    <!-- Irrecoverable -->
+    <rect x="15" y="58" width="420" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="77" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#f87171">Irrecoverable Schedule (STRICTLY PROHIBITED!)</text>
+    <text x="25" y="93" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">T2 reads dirty data from T1, and T2 commits BEFORE T1 commits!</text>
+    <text x="25" y="107" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fca5a5">If T1 aborts, T2 cannot be rolled back (Durability violation!).</text>
+
+    <!-- Recoverable -->
+    <rect x="15" y="122" width="420" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="141" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#34d399">Recoverable Schedule (Baseline Requirement)</text>
+    <text x="25" y="157" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If T2 reads uncommitted data from T1, T2 commits AFTER T1 commits.</text>
+    <text x="25" y="171" font-family="-apple-system, sans-serif" font-size="8.5" fill="#a7f3d0">Commit(T1) &lt; Commit(T2). If T1 aborts, T2 can safely rollback.</text>
+  </g>
+
+  <!-- Level 2: Cascading vs Cascadeless -->
+  <g transform="translate(515, 85)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#fbbf24" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#fde68a">2. Cascading Rollback vs Cascadeless (ACA)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Chain-Reaction Aborts &amp; Read Constraints</text>
+
+    <!-- Cascading -->
+    <rect x="15" y="58" width="420" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="77" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#fbbf24">Cascading Abort / Rollback</text>
+    <text x="25" y="93" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Failure of 1 transaction forces rollback of 10 dependent transactions.</text>
+    <text x="25" y="107" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fed7aa">Safe and recoverable, but causes massive CPU/IO waste!</text>
+
+    <!-- Cascadeless -->
+    <rect x="15" y="122" width="420" height="58" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="141" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#34d399">Cascadeless Schedule (Avoids Cascading Aborts - ACA)</text>
+    <text x="25" y="157" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">T2 can read data item A ONLY AFTER T1 has COMMITTED!</text>
+    <text x="25" y="171" font-family="-apple-system, sans-serif" font-size="8.5" fill="#a7f3d0">Eliminates uncommitted reads entirely. Zero cascading rollbacks!</text>
+  </g>
+
+  <!-- Level 3: Strict Schedule -->
+  <g transform="translate(35, 295)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="25" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#34d399">3. Strict Schedule (Industrial Gold Standard)</text>
+    <text x="25" y="46" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">The Most Robust Schedule for Log Recovery</text>
+
+    <rect x="15" y="58" width="420" height="115" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="25" y="78" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Formal Strict Criteria:</text>
+    <text x="25" y="96" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Transaction T2 can NEITHER READ NOR WRITE data item A</text>
+    <text x="25" y="112" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">until the previous transaction T1 that wrote A has COMMITTED or ABORTED!</text>
+    <text x="25" y="132" font-family="-apple-system, sans-serif" font-size="9" fill="#fbbf24">Recovery is trivial: Simply restore before-image (old value) on abort!</text>
+    <text x="25" y="152" font-family="-apple-system, sans-serif" font-size="8.5" fill="#34d399">✓ Recoverable  ✓ Cascadeless  ✓ Simplest Undo logic.</text>
+  </g>
+
+  <!-- Level 4: Master Nested Venn Diagram -->
+  <g transform="translate(515, 295)">
+    <rect width="450" height="190" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.6"/>
+    <text x="225" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#60a5fa">4. Master Inclusion Hierarchy</text>
+    <text x="225" y="46" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Strict ⊂ Cascadeless ⊂ Recoverable ⊂ All Schedules</text>
+
+    <!-- Visual nested circles -->
+    <rect x="25" y="60" width="400" height="115" rx="8" fill="#0f172a" stroke="#64748b"/>
+    <text x="40" y="80" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#94a3b8">All Schedules</text>
+
+    <rect x="50" y="85" width="350" height="80" rx="6" fill="#1e293b" stroke="#38bdf8"/>
+    <text x="65" y="103" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#38bdf8">Recoverable Schedules</text>
+
+    <rect x="75" y="110" width="300" height="50" rx="6" fill="#0f172a" stroke="#fbbf24"/>
+    <text x="90" y="128" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="bold" fill="#fbbf24">Cascadeless (ACA)</text>
+
+    <rect x="195" y="115" width="170" height="40" rx="4" fill="#064e3b" stroke="#10b981"/>
+    <text x="280" y="140" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#a7f3d0">Strict Schedules</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** Irrecoverable Schedules (Hazard), Recoverable Schedules, Cascading Rollback vs Cascadeless (ACA), Strict Schedules, Master Inclusion Hierarchy, Solved Schedule Testing.</p>
+<p>---</p>
+<h2>1. Why Do We Need Recoverable Schedules?</h2>
+<p>Serializability yeh ensure karti hai ki concurrent schedule ka outcome kisi serial execution ke barabar ho. Lekin Serializability <strong>Failures (Aborts)</strong> ko consider nahi karti!</p>
+<li>Real-world database me transactions network drop, disk error, ya divide-by-zero ki wajah se <strong>Abort</strong> hoti hain.</li>
+<li>Agar ek abort hui transaction ka data kisi doosri transaction ne read kar liya ho aur wo commit ho chuki ho, toh system aisi state me phans jaata hai jahan se <strong>database ko recover karna mathematically impossible ho jaata hai</strong>!</li>
+<p>Isliye relational DBMS me <strong>Recoverability</strong> serializability se bhi zyada critical property hoti hai!</p>
+<p>---</p>
+<h2>2. Classification of Schedules Based on Recovery</h2>
+<h3>2.1 Irrecoverable Schedule (Strictly Prohibited!)</h3>
+<li><strong>Definition:</strong> Jab transaction $T_2$ data item $A$ ko read karta hai jise $T_1$ ne update kiya tha ($W_1(A) </li>
+<p>ightarrow R_2(A)$), aur <strong>$T_2$ pehle COMMIT ho jaata hai jabki $T_1$ abhi active tha</strong>.</p>
+<li>Uske baad $T_1$ fail hokar <strong>Abort</strong> ho jaata hai!</li>
+<li><strong>Hazard:</strong> ACID properties ke Durability rule ke according hum committed transaction $T_2$ ko rollback nahi kar sakte, aur Atomicity ke according hum $T_1$ ke uncommitted data ko database me chhod nahi sakte!</li>
+<li><strong>Verdict:</strong> Irrecoverable schedules database corrupt karte hain aur kisi bhi RDBMS me allow nahi hote.</li>
+<p><code></code>`</p>
+<p>     T1                     T2</p>
+<p>     │                      │</p>
+<p>   Write(A)                 │</p>
+<p>     │                   Read(A)      <-- Reads uncommitted A</p>
+<p>     │                   Commit       <-- T2 COMMITS!</p>
+<p>   [ABORT / CRASH]          │         <-- T1 aborts! T2 cannot rollback!</p>
+<p><code></code>`</p>
+<p>---</p>
+<h3>2.2 Recoverable Schedule (Baseline Requirement)</h3>
+<li><strong>Definition:</strong> Agar transaction $T_2$ uncommitted data item $A$ read karta hai jo $T_1$ ne likha tha, toh $T_2$ ka commit operation compulsory roop se <strong>$T_1$ ke commit hone ke BAAD hona chahiye</strong>:</li>
+<p>  $$\mathbf{	ext{Commit}(T_1) < 	ext{Commit}(T_2)}$$</p>
+<li>Agar $T_1$ abort hota hai, toh $T_2$ abhi commit nahi hua hai, isliye $T_2$ ko bhi safe tarike se rollback kiya ja sakta hai!</li>
+<p>---</p>
+<h3>2.3 Cascading Rollback / Cascading Abort</h3>
+<li>Ek recoverable schedule me agar transaction $T_1$ fail ho jaye, toh un sabhi transactions ($T_2, T_3, \dots, T_k$) ko bhi abort aur rollback karna padta hai jinhone $T_1$ ka uncommitted data padha tha!</li>
+<li>Yeh chain reaction bohot saara CPU aur I/O time waste karti hai.</li>
+<p>---</p>
+<h3>2.4 Cascadeless Schedule (Avoids Cascading Aborts - ACA)</h3>
+<li><strong>Rule:</strong> Transaction $T_2$ kisi data item $A$ ko <strong>tabhi read kar sakta hai jab use likhne wala transaction $T_1$ already COMMIT ho chuka ho</strong>!</li>
+<li>Dirty reads physically allow hi nahi hote!</li>
+<li>Agar $T_1$ abort hota hai, toh kisi aur transaction ko rollback karne ki zaroorat nahi padti (Zero cascading rollbacks).</li>
+<p>---</p>
+<h3>2.5 Strict Schedule (Industrial Standard)</h3>
+<li><strong>Rule:</strong> Transaction $T_2$ kisi data item $A$ ko <strong>na toh READ kar sakta hai aur na hi WRITE kar sakta hai</strong> jab tak use pehle likhne wala transaction $T_1$ commit ya abort na ho jaye!</li>
+<li><strong>Huge Advantage in Crash Recovery:</strong> Agar koi transaction abort hoti hai, toh database recovery manager ko koi complex calculation nahi karni padti; wo seedha log file se <strong>Before-Image (Purani value)</strong> uthakar cell me paste kar deta hai!</li>
+<p>---</p>
+<h2>3. Master Inclusion Hierarchy</h2>
+<p>$$\mathbf{	ext{Strict} \subset 	ext{Cascadeless (ACA)} \subset 	ext{Recoverable} \subset 	ext{All Schedules}}$$</p>
+<li>Har Strict schedule by default Cascadeless hota hai.</li>
+<li>Har Cascadeless schedule by default Recoverable hota hai.</li>
+<li>Lekin har Recoverable schedule Cascadeless nahi hota!</li>
+<p>---</p>
+<h2>4. Architectural Diagram</h2>
+<p>---</p>
+<h2>5. Gateway Classes Solved AKTU Examination Problem</h2>
+<p><strong>Question:</strong> Test whether the following schedule $S$ is Recoverable, Cascadeless, or Strict:</p>
+<p>$$S: R_1(X); \quad R_2(Z); \quad W_1(X); \quad R_2(Y); \quad W_3(Y); \quad R_2(X); \quad W_2(Z); \quad W_2(Y); \quad C_1; \quad C_2; \quad C_3$$</p>
+<h3>Step-by-Step Analysis:</h3>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> **Find all Dirty Reads ($W_i </p>
+<p>ightarrow R_j$):**</p>
+<p>   - $W_1(X)$ happens, followed by $R_2(X)$ before $T_1$ commits!</p>
+<p>   - This is a Dirty Read from $T_1$ to $T_2$.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Check Commit Order:</strong></p>
+<p>   - $T_1$ commits at step $C_1$.</p>
+<p>   - $T_2$ commits at step $C_2$.</p>
+<p>   - Here $C_1 < C_2$ ($T_1$ commits before $T_2$).</p>
+<p>   - Therefore, the schedule is <strong>RECOVERABLE</strong>!</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>Check Cascadeless:</strong></p>
+<p>   - In Cascadeless, a transaction can only read AFTER commit.</p>
+<p>   - But $T_2$ read $X$ at $R_2(X)$ while $T_1$ was uncommitted!</p>
+<p>   - Therefore, schedule $S$ is <strong>NOT Cascadeless</strong>!</p>
+<p>4. <strong>Check Strict:</strong></p>
+<p>   - Since it is not cascadeless, it can <strong>NEVER be Strict</strong>!</p>
+<p><strong>Conclusion:</strong> Schedule $S$ is <strong>Recoverable with Cascading Rollback</strong>, but <strong>NOT Cascadeless and NOT Strict</strong>!</p>
+</body></html>

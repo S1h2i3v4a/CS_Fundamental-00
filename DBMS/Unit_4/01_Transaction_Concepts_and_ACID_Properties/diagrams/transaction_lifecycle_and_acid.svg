@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr01" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg01)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Transaction Lifecycle &amp; ACID Architecture</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">State Transition Diagram, Core Primitives, and Invariant Guarantees</text>
+
+  <!-- LEFT: STATE TRANSITION DIAGRAM -->
+  <g transform="translate(35, 85)">
+    <rect width="470" height="400" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.8"/>
+    <text x="235" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">1. Transaction State Transition Machine</text>
+    <text x="235" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Lifecycle States from Inception to Termination</text>
+
+    <!-- Active State -->
+    <rect x="25" y="80" width="120" height="45" rx="6" fill="#0f172a" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="85" y="107" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#93c5fd">Active</text>
+
+    <!-- Arrow Active to Partially Committed -->
+    <path d="M 145 102 L 205 102" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr01)"/>
+
+    <!-- Partially Committed -->
+    <rect x="215" y="80" width="150" height="45" rx="6" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="290" y="99" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#fde68a">Partially</text>
+    <text x="290" y="115" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="bold" fill="#fde68a">Committed</text>
+
+    <!-- Arrow Partially Committed to Committed -->
+    <path d="M 365 102 L 415 102" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr01)"/>
+
+    <!-- Committed State -->
+    <rect x="340" y="175" width="105" height="45" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.8"/>
+    <text x="392" y="202" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#34d399">Committed</text>
+
+    <!-- Path Partially Committed down to Committed -->
+    <path d="M 290 125 L 290 197 L 340 197" fill="none" stroke="#34d399" stroke-width="1.8" marker-end="url(#arr01)"/>
+
+    <!-- Failed State -->
+    <rect x="170" y="260" width="120" height="45" rx="6" fill="#0f172a" stroke="#f87171" stroke-width="1.5"/>
+    <text x="230" y="287" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#f87171">Failed</text>
+
+    <!-- Arrow Active down to Failed -->
+    <path d="M 85 125 L 85 282 L 170 282" fill="none" stroke="#f87171" stroke-width="1.5" marker-end="url(#arr01)"/>
+    <!-- Arrow Partially committed to Failed -->
+    <path d="M 250 125 L 250 260" fill="none" stroke="#f87171" stroke-width="1.5" marker-end="url(#arr01)"/>
+
+    <!-- Aborted State -->
+    <rect x="25" y="335" width="120" height="45" rx="6" fill="#0f172a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="85" y="362" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fca5a5">Aborted</text>
+
+    <!-- Arrow Failed to Aborted -->
+    <path d="M 170 295 L 85 335" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr01)"/>
+
+    <!-- Terminated State -->
+    <rect x="340" y="335" width="105" height="45" rx="6" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="392" y="362" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#e2e8f0">Terminated</text>
+
+    <!-- Arrow Committed to Terminated -->
+    <path d="M 392 220 L 392 335" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr01)"/>
+    <!-- Arrow Aborted to Terminated -->
+    <path d="M 145 357 L 340 357" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr01)"/>
+  </g>
+
+  <!-- RIGHT: ACID PROPERTIES -->
+  <g transform="translate(535, 85)">
+    <rect width="430" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+    <text x="215" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">2. ACID Properties &amp; DBMS Subsystems</text>
+    <text x="215" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">The Four Indispensable Pillars of Transaction Safety</text>
+
+    <!-- Atomicity -->
+    <rect x="20" y="65" width="390" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">A — Atomicity (&quot;All or Nothing&quot;)</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Either all operations complete successfully, or none do.</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9" fill="#38bdf8">Enforced by: Recovery Manager (via Undo Logging).</text>
+
+    <!-- Consistency -->
+    <rect x="20" y="145" width="390" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="167" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">C — Consistency (Preserving Invariants)</text>
+    <text x="35" y="185" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Database moves from one valid state to another valid state.</text>
+    <text x="35" y="202" font-family="-apple-system, sans-serif" font-size="9" fill="#38bdf8">Enforced by: Application Programmer &amp; DBMS Integrity Rules.</text>
+
+    <!-- Isolation -->
+    <rect x="20" y="225" width="390" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="247" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">I — Isolation (Zero Concurrent Interference)</text>
+    <text x="35" y="265" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Execution of one transaction is hidden from all others.</text>
+    <text x="35" y="282" font-family="-apple-system, sans-serif" font-size="9" fill="#38bdf8">Enforced by: Concurrency Control Manager (Locking/Timestamps).</text>
+
+    <!-- Durability -->
+    <rect x="20" y="305" width="390" height="75" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="327" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">D — Durability (Permanent Updates)</text>
+    <text x="35" y="345" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Once committed, updates survive power cuts &amp; crashes.</text>
+    <text x="35" y="362" font-family="-apple-system, sans-serif" font-size="9" fill="#38bdf8">Enforced by: Recovery Manager (via Redo Logging &amp; Non-volatile storage).</text>
+  </g>
+</svg>

@@ -1,0 +1,172 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Module 05: View Serializability & Blind Writes</title>
+<style>
+
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0; font-size: 10pt; }
+h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; font-size: 16pt; margin-top: 0; }
+h2 { color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; font-size: 13pt; margin-top: 14px; }
+h3 { color: #334155; font-size: 11pt; margin-top: 10px; }
+p, li { text-align: justify; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 8.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+th { background-color: #f1f5f9; color: #0f172a; font-weight: 600; }
+tr:nth-child(even) { background-color: #f8fafc; }
+pre { background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-size: 8pt; overflow-x: auto; line-height: 1.4; }
+code { font-family: Consolas, Monaco, monospace; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: bold; background: #dbeafe; color: #1e40af; }
+.callout { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-warn { background: #fffbeb; border-left: 4px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.callout-info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 8px 12px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 9pt; }
+.diagram { text-align: center; margin: 12px 0; }
+.diagram svg { max-width: 98%; height: auto; }
+
+</style>
+</head><body>
+<h1>Module 05: View Serializability & Blind Writes</h1>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg05)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">View Serializability &amp; Blind Writes Architecture</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">The 3 Formal Rules of View Equivalence &amp; Handling Blind Write Overwrites</text>
+
+  <!-- TOP BANNER: 3 RULES OF VIEW EQUIVALENCE -->
+  <g transform="translate(35, 80)">
+    <rect width="930" height="210" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.8"/>
+    <text x="465" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">The 3 Formal Conditions for View Equivalence (Schedule S ≡_view S&apos;)</text>
+
+    <!-- Rule 1 -->
+    <rect x="20" y="48" width="280" height="145" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="70" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Rule 1: Initial Read</text>
+    <text x="35" y="90" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">For every data item A:</text>
+    <text x="35" y="106" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If Ti reads the initial database value</text>
+    <text x="35" y="120" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">of A in schedule S, then Ti MUST</text>
+    <text x="35" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">also read the initial value of A</text>
+    <text x="35" y="152" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">in schedule S&apos;!</text>
+    <text x="35" y="172" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">(Preserves original state input)</text>
+
+    <!-- Rule 2 -->
+    <rect x="325" y="48" width="280" height="145" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="340" y="70" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Rule 2: Updated Read (Flow)</text>
+    <text x="340" y="90" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">For every data item A:</text>
+    <text x="340" y="106" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If Ti reads the value of A written by</text>
+    <text x="340" y="120" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">Tj in schedule S (Wj(A) → Ri(A)),</text>
+    <text x="340" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">then Ti MUST also read the value</text>
+    <text x="340" y="152" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">written by Tj in S&apos;!</text>
+    <text x="340" y="172" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">(Preserves data dependency pipeline)</text>
+
+    <!-- Rule 3 -->
+    <rect x="630" y="48" width="280" height="145" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="645" y="70" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Rule 3: Final Write</text>
+    <text x="645" y="90" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">For every data item A:</text>
+    <text x="645" y="106" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If Ti executes the last/final write</text>
+    <text x="645" y="120" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">operation on A in schedule S,</text>
+    <text x="645" y="136" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">then Ti MUST also execute the last</text>
+    <text x="645" y="152" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">write on A in schedule S&apos;!</text>
+    <text x="645" y="172" font-family="-apple-system, sans-serif" font-size="8.5" fill="#94a3b8">(Preserves final database outcome)</text>
+  </g>
+
+  <!-- BOTTOM: BLIND WRITE ROLE & THEOREM -->
+  <g transform="translate(35, 305)">
+    <rect width="930" height="185" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="465" y="28" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13.5" font-weight="bold" fill="#fbbf24">Blind Writes &amp; The Equivalence Theorems</text>
+
+    <!-- Blind write definition -->
+    <rect x="20" y="45" width="430" height="125" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="68" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fed7aa">What is a Blind Write?</text>
+    <text x="35" y="88" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">A transaction performs W(A) without executing R(A) first.</text>
+    <text x="35" y="104" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">It blindly overwrites A without knowing the existing value.</text>
+    <text x="35" y="124" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">★ The Magical Role of Blind Writes:</text>
+    <text x="35" y="140" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">If a schedule has NO blind writes and has a cycle in its Precedence Graph,</text>
+    <text x="35" y="154" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">it can NEVER be View Serializable!</text>
+
+    <!-- Fundamental Theorem -->
+    <rect x="470" y="45" width="440" height="125" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="485" y="68" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#a7f3d0">Crucial Theorems for Fast Solving:</text>
+    <text x="485" y="90" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">1. Conflict Serializable ⇒ ALWAYS View Serializable.</text>
+    <text x="485" y="108" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. If Graph has NO cycle ⇒ Conflict &amp; View Serializable!</text>
+    <text x="485" y="126" font-family="-apple-system, sans-serif" font-size="9.5" fill="#fbbf24">3. If Graph HAS cycle + NO Blind Writes ⇒ NOT View Serializable!</text>
+    <text x="485" y="146" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">4. If Graph HAS cycle + HAS Blind Writes ⇒ Test view equivalence</text>
+    <text x="485" y="160" font-family="-apple-system, sans-serif" font-size="8.5" fill="#cbd5e1">   with n! serial schedules (Polygraph method).</text>
+  </g>
+</svg></div>
+<p>> <strong>Course:</strong> Database Management Systems (AKTU Code: <strong>BCS501</strong>)  </p>
+<p style="color:#475569; margin: 4px 0;">**Topic Focus:** View Equivalence Definition (Initial Read, Updated Read, Final Write), View Serializability, The Critical Role of Blind Writes, Shortcut Theorems for AKTU Exams, Solved Numerical.</p>
+<p>---</p>
+<h2>1. What is View Equivalence?</h2>
+<p>Do schedules $S$ aur $S'$ (involving the same transactions) <strong>View Equivalent</strong> tab kehlate hain jab wo neeche di gayi <strong>3 conditions</strong> ko 100% satisfy karein:</p>
+<h3>1.1 The Three Formal Rules of View Equivalence</h3>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Initial Read Rule:</strong></p>
+<p>   - Har data item $A$ ke liye, agar schedule $S$ me transaction $T_i$ initial (pehle se stored) value read karta hai, toh schedule $S'$ me bhi $T_i$ ko hi initial value read karni chahiye.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>2. </strong> <strong>Updated Read (Data Dependency) Rule:</strong></p>
+<p>   - Har data item $A$ ke liye, agar schedule $S$ me transaction $T_i$ wo value read karta hai jo transaction $T_j$ ne write ki thi ($W_j(A) </p>
+<p>ightarrow R_i(A)$), toh schedule $S'$ me bhi $T_i$ ko $T_j$ dwara likhi gayi value hi read karni chahiye.</p>
+<p style="margin: 4px 0 4px 16px;"><strong>3. </strong> <strong>Final Write Rule:</strong></p>
+<p>   - Har data item $A$ ke liye, agar schedule $S$ me transaction $T_i$ aakhiri (final) write operation perform karta hai, toh schedule $S'$ me bhi $T_i$ hi final write perform karega.</p>
+<p>---</p>
+<h2>2. View Serializability Definition</h2>
+<p style="color:#475569; margin: 4px 0;">A non-serial schedule $S$ is **View Serializable** if it is **view equivalent** to some serial schedule of the same transactions.</p>
+<p>---</p>
+<h2>3. The Crucial Role of "Blind Writes"</h2>
+<li><strong>Blind Write:</strong> Jab koi transaction kisi variable $A$ par write karta hai bina use pehle read kiye ($W(A)$ without preceding $R(A)$).</li>
+<li><strong>The Blind Write Shortcut Theorem (AKTU Exam Lifesaver):</strong></li>
+<p>  1. Agar kisi schedule me <strong>koi bhi Blind Write nahi hai</strong>, aur uska Precedence Graph <strong>cyclic</strong> hai:</p>
+<p>     $$\mathbf{	ext{No Blind Writes} + 	ext{Cycle in Graph} \implies 	ext{NOT View Serializable!}}$$</p>
+<p>     *(Exam me time waste karne ki zaroorat nahi, direct "Not View Serializable" likhein!)*</p>
+<p>  2. Agar kisi schedule me Precedence Graph me cycle hai, lekin <strong>Blind Write present hai</strong>, tab wo schedule <strong>View Serializable ho bhi sakta hai aur nahi bhi</strong>! (Polygraph test / manual view check required).</p>
+<p>---</p>
+<h2>4. Conflict vs View Serializability Comparison</h2>
+<table><thead><tr><th>Feature</th><th>Conflict Serializability</th><th>View Serializability</th></tr></thead><tbody>
+<tr><td>**Testing Complexity**</td><td>Polynomial $O(V + E)$ (Precedence Graph)</td><td>**NP-Complete** ($O(n!)$ serial permutations)</td></tr>
+<tr><td>**Swapping Operations**</td><td>Swaps adjacent non-conflicting ops</td><td>Matches data read/write views</td></tr>
+<tr><td>**Condition Strictness**</td><td>More Strict</td><td>Relaxed (allows blind write overwrites)</td></tr>
+<tr><td>**Mathematical Relation**</td><td>$	ext{Conflict Serializable} \subset 	ext{View Serializable}$</td><td>Every conflict serializable is view serializable</td></tr>
+</tbody></table>
+<p>---</p>
+<h2>5. Architectural Diagram</h2>
+<p>---</p>
+<h2>6. Gateway Classes Solved AKTU Examination Problem</h2>
+<p><strong>Problem:</strong> Test whether the following schedule $S$ is View Serializable:</p>
+<p>$$S: R_1(A); \quad W_2(A); \quad W_1(A); \quad W_3(A)$$</p>
+<h3>Step 1: Precedence Graph for Conflict Serializability</h3>
+<li>$R_1(A)$ followed by $W_2(A) \implies T_1 </li>
+<p>ightarrow T_2$.</p>
+<li>$W_2(A)$ followed by $W_1(A) \implies T_2 </li>
+<p>ightarrow T_1$.</p>
+<li>Cycle detected: $T_1 </li>
+<p>ightleftarrows T_2$!</p>
+<li><strong>Verdict 1:</strong> Schedule $S$ is <strong>NOT Conflict Serializable</strong>.</li>
+<h3>Step 2: Check for Blind Writes</h3>
+<li>In $T_2$: It executes $W_2(A)$ without reading $A$ $\implies$ <strong>Blind Write present!</strong></li>
+<li>In $T_3$: It executes $W_3(A)$ without reading $A$ $\implies$ <strong>Blind Write present!</strong></li>
+<li>Because blind writes exist, $S$ might still be View Serializable!</li>
+<h3>Step 3: Test View Equivalence with Candidate Serial Orders</h3>
+<p>Transactions are $\{T_1, T_2, T_3\}$.</p>
+<p>Possible serial orders where $T_3$ is last (since $T_3$ is the final writer in $S$):</p>
+<li>Candidate 1: $T_2 </li>
+<p>ightarrow T_1 </p>
+<p>ightarrow T_3$</p>
+<p>Let us test rules for Candidate 1 ($T_2 </p>
+<p>ightarrow T_1 </p>
+<p>ightarrow T_3$):</p>
+<p style="margin: 4px 0 4px 16px;"><strong>1. </strong> <strong>Initial Read:</strong></p>
+<p>   - In $S$: $T_1$ reads initial $A$.</p>
+<p>   - In $T_2 </p>
+<p>ightarrow T_1 </p>
+<p>ightarrow T_3$: $T_2$ only writes $A$, then $T_1$ reads $A$ (Wait, $T_1$ reads $T_2$'s write, NOT initial!). Fails!</p>
+<li>Candidate 2: Try $T_1 </li>
+<p>ightarrow T_2 </p>
+<p>ightarrow T_3$:</p>
+<p>  1. <strong>Initial Read:</strong> In $S$, $T_1$ reads initial $A$. In Candidate 2, $T_1$ runs first, so $T_1$ reads initial $A$. <strong>(Satisfied!)</strong></p>
+<p>  2. <strong>Updated Read:</strong> In $S$, no transaction reads any updated value. In Candidate 2, no transaction reads any updated value. <strong>(Satisfied!)</strong></p>
+<p>  3. <strong>Final Write:</strong> In $S$, $T_3$ performs final write. In Candidate 2, $T_3$ performs final write. <strong>(Satisfied!)</strong></p>
+<h3>Final Verdict:</h3>
+<p>Schedule $S$ is view equivalent to the serial schedule $\mathbf{T_1 </p>
+<p>ightarrow T_2 </p>
+<p>ightarrow T_3}$.  </p>
+<p>Therefore, schedule $S$ is <strong>VIEW SERIALIZABLE</strong>!</p>
+</body></html>

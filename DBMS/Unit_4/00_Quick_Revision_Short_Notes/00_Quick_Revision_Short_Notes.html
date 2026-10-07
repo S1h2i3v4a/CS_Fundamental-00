@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DBMS Unit 4: Ultra Quick Revision Short Notes (Exact 3 Pages)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 7.4pt;
+    line-height: 1.25;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 6.5mm 7.5mm 5.5mm 7.5mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-bar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 4px 9px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .header-title {
+    font-size: 10pt;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 6.8pt;
+    color: #93c5fd;
+    font-weight: 500;
+  }
+  .page-tag {
+    background: #3b82f6;
+    color: #ffffff;
+    padding: 1.5px 6px;
+    border-radius: 3px;
+    font-size: 6.6pt;
+    font-weight: 700;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4.5px;
+  }
+  .card {
+    border: 0.8px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 4px 6px;
+    background: #ffffff;
+    margin-bottom: 4px;
+  }
+  .card-header {
+    font-size: 7.7pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1.2px solid #e2e8f0;
+    padding-bottom: 1.5px;
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-header-accent {
+    color: #b91c1c;
+    border-bottom-color: #fecaca;
+  }
+  .card-header-green {
+    color: #047857;
+    border-bottom-color: #a7f3d0;
+  }
+  .badge {
+    font-size: 6pt;
+    padding: 1px 3.5px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 6.5pt;
+    margin: 2px 0;
+  }
+  th, td {
+    border: 0.6px solid #cbd5e1;
+    padding: 1.8px 3.5px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  tr:nth-child(even) { background-color: #f8fafc; }
+  ul {
+    margin: 1.5px 0 2px 11px;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 1px;
+  }
+  .formula-box {
+    background: #f8fafc;
+    border-left: 2.5px solid #2563eb;
+    padding: 2.5px 5px;
+    margin: 2px 0;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 6.6pt;
+    color: #0f172a;
+  }
+  .warn-box {
+    background: #fef2f2;
+    border-left: 2.5px solid #ef4444;
+    padding: 2px 5px;
+    margin: 2px 0;
+    font-size: 6.5pt;
+    color: #7f1d1d;
+  }
+  .footer-bar {
+    border-top: 0.8px solid #cbd5e1;
+    padding-top: 2px;
+    font-size: 6pt;
+    color: #64748b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  code {
+    font-family: Consolas, Monaco, monospace;
+    font-size: 6.5pt;
+    background: #f1f5f9;
+    padding: 0.5px 2px;
+    border-radius: 2px;
+    color: #0f172a;
+  }
+  strong { color: #0f172a; }
+</style>
+</head>
+<body>
+
+<!-- ======================================================== -->
+<!-- PAGE 1: TRANSACTIONS, ACID, ANOMALIES & CONFLICT CSR -->
+<!-- ======================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">DBMS Unit 4: Transaction Processing &amp; Distributed Databases</div>
+        <div class="header-sub">AKTU BCS501 | Gateway Classes Complete Revision Notes</div>
+      </div>
+      <div class="page-tag">Page 1 of 3: Transactions, ACID &amp; CSR</div>
+    </div>
+
+    <!-- ROW 1: TRANSACTIONS & ACID -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>1. Transaction Concepts &amp; Lifecycle</span>
+          <span class="badge badge-blue">Logical Unit of Work</span>
+        </div>
+        <p style="margin:1px 0;">Logical unit of work executing database read/write ops maintaining integrity.</p>
+        <div class="formula-box">
+          Active &rarr; Partially Committed &rarr; Committed<br>
+          Active/Partially Committed &rarr; Failed &rarr; Aborted &rarr; Terminated
+        </div>
+        <ul>
+          <li><strong>Active:</strong> Initial state while executing instructions.</li>
+          <li><strong>Partially Committed:</strong> Final instruction executed; writes still in memory buffer.</li>
+          <li><strong>Committed:</strong> Log flushed to disk; success ack sent.</li>
+          <li><strong>Failed:</strong> Hardware/logical error occurs.</li>
+          <li><strong>Aborted:</strong> Changes undone (rollback); restart or terminate.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>2. ACID Properties Summary Matrix</span>
+          <span class="badge badge-green">Core Engine</span>
+        </div>
+        <table>
+          <tr><th>Property</th><th>Meaning</th><th>Responsible DBMS Component</th></tr>
+          <tr><td><strong>Atomicity</strong></td><td>All operations execute or none do ("All or Nothing")</td><td><strong>Recovery Manager</strong> (Undo Logs / WAL)</td></tr>
+          <tr><td><strong>Consistency</strong></td><td>Database transforms from one valid state to another</td><td><strong>Application Programmer</strong> + Integrity Constraints</td></tr>
+          <tr><td><strong>Isolation</strong></td><td>Concurrent transactions run as if serial (no interference)</td><td><strong>Concurrency Control Manager</strong> (Locks/Timestamps)</td></tr>
+          <tr><td><strong>Durability</strong></td><td>Committed changes survive any subsequent crash</td><td><strong>Recovery Manager</strong> (Redo Logs / Stable Storage)</td></tr>
+        </table>
+        <div class="warn-box">
+          <strong>Key Rule:</strong> Intermediate uncommitted changes must never be visible to other transactions (Preserves Isolation).
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2: CONCURRENCY ANOMALIES -->
+    <div class="card">
+      <div class="card-header card-header-accent">
+        <span>3. Concurrency Anomalies &amp; Isolation Violations</span>
+        <span class="badge badge-red">AKTU 10M Question</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <table>
+            <tr><th>Anomaly</th><th>Conflict Pattern</th><th>Description</th></tr>
+            <tr>
+              <td><strong>Dirty Read</strong> (WR)</td>
+              <td><code>W1(A) &rarr; R2(A) &rarr; A1</code></td>
+              <td>T2 uncommitted data read karta hai jo T1 abort hone par discard ho jata hai.</td>
+            </tr>
+            <tr>
+              <td><strong>Lost Update</strong> (WW)</td>
+              <td><code>R1(A)..R2(A)..W1(A)..W2(A)</code></td>
+              <td>T2 T1 ke update ko bina jane overwrite kar deta hai (Blind/unaware write).</td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <table>
+            <tr><th>Anomaly</th><th>Conflict Pattern</th><th>Description</th></tr>
+            <tr>
+              <td><strong>Unrepeatable Read</strong> (RW)</td>
+              <td><code>R1(A) &rarr; W2(A) &rarr; R1(A)</code></td>
+              <td>T1 do baar read karta hai par intermediate update ke karan value badal jati hai.</td>
+            </tr>
+            <tr>
+              <td><strong>Phantom Read</strong></td>
+              <td><code>R1(range) &rarr; Ins2 &rarr; R1(range)</code></td>
+              <td>Predicate query me new tuples insert hone se record count change hota hai.</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3: SCHEDULES & CONFLICT SERIALIZABILITY -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>4. Schedules &amp; Serializability Foundations</span>
+          <span class="badge badge-blue">Equivalence Base</span>
+        </div>
+        <ul>
+          <li><strong>Serial Schedule:</strong> Transactions execute strictly one after another. Concurrency = 0, Throughput = Minimum, Consistency = 100%.</li>
+          <li><strong>Non-Serial Schedule:</strong> Operations interleave. High throughput, but anomaly prone.</li>
+          <li><strong>Serializable Schedule:</strong> A non-serial schedule equivalent to some serial schedule.</li>
+          <li><strong>Conflict Operations:</strong> Belong to $T_i 
+e T_j$, access same data item $Q$, at least one is Write. Conflicts: $(R_i, W_j), (W_i, R_j), (W_i, W_j)$. Read-Read $(R_i, R_j)$ is NON-conflicting.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>5. Conflict Serializability &amp; Precedence Graph</span>
+          <span class="badge badge-green">Graph Algorithm</span>
+        </div>
+        <p style="margin:1px 0;"><strong>Conflict Equivalent:</strong> $S \equiv_C S'$ if $S$ transformed into $S'$ by swapping non-conflicting adjacent operations.</p>
+        <div class="formula-box">
+          Precedence Graph G = (V, E): Node per transaction Ti.<br>
+          Directed Edge Ti &rarr; Tj iff Ti executes conflicting op before Tj.
+        </div>
+        <div class="warn-box">
+          <strong>AKTU Theorem:</strong> Schedule S is Conflict Serializable <strong>IF &amp; ONLY IF</strong> Precedence Graph $G(S)$ contains <strong>NO CYCLES (Acyclic)</strong>.
+        </div>
+        <p style="margin:1px 0;"><strong>Equivalent Serial Order:</strong> Derived directly using <strong>Topological Sort</strong> on the acyclic DAG.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>DBMS Unit 4: Transaction Processing &amp; Recovery | AKTU BCS501</span>
+    <span>Page 1 of 3</span>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PAGE 2: VIEW SERIALIZABILITY, RECOVERABILITY & 2PL -->
+<!-- ======================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">DBMS Unit 4: Transaction Processing &amp; Distributed Databases</div>
+        <div class="header-sub">AKTU BCS501 | Gateway Classes Complete Revision Notes</div>
+      </div>
+      <div class="page-tag">Page 2 of 3: VSR, Recoverability &amp; 2PL</div>
+    </div>
+
+    <!-- ROW 1: VIEW SERIALIZABILITY & BLIND WRITES -->
+    <div class="card">
+      <div class="card-header">
+        <span>6. View Serializability (VSR) &amp; Blind Writes</span>
+        <span class="badge badge-amber">NP-Complete Testing</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <p style="margin:1px 0;">Schedule $S \equiv_V S'$ (View Equivalent) iff 3 conditions hold:</p>
+          <ul>
+            <li><strong>Initial Read:</strong> Agar $T_i$ $S$ me initial $X$ read karta hai, to $S'$ me bhi wahi kare.</li>
+            <li><strong>Updated Read:</strong> Agar $T_j$ $S$ me $T_i$ ka likha $X$ read karta hai, to $S'$ me bhi kare.</li>
+            <li><strong>Final Write:</strong> Jo transaction $S$ me final write karta hai, wahi $S'$ me kare.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="warn-box">
+            <strong>Blind Write Shortcut Rule:</strong><br>
+            • Blind Write: Transaction writes $X$ without reading $X$ first ($W(X)$ without $R(X)$).<br>
+            • Agar schedule me <strong>NO blind write</strong> hai aur schedule <strong>CSR nahi hai</strong>, then schedule can <strong>NEVER be View Serializable!</strong>
+          </div>
+          <div class="formula-box">Conflict Serializable (CSR) &sub; View Serializable (VSR)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2: RECOVERABILITY SPECTRUM -->
+    <div class="card">
+      <div class="card-header card-header-accent">
+        <span>7. Recoverability Spectrum &amp; Cascading Aborts</span>
+        <span class="badge badge-red">Critical for Durability</span>
+      </div>
+      <table>
+        <tr><th>Schedule Class</th><th>Formal Condition</th><th>Cascading Rollback?</th><th>AKTU Notes</th></tr>
+        <tr>
+          <td><strong>Irrecoverable</strong></td>
+          <td>$T_j$ reads uncommitted from $T_i$, and $Commit(T_j) < Commit(T_i)$</td>
+          <td>Catastrophic!</td>
+          <td>Strictly disallowed in DBMS (Violates Durability).</td>
+        </tr>
+        <tr>
+          <td><strong>Recoverable</strong></td>
+          <td>$Commit(T_i) < Commit(T_j)$ whenever $T_j$ reads uncommitted from $T_i$</td>
+          <td>Possible</td>
+          <td>Agar $T_i$ abort hua to $T_j$ bhi rollback hoga (Cascading Abort).</td>
+        </tr>
+        <tr>
+          <td><strong>Cascadeless (ACA)</strong></td>
+          <td>$Commit(T_i) < Read_j(X)$ (No uncommitted read allowed)</td>
+          <td><strong>Zero (None)</strong></td>
+          <td>Reads only committed data. High concurrency.</td>
+        </tr>
+        <tr>
+          <td><strong>Strict</strong></td>
+          <td>$Commit/Abort(T_i) < Read_j(X) 	ext{ and } Write_j(X)$</td>
+          <td><strong>Zero (None)</strong></td>
+          <td>Undo easily by restoring Before-Image (Old Value).</td>
+        </tr>
+      </table>
+      <div class="formula-box" style="text-align:center;">
+        <strong>Hierarchy:</strong> Strict Schedules &sub; Cascadeless Schedules &sub; Recoverable Schedules &sub; All Schedules
+      </div>
+    </div>
+
+    <!-- ROW 3: CONCURRENCY CONTROL PROTOCOLS & 2PL -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>8. Two-Phase Locking (2PL) Protocols</span>
+          <span class="badge badge-green">Serializability Guard</span>
+        </div>
+        <p style="margin:1px 0;"><strong>Locks:</strong> Shared $S(Q)$ (read-only, shared), Exclusive $X(Q)$ (read/write, exclusive).</p>
+        <ul>
+          <li><strong>Growing Phase:</strong> Transaction acquires locks, cannot release any.</li>
+          <li><strong>Shrinking Phase:</strong> Transaction releases locks, cannot acquire any.</li>
+          <li><strong>Lock Point:</strong> Point where the transaction acquires its final lock.</li>
+        </ul>
+        <table>
+          <tr><th>Variant</th><th>Lock Holding Rule</th><th>Guarantees</th></tr>
+          <tr><td><strong>Basic 2PL</strong></td><td>Normal 2 phases</td><td>CSR, Deadlock &amp; Cascading possible</td></tr>
+          <tr><td><strong>Strict 2PL</strong></td><td>X-locks held till Commit</td><td>CSR + Cascadeless + Strict</td></tr>
+          <tr><td><strong>Rigorous 2PL</strong></td><td>S &amp; X locks held till Commit</td><td>CSR + Commit Order Serializability</td></tr>
+          <tr><td><strong>Conservative</strong></td><td>Acquire all locks at start</td><td>Deadlock-Free (Low concurrency)</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>9. Deadlock Handling &amp; Timestamp Schemes</span>
+          <span class="badge badge-blue">Wait-Die vs Wound-Wait</span>
+        </div>
+        <p style="margin:1px 0;"><strong>Timestamp Scheme:</strong> $TS(T_i)$ timestamp at start. Smaller $TS$ = Older.</p>
+        <table>
+          <tr><th>Protocol</th><th>Rule when $T_i$ requests lock held by $T_j$</th><th>Type</th></tr>
+          <tr>
+            <td><strong>Wait-Die</strong></td>
+            <td>Older waits for Younger ($TS_i < TS_j \implies 	ext{Wait}$).<br>Younger dies ($TS_i > TS_j \implies 	ext{Die/Rollback}$).</td>
+            <td>Non-preemptive</td>
+          </tr>
+          <tr>
+            <td><strong>Wound-Wait</strong></td>
+            <td>Older wounds/preempts Younger ($TS_i < TS_j \implies 	ext{Rollback } T_j$).<br>Younger waits ($TS_i > TS_j \implies 	ext{Wait}$).</td>
+            <td>Preemptive (Starvation Free)</td>
+          </tr>
+        </table>
+        <div class="formula-box">
+          <strong>Deadlock Detection:</strong> Wait-For Graph (WFG) directed edges $T_i 	o T_j$. Cycle $\iff$ Deadlock. Victim selection based on minimum rollback cost.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>DBMS Unit 4: Transaction Processing &amp; Recovery | AKTU BCS501</span>
+    <span>Page 2 of 3</span>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PAGE 3: LOG RECOVERY, CHECKPOINTS, DDBMS & PYQ BLUEPRINT -->
+<!-- ======================================================== -->
+<div class="page">
+  <div>
+    <div class="header-bar">
+      <div>
+        <div class="header-title">DBMS Unit 4: Transaction Processing &amp; Distributed Databases</div>
+        <div class="header-sub">AKTU BCS501 | Gateway Classes Complete Revision Notes</div>
+      </div>
+      <div class="page-tag">Page 3 of 3: Recovery, DDBMS &amp; PYQs</div>
+    </div>
+
+    <!-- ROW 1: RECOVERY & WAL -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span>10. Database Failures &amp; WAL Protocol</span>
+          <span class="badge badge-blue">Recovery Foundation</span>
+        </div>
+        <ul>
+          <li><strong>Storage Hierarchy:</strong> Volatile (RAM), Non-Volatile (Disk/SSD), Stable (Mirrored disks, survives crashes).</li>
+          <li><strong>Failure Types:</strong> Transaction Failure (logical/system), System Crash (RAM loss), Disk Failure (head crash).</li>
+          <li><strong>Write-Ahead Logging (WAL):</strong> Log record $\langle T_i, X, V_{old}, V_{new} angle$ must be written to stable storage BEFORE database item $X$ is updated on disk.</li>
+        </ul>
+        <table>
+          <tr><th>Technique</th><th>Disk Write Timing</th><th>Recovery Action</th></tr>
+          <tr><td><strong>Deferred Mod</strong></td><td>Only after Commit</td><td>REDO only (No UNDO required)</td></tr>
+          <tr><td><strong>Immediate Mod</strong></td><td>Anytime (Uncommitted)</td><td>Both UNDO &amp; REDO required</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-header card-header-green">
+          <span>11. Checkpoints &amp; Shadow Paging</span>
+          <span class="badge badge-green">Performance Boost</span>
+        </div>
+        <p style="margin:1px 0;"><strong>Checkpoints:</strong> Limits log scan overhead on system crash.</p>
+        <div class="formula-box">
+          Log Record: &lang;checkpoint L&rang; where L = active transactions list.<br>
+          1. Scan backward to last checkpoint.<br>
+          2. Ti with Commit/Abort &rarr; REDO list (Forward scan).<br>
+          3. Ti active without Commit &rarr; UNDO list (Backward scan).
+        </div>
+        <p style="margin:1px 0;"><strong>Shadow Paging:</strong> Maintains Current Page Table in RAM, Shadow Page Table on disk. Commit = atomically pointing to current page table. No logs needed, but page fragmentation occurs.</p>
+      </div>
+    </div>
+
+    <!-- ROW 2: DISTRIBUTED DATABASES & DIRECTORY SYSTEMS -->
+    <div class="card">
+      <div class="card-header">
+        <span>12. Distributed Databases (DDBMS) &amp; Directory Systems</span>
+        <span class="badge badge-amber">Architecture &amp; Protocols</span>
+      </div>
+      <div class="grid-3">
+        <div>
+          <strong style="color:#1e3a8a;">Data Fragmentation:</strong>
+          <ul>
+            <li><strong>Horizontal:</strong> Rows split by predicate $\sigma_p(R)$. Reconstruct: $R_1 \cup R_2$.</li>
+            <li><strong>Vertical:</strong> Columns split by projection $\pi(R)$ keeping PK. Reconstruct: $R_1 owtie R_2$.</li>
+            <li><strong>Hybrid:</strong> Nested horizontal &amp; vertical.</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="color:#1e3a8a;">Correctness Rules:</strong>
+          <ul>
+            <li><strong>Completeness:</strong> Har tuple/attribute fragment me hona chahiye.</li>
+            <li><strong>Reconstruction:</strong> Lossless join/union se original relation restore hona chahiye.</li>
+            <li><strong>Disjointness:</strong> Non-key attributes overlap nahi hone chahiye.</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="color:#1e3a8a;">Directory &amp; 2PC Protocol:</strong>
+          <ul>
+            <li><strong>LDAP:</strong> Lightweight Directory Access Protocol (X.500 based, DIT tree, read-optimized).</li>
+            <li><strong>Two-Phase Commit (2PC):</strong><br>
+              Phase 1: Prepare &amp; Vote (Commit/Abort).<br>
+              Phase 2: Global Decision (Commit/Abort).
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3: AKTU 10-MARK MASTER PROBLEM SOLVING FLOWCHART -->
+    <div class="card">
+      <div class="card-header card-header-accent">
+        <span>13. Master AKTU Exam Problem Solving Flowchart &amp; Checklist</span>
+        <span class="badge badge-red">100% Exam Formulae</span>
+      </div>
+      <table>
+        <tr><th>Step</th><th>Question Type</th><th>Actionable Solution Algorithm</th><th>Outcome / Formula</th></tr>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Conflict Serializability (CSR)</td>
+          <td>Identify conflicting pairs $(R_i, W_j), (W_i, R_j), (W_i, W_j)$ on same variable. Draw edge $T_i 	o T_j$.</td>
+          <td>Acyclic $\implies$ CSR. Cyclic $\implies$ Not CSR. Topological sort = Serial order.</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>View Serializability (VSR)</td>
+          <td>Agar CSR hai $\implies$ Directly VSR! Agar Not CSR hai, check for Blind Writes.</td>
+          <td>Agar koi blind write nahi hai $\implies$ Directly NOT VSR! If blind write present, test equivalence.</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Recoverability Check</td>
+          <td>Locate every Read-From pair: $W_i(X) \dots R_j(X)$ where $T_j$ reads uncommitted $X$ from $T_i$.</td>
+          <td>If $C_i < C_j \implies$ Recoverable. If $C_j < C_i \implies$ Irrecoverable. If $C_i < R_j(X) \implies$ Cascadeless.</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>2PL Schedule Verification</td>
+          <td>Trace every lock acquisition and release. Check if any lock acquired AFTER a release.</td>
+          <td>If lock acquired after unlock $\implies$ Violates 2PL. If all X-locks held till commit $\implies$ Strict 2PL.</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Log Recovery (Undo/Redo)</td>
+          <td>Find checkpoint. Transactions with `commit` record $	o$ `REDO`. Transactions without `commit` $	o$ `UNDO`.</td>
+          <td>Execute backward for `UNDO` (restore $V_{old}$) and forward for `REDO` (apply $V_{new}$).</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>DBMS Unit 4: Transaction Processing &amp; Recovery | AKTU BCS501</span>
+    <span>Page 3 of 3</span>
+  </div>
+</div>
+
+</body>
+</html>

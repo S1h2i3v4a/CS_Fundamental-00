@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg11)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Checkpoints &amp; Shadow Paging Architecture</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Accelerating Log Recovery (Undo/Redo Lists) &amp; Shadow Directory Atomic Switching</text>
+
+  <!-- LEFT: CHECKPOINT MECHANISM & TIMELINE -->
+  <g transform="translate(35, 85)">
+    <rect width="450" height="400" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#34d399">1. Checkpointing Mechanism</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Limits Log Scan Distance During System Recovery</text>
+
+    <!-- Why needed -->
+    <rect x="20" y="65" width="410" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Why Are Checkpoints Essential?</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">Without checkpoints, recovery must search the ENTIRE log from day 1,</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">re-executing millions of already flushed transactions!</text>
+
+    <!-- Checkpoint procedure -->
+    <rect x="20" y="145" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="167" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Checkpoint Creation Steps:</text>
+    <text x="35" y="187" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Flush all dirty database memory buffers to disk.</text>
+    <text x="35" y="204" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">2. Write &lt;checkpoint L&gt; to log, where L is active transaction list.</text>
+    <text x="35" y="221" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">3. Flush log to stable storage.</text>
+
+    <!-- Resolution algorithm -->
+    <rect x="20" y="250" width="410" height="135" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="272" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">Recovery Algorithm with Checkpoint:</text>
+    <text x="35" y="292" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Scan log backward to most recent &lt;checkpoint L&gt;.</text>
+    <text x="35" y="309" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Undo-List = L; Redo-List = ∅.</text>
+    <text x="35" y="326" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Scan forward: if &lt;Ti commit&gt; found ⇒ Move Ti to Redo-List.</text>
+    <text x="35" y="343" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• If &lt;Ti start&gt; found after checkpoint ⇒ Add Ti to Undo-List.</text>
+    <text x="35" y="363" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">★ Transactions completed BEFORE checkpoint are completely IGNORED!</text>
+  </g>
+
+  <!-- RIGHT: SHADOW PAGING -->
+  <g transform="translate(515, 85)">
+    <rect width="450" height="400" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">2. Shadow Paging Architecture</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Log-Free Atomic Commit via Directory Switching</text>
+
+    <!-- Two Directories -->
+    <rect x="20" y="65" width="410" height="120" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#93c5fd">The Two Page Tables:</text>
+    <text x="35" y="108" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">1. Current Page Table: Kept in memory, points to latest</text>
+    <text x="35" y="123" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">   modified pages written to new disk blocks.</text>
+    <text x="35" y="143" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">2. Shadow Page Table: Kept on non-volatile disk,</text>
+    <text x="35" y="158" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">   points to original unmodified database pages.</text>
+
+    <!-- Commit vs Abort -->
+    <rect x="20" y="195" width="410" height="110" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="217" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#fed7aa">Commit vs Abort Mechanism:</text>
+    <text x="35" y="237" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">• Commit: Atomically switch pointer on disk to point</text>
+    <text x="35" y="252" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">  to Current Page Table. Instantly permanent!</text>
+    <text x="35" y="272" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">• Abort / Crash: Simply discard Current Table in RAM!</text>
+    <text x="35" y="287" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">  Database state reverts to Shadow Table without undo.</text>
+
+    <!-- Shadow Paging Pros and Cons -->
+    <rect x="20" y="315" width="410" height="70" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="335" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#e2e8f0">Trade-Offs:</text>
+    <text x="35" y="352" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">✓ No log file overhead, instant commit/recovery.</text>
+    <text x="35" y="368" font-family="-apple-system, sans-serif" font-size="9" fill="#f87171">✕ Data fragmentation, garbage collection needed, single-user lock.</text>
+  </g>
+</svg>

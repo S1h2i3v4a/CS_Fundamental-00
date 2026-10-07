@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arr09" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="520" fill="url(#bg09)" rx="16"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Database Failure Classification &amp; Storage Hierarchy</text>
+  <text x="500" y="60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">Transaction, System &amp; Disk Failures, Volatile/Non-Volatile/Stable Storage &amp; Buffer Movement</text>
+
+  <!-- LEFT: FAILURE CLASSIFICATION -->
+  <g transform="translate(35, 85)">
+    <rect width="450" height="400" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#f87171">1. Three Types of Database Failures</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Failure Modes and Recovery Scope</text>
+
+    <!-- Failure 1 -->
+    <rect x="20" y="65" width="410" height="85" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fca5a5">1. Transaction Failure</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Logical Error: Bad input, arithmetic overflow, constraint fail.</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• System Error: Deadlock victim, concurrency abort.</text>
+    <text x="35" y="139" font-family="-apple-system, sans-serif" font-size="9" fill="#38bdf8">Recovery: Local transaction rollback using Undo Log.</text>
+
+    <!-- Failure 2 -->
+    <rect x="20" y="165" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="187" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#fbbf24">2. System Crash (Soft Crash)</text>
+    <text x="35" y="205" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Hardware power outage, operating system kernel panic.</text>
+    <text x="35" y="222" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Main memory (Volatile RAM) contents are completely LOST!</text>
+    <text x="35" y="239" font-family="-apple-system, sans-serif" font-size="9.5" fill="#a7f3d0">• Non-volatile disk data remains INTACT.</text>
+    <text x="35" y="254" font-family="-apple-system, sans-serif" font-size="9" fill="#38bdf8">Recovery: Crash recovery manager runs Redo &amp; Undo passes.</text>
+
+    <!-- Failure 3 -->
+    <rect x="20" y="275" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="297" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="bold" fill="#f87171">3. Disk Failure (Hard Crash)</text>
+    <text x="35" y="315" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Disk head crash, bad sectors, physical magnetic damage.</text>
+    <text x="35" y="332" font-family="-apple-system, sans-serif" font-size="9.5" fill="#f87171">• Non-volatile storage data is physically destroyed!</text>
+    <text x="35" y="352" font-family="-apple-system, sans-serif" font-size="9" fill="#34d399">Recovery: Restore from archive tape/cloud backup + log replay.</text>
+  </g>
+
+  <!-- RIGHT: STORAGE HIERARCHY & DATA ACCESS -->
+  <g transform="translate(515, 85)">
+    <rect width="450" height="400" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="225" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#38bdf8">2. Storage Media &amp; Buffer Flow</text>
+    <text x="225" y="48" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#94a3b8">Physical Data Movement Between Disk, RAM &amp; CPU</text>
+
+    <!-- Storage Tiers -->
+    <rect x="20" y="65" width="410" height="95" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="87" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#93c5fd">Storage Media Hierarchy:</text>
+    <text x="35" y="105" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Volatile Storage: Main RAM, CPU cache. Lost on crash.</text>
+    <text x="35" y="122" font-family="-apple-system, sans-serif" font-size="9.5" fill="#cbd5e1">• Non-Volatile Storage: HDD, SSD, Flash. Survives power loss.</text>
+    <text x="35" y="140" font-family="-apple-system, sans-serif" font-size="9.5" fill="#34d399">• Stable Storage: Mirrored, distributed disks. Survives ALL failures!</text>
+
+    <!-- Buffer block flow -->
+    <rect x="20" y="175" width="410" height="200" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="35" y="197" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#a7f3d0">Data Movement Primitive Operations:</text>
+
+    <rect x="35" y="212" width="170" height="40" rx="4" fill="#1e293b" stroke="#38bdf8"/>
+    <text x="120" y="235" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#e2e8f0">Disk Block B</text>
+
+    <path d="M 215 232 L 255 232" stroke="#38bdf8" stroke-width="1.8" marker-end="url(#arr09)"/>
+
+    <rect x="265" y="212" width="150" height="40" rx="4" fill="#1e293b" stroke="#10b981"/>
+    <text x="340" y="235" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9.5" fill="#e2e8f0">Buffer Block B</text>
+
+    <text x="35" y="275" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• input(B): Transfers physical disk block B into main memory buffer.</text>
+    <text x="35" y="295" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• output(B): Writes modified buffer block B back to physical disk.</text>
+    <text x="35" y="315" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• read(X, x): Copies data item X from buffer block to local variable x.</text>
+    <text x="35" y="335" font-family="-apple-system, sans-serif" font-size="9" fill="#cbd5e1">• write(X, x): Writes value from variable x to buffer block in RAM.</text>
+    <text x="35" y="358" font-family="-apple-system, sans-serif" font-size="8.5" fill="#fbbf24">Notice: write(X) writes to RAM buffer, NOT directly to disk!</text>
+  </g>
+</svg>
